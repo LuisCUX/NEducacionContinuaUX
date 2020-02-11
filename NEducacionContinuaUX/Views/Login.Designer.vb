@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class Login
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()>
+    <System.Diagnostics.DebuggerNonUserCode()> _
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,177 +20,112 @@ Partial Class Login
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()>
+    <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.cbconcepto = New System.Windows.Forms.ComboBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.lblTotal = New System.Windows.Forms.Label()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Precio = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IVA = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Descuento = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.txtCantidad = New System.Windows.Forms.TextBox()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Login))
+        Me.panelLogo = New System.Windows.Forms.Panel()
+        Me.lblUsuario = New System.Windows.Forms.Label()
+        Me.txtUsuario = New System.Windows.Forms.TextBox()
+        Me.txtContraseña = New System.Windows.Forms.TextBox()
+        Me.lblContraseña = New System.Windows.Forms.Label()
+        Me.btnAceptar = New System.Windows.Forms.Button()
+        Me.btnSalir = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
-        'Button1
+        'panelLogo
         '
-        Me.Button1.Location = New System.Drawing.Point(15, 292)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Cobrar"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.panelLogo.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.ec_logo
+        Me.panelLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.panelLogo.Location = New System.Drawing.Point(0, -2)
+        Me.panelLogo.Name = "panelLogo"
+        Me.panelLogo.Size = New System.Drawing.Size(284, 271)
+        Me.panelLogo.TabIndex = 0
         '
-        'Label1
+        'lblUsuario
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(12, 9)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(56, 13)
-        Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Concepto:"
+        Me.lblUsuario.AutoSize = True
+        Me.lblUsuario.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblUsuario.Location = New System.Drawing.Point(321, 32)
+        Me.lblUsuario.Name = "lblUsuario"
+        Me.lblUsuario.Size = New System.Drawing.Size(61, 16)
+        Me.lblUsuario.TabIndex = 1
+        Me.lblUsuario.Text = "Usuario: "
         '
-        'cbconcepto
+        'txtUsuario
         '
-        Me.cbconcepto.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbconcepto.FormattingEnabled = True
-        Me.cbconcepto.Location = New System.Drawing.Point(15, 25)
-        Me.cbconcepto.Name = "cbconcepto"
-        Me.cbconcepto.Size = New System.Drawing.Size(580, 21)
-        Me.cbconcepto.TabIndex = 2
+        Me.txtUsuario.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtUsuario.Location = New System.Drawing.Point(321, 51)
+        Me.txtUsuario.Name = "txtUsuario"
+        Me.txtUsuario.Size = New System.Drawing.Size(242, 21)
+        Me.txtUsuario.TabIndex = 2
         '
-        'Label2
+        'txtContraseña
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(364, 220)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(34, 13)
-        Me.Label2.TabIndex = 3
-        Me.Label2.Text = "Total:"
+        Me.txtContraseña.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtContraseña.Location = New System.Drawing.Point(321, 104)
+        Me.txtContraseña.Name = "txtContraseña"
+        Me.txtContraseña.Size = New System.Drawing.Size(242, 21)
+        Me.txtContraseña.TabIndex = 4
         '
-        'lblTotal
+        'lblContraseña
         '
-        Me.lblTotal.AutoSize = True
-        Me.lblTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTotal.Location = New System.Drawing.Point(455, 220)
-        Me.lblTotal.Name = "lblTotal"
-        Me.lblTotal.Size = New System.Drawing.Size(0, 31)
-        Me.lblTotal.TabIndex = 4
+        Me.lblContraseña.AutoSize = True
+        Me.lblContraseña.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblContraseña.Location = New System.Drawing.Point(321, 85)
+        Me.lblContraseña.Name = "lblContraseña"
+        Me.lblContraseña.Size = New System.Drawing.Size(80, 16)
+        Me.lblContraseña.TabIndex = 3
+        Me.lblContraseña.Text = "Contraseña:"
         '
-        'Button2
+        'btnAceptar
         '
-        Me.Button2.Location = New System.Drawing.Point(602, 52)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(53, 23)
-        Me.Button2.TabIndex = 6
-        Me.Button2.Text = "Agregar"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnAceptar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAceptar.Location = New System.Drawing.Point(321, 174)
+        Me.btnAceptar.Name = "btnAceptar"
+        Me.btnAceptar.Size = New System.Drawing.Size(80, 36)
+        Me.btnAceptar.TabIndex = 5
+        Me.btnAceptar.Text = "Aceptar"
+        Me.btnAceptar.UseVisualStyleBackColor = True
         '
-        'DataGridView1
+        'btnSalir
         '
-        Me.DataGridView1.AllowUserToAddRows = False
-        Me.DataGridView1.AllowUserToDeleteRows = False
-        Me.DataGridView1.AllowUserToResizeColumns = False
-        Me.DataGridView1.AllowUserToResizeRows = False
-        Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.DataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Nombre, Me.Precio, Me.IVA, Me.Descuento, Me.Cantidad})
-        Me.DataGridView1.Location = New System.Drawing.Point(15, 52)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(580, 150)
-        Me.DataGridView1.TabIndex = 5
-        '
-        'ID
-        '
-        Me.ID.HeaderText = "ID"
-        Me.ID.Name = "ID"
-        '
-        'Nombre
-        '
-        Me.Nombre.HeaderText = "Nombre"
-        Me.Nombre.Name = "Nombre"
-        '
-        'Precio
-        '
-        Me.Precio.HeaderText = "Precio"
-        Me.Precio.Name = "Precio"
-        '
-        'IVA
-        '
-        Me.IVA.HeaderText = "IVA"
-        Me.IVA.Name = "IVA"
-        '
-        'Descuento
-        '
-        Me.Descuento.HeaderText = "Descuento"
-        Me.Descuento.Name = "Descuento"
-        '
-        'Cantidad
-        '
-        Me.Cantidad.HeaderText = "Cantidad"
-        Me.Cantidad.Name = "Cantidad"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(426, 220)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(29, 31)
-        Me.Label3.TabIndex = 7
-        Me.Label3.Text = "$"
-        '
-        'txtCantidad
-        '
-        Me.txtCantidad.Location = New System.Drawing.Point(602, 25)
-        Me.txtCantidad.Name = "txtCantidad"
-        Me.txtCantidad.Size = New System.Drawing.Size(53, 20)
-        Me.txtCantidad.TabIndex = 8
+        Me.btnSalir.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSalir.Location = New System.Drawing.Point(483, 174)
+        Me.btnSalir.Name = "btnSalir"
+        Me.btnSalir.Size = New System.Drawing.Size(80, 36)
+        Me.btnSalir.TabIndex = 6
+        Me.btnSalir.Text = "Salir"
+        Me.btnSalir.UseVisualStyleBackColor = True
         '
         'Login
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(664, 324)
-        Me.Controls.Add(Me.txtCantidad)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.DataGridView1)
-        Me.Controls.Add(Me.lblTotal)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.cbconcepto)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.Button1)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.BackColor = System.Drawing.SystemColors.Control
+        Me.ClientSize = New System.Drawing.Size(601, 266)
+        Me.Controls.Add(Me.btnSalir)
+        Me.Controls.Add(Me.btnAceptar)
+        Me.Controls.Add(Me.txtContraseña)
+        Me.Controls.Add(Me.lblContraseña)
+        Me.Controls.Add(Me.txtUsuario)
+        Me.Controls.Add(Me.lblUsuario)
+        Me.Controls.Add(Me.panelLogo)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "Login"
-        Me.Text = "Login"
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Inicio de sesion"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Label1 As Label
-    Friend WithEvents cbconcepto As ComboBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents lblTotal As Label
-    Friend WithEvents Button2 As Button
-    Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents Label3 As Label
-    Friend WithEvents txtCantidad As TextBox
-    Friend WithEvents ID As DataGridViewTextBoxColumn
-    Friend WithEvents Nombre As DataGridViewTextBoxColumn
-    Friend WithEvents Precio As DataGridViewTextBoxColumn
-    Friend WithEvents IVA As DataGridViewTextBoxColumn
-    Friend WithEvents Descuento As DataGridViewTextBoxColumn
-    Friend WithEvents Cantidad As DataGridViewTextBoxColumn
+    Friend WithEvents panelLogo As Panel
+    Friend WithEvents lblUsuario As Label
+    Friend WithEvents txtUsuario As TextBox
+    Friend WithEvents txtContraseña As TextBox
+    Friend WithEvents lblContraseña As Label
+    Friend WithEvents btnAceptar As Button
+    Friend WithEvents btnSalir As Button
 End Class

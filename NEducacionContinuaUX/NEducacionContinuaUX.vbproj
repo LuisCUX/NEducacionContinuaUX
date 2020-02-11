@@ -47,6 +47,9 @@
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ec-logo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -101,6 +104,12 @@
     <Compile Include="Services\EnviromentService.vb" />
     <Compile Include="Services\SelladoTimbradoService.vb" />
     <Compile Include="Services\XmlService.vb" />
+    <Compile Include="Views\Cobros.Designer.vb">
+      <DependentUpon>Cobros.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Cobros.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\Login.Designer.vb">
       <DependentUpon>Login.vb</DependentUpon>
     </Compile>
@@ -117,9 +126,12 @@
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Cobros.resx">
+      <DependentUpon>Cobros.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Login.resx">
       <DependentUpon>Login.vb</DependentUpon>
@@ -202,6 +214,11 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.vb</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ec-logo.ico" />
+    <Content Include="Images\ec-logo.ico" />
+    <None Include="Images\ec-logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

@@ -10,6 +10,15 @@
         Me.actualizarTotal(listaConceptos, lblTotal, True)
     End Sub
 
+    Sub eliminarconcepto(index As Integer, conceptoID As Integer, cantidad As Integer, gridConceptos As DataGridView, lblTotal As Label)
+        Dim concepto As New Concepto
+        concepto = Me.crearConcepto(conceptoID, cantidad)
+        listaConceptos.Remove(concepto)
+        gridConceptos.Rows.RemoveAt(index)
+        gridConceptos.Rows.RemoveAt(index)
+        Me.actualizarTotal(listaConceptos, lblTotal, True)
+    End Sub
+
     Function crearConcepto(conceptoID As Integer, cantidad As Integer) As Concepto
         Dim concepto As New Concepto()
         Dim tableConcepto As DataTable = db.getDataTableFromSQL("SELECT * FROM ing_ConceptosTemp WHERE ID = " & conceptoID & "")
@@ -24,7 +33,6 @@
             concepto.IVAExento = item("exentoIVA")
         Next
         concepto.Cantidad = cantidad
-
 
         If (concepto.absorbeIVA = True And concepto.IVAExento = False And concepto.consideraIVA = False) Then ''---ABSORBE IVA
 
