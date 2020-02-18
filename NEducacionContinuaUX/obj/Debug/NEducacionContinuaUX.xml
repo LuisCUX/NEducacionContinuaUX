@@ -22,7 +22,22 @@ NEducacionContinuaUX
   resource lookups using this strongly typed resource class.
 </summary>
 </member>
+<member name="P:NEducacionContinuaUX.My.Resources.Resources.descargar">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.ec_logo">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:NEducacionContinuaUX.My.Resources.Resources.exit_32px">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:NEducacionContinuaUX.My.Resources.Resources.login_rounded_up_26px">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>

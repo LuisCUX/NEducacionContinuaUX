@@ -1,7 +1,10 @@
 ﻿Public Class PrincipalView
     Private Sub PrincipalView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Location = Screen.PrimaryScreen.WorkingArea.Location
-        Me.Size = Screen.PrimaryScreen.WorkingArea.Size
-        Me.Text = "wea"
+        statusLabel.Text = User.getPerfil
+    End Sub
+
+    Private Sub RegistroDePagosOpcionalesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RegistroDePagosOpcionalesToolStripMenuItem.Click
+        MainPagosOpcionales.MdiParent = Me
+        MainPagosOpcionales.Show()
     End Sub
 End Class

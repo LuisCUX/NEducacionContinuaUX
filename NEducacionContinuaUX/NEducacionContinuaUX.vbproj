@@ -84,7 +84,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Controllers\ConceptHandlerController.vb" />
+    <Compile Include="Controllers\PagosOpcionalesController.vb" />
     <Compile Include="Models\Concepto.vb" />
+    <Compile Include="Models\User.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -100,6 +102,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Services\ComboboxService.vb" />
     <Compile Include="Services\DataBaseService.vb" />
     <Compile Include="Services\EnviromentService.vb" />
     <Compile Include="Services\SelladoTimbradoService.vb" />
@@ -122,6 +125,18 @@
     <Compile Include="Views\PrincipalView.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Views\MainPagosOpcionales.Designer.vb">
+      <DependentUpon>MainPagosOpcionales.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainPagosOpcionales.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\RegistroPagosOpcionales.Designer.vb">
+      <DependentUpon>RegistroPagosOpcionales.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegistroPagosOpcionales.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -138,6 +153,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PrincipalView.resx">
       <DependentUpon>PrincipalView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MainPagosOpcionales.resx">
+      <DependentUpon>MainPagosOpcionales.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\RegistroPagosOpcionales.resx">
+      <DependentUpon>RegistroPagosOpcionales.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -217,7 +238,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ec-logo.ico" />
+    <None Include="Resources\descargar.png" />
+    <None Include="exit_32px.png" />
     <Content Include="Images\ec-logo.ico" />
+    <None Include="login_rounded_up_26px.png" />
     <None Include="Images\ec-logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

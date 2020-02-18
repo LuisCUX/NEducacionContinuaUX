@@ -24,21 +24,30 @@ Partial Class PrincipalView
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PrincipalView))
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
+        Me.statusLabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.MenuStrip = New System.Windows.Forms.MenuStrip()
         Me.CobrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PagosOpcionalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RegistroDePagosOpcionalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AsignacionDePagosOpcionalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StatusStrip.SuspendLayout()
         Me.MenuStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'StatusStrip
         '
+        Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.statusLabel})
         Me.StatusStrip.Location = New System.Drawing.Point(0, 728)
         Me.StatusStrip.Name = "StatusStrip"
         Me.StatusStrip.Size = New System.Drawing.Size(1423, 22)
         Me.StatusStrip.TabIndex = 1
         Me.StatusStrip.Text = "StatusStrip1"
+        '
+        'statusLabel
+        '
+        Me.statusLabel.Name = "statusLabel"
+        Me.statusLabel.Size = New System.Drawing.Size(67, 17)
+        Me.statusLabel.Text = "StatusLabel"
         '
         'MenuStrip
         '
@@ -91,7 +100,11 @@ Partial Class PrincipalView
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.MenuStrip
         Me.Name = "PrincipalView"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Educacion Continua"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
+        Me.StatusStrip.ResumeLayout(False)
+        Me.StatusStrip.PerformLayout()
         Me.MenuStrip.ResumeLayout(False)
         Me.MenuStrip.PerformLayout()
         Me.ResumeLayout(False)
@@ -105,4 +118,5 @@ Partial Class PrincipalView
     Friend WithEvents RegistroDePagosOpcionalesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AsignacionDePagosOpcionalesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CobrosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents statusLabel As ToolStripStatusLabel
 End Class
