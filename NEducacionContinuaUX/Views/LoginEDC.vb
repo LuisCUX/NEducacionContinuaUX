@@ -1,4 +1,4 @@
-﻿Public Class Login
+﻿Public Class LoginEDC
     Dim db As DataBaseService = New DataBaseService()
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         EnviromentService.setEnviroment()
@@ -21,5 +21,17 @@
             Exit Sub
         End If
 
+    End Sub
+
+    Private Sub txtContraseña_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtContraseña.KeyPress
+        If Asc(e.KeyChar) = 39 Or Asc(e.KeyChar) = 44 Then
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub txtUsuario_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtUsuario.KeyPress
+        If Asc(e.KeyChar) = 39 Or Asc(e.KeyChar) = 44 Then
+            e.Handled = True
+        End If
     End Sub
 End Class

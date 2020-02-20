@@ -83,6 +83,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AsignacionPagosOpcionalesController.vb" />
     <Compile Include="Controllers\ConceptHandlerController.vb" />
     <Compile Include="Controllers\PagosOpcionalesController.vb" />
     <Compile Include="Models\Concepto.vb" />
@@ -105,18 +106,32 @@
     <Compile Include="Services\ComboboxService.vb" />
     <Compile Include="Services\DataBaseService.vb" />
     <Compile Include="Services\EnviromentService.vb" />
+    <Compile Include="Services\ObjectBagService.vb" />
     <Compile Include="Services\SelladoTimbradoService.vb" />
+    <Compile Include="Services\UtilitiesService.vb" />
     <Compile Include="Services\XmlService.vb" />
+    <Compile Include="Views\MainAsignacionPagosOpcionalesEDC.Designer.vb">
+      <DependentUpon>MainAsignacionPagosOpcionalesEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainAsignacionPagosOpcionalesEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\Cobros.Designer.vb">
       <DependentUpon>Cobros.vb</DependentUpon>
     </Compile>
     <Compile Include="Views\Cobros.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Login.Designer.vb">
-      <DependentUpon>Login.vb</DependentUpon>
+    <Compile Include="Views\LoginEDC.Designer.vb">
+      <DependentUpon>LoginEDC.vb</DependentUpon>
     </Compile>
-    <Compile Include="Views\Login.vb">
+    <Compile Include="Views\LoginEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ModalAsignacionPagosOpcionalesEDC.Designer.vb">
+      <DependentUpon>ModalAsignacionPagosOpcionalesEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModalAsignacionPagosOpcionalesEDC.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\PrincipalView.Designer.vb">
@@ -125,16 +140,16 @@
     <Compile Include="Views\PrincipalView.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\MainPagosOpcionales.Designer.vb">
-      <DependentUpon>MainPagosOpcionales.vb</DependentUpon>
+    <Compile Include="Views\MainRegistroPagosOpcionalesEDC.Designer.vb">
+      <DependentUpon>MainRegistroPagosOpcionalesEDC.vb</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainPagosOpcionales.vb">
+    <Compile Include="Views\MainRegistroPagosOpcionalesEDC.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\RegistroPagosOpcionales.Designer.vb">
-      <DependentUpon>RegistroPagosOpcionales.vb</DependentUpon>
+    <Compile Include="Views\ModalRegistroPagosOpcionalesEDC.Designer.vb">
+      <DependentUpon>ModalRegistroPagosOpcionalesEDC.vb</DependentUpon>
     </Compile>
-    <Compile Include="Views\RegistroPagosOpcionales.vb">
+    <Compile Include="Views\ModalRegistroPagosOpcionalesEDC.vb">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
@@ -145,20 +160,26 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\MainAsignacionPagosOpcionalesEDC.resx">
+      <DependentUpon>MainAsignacionPagosOpcionalesEDC.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Cobros.resx">
       <DependentUpon>Cobros.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Login.resx">
-      <DependentUpon>Login.vb</DependentUpon>
+    <EmbeddedResource Include="Views\LoginEDC.resx">
+      <DependentUpon>LoginEDC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ModalAsignacionPagosOpcionalesEDC.resx">
+      <DependentUpon>ModalAsignacionPagosOpcionalesEDC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PrincipalView.resx">
       <DependentUpon>PrincipalView.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\MainPagosOpcionales.resx">
-      <DependentUpon>MainPagosOpcionales.vb</DependentUpon>
+    <EmbeddedResource Include="Views\MainRegistroPagosOpcionalesEDC.resx">
+      <DependentUpon>MainRegistroPagosOpcionalesEDC.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\RegistroPagosOpcionales.resx">
-      <DependentUpon>RegistroPagosOpcionales.vb</DependentUpon>
+    <EmbeddedResource Include="Views\ModalRegistroPagosOpcionalesEDC.resx">
+      <DependentUpon>ModalRegistroPagosOpcionalesEDC.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -238,6 +259,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ec-logo.ico" />
+    <None Include="Resources\plus_32px.png" />
+    <None Include="Resources\search_32px.png" />
     <None Include="Resources\descargar.png" />
     <None Include="exit_32px.png" />
     <Content Include="Images\ec-logo.ico" />

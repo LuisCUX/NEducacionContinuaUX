@@ -4,7 +4,12 @@
     End Sub
 
     Private Sub RegistroDePagosOpcionalesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RegistroDePagosOpcionalesToolStripMenuItem.Click
-        MainPagosOpcionales.MdiParent = Me
-        MainPagosOpcionales.Show()
+        MainRegistroPagosOpcionalesEDC.MdiParent = Me
+        MainRegistroPagosOpcionalesEDC.Show()
+    End Sub
+
+    Private Sub AsignacionDePagosOpcionalesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AsignacionDePagosOpcionalesToolStripMenuItem.Click
+        MainAsignacionPagosOpcionalesEDC.MdiParent = Me
+        MainAsignacionPagosOpcionalesEDC.Show()
     End Sub
 End Class

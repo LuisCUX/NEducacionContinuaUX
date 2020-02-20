@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Login
+Partial Class LoginEDC
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,7 +22,7 @@ Partial Class Login
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Login))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(LoginEDC))
         Me.lblUsuario = New System.Windows.Forms.Label()
         Me.txtUsuario = New System.Windows.Forms.TextBox()
         Me.txtContraseña = New System.Windows.Forms.TextBox()
@@ -101,7 +101,7 @@ Partial Class Login
         Me.panelLogo.Size = New System.Drawing.Size(284, 271)
         Me.panelLogo.TabIndex = 0
         '
-        'Login
+        'LoginEDC
         '
         Me.AcceptButton = Me.btnAceptar
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -119,7 +119,7 @@ Partial Class Login
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "Login"
+        Me.Name = "LoginEDC"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Inicio de sesion"
         Me.ResumeLayout(False)

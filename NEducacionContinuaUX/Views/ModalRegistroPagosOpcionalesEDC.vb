@@ -1,8 +1,21 @@
-﻿Public Class RegistroPagosOpcionales
+﻿Public Class ModalRegistroPagosOpcionalesEDC
     Dim po As PagosOpcionalesController = New PagosOpcionalesController()
     Dim db As DataBaseService = New DataBaseService()
+    Dim first As Boolean
+    Dim tipoVentana As String
+    Dim IDPago As Integer
     Private Sub RegistroPagosOpcionales_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         po.llenarCombobox(cbConceptoPara, cbTipoPago, cbTipoConcepto, cbNivel)
+        tipoVentana = ObjectBagService.getItem("tipoVentana")
+
+        If (tipoVentana = "Edicion") Then
+            IDPago = ObjectBagService.getItem("IDPago")
+            po.llenarVentanaPago(IDPago, cbConceptoPara, cbNivel, cbTurno, cbTipoPago, cbTipoConcepto, cbDivision, cbGrupo, cbClase, cbProdServ, cbUnidad, lblNivel, lblTurno, txtConcepto, txtDescripcion, txtValorUnitario, txtValorUnitarioSinIVA, chbExentaIVA, chbConsideraIVA, chbIncluyeIVA)
+            Me.enableControls()
+            btnGuardar.Enabled = True
+        End If
+        ObjectBagService.clearBag()
+        first = True
     End Sub
 
     Private Sub txtValorUnitario_TextChanged(sender As Object, e As EventArgs) Handles txtValorUnitario.TextChanged
@@ -113,7 +126,7 @@
     Private Sub cbTipoConcepto_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbTipoConcepto.SelectionChangeCommitted
         Dim tableDivision As DataTable = db.getDataTableFromSQL($"SELECT DISTINCT Cve_division, Division FROM sat_ClasificacionClavesSAT WHERE Tipo = '{cbTipoConcepto.Text}'")
         ComboboxService.llenarCombobox(cbDivision, tableDivision, "Cve_division", "Division")
-        If (cbTipoConcepto.Text = "SERVICIO") Then
+        If (cbTipoConcepto.Text = "SERVICIO" And first = True) Then
             cbDivision.SelectedValue = "86000000"
             cbDivision_SelectionChangeCommitted(Nothing, Nothing)
         End If
@@ -123,7 +136,7 @@
     Private Sub cbDivision_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbDivision.SelectionChangeCommitted
         Dim tableGrupo As DataTable = db.getDataTableFromSQL($"SELECT DISTINCT cve_grupo, grupo FROM sat_ClasificacionClavesSAT WHERE Cve_division = '{cbDivision.SelectedValue}'")
         ComboboxService.llenarCombobox(cbGrupo, tableGrupo, "cve_grupo", "grupo")
-        If (cbTipoConcepto.Text = "SERVICIO") Then
+        If (cbTipoConcepto.Text = "SERVICIO" And first = True) Then
             cbGrupo.SelectedValue = "86120000"
         End If
         cbGrupo_SelectionChangeCommitted(Nothing, Nothing)
@@ -132,7 +145,7 @@
     Private Sub cbGrupo_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbGrupo.SelectionChangeCommitted
         Dim tableClase As DataTable = db.getDataTableFromSQL($"SELECT DISTINCT cve_clase, clase FROM sat_ClasificacionClavesSAT WHERE cve_grupo = '{cbGrupo.SelectedValue}'")
         ComboboxService.llenarCombobox(cbClase, tableClase, "cve_clase", "clase")
-        If (cbTipoConcepto.Text = "SERVICIO") Then
+        If (cbTipoConcepto.Text = "SERVICIO" And first = True) Then
             cbClase.SelectedValue = "86121700"
         End If
         cbClase_SelectionChangeCommitted(Nothing, Nothing)
@@ -142,7 +155,7 @@
         Dim clave As String = cbClase.SelectedValue.ToString().Substring(0, cbClase.SelectedValue.ToString().Length() - 2) + "%"
         Dim tableProdServ As DataTable = db.getDataTableFromSQL($"SELECT ClaveProdServ, Descripcion FROM sat_CatClaveProdServSAT WHERE ClaveProdServ LIKE '{clave}'")
         ComboboxService.llenarCombobox(cbProdServ, tableProdServ, "ClaveProdServ", "Descripcion")
-        If (cbTipoConcepto.Text = "SERVICIO") Then
+        If (cbTipoConcepto.Text = "SERVICIO" And first = True) Then
             cbProdServ.SelectedValue = "86121700"
         End If
         cbProdServ_SelectionChangeCommitted(Nothing, Nothing)
@@ -151,6 +164,7 @@
     Private Sub cbProdServ_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbProdServ.SelectionChangeCommitted
         Dim tableUnidad As DataTable = db.getDataTableFromSQL("SELECT id_claveProd, nombre FROM sat_cat_unidad")
         ComboboxService.llenarCombobox(cbUnidad, tableUnidad, "id_claveProd", "nombre")
+        first = False
     End Sub
 
     Private Sub cbConceptoPara_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbConceptoPara.SelectionChangeCommitted
@@ -243,13 +257,48 @@
         Else
             exentaIVA = 0
         End If
+        If (tipoVentana = "Edicion") Then
+            po.guardarCambios(IDPago, txtConcepto.Text, txtDescripcion.Text, cbProdServ.SelectedValue, cbUnidad.SelectedValue, CDec(txtValorUnitario.Text), cbConceptoPara.Text, consideraIVA, agregaIVA, exentaIVA, cbTipoPago.SelectedValue, cbTurno.SelectedValue, cbNivel.SelectedValue)
+        ElseIf (tipoVentana = "Nuevo") Then
+            po.registrarPagoOpcional(txtConcepto.Text, txtDescripcion.Text, cbProdServ.SelectedValue, cbUnidad.SelectedValue, CDec(txtValorUnitario.Text), cbConceptoPara.Text, consideraIVA, agregaIVA, exentaIVA, cbTipoPago.SelectedValue, cbTurno.SelectedValue, cbNivel.SelectedValue)
+        End If
+    End Sub
 
-        po.registrarPagoOpcional(txtConcepto.Text, txtDescripcion.Text, cbProdServ.SelectedValue, cbUnidad.SelectedValue, CDec(txtValorUnitario.Text), cbConceptoPara.Text, consideraIVA, agregaIVA, exentaIVA, cbTipoPago.SelectedValue, cbTurno.SelectedValue, cbNivel.SelectedValue)
+    Sub commitChangeTipo()
+        cbTipoConcepto_SelectionChangeCommitted(Nothing, Nothing)
+    End Sub
+
+    Sub commitChangecbGrupo()
+        cbGrupo_SelectionChangeCommitted(Nothing, Nothing)
+    End Sub
+
+    Sub commitChangecbClase()
+        cbClase_SelectionChangeCommitted(Nothing, Nothing)
+    End Sub
+
+    Sub commitChangecbDivision()
+        cbDivision_SelectionChangeCommitted(Nothing, Nothing)
+    End Sub
+
+    Sub commitChangecbNivel()
+        cbNivel_SelectionChangeCommitted(Nothing, Nothing)
     End Sub
 
     Sub Reiniciar()
         Me.Controls.Clear()
         InitializeComponent()
         RegistroPagosOpcionales_Load(Me, Nothing)
+    End Sub
+
+    Private Sub txtConcepto_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtConcepto.KeyPress
+        If Asc(e.KeyChar) = 39 Or Asc(e.KeyChar) = 44 Then
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub txtDescripcion_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtDescripcion.KeyPress
+        If Asc(e.KeyChar) = 39 Or Asc(e.KeyChar) = 44 Then
+            e.Handled = True
+        End If
     End Sub
 End Class

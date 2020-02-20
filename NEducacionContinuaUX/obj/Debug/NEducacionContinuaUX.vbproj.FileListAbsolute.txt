@@ -11,6 +11,8 @@ C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEdu
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.pdb
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.PrincipalView.resources
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.Cobros.resources
-C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.Login.resources
-C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.MainPagosOpcionales.resources
-C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.RegistroPagosOpcionales.resources
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.LoginEDC.resources
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.MainAsignacionPagosOpcionalesEDC.resources
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.ModalAsignacionPagosOpcionalesEDC.resources
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.MainRegistroPagosOpcionalesEDC.resources
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.ModalRegistroPagosOpcionalesEDC.resources
