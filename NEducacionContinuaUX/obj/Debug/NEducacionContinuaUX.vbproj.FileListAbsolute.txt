@@ -16,3 +16,4 @@ C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEdu
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.ModalAsignacionPagosOpcionalesEDC.resources
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.MainRegistroPagosOpcionalesEDC.resources
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.ModalRegistroPagosOpcionalesEDC.resources
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.CobrosEDC.resources

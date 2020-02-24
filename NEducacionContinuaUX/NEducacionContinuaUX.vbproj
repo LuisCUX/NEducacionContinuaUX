@@ -84,6 +84,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AsignacionPagosOpcionalesController.vb" />
+    <Compile Include="Controllers\CobrosController.vb" />
     <Compile Include="Controllers\ConceptHandlerController.vb" />
     <Compile Include="Controllers\PagosOpcionalesController.vb" />
     <Compile Include="Models\Concepto.vb" />
@@ -110,6 +111,12 @@
     <Compile Include="Services\SelladoTimbradoService.vb" />
     <Compile Include="Services\UtilitiesService.vb" />
     <Compile Include="Services\XmlService.vb" />
+    <Compile Include="Views\CobrosEDC.Designer.vb">
+      <DependentUpon>CobrosEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CobrosEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\MainAsignacionPagosOpcionalesEDC.Designer.vb">
       <DependentUpon>MainAsignacionPagosOpcionalesEDC.vb</DependentUpon>
     </Compile>
@@ -159,6 +166,9 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CobrosEDC.resx">
+      <DependentUpon>CobrosEDC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MainAsignacionPagosOpcionalesEDC.resx">
       <DependentUpon>MainAsignacionPagosOpcionalesEDC.vb</DependentUpon>
@@ -259,6 +269,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ec-logo.ico" />
+    <None Include="Resources\cash_counter_32px.png" />
+    <None Include="Resources\cash_register_26px.png" />
     <None Include="Resources\plus_32px.png" />
     <None Include="Resources\search_32px.png" />
     <None Include="Resources\descargar.png" />

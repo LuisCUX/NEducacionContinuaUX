@@ -12,4 +12,9 @@
         MainAsignacionPagosOpcionalesEDC.MdiParent = Me
         MainAsignacionPagosOpcionalesEDC.Show()
     End Sub
+
+    Private Sub CobrosToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles CobrosToolStripMenuItem1.Click
+        CobrosEDC.MdiParent = Me
+        CobrosEDC.Show()
+    End Sub
 End Class

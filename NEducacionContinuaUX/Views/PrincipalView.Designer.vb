@@ -30,6 +30,7 @@ Partial Class PrincipalView
         Me.PagosOpcionalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RegistroDePagosOpcionalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AsignacionDePagosOpcionalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CobrosToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip.SuspendLayout()
         Me.MenuStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -60,6 +61,7 @@ Partial Class PrincipalView
         '
         'CobrosToolStripMenuItem
         '
+        Me.CobrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CobrosToolStripMenuItem1})
         Me.CobrosToolStripMenuItem.Name = "CobrosToolStripMenuItem"
         Me.CobrosToolStripMenuItem.Size = New System.Drawing.Size(57, 20)
         Me.CobrosToolStripMenuItem.Text = "Cobros"
@@ -82,6 +84,12 @@ Partial Class PrincipalView
         Me.AsignacionDePagosOpcionalesToolStripMenuItem.Name = "AsignacionDePagosOpcionalesToolStripMenuItem"
         Me.AsignacionDePagosOpcionalesToolStripMenuItem.Size = New System.Drawing.Size(244, 22)
         Me.AsignacionDePagosOpcionalesToolStripMenuItem.Text = "Asignacion de pagos opcionales"
+        '
+        'CobrosToolStripMenuItem1
+        '
+        Me.CobrosToolStripMenuItem1.Name = "CobrosToolStripMenuItem1"
+        Me.CobrosToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
+        Me.CobrosToolStripMenuItem1.Text = "Cobros"
         '
         'PrincipalView
         '
@@ -119,4 +127,5 @@ Partial Class PrincipalView
     Friend WithEvents AsignacionDePagosOpcionalesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CobrosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents statusLabel As ToolStripStatusLabel
+    Friend WithEvents CobrosToolStripMenuItem1 As ToolStripMenuItem
 End Class

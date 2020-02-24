@@ -22,7 +22,6 @@
                            lblNivel As Label, lblTurno As Label, txtNombre As TextBox, txtDesc As TextBox, txtCostoUnitario As TextBox, txtCostoIVA As TextBox, chbExento As CheckBox, chbAbsorbe As CheckBox, chbAgrega As CheckBox)
 
         Dim cveProdServ As String
-
         Dim tableUnidad As DataTable = db.getDataTableFromSQL("SELECT id_claveProd, nombre FROM sat_cat_unidad")
         ComboboxService.llenarCombobox(cbUnidad, tableUnidad, "id_claveProd", "nombre")
         Dim tablePago As DataTable = db.getDataTableFromSQL($"SELECT Nombre, Descripcion, claveProductoServicio, claveUnidad, considerarIVA, AgregaIVA, ExentaIVA, ID_cat_TipoPagoOpcional FROM ing_PagosOpcionales WHERE ID = {ID}")
