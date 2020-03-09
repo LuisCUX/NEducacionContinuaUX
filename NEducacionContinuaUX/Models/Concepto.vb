@@ -2,6 +2,8 @@
     Public Property NombreConcepto As String
     Public Property cveClase As String
     Public Property cveUnidad As String
+    Public Property claveConcepto As String
+    Public Property IDConcepto As Integer
 
     Public Property Cantidad As Integer ''Cantidad de conceptos
     Public Property costoUnitario As String ''Costo de cada concepto

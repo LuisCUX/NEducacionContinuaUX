@@ -22,6 +22,11 @@ NEducacionContinuaUX
   resource lookups using this strongly typed resource class.
 </summary>
 </member>
+<member name="P:NEducacionContinuaUX.My.Resources.Resources.broom_32px">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.cash_counter_32px">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
@@ -32,12 +37,12 @@ NEducacionContinuaUX
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:NEducacionContinuaUX.My.Resources.Resources.descargar">
+<member name="P:NEducacionContinuaUX.My.Resources.Resources.Construction_4_512">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:NEducacionContinuaUX.My.Resources.Resources.ec_logo">
+<member name="P:NEducacionContinuaUX.My.Resources.Resources.descargar">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>

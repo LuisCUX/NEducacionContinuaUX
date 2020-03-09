@@ -2,37 +2,53 @@
     Dim db As DataBaseService = New DataBaseService()
     Dim listaConceptos As New List(Of Concepto)
 
-    Sub agregarconcepto(conceptoID As Integer, cantidad As Integer, gridConceptos As DataGridView, lblTotal As Label)
+    Sub agregarconcepto(conceptoID As Integer, claveConcepto As String)
         Dim concepto As New Concepto
-        concepto = Me.crearConcepto(conceptoID, cantidad)
+        concepto = Me.crearConcepto(conceptoID, claveConcepto)
         listaConceptos.Add(concepto)
-        gridConceptos.Rows.Add(conceptoID, concepto.NombreConcepto, Format(CDec(concepto.costoUnitario), "#####0.00"), Format(CDec(concepto.costoIVAUnitario), "#####0.00"), Format(CDec(concepto.descuento), "#####0.00"), concepto.Cantidad)
-        Me.actualizarTotal(listaConceptos, lblTotal, True)
     End Sub
 
-    Sub eliminarconcepto(index As Integer, conceptoID As Integer, cantidad As Integer, gridConceptos As DataGridView, lblTotal As Label)
+    Sub eliminarconcepto(conceptoID As Integer, claveConcepto As String)
         Dim concepto As New Concepto
-        concepto = Me.crearConcepto(conceptoID, cantidad)
-        listaConceptos.Remove(concepto)
-        gridConceptos.Rows.RemoveAt(index)
-        gridConceptos.Rows.RemoveAt(index)
-        Me.actualizarTotal(listaConceptos, lblTotal, True)
+        concepto = Me.crearConcepto(conceptoID, claveConcepto)
+        listaConceptos.RemoveAll(Function(wea) wea.absorbeIVA = concepto.absorbeIVA And wea.Cantidad = concepto.Cantidad And wea.consideraIVA = concepto.consideraIVA And wea.costoBase = concepto.costoBase And wea.costoFinal = concepto.costoFinal And wea.costoIVATotal = concepto.costoIVATotal And wea.claveConcepto = concepto.claveConcepto And wea.IDConcepto = concepto.IDConcepto And
+                                 wea.costoIVAUnitario = concepto.costoIVAUnitario And wea.costoTotal = concepto.costoTotal And wea.costoUnitario = concepto.costoUnitario And wea.cveClase = concepto.cveClase And wea.cveUnidad = concepto.cveUnidad And wea.descuento = concepto.descuento And wea.IVAExento = concepto.IVAExento And wea.NombreConcepto = concepto.NombreConcepto)
     End Sub
 
-    Function crearConcepto(conceptoID As Integer, cantidad As Integer) As Concepto
+    Function crearObjeto(conceptoID As Integer, claveConcepto As String) As Concepto
+        Dim concep As Concepto = New Concepto()
+
+        If (claveConcepto = "POA" Or claveConcepto = "POE") Then
+            Dim nombreTabla As String
+            If (claveConcepto = "POA") Then
+                nombreTabla = "ing_AsignacionPagoOpcionalAlumno"
+            ElseIf (claveconcepto = "POE") Then
+                nombreTabla = "ing_AsignacionPagoOpcionalExterno"
+            End If
+            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT P.Nombre, P.claveProductoServicio, P.claveUnidad, A.costoUnitario, 0.00 As Descuento, P.considerarIVA, P.AgregaIVA, P.ExentaIVA, A.Cantidad FROM {nombreTabla} AS A
+                                                                     INNER JOIN ing_resPagoOpcionalAsignacion AS R ON R.ID = A.ID_resPagoOpcionalAsignacion
+                                                                     INNER JOIN ing_PagosOpcionales AS P ON P.ID = R.ID_PagoOpcional
+                                                                     WHERE A.ID = {conceptoID}")
+            For Each item As DataRow In tableConcepto.Rows
+                    concep.IDConcepto = conceptoID
+                    concep.NombreConcepto = item("Nombre")
+                    concep.claveConcepto = claveConcepto
+                    concep.cveClase = item("claveProductoServicio")
+                    concep.cveUnidad = item("claveUnidad")
+                    concep.costoUnitario = item("costoUnitario")
+                    concep.descuento = item("Descuento")
+                    concep.absorbeIVA = item("considerarIVA")
+                    concep.consideraIVA = item("AgregaIVA")
+                    concep.IVAExento = item("ExentaIVA")
+                    concep.Cantidad = item("Cantidad")
+                Next
+            End If
+            Return concep
+    End Function
+
+    Function crearConcepto(conceptoID As Integer, claveConcepto As String) As Concepto
         Dim concepto As New Concepto()
-        Dim tableConcepto As DataTable = db.getDataTableFromSQL("SELECT * FROM ing_ConceptosTemp WHERE ID = " & conceptoID & "")
-        For Each item As DataRow In tableConcepto.Rows
-            concepto.NombreConcepto = item("Nombre")
-            concepto.cveClase = item("claveProductoServicio")
-            concepto.cveUnidad = item("claveUnidad")
-            concepto.costoUnitario = item("valorUnitario")
-            concepto.descuento = item("Descuento")
-            concepto.absorbeIVA = item("absorbeIVA")
-            concepto.consideraIVA = item("consideraIVA")
-            concepto.IVAExento = item("exentoIVA")
-        Next
-        concepto.Cantidad = cantidad
+        concepto = Me.crearObjeto(conceptoID, claveConcepto)
 
         If (concepto.absorbeIVA = True And concepto.IVAExento = False And concepto.consideraIVA = False) Then ''---ABSORBE IVA
 
@@ -108,4 +124,8 @@
     Function getListaConceptos() As List(Of Concepto)
         Return listaConceptos
     End Function
+
+    Sub limpiarListaConceptos()
+        listaConceptos.Clear()
+    End Sub
 End Class

@@ -94,7 +94,7 @@ Partial Class LoginEDC
         '
         'panelLogo
         '
-        Me.panelLogo.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.ec_logo
+        Me.panelLogo.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.Construction_4_512
         Me.panelLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.panelLogo.Location = New System.Drawing.Point(0, -2)
         Me.panelLogo.Name = "panelLogo"
@@ -121,7 +121,7 @@ Partial Class LoginEDC
         Me.MinimizeBox = False
         Me.Name = "LoginEDC"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Inicio de sesion"
+        Me.Text = "f56"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

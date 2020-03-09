@@ -111,9 +111,6 @@
     End Sub
 
     Private Sub cbTipoPago_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbTipoPago.SelectionChangeCommitted
-        cbTipoConcepto.SelectedIndex = 1
-        cbTipoConcepto_SelectionChangeCommitted(Nothing, Nothing)
-
         cbTipoConcepto.Enabled = True
         cbDivision.Enabled = True
         cbGrupo.Enabled = True
@@ -121,6 +118,8 @@
         cbProdServ.Enabled = True
         cbUnidad.Enabled = True
         btnGuardar.Enabled = True
+        cbTipoConcepto.SelectedIndex = 1
+        cbTipoConcepto_SelectionChangeCommitted(Nothing, Nothing)
     End Sub
 
     Private Sub cbTipoConcepto_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbTipoConcepto.SelectionChangeCommitted
@@ -173,7 +172,7 @@
             txtConcepto.Enabled = True
             txtDescripcion.Enabled = True
             txtValorUnitario.Enabled = True
-            txtValorUnitarioSinIVA.Enabled = True
+            txtClavePS.Enabled = True
             chbConsideraIVA.Enabled = True
             chbExentaIVA.Enabled = True
             chbIncluyeIVA.Enabled = True
@@ -185,12 +184,11 @@
         Else
             lblNivel.Visible = True
             cbNivel.Visible = True
-
+            txtClavePS.Enabled = False
             cbTipoPago.Enabled = False
             txtConcepto.Enabled = False
             txtDescripcion.Enabled = False
             txtValorUnitario.Enabled = False
-            txtValorUnitarioSinIVA.Enabled = False
             chbConsideraIVA.Enabled = False
             chbExentaIVA.Enabled = False
             chbIncluyeIVA.Enabled = False
@@ -214,10 +212,10 @@
         txtConcepto.Enabled = True
         txtDescripcion.Enabled = True
         txtValorUnitario.Enabled = True
-        txtValorUnitarioSinIVA.Enabled = True
         chbConsideraIVA.Enabled = True
         chbExentaIVA.Enabled = True
         chbIncluyeIVA.Enabled = True
+        'Me.commitChangeTipoPago()
     End Sub
 
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
@@ -264,6 +262,10 @@
         End If
     End Sub
 
+    Sub commitChangeTipoPago()
+        cbTipoPago_SelectionChangeCommitted(Nothing, Nothing)
+    End Sub
+
     Sub commitChangeTipo()
         cbTipoConcepto_SelectionChangeCommitted(Nothing, Nothing)
     End Sub
@@ -290,13 +292,23 @@
         RegistroPagosOpcionales_Load(Me, Nothing)
     End Sub
 
-    Private Sub txtConcepto_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtConcepto.KeyPress
+    Private Sub txtClavePS_PreviewKeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PreviewKeyDownEventArgs) Handles txtClavePS.PreviewKeyDown
+        If e.KeyCode = Keys.Enter Then
+            po.BuscarClavePS(txtClavePS.Text, cbTipoConcepto, cbDivision, cbGrupo, cbClase, cbProdServ)
+        End If
+    End Sub
+
+    Private Sub txtClavePS_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtClavePS.KeyPress
         If Asc(e.KeyChar) = 39 Or Asc(e.KeyChar) = 44 Then
+            e.Handled = True
+        End If
+
+        If Not IsNumeric(e.KeyChar) And Not e.KeyChar = ChrW(Keys.Back) Then
             e.Handled = True
         End If
     End Sub
 
-    Private Sub txtDescripcion_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtDescripcion.KeyPress
+    Private Sub txtDescripcion_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtDescripcion.KeyPress, txtClavePS.KeyPress, txtConcepto.KeyPress
         If Asc(e.KeyChar) = 39 Or Asc(e.KeyChar) = 44 Then
             e.Handled = True
         End If

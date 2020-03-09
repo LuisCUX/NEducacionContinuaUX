@@ -56,6 +56,8 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         Me.cbTurno = New System.Windows.Forms.ComboBox()
         Me.chbIncluyeIVA = New System.Windows.Forms.CheckBox()
         Me.chbExentaIVA = New System.Windows.Forms.CheckBox()
+        Me.lblBuscarPS = New System.Windows.Forms.Label()
+        Me.txtClavePS = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'lblNombreVentana
@@ -214,7 +216,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         Me.cbTipoConcepto.Enabled = False
         Me.cbTipoConcepto.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbTipoConcepto.FormattingEnabled = True
-        Me.cbTipoConcepto.Location = New System.Drawing.Point(180, 409)
+        Me.cbTipoConcepto.Location = New System.Drawing.Point(180, 446)
         Me.cbTipoConcepto.Name = "cbTipoConcepto"
         Me.cbTipoConcepto.Size = New System.Drawing.Size(490, 23)
         Me.cbTipoConcepto.TabIndex = 26
@@ -224,7 +226,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         Me.lblTipoConcepto.AutoSize = True
         Me.lblTipoConcepto.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTipoConcepto.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblTipoConcepto.Location = New System.Drawing.Point(13, 412)
+        Me.lblTipoConcepto.Location = New System.Drawing.Point(13, 449)
         Me.lblTipoConcepto.Name = "lblTipoConcepto"
         Me.lblTipoConcepto.Size = New System.Drawing.Size(117, 16)
         Me.lblTipoConcepto.TabIndex = 25
@@ -236,7 +238,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         Me.cbDivision.Enabled = False
         Me.cbDivision.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbDivision.FormattingEnabled = True
-        Me.cbDivision.Location = New System.Drawing.Point(180, 437)
+        Me.cbDivision.Location = New System.Drawing.Point(180, 474)
         Me.cbDivision.Name = "cbDivision"
         Me.cbDivision.Size = New System.Drawing.Size(490, 23)
         Me.cbDivision.TabIndex = 28
@@ -246,7 +248,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         Me.lblDivision.AutoSize = True
         Me.lblDivision.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDivision.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblDivision.Location = New System.Drawing.Point(13, 440)
+        Me.lblDivision.Location = New System.Drawing.Point(13, 477)
         Me.lblDivision.Name = "lblDivision"
         Me.lblDivision.Size = New System.Drawing.Size(56, 16)
         Me.lblDivision.TabIndex = 27
@@ -258,7 +260,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         Me.cbGrupo.Enabled = False
         Me.cbGrupo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbGrupo.FormattingEnabled = True
-        Me.cbGrupo.Location = New System.Drawing.Point(180, 465)
+        Me.cbGrupo.Location = New System.Drawing.Point(180, 502)
         Me.cbGrupo.Name = "cbGrupo"
         Me.cbGrupo.Size = New System.Drawing.Size(490, 23)
         Me.cbGrupo.TabIndex = 30
@@ -268,7 +270,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         Me.lblGrupo.AutoSize = True
         Me.lblGrupo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblGrupo.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblGrupo.Location = New System.Drawing.Point(13, 468)
+        Me.lblGrupo.Location = New System.Drawing.Point(13, 505)
         Me.lblGrupo.Name = "lblGrupo"
         Me.lblGrupo.Size = New System.Drawing.Size(48, 16)
         Me.lblGrupo.TabIndex = 29
@@ -280,7 +282,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         Me.cbClase.Enabled = False
         Me.cbClase.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbClase.FormattingEnabled = True
-        Me.cbClase.Location = New System.Drawing.Point(180, 493)
+        Me.cbClase.Location = New System.Drawing.Point(180, 530)
         Me.cbClase.Name = "cbClase"
         Me.cbClase.Size = New System.Drawing.Size(490, 23)
         Me.cbClase.TabIndex = 32
@@ -290,7 +292,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         Me.lblClase.AutoSize = True
         Me.lblClase.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblClase.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblClase.Location = New System.Drawing.Point(13, 496)
+        Me.lblClase.Location = New System.Drawing.Point(13, 533)
         Me.lblClase.Name = "lblClase"
         Me.lblClase.Size = New System.Drawing.Size(46, 16)
         Me.lblClase.TabIndex = 31
@@ -302,7 +304,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         Me.cbProdServ.Enabled = False
         Me.cbProdServ.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbProdServ.FormattingEnabled = True
-        Me.cbProdServ.Location = New System.Drawing.Point(180, 521)
+        Me.cbProdServ.Location = New System.Drawing.Point(180, 558)
         Me.cbProdServ.Name = "cbProdServ"
         Me.cbProdServ.Size = New System.Drawing.Size(490, 23)
         Me.cbProdServ.TabIndex = 34
@@ -312,7 +314,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         Me.lblProdServ.AutoSize = True
         Me.lblProdServ.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblProdServ.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblProdServ.Location = New System.Drawing.Point(13, 524)
+        Me.lblProdServ.Location = New System.Drawing.Point(13, 561)
         Me.lblProdServ.Name = "lblProdServ"
         Me.lblProdServ.Size = New System.Drawing.Size(125, 16)
         Me.lblProdServ.TabIndex = 33
@@ -324,7 +326,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         Me.cbUnidad.Enabled = False
         Me.cbUnidad.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbUnidad.FormattingEnabled = True
-        Me.cbUnidad.Location = New System.Drawing.Point(180, 549)
+        Me.cbUnidad.Location = New System.Drawing.Point(180, 586)
         Me.cbUnidad.Name = "cbUnidad"
         Me.cbUnidad.Size = New System.Drawing.Size(490, 23)
         Me.cbUnidad.TabIndex = 36
@@ -334,7 +336,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         Me.lblUnidad.AutoSize = True
         Me.lblUnidad.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblUnidad.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblUnidad.Location = New System.Drawing.Point(13, 552)
+        Me.lblUnidad.Location = New System.Drawing.Point(13, 589)
         Me.lblUnidad.Name = "lblUnidad"
         Me.lblUnidad.Size = New System.Drawing.Size(109, 16)
         Me.lblUnidad.TabIndex = 35
@@ -355,7 +357,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         '
         Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_32px
         Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnSalir.Location = New System.Drawing.Point(530, 620)
+        Me.btnSalir.Location = New System.Drawing.Point(461, 620)
         Me.btnSalir.Name = "btnSalir"
         Me.btnSalir.Size = New System.Drawing.Size(75, 54)
         Me.btnSalir.TabIndex = 38
@@ -435,12 +437,34 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         Me.chbExentaIVA.Text = "¿Exenta IVA?"
         Me.chbExentaIVA.UseVisualStyleBackColor = True
         '
-        'RegistroPagosOpcionales
+        'lblBuscarPS
+        '
+        Me.lblBuscarPS.AutoSize = True
+        Me.lblBuscarPS.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblBuscarPS.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblBuscarPS.Location = New System.Drawing.Point(13, 406)
+        Me.lblBuscarPS.Name = "lblBuscarPS"
+        Me.lblBuscarPS.Size = New System.Drawing.Size(114, 16)
+        Me.lblBuscarPS.TabIndex = 45
+        Me.lblBuscarPS.Text = "Buscar clave P/S:"
+        '
+        'txtClavePS
+        '
+        Me.txtClavePS.Enabled = False
+        Me.txtClavePS.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtClavePS.Location = New System.Drawing.Point(180, 403)
+        Me.txtClavePS.Name = "txtClavePS"
+        Me.txtClavePS.Size = New System.Drawing.Size(136, 21)
+        Me.txtClavePS.TabIndex = 46
+        '
+        'ModalRegistroPagosOpcionalesEDC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
         Me.ClientSize = New System.Drawing.Size(677, 701)
+        Me.Controls.Add(Me.txtClavePS)
+        Me.Controls.Add(Me.lblBuscarPS)
         Me.Controls.Add(Me.chbExentaIVA)
         Me.Controls.Add(Me.chbIncluyeIVA)
         Me.Controls.Add(Me.cbTurno)
@@ -475,7 +499,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         Me.Controls.Add(Me.cbConceptoPara)
         Me.Controls.Add(Me.lblconceptopara)
         Me.Controls.Add(Me.lblNombreVentana)
-        Me.Name = "RegistroPagosOpcionales"
+        Me.Name = "ModalRegistroPagosOpcionalesEDC"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "s"
         Me.ResumeLayout(False)
@@ -517,4 +541,6 @@ Partial Class ModalRegistroPagosOpcionalesEDC
     Friend WithEvents cbTurno As ComboBox
     Friend WithEvents chbIncluyeIVA As CheckBox
     Friend WithEvents chbExentaIVA As CheckBox
+    Friend WithEvents lblBuscarPS As Label
+    Friend WithEvents txtClavePS As TextBox
 End Class

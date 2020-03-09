@@ -76,15 +76,15 @@ Public Class Cobros
         MessageBox.Show("XML completado")
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        ch.agregarconcepto(cbconcepto.SelectedValue, txtCantidad.Text, DataGridView1, lblTotal)
-    End Sub
+    'Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    '    ch.agregarconcepto(cbconcepto.SelectedValue, txtCantidad.Text, DataGridView1, lblTotal)
+    'End Sub
 
-    Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
-        Dim index As Integer
-        index = DataGridView1.CurrentCell.RowIndex
-        Dim conceptoID As Integer = Convert.ToInt32(DataGridView1.Rows(index).Cells(0).Value)
-        Dim cantidad As Integer = Convert.ToInt32(DataGridView1.Rows(index).Cells(5).Value)
-        ch.eliminarconcepto(index, conceptoID, cantidad, DataGridView1, lblTotal)
-    End Sub
+    'Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
+    '    Dim index As Integer
+    '    index = DataGridView1.CurrentCell.RowIndex
+    '    Dim conceptoID As Integer = Convert.ToInt32(DataGridView1.Rows(index).Cells(0).Value)
+    '    Dim cantidad As Integer = Convert.ToInt32(DataGridView1.Rows(index).Cells(5).Value)
+    '    ch.eliminarconcepto(index, conceptoID, , cantidad)
+    'End Sub
 End Class

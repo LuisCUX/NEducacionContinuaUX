@@ -27,10 +27,12 @@ Partial Class PrincipalView
         Me.statusLabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.MenuStrip = New System.Windows.Forms.MenuStrip()
         Me.CobrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CobrosToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.PagosOpcionalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RegistroDePagosOpcionalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AsignacionDePagosOpcionalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CobrosToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CatalogosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GestionDeExternosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip.SuspendLayout()
         Me.MenuStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -52,7 +54,7 @@ Partial Class PrincipalView
         '
         'MenuStrip
         '
-        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CobrosToolStripMenuItem, Me.PagosOpcionalesToolStripMenuItem})
+        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CobrosToolStripMenuItem, Me.PagosOpcionalesToolStripMenuItem, Me.CatalogosToolStripMenuItem})
         Me.MenuStrip.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip.Name = "MenuStrip"
         Me.MenuStrip.Size = New System.Drawing.Size(1423, 24)
@@ -65,6 +67,12 @@ Partial Class PrincipalView
         Me.CobrosToolStripMenuItem.Name = "CobrosToolStripMenuItem"
         Me.CobrosToolStripMenuItem.Size = New System.Drawing.Size(57, 20)
         Me.CobrosToolStripMenuItem.Text = "Cobros"
+        '
+        'CobrosToolStripMenuItem1
+        '
+        Me.CobrosToolStripMenuItem1.Name = "CobrosToolStripMenuItem1"
+        Me.CobrosToolStripMenuItem1.Size = New System.Drawing.Size(112, 22)
+        Me.CobrosToolStripMenuItem1.Text = "Cobros"
         '
         'PagosOpcionalesToolStripMenuItem
         '
@@ -85,18 +93,25 @@ Partial Class PrincipalView
         Me.AsignacionDePagosOpcionalesToolStripMenuItem.Size = New System.Drawing.Size(244, 22)
         Me.AsignacionDePagosOpcionalesToolStripMenuItem.Text = "Asignacion de pagos opcionales"
         '
-        'CobrosToolStripMenuItem1
+        'CatalogosToolStripMenuItem
         '
-        Me.CobrosToolStripMenuItem1.Name = "CobrosToolStripMenuItem1"
-        Me.CobrosToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
-        Me.CobrosToolStripMenuItem1.Text = "Cobros"
+        Me.CatalogosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GestionDeExternosToolStripMenuItem})
+        Me.CatalogosToolStripMenuItem.Name = "CatalogosToolStripMenuItem"
+        Me.CatalogosToolStripMenuItem.Size = New System.Drawing.Size(72, 20)
+        Me.CatalogosToolStripMenuItem.Text = "Catalogos"
+        '
+        'GestionDeExternosToolStripMenuItem
+        '
+        Me.GestionDeExternosToolStripMenuItem.Name = "GestionDeExternosToolStripMenuItem"
+        Me.GestionDeExternosToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+        Me.GestionDeExternosToolStripMenuItem.Text = "Gestion de externos"
         '
         'PrincipalView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.SystemColors.ControlDark
-        Me.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.ec_logo
+        Me.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.Construction_4_512
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.ClientSize = New System.Drawing.Size(1423, 750)
         Me.Controls.Add(Me.StatusStrip)
@@ -128,4 +143,6 @@ Partial Class PrincipalView
     Friend WithEvents CobrosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents statusLabel As ToolStripStatusLabel
     Friend WithEvents CobrosToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents CatalogosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents GestionDeExternosToolStripMenuItem As ToolStripMenuItem
 End Class

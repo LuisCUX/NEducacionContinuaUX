@@ -17,4 +17,9 @@
         CobrosEDC.MdiParent = Me
         CobrosEDC.Show()
     End Sub
+
+    Private Sub GestionDeExternosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GestionDeExternosToolStripMenuItem.Click
+        RegistroExternosEDC.MdiParent = Me
+        RegistroExternosEDC.Show()
+    End Sub
 End Class

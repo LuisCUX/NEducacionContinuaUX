@@ -102,8 +102,8 @@
             db.execSQLQueryWithoutParams($"INSERT INTO ing_resPagoOpcionalAsignacion(ID_PagoOpcional, valorUnitario, Para, ID_res_NT, Activo) VALUES ({ID_PagoOpcional}, {valorUnitario}, '{para}', {ID_ResNT}, 1)")
             db.commitTransaction()
             MessageBox.Show("Pago opcional registrado correctamente")
+            MainRegistroPagosOpcionalesEDC.reloadGrid()
             ModalRegistroPagosOpcionalesEDC.Close()
-            MainRegistroPagosOpcionalesEDC.Reiniciar()
         Catch ex As Exception
             db.rollBackTransaction()
             MessageBox.Show($"Error: {ex.Message}")
@@ -122,11 +122,42 @@
             db.execSQLQueryWithoutParams($"UPDATE ing_resPagoOpcionalAsignacion SET valorUnitario = {valorUnitario}, Para = '{para}', ID_res_NT = {ID_ResNT} WHERE ID_PagoOpcional = {IDPago}")
             db.commitTransaction()
             MessageBox.Show("Pago opcional editado correctamente")
+            MainRegistroPagosOpcionalesEDC.reloadGrid()
             ModalRegistroPagosOpcionalesEDC.Close()
-            MainRegistroPagosOpcionalesEDC.Reiniciar()
         Catch ex As Exception
             db.rollBackTransaction()
             MessageBox.Show($"Error: {ex.Message}")
         End Try
+    End Sub
+
+    Sub BuscarClavePS(Clave As String, cbTipoConcepto As ComboBox, cbDivision As ComboBox, cbGrupo As ComboBox, cbClase As ComboBox, cbProdServ As ComboBox)
+        Dim exists As Integer = db.exectSQLQueryScalar($"SELECT id FROM sat_CatClaveProdServSAT WHERE ClaveProdServ = '{Clave}'")
+        If (exists = 0) Then
+            MessageBox.Show("La clave ingresada no existe, ingrese una clave valida")
+            Return
+        End If
+
+        Dim cve_clase As String = $"{Clave.Substring(0, Clave.Length() - 2) }00"
+        Dim tableSat As DataTable = db.getDataTableFromSQL($"SELECT Tipo, Cve_division, cve_grupo, cve_clase FROM sat_ClasificacionClavesSAT WHERE cve_clase = '{cve_clase}'")
+
+        For Each item As DataRow In tableSat.Rows
+            If (item("tipo") = "Producto") Then
+                cbTipoConcepto.SelectedIndex = 0
+            ElseIf (item("tipo") = "Servicio") Then
+                cbTipoConcepto.SelectedIndex = 1
+            End If
+            ModalRegistroPagosOpcionalesEDC.commitChangeTipo()
+
+            cbDivision.SelectedValue = item("Cve_division")
+            ModalRegistroPagosOpcionalesEDC.commitChangecbDivision()
+
+            cbGrupo.SelectedValue = item("cve_grupo")
+            ModalRegistroPagosOpcionalesEDC.commitChangecbGrupo()
+
+            cbClase.SelectedValue = item("cve_clase")
+            ModalRegistroPagosOpcionalesEDC.commitChangecbClase()
+
+            cbProdServ.SelectedValue = Clave
+        Next
     End Sub
 End Class

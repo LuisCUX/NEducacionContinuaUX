@@ -32,7 +32,7 @@ Public Class SelladoTimbradoService
             xmlResult = respuesta.XMLResultado
             Return xmlResult
         Else
-            MessageBox.Show(respuesta.MensajeError)
+            Throw New Exception($"Error al timbrar {respuesta.MensajeError}")
             Return "Error"
         End If
     End Function

@@ -6,9 +6,10 @@
             MessageBox.Show("La matricula ingresada no existe, favor de ingresar una matricula valida")
             Return "False"
         Else
-            If (Matricula.Substring(0, 2) = "UX") Then
+            Dim MatriculaUX As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_catMatriculasUX WHERE MatriculaEX = '{Matricula}'")
+            If (MatriculaUX > 0) Then
                 Return "UX"
-            ElseIf (Matricula.Substring(0, 2) = "EC" Or Matricula.Substring(0, 2) = "EX") Then
+            Else
                 Return "EC"
             End If
         End If
@@ -52,6 +53,34 @@
         panelAsignacion.Visible = True
     End Sub
 
+    Sub buscarMatriculaEX(Matricula As String, panelDatos As Panel, panelAsignacion As Panel, txtNombre As TextBox, txtEmail As TextBox, txtCarrera As TextBox, txtTurno As TextBox)
+        Dim exists As Integer = db.exectSQLQueryScalar($"SELECT id_clave FROM portal_clave WHERE clave_cliente = '{Matricula}'")
+
+        If (exists < 1) Then
+            MessageBox.Show("La matricula ingresada no existe, favor de ingresar una matricula valida")
+            MainAsignacionPagosOpcionalesEDC.Reiniciar()
+            Exit Sub
+        End If
+
+        Me.llenarPanelDatosEX(Matricula, panelDatos, panelAsignacion, txtNombre, txtEmail, txtCarrera, txtTurno)
+    End Sub
+
+    Sub llenarPanelDatosEX(Matricula As String, panelDatos As Panel, panelAsignacion As Panel, txtNombre As TextBox, txtEmail As TextBox, txtCarrera As TextBox, txtTurno As TextBox)
+        Dim tableDatos As DataTable = db.getDataTableFromSQL($"SELECT UPPER(C.nombre + ' ' + EX.paterno + ' ' + EX.materno)As Nombre, C.correo FROM portal_cliente AS C 
+                                                               INNER JOIN portal_registroExterno AS EX ON C.id_cliente = EX.id_cliente
+                                                               WHERE EX.clave_cliente = '{Matricula}'")
+        For Each item As DataRow In tableDatos.Rows
+            txtNombre.Text = item("Nombre")
+            txtEmail.Text = item("correo")
+        Next
+        txtCarrera.Text = ""
+        txtTurno.Text = ""
+
+        panelDatos.Visible = True
+        panelAsignacion.Visible = True
+    End Sub
+
+
     Sub loadAsignacionPagosOpcionalesModal(tipoMatricula As String, Matricula As String, cbTipoPagos As ComboBox, cbPagosOpcionales As ComboBox)
         Dim tableTipoPago As DataTable = db.getDataTableFromSQL("SELECT ID, Nombre FROM ing_CatTipoPagoOpcional WHERE Activo = 1")
         ComboboxService.llenarCombobox(cbTipoPagos, tableTipoPago, "ID", "Nombre")
@@ -82,27 +111,53 @@
             MainAsignacionPagosOpcionalesEDC.Reiniciar()
             Exit Sub
         ElseIf (tipoMatricula = "EC") Then
-
+            db.execSQLQueryWithoutParams($"INSERT INTO ing_AsignacionPagoOpcionalExterno(ID_resPagoOpcionalAsignacion, MatriculaExterna, Cantidad, fechaAsignacion, costoUnitario, Autorizado, Condonado, Activo) VALUES ({IDPAgo}, '{Matricula}', {Cantidad}, GETDATE(), {costoUnitario}, 0, 0, 1)")
+            MessageBox.Show("Pago opcional registrado correctamente")
+            ModalAsignacionPagosOpcionalesEDC.Close()
+            MainAsignacionPagosOpcionalesEDC.Reiniciar()
+            Exit Sub
         End If
+    End Sub
+
+    Sub editarPagoOpcional(Matricula As String, tipoMatricula As String, IDPAgo As Integer, Cantidad As Integer, costoUnitario As Decimal, Activo As Boolean)
+        Dim act As Integer
+        If (Activo = True) Then
+            act = 1
+        Else
+            act = 0
+        End If
+        Dim tabla As String
+        If (tipoMatricula = "UX") Then
+            tabla = "ing_AsignacionPagoOpcionalAlumno"
+        ElseIf (tipoMatricula = "EC") Then
+            tabla = "ing_AsignacionPagoOpcionalExterno"
+        End If
+
+        db.execSQLQueryWithoutParams($"UPDATE {tabla} SET Cantidad = {Cantidad}, costoUnitario = {costoUnitario}, Activo = {act} WHERE ID = {IDPAgo}")
+        MessageBox.Show("Pago opcional editado correctamente")
+        ModalAsignacionPagosOpcionalesEDC.Close()
+        MainAsignacionPagosOpcionalesEDC.Reiniciar()
     End Sub
 
     Sub llenarVentanaEdicion(tipoMatricula As String, IDPago As Integer, cbTipoPago As ComboBox, cbPagoOpcional As ComboBox, txtCostoUnitario As TextBox, chbActivo As CheckBox, NUCantidad As NumericUpDown)
         Dim tableInfo As DataTable
+        Dim tabla As String
         If (tipoMatricula = "UX") Then
-            tableInfo = db.getDataTableFromSQL($"SELECT P.ID_cat_TipoPagoOpcional, R.ID, A.Cantidad, A.costoUnitario, A.Activo FROM ing_AsignacionPagoOpcionalAlumno AS A
+            tabla = "ing_AsignacionPagoOpcionalAlumno"
+        ElseIf (tipoMatricula = "EC") Then
+            tabla = "ing_AsignacionPagoOpcionalExterno"
+        End If
+
+        tableInfo = db.getDataTableFromSQL($"SELECT P.ID_cat_TipoPagoOpcional, R.ID, A.Cantidad, A.costoUnitario, A.Activo FROM {tabla} AS A
                                                  INNER JOIN ing_resPagoOpcionalAsignacion AS R ON R.ID = A.ID_resPagoOpcionalAsignacion
                                                  INNER JOIN ing_PagosOpcionales AS P ON P.ID = R.ID_PagoOpcional 
                                                  WHERE A.ID = {IDPago}")
-            For Each item As DataRow In tableInfo.Rows
-                cbTipoPago.SelectedValue = item("ID_cat_TipoPagoOpcional")
-                cbPagoOpcional.SelectedValue = item("ID")
-                NUCantidad.Value = item("Cantidad")
-                txtCostoUnitario.Text = item("costoUnitario")
-                chbActivo.Checked = item("Activo")
-            Next
-
-        ElseIf (tipoMatricula = "EC") Then
-
-        End If
+        For Each item As DataRow In tableInfo.Rows
+            cbTipoPago.SelectedValue = item("ID_cat_TipoPagoOpcional")
+            cbPagoOpcional.SelectedValue = item("ID")
+            NUCantidad.Value = item("Cantidad")
+            txtCostoUnitario.Text = item("costoUnitario")
+            chbActivo.Checked = item("Activo")
+        Next
     End Sub
 End Class

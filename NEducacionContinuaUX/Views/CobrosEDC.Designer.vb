@@ -41,12 +41,14 @@ Partial Class CobrosEDC
         Me.lblEmail = New System.Windows.Forms.Label()
         Me.lblNombre = New System.Windows.Forms.Label()
         Me.panelCobros = New System.Windows.Forms.Panel()
+        Me.lblPeso = New System.Windows.Forms.Label()
+        Me.lblTotal = New System.Windows.Forms.Label()
+        Me.Tree = New System.Windows.Forms.TreeView()
         Me.cbFormaPago = New System.Windows.Forms.ComboBox()
         Me.lblFormadepago = New System.Windows.Forms.Label()
         Me.btnCobrar = New System.Windows.Forms.Button()
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.lblPendientes = New System.Windows.Forms.Label()
-        Me.Tree = New System.Windows.Forms.TreeView()
         Me.ImageListTree = New System.Windows.Forms.ImageList(Me.components)
         Me.panelBusqueda.SuspendLayout()
         Me.panelDatos.SuspendLayout()
@@ -202,6 +204,8 @@ Partial Class CobrosEDC
         '
         'panelCobros
         '
+        Me.panelCobros.Controls.Add(Me.lblPeso)
+        Me.panelCobros.Controls.Add(Me.lblTotal)
         Me.panelCobros.Controls.Add(Me.Tree)
         Me.panelCobros.Controls.Add(Me.cbFormaPago)
         Me.panelCobros.Controls.Add(Me.lblFormadepago)
@@ -213,6 +217,53 @@ Partial Class CobrosEDC
         Me.panelCobros.Size = New System.Drawing.Size(1229, 519)
         Me.panelCobros.TabIndex = 16
         Me.panelCobros.Visible = False
+        '
+        'lblPeso
+        '
+        Me.lblPeso.AutoSize = True
+        Me.lblPeso.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPeso.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblPeso.Location = New System.Drawing.Point(887, 412)
+        Me.lblPeso.Name = "lblPeso"
+        Me.lblPeso.Size = New System.Drawing.Size(26, 29)
+        Me.lblPeso.TabIndex = 10
+        Me.lblPeso.Text = "$"
+        '
+        'lblTotal
+        '
+        Me.lblTotal.AutoSize = True
+        Me.lblTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTotal.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblTotal.Location = New System.Drawing.Point(907, 412)
+        Me.lblTotal.Name = "lblTotal"
+        Me.lblTotal.Size = New System.Drawing.Size(0, 29)
+        Me.lblTotal.TabIndex = 9
+        '
+        'Tree
+        '
+        Me.Tree.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Tree.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Tree.ForeColor = System.Drawing.SystemColors.Control
+        Me.Tree.Location = New System.Drawing.Point(10, 55)
+        Me.Tree.Name = "Tree"
+        TreeNode1.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        TreeNode1.ForeColor = System.Drawing.SystemColors.Control
+        TreeNode1.Name = "nodeEventos"
+        TreeNode1.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        TreeNode1.SelectedImageIndex = -2
+        TreeNode1.StateImageIndex = 2
+        TreeNode1.Text = "Eventos"
+        TreeNode2.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        TreeNode2.ForeColor = System.Drawing.SystemColors.Control
+        TreeNode2.Name = "nodePagosOpcionales"
+        TreeNode2.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        TreeNode2.SelectedImageIndex = -2
+        TreeNode2.StateImageIndex = 2
+        TreeNode2.Text = "Pagos Opcionales"
+        Me.Tree.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2})
+        Me.Tree.Size = New System.Drawing.Size(715, 415)
+        Me.Tree.StateImageList = Me.ImageListTree
+        Me.Tree.TabIndex = 8
         '
         'cbFormaPago
         '
@@ -265,34 +316,13 @@ Partial Class CobrosEDC
         Me.lblPendientes.TabIndex = 3
         Me.lblPendientes.Text = "Pagos pendientes:"
         '
-        'Tree
-        '
-        Me.Tree.BackColor = System.Drawing.SystemColors.ControlDark
-        Me.Tree.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Tree.ForeColor = System.Drawing.Color.Black
-        Me.Tree.Location = New System.Drawing.Point(10, 55)
-        Me.Tree.Name = "Tree"
-        TreeNode1.BackColor = System.Drawing.SystemColors.ControlDark
-        TreeNode1.ForeColor = System.Drawing.Color.Black
-        TreeNode1.Name = "nodEventos"
-        TreeNode1.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        TreeNode1.Text = "Eventos"
-        TreeNode2.BackColor = System.Drawing.SystemColors.ControlDark
-        TreeNode2.ForeColor = System.Drawing.Color.Black
-        TreeNode2.Name = "nodePagosOpcionales"
-        TreeNode2.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        TreeNode2.Text = "Pagos Opcionales"
-        Me.Tree.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2})
-        Me.Tree.Size = New System.Drawing.Size(715, 415)
-        Me.Tree.TabIndex = 8
-        '
         'ImageListTree
         '
         Me.ImageListTree.ImageStream = CType(resources.GetObject("ImageListTree.ImageStream"), System.Windows.Forms.ImageListStreamer)
         Me.ImageListTree.TransparentColor = System.Drawing.Color.Transparent
-        Me.ImageListTree.Images.SetKeyName(0, "empty")
-        Me.ImageListTree.Images.SetKeyName(1, "checked")
-        Me.ImageListTree.Images.SetKeyName(2, "folder_24px.png")
+        Me.ImageListTree.Images.SetKeyName(0, "unchecked_checkbox_40px.png")
+        Me.ImageListTree.Images.SetKeyName(1, "checked_checkbox_40px.png")
+        Me.ImageListTree.Images.SetKeyName(2, "folder_40px.png")
         '
         'CobrosEDC
         '
@@ -341,4 +371,6 @@ Partial Class CobrosEDC
     Friend WithEvents cbFormaPago As ComboBox
     Friend WithEvents Tree As TreeView
     Friend WithEvents ImageListTree As ImageList
+    Friend WithEvents lblTotal As Label
+    Friend WithEvents lblPeso As Label
 End Class

@@ -1,14 +1,19 @@
 ﻿Public Class ModalAsignacionPagosOpcionalesEDC
     Dim NT As String()
     Dim Matricula As String
+    Dim MatriculaUX As String
     Dim tipoMatricula As String
+    Dim tipoVentana As String
+    Dim IDAsignacion As Integer
     Dim ap As AsignacionPagosOpcionalesController = New AsignacionPagosOpcionalesController()
     Dim db As DataBaseService = New DataBaseService()
     Private Sub ModalAsignacionPagosOpcionalesEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         tipoMatricula = ObjectBagService.getItem("tipoMatricula")
         Matricula = ObjectBagService.getItem("Matricula")
-        Dim tipoVentana As String = ObjectBagService.getItem("tipoVentana")
-        ap.loadAsignacionPagosOpcionalesModal(tipoMatricula, Matricula, cbTipoPago, cbPagosOpcionales)
+        MatriculaUX = ObjectBagService.getItem("MatriculaUX")
+        tipoVentana = ObjectBagService.getItem("tipoVentana")
+        IDAsignacion = ObjectBagService.getItem("IDPago")
+        ap.loadAsignacionPagosOpcionalesModal(tipoMatricula, MatriculaUX, cbTipoPago, cbPagosOpcionales)
 
         If (tipoVentana = "Edicion") Then
             Dim IDPago As String = ObjectBagService.getItem("IDPago")
@@ -22,9 +27,17 @@
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         If (txtValorUnitario.Text = "") Then
             MessageBox.Show("Ingrese el valor unitario del pago a asignar")
-            Exit Sub
+            Return
         End If
-        ap.guardarPagoOpcional(Matricula, tipoMatricula, cbPagosOpcionales.SelectedValue, NUCantidad.Value, CDec(txtValorUnitario.Text))
+        If (cbPagosOpcionales.Text = "") Then
+            MessageBox.Show("Seleccione un pago opcional a asignar")
+            Return
+        End If
+        If (tipoVentana = "Edicion") Then
+            ap.editarPagoOpcional(Matricula, tipoMatricula, IDAsignacion, NUCantidad.Value, CDec(txtValorUnitario.Text), chbActivo.Checked)
+        Else
+            ap.guardarPagoOpcional(Matricula, tipoMatricula, cbPagosOpcionales.SelectedValue, NUCantidad.Value, CDec(txtValorUnitario.Text))
+        End If
     End Sub
 
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
@@ -32,30 +45,34 @@
     End Sub
 
     Private Sub cbPagosOpcionales_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbPagosOpcionales.SelectionChangeCommitted
-        chbExentaIVA.Checked = False
-        chbConsideraIVA.Checked = False
-        chbIncluyeIVA.Checked = False
-        Dim precio As Decimal = db.exectSQLQueryScalar($"SELECT valorUnitario FROM ing_resPagoOpcionalAsignacion WHERE ID = {cbPagosOpcionales.SelectedValue}")
-        txtValorUnitario.Text = precio
-        Dim agregaIVA As Boolean
-        Dim exentaIVA As Boolean
-        Dim consideraIVA As Boolean
-        Dim tableIVA As DataTable = db.getDataTableFromSQL($"SELECT P.considerarIVA, P.AgregaIVA, P.ExentaIVA FROM ing_resPagoOpcionalAsignacion AS R 
+        Try
+            chbExentaIVA.Checked = False
+            chbConsideraIVA.Checked = False
+            chbIncluyeIVA.Checked = False
+            Dim precio As Decimal = db.exectSQLQueryScalar($"SELECT valorUnitario FROM ing_resPagoOpcionalAsignacion WHERE ID = {cbPagosOpcionales.SelectedValue}")
+            txtValorUnitario.Text = precio
+            Dim agregaIVA As Boolean
+            Dim exentaIVA As Boolean
+            Dim consideraIVA As Boolean
+            Dim tableIVA As DataTable = db.getDataTableFromSQL($"SELECT P.considerarIVA, P.AgregaIVA, P.ExentaIVA FROM ing_resPagoOpcionalAsignacion AS R 
                                                            INNER JOIN ing_PagosOpcionales AS P ON P.ID = R.ID_PagoOpcional
                                                            WHERE R.ID ={cbPagosOpcionales.SelectedValue}")
-        For Each item As DataRow In tableIVA.Rows
-            agregaIVA = item("AgregaIVA")
-            exentaIVA = item("ExentaIVA")
-            consideraIVA = item("considerarIVA")
-        Next
+            For Each item As DataRow In tableIVA.Rows
+                agregaIVA = item("AgregaIVA")
+                exentaIVA = item("ExentaIVA")
+                consideraIVA = item("considerarIVA")
+            Next
 
-        If (agregaIVA = True) Then
-            chbIncluyeIVA.Checked = True
-        ElseIf (consideraIVA = True) Then
-            chbConsideraIVA.Checked = True
-        ElseIf (exentaIVA = True) Then
-            chbExentaIVA.Checked = True
-        End If
+            If (agregaIVA = True) Then
+                chbIncluyeIVA.Checked = True
+            ElseIf (consideraIVA = True) Then
+                chbConsideraIVA.Checked = True
+            ElseIf (exentaIVA = True) Then
+                chbExentaIVA.Checked = True
+            End If
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Sub commitChangecbPagosOpcionales()
@@ -101,6 +118,13 @@
             If KeyAscii = 46 Then
                 e.Handled = True
             End If
+        End If
+    End Sub
+
+
+    Private Sub NUCantidad_KeyPress(sender As Object, e As KeyPressEventArgs) Handles NUCantidad.KeyPress
+        If Not Char.IsNumber(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
+            e.Handled = True
         End If
     End Sub
 
