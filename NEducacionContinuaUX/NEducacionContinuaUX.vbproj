@@ -85,6 +85,7 @@
     </Compile>
     <Compile Include="Controllers\AsignacionPagosOpcionalesController.vb" />
     <Compile Include="Controllers\CobrosController.vb" />
+    <Compile Include="Controllers\CobrosDiferidosController.vb" />
     <Compile Include="Controllers\ConceptHandlerController.vb" />
     <Compile Include="Controllers\GestionExternosController.vb" />
     <Compile Include="Controllers\PagosOpcionalesController.vb" />
@@ -113,6 +114,12 @@
     <Compile Include="Services\UtilitiesService.vb" />
     <Compile Include="Services\ValidadorCobrosService.vb" />
     <Compile Include="Services\XmlService.vb" />
+    <Compile Include="Views\MainCobrosDiferidosEDC.Designer.vb">
+      <DependentUpon>MainCobrosDiferidosEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainCobrosDiferidosEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\CobrosEDC.Designer.vb">
       <DependentUpon>CobrosEDC.vb</DependentUpon>
     </Compile>
@@ -141,6 +148,12 @@
       <DependentUpon>ModalAsignacionPagosOpcionalesEDC.vb</DependentUpon>
     </Compile>
     <Compile Include="Views\ModalAsignacionPagosOpcionalesEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ModalCobrosDiferidosEDC.Designer.vb">
+      <DependentUpon>ModalCobrosDiferidosEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModalCobrosDiferidosEDC.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\PrincipalView.Designer.vb">
@@ -175,6 +188,9 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\MainCobrosDiferidosEDC.resx">
+      <DependentUpon>MainCobrosDiferidosEDC.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\CobrosEDC.resx">
       <DependentUpon>CobrosEDC.vb</DependentUpon>
     </EmbeddedResource>
@@ -189,6 +205,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ModalAsignacionPagosOpcionalesEDC.resx">
       <DependentUpon>ModalAsignacionPagosOpcionalesEDC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ModalCobrosDiferidosEDC.resx">
+      <DependentUpon>ModalCobrosDiferidosEDC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PrincipalView.resx">
       <DependentUpon>PrincipalView.vb</DependentUpon>

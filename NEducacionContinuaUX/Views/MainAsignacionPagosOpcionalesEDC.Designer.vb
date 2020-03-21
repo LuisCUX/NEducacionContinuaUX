@@ -24,10 +24,14 @@ Partial Class MainAsignacionPagosOpcionalesEDC
     Private Sub InitializeComponent()
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.panelBuscar = New System.Windows.Forms.Panel()
+        Me.cbExterno = New System.Windows.Forms.ComboBox()
+        Me.lblBusquedaNombre = New System.Windows.Forms.Label()
         Me.btnBuscar = New System.Windows.Forms.Button()
         Me.txtMatricula = New System.Windows.Forms.TextBox()
         Me.lblMatricula = New System.Windows.Forms.Label()
         Me.panelDatos = New System.Windows.Forms.Panel()
+        Me.txtMatriculaDato = New System.Windows.Forms.TextBox()
+        Me.lblMatriculaDato = New System.Windows.Forms.Label()
         Me.txtTurno = New System.Windows.Forms.TextBox()
         Me.lblTurno = New System.Windows.Forms.Label()
         Me.txtCarrera = New System.Windows.Forms.TextBox()
@@ -59,6 +63,8 @@ Partial Class MainAsignacionPagosOpcionalesEDC
         '
         'panelBuscar
         '
+        Me.panelBuscar.Controls.Add(Me.cbExterno)
+        Me.panelBuscar.Controls.Add(Me.lblBusquedaNombre)
         Me.panelBuscar.Controls.Add(Me.btnBuscar)
         Me.panelBuscar.Controls.Add(Me.txtMatricula)
         Me.panelBuscar.Controls.Add(Me.lblMatricula)
@@ -67,23 +73,44 @@ Partial Class MainAsignacionPagosOpcionalesEDC
         Me.panelBuscar.Size = New System.Drawing.Size(858, 54)
         Me.panelBuscar.TabIndex = 12
         '
+        'cbExterno
+        '
+        Me.cbExterno.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.cbExterno.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cbExterno.FormattingEnabled = True
+        Me.cbExterno.Location = New System.Drawing.Point(382, 19)
+        Me.cbExterno.Name = "cbExterno"
+        Me.cbExterno.Size = New System.Drawing.Size(458, 21)
+        Me.cbExterno.TabIndex = 75
+        '
+        'lblBusquedaNombre
+        '
+        Me.lblBusquedaNombre.AutoSize = True
+        Me.lblBusquedaNombre.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblBusquedaNombre.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblBusquedaNombre.Location = New System.Drawing.Point(321, 20)
+        Me.lblBusquedaNombre.Name = "lblBusquedaNombre"
+        Me.lblBusquedaNombre.Size = New System.Drawing.Size(63, 16)
+        Me.lblBusquedaNombre.TabIndex = 74
+        Me.lblBusquedaNombre.Text = "Nombre: "
+        '
         'btnBuscar
         '
         Me.btnBuscar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.search_32px
         Me.btnBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnBuscar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnBuscar.Location = New System.Drawing.Point(581, 7)
+        Me.btnBuscar.Location = New System.Drawing.Point(193, 11)
         Me.btnBuscar.Name = "btnBuscar"
-        Me.btnBuscar.Size = New System.Drawing.Size(87, 39)
+        Me.btnBuscar.Size = New System.Drawing.Size(41, 34)
         Me.btnBuscar.TabIndex = 17
         Me.btnBuscar.UseVisualStyleBackColor = True
         '
         'txtMatricula
         '
         Me.txtMatricula.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMatricula.Location = New System.Drawing.Point(291, 15)
+        Me.txtMatricula.Location = New System.Drawing.Point(77, 17)
         Me.txtMatricula.Name = "txtMatricula"
-        Me.txtMatricula.Size = New System.Drawing.Size(268, 22)
+        Me.txtMatricula.Size = New System.Drawing.Size(110, 22)
         Me.txtMatricula.TabIndex = 16
         '
         'lblMatricula
@@ -91,7 +118,7 @@ Partial Class MainAsignacionPagosOpcionalesEDC
         Me.lblMatricula.AutoSize = True
         Me.lblMatricula.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblMatricula.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblMatricula.Location = New System.Drawing.Point(183, 16)
+        Me.lblMatricula.Location = New System.Drawing.Point(7, 18)
         Me.lblMatricula.Name = "lblMatricula"
         Me.lblMatricula.Size = New System.Drawing.Size(72, 18)
         Me.lblMatricula.TabIndex = 15
@@ -99,6 +126,8 @@ Partial Class MainAsignacionPagosOpcionalesEDC
         '
         'panelDatos
         '
+        Me.panelDatos.Controls.Add(Me.txtMatriculaDato)
+        Me.panelDatos.Controls.Add(Me.lblMatriculaDato)
         Me.panelDatos.Controls.Add(Me.txtTurno)
         Me.panelDatos.Controls.Add(Me.lblTurno)
         Me.panelDatos.Controls.Add(Me.txtCarrera)
@@ -112,6 +141,26 @@ Partial Class MainAsignacionPagosOpcionalesEDC
         Me.panelDatos.Size = New System.Drawing.Size(858, 134)
         Me.panelDatos.TabIndex = 13
         Me.panelDatos.Visible = False
+        '
+        'txtMatriculaDato
+        '
+        Me.txtMatriculaDato.Enabled = False
+        Me.txtMatriculaDato.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMatriculaDato.Location = New System.Drawing.Point(77, 10)
+        Me.txtMatriculaDato.Name = "txtMatriculaDato"
+        Me.txtMatriculaDato.Size = New System.Drawing.Size(110, 22)
+        Me.txtMatriculaDato.TabIndex = 25
+        '
+        'lblMatriculaDato
+        '
+        Me.lblMatriculaDato.AutoSize = True
+        Me.lblMatriculaDato.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblMatriculaDato.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblMatriculaDato.Location = New System.Drawing.Point(7, 11)
+        Me.lblMatriculaDato.Name = "lblMatriculaDato"
+        Me.lblMatriculaDato.Size = New System.Drawing.Size(72, 18)
+        Me.lblMatriculaDato.TabIndex = 26
+        Me.lblMatriculaDato.Text = "Matricula:"
         '
         'txtTurno
         '
@@ -166,9 +215,9 @@ Partial Class MainAsignacionPagosOpcionalesEDC
         '
         Me.txtNombre.Enabled = False
         Me.txtNombre.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtNombre.Location = New System.Drawing.Point(77, 10)
+        Me.txtNombre.Location = New System.Drawing.Point(262, 10)
         Me.txtNombre.Name = "txtNombre"
-        Me.txtNombre.Size = New System.Drawing.Size(764, 22)
+        Me.txtNombre.Size = New System.Drawing.Size(579, 22)
         Me.txtNombre.TabIndex = 18
         '
         'lblEmail
@@ -187,7 +236,7 @@ Partial Class MainAsignacionPagosOpcionalesEDC
         Me.lblNombre.AutoSize = True
         Me.lblNombre.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblNombre.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblNombre.Location = New System.Drawing.Point(7, 11)
+        Me.lblNombre.Location = New System.Drawing.Point(193, 11)
         Me.lblNombre.Name = "lblNombre"
         Me.lblNombre.Size = New System.Drawing.Size(70, 18)
         Me.lblNombre.TabIndex = 18
@@ -270,4 +319,8 @@ Partial Class MainAsignacionPagosOpcionalesEDC
     Friend WithEvents panelAsignacion As Panel
     Friend WithEvents btnAgregar As Button
     Friend WithEvents GridPagosAsignados As DataGridView
+    Friend WithEvents cbExterno As ComboBox
+    Friend WithEvents lblBusquedaNombre As Label
+    Friend WithEvents txtMatriculaDato As TextBox
+    Friend WithEvents lblMatriculaDato As Label
 End Class

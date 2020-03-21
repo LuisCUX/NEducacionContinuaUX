@@ -22,4 +22,5 @@
         RegistroExternosEDC.MdiParent = Me
         RegistroExternosEDC.Show()
     End Sub
+
 End Class

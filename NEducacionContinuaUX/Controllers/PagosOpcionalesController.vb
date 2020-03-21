@@ -22,7 +22,7 @@
                            lblNivel As Label, lblTurno As Label, txtNombre As TextBox, txtDesc As TextBox, txtCostoUnitario As TextBox, txtCostoIVA As TextBox, chbExento As CheckBox, chbAbsorbe As CheckBox, chbAgrega As CheckBox)
 
         Dim cveProdServ As String
-        Dim tableUnidad As DataTable = db.getDataTableFromSQL("SELECT id_claveProd, nombre FROM sat_cat_unidad")
+        Dim tableUnidad As DataTable = db.getDataTableFromSQL("SELECT id_claveProd, nombre FROM ing_cat_unidad")
         ComboboxService.llenarCombobox(cbUnidad, tableUnidad, "id_claveProd", "nombre")
         Dim tablePago As DataTable = db.getDataTableFromSQL($"SELECT Nombre, Descripcion, claveProductoServicio, claveUnidad, considerarIVA, AgregaIVA, ExentaIVA, ID_cat_TipoPagoOpcional FROM ing_PagosOpcionales WHERE ID = {ID}")
         For Each item As DataRow In tablePago.Rows
@@ -44,7 +44,7 @@
 
 
         Dim prodservlike = cveProdServ.Substring(0, cveProdServ.Length() - 2) + "%"
-        Dim tableSAT As DataTable = db.getDataTableFromSQL($"SELECT tipo, cve_division, cve_grupo, cve_clase FROM sat_ClasificacionClavesSAT WHERE cve_clase LIKE '{prodservlike}'")
+        Dim tableSAT As DataTable = db.getDataTableFromSQL($"SELECT tipo, cve_division, cve_grupo, cve_clase FROM ing_ClasificacionClavesSAT WHERE cve_clase LIKE '{prodservlike}'")
         For Each item As DataRow In tableSAT.Rows
             cbTipoConcepto.Text = item("tipo")
             ModalRegistroPagosOpcionalesEDC.commitChangeTipo()
@@ -131,14 +131,14 @@
     End Sub
 
     Sub BuscarClavePS(Clave As String, cbTipoConcepto As ComboBox, cbDivision As ComboBox, cbGrupo As ComboBox, cbClase As ComboBox, cbProdServ As ComboBox)
-        Dim exists As Integer = db.exectSQLQueryScalar($"SELECT id FROM sat_CatClaveProdServSAT WHERE ClaveProdServ = '{Clave}'")
+        Dim exists As Integer = db.exectSQLQueryScalar($"SELECT id FROM ing_CatClaveProdServSAT WHERE ClaveProdServ = '{Clave}'")
         If (exists = 0) Then
             MessageBox.Show("La clave ingresada no existe, ingrese una clave valida")
             Return
         End If
 
         Dim cve_clase As String = $"{Clave.Substring(0, Clave.Length() - 2) }00"
-        Dim tableSat As DataTable = db.getDataTableFromSQL($"SELECT Tipo, Cve_division, cve_grupo, cve_clase FROM sat_ClasificacionClavesSAT WHERE cve_clase = '{cve_clase}'")
+        Dim tableSat As DataTable = db.getDataTableFromSQL($"SELECT Tipo, Cve_division, cve_grupo, cve_clase FROM ing_ClasificacionClavesSAT WHERE cve_clase = '{cve_clase}'")
 
         For Each item As DataRow In tableSat.Rows
             If (item("tipo") = "Producto") Then

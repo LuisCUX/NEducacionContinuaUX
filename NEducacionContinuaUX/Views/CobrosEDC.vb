@@ -7,23 +7,35 @@
     Private Sub CobrosEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim tableFormaPago As DataTable = db.getDataTableFromSQL("SELECT Forma_Pago, Descripcion FROM ing_CatFormaPago")
         ComboboxService.llenarCombobox(cbFormaPago, tableFormaPago, "Forma_Pago", "Descripcion")
+
+        Dim tableExternos As DataTable = db.getDataTableFromSQL("SELECT CL.clave_cliente, UPPER(C.nombre + ' ' + E.paterno + ' ' + E.materno) As NombreExterno FROM portal_registroExterno AS E
+                                                                 INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
+                                                                 INNER JOIN portal_clave AS CL ON CL.id_cliente = C.id_cliente
+                                                                 ORDER BY C.nombre")
+        ComboboxService.llenarCombobox(cbExterno, tableExternos, "clave_cliente", "NombreExterno")
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         Me.Limpiar()
         Matricula = txtMatricula.Text
         tipoMatricula = co.validarMatricula(Matricula)
+        txtMatriculaDato.Text = Matricula
         If (tipoMatricula = "False") Then
             Me.Reiniciar()
             Exit Sub
         ElseIf (tipoMatricula = "UX") Then
             co.buscarMatriculaUX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno)
-        ElseIf (tipoMatricula = "EC") Then
+        ElseIf (tipoMatricula = "EX") Then
             co.buscarMatriculaEX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno)
+        ElseIf (tipoMatricula = "EC") Then
+            co.buscarMatriculaEC(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno)
         End If
         co.buscarPagosOpcionales(Tree, Matricula, tipoMatricula)
+        co.buscarCongresos(Tree, Matricula, tipoMatricula)
+        Tree.Nodes(0).Expand()
         Tree.Nodes(1).Expand()
     End Sub
+
     Sub Reiniciar()
         Me.Controls.Clear()
         InitializeComponent()
@@ -47,19 +59,28 @@
             Exit Sub
         ElseIf Tree.SelectedNode.Text = "Pagos Opcionales" Then
             Exit Sub
+        ElseIf Tree.SelectedNode.Text = "Congresos" Then
+            Exit Sub
+        ElseIf Tree.SelectedNode.Text = "Diplomados" Then
+            Exit sub
         End If
         Dim tipoPago As String = Tree.SelectedNode.Parent.Name()
 
 
-        If (tipoPago = "nodeEventos") Then
+        If (tipoPago = "nodeCongresos") Then
             Dim index As Integer = Tree.SelectedNode.Index
             If (Tree.SelectedNode.Checked = False) Then
                 Tree.SelectedNode.Checked = True
-                Dim conceptoID As String = Tree.SelectedNode.ToString()
-                Tree.SelectedNode.SelectedImageIndex = 0
+                Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
+                ch.agregarconcepto(conceptoID, "CON")
+                Me.actualizarTotal(ch.getListaConceptos())
+                Tree.Nodes(0).Nodes(index).SelectedImageIndex = 1
             Else
                 Tree.SelectedNode.Checked = False
-                Tree.SelectedNode.SelectedImageIndex = 1
+                Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
+                ch.eliminarconcepto(conceptoID, "CON")
+                Me.actualizarTotal(ch.getListaConceptos())
+                Tree.Nodes(1).Nodes(index).SelectedImageIndex = 0
             End If
         ElseIf (tipoPago = "nodePagosOpcionales") Then
             Dim tipoConcepto As String
@@ -69,20 +90,20 @@
                 tipoConcepto = "POE"
             End If
             Dim index As Integer = Tree.SelectedNode.Index
-                If (Tree.SelectedNode.Checked = False) Then
-                    Tree.SelectedNode.Checked = True
-                    Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
+            If (Tree.SelectedNode.Checked = False) Then
+                Tree.SelectedNode.Checked = True
+                Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
                 ch.agregarconcepto(conceptoID, tipoConcepto)
                 Me.actualizarTotal(ch.getListaConceptos())
-                    Tree.Nodes(1).Nodes(index).SelectedImageIndex = 1
-                ElseIf (Tree.SelectedNode.Checked = True) Then
-                    Tree.SelectedNode.Checked = False
-                    Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
+                Tree.Nodes(1).Nodes(index).SelectedImageIndex = 1
+            ElseIf (Tree.SelectedNode.Checked = True) Then
+                Tree.SelectedNode.Checked = False
+                Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
                 ch.eliminarconcepto(conceptoID, tipoConcepto)
                 Me.actualizarTotal(ch.getListaConceptos())
-                    Tree.Nodes(1).Nodes(index).SelectedImageIndex = 0
-                End If
+                Tree.Nodes(1).Nodes(index).SelectedImageIndex = 0
             End If
+        End If
     End Sub
 
     Sub actualizarTotal(listaConceptos As List(Of Concepto))
@@ -94,6 +115,15 @@
         lblTotal.Text = Total.ToString()
     End Sub
 
+    Private Sub cbExterno_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbExterno.SelectedIndexChanged
+        Try
+            txtMatricula.Text = cbExterno.SelectedValue
+            btnBuscar.PerformClick()
+            txtMatricula.Clear()
+        Catch ex As Exception
+
+        End Try
+    End Sub
 
     Private Sub btnCobrar_Click(sender As Object, e As EventArgs) Handles btnCobrar.Click
         Dim listaConceptos As List(Of Concepto) = ch.getListaConceptos()

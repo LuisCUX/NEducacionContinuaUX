@@ -30,20 +30,56 @@
                                                                      INNER JOIN ing_PagosOpcionales AS P ON P.ID = R.ID_PagoOpcional
                                                                      WHERE A.ID = {conceptoID}")
             For Each item As DataRow In tableConcepto.Rows
+                concep.IDConcepto = conceptoID
+                concep.NombreConcepto = Me.removerEspaciosInicioFin(item("Nombre"))
+                concep.claveConcepto = claveConcepto
+                concep.cveClase = item("claveProductoServicio")
+                concep.cveUnidad = item("claveUnidad")
+                concep.costoUnitario = item("costoUnitario")
+                concep.descuento = item("Descuento")
+                concep.absorbeIVA = item("considerarIVA")
+                concep.consideraIVA = item("AgregaIVA")
+                concep.IVAExento = item("ExentaIVA")
+                concep.Cantidad = item("Cantidad")
+            Next
+        ElseIf (claveConcepto = "CON") Then
+            Dim Costo As Decimal
+            Dim Descuento As Decimal
+            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT CON.nombre, CON.clave_servicio, 1 As considerarIVA, 0 As AgregaIVA, 0 As ExentaIVA, 1 As Cantidad, GETDATE() AS FechaHoy, CO.fecha_limite, CO.costo_antes, CO.costo_despues FROM portal_registroCongreso AS RC
+                                                                      INNER JOIN portal_cliente AS C ON C.id_cliente = RC.id_cliente
+                                                                      INNER JOIN portal_tipoAsistente AS TA ON TA.id_tipo_asistente = RC.id_tipo_asistente
+                                                                      INNER JOIN portal_congreso AS CON ON CON.id_congreso = TA.id_congreso
+                                                                      INNER JOIN portal_costo AS CO ON CO.id_tipo_asistente = TA.id_tipo_asistente
+                                                                      INNER JOIN ing_CatClavesPagos AS CP ON CP.ID = 3
+                                                                      WHERE c.id_cliente = {conceptoID}")
+            For Each item As DataRow In tableConcepto.Rows
+
+                If (item("FechaHoy") > item("fecha_limite")) Then
+                    Costo = item("costo_despues")
+                    Descuento = 0.00
+                Else
+                    Costo = item("costo_antes")
+                    If (item("costo_despues") > item("costo_antes")) Then
+                        Descuento = item("costo_despues") - item("costo_antes")
+                    Else
+                        Descuento = 0.00
+                    End If
+                End If
+
                     concep.IDConcepto = conceptoID
-                    concep.NombreConcepto = item("Nombre")
-                    concep.claveConcepto = claveConcepto
-                    concep.cveClase = item("claveProductoServicio")
-                    concep.cveUnidad = item("claveUnidad")
-                    concep.costoUnitario = item("costoUnitario")
-                    concep.descuento = item("Descuento")
-                    concep.absorbeIVA = item("considerarIVA")
-                    concep.consideraIVA = item("AgregaIVA")
-                    concep.IVAExento = item("ExentaIVA")
-                    concep.Cantidad = item("Cantidad")
-                Next
-            End If
-            Return concep
+                concep.NombreConcepto = Me.removerEspaciosInicioFin(item("nombre"))
+                concep.claveConcepto = claveConcepto
+                concep.cveClase = item("clave_servicio")
+                concep.cveUnidad = "E48"
+                concep.costoUnitario = Costo
+                concep.descuento = Descuento
+                concep.absorbeIVA = item("considerarIVA")
+                concep.consideraIVA = item("AgregaIVA")
+                concep.IVAExento = item("ExentaIVA")
+                concep.Cantidad = item("Cantidad")
+            Next
+        End If
+        Return concep
     End Function
 
     Function crearConcepto(conceptoID As Integer, claveConcepto As String) As Concepto
@@ -123,6 +159,23 @@
 
     Function getListaConceptos() As List(Of Concepto)
         Return listaConceptos
+    End Function
+
+    Function removerEspaciosInicioFin(cadena As String) As String
+        Dim first As String = cadena.Substring(0, 1)
+        Dim last As String = cadena.Substring(cadena.Length() - 1, 1)
+
+        If (first = " " And last <> " ") Then
+            Return cadena.Substring(1, cadena.Length() - 1)
+        ElseIf (first <> " " And last = " ") Then
+            Return cadena.Substring(0, cadena.Length() - 2)
+        ElseIf (first = " " And last = " ") Then
+            cadena = cadena.Substring(1, cadena.Length() - 1)
+            Return cadena.Substring(0, cadena.Length() - 2)
+        ElseIf (first <> " " And last <> " ") Then
+            Return cadena
+        End If
+        Return Nothing
     End Function
 
     Sub limpiarListaConceptos()

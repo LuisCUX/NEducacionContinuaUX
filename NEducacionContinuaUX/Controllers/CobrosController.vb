@@ -1,5 +1,6 @@
 ﻿Imports System.Configuration
 Imports System.IO
+Imports System.Text.RegularExpressions
 
 Public Class CobrosController
     Dim db As DataBaseService = New DataBaseService()
@@ -26,6 +27,15 @@ Public Class CobrosController
         db.execSQLQueryWithoutParams($"UPDATE ing_resPagoOpcionalAsignacion SET Activo = 0 WHERE ID = {ID_ResAsignacion}")
     End Sub
 
+
+    ''----------------------------------------------------------------------------------------------------------------------------------------
+    ''-----------------------------------------------------COBRA PAGO OPCIONAL DE EXTERNO-----------------------------------------------------
+    ''----------------------------------------------------------------------------------------------------------------------------------------
+    Sub cobrarCongreso(concepto As Concepto, Matricula As String, Folio As String, formaPago As String)
+        Dim formaPagoint As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatFormaPago WHERE Forma_Pago = '{formaPago}'")
+        db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosCongresos(Folio, Matricula, valorUnitario, Cantidad, valorIVA, Descuento, ID_FormaPago, Fecha_Pago, Autorizado, Condonado, Usuario) VALUES ('{Folio}', '{Matricula}', {CDec(concepto.costoBase)}, {concepto.Cantidad}, {CDec(concepto.costoIVAUnitario)}, {CDec(concepto.descuento)}, {formaPagoint}, GETDATE(), 0, 0, '{User.getUsername()}')")
+    End Sub
+
     ''----------------------------------------------------------------------------------------------------------------------------------------
     ''---------------------------------------------------------COBRA PAGO YA VALIDADO---------------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
@@ -38,6 +48,8 @@ Public Class CobrosController
                     Me.cobrarPagoOpcionalAlumno(concepto, Matricula, folioPago)
                 ElseIf (concepto.claveConcepto = "POE") Then
                     Me.cobrarPagoOpcionalExterno(concepto, Matricula, folioPago)
+                ElseIf (concepto.claveConcepto = "CON") Then
+                    Me.cobrarCongreso(concepto, Matricula, folioPago, formaPago)
                 End If
             Next
 
@@ -102,14 +114,16 @@ Public Class CobrosController
     ''----------------------------------------------------------------------------------------------------------------------------------------
 
     Function validarMatricula(Matricula As String) As String
-        If (Matricula.Length() - 9) Then
+        If (Matricula.Length() < 9 Or Matricula.Length() > 9) Then
             MessageBox.Show("La matricula ingresada no existe, favor de ingresar una matricula valida")
             Return "False"
         Else
             Dim MatriculaUX As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_catMatriculasUX WHERE MatriculaEX = '{Matricula}'")
             If (MatriculaUX > 0) Then
                 Return "UX"
-            Else
+            ElseIf (Matricula.Substring(0, 2) = "EX") Then
+                Return "EX"
+            ElseIf (Matricula.Substring(0, 2) = "EC") Then
                 Return "EC"
             End If
         End If
@@ -128,13 +142,13 @@ Public Class CobrosController
 
         If (exists = Nothing) Then
             MessageBox.Show("La matricula ingresada no existe, favor de ingresar una matricula valida")
-            MainAsignacionPagosOpcionalesEDC.Reiniciar()
+            CobrosEDC.Reiniciar()
             Exit Sub
         End If
 
         If (sit_esc = "B") Then
             MessageBox.Show("La matricula ingresada se encuentra dada de baja, favor de ingresar una matricula valida")
-            MainAsignacionPagosOpcionalesEDC.Reiniciar()
+            CobrosEDC.Reiniciar()
             Exit Sub
         End If
 
@@ -169,12 +183,14 @@ Public Class CobrosController
 
         If (exists < 1) Then
             MessageBox.Show("La matricula ingresada no existe, favor de ingresar una matricula valida")
-            MainAsignacionPagosOpcionalesEDC.Reiniciar()
+            CobrosEDC.Reiniciar()
             Exit Sub
         End If
 
         Me.llenarPanelDatosEX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno)
     End Sub
+
+
 
     ''----------------------------------------------------------------------------------------------------------------------------------------
     ''-----------------------------------------------------LLENA PANEL DE DATOS EXTERNA-------------------------------------------------------
@@ -183,6 +199,41 @@ Public Class CobrosController
         Dim tableDatos As DataTable = db.getDataTableFromSQL($"SELECT UPPER(C.nombre + ' ' + EX.paterno + ' ' + EX.materno)As Nombre, C.correo FROM portal_cliente AS C 
                                                                INNER JOIN portal_registroExterno AS EX ON C.id_cliente = EX.id_cliente
                                                                WHERE EX.clave_cliente = '{Matricula}'")
+        For Each item As DataRow In tableDatos.Rows
+            txtNombre.Text = item("Nombre")
+            txtEmail.Text = item("correo")
+        Next
+        txtCarrera.Text = ""
+        txtTurno.Text = ""
+
+        panelDatos.Visible = True
+        panelCobros.Visible = True
+    End Sub
+
+    ''----------------------------------------------------------------------------------------------------------------------------------------
+    ''-------------------------------------------------BUSCA MATRICULA MATRICULA CONGRESO-----------------------------------------------------
+    ''----------------------------------------------------------------------------------------------------------------------------------------
+    Sub buscarMatriculaEC(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As TextBox, txtEmail As TextBox, txtCarrera As TextBox, txtTurno As TextBox)
+        Dim exists As Integer = db.exectSQLQueryScalar($"SELECT id_clave FROM portal_clave WHERE clave_cliente = '{Matricula}'")
+
+        If (exists < 1) Then
+            MessageBox.Show("La matricula ingresada no existe, favor de ingresar una matricula valida")
+            CobrosEDC.Reiniciar()
+            Exit Sub
+        End If
+
+        Me.llenarPanelDatosEC(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno)
+    End Sub
+
+
+
+    ''----------------------------------------------------------------------------------------------------------------------------------------
+    ''-----------------------------------------------------LLENA PANEL DE DATOS CONGRESO------------------------------------------------------
+    ''----------------------------------------------------------------------------------------------------------------------------------------
+    Sub llenarPanelDatosEC(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As TextBox, txtEmail As TextBox, txtCarrera As TextBox, txtTurno As TextBox)
+        Dim tableDatos As DataTable = db.getDataTableFromSQL($"SELECT UPPER(C.nombre + ' ' + R.apellido_paterno + ' ' + R.apellido_materno) AS Nombre, C.correo FROM portal_cliente AS C 
+                                                               INNER JOIN portal_registroCongreso AS R ON R.id_cliente = C.id_cliente
+                                                               WHERE R.clave_cliente = '{Matricula}'")
         For Each item As DataRow In tableDatos.Rows
             txtNombre.Text = item("Nombre")
             txtEmail.Text = item("correo")
@@ -205,10 +256,12 @@ Public Class CobrosController
             tabla = "ing_AsignacionPagoOpcionalAlumno"
             MatriculaName = "Matricula"
             claveTipoPago = 1
-        ElseIf (TipoMatricula = "EC") Then
+        ElseIf (TipoMatricula = "EX") Then
             tabla = "ing_AsignacionPagoOpcionalExterno"
             claveTipoPago = 2
             MatriculaName = "MatriculaExterna"
+        ElseIf (TipoMatricula = "EC") Then
+            Return
         End If
         Dim tablePagosOpcionales As DataTable = db.getDataTableFromSQL($"SELECT A.ID, C.Clave, P.Descripcion, A.costoUnitario, A.Cantidad, P.considerarIVA, P.AgregaIVA, P.ExentaIVA FROM {tabla} AS A
                                                                         INNER JOIN ing_resPagoOpcionalAsignacion AS R ON R.ID = A.ID_resPagoOpcionalAsignacion
@@ -222,6 +275,32 @@ Public Class CobrosController
         Tree.Nodes(1).Expand()
     End Sub
 
+    ''----------------------------------------------------------------------------------------------------------------------------------------
+    ''--------------------------------------------------------BUSCA CONGRESOS----------------------------------------------------------
+    ''----------------------------------------------------------------------------------------------------------------------------------------
+    Sub buscarCongresos(Tree As TreeView, Matricula As String, TipoMatricula As String)
+        Dim Costo As Decimal
+        If (TipoMatricula <> "EC") Then
+            Return
+        End If
+        Dim tablePagosOpcionales As DataTable = db.getDataTableFromSQL($"SELECT C.id_cliente, CP.Clave, GETDATE() AS FechaHoy, CON.nombre, CO.fecha_limite, CO.costo_antes, CO.costo_despues, 1 As Cantidad, 1 As considerarIVA, 0 As AgregaIVA, 0 As exentaIVA FROM portal_registroCongreso AS RC
+                                                                         INNER JOIN portal_cliente AS C ON C.id_cliente = RC.id_cliente
+                                                                         INNER JOIN portal_tipoAsistente AS TA ON TA.id_tipo_asistente = RC.id_tipo_asistente
+                                                                         INNER JOIN portal_congreso AS CON ON CON.id_congreso = TA.id_congreso
+                                                                         INNER JOIN portal_costo AS CO ON CO.id_tipo_asistente = TA.id_tipo_asistente
+                                                                         INNER JOIN ing_CatClavesPagos AS CP ON CP.ID = 3
+                                                                         WHERE RC.clave_cliente = '{Matricula}' AND RC.clave_cliente NOT IN (SELECT Matricula FROM ing_PagosCongresos)")
+        For Each item As DataRow In tablePagosOpcionales.Rows
+            If (item("FechaHoy") > item("fecha_limite")) Then
+                Costo = item("costo_despues")
+            Else
+                Costo = item("costo_antes")
+            End If
+            Dim result As String = $"[{item("id_cliente")}]|{item("Clave")}|{item("nombre")}|{Costo}|{item("Cantidad")}|Total: {Me.calcularTotal(Costo, item("Cantidad"), item("considerarIVA"), item("AgregaIVA"), item("exentaIVA"))}"
+            Tree.Nodes(0).Nodes.Add(result).StateImageIndex = 0
+        Next
+        Tree.Nodes(0).Expand()
+    End Sub
 
     ''----------------------------------------------------------------------------------------------------------------------------------------
     ''--------------------------------------------------------CALCULA TOTAL A PAGAR-----------------------------------------------------------

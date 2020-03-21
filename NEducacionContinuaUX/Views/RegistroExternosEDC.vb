@@ -5,7 +5,7 @@
     Public Shared matriculaExterna As Boolean
 
     Private Sub RegistroExternosEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        re.loadComboboxExternos(cbEstado, cbEstadoF, cbEstadoEd, cbEstadoFEd)
+        re.loadComboboxExternos(cbEstado, cbEstadoF, cbEstadoEd, cbEstadoFEd, cbExterno, cbUX)
         lblMatriculaEXString.Text = re.obtenerNuevaMatricula()
         matriculaExterna = False
     End Sub
@@ -32,9 +32,15 @@
 
     Private Sub btnGuardarN_Click(sender As Object, e As EventArgs) Handles btnGuardarN.Click
         Dim validaTXT As Object() = re.validaTextboxDatos(txtNombre, txtAp_Pat, txtAp_Mat, txtDireccion, txtColonia, txtCorreo, txtCP, txtTelefono, cbMunicipio)
+        Dim validaCorreo As Object() = re.validaCorreo(txtCorreo.Text, "Nuevo", 0)
 
         If (validaTXT(0) = False And matriculaExterna = False) Then
             MessageBox.Show(validaTXT(1))
+            Return
+        End If
+
+        If (validaCorreo(0) = False) Then
+            MessageBox.Show(validaCorreo(1))
             Return
         End If
 
@@ -58,6 +64,7 @@
 
     Private Sub btnGuardarEdit_Click(sender As Object, e As EventArgs) Handles btnGuardarEdit.Click
         Dim validaTXT As Object() = re.validaTextboxDatos(txtNombreEd, txtAp_PatEd, txtAp_MatEd, txtDireccionEd, txtColoniaEd, txtCorreoEd, txtCPEd, txtTelefonoEd, cbMunicipioEd)
+        Dim validaCorreo As Object() = re.validaCorreo(txtCorreoEd.Text, "Edicion", Matricula)
 
         If (validaTXT(0) = False) Then
             MessageBox.Show(validaTXT(1))
@@ -72,6 +79,11 @@
             End If
         End If
 
+        If (validaCorreo(0) = False) Then
+            MessageBox.Show(validaCorreo(1))
+            Return
+        End If
+
         Dim tipocliente As Integer
         If (chbDatosFiscales.Checked = True) Then
             tipocliente = 1
@@ -80,32 +92,53 @@
         End If
 
         re.EdicionExterno(txtMatriculaEd.Text, txtCorreoEd.Text, txtNombreEd.Text, txtDireccionEd.Text, txtColoniaEd.Text, txtCPEd.Text, cbMunicipioEd.SelectedValue, tipocliente, txtTelefonoEd.Text, 104, txtAp_PatEd.Text, txtAp_MatEd.Text, matriculaExterna, chbDatosFiscalesEdit.Checked, txtRFCEd.Text, txtDireccionFEd.Text, 0, txtColoniaFEd.Text, txtCPFEd.Text, txtCiudadFEd.Text, txtTelefonoFEd.Text, txtCorreoFEd.Text, cbMunicipioFEd.SelectedValue, txtNREd.Text)
-
     End Sub
 
     Private Sub btnBuscarEd_Click(sender As Object, e As EventArgs) Handles btnBuscarEd.Click
+        Matricula = txtMatricula.Text
         re.buscarDatosMatriculaExterna(txtMatriculaEd.Text, txtNombreEd, txtAp_PatEd, txtAp_MatEd, txtDireccionEd, txtColoniaEd, cbEstadoEd, cbMunicipioEd, txtCorreoEd, txtCPEd, txtTelefonoEd,
-                                       txtRFCEd, txtNREd, txtDireccionFEd, txtColoniaFEd, cbEstadoFEd, cbMunicipioFEd, txtCiudadFEd, txtCorreoFEd, txtCPFEd, txtTelefonoFEd, chbDatosFiscalesEdit, panelDatosPersonalesEdit, panelDatosFiscalesEdit, btnGuardarEdit)
+                                       txtRFCEd, txtNREd, txtDireccionFEd, txtColoniaFEd, cbEstadoFEd, cbMunicipioFEd, txtCiudadFEd, txtCorreoFEd, txtCPFEd, txtTelefonoFEd, chbDatosFiscalesEdit, panelDatosPersonalesEdit, panelDatosFiscalesEdit, btnGuardarEdit, btnSalirEd)
+        lblMatriculaEXEdString.Text = Matricula
     End Sub
 
     Private Sub cbEstado_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbEstado.SelectionChangeCommitted
-        Dim tableMunicipios As DataTable = db.getDataTableFromSQL($"SELECT id_municipio, nombre FROM portal_municipio WHERE id_estado = {cbEstado.SelectedValue}")
+        Dim tableMunicipios As DataTable = db.getDataTableFromSQL($"SELECT id_municipio, nombre FROM portal_municipio WHERE id_estado = {cbEstado.SelectedValue} ORDER BY nombre")
         ComboboxService.llenarCombobox(cbMunicipio, tableMunicipios, "id_municipio", "nombre")
     End Sub
 
     Private Sub cbEstadoF_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbEstadoF.SelectionChangeCommitted
-        Dim tableMunicipiosF As DataTable = db.getDataTableFromSQL($"SELECT id_municipio, nombre FROM portal_municipio WHERE id_estado = {cbEstadoF.SelectedValue}")
+        Dim tableMunicipiosF As DataTable = db.getDataTableFromSQL($"SELECT id_municipio, nombre FROM portal_municipio WHERE id_estado = {cbEstadoF.SelectedValue} ORDER BY nombre")
         ComboboxService.llenarCombobox(cbMunicipioF, tableMunicipiosF, "id_municipio", "nombre")
     End Sub
 
     Private Sub cbEstadoEd_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbEstadoEd.SelectionChangeCommitted
-        Dim tableMunicipiosEd As DataTable = db.getDataTableFromSQL($"SELECT id_municipio, nombre FROM portal_municipio WHERE id_estado = {cbEstadoEd.SelectedValue}")
+        Dim tableMunicipiosEd As DataTable = db.getDataTableFromSQL($"SELECT id_municipio, nombre FROM portal_municipio WHERE id_estado = {cbEstadoEd.SelectedValue} ORDER BY nombre")
         ComboboxService.llenarCombobox(cbMunicipioEd, tableMunicipiosEd, "id_municipio", "nombre")
     End Sub
 
     Private Sub cbEstadoFEd_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbEstadoFEd.SelectionChangeCommitted
-        Dim tableMunicipiosFEd As DataTable = db.getDataTableFromSQL($"SELECT id_municipio, nombre FROM portal_municipio WHERE id_estado = {cbEstadoFEd.SelectedValue}")
+        Dim tableMunicipiosFEd As DataTable = db.getDataTableFromSQL($"SELECT id_municipio, nombre FROM portal_municipio WHERE id_estado = {cbEstadoFEd.SelectedValue} ORDER BY nombre")
         ComboboxService.llenarCombobox(cbMunicipioFEd, tableMunicipiosFEd, "id_municipio", "nombre")
+    End Sub
+
+    Private Sub cbExterno_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbExterno.SelectedIndexChanged
+        Try
+            Matricula = cbExterno.SelectedValue
+            re.buscarDatosMatriculaExterna(cbExterno.SelectedValue, txtNombreEd, txtAp_PatEd, txtAp_MatEd, txtDireccionEd, txtColoniaEd, cbEstadoEd, cbMunicipioEd, txtCorreoEd, txtCPEd, txtTelefonoEd,
+                                       txtRFCEd, txtNREd, txtDireccionFEd, txtColoniaFEd, cbEstadoFEd, cbMunicipioFEd, txtCiudadFEd, txtCorreoFEd, txtCPFEd, txtTelefonoFEd, chbDatosFiscalesEdit, panelDatosPersonalesEdit, panelDatosFiscalesEdit, btnGuardarEdit, btnSalirEd)
+            lblMatriculaEXEdString.Text = Matricula
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub cbUX_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbUX.SelectedIndexChanged
+        Try
+            Matricula = txtMatricula.Text
+            re.buscaDatosMatriculaUX(cbUX.SelectedValue, txtNombre, txtAp_Pat, txtAp_Mat, txtDireccion, txtColonia, cbEstado, cbMunicipio, txtCorreo, txtCP, txtTelefono)
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub txt_KeyPressNumber(sender As Object, e As KeyPressEventArgs) Handles txtCP.KeyPress, txtTelefono.KeyPress, txtCPF.KeyPress, txtTelefonoF.KeyPress
@@ -190,5 +223,11 @@
         RegistroExternosEDC_Load(Me, Nothing)
     End Sub
 
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
+        Me.Close()
+    End Sub
 
+    Private Sub btnSalirEd_Click(sender As Object, e As EventArgs) Handles btnSalirEd.Click
+        Me.Close()
+    End Sub
 End Class

@@ -5,6 +5,9 @@
         If (Matricula.Length() - 9) Then
             MessageBox.Show("La matricula ingresada no existe, favor de ingresar una matricula valida")
             Return "False"
+        ElseIf (Matricula.Substring(0, 2) = "EC") Then
+            MessageBox.Show("No puede agregar pagos opcionales a una matricula de congreso, genere una matricula externa para poder agregar el pago")
+            Return "False"
         Else
             Dim MatriculaUX As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_catMatriculasUX WHERE MatriculaEX = '{Matricula}'")
             If (MatriculaUX > 0) Then

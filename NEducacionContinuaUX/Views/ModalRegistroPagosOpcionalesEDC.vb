@@ -13,6 +13,7 @@
             po.llenarVentanaPago(IDPago, cbConceptoPara, cbNivel, cbTurno, cbTipoPago, cbTipoConcepto, cbDivision, cbGrupo, cbClase, cbProdServ, cbUnidad, lblNivel, lblTurno, txtConcepto, txtDescripcion, txtValorUnitario, txtValorUnitarioSinIVA, chbExentaIVA, chbConsideraIVA, chbIncluyeIVA)
             Me.enableControls()
             btnGuardar.Enabled = True
+            txtClavePS.Enabled = True
         End If
         ObjectBagService.clearBag()
         first = True
@@ -123,17 +124,16 @@
     End Sub
 
     Private Sub cbTipoConcepto_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbTipoConcepto.SelectionChangeCommitted
-        Dim tableDivision As DataTable = db.getDataTableFromSQL($"SELECT DISTINCT Cve_division, Division FROM sat_ClasificacionClavesSAT WHERE Tipo = '{cbTipoConcepto.Text}'")
+        Dim tableDivision As DataTable = db.getDataTableFromSQL($"SELECT DISTINCT Cve_division, Division FROM ing_ClasificacionClavesSAT WHERE Tipo = '{cbTipoConcepto.Text}'")
         ComboboxService.llenarCombobox(cbDivision, tableDivision, "Cve_division", "Division")
         If (cbTipoConcepto.Text = "SERVICIO" And first = True) Then
             cbDivision.SelectedValue = "86000000"
-            cbDivision_SelectionChangeCommitted(Nothing, Nothing)
         End If
         cbDivision_SelectionChangeCommitted(Nothing, Nothing)
     End Sub
 
     Private Sub cbDivision_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbDivision.SelectionChangeCommitted
-        Dim tableGrupo As DataTable = db.getDataTableFromSQL($"SELECT DISTINCT cve_grupo, grupo FROM sat_ClasificacionClavesSAT WHERE Cve_division = '{cbDivision.SelectedValue}'")
+        Dim tableGrupo As DataTable = db.getDataTableFromSQL($"SELECT DISTINCT cve_grupo, grupo FROM ing_ClasificacionClavesSAT WHERE Cve_division = '{cbDivision.SelectedValue}'")
         ComboboxService.llenarCombobox(cbGrupo, tableGrupo, "cve_grupo", "grupo")
         If (cbTipoConcepto.Text = "SERVICIO" And first = True) Then
             cbGrupo.SelectedValue = "86120000"
@@ -142,7 +142,7 @@
     End Sub
 
     Private Sub cbGrupo_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbGrupo.SelectionChangeCommitted
-        Dim tableClase As DataTable = db.getDataTableFromSQL($"SELECT DISTINCT cve_clase, clase FROM sat_ClasificacionClavesSAT WHERE cve_grupo = '{cbGrupo.SelectedValue}'")
+        Dim tableClase As DataTable = db.getDataTableFromSQL($"SELECT DISTINCT cve_clase, clase FROM ing_ClasificacionClavesSAT WHERE cve_grupo = '{cbGrupo.SelectedValue}'")
         ComboboxService.llenarCombobox(cbClase, tableClase, "cve_clase", "clase")
         If (cbTipoConcepto.Text = "SERVICIO" And first = True) Then
             cbClase.SelectedValue = "86121700"
@@ -152,7 +152,7 @@
 
     Private Sub cbClase_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbClase.SelectionChangeCommitted
         Dim clave As String = cbClase.SelectedValue.ToString().Substring(0, cbClase.SelectedValue.ToString().Length() - 2) + "%"
-        Dim tableProdServ As DataTable = db.getDataTableFromSQL($"SELECT ClaveProdServ, Descripcion FROM sat_CatClaveProdServSAT WHERE ClaveProdServ LIKE '{clave}'")
+        Dim tableProdServ As DataTable = db.getDataTableFromSQL($"SELECT ClaveProdServ, Descripcion FROM ing_CatClaveProdServSAT WHERE ClaveProdServ LIKE '{clave}'")
         ComboboxService.llenarCombobox(cbProdServ, tableProdServ, "ClaveProdServ", "Descripcion")
         If (cbTipoConcepto.Text = "SERVICIO" And first = True) Then
             cbProdServ.SelectedValue = "86121700"
@@ -161,7 +161,7 @@
     End Sub
 
     Private Sub cbProdServ_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbProdServ.SelectionChangeCommitted
-        Dim tableUnidad As DataTable = db.getDataTableFromSQL("SELECT id_claveProd, nombre FROM sat_cat_unidad")
+        Dim tableUnidad As DataTable = db.getDataTableFromSQL("SELECT id_claveProd, nombre FROM ing_cat_unidad")
         ComboboxService.llenarCombobox(cbUnidad, tableUnidad, "id_claveProd", "nombre")
         first = False
     End Sub
@@ -231,6 +231,9 @@
             Return
         ElseIf (txtValorUnitario.Text = "") Then
             MessageBox.Show("Ingrese el monto del concepto")
+            Return
+        ElseIf (cbTurno.Enabled = False And cbConceptoPara.Text = "ALUMNO") Then
+            MessageBox.Show("Seleccione el turno")
             Return
         End If
 

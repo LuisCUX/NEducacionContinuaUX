@@ -121,7 +121,7 @@ Partial Class LoginEDC
         Me.MinimizeBox = False
         Me.Name = "LoginEDC"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "f56"
+        Me.Text = "Inicio de sesión"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

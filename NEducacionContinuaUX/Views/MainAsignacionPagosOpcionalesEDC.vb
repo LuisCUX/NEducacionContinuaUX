@@ -5,12 +5,17 @@
     Dim MatriculaUX As String
     Dim ap As AsignacionPagosOpcionalesController = New AsignacionPagosOpcionalesController()
     Private Sub AsignacionPagosOpcionalesEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        Dim tableExternos As DataTable = db.getDataTableFromSQL("SELECT CL.clave_cliente, UPPER(C.nombre + ' ' + E.paterno + ' ' + E.materno) As NombreExterno FROM portal_registroExterno AS E
+                                                                 INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
+                                                                 INNER JOIN portal_clave AS CL ON CL.id_cliente = C.id_cliente
+                                                                 ORDER BY C.nombre")
+        ComboboxService.llenarCombobox(cbExterno, tableExternos, "clave_cliente", "NombreExterno")
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         Matricula = txtMatricula.Text
         tipoMatricula = ap.validarMatricula(Matricula)
+        txtMatriculaDato.Text = Matricula
         If (tipoMatricula = "False") Then
             Me.Reiniciar()
             Exit Sub
@@ -43,6 +48,16 @@
         ModalAsignacionPagosOpcionalesEDC.Show()
     End Sub
 
+    Private Sub cbExterno_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbExterno.SelectedIndexChanged
+        Try
+            txtMatricula.Text = cbExterno.SelectedValue
+            btnBuscar.PerformClick()
+            txtMatricula.Clear()
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
     Sub Reiniciar()
         Me.Controls.Clear()
         InitializeComponent()
@@ -65,4 +80,5 @@
         ModalAsignacionPagosOpcionalesEDC.MdiParent = PrincipalView
         ModalAsignacionPagosOpcionalesEDC.Show()
     End Sub
+
 End Class
