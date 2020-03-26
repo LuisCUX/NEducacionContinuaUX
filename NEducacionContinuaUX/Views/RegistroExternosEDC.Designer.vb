@@ -113,6 +113,8 @@ Partial Class RegistroExternosEDC
         Me.lblColoniaFEd = New System.Windows.Forms.Label()
         Me.lblDireccionFEd = New System.Windows.Forms.Label()
         Me.panelDatosPersonalesEdit = New System.Windows.Forms.Panel()
+        Me.lblMatriculaEXEdString = New System.Windows.Forms.Label()
+        Me.lblMatriculaEXEd = New System.Windows.Forms.Label()
         Me.cbMunicipioEd = New System.Windows.Forms.ComboBox()
         Me.cbEstadoEd = New System.Windows.Forms.ComboBox()
         Me.txtTelefonoEd = New System.Windows.Forms.TextBox()
@@ -135,8 +137,6 @@ Partial Class RegistroExternosEDC
         Me.lblnombreEd = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.btnBuscarEd = New System.Windows.Forms.Button()
-        Me.lblMatriculaEXEdString = New System.Windows.Forms.Label()
-        Me.lblMatriculaEXEd = New System.Windows.Forms.Label()
         Me.tabExternos.SuspendLayout()
         Me.tabRegistroExternos.SuspendLayout()
         Me.panelDatosFiscales.SuspendLayout()
@@ -507,9 +507,9 @@ Partial Class RegistroExternosEDC
         Me.cbUX.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbUX.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbUX.FormattingEnabled = True
-        Me.cbUX.Location = New System.Drawing.Point(520, 41)
+        Me.cbUX.Location = New System.Drawing.Point(594, 41)
         Me.cbUX.Name = "cbUX"
-        Me.cbUX.Size = New System.Drawing.Size(435, 21)
+        Me.cbUX.Size = New System.Drawing.Size(361, 21)
         Me.cbUX.TabIndex = 70
         '
         'lblMatriculaEXString
@@ -539,7 +539,7 @@ Partial Class RegistroExternosEDC
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label8.Location = New System.Drawing.Point(415, 42)
+        Me.Label8.Location = New System.Drawing.Point(483, 42)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(108, 16)
         Me.Label8.TabIndex = 42
@@ -645,7 +645,7 @@ Partial Class RegistroExternosEDC
         Me.lblTelefono.AutoSize = True
         Me.lblTelefono.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTelefono.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblTelefono.Location = New System.Drawing.Point(744, 137)
+        Me.lblTelefono.Location = New System.Drawing.Point(743, 137)
         Me.lblTelefono.Name = "lblTelefono"
         Me.lblTelefono.Size = New System.Drawing.Size(65, 16)
         Me.lblTelefono.TabIndex = 41
@@ -1166,6 +1166,28 @@ Partial Class RegistroExternosEDC
         Me.panelDatosPersonalesEdit.TabIndex = 1
         Me.panelDatosPersonalesEdit.Visible = False
         '
+        'lblMatriculaEXEdString
+        '
+        Me.lblMatriculaEXEdString.AutoSize = True
+        Me.lblMatriculaEXEdString.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblMatriculaEXEdString.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblMatriculaEXEdString.ForeColor = System.Drawing.Color.Gold
+        Me.lblMatriculaEXEdString.Location = New System.Drawing.Point(706, 145)
+        Me.lblMatriculaEXEdString.Name = "lblMatriculaEXEdString"
+        Me.lblMatriculaEXEdString.Size = New System.Drawing.Size(0, 24)
+        Me.lblMatriculaEXEdString.TabIndex = 71
+        '
+        'lblMatriculaEXEd
+        '
+        Me.lblMatriculaEXEd.AutoSize = True
+        Me.lblMatriculaEXEd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblMatriculaEXEd.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblMatriculaEXEd.Location = New System.Drawing.Point(585, 148)
+        Me.lblMatriculaEXEd.Name = "lblMatriculaEXEd"
+        Me.lblMatriculaEXEd.Size = New System.Drawing.Size(115, 16)
+        Me.lblMatriculaEXEd.TabIndex = 70
+        Me.lblMatriculaEXEd.Text = "Matricula externa: "
+        '
         'cbMunicipioEd
         '
         Me.cbMunicipioEd.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -1382,28 +1404,6 @@ Partial Class RegistroExternosEDC
         Me.btnBuscarEd.Size = New System.Drawing.Size(40, 33)
         Me.btnBuscarEd.TabIndex = 31
         Me.btnBuscarEd.UseVisualStyleBackColor = True
-        '
-        'lblMatriculaEXEdString
-        '
-        Me.lblMatriculaEXEdString.AutoSize = True
-        Me.lblMatriculaEXEdString.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblMatriculaEXEdString.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblMatriculaEXEdString.ForeColor = System.Drawing.Color.Gold
-        Me.lblMatriculaEXEdString.Location = New System.Drawing.Point(706, 145)
-        Me.lblMatriculaEXEdString.Name = "lblMatriculaEXEdString"
-        Me.lblMatriculaEXEdString.Size = New System.Drawing.Size(0, 24)
-        Me.lblMatriculaEXEdString.TabIndex = 71
-        '
-        'lblMatriculaEXEd
-        '
-        Me.lblMatriculaEXEd.AutoSize = True
-        Me.lblMatriculaEXEd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblMatriculaEXEd.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblMatriculaEXEd.Location = New System.Drawing.Point(585, 148)
-        Me.lblMatriculaEXEd.Name = "lblMatriculaEXEd"
-        Me.lblMatriculaEXEd.Size = New System.Drawing.Size(115, 16)
-        Me.lblMatriculaEXEd.TabIndex = 70
-        Me.lblMatriculaEXEd.Text = "Matricula externa: "
         '
         'RegistroExternosEDC
         '

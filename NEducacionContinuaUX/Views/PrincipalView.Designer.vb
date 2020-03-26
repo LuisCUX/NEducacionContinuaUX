@@ -33,6 +33,8 @@ Partial Class PrincipalView
         Me.AsignacionDePagosOpcionalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CatalogosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GestionDeExternosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AutorizacionesYCondonacionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AutorizacionesYCondonacionesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip.SuspendLayout()
         Me.MenuStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -54,7 +56,7 @@ Partial Class PrincipalView
         '
         'MenuStrip
         '
-        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CobrosToolStripMenuItem, Me.PagosOpcionalesToolStripMenuItem, Me.CatalogosToolStripMenuItem})
+        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CobrosToolStripMenuItem, Me.AutorizacionesYCondonacionesToolStripMenuItem, Me.PagosOpcionalesToolStripMenuItem, Me.CatalogosToolStripMenuItem})
         Me.MenuStrip.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip.Name = "MenuStrip"
         Me.MenuStrip.Size = New System.Drawing.Size(1423, 24)
@@ -106,6 +108,19 @@ Partial Class PrincipalView
         Me.GestionDeExternosToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
         Me.GestionDeExternosToolStripMenuItem.Text = "Gestion de externos"
         '
+        'AutorizacionesYCondonacionesToolStripMenuItem
+        '
+        Me.AutorizacionesYCondonacionesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AutorizacionesYCondonacionesToolStripMenuItem1})
+        Me.AutorizacionesYCondonacionesToolStripMenuItem.Name = "AutorizacionesYCondonacionesToolStripMenuItem"
+        Me.AutorizacionesYCondonacionesToolStripMenuItem.Size = New System.Drawing.Size(192, 20)
+        Me.AutorizacionesYCondonacionesToolStripMenuItem.Text = "Autorizaciones y Condonaciones"
+        '
+        'AutorizacionesYCondonacionesToolStripMenuItem1
+        '
+        Me.AutorizacionesYCondonacionesToolStripMenuItem1.Name = "AutorizacionesYCondonacionesToolStripMenuItem1"
+        Me.AutorizacionesYCondonacionesToolStripMenuItem1.Size = New System.Drawing.Size(247, 22)
+        Me.AutorizacionesYCondonacionesToolStripMenuItem1.Text = "Autorizaciones y Condonaciones"
+        '
         'PrincipalView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -145,4 +160,6 @@ Partial Class PrincipalView
     Friend WithEvents CobrosToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents CatalogosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GestionDeExternosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AutorizacionesYCondonacionesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AutorizacionesYCondonacionesToolStripMenuItem1 As ToolStripMenuItem
 End Class

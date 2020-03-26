@@ -45,34 +45,22 @@
         ElseIf (claveConcepto = "CON") Then
             Dim Costo As Decimal
             Dim Descuento As Decimal
-            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT CON.nombre, CON.clave_servicio, 1 As considerarIVA, 0 As AgregaIVA, 0 As ExentaIVA, 1 As Cantidad, GETDATE() AS FechaHoy, CO.fecha_limite, CO.costo_antes, CO.costo_despues FROM portal_registroCongreso AS RC
+            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT CON.nombre, CON.clave_servicio, 1 As considerarIVA, 0 As AgregaIVA, 0 As ExentaIVA, 1 As Cantidad, GETDATE() AS FechaHoy, SUB.costo_total, SUB.descuento FROM portal_registroCongreso AS RC
                                                                       INNER JOIN portal_cliente AS C ON C.id_cliente = RC.id_cliente
                                                                       INNER JOIN portal_tipoAsistente AS TA ON TA.id_tipo_asistente = RC.id_tipo_asistente
                                                                       INNER JOIN portal_congreso AS CON ON CON.id_congreso = TA.id_congreso
-                                                                      INNER JOIN portal_costo AS CO ON CO.id_tipo_asistente = TA.id_tipo_asistente
+                                                                      INNER JOIN portal_subtotales AS SUB ON SUB.clave_cliente = RC.clave_cliente
                                                                       INNER JOIN ing_CatClavesPagos AS CP ON CP.ID = 3
                                                                       WHERE c.id_cliente = {conceptoID}")
             For Each item As DataRow In tableConcepto.Rows
 
-                If (item("FechaHoy") > item("fecha_limite")) Then
-                    Costo = item("costo_despues")
-                    Descuento = 0.00
-                Else
-                    Costo = item("costo_antes")
-                    If (item("costo_despues") > item("costo_antes")) Then
-                        Descuento = item("costo_despues") - item("costo_antes")
-                    Else
-                        Descuento = 0.00
-                    End If
-                End If
-
-                    concep.IDConcepto = conceptoID
+                concep.IDConcepto = conceptoID
                 concep.NombreConcepto = Me.removerEspaciosInicioFin(item("nombre"))
                 concep.claveConcepto = claveConcepto
                 concep.cveClase = item("clave_servicio")
                 concep.cveUnidad = "E48"
-                concep.costoUnitario = Costo
-                concep.descuento = Descuento
+                concep.costoUnitario = item("costo_total")
+                concep.descuento = item("descuento")
                 concep.absorbeIVA = item("considerarIVA")
                 concep.consideraIVA = item("AgregaIVA")
                 concep.IVAExento = item("ExentaIVA")

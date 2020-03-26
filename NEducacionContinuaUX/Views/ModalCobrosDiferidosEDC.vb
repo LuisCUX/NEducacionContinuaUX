@@ -3,6 +3,7 @@
     Dim Matricula As String
     Dim tipoMatricula As String
     Dim co As CobrosController = New CobrosController()
+    Dim va As ValidacionesController = New ValidacionesController()
 
     Private Sub ModalCobrosDiferidosEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -11,17 +12,16 @@
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         Me.Limpiar()
         Matricula = txtMatricula.Text
-        tipoMatricula = co.validarMatricula(Matricula)
+        tipoMatricula = va.validarMatricula(Matricula)
         If (tipoMatricula = "False") Then
             Me.Reiniciar()
             Exit Sub
         ElseIf (tipoMatricula = "UX") Then
-            co.buscarMatriculaUX(Matricula, panelDatos, panelPagos, txtNombre, txtEmail, txtCarrera, txtTurno)
+            va.buscarMatriculaUX(Matricula, panelDatos, panelPagos, txtNombre, txtEmail, txtCarrera, txtTurno)
         ElseIf (tipoMatricula = "EC") Then
-            co.buscarMatriculaEX(Matricula, panelDatos, panelPagos, txtNombre, txtEmail, txtCarrera, txtTurno)
+            va.buscarMatriculaEX(Matricula, panelDatos, panelPagos, txtNombre, txtEmail, txtCarrera, txtTurno)
         End If
 
-        co.buscarPagosOpcionales(Tree, Matricula, tipoMatricula)
         Tree.Nodes(1).Expand()
     End Sub
 

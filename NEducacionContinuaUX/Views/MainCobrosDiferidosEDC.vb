@@ -4,6 +4,7 @@
     Dim Matricula As String
     Dim tipoMatricula As String
     Dim co As CobrosController = New CobrosController()
+    Dim va As ValidacionesController = New ValidacionesController()
 
     Private Sub MainCobrosDiferidosEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim tableFormaPago As DataTable = db.getDataTableFromSQL("SELECT Forma_Pago, Descripcion FROM ing_CatFormaPago")
@@ -13,14 +14,14 @@
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         Me.Limpiar()
         Matricula = txtMatricula.Text
-        tipoMatricula = co.validarMatricula(Matricula)
+        tipoMatricula = va.validarMatricula(Matricula)
         If (tipoMatricula = "False") Then
             Me.Reiniciar()
             Exit Sub
         ElseIf (tipoMatricula = "UX") Then
-            co.buscarMatriculaUX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno)
+            va.buscarMatriculaUX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno)
         ElseIf (tipoMatricula = "EC") Then
-            co.buscarMatriculaEX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno)
+            va.buscarMatriculaEX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno)
         End If
     End Sub
 

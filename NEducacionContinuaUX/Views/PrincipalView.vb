@@ -23,4 +23,8 @@
         RegistroExternosEDC.Show()
     End Sub
 
+    Private Sub AutorizacionesYCondonacionesToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AutorizacionesYCondonacionesToolStripMenuItem1.Click
+        AutorizacionCondonacionEDC.MdiParent = Me
+        AutorizacionCondonacionEDC.Show()
+    End Sub
 End Class

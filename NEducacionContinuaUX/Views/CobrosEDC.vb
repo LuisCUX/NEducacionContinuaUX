@@ -3,7 +3,9 @@
     Dim Matricula As String
     Dim tipoMatricula As String
     Dim co As CobrosController = New CobrosController()
+    Dim ca As CargosController = New CargosController()
     Dim ch As ConceptHandlerController = New ConceptHandlerController()
+    Dim va As ValidacionesController = New ValidacionesController()
     Private Sub CobrosEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim tableFormaPago As DataTable = db.getDataTableFromSQL("SELECT Forma_Pago, Descripcion FROM ing_CatFormaPago")
         ComboboxService.llenarCombobox(cbFormaPago, tableFormaPago, "Forma_Pago", "Descripcion")
@@ -18,20 +20,20 @@
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         Me.Limpiar()
         Matricula = txtMatricula.Text
-        tipoMatricula = co.validarMatricula(Matricula)
+        tipoMatricula = va.validarMatricula(Matricula)
         txtMatriculaDato.Text = Matricula
         If (tipoMatricula = "False") Then
             Me.Reiniciar()
             Exit Sub
         ElseIf (tipoMatricula = "UX") Then
-            co.buscarMatriculaUX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno)
+            va.buscarMatriculaUX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno)
         ElseIf (tipoMatricula = "EX") Then
-            co.buscarMatriculaEX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno)
+            va.buscarMatriculaEX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno)
         ElseIf (tipoMatricula = "EC") Then
-            co.buscarMatriculaEC(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno)
+            va.buscarMatriculaEC(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno)
         End If
-        co.buscarPagosOpcionales(Tree, Matricula, tipoMatricula)
-        co.buscarCongresos(Tree, Matricula, tipoMatricula)
+        ca.buscarPagosOpcionales(Tree, Matricula, tipoMatricula, "Cobros")
+        ca.buscarCongresos(Tree, Matricula, tipoMatricula, "Cobros")
         Tree.Nodes(0).Expand()
         Tree.Nodes(1).Expand()
     End Sub
