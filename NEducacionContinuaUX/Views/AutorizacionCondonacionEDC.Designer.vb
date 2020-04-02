@@ -47,15 +47,15 @@ Partial Class AutorizacionCondonacionEDC
         Me.tabCondonaciones = New System.Windows.Forms.TabPage()
         Me.btnGuardarCondonaciones = New System.Windows.Forms.Button()
         Me.GridCondonaciones = New System.Windows.Forms.DataGridView()
+        Me.Node = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Concepto = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Porcentaje = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cbTipoCondonacion = New System.Windows.Forms.ComboBox()
         Me.lblTipoCondonacion = New System.Windows.Forms.Label()
         Me.TreeCondonaciones = New System.Windows.Forms.TreeView()
         Me.ImageListTree = New System.Windows.Forms.ImageList(Me.components)
         Me.tabAutorizacionCaja = New System.Windows.Forms.TabPage()
         Me.tabAutorizacionProceso = New System.Windows.Forms.TabPage()
-        Me.Node = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Concepto = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Porcentaje = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.panelBusqueda.SuspendLayout()
         Me.panelDatos.SuspendLayout()
         Me.panelAutCon.SuspendLayout()
@@ -314,6 +314,23 @@ Partial Class AutorizacionCondonacionEDC
         Me.GridCondonaciones.Size = New System.Drawing.Size(563, 307)
         Me.GridCondonaciones.TabIndex = 12
         '
+        'Node
+        '
+        Me.Node.HeaderText = "Node"
+        Me.Node.Name = "Node"
+        Me.Node.Visible = False
+        '
+        'Concepto
+        '
+        Me.Concepto.HeaderText = "Concepto"
+        Me.Concepto.Name = "Concepto"
+        '
+        'Porcentaje
+        '
+        Me.Porcentaje.FillWeight = 15.0!
+        Me.Porcentaje.HeaderText = "Porcentaje"
+        Me.Porcentaje.Name = "Porcentaje"
+        '
         'cbTipoCondonacion
         '
         Me.cbTipoCondonacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -372,23 +389,6 @@ Partial Class AutorizacionCondonacionEDC
         Me.tabAutorizacionProceso.Size = New System.Drawing.Size(1161, 441)
         Me.tabAutorizacionProceso.TabIndex = 2
         Me.tabAutorizacionProceso.Text = "Autorizacion de Proceso"
-        '
-        'Node
-        '
-        Me.Node.HeaderText = "Node"
-        Me.Node.Name = "Node"
-        Me.Node.Visible = False
-        '
-        'Concepto
-        '
-        Me.Concepto.HeaderText = "Concepto"
-        Me.Concepto.Name = "Concepto"
-        '
-        'Porcentaje
-        '
-        Me.Porcentaje.FillWeight = 15.0!
-        Me.Porcentaje.HeaderText = "Porcentaje"
-        Me.Porcentaje.Name = "Porcentaje"
         '
         'AutorizacionCondonacionEDC
         '

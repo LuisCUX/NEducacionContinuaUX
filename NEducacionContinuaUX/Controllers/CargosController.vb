@@ -25,7 +25,7 @@
                                                                         INNER JOIN ing_CatClavesPagos AS C ON C.ID = {claveTipoPago}
                                                                         WHERE A.{MatriculaName} = '{Matricula}' AND A.Activo = 1")
         For Each item As DataRow In tablePagosOpcionales.Rows
-            Dim result As String = $"[{item("ID")}]|{item("Clave")}|{item("Descripcion")}|{item("costoUnitario")}|{item("Cantidad")}|Total: {Me.calcularTotal(item("costoUnitario"), item("Cantidad"), item("considerarIVA"), item("AgregaIVA"), item("exentaIVA"))}"
+            Dim result As String = $"[{item("ID")}]|({item("Clave")})|{item("Descripcion")}|{item("costoUnitario")}|{item("Cantidad")}|Total: {Me.calcularTotal(item("costoUnitario"), item("Cantidad"), item("considerarIVA"), item("AgregaIVA"), item("exentaIVA"))}"
             If (Tipo = "Cobros") Then
                 Tree.Nodes(1).Nodes.Add(result).StateImageIndex = 0
                 Tree.Nodes(1).Expand()
@@ -41,27 +41,21 @@
     ''--------------------------------------------------------BUSCA CONGRESOS----------------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
     Sub buscarCongresos(Tree As TreeView, Matricula As String, TipoMatricula As String, Tipo As String)
-        Dim Costo As Decimal
         If (TipoMatricula <> "EC") Then
             Return
         End If
-        Dim tablePagosOpcionales As DataTable = db.getDataTableFromSQL($"SELECT C.id_cliente, CP.Clave, GETDATE() AS FechaHoy, CON.nombre, CO.fecha_limite, CO.costo_antes, CO.costo_despues, 1 As Cantidad, 1 As considerarIVA, 0 As AgregaIVA, 0 As exentaIVA FROM portal_registroCongreso AS RC
+        Dim tablePagosOpcionales As DataTable = db.getDataTableFromSQL($"SELECT RC.id_registro, CP.Clave, SUB.costo_total, SUB.descuento, CON.nombre, 1 As Cantidad, 1 As considerarIVA, 0 As AgregaIVA, 0 As exentaIVA FROM portal_registroCongreso AS RC
                                                                          INNER JOIN portal_cliente AS C ON C.id_cliente = RC.id_cliente
                                                                          INNER JOIN portal_tipoAsistente AS TA ON TA.id_tipo_asistente = RC.id_tipo_asistente
                                                                          INNER JOIN portal_congreso AS CON ON CON.id_congreso = TA.id_congreso
-                                                                         INNER JOIN portal_costo AS CO ON CO.id_tipo_asistente = TA.id_tipo_asistente
+                                                                         INNER JOIN portal_subtotales AS SUB ON SUB.clave_cliente = RC.clave_cliente
                                                                          INNER JOIN ing_CatClavesPagos AS CP ON CP.ID = 3
                                                                          WHERE RC.clave_cliente = '{Matricula}' AND RC.clave_cliente NOT IN (SELECT Matricula FROM ing_PagosCongresos)")
         For Each item As DataRow In tablePagosOpcionales.Rows
-            If (item("FechaHoy") > item("fecha_limite")) Then
-                Costo = item("costo_despues")
-            Else
-                Costo = item("costo_antes")
-            End If
-            Dim result As String = $"[{item("id_cliente")}]|{item("Clave")}|{item("nombre")}|{Costo}|{item("Cantidad")}|Total: {Me.calcularTotal(Costo, item("Cantidad"), item("considerarIVA"), item("AgregaIVA"), item("exentaIVA"))}"
+            Dim result As String = $"[{item("id_registro")}]|({item("Clave")})|{item("nombre")}|{item("costo_total")}|{item("Cantidad")}|Total: {Me.calcularTotal(item("costo_total"), item("Cantidad"), item("considerarIVA"), item("AgregaIVA"), item("exentaIVA"))}"
             If (Tipo = "Cobros") Then
-                Tree.Nodes(1).Nodes.Add(result).StateImageIndex = 0
-                Tree.Nodes(1).Expand()
+                Tree.Nodes(0).Nodes.Add(result).StateImageIndex = 0
+                Tree.Nodes(0).Expand()
             ElseIf (Tipo = "AutCon") Then
                 Tree.Nodes(0).Nodes(0).Nodes.Add(result).StateImageIndex = 0
                 Tree.Nodes(0).Nodes(0).Expand()

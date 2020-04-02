@@ -23,7 +23,7 @@ Partial Class ModalAutConPorcentaje
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.lblPorcentaje = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtPorcentaje = New System.Windows.Forms.TextBox()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
@@ -38,12 +38,12 @@ Partial Class ModalAutConPorcentaje
         Me.lblPorcentaje.TabIndex = 16
         Me.lblPorcentaje.Text = "Porcentaje:"
         '
-        'TextBox1
+        'txtPorcentaje
         '
-        Me.TextBox1.Location = New System.Drawing.Point(94, 14)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(100, 20)
-        Me.TextBox1.TabIndex = 17
+        Me.txtPorcentaje.Location = New System.Drawing.Point(94, 14)
+        Me.txtPorcentaje.Name = "txtPorcentaje"
+        Me.txtPorcentaje.Size = New System.Drawing.Size(100, 20)
+        Me.txtPorcentaje.TabIndex = 17
         '
         'btnGuardar
         '
@@ -63,9 +63,10 @@ Partial Class ModalAutConPorcentaje
         Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
         Me.ClientSize = New System.Drawing.Size(209, 79)
         Me.Controls.Add(Me.btnGuardar)
-        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.txtPorcentaje)
         Me.Controls.Add(Me.lblPorcentaje)
         Me.Name = "ModalAutConPorcentaje"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "ModalAutConPorcentaje"
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -73,6 +74,6 @@ Partial Class ModalAutConPorcentaje
     End Sub
 
     Friend WithEvents lblPorcentaje As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtPorcentaje As TextBox
     Friend WithEvents btnGuardar As Button
 End Class

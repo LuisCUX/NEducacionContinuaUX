@@ -82,7 +82,7 @@
                 Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
                 ch.eliminarconcepto(conceptoID, "CON")
                 Me.actualizarTotal(ch.getListaConceptos())
-                Tree.Nodes(1).Nodes(index).SelectedImageIndex = 0
+                Tree.Nodes(0).Nodes(index).SelectedImageIndex = 0
             End If
         ElseIf (tipoPago = "nodePagosOpcionales") Then
             Dim tipoConcepto As String

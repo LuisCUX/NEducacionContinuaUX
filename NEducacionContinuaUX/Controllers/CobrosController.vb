@@ -147,8 +147,8 @@ Public Class CobrosController
     ''--------------------------------------------------------OBTIENE FOLIO DE PAGO-----------------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
     Public Function obtenerFolio() As String
-        Dim Serie As String = db.exectSQLQueryScalar($"SELECT Folio FROM ing_CatFolios WHERE Usuario = '{User.getUsername()}'")
-        Dim Consecutivo As Integer = db.exectSQLQueryScalar($"SELECT Consecutivo + 1 FROM ing_CatFolios WHERE Usuario = '{User.getUsername()}'")
+        Dim Serie As String = db.exectSQLQueryScalar($"SELECT Folio FROM ing_CatFolios WHERE Usuario = '{User.getUsername()}' AND Descripcion = 'ING'")
+        Dim Consecutivo As Integer = db.exectSQLQueryScalar($"SELECT Consecutivo + 1 FROM ing_CatFolios WHERE Usuario = '{User.getUsername()}' AND Descripcion = 'ING'")
         Dim ConsecutivoStr As String
         If (Consecutivo > 0 And Consecutivo < 10) Then
             ConsecutivoStr = $"00000{Consecutivo}"

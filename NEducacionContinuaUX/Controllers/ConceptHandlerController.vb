@@ -45,16 +45,16 @@
         ElseIf (claveConcepto = "CON") Then
             Dim Costo As Decimal
             Dim Descuento As Decimal
-            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT CON.nombre, CON.clave_servicio, 1 As considerarIVA, 0 As AgregaIVA, 0 As ExentaIVA, 1 As Cantidad, GETDATE() AS FechaHoy, SUB.costo_total, SUB.descuento FROM portal_registroCongreso AS RC
+            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT RC.id_registro, CON.nombre, CON.clave_servicio, 1 As considerarIVA, 0 As AgregaIVA, 0 As ExentaIVA, 1 As Cantidad, GETDATE() AS FechaHoy, SUB.costo_total, SUB.descuento FROM portal_registroCongreso AS RC
                                                                       INNER JOIN portal_cliente AS C ON C.id_cliente = RC.id_cliente
                                                                       INNER JOIN portal_tipoAsistente AS TA ON TA.id_tipo_asistente = RC.id_tipo_asistente
                                                                       INNER JOIN portal_congreso AS CON ON CON.id_congreso = TA.id_congreso
                                                                       INNER JOIN portal_subtotales AS SUB ON SUB.clave_cliente = RC.clave_cliente
                                                                       INNER JOIN ing_CatClavesPagos AS CP ON CP.ID = 3
-                                                                      WHERE c.id_cliente = {conceptoID}")
+                                                                      WHERE RC.id_registro = {conceptoID}")
             For Each item As DataRow In tableConcepto.Rows
 
-                concep.IDConcepto = conceptoID
+                concep.IDConcepto = item("id_registro")
                 concep.NombreConcepto = Me.removerEspaciosInicioFin(item("nombre"))
                 concep.claveConcepto = claveConcepto
                 concep.cveClase = item("clave_servicio")

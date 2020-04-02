@@ -12,13 +12,6 @@
 
     Private Sub cbTipoCondonacion_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbTipoCondonacion.SelectionChangeCommitted
         ac.ActualizarArbolCondonacion(TreeCondonaciones, cbTipoCondonacion.Text, Matricula, tipoMatricula)
-        If (cbTipoCondonacion.Text = "CONDONACIÓN TOTAL") Then
-            lblPorcentaje.Visible = False
-            txtPorcentaje.Visible = False
-        ElseIf (cbTipoCondonacion.Text = "CONDONACIÓN PARCIAL") Then
-            lblPorcentaje.Visible = True
-            txtPorcentaje.Visible = True
-        End If
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
@@ -46,15 +39,34 @@
     Sub NodosCondonaciones()
         If (TreeCondonaciones.SelectedNode Is Nothing) Then
             Exit Sub
+        ElseIf (TreeCondonaciones.SelectedNode.StateImageIndex = 2) Then
+            Exit Sub
         End If
 
         Dim index As Integer = TreeCondonaciones.SelectedNode.Index
         If (TreeCondonaciones.SelectedNode.Checked = False) Then
             TreeCondonaciones.SelectedNode.Checked = True
             TreeCondonaciones.SelectedNode.SelectedImageIndex = 1
+            If (cbTipoCondonacion.Text = "CONDONACIÓN PARCIAL") Then
+                Me.Enabled = False
+                ModalAutConPorcentaje.MdiParent = PrincipalView
+                ModalAutConPorcentaje.Show()
+            ElseIf (cbTipoCondonacion.Text = "CONDONACIÓN TOTAL") Then
+                Dim NombreAutorizacion As String = TreeCondonaciones.SelectedNode.Parent.Text
+                Dim NombreClave As String = TreeCondonaciones.SelectedNode.Parent.Parent.Text
+                Dim ID_res As Integer = ac.ObtenerIDResAutCon(4, NombreAutorizacion, NombreClave)
+                GridCondonaciones.Rows.Add(ID_res, TreeCondonaciones.SelectedNode.Text, 100.0)
+            End If
         Else
             TreeCondonaciones.SelectedNode.Checked = False
             TreeCondonaciones.SelectedNode.SelectedImageIndex = 0
+
+            For x = 0 To GridCondonaciones.Rows.Count() - 1
+                If ((GridCondonaciones.Rows(x).Cells(0).Value = index) And (GridCondonaciones.Rows(x).Cells(1).Value = TreeCondonaciones.SelectedNode.Text)) Then
+                    GridCondonaciones.Rows.RemoveAt(x)
+                    Exit Sub
+                End If
+            Next
         End If
     End Sub
 
@@ -71,5 +83,9 @@
         Me.Controls.Clear()
         InitializeComponent()
         AutorizacionCondonacionEDC_Load(Me, Nothing)
+    End Sub
+
+    Private Sub btnGuardarCondonaciones_Click(sender As Object, e As EventArgs) Handles btnGuardarCondonaciones.Click
+        ac.GuardarCondonaciones(Matricula, GridCondonaciones)
     End Sub
 End Class
