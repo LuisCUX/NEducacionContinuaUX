@@ -12,13 +12,6 @@
 
     Private Sub cbTipoCondonacion_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbTipoCondonacion.SelectionChangeCommitted
         ac.ActualizarArbolCondonacion(TreeCondonaciones, cbTipoCondonacion.Text, Matricula, tipoMatricula)
-        If (cbTipoCondonacion.Text = "CONDONACIÓN TOTAL") Then
-            lblPorcentaje.Visible = False
-            txtPorcentaje.Visible = False
-        ElseIf (cbTipoCondonacion.Text = "CONDONACIÓN PARCIAL") Then
-            lblPorcentaje.Visible = True
-            txtPorcentaje.Visible = True
-        End If
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
