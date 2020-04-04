@@ -17,18 +17,23 @@
 
     Function crearObjeto(conceptoID As Integer, claveConcepto As String) As Concepto
         Dim concep As Concepto = New Concepto()
-
+        Dim claveConceptoint As Integer
         If (claveConcepto = "POA" Or claveConcepto = "POE") Then
             Dim nombreTabla As String
             If (claveConcepto = "POA") Then
                 nombreTabla = "ing_AsignacionPagoOpcionalAlumno"
+                claveConceptoint = 1
             ElseIf (claveconcepto = "POE") Then
                 nombreTabla = "ing_AsignacionPagoOpcionalExterno"
+                claveConceptoint = 2
             End If
             Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT P.Nombre, P.claveProductoServicio, P.claveUnidad, A.costoUnitario, 0.00 As Descuento, P.considerarIVA, P.AgregaIVA, P.ExentaIVA, A.Cantidad FROM {nombreTabla} AS A
                                                                      INNER JOIN ing_resPagoOpcionalAsignacion AS R ON R.ID = A.ID_resPagoOpcionalAsignacion
                                                                      INNER JOIN ing_PagosOpcionales AS P ON P.ID = R.ID_PagoOpcional
                                                                      WHERE A.ID = {conceptoID}")
+
+            Dim condonacion As Object() = Me.obtenerDatosCondonacion(conceptoID, claveConceptoint)
+
             For Each item As DataRow In tableConcepto.Rows
                 concep.IDConcepto = conceptoID
                 concep.NombreConcepto = Me.removerEspaciosInicioFin(item("Nombre"))
@@ -41,20 +46,29 @@
                 concep.consideraIVA = item("AgregaIVA")
                 concep.IVAExento = item("ExentaIVA")
                 concep.Cantidad = item("Cantidad")
+                If (condonacion(0) > 0) Then
+                    concep.Condonacion = True
+                Else
+                    concep.Condonacion = False
+                End If
+                concep.porcentajeCondonacion = condonacion(1)
             Next
         ElseIf (claveConcepto = "CON") Then
             Dim Costo As Decimal
             Dim Descuento As Decimal
-            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT CON.nombre, CON.clave_servicio, 1 As considerarIVA, 0 As AgregaIVA, 0 As ExentaIVA, 1 As Cantidad, GETDATE() AS FechaHoy, SUB.costo_total, SUB.descuento FROM portal_registroCongreso AS RC
+            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT RC.id_registro, CON.nombre, CON.clave_servicio, 1 As considerarIVA, 0 As AgregaIVA, 0 As ExentaIVA, 1 As Cantidad, GETDATE() AS FechaHoy, SUB.costo_total, SUB.descuento FROM portal_registroCongreso AS RC
                                                                       INNER JOIN portal_cliente AS C ON C.id_cliente = RC.id_cliente
                                                                       INNER JOIN portal_tipoAsistente AS TA ON TA.id_tipo_asistente = RC.id_tipo_asistente
                                                                       INNER JOIN portal_congreso AS CON ON CON.id_congreso = TA.id_congreso
                                                                       INNER JOIN portal_subtotales AS SUB ON SUB.clave_cliente = RC.clave_cliente
                                                                       INNER JOIN ing_CatClavesPagos AS CP ON CP.ID = 3
-                                                                      WHERE c.id_cliente = {conceptoID}")
+                                                                      WHERE RC.id_registro = {conceptoID}")
+
+            Dim condonacion As Object() = Me.obtenerDatosCondonacion(conceptoID, 3)
+
             For Each item As DataRow In tableConcepto.Rows
 
-                concep.IDConcepto = conceptoID
+                concep.IDConcepto = item("id_registro")
                 concep.NombreConcepto = Me.removerEspaciosInicioFin(item("nombre"))
                 concep.claveConcepto = claveConcepto
                 concep.cveClase = item("clave_servicio")
@@ -65,6 +79,12 @@
                 concep.consideraIVA = item("AgregaIVA")
                 concep.IVAExento = item("ExentaIVA")
                 concep.Cantidad = item("Cantidad")
+                If (condonacion(0) > 0) Then
+                    concep.Condonacion = True
+                Else
+                    concep.Condonacion = False
+                End If
+                concep.porcentajeCondonacion = condonacion(1)
             Next
         End If
         Return concep
@@ -73,6 +93,11 @@
     Function crearConcepto(conceptoID As Integer, claveConcepto As String) As Concepto
         Dim concepto As New Concepto()
         concepto = Me.crearObjeto(conceptoID, claveConcepto)
+
+        If (concepto.Condonacion = True) Then
+            Dim porcentaje = concepto.costoUnitario * CDec($"0.{concepto.porcentajeCondonacion}")
+            concepto.costoUnitario = concepto.costoUnitario - porcentaje
+        End If
 
         If (concepto.absorbeIVA = True And concepto.IVAExento = False And concepto.consideraIVA = False) Then ''---ABSORBE IVA
 
@@ -164,6 +189,17 @@
             Return cadena
         End If
         Return Nothing
+    End Function
+
+    Function obtenerDatosCondonacion(conceptoID As Integer, claveID As Integer) As Object()
+        Dim IDCondonacion As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_Condonaciones WHERE ID_Concepto = {conceptoID} AND ID_ClaveConcepto = {claveID} AND Activo = 1")
+        Dim porcentajeCondonacion As Decimal
+        If (IDCondonacion <> Nothing) Then
+            porcentajeCondonacion = db.exectSQLQueryScalar($"SELECT Porcentaje FROM ing_Condonaciones WHERE ID = {IDCondonacion}")
+        Else
+            porcentajeCondonacion = 0
+        End If
+        Return {IDCondonacion, porcentajeCondonacion}
     End Function
 
     Sub limpiarListaConceptos()

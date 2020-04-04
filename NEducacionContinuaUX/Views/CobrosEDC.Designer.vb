@@ -29,6 +29,8 @@ Partial Class CobrosEDC
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CobrosEDC))
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.panelBusqueda = New System.Windows.Forms.Panel()
+        Me.rbEDC = New System.Windows.Forms.RadioButton()
+        Me.rbExterno = New System.Windows.Forms.RadioButton()
         Me.cbExterno = New System.Windows.Forms.ComboBox()
         Me.lblBusquedaNombre = New System.Windows.Forms.Label()
         Me.btnBuscar = New System.Windows.Forms.Button()
@@ -74,6 +76,8 @@ Partial Class CobrosEDC
         '
         'panelBusqueda
         '
+        Me.panelBusqueda.Controls.Add(Me.rbEDC)
+        Me.panelBusqueda.Controls.Add(Me.rbExterno)
         Me.panelBusqueda.Controls.Add(Me.cbExterno)
         Me.panelBusqueda.Controls.Add(Me.lblBusquedaNombre)
         Me.panelBusqueda.Controls.Add(Me.btnBuscar)
@@ -84,12 +88,39 @@ Partial Class CobrosEDC
         Me.panelBusqueda.Size = New System.Drawing.Size(1229, 50)
         Me.panelBusqueda.TabIndex = 14
         '
+        'rbEDC
+        '
+        Me.rbEDC.AutoSize = True
+        Me.rbEDC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbEDC.ForeColor = System.Drawing.SystemColors.Control
+        Me.rbEDC.Location = New System.Drawing.Point(1016, 16)
+        Me.rbEDC.Name = "rbEDC"
+        Me.rbEDC.Size = New System.Drawing.Size(143, 20)
+        Me.rbEDC.TabIndex = 75
+        Me.rbEDC.TabStop = True
+        Me.rbEDC.Text = "Educacion continua"
+        Me.rbEDC.UseVisualStyleBackColor = True
+        '
+        'rbExterno
+        '
+        Me.rbExterno.AutoSize = True
+        Me.rbExterno.Checked = True
+        Me.rbExterno.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbExterno.ForeColor = System.Drawing.SystemColors.Control
+        Me.rbExterno.Location = New System.Drawing.Point(927, 16)
+        Me.rbExterno.Name = "rbExterno"
+        Me.rbExterno.Size = New System.Drawing.Size(71, 20)
+        Me.rbExterno.TabIndex = 74
+        Me.rbExterno.TabStop = True
+        Me.rbExterno.Text = "Externo"
+        Me.rbExterno.UseVisualStyleBackColor = True
+        '
         'cbExterno
         '
         Me.cbExterno.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.cbExterno.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbExterno.FormattingEnabled = True
-        Me.cbExterno.Location = New System.Drawing.Point(350, 15)
+        Me.cbExterno.Location = New System.Drawing.Point(320, 15)
         Me.cbExterno.Name = "cbExterno"
         Me.cbExterno.Size = New System.Drawing.Size(586, 21)
         Me.cbExterno.TabIndex = 73
@@ -99,7 +130,7 @@ Partial Class CobrosEDC
         Me.lblBusquedaNombre.AutoSize = True
         Me.lblBusquedaNombre.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblBusquedaNombre.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblBusquedaNombre.Location = New System.Drawing.Point(289, 16)
+        Me.lblBusquedaNombre.Location = New System.Drawing.Point(259, 16)
         Me.lblBusquedaNombre.Name = "lblBusquedaNombre"
         Me.lblBusquedaNombre.Size = New System.Drawing.Size(63, 16)
         Me.lblBusquedaNombre.TabIndex = 3
@@ -432,4 +463,6 @@ Partial Class CobrosEDC
     Friend WithEvents cbExterno As ComboBox
     Friend WithEvents lblMatriculaDato As Label
     Friend WithEvents txtMatriculaDato As TextBox
+    Friend WithEvents rbEDC As RadioButton
+    Friend WithEvents rbExterno As RadioButton
 End Class

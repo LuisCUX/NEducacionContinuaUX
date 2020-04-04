@@ -16,4 +16,7 @@
     Public Property absorbeIVA As Boolean ''Bandera de IVA absorbido por la UX
     Public Property consideraIVA As Boolean ''Bandera de IVA cobrado adicional al concepto   
     Public Property IVAExento As Boolean ''Bandera de IVA exento    
+
+    Public Property Condonacion As Boolean ''Condonacion
+    Public Property porcentajeCondonacion As Decimal ''Porcentaje de la condonacion
 End Class

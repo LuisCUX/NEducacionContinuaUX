@@ -10,11 +10,7 @@
         Dim tableFormaPago As DataTable = db.getDataTableFromSQL("SELECT Forma_Pago, Descripcion FROM ing_CatFormaPago")
         ComboboxService.llenarCombobox(cbFormaPago, tableFormaPago, "Forma_Pago", "Descripcion")
 
-        Dim tableExternos As DataTable = db.getDataTableFromSQL("SELECT CL.clave_cliente, UPPER(C.nombre + ' ' + E.paterno + ' ' + E.materno) As NombreExterno FROM portal_registroExterno AS E
-                                                                 INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
-                                                                 INNER JOIN portal_clave AS CL ON CL.id_cliente = C.id_cliente
-                                                                 ORDER BY C.nombre")
-        ComboboxService.llenarCombobox(cbExterno, tableExternos, "clave_cliente", "NombreExterno")
+        rbExterno.Checked = True
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
@@ -82,7 +78,7 @@
                 Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
                 ch.eliminarconcepto(conceptoID, "CON")
                 Me.actualizarTotal(ch.getListaConceptos())
-                Tree.Nodes(1).Nodes(index).SelectedImageIndex = 0
+                Tree.Nodes(0).Nodes(index).SelectedImageIndex = 0
             End If
         ElseIf (tipoPago = "nodePagosOpcionales") Then
             Dim tipoConcepto As String
@@ -117,7 +113,7 @@
         lblTotal.Text = Total.ToString()
     End Sub
 
-    Private Sub cbExterno_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbExterno.SelectedIndexChanged
+    Private Sub cbExterno_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbExterno.SelectionChangeCommitted
         Try
             txtMatricula.Text = cbExterno.SelectedValue
             btnBuscar.PerformClick()
@@ -134,6 +130,23 @@
             Return
         End If
         co.Cobrar(ch.getListaConceptos(), cbFormaPago.SelectedValue, Matricula)
+    End Sub
+
+    Private Sub rbExterno_CheckedChanged(sender As Object, e As EventArgs) Handles rbExterno.CheckedChanged
+        cbExterno.DataSource = Nothing
+        Dim tableExternos As DataTable = db.getDataTableFromSQL("SELECT CL.clave_cliente, UPPER(C.nombre + ' ' + E.paterno + ' ' + E.materno + ' (' + CL.clave_cliente + ')') As NombreExterno FROM portal_registroExterno AS E
+                                                                 INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
+                                                                 INNER JOIN portal_clave AS CL ON CL.id_cliente = C.id_cliente
+                                                                 ORDER BY C.nombre")
+        ComboboxService.llenarCombobox(cbExterno, tableExternos, "clave_cliente", "NombreExterno")
+    End Sub
+
+    Private Sub rbEDC_CheckedChanged(sender As Object, e As EventArgs) Handles rbEDC.CheckedChanged
+        cbExterno.DataSource = Nothing
+        Dim tableEDC As DataTable = db.getDataTableFromSQL("SELECT RC.clave_cliente, UPPER(C.nombre + ' ' + RC.apellido_paterno + ' ' + RC.apellido_materno + ' (' + RC.clave_cliente + ')') AS NombreCliente FROM portal_registroCongreso AS RC
+                                                            INNER JOIN portal_cliente AS C ON RC.id_cliente = C.id_cliente
+                                                            ORDER BY NombreCliente")
+        ComboboxService.llenarCombobox(cbExterno, tableEDC, "clave_cliente", "NombreCliente")
     End Sub
 
     Sub Limpiar()

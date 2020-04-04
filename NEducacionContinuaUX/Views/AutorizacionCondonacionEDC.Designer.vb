@@ -47,15 +47,17 @@ Partial Class AutorizacionCondonacionEDC
         Me.tabCondonaciones = New System.Windows.Forms.TabPage()
         Me.btnGuardarCondonaciones = New System.Windows.Forms.Button()
         Me.GridCondonaciones = New System.Windows.Forms.DataGridView()
+        Me.Node = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Concepto = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Porcentaje = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cbTipoCondonacion = New System.Windows.Forms.ComboBox()
         Me.lblTipoCondonacion = New System.Windows.Forms.Label()
         Me.TreeCondonaciones = New System.Windows.Forms.TreeView()
         Me.ImageListTree = New System.Windows.Forms.ImageList(Me.components)
         Me.tabAutorizacionCaja = New System.Windows.Forms.TabPage()
         Me.tabAutorizacionProceso = New System.Windows.Forms.TabPage()
-        Me.Node = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Concepto = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Porcentaje = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.rbEDC = New System.Windows.Forms.RadioButton()
+        Me.rbExterno = New System.Windows.Forms.RadioButton()
         Me.panelBusqueda.SuspendLayout()
         Me.panelDatos.SuspendLayout()
         Me.panelAutCon.SuspendLayout()
@@ -78,6 +80,8 @@ Partial Class AutorizacionCondonacionEDC
         '
         'panelBusqueda
         '
+        Me.panelBusqueda.Controls.Add(Me.rbEDC)
+        Me.panelBusqueda.Controls.Add(Me.rbExterno)
         Me.panelBusqueda.Controls.Add(Me.cbExterno)
         Me.panelBusqueda.Controls.Add(Me.lblBusquedaNombre)
         Me.panelBusqueda.Controls.Add(Me.btnBuscar)
@@ -93,7 +97,7 @@ Partial Class AutorizacionCondonacionEDC
         Me.cbExterno.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.cbExterno.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbExterno.FormattingEnabled = True
-        Me.cbExterno.Location = New System.Drawing.Point(350, 15)
+        Me.cbExterno.Location = New System.Drawing.Point(311, 15)
         Me.cbExterno.Name = "cbExterno"
         Me.cbExterno.Size = New System.Drawing.Size(586, 21)
         Me.cbExterno.TabIndex = 73
@@ -103,7 +107,7 @@ Partial Class AutorizacionCondonacionEDC
         Me.lblBusquedaNombre.AutoSize = True
         Me.lblBusquedaNombre.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblBusquedaNombre.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblBusquedaNombre.Location = New System.Drawing.Point(289, 16)
+        Me.lblBusquedaNombre.Location = New System.Drawing.Point(250, 16)
         Me.lblBusquedaNombre.Name = "lblBusquedaNombre"
         Me.lblBusquedaNombre.Size = New System.Drawing.Size(63, 16)
         Me.lblBusquedaNombre.TabIndex = 3
@@ -314,6 +318,23 @@ Partial Class AutorizacionCondonacionEDC
         Me.GridCondonaciones.Size = New System.Drawing.Size(563, 307)
         Me.GridCondonaciones.TabIndex = 12
         '
+        'Node
+        '
+        Me.Node.HeaderText = "Node"
+        Me.Node.Name = "Node"
+        Me.Node.Visible = False
+        '
+        'Concepto
+        '
+        Me.Concepto.HeaderText = "Concepto"
+        Me.Concepto.Name = "Concepto"
+        '
+        'Porcentaje
+        '
+        Me.Porcentaje.FillWeight = 15.0!
+        Me.Porcentaje.HeaderText = "Porcentaje"
+        Me.Porcentaje.Name = "Porcentaje"
+        '
         'cbTipoCondonacion
         '
         Me.cbTipoCondonacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -373,22 +394,32 @@ Partial Class AutorizacionCondonacionEDC
         Me.tabAutorizacionProceso.TabIndex = 2
         Me.tabAutorizacionProceso.Text = "Autorizacion de Proceso"
         '
-        'Node
+        'rbEDC
         '
-        Me.Node.HeaderText = "Node"
-        Me.Node.Name = "Node"
-        Me.Node.Visible = False
+        Me.rbEDC.AutoSize = True
+        Me.rbEDC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbEDC.ForeColor = System.Drawing.SystemColors.Control
+        Me.rbEDC.Location = New System.Drawing.Point(1013, 16)
+        Me.rbEDC.Name = "rbEDC"
+        Me.rbEDC.Size = New System.Drawing.Size(143, 20)
+        Me.rbEDC.TabIndex = 77
+        Me.rbEDC.TabStop = True
+        Me.rbEDC.Text = "Educacion continua"
+        Me.rbEDC.UseVisualStyleBackColor = True
         '
-        'Concepto
+        'rbExterno
         '
-        Me.Concepto.HeaderText = "Concepto"
-        Me.Concepto.Name = "Concepto"
-        '
-        'Porcentaje
-        '
-        Me.Porcentaje.FillWeight = 15.0!
-        Me.Porcentaje.HeaderText = "Porcentaje"
-        Me.Porcentaje.Name = "Porcentaje"
+        Me.rbExterno.AutoSize = True
+        Me.rbExterno.Checked = True
+        Me.rbExterno.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbExterno.ForeColor = System.Drawing.SystemColors.Control
+        Me.rbExterno.Location = New System.Drawing.Point(924, 16)
+        Me.rbExterno.Name = "rbExterno"
+        Me.rbExterno.Size = New System.Drawing.Size(71, 20)
+        Me.rbExterno.TabIndex = 76
+        Me.rbExterno.TabStop = True
+        Me.rbExterno.Text = "Externo"
+        Me.rbExterno.UseVisualStyleBackColor = True
         '
         'AutorizacionCondonacionEDC
         '
@@ -449,4 +480,6 @@ Partial Class AutorizacionCondonacionEDC
     Friend WithEvents Node As DataGridViewTextBoxColumn
     Friend WithEvents Concepto As DataGridViewTextBoxColumn
     Friend WithEvents Porcentaje As DataGridViewTextBoxColumn
+    Friend WithEvents rbEDC As RadioButton
+    Friend WithEvents rbExterno As RadioButton
 End Class

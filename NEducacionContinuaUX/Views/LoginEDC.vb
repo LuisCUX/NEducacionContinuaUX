@@ -28,7 +28,7 @@
     End Sub
 
     Private Sub login_back_door(sender As Object, e As KeyEventArgs) Handles txtUsuario.KeyDown, txtContraseña.KeyDown, Me.KeyDown
-        If e.KeyData = Keys.NumPad8 Then
+        If e.KeyData = Keys.A Then
             If (System.Diagnostics.Debugger.IsAttached) Then
                 User.setModel("Shupi", "UX99979961", "Luis Alberto Carmona Ronzon", "Administrador")
                 PrincipalView.Show()
