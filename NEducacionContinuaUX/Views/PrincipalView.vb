@@ -27,4 +27,9 @@
         AutorizacionCondonacionEDC.MdiParent = Me
         AutorizacionCondonacionEDC.Show()
     End Sub
+
+    Private Sub RegistroDePlanesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RegistroDePlanesToolStripMenuItem.Click
+        PlanesEDC.MdiParent = Me
+        PlanesEDC.Show()
+    End Sub
 End Class

@@ -28,13 +28,15 @@ Partial Class PrincipalView
         Me.MenuStrip = New System.Windows.Forms.MenuStrip()
         Me.CobrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CobrosToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AutorizacionesYCondonacionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AutorizacionesYCondonacionesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.PagosOpcionalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RegistroDePagosOpcionalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AsignacionDePagosOpcionalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CatalogosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GestionDeExternosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AutorizacionesYCondonacionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AutorizacionesYCondonacionesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PlanesDeDiplomadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RegistroDePlanesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip.SuspendLayout()
         Me.MenuStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -56,7 +58,7 @@ Partial Class PrincipalView
         '
         'MenuStrip
         '
-        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CobrosToolStripMenuItem, Me.AutorizacionesYCondonacionesToolStripMenuItem, Me.PagosOpcionalesToolStripMenuItem, Me.CatalogosToolStripMenuItem})
+        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CobrosToolStripMenuItem, Me.AutorizacionesYCondonacionesToolStripMenuItem, Me.PagosOpcionalesToolStripMenuItem, Me.PlanesDeDiplomadosToolStripMenuItem, Me.CatalogosToolStripMenuItem})
         Me.MenuStrip.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip.Name = "MenuStrip"
         Me.MenuStrip.Size = New System.Drawing.Size(1423, 24)
@@ -73,8 +75,21 @@ Partial Class PrincipalView
         'CobrosToolStripMenuItem1
         '
         Me.CobrosToolStripMenuItem1.Name = "CobrosToolStripMenuItem1"
-        Me.CobrosToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
+        Me.CobrosToolStripMenuItem1.Size = New System.Drawing.Size(112, 22)
         Me.CobrosToolStripMenuItem1.Text = "Cobros"
+        '
+        'AutorizacionesYCondonacionesToolStripMenuItem
+        '
+        Me.AutorizacionesYCondonacionesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AutorizacionesYCondonacionesToolStripMenuItem1})
+        Me.AutorizacionesYCondonacionesToolStripMenuItem.Name = "AutorizacionesYCondonacionesToolStripMenuItem"
+        Me.AutorizacionesYCondonacionesToolStripMenuItem.Size = New System.Drawing.Size(192, 20)
+        Me.AutorizacionesYCondonacionesToolStripMenuItem.Text = "Autorizaciones y Condonaciones"
+        '
+        'AutorizacionesYCondonacionesToolStripMenuItem1
+        '
+        Me.AutorizacionesYCondonacionesToolStripMenuItem1.Name = "AutorizacionesYCondonacionesToolStripMenuItem1"
+        Me.AutorizacionesYCondonacionesToolStripMenuItem1.Size = New System.Drawing.Size(247, 22)
+        Me.AutorizacionesYCondonacionesToolStripMenuItem1.Text = "Autorizaciones y Condonaciones"
         '
         'PagosOpcionalesToolStripMenuItem
         '
@@ -105,21 +120,21 @@ Partial Class PrincipalView
         'GestionDeExternosToolStripMenuItem
         '
         Me.GestionDeExternosToolStripMenuItem.Name = "GestionDeExternosToolStripMenuItem"
-        Me.GestionDeExternosToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+        Me.GestionDeExternosToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.GestionDeExternosToolStripMenuItem.Text = "Gestion de externos"
         '
-        'AutorizacionesYCondonacionesToolStripMenuItem
+        'PlanesDeDiplomadosToolStripMenuItem
         '
-        Me.AutorizacionesYCondonacionesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AutorizacionesYCondonacionesToolStripMenuItem1})
-        Me.AutorizacionesYCondonacionesToolStripMenuItem.Name = "AutorizacionesYCondonacionesToolStripMenuItem"
-        Me.AutorizacionesYCondonacionesToolStripMenuItem.Size = New System.Drawing.Size(192, 20)
-        Me.AutorizacionesYCondonacionesToolStripMenuItem.Text = "Autorizaciones y Condonaciones"
+        Me.PlanesDeDiplomadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RegistroDePlanesToolStripMenuItem})
+        Me.PlanesDeDiplomadosToolStripMenuItem.Name = "PlanesDeDiplomadosToolStripMenuItem"
+        Me.PlanesDeDiplomadosToolStripMenuItem.Size = New System.Drawing.Size(135, 20)
+        Me.PlanesDeDiplomadosToolStripMenuItem.Text = "Planes de diplomados"
         '
-        'AutorizacionesYCondonacionesToolStripMenuItem1
+        'RegistroDePlanesToolStripMenuItem
         '
-        Me.AutorizacionesYCondonacionesToolStripMenuItem1.Name = "AutorizacionesYCondonacionesToolStripMenuItem1"
-        Me.AutorizacionesYCondonacionesToolStripMenuItem1.Size = New System.Drawing.Size(247, 22)
-        Me.AutorizacionesYCondonacionesToolStripMenuItem1.Text = "Autorizaciones y Condonaciones"
+        Me.RegistroDePlanesToolStripMenuItem.Name = "RegistroDePlanesToolStripMenuItem"
+        Me.RegistroDePlanesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.RegistroDePlanesToolStripMenuItem.Text = "Registro de planes"
         '
         'PrincipalView
         '
@@ -162,4 +177,6 @@ Partial Class PrincipalView
     Friend WithEvents GestionDeExternosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AutorizacionesYCondonacionesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AutorizacionesYCondonacionesToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents PlanesDeDiplomadosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents RegistroDePlanesToolStripMenuItem As ToolStripMenuItem
 End Class

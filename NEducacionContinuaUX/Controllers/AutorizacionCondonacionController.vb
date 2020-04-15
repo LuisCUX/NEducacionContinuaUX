@@ -61,9 +61,17 @@
 
                 If (claveConcepto = "CON") Then
 
-                    Dim concepto As Concepto = ch.crearConcepto(IDPago, claveConcepto)
+                    Dim tableCostos As DataTable = db.getDataTableFromSQL($"SELECT costo_total, descuento, iva FROM portal_subtotales WHERE clave_cliente = '{Matricula}'")
+                    Dim costototal As Decimal
+                    Dim costoivatotal As Decimal
+                    Dim descuento As Decimal
+                    For Each item As DataRow In tableCostos.Rows
+                        costototal = item("costo_total")
+                        descuento = item("descuento")
+                        costoivatotal = item("iva")
+                    Next
                     If (GridCondonaciones.Rows(X).Cells(2).Value.ToString() = "100.00") Then
-                        db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosCongresos (Folio, Matricula, valorUnitario, Cantidad, valorIVA, Descuento, ID_FormaPago, Fecha_Pago, Autorizado, Condonado, Usuario) VALUES ('{Folio}', '{Matricula}', {concepto.costoFinal}, {concepto.Cantidad}, {concepto.costoIVATotal}, {concepto.descuento}, 1, GETDATE(), 0, 1, '{User.getUsername()}')")
+                        db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosCongresos (Folio, Matricula, valorUnitario, Cantidad, valorIVA, Descuento, ID_FormaPago, Fecha_Pago, Autorizado, Condonado, Usuario) VALUES ('{Folio}', '{Matricula}', {costototal}, 1, {costoivatotal}, {descuento}, 1, GETDATE(), 0, 1, '{User.getUsername()}')")
                     End If
                 End If
 

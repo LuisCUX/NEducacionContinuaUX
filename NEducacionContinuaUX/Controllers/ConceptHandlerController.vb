@@ -94,11 +94,6 @@
         Dim concepto As New Concepto()
         concepto = Me.crearObjeto(conceptoID, claveConcepto)
 
-        If (concepto.Condonacion = True) Then
-            Dim porcentaje = concepto.costoUnitario * CDec($"0.{concepto.porcentajeCondonacion}")
-            concepto.costoUnitario = concepto.costoUnitario - porcentaje
-        End If
-
         If (concepto.absorbeIVA = True And concepto.IVAExento = False And concepto.consideraIVA = False) Then ''---ABSORBE IVA
 
             Dim costooriginal As Decimal = CDec(concepto.costoUnitario)
@@ -192,7 +187,7 @@
     End Function
 
     Function obtenerDatosCondonacion(conceptoID As Integer, claveID As Integer) As Object()
-        Dim IDCondonacion As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_Condonaciones WHERE ID_Concepto = {conceptoID} AND ID_ClaveConcepto = {claveID} AND Activo = 1")
+        Dim IDCondonacion As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_Condonaciones WHERE ID_Concepto = {conceptoID}")
         Dim porcentajeCondonacion As Decimal
         If (IDCondonacion <> Nothing) Then
             porcentajeCondonacion = db.exectSQLQueryScalar($"SELECT Porcentaje FROM ing_Condonaciones WHERE ID = {IDCondonacion}")
