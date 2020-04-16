@@ -26,6 +26,11 @@
                                                                         WHERE A.{MatriculaName} = '{Matricula}' AND A.Activo = 1")
         For Each item As DataRow In tablePagosOpcionales.Rows
             Dim result As String = $"[{item("ID")}]|({item("Clave")})|{item("Descripcion")}|{item("costoUnitario")}|{item("Cantidad")}|Total: {Me.calcularTotal(item("costoUnitario"), item("Cantidad"), item("considerarIVA"), item("AgregaIVA"), item("exentaIVA"))}"
+            Dim IDCondonacion As Integer = db.exectSQLQueryScalar($"SELECT ID FROM aut_Condonaciones WHERE ID_ClaveConcepto = {claveTipoPago} AND ID_Concepto = {item("ID")}")
+            If (IDCondonacion > 0) Then
+                Dim porcentaje As Decimal = db.exectSQLQueryScalar($"SELECT Porcentaje FROM aut_Condonaciones WHERE ID = {IDCondonacion}")
+                result = result + $"|Condonacion {porcentaje}%"
+            End If
             If (Tipo = "Cobros") Then
                 Tree.Nodes(1).Nodes.Add(result).StateImageIndex = 0
                 Tree.Nodes(1).Expand()
@@ -53,7 +58,15 @@
                                                                          WHERE RC.clave_cliente = '{Matricula}' AND RC.clave_cliente NOT IN (SELECT Matricula FROM ing_PagosCongresos)")
         For Each item As DataRow In tablePagosOpcionales.Rows
             Dim result As String = $"[{item("id_registro")}]|({item("Clave")})|{item("nombre")}|{item("costo_total")}|{item("Cantidad")}|Total: {Me.calcularTotal(item("costo_total"), item("Cantidad"), item("considerarIVA"), item("AgregaIVA"), item("exentaIVA"))}"
-            If (Tipo = "Cobros") Then
+            Dim IDCondonacion As Integer = db.exectSQLQueryScalar($"SELECT ID FROM aut_Condonaciones WHERE ID_ClaveConcepto = 3 AND ID_Concepto = {item("id_registro")}")
+            If (IDCondonacion > 0) Then
+                If (Tipo = "AutCon") Then
+                    Continue For
+                End If
+                Dim porcentaje As Decimal = db.exectSQLQueryScalar($"SELECT Porcentaje FROM aut_Condonaciones WHERE ID = {IDCondonacion}")
+                result = result + $"|Condonacion {porcentaje}%"
+            End If
+                If (Tipo = "Cobros") Then
                 Tree.Nodes(0).Nodes.Add(result).StateImageIndex = 0
                 Tree.Nodes(0).Expand()
             ElseIf (Tipo = "AutCon") Then

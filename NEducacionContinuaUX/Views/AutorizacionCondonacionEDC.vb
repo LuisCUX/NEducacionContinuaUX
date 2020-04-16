@@ -112,6 +112,7 @@
 
     Private Sub cbExterno_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbExterno.SelectionChangeCommitted
         Try
+            Me.limpiar()
             txtMatricula.Text = cbExterno.SelectedValue
             btnBuscar.PerformClick()
             txtMatricula.Clear()

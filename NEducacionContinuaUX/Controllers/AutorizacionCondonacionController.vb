@@ -44,6 +44,7 @@
         ElseIf (tipoCondonacion = "CONDONACIÓN PARCIAL") Then
             ca.buscarCongresos(TreeCondonacion, Matricula, tipoMatricula, "AutCon")
         End If
+
     End Sub
 
     ''-----------------------------------------------------------------------------------------------------''
@@ -57,13 +58,12 @@
                 Dim IDPago As Integer = Convert.ToInt32(Me.Extrae_Cadena(GridCondonaciones.Rows(X).Cells(1).Value, "[", "]"))
                 Dim IDConcepto As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatClavesPagos WHERE CLAVE = '{Me.Extrae_Cadena(GridCondonaciones.Rows(X).Cells(1).Value, "(", ")")}'")
                 Dim claveConcepto As String = db.exectSQLQueryScalar($"SELECT Clave FROM ing_CatClavesPagos WHERE ID = {IDConcepto}")
-                db.execSQLQueryWithoutParams($"INSERT INTO ing_Condonaciones (Folio, Fecha_Condonacion, Matricula, Usuario, ID_res_AutClave, ID_Concepto, ID_ClaveConcepto, Descripcion, Porcentaje, Cantidad, Observaciones, Activo) VALUES ('{Folio}', GETDATE(), '{Matricula}', '{User.getUsername()}', {GridCondonaciones.Rows(X).Cells(0).Value}, {IDPago}, {IDConcepto}, '{GridCondonaciones.Rows(X).Cells(1).Value}', {GridCondonaciones.Rows(X).Cells(2).Value}, 1, 'NA', 1)")
+                db.execSQLQueryWithoutParams($"INSERT INTO aut_Condonaciones (Folio, Fecha_Condonacion, Matricula, Usuario, ID_res_AutClave, ID_Concepto, ID_ClaveConcepto, Descripcion, Porcentaje, Cantidad, Observaciones, Activo) VALUES ('{Folio}', GETDATE(), '{Matricula}', '{User.getUsername()}', {GridCondonaciones.Rows(X).Cells(0).Value}, {IDPago}, {IDConcepto}, '{GridCondonaciones.Rows(X).Cells(1).Value}', {GridCondonaciones.Rows(X).Cells(2).Value}, 1, 'NA', 1)")
 
                 If (claveConcepto = "CON") Then
-
-                    Dim concepto As Concepto = ch.crearConcepto(IDPago, claveConcepto)
-                    If (GridCondonaciones.Rows(X).Cells(2).Value.ToString() = "100.00") Then
-                        db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosCongresos (Folio, Matricula, valorUnitario, Cantidad, valorIVA, Descuento, ID_FormaPago, Fecha_Pago, Autorizado, Condonado, Usuario) VALUES ('{Folio}', '{Matricula}', {concepto.costoFinal}, {concepto.Cantidad}, {concepto.costoIVATotal}, {concepto.descuento}, 1, GETDATE(), 0, 1, '{User.getUsername()}')")
+                    If (GridCondonaciones.Rows(X).Cells(2).Value.ToString() = "100") Then
+                        Dim costos As Decimal() = Me.obtenerCostoIVA(Matricula)
+                        db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosCongresos (Folio, Matricula, valorUnitario, Cantidad, valorIVA, Descuento, ID_FormaPago, Fecha_Pago, Autorizado, Condonado, Usuario) VALUES ('{Folio}', '{Matricula}', {costos(0)}, 1, {costos(1)}, {costos(2)}, 1, GETDATE(), 0, 1, '{User.getUsername()}')")
                     End If
                 End If
 
@@ -126,4 +126,22 @@
 
         Return $"{Serie}{ConsecutivoStr}"
     End Function
+
+    Function obtenerCostoIVA(Matricula As String) As Decimal()
+        Dim tableCostos As DataTable = db.getDataTableFromSQL($"SELECT costo_total, iva, descuento FROM portal_subtotales WHERE clave_cliente = '{Matricula}'")
+        Dim costototal As Decimal
+        Dim iva As Decimal
+        Dim descuento As Decimal
+        For Each item As DataRow In tableCostos.Rows
+            costototal = item("costo_total")
+            iva = item("iva")
+            descuento = item("descuento")
+        Next
+
+        Return {costototal, iva, descuento}
+    End Function
+
+    Sub eliminarCondonados(tree As TreeView)
+
+    End Sub
 End Class
