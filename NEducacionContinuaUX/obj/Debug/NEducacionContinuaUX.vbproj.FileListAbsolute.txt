@@ -46,3 +46,5 @@ C:\Users\darkz\Documents\neducacioncontinuaux\NEducacionContinuaUX\obj\Debug\NEd
 C:\Users\darkz\Documents\neducacioncontinuaux\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.exe
 C:\Users\darkz\Documents\neducacioncontinuaux\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.xml
 C:\Users\darkz\Documents\neducacioncontinuaux\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.pdb
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.PlanesEDC.resources
+C:\Users\darkz\Documents\neducacioncontinuaux\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.PlanesEDC.resources

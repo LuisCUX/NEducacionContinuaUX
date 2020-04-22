@@ -23,9 +23,9 @@ Partial Class CobrosEDC
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Congresos")
-        Dim TreeNode2 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Pagos Opcionales")
-        Dim TreeNode3 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Diplomados")
+        Dim TreeNode4 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Congresos")
+        Dim TreeNode5 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Pagos Opcionales")
+        Dim TreeNode6 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Diplomados")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CobrosEDC))
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.panelBusqueda = New System.Windows.Forms.Panel()
@@ -57,6 +57,8 @@ Partial Class CobrosEDC
         Me.btnCobrar = New System.Windows.Forms.Button()
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.lblPendientes = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.panelBusqueda.SuspendLayout()
         Me.panelDatos.SuspendLayout()
         Me.panelCobros.SuspendLayout()
@@ -76,6 +78,8 @@ Partial Class CobrosEDC
         '
         'panelBusqueda
         '
+        Me.panelBusqueda.Controls.Add(Me.Label2)
+        Me.panelBusqueda.Controls.Add(Me.Label1)
         Me.panelBusqueda.Controls.Add(Me.rbEDC)
         Me.panelBusqueda.Controls.Add(Me.rbExterno)
         Me.panelBusqueda.Controls.Add(Me.cbExterno)
@@ -93,12 +97,12 @@ Partial Class CobrosEDC
         Me.rbEDC.AutoSize = True
         Me.rbEDC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbEDC.ForeColor = System.Drawing.SystemColors.Control
-        Me.rbEDC.Location = New System.Drawing.Point(1016, 16)
+        Me.rbEDC.Location = New System.Drawing.Point(1121, 14)
         Me.rbEDC.Name = "rbEDC"
-        Me.rbEDC.Size = New System.Drawing.Size(143, 20)
+        Me.rbEDC.Size = New System.Drawing.Size(92, 20)
         Me.rbEDC.TabIndex = 75
         Me.rbEDC.TabStop = True
-        Me.rbEDC.Text = "Educacion continua"
+        Me.rbEDC.Text = "Congresos"
         Me.rbEDC.UseVisualStyleBackColor = True
         '
         'rbExterno
@@ -107,12 +111,12 @@ Partial Class CobrosEDC
         Me.rbExterno.Checked = True
         Me.rbExterno.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbExterno.ForeColor = System.Drawing.SystemColors.Control
-        Me.rbExterno.Location = New System.Drawing.Point(927, 16)
+        Me.rbExterno.Location = New System.Drawing.Point(979, 13)
         Me.rbExterno.Name = "rbExterno"
-        Me.rbExterno.Size = New System.Drawing.Size(71, 20)
+        Me.rbExterno.Size = New System.Drawing.Size(136, 20)
         Me.rbExterno.TabIndex = 74
         Me.rbExterno.TabStop = True
-        Me.rbExterno.Text = "Externo"
+        Me.rbExterno.Text = "Pagos opcionales"
         Me.rbExterno.UseVisualStyleBackColor = True
         '
         'cbExterno
@@ -120,7 +124,7 @@ Partial Class CobrosEDC
         Me.cbExterno.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.cbExterno.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbExterno.FormattingEnabled = True
-        Me.cbExterno.Location = New System.Drawing.Point(320, 15)
+        Me.cbExterno.Location = New System.Drawing.Point(300, 14)
         Me.cbExterno.Name = "cbExterno"
         Me.cbExterno.Size = New System.Drawing.Size(586, 21)
         Me.cbExterno.TabIndex = 73
@@ -130,7 +134,7 @@ Partial Class CobrosEDC
         Me.lblBusquedaNombre.AutoSize = True
         Me.lblBusquedaNombre.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblBusquedaNombre.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblBusquedaNombre.Location = New System.Drawing.Point(259, 16)
+        Me.lblBusquedaNombre.Location = New System.Drawing.Point(241, 16)
         Me.lblBusquedaNombre.Name = "lblBusquedaNombre"
         Me.lblBusquedaNombre.Size = New System.Drawing.Size(63, 16)
         Me.lblBusquedaNombre.TabIndex = 3
@@ -327,26 +331,26 @@ Partial Class CobrosEDC
         Me.Tree.ForeColor = System.Drawing.SystemColors.Control
         Me.Tree.Location = New System.Drawing.Point(10, 55)
         Me.Tree.Name = "Tree"
-        TreeNode1.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        TreeNode1.ForeColor = System.Drawing.SystemColors.Control
-        TreeNode1.Name = "nodeCongresos"
-        TreeNode1.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        TreeNode1.SelectedImageIndex = -2
-        TreeNode1.StateImageIndex = 2
-        TreeNode1.Text = "Congresos"
-        TreeNode2.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        TreeNode2.ForeColor = System.Drawing.SystemColors.Control
-        TreeNode2.Name = "nodePagosOpcionales"
-        TreeNode2.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        TreeNode2.SelectedImageIndex = -2
-        TreeNode2.StateImageIndex = 2
-        TreeNode2.Text = "Pagos Opcionales"
-        TreeNode3.Name = "nodeDiplomados"
-        TreeNode3.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        TreeNode3.SelectedImageIndex = -2
-        TreeNode3.StateImageIndex = 2
-        TreeNode3.Text = "Diplomados"
-        Me.Tree.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2, TreeNode3})
+        TreeNode4.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        TreeNode4.ForeColor = System.Drawing.SystemColors.Control
+        TreeNode4.Name = "nodeCongresos"
+        TreeNode4.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        TreeNode4.SelectedImageIndex = -2
+        TreeNode4.StateImageIndex = 2
+        TreeNode4.Text = "Congresos"
+        TreeNode5.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        TreeNode5.ForeColor = System.Drawing.SystemColors.Control
+        TreeNode5.Name = "nodePagosOpcionales"
+        TreeNode5.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        TreeNode5.SelectedImageIndex = -2
+        TreeNode5.StateImageIndex = 2
+        TreeNode5.Text = "Pagos Opcionales"
+        TreeNode6.Name = "nodeDiplomados"
+        TreeNode6.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        TreeNode6.SelectedImageIndex = -2
+        TreeNode6.StateImageIndex = 2
+        TreeNode6.Text = "Diplomados"
+        Me.Tree.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode4, TreeNode5, TreeNode6})
         Me.Tree.Size = New System.Drawing.Size(715, 415)
         Me.Tree.StateImageList = Me.ImageListTree
         Me.Tree.TabIndex = 8
@@ -410,6 +414,28 @@ Partial Class CobrosEDC
         Me.lblPendientes.TabIndex = 3
         Me.lblPendientes.Text = "Pagos pendientes:"
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label1.Location = New System.Drawing.Point(909, 7)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(58, 16)
+        Me.Label1.TabIndex = 76
+        Me.Label1.Text = "Tipo de "
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label2.Location = New System.Drawing.Point(907, 25)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(65, 16)
+        Me.Label2.TabIndex = 77
+        Me.Label2.Text = "matricula:"
+        '
         'CobrosEDC
         '
         Me.AcceptButton = Me.btnBuscar
@@ -465,4 +491,6 @@ Partial Class CobrosEDC
     Friend WithEvents txtMatriculaDato As TextBox
     Friend WithEvents rbEDC As RadioButton
     Friend WithEvents rbExterno As RadioButton
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Label2 As Label
 End Class

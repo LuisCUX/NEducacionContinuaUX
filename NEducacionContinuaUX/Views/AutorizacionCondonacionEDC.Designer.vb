@@ -26,6 +26,8 @@ Partial Class AutorizacionCondonacionEDC
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AutorizacionCondonacionEDC))
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.panelBusqueda = New System.Windows.Forms.Panel()
+        Me.rbEDC = New System.Windows.Forms.RadioButton()
+        Me.rbExterno = New System.Windows.Forms.RadioButton()
         Me.cbExterno = New System.Windows.Forms.ComboBox()
         Me.lblBusquedaNombre = New System.Windows.Forms.Label()
         Me.btnBuscar = New System.Windows.Forms.Button()
@@ -56,8 +58,8 @@ Partial Class AutorizacionCondonacionEDC
         Me.ImageListTree = New System.Windows.Forms.ImageList(Me.components)
         Me.tabAutorizacionCaja = New System.Windows.Forms.TabPage()
         Me.tabAutorizacionProceso = New System.Windows.Forms.TabPage()
-        Me.rbEDC = New System.Windows.Forms.RadioButton()
-        Me.rbExterno = New System.Windows.Forms.RadioButton()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.panelBusqueda.SuspendLayout()
         Me.panelDatos.SuspendLayout()
         Me.panelAutCon.SuspendLayout()
@@ -80,6 +82,8 @@ Partial Class AutorizacionCondonacionEDC
         '
         'panelBusqueda
         '
+        Me.panelBusqueda.Controls.Add(Me.Label2)
+        Me.panelBusqueda.Controls.Add(Me.Label1)
         Me.panelBusqueda.Controls.Add(Me.rbEDC)
         Me.panelBusqueda.Controls.Add(Me.rbExterno)
         Me.panelBusqueda.Controls.Add(Me.cbExterno)
@@ -92,14 +96,41 @@ Partial Class AutorizacionCondonacionEDC
         Me.panelBusqueda.Size = New System.Drawing.Size(1175, 50)
         Me.panelBusqueda.TabIndex = 15
         '
+        'rbEDC
+        '
+        Me.rbEDC.AutoSize = True
+        Me.rbEDC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbEDC.ForeColor = System.Drawing.SystemColors.Control
+        Me.rbEDC.Location = New System.Drawing.Point(1080, 16)
+        Me.rbEDC.Name = "rbEDC"
+        Me.rbEDC.Size = New System.Drawing.Size(92, 20)
+        Me.rbEDC.TabIndex = 77
+        Me.rbEDC.TabStop = True
+        Me.rbEDC.Text = "Congresos"
+        Me.rbEDC.UseVisualStyleBackColor = True
+        '
+        'rbExterno
+        '
+        Me.rbExterno.AutoSize = True
+        Me.rbExterno.Checked = True
+        Me.rbExterno.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbExterno.ForeColor = System.Drawing.SystemColors.Control
+        Me.rbExterno.Location = New System.Drawing.Point(938, 14)
+        Me.rbExterno.Name = "rbExterno"
+        Me.rbExterno.Size = New System.Drawing.Size(136, 20)
+        Me.rbExterno.TabIndex = 76
+        Me.rbExterno.TabStop = True
+        Me.rbExterno.Text = "Pagos opcionales"
+        Me.rbExterno.UseVisualStyleBackColor = True
+        '
         'cbExterno
         '
         Me.cbExterno.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.cbExterno.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbExterno.FormattingEnabled = True
-        Me.cbExterno.Location = New System.Drawing.Point(311, 15)
+        Me.cbExterno.Location = New System.Drawing.Point(298, 15)
         Me.cbExterno.Name = "cbExterno"
-        Me.cbExterno.Size = New System.Drawing.Size(586, 21)
+        Me.cbExterno.Size = New System.Drawing.Size(556, 21)
         Me.cbExterno.TabIndex = 73
         '
         'lblBusquedaNombre
@@ -107,7 +138,7 @@ Partial Class AutorizacionCondonacionEDC
         Me.lblBusquedaNombre.AutoSize = True
         Me.lblBusquedaNombre.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblBusquedaNombre.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblBusquedaNombre.Location = New System.Drawing.Point(250, 16)
+        Me.lblBusquedaNombre.Location = New System.Drawing.Point(241, 16)
         Me.lblBusquedaNombre.Name = "lblBusquedaNombre"
         Me.lblBusquedaNombre.Size = New System.Drawing.Size(63, 16)
         Me.lblBusquedaNombre.TabIndex = 3
@@ -394,32 +425,27 @@ Partial Class AutorizacionCondonacionEDC
         Me.tabAutorizacionProceso.TabIndex = 2
         Me.tabAutorizacionProceso.Text = "Autorizacion de Proceso"
         '
-        'rbEDC
+        'Label2
         '
-        Me.rbEDC.AutoSize = True
-        Me.rbEDC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbEDC.ForeColor = System.Drawing.SystemColors.Control
-        Me.rbEDC.Location = New System.Drawing.Point(1013, 16)
-        Me.rbEDC.Name = "rbEDC"
-        Me.rbEDC.Size = New System.Drawing.Size(143, 20)
-        Me.rbEDC.TabIndex = 77
-        Me.rbEDC.TabStop = True
-        Me.rbEDC.Text = "Educacion continua"
-        Me.rbEDC.UseVisualStyleBackColor = True
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label2.Location = New System.Drawing.Point(872, 25)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(65, 16)
+        Me.Label2.TabIndex = 79
+        Me.Label2.Text = "matricula:"
         '
-        'rbExterno
+        'Label1
         '
-        Me.rbExterno.AutoSize = True
-        Me.rbExterno.Checked = True
-        Me.rbExterno.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbExterno.ForeColor = System.Drawing.SystemColors.Control
-        Me.rbExterno.Location = New System.Drawing.Point(924, 16)
-        Me.rbExterno.Name = "rbExterno"
-        Me.rbExterno.Size = New System.Drawing.Size(71, 20)
-        Me.rbExterno.TabIndex = 76
-        Me.rbExterno.TabStop = True
-        Me.rbExterno.Text = "Externo"
-        Me.rbExterno.UseVisualStyleBackColor = True
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label1.Location = New System.Drawing.Point(874, 7)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(58, 16)
+        Me.Label1.TabIndex = 78
+        Me.Label1.Text = "Tipo de "
         '
         'AutorizacionCondonacionEDC
         '
@@ -482,4 +508,6 @@ Partial Class AutorizacionCondonacionEDC
     Friend WithEvents Porcentaje As DataGridViewTextBoxColumn
     Friend WithEvents rbEDC As RadioButton
     Friend WithEvents rbExterno As RadioButton
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label1 As Label
 End Class
