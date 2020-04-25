@@ -462,233 +462,284 @@
     End Sub
 
     Private Sub txtClavePago1_TextChanged(sender As Object, e As EventArgs) Handles txtClavePago1.TextChanged
-        For x = 0 To cbNoPagos.SelectedIndex
-            If (listatxtClaves(x).Text = txtClavePago1.Text And x <> 0) Then
-                listatxtClaves(x).Clear()
-                txtConcepto1.Clear()
-                Exit Sub
-            End If
-        Next
-        Dim clave As Integer = Convert.ToInt32(txtClavePago1.Text)
-        Dim mes As String() = Me.getmesclave(clave)
-        txtConcepto1.Text = $"Pago de colegiatura de {mes(0)}"
+        Try
+            For x = 0 To cbNoPagos.SelectedIndex
+                If (listatxtClaves(x).Text = txtClavePago1.Text And x <> 0) Then
+                    listatxtClaves(x).Clear()
+                    txtConcepto1.Clear()
+                    Exit Sub
+                End If
+            Next
+            Dim clave As Integer = Convert.ToInt32(txtClavePago1.Text)
+            Dim mes As String() = Me.getmesclave(clave)
+            txtConcepto1.Text = $"Pago de colegiatura de {mes(0)}"
 
-        If (chbRecargosPagos.Checked = True) Then
-            Dim dia As Integer
-            If (chbPrimerDia.Checked = True) Then
-                dia = 1
-            Else
-                dia = Convert.ToInt32(txtDiaRecargo.Text)
+            If (chbRecargosPagos.Checked = True) Then
+                Dim dia As Integer
+                If (chbPrimerDia.Checked = True) Then
+                    dia = 1
+                Else
+                    dia = Convert.ToInt32(txtDiaRecargo.Text)
+                End If
+                datePickerRecargo1.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
             End If
-            datePickerRecargo1.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
-        End If
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub txtClavePago2_TextChanged(sender As Object, e As EventArgs) Handles txtClavePago2.TextChanged
-        For x = 0 To cbNoPagos.SelectedIndex
-            If (listatxtClaves(x).Text = txtClavePago2.Text And x <> 1) Then
-                listatxtClaves(x).Clear()
-                txtConcepto2.Clear()
-                Exit Sub
-            End If
-        Next
-        Dim clave As Integer = Convert.ToInt32(txtClavePago2.Text)
-        Dim mes As String() = Me.getmesclave(clave)
-        txtConcepto2.Text = $"Pago de colegiatura de {mes(0)}"
+        Try
+            For x = 0 To cbNoPagos.SelectedIndex
+                If (listatxtClaves(x).Text = txtClavePago2.Text And x <> 1) Then
+                    listatxtClaves(x).Clear()
+                    txtConcepto2.Clear()
+                    Exit Sub
+                End If
+            Next
+            Dim clave As Integer = Convert.ToInt32(txtClavePago2.Text)
+            Dim mes As String() = Me.getmesclave(clave)
+            txtConcepto2.Text = $"Pago de colegiatura de {mes(0)}"
 
-        If (chbRecargosPagos.Checked = True) Then
-            Dim dia As Integer
-            If (chbPrimerDia.Checked = True) Then
-                dia = 1
-            Else
-                dia = Convert.ToInt32(txtDiaRecargo.Text)
+            If (chbRecargosPagos.Checked = True) Then
+                Dim dia As Integer
+                If (chbPrimerDia.Checked = True) Then
+                    dia = 1
+                Else
+                    dia = Convert.ToInt32(txtDiaRecargo.Text)
+                End If
+                datePickerRecargo2.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
             End If
-            datePickerRecargo2.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
-        End If
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub txtClavePago3_TextChanged(sender As Object, e As EventArgs) Handles txtClavePago3.TextChanged
-        For x = 0 To cbNoPagos.SelectedIndex
-            If (listatxtClaves(x).Text = txtClavePago3.Text And x <> 2) Then
-                listatxtClaves(x).Clear()
-                txtConcepto3.Clear()
-                Exit Sub
-            End If
-        Next
-        Dim clave As Integer = Convert.ToInt32(txtClavePago3.Text)
-        Dim mes As String() = Me.getmesclave(clave)
-        txtConcepto3.Text = $"Pago de colegiatura de {mes(0)}"
+        Try
+            For x = 0 To cbNoPagos.SelectedIndex
+                If (listatxtClaves(x).Text = txtClavePago3.Text And x <> 2) Then
+                    listatxtClaves(x).Clear()
+                    txtConcepto3.Clear()
+                    Exit Sub
+                End If
+            Next
+            Dim clave As Integer = Convert.ToInt32(txtClavePago3.Text)
+            Dim mes As String() = Me.getmesclave(clave)
+            txtConcepto3.Text = $"Pago de colegiatura de {mes(0)}"
 
-        If (chbRecargosPagos.Checked = True) Then
-            Dim dia As Integer
-            If (chbPrimerDia.Checked = True) Then
-                dia = 1
-            Else
-                dia = Convert.ToInt32(txtDiaRecargo.Text)
+            If (chbRecargosPagos.Checked = True) Then
+                Dim dia As Integer
+                If (chbPrimerDia.Checked = True) Then
+                    dia = 1
+                Else
+                    dia = Convert.ToInt32(txtDiaRecargo.Text)
+                End If
+                datePickerRecargo3.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
             End If
-            datePickerRecargo3.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
-        End If
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub txtClavePago4_TextChanged(sender As Object, e As EventArgs) Handles txtClavePago4.TextChanged
-        For x = 0 To cbNoPagos.SelectedIndex
-            If (listatxtClaves(x).Text = txtClavePago4.Text And x <> 3) Then
-                listatxtClaves(x).Clear()
-                txtConcepto4.Clear()
-                Exit Sub
-            End If
-        Next
-        Dim clave As Integer = Convert.ToInt32(txtClavePago4.Text)
-        Dim mes As String() = Me.getmesclave(clave)
-        txtConcepto4.Text = $"Pago de colegiatura de {mes(0)}"
+        Try
+            For x = 0 To cbNoPagos.SelectedIndex
+                If (listatxtClaves(x).Text = txtClavePago4.Text And x <> 3) Then
+                    listatxtClaves(x).Clear()
+                    txtConcepto4.Clear()
+                    Exit Sub
+                End If
+            Next
+            Dim clave As Integer = Convert.ToInt32(txtClavePago4.Text)
+            Dim mes As String() = Me.getmesclave(clave)
+            txtConcepto4.Text = $"Pago de colegiatura de {mes(0)}"
 
-        If (chbRecargosPagos.Checked = True) Then
-            Dim dia As Integer
-            If (chbPrimerDia.Checked = True) Then
-                dia = 1
-            Else
-                dia = Convert.ToInt32(txtDiaRecargo.Text)
+            If (chbRecargosPagos.Checked = True) Then
+                Dim dia As Integer
+                If (chbPrimerDia.Checked = True) Then
+                    dia = 1
+                Else
+                    dia = Convert.ToInt32(txtDiaRecargo.Text)
+                End If
+                datePickerRecargo4.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
             End If
-            datePickerRecargo4.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
-        End If
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub txtClavePago5_TextChanged(sender As Object, e As EventArgs) Handles txtClavePago5.TextChanged
-        For x = 0 To cbNoPagos.SelectedIndex
-            If (listatxtClaves(x).Text = txtClavePago5.Text And x <> 4) Then
-                listatxtClaves(x).Clear()
-                txtConcepto5.Clear()
-                Exit Sub
-            End If
-        Next
-        Dim clave As Integer = Convert.ToInt32(txtClavePago5.Text)
-        Dim mes As String() = Me.getmesclave(clave)
-        txtConcepto5.Text = $"Pago de colegiatura de {mes(0)}"
+        Try
+            For x = 0 To cbNoPagos.SelectedIndex
+                If (listatxtClaves(x).Text = txtClavePago5.Text And x <> 4) Then
+                    listatxtClaves(x).Clear()
+                    txtConcepto5.Clear()
+                    Exit Sub
+                End If
+            Next
+            Dim clave As Integer = Convert.ToInt32(txtClavePago5.Text)
+            Dim mes As String() = Me.getmesclave(clave)
+            txtConcepto5.Text = $"Pago de colegiatura de {mes(0)}"
 
-        If (chbRecargosPagos.Checked = True) Then
-            Dim dia As Integer
-            If (chbPrimerDia.Checked = True) Then
-                dia = 1
-            Else
-                dia = Convert.ToInt32(txtDiaRecargo.Text)
+            If (chbRecargosPagos.Checked = True) Then
+                Dim dia As Integer
+                If (chbPrimerDia.Checked = True) Then
+                    dia = 1
+                Else
+                    dia = Convert.ToInt32(txtDiaRecargo.Text)
+                End If
+                datePickerRecargo5.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
             End If
-            datePickerRecargo5.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
-        End If
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub txtClavePago6_TextChanged(sender As Object, e As EventArgs) Handles txtClavePago6.TextChanged
-        For x = 0 To cbNoPagos.SelectedIndex
-            If (listatxtClaves(x).Text = txtClavePago6.Text And x <> 5) Then
-                listatxtClaves(x).Clear()
-                txtConcepto6.Clear()
-                Exit Sub
-            End If
-        Next
-        Dim clave As Integer = Convert.ToInt32(txtClavePago6.Text)
-        Dim mes As String() = Me.getmesclave(clave)
-        txtConcepto6.Text = $"Pago de colegiatura de {mes(0)}"
+        Try
+            For x = 0 To cbNoPagos.SelectedIndex
+                If (listatxtClaves(x).Text = txtClavePago6.Text And x <> 5) Then
+                    listatxtClaves(x).Clear()
+                    txtConcepto6.Clear()
+                    Exit Sub
+                End If
+            Next
+            Dim clave As Integer = Convert.ToInt32(txtClavePago6.Text)
+            Dim mes As String() = Me.getmesclave(clave)
+            txtConcepto6.Text = $"Pago de colegiatura de {mes(0)}"
 
-        If (chbRecargosPagos.Checked = True) Then
-            Dim dia As Integer
-            If (chbPrimerDia.Checked = True) Then
-                dia = 1
-            Else
-                dia = Convert.ToInt32(txtDiaRecargo.Text)
+            If (chbRecargosPagos.Checked = True) Then
+                Dim dia As Integer
+                If (chbPrimerDia.Checked = True) Then
+                    dia = 1
+                Else
+                    dia = Convert.ToInt32(txtDiaRecargo.Text)
+                End If
+                datePickerRecargo6.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
             End If
-            datePickerRecargo6.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
-        End If
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub txtClavePago7_TextChanged(sender As Object, e As EventArgs) Handles txtClavePago7.TextChanged
-        For x = 0 To cbNoPagos.SelectedIndex
-            If (listatxtClaves(x).Text = txtClavePago7.Text And x <> 6) Then
-                listatxtClaves(x).Clear()
-                txtConcepto7.Clear()
-                Exit Sub
-            End If
-        Next
-        Dim clave As Integer = Convert.ToInt32(txtClavePago7.Text)
-        Dim mes As String() = Me.getmesclave(clave)
-        txtConcepto7.Text = $"Pago de colegiatura de {mes(0)}"
+        Try
+            For x = 0 To cbNoPagos.SelectedIndex
+                If (listatxtClaves(x).Text = txtClavePago7.Text And x <> 6) Then
+                    listatxtClaves(x).Clear()
+                    txtConcepto7.Clear()
+                    Exit Sub
+                End If
+            Next
+            Dim clave As Integer = Convert.ToInt32(txtClavePago7.Text)
+            Dim mes As String() = Me.getmesclave(clave)
+            txtConcepto7.Text = $"Pago de colegiatura de {mes(0)}"
 
-        If (chbRecargosPagos.Checked = True) Then
-            Dim dia As Integer
-            If (chbPrimerDia.Checked = True) Then
-                dia = 1
-            Else
-                dia = Convert.ToInt32(txtDiaRecargo.Text)
+            If (chbRecargosPagos.Checked = True) Then
+                Dim dia As Integer
+                If (chbPrimerDia.Checked = True) Then
+                    dia = 1
+                Else
+                    dia = Convert.ToInt32(txtDiaRecargo.Text)
+                End If
+                datePickerRecargo7.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
             End If
-            datePickerRecargo7.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
-        End If
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub txtClavePago8_TextChanged(sender As Object, e As EventArgs) Handles txtClavePago8.TextChanged
-        For x = 0 To cbNoPagos.SelectedIndex
-            If (listatxtClaves(x).Text = txtClavePago8.Text And x <> 7) Then
-                listatxtClaves(x).Clear()
-                txtConcepto8.Clear()
-                Exit Sub
-            End If
-        Next
-        Dim clave As Integer = Convert.ToInt32(txtClavePago8.Text)
-        Dim mes As String() = Me.getmesclave(clave)
-        txtConcepto8.Text = $"Pago de colegiatura de {mes(0)}"
+        Try
+            For x = 0 To cbNoPagos.SelectedIndex
+                If (listatxtClaves(x).Text = txtClavePago8.Text And x <> 7) Then
+                    listatxtClaves(x).Clear()
+                    txtConcepto8.Clear()
+                    Exit Sub
+                End If
+            Next
+            Dim clave As Integer = Convert.ToInt32(txtClavePago8.Text)
+            Dim mes As String() = Me.getmesclave(clave)
+            txtConcepto8.Text = $"Pago de colegiatura de {mes(0)}"
 
-        If (chbRecargosPagos.Checked = True) Then
-            Dim dia As Integer
-            If (chbPrimerDia.Checked = True) Then
-                dia = 1
-            Else
-                dia = Convert.ToInt32(txtDiaRecargo.Text)
+            If (chbRecargosPagos.Checked = True) Then
+                Dim dia As Integer
+                If (chbPrimerDia.Checked = True) Then
+                    dia = 1
+                Else
+                    dia = Convert.ToInt32(txtDiaRecargo.Text)
+                End If
+                datePickerRecargo8.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
             End If
-            datePickerRecargo8.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
-        End If
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub txtClavePago9_TextChanged(sender As Object, e As EventArgs) Handles txtClavePago9.TextChanged
-        For x = 0 To cbNoPagos.SelectedIndex
-            If (listatxtClaves(x).Text = txtClavePago9.Text And x <> 8) Then
-                listatxtClaves(x).Clear()
-                txtConcepto9.Clear()
-                Exit Sub
-            End If
-        Next
-        Dim clave As Integer = Convert.ToInt32(txtClavePago9.Text)
-        Dim mes As String() = Me.getmesclave(clave)
-        txtConcepto9.Text = $"Pago de colegiatura de {mes(0)}"
+        Try
+            For x = 0 To cbNoPagos.SelectedIndex
+                If (listatxtClaves(x).Text = txtClavePago9.Text And x <> 8) Then
+                    listatxtClaves(x).Clear()
+                    txtConcepto9.Clear()
+                    Exit Sub
+                End If
+            Next
+            Dim clave As Integer = Convert.ToInt32(txtClavePago9.Text)
+            Dim mes As String() = Me.getmesclave(clave)
+            txtConcepto9.Text = $"Pago de colegiatura de {mes(0)}"
 
-        If (chbRecargosPagos.Checked = True) Then
-            Dim dia As Integer
-            If (chbPrimerDia.Checked = True) Then
-                dia = 1
-            Else
-                dia = Convert.ToInt32(txtDiaRecargo.Text)
+            If (chbRecargosPagos.Checked = True) Then
+                Dim dia As Integer
+                If (chbPrimerDia.Checked = True) Then
+                    dia = 1
+                Else
+                    dia = Convert.ToInt32(txtDiaRecargo.Text)
+                End If
+                datePickerRecargo9.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
             End If
-            datePickerRecargo9.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
-        End If
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub txtClavePago10_TextChanged(sender As Object, e As EventArgs) Handles txtClavePago10.TextChanged
-        For x = 0 To cbNoPagos.SelectedIndex
-            If (listatxtClaves(x).Text = txtClavePago10.Text And x <> 9) Then
-                listatxtClaves(x).Clear()
-                txtConcepto10.Clear()
-                Exit Sub
-            End If
-        Next
-        Dim clave As Integer = Convert.ToInt32(txtClavePago10.Text)
-        Dim mes As String() = Me.getmesclave(clave)
-        txtConcepto10.Text = $"Pago de colegiatura de {mes(0)}"
+        Try
+            For x = 0 To cbNoPagos.SelectedIndex
+                If (listatxtClaves(x).Text = txtClavePago10.Text And x <> 9) Then
+                    listatxtClaves(x).Clear()
+                    txtConcepto10.Clear()
+                    Exit Sub
+                End If
+            Next
+            Dim clave As Integer = Convert.ToInt32(txtClavePago10.Text)
+            Dim mes As String() = Me.getmesclave(clave)
+            txtConcepto10.Text = $"Pago de colegiatura de {mes(0)}"
 
-        If (chbRecargosPagos.Checked = True) Then
-            Dim dia As Integer
-            If (chbPrimerDia.Checked = True) Then
-                dia = 1
-            Else
-                dia = Convert.ToInt32(txtDiaRecargo.Text)
+            If (chbRecargosPagos.Checked = True) Then
+                Dim dia As Integer
+                If (chbPrimerDia.Checked = True) Then
+                    dia = 1
+                Else
+                    dia = Convert.ToInt32(txtDiaRecargo.Text)
+                End If
+                datePickerRecargo10.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
             End If
-            datePickerRecargo10.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
-        End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub btnRefreshPagos_Click(sender As Object, e As EventArgs) Handles btnRefreshPagos.Click
+        For x = 0 To 9
+            listaPaneles(x).Visible = False
+            listatxtClaves(x).Clear()
+            listatxtDescripcionDescuentos(x).Clear()
+            listatxtDescuentos(x).Clear()
+            listatxtImportes(x).Clear()
+            listatxtRecargos(x).Clear()
+        Next
     End Sub
 
     Function getmesclave(clave As Integer) As String()
@@ -717,7 +768,7 @@
         ElseIf (clave = 12) Then
             Return {"Diciembre", 12}
         End If
-        Return Nothing
+        Return {Nothing, Nothing}
     End Function
 
     Sub llenarListaPanel()
@@ -822,5 +873,15 @@
         listatxtClaves.Add(txtClavePago8)
         listatxtClaves.Add(txtClavePago9)
         listatxtClaves.Add(txtClavePago10)
+    End Sub
+
+    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+        Try
+            db.startTransaction()
+            pc.guardarPlan(chbInscripcion.Checked, chbPagoUnico.Checked, txtNombrePlan.Text, cbDiplomados.SelectedValue, txtImporteInscripcion.Text, txtRecargoInscripcion.Text, $"{datePickerLimiteDescuentoInscripcion.Value.Year}{datePickerLimiteDescuentoInscripcion.Value.Month}{datePickerLimiteDescuentoInscripcion.Value.Day}", $"{datePickerRecargoInscripcion.Value.Date.Year}{datePickerRecargoInscripcion.Value.Date.Month}{datePickerRecargoInscripcion.Value.Date.Day}", "Mensual")
+            db.commitTransaction()
+        Catch ex As Exception
+            db.rollBackTransaction()
+        End Try
     End Sub
 End Class

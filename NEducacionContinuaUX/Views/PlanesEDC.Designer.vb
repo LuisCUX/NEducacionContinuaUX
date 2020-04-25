@@ -233,6 +233,8 @@ Partial Class PlanesEDC
         Me.chbDescuentoPagoUnico = New System.Windows.Forms.CheckBox()
         Me.lblImportePagoUnico = New System.Windows.Forms.Label()
         Me.chbPagoUnico = New System.Windows.Forms.CheckBox()
+        Me.btnGuardar = New System.Windows.Forms.Button()
+        Me.btnSalir = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.tcPlanes.SuspendLayout()
         Me.pageInscripcion.SuspendLayout()
@@ -2470,12 +2472,34 @@ Partial Class PlanesEDC
         Me.chbPagoUnico.Text = "Pago unico"
         Me.chbPagoUnico.UseVisualStyleBackColor = True
         '
+        'btnGuardar
+        '
+        Me.btnGuardar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.descargar
+        Me.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnGuardar.Location = New System.Drawing.Point(596, 553)
+        Me.btnGuardar.Name = "btnGuardar"
+        Me.btnGuardar.Size = New System.Drawing.Size(63, 38)
+        Me.btnGuardar.TabIndex = 17
+        Me.btnGuardar.UseVisualStyleBackColor = True
+        '
+        'btnSalir
+        '
+        Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_32px
+        Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnSalir.Location = New System.Drawing.Point(400, 553)
+        Me.btnSalir.Name = "btnSalir"
+        Me.btnSalir.Size = New System.Drawing.Size(63, 38)
+        Me.btnSalir.TabIndex = 18
+        Me.btnSalir.UseVisualStyleBackColor = True
+        '
         'PlanesEDC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
         Me.ClientSize = New System.Drawing.Size(1203, 603)
+        Me.Controls.Add(Me.btnSalir)
+        Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.tcPlanes)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.lblNombreVentana)
@@ -2728,4 +2752,6 @@ Partial Class PlanesEDC
     Friend WithEvents Label31 As Label
     Friend WithEvents Label28 As Label
     Friend WithEvents Label27 As Label
+    Friend WithEvents btnGuardar As Button
+    Friend WithEvents btnSalir As Button
 End Class
