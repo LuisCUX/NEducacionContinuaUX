@@ -2476,7 +2476,7 @@ Partial Class PlanesEDC
         '
         Me.btnGuardar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.descargar
         Me.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnGuardar.Location = New System.Drawing.Point(596, 553)
+        Me.btnGuardar.Location = New System.Drawing.Point(734, 553)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(63, 38)
         Me.btnGuardar.TabIndex = 17
