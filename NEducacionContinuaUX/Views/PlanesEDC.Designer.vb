@@ -420,6 +420,7 @@ Partial Class PlanesEDC
         Me.txtDescuentoInscripcion.Name = "txtDescuentoInscripcion"
         Me.txtDescuentoInscripcion.Size = New System.Drawing.Size(87, 20)
         Me.txtDescuentoInscripcion.TabIndex = 134
+        Me.txtDescuentoInscripcion.Text = "0.00"
         '
         'datePickerRecargoInscripcion
         '
@@ -438,6 +439,7 @@ Partial Class PlanesEDC
         Me.txtRecargoInscripcion.Name = "txtRecargoInscripcion"
         Me.txtRecargoInscripcion.Size = New System.Drawing.Size(87, 20)
         Me.txtRecargoInscripcion.TabIndex = 132
+        Me.txtRecargoInscripcion.Text = "0.00"
         '
         'txtImporteInscripcionText
         '
@@ -472,11 +474,11 @@ Partial Class PlanesEDC
         '
         Me.lbl00.AutoSize = True
         Me.lbl00.ForeColor = System.Drawing.SystemColors.Control
-        Me.lbl00.Location = New System.Drawing.Point(46, 109)
+        Me.lbl00.Location = New System.Drawing.Point(43, 109)
         Me.lbl00.Name = "lbl00"
-        Me.lbl00.Size = New System.Drawing.Size(19, 13)
+        Me.lbl00.Size = New System.Drawing.Size(26, 13)
         Me.lbl00.TabIndex = 128
-        Me.lbl00.Text = "00"
+        Me.lbl00.Text = "P00"
         '
         'lblLimiteDescuentoInscripcion
         '
@@ -2306,6 +2308,7 @@ Partial Class PlanesEDC
         Me.txtDescuentoPagoUnico.Name = "txtDescuentoPagoUnico"
         Me.txtDescuentoPagoUnico.Size = New System.Drawing.Size(87, 20)
         Me.txtDescuentoPagoUnico.TabIndex = 175
+        Me.txtDescuentoPagoUnico.Text = "0.00"
         '
         'datePickerDescuentoPagoUnico
         '
@@ -2339,11 +2342,11 @@ Partial Class PlanesEDC
         '
         Me.lblClaveNOPU.AutoSize = True
         Me.lblClaveNOPU.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblClaveNOPU.Location = New System.Drawing.Point(208, 125)
+        Me.lblClaveNOPU.Location = New System.Drawing.Point(205, 125)
         Me.lblClaveNOPU.Name = "lblClaveNOPU"
-        Me.lblClaveNOPU.Size = New System.Drawing.Size(19, 13)
+        Me.lblClaveNOPU.Size = New System.Drawing.Size(26, 13)
         Me.lblClaveNOPU.TabIndex = 159
-        Me.lblClaveNOPU.Text = "13"
+        Me.lblClaveNOPU.Text = "P13"
         '
         'lblDescDescuentoPU
         '

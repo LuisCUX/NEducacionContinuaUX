@@ -20,7 +20,7 @@
         Return ID_Plan
     End Function
 
-    Function guardarInscripcion(ID_Plan As Integer, Orden As Integer, Importe As Decimal, Recargo As Decimal, Descuento As Decimal, Fecha_Limite_Desc As String, Fecha_Calcula_Recargo As String, Considera_Recargo As Boolean) As Integer
+    Sub guardarInscripcion(ID_Plan As Integer, Orden As Integer, Importe As Decimal, Recargo As Decimal, Descuento As Decimal, Fecha_Limite_Desc As String, Fecha_Calcula_Recargo As String, Considera_Recargo As Boolean)
         Dim RecargoBit As Integer
         If (Considera_Recargo = True) Then
             RecargoBit = 1
@@ -28,31 +28,36 @@
             RecargoBit = 0
         End If
 
-        db.execSQLQueryWithoutParams($"INSERT INTO ing_PlanesConceptos(ID_Plan, Orden, Clave, Descripcion, Importe, Recargo, Descuento, Fecha_Limite_Desc, Fecha_Calcula_Recargo, Considera_Recargo, Importe_Total, Activo) VALUES ({ID_Plan}, {Orden}, 'P01', 'PAGO DE INSCRIPCIÓN A DIPLOMADO', {Importe}, {Recargo}, {Descuento}, '{Fecha_Limite_Desc}', '{Fecha_Calcula_Recargo}', {RecargoBit}, {Importe}, 1)")
-        Return Orden = Orden + 1
-    End Function
+        db.execSQLQueryWithoutParams($"INSERT INTO ing_PlanesConceptos(ID_Plan, Orden, Clave, Descripcion, Importe, Recargo, Descuento, Fecha_Limite_Desc, Fecha_Calcula_Recargo, Considera_Recargo, Importe_Total, Activo) VALUES ({ID_Plan}, {Orden}, 'P00', 'PAGO DE INSCRIPCIÓN A DIPLOMADO', {Importe}, {Recargo}, {Descuento}, '{Fecha_Limite_Desc}', '{Fecha_Calcula_Recargo}', {RecargoBit}, {Importe}, 1)")
+    End Sub
 
-    Function guardarPagoUnico(ID_Plan As Integer, Orden As Integer, Importe As Decimal, Descuento As Decimal, Fecha_Limite_Desc As String) As Integer
+    Sub guardarPagoUnico(ID_Plan As Integer, Orden As Integer, Importe As Decimal, Descuento As Decimal, Fecha_Limite_Desc As String)
         db.execSQLQueryWithoutParams($"INSERT INTO ing_PlanesConceptos(ID_Plan, Orden, Clave, Descripcion, Importe, Recargo, Descuento, Fecha_Limite_Desc, Fecha_Calcula_Recargo, Considera_Recargo, Importe_Total, Activo) VALUES ({ID_Plan}, {Orden}, 'P13', 'PAGO COMPLETO DE DIPLOMADO', {Importe}, 0.000000, {Descuento}, '{Fecha_Limite_Desc}', '1900-01-01', 0, {Importe}, 1)")
-        Return Orden = Orden + 1
-    End Function
+    End Sub
 
-    Function guardarPagoPlan(ID_Plan As Integer, Orden As Integer, Clave As String, Mes As String, Importe As Decimal, Recargo As Decimal, Descuento As Decimal, Fecha_Limite_Desc As String, Fecha_Calcula_Recargo As String, Considera_Recargo As Boolean) As Integer
+    Sub guardarPagoPlan(ID_Plan As Integer, Orden As Integer, Clave As String, Mes As String, Importe As Decimal, Recargo As Decimal, Descuento As Decimal, Fecha_Limite_Desc As String, Fecha_Calcula_Recargo As String, Considera_Recargo As Boolean)
         Dim RecargoBit As Integer
         If (Considera_Recargo = True) Then
             RecargoBit = 1
         Else
             RecargoBit = 0
         End If
-        db.execSQLQueryWithoutParams($"INSERT INTO ing_PlanesConceptos(ID_Plan, Orden, Clave, Descripcion, Importe, Recargo, Descuento, Fecha_Limite_Desc, Fecha_Calcula_Recargo, Considera_Recargo, Importe_Total, Activo) VALUES ({ID_Plan}, {Orden}, '{Clave}', '{Mes}', {Importe}, {Recargo}, {Descuento}, '{Fecha_Limite_Desc}', '{Fecha_Calcula_Recargo}', {RecargoBit}, {Importe}, 1)")
-        Return Orden = Orden + 1
-    End Function
+        Dim ClaveString As String = $"P{Clave}"
+        db.execSQLQueryWithoutParams($"INSERT INTO ing_PlanesConceptos(ID_Plan, Orden, Clave, Descripcion, Importe, Recargo, Descuento, Fecha_Limite_Desc, Fecha_Calcula_Recargo, Considera_Recargo, Importe_Total, Activo) VALUES ({ID_Plan}, {Orden}, '{ClaveString}', '{Mes}', {Importe}, {Recargo}, {Descuento}, '{Fecha_Limite_Desc}', '{Fecha_Calcula_Recargo}', {RecargoBit}, {Importe}, 1)")
+    End Sub
+
+
 
     Function obtenerFechaString(datePicker As DateTimePicker) As String
-        Dim dia As String = datePicker.Value.Day
-        Dim mes As String = datePicker.Value.Month
-        Dim año As String = datePicker.Value.Year
+        Try
+            Dim dia As String = datePicker.Value.Day
+            Dim mes As String = datePicker.Value.Month
+            Dim año As String = datePicker.Value.Year
 
-        Return $"{año}-{mes}-{dia}"
+            Return $"{año}-{mes}-{dia}"
+        Catch ex As Exception
+            Return "1900-01-01"
+        End Try
+
     End Function
 End Class

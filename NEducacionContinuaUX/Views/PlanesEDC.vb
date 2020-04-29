@@ -56,9 +56,11 @@
         If (chbRecargoInscripcion.Checked = True) Then
             txtRecargoInscripcion.Enabled = True
             datePickerRecargoInscripcion.Enabled = True
+            txtRecargoInscripcion.Clear()
         Else
             txtRecargoInscripcion.Enabled = False
             datePickerRecargoInscripcion.Enabled = False
+            txtRecargoInscripcion.Text = "0.00"
         End If
     End Sub
 
@@ -67,10 +69,12 @@
             txtDescuentoInscripcion.Enabled = True
             datePickerLimiteDescuentoInscripcion.Enabled = True
             txtDescripcionDescuentoInscripcion.Enabled = True
+            txtDescuentoInscripcion.Clear()
         Else
             txtDescuentoInscripcion.Enabled = False
             datePickerLimiteDescuentoInscripcion.Enabled = False
             txtDescripcionDescuentoInscripcion.Enabled = False
+            txtDescuentoInscripcion.Text = "0.00"
         End If
     End Sub
 
@@ -94,7 +98,7 @@
             ComboboxService.llenarCombobox(cbPlanes, tablePlanes, "ID", "Nombre_Plan")
             txtNombrePlan.Enabled = True
         Else
-            cbPlanes.Items.Clear()
+            cbPlanes.DataSource = Nothing
             cbPlanes.Items.Add("NUEVO PLAN")
             cbPlanes.SelectedIndex = 0
             txtNombrePlan.Enabled = True
@@ -158,6 +162,10 @@
                 listatxtDescripcionDescuentos(x).Enabled = True
                 listadatePickerDescuentos(x).Enabled = True
             Next
+        Else
+            For x = 0 To cbNoPagos.SelectedIndex
+                listatxtDescuentos(x).Text = "0.00"
+            Next
         End If
 
         If (chbRecargosPagos.Checked = True) Then
@@ -165,6 +173,10 @@
                 listatxtRecargos(x).Text = txtRecargosPagos.Text
                 listatxtRecargos(x).Enabled = True
                 listadatePickerRecargos(x).Enabled = True
+            Next
+        Else
+            For x = 0 To cbNoPagos.SelectedIndex
+                listatxtRecargos(x).Text = "0.00"
             Next
         End If
 
@@ -260,10 +272,12 @@
             txtDescuentoPagoUnico.Enabled = True
             datePickerDescuentoPagoUnico.Enabled = True
             txtDescripcionDescuentoPagoUnico.Enabled = True
+            txtDescuentoPagoUnico.Clear()
         Else
             txtDescuentoPagoUnico.Enabled = False
             datePickerDescuentoPagoUnico.Enabled = False
             txtDescripcionDescuentoPagoUnico.Enabled = False
+            txtDescuentoPagoUnico.Text = "0.00"
         End If
     End Sub
 
@@ -890,27 +904,39 @@
         listatxtConcepto.Add(txtConcepto10)
     End Sub
 
+    Sub Reiniciar()
+        Me.Controls.Clear()
+        InitializeComponent()
+        PlanesEDC_Load(Me, Nothing)
+    End Sub
+
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         Try
             db.startTransaction()
             Dim Orden As Integer = 1
             Dim ID_Plan As Integer = pc.guardarPlan(txtNombrePlan.Text, cbDiplomados.SelectedValue)
             If (chbInscripcion.Checked = True) Then
-                Orden = pc.guardarInscripcion(ID_Plan, Orden, txtImporteInscripcion.Text, txtRecargoInscripcion.Text, txtDescuentoInscripcion.Text, pc.obtenerFechaString(datePickerLimiteDescuentoInscripcion), pc.obtenerFechaString(datePickerRecargoInscripcion), chbRecargoInscripcion.Checked)
+                pc.guardarInscripcion(ID_Plan, Orden, txtImporteInscripcion.Text, txtRecargoInscripcion.Text, txtDescuentoInscripcion.Text, pc.obtenerFechaString(datePickerLimiteDescuentoInscripcion), pc.obtenerFechaString(datePickerRecargoInscripcion), chbRecargoInscripcion.Checked)
+                Orden = Orden + 1
             End If
 
             For x = 0 To cbNoPagos.SelectedIndex
                 Dim Clave As String = listatxtClaves(x).Text
                 Dim Mes As String = listatxtConcepto(x).Text.ToUpper()
-                Orden = pc.guardarPagoPlan(ID_Plan, Orden, Clave, Mes, listatxtImportes(x).Text, listatxtRecargos(x).Text, listatxtDescuentos(x).Text, pc.obtenerFechaString(listadatePickerDescuentos(x)), pc.obtenerFechaString(listadatePickerRecargos(x)), chbRecargosPagos.Checked)
+                pc.guardarPagoPlan(ID_Plan, Orden, Clave, Mes, listatxtImportes(x).Text, listatxtRecargos(x).Text, listatxtDescuentos(x).Text, pc.obtenerFechaString(listadatePickerDescuentos(x)), pc.obtenerFechaString(listadatePickerRecargos(x)), chbRecargosPagos.Checked)
+                Orden = Orden + 1
             Next
 
             If (chbPagoUnico.Checked = True) Then
-                Orden = pc.guardarPagoUnico(ID_Plan, Orden, txtMontoPagoUnico.Text, txtDescuentoPagoUnico.Text, pc.obtenerFechaString(datePickerDescuentoPagoUnico))
+                pc.guardarPagoUnico(ID_Plan, Orden, txtMontoPagoUnico.Text, txtDescuentoPagoUnico.Text, pc.obtenerFechaString(datePickerDescuentoPagoUnico))
+                Orden = Orden + 1
             End If
             db.commitTransaction()
+            MessageBox.Show("Plan registrado correctamente")
+            Me.Reiniciar()
         Catch ex As Exception
             db.rollBackTransaction()
+            MessageBox.Show(ex.Message)
         End Try
     End Sub
 End Class
