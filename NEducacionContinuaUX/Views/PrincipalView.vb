@@ -32,4 +32,9 @@
         PlanesEDC.MdiParent = Me
         PlanesEDC.Show()
     End Sub
+
+    Private Sub AsignacionDePlanToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AsignacionDePlanToolStripMenuItem.Click
+        AsignacionPlanesEDC.MdiParent = Me
+        AsignacionPlanesEDC.Show()
+    End Sub
 End Class

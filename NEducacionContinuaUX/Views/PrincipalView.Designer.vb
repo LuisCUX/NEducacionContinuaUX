@@ -33,10 +33,11 @@ Partial Class PrincipalView
         Me.PagosOpcionalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RegistroDePagosOpcionalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AsignacionDePagosOpcionalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CatalogosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GestionDeExternosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PlanesDeDiplomadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RegistroDePlanesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CatalogosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GestionDeExternosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AsignacionDePlanToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip.SuspendLayout()
         Me.MenuStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -110,6 +111,19 @@ Partial Class PrincipalView
         Me.AsignacionDePagosOpcionalesToolStripMenuItem.Size = New System.Drawing.Size(244, 22)
         Me.AsignacionDePagosOpcionalesToolStripMenuItem.Text = "Asignacion de pagos opcionales"
         '
+        'PlanesDeDiplomadosToolStripMenuItem
+        '
+        Me.PlanesDeDiplomadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RegistroDePlanesToolStripMenuItem, Me.AsignacionDePlanToolStripMenuItem})
+        Me.PlanesDeDiplomadosToolStripMenuItem.Name = "PlanesDeDiplomadosToolStripMenuItem"
+        Me.PlanesDeDiplomadosToolStripMenuItem.Size = New System.Drawing.Size(135, 20)
+        Me.PlanesDeDiplomadosToolStripMenuItem.Text = "Planes de diplomados"
+        '
+        'RegistroDePlanesToolStripMenuItem
+        '
+        Me.RegistroDePlanesToolStripMenuItem.Name = "RegistroDePlanesToolStripMenuItem"
+        Me.RegistroDePlanesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.RegistroDePlanesToolStripMenuItem.Text = "Registro de planes"
+        '
         'CatalogosToolStripMenuItem
         '
         Me.CatalogosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GestionDeExternosToolStripMenuItem})
@@ -120,21 +134,14 @@ Partial Class PrincipalView
         'GestionDeExternosToolStripMenuItem
         '
         Me.GestionDeExternosToolStripMenuItem.Name = "GestionDeExternosToolStripMenuItem"
-        Me.GestionDeExternosToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.GestionDeExternosToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
         Me.GestionDeExternosToolStripMenuItem.Text = "Gestion de externos"
         '
-        'PlanesDeDiplomadosToolStripMenuItem
+        'AsignacionDePlanToolStripMenuItem
         '
-        Me.PlanesDeDiplomadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RegistroDePlanesToolStripMenuItem})
-        Me.PlanesDeDiplomadosToolStripMenuItem.Name = "PlanesDeDiplomadosToolStripMenuItem"
-        Me.PlanesDeDiplomadosToolStripMenuItem.Size = New System.Drawing.Size(135, 20)
-        Me.PlanesDeDiplomadosToolStripMenuItem.Text = "Planes de diplomados"
-        '
-        'RegistroDePlanesToolStripMenuItem
-        '
-        Me.RegistroDePlanesToolStripMenuItem.Name = "RegistroDePlanesToolStripMenuItem"
-        Me.RegistroDePlanesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.RegistroDePlanesToolStripMenuItem.Text = "Registro de planes"
+        Me.AsignacionDePlanToolStripMenuItem.Name = "AsignacionDePlanToolStripMenuItem"
+        Me.AsignacionDePlanToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.AsignacionDePlanToolStripMenuItem.Text = "Asignacion de plan"
         '
         'PrincipalView
         '
@@ -179,4 +186,5 @@ Partial Class PrincipalView
     Friend WithEvents AutorizacionesYCondonacionesToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents PlanesDeDiplomadosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents RegistroDePlanesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AsignacionDePlanToolStripMenuItem As ToolStripMenuItem
 End Class

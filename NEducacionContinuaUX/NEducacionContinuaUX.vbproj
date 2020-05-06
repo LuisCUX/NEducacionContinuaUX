@@ -104,6 +104,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AsignacionPagosOpcionalesController.vb" />
+    <Compile Include="Controllers\AsignacionPlanesController.vb" />
     <Compile Include="Controllers\AutorizacionCondonacionController.vb" />
     <Compile Include="Controllers\CargosController.vb" />
     <Compile Include="Controllers\CobrosController.vb" />
@@ -138,6 +139,12 @@
     <Compile Include="Services\UtilitiesService.vb" />
     <Compile Include="Services\ValidadorCobrosService.vb" />
     <Compile Include="Services\XmlService.vb" />
+    <Compile Include="Views\AsignacionPlanesEDC.Designer.vb">
+      <DependentUpon>AsignacionPlanesEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AsignacionPlanesEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\AutorizacionCondonacionEDC.Designer.vb">
       <DependentUpon>AutorizacionCondonacionEDC.vb</DependentUpon>
     </Compile>
@@ -229,6 +236,9 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\AsignacionPlanesEDC.resx">
+      <DependentUpon>AsignacionPlanesEDC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\AutorizacionCondonacionEDC.resx">
       <DependentUpon>AutorizacionCondonacionEDC.vb</DependentUpon>
