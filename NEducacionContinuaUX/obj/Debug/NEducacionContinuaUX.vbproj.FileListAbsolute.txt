@@ -49,3 +49,4 @@ C:\Users\darkz\Documents\neducacioncontinuaux\NEducacionContinuaUX\obj\Debug\NEd
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.PlanesEDC.resources
 C:\Users\darkz\Documents\neducacioncontinuaux\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.PlanesEDC.resources
 C:\Users\darkz\Documents\neducacioncontinuaux\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.AsignacionPlanesEDC.resources
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.AsignacionPlanesEDC.resources

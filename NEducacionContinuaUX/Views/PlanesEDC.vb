@@ -928,7 +928,7 @@
             Next
 
             If (chbPagoUnico.Checked = True) Then
-                pc.guardarPagoUnico(ID_Plan, Orden, txtMontoPagoUnico.Text, txtDescuentoPagoUnico.Text, pc.obtenerFechaString(datePickerDescuentoPagoUnico))
+                pc.guardarPagoUnico(ID_Plan, Orden, txtMontoPagoUnico.Text, txtDescuentoPagoUnico.Text, pc.obtenerFechaString(datePickerDescuentoPagoUnico), pc.obtenerFechaString(datePickerPagoUnico))
                 Orden = Orden + 1
             End If
             db.commitTransaction()
