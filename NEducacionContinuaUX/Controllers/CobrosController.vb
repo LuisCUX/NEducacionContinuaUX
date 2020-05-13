@@ -37,6 +37,30 @@ Public Class CobrosController
     End Sub
 
     ''----------------------------------------------------------------------------------------------------------------------------------------
+    ''-----------------------------------------------------COBRA INSCRIPCION DE DIPLOMADO-----------------------------------------------------
+    ''----------------------------------------------------------------------------------------------------------------------------------------
+    Sub cobrarInscripcionDiplomado(concepto As Concepto, Matricula As String, Folio As String, formaPago As String)
+        Dim formaPagoint As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatFormaPago WHERE Forma_Pago = '{formaPago}'")
+        db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosDiplomados(Folio, Matricula, valorUnitario, valorIVA, Descuento, ID_FormaPago, ID_ClavePago, Fecha_Pago, Autorizado, Condonado, Usuario) VALUES ('{Folio}', '{Matricula}', {CDec(concepto.costoBase)}, {CDec(concepto.costoIVAUnitario)}, {CDec(concepto.descuento)}, {formaPagoint}, 6, GETDATE(), 0, 0, '{User.getUsername()}', 1)")
+    End Sub
+
+    ''----------------------------------------------------------------------------------------------------------------------------------------
+    ''-----------------------------------------------------COBRA COLEGIATURA DE DIPLOMADO-----------------------------------------------------
+    ''----------------------------------------------------------------------------------------------------------------------------------------
+    Sub cobrarColegiaturaDiplomado(concepto As Concepto, Matricula As String, Folio As String, formaPago As String)
+        Dim formaPagoint As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatFormaPago WHERE Forma_Pago = '{formaPago}'")
+        db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosDiplomados(Folio, Matricula, valorUnitario, Cantidad, Descuento, ID_FormaPago, ID_ClavePago, Fecha_Pago, Autorizado, Condonado, Usuario) VALUES ('{Folio}', '{Matricula}', {CDec(concepto.costoBase)}, {CDec(concepto.costoIVAUnitario)}, {CDec(concepto.descuento)}, {formaPagoint}, 4, GETDATE(), 0, 0, '{User.getUsername()}', 1)")
+    End Sub
+
+    ''----------------------------------------------------------------------------------------------------------------------------------------
+    ''-----------------------------------------------------COBRA PAGO UNICO DE DIPLOMADO------------------------------------------------------
+    ''----------------------------------------------------------------------------------------------------------------------------------------
+    Sub cobrarPagoUnicoDiplomado(concepto As Concepto, Matricula As String, Folio As String, formaPago As String)
+        Dim formaPagoint As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatFormaPago WHERE Forma_Pago = '{formaPago}'")
+        db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosDiplomados(Folio, Matricula, valorUnitario, Cantidad, Descuento, ID_FormaPago, ID_ClavePago, Fecha_Pago, Autorizado, Condonado, Usuario) VALUES ('{Folio}', '{Matricula}', {CDec(concepto.costoBase)}, {CDec(concepto.costoIVAUnitario)}, {CDec(concepto.descuento)}, {formaPagoint}, 5, GETDATE(), 0, 0, '{User.getUsername()}', 1)")
+    End Sub
+
+    ''----------------------------------------------------------------------------------------------------------------------------------------
     ''---------------------------------------------------------COBRA PAGO YA VALIDADO---------------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
     Sub Cobrar(listaConceptos As List(Of Concepto), formaPago As String, Matricula As String)
@@ -91,8 +115,8 @@ Public Class CobrosController
             MessageBox.Show(Fecha)
 
             Dim cadena = xml.cadenaPrueba(Serie, Folio, Fecha, formaPago, NoCertificado, SubTotal, DescuentoS, Total, listaConceptos, totalIVA)
-            ''Dim sello As String = st.Sellado("C:\Users\darkz\Desktop\pfx\uxa_pfx33.pfx", "12345678a", cadena)
-            Dim sello As String = st.Sellado("C:\Users\Luis\Desktop\pfx\uxa_pfx33.pfx", "12345678a", cadena)
+            Dim sello As String = st.Sellado("C:\Users\darkz\Desktop\pfx\uxa_pfx33.pfx", "12345678a", cadena)
+            ''Dim sello As String = st.Sellado("C:\Users\Luis\Desktop\pfx\uxa_pfx33.pfx", "12345678a", cadena)
             Dim xmlString As String = xml.xmlPrueba(Total, SubTotal, DescuentoS, totalIVA, Fecha, sello, Certificado, NoCertificado, formaPago, Folio, Serie, UsoCFDI, listaConceptos)
             xmlString = xmlString.Replace("utf-16", "UTF-8")
             Dim xmlTimbrado As String = st.Timbrado(xmlString, Folio)

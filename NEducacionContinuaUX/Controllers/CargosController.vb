@@ -66,12 +66,54 @@
                 Dim porcentaje As Decimal = db.exectSQLQueryScalar($"SELECT Porcentaje FROM aut_Condonaciones WHERE ID = {IDCondonacion}")
                 result = result + $"|Condonacion {porcentaje}%"
             End If
-                If (Tipo = "Cobros") Then
+            If (Tipo = "Cobros") Then
                 Tree.Nodes(0).Nodes.Add(result).StateImageIndex = 0
                 Tree.Nodes(0).Expand()
             ElseIf (Tipo = "AutCon") Then
                 Tree.Nodes(0).Nodes(0).Nodes.Add(result).StateImageIndex = 0
                 Tree.Nodes(0).Nodes(0).Expand()
+            End If
+        Next
+    End Sub
+
+    Sub buscarInscripcionesDiplomados(Tree As TreeView, Matricula As String, TipoMatricula As String, Tipo As String)
+        Dim tableInscripciones As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, C.Importe, CP.Clave FROM ing_AsignacionCargosPlanes AS AC 
+                                                                      INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
+                                                                      INNER JOIN ing_CatClavesPagos AS CP ON CP.ID = 6
+                                                                      WHERE AC.Matricula = '{Matricula}' AND C.Clave = 'P00'")
+        For Each item As DataRow In tableInscripciones.Rows
+            Dim result As String = $"[{item("ID")}]|({item("Clave")})|{item("Descripcion")}|{item("Importe")}|{1}|Total: {Me.calcularTotal(item("Importe"), 1, True, False, False)}"
+            If (Tipo = "Cobros") Then
+                Tree.Nodes(2).Nodes.Add(result).StateImageIndex = 0
+                Tree.Nodes(2).Expand()
+            End If
+        Next
+    End Sub
+
+    Sub buscarColegiaturas(Tree As TreeView, Matricula As String, TipoMatricula As String, Tipo As String)
+        Dim tableColegiaturas As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, C.Importe, CP.Clave FROM ing_AsignacionCargosPlanes AS AC 
+                                                                      INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
+                                                                      INNER JOIN ing_CatClavesPagos AS CP ON CP.ID = 4
+                                                                      WHERE AC.Matricula = '{Matricula}' AND C.Clave != 'P00' AND C.Clave != 'P13'")
+        For Each item As DataRow In tableColegiaturas.Rows
+            Dim result As String = $"[{item("ID")}]|({item("Clave")})|{item("Descripcion")}|{item("Importe")}|{1}|Total: {Me.calcularTotal(item("Importe"), 1, True, False, False)}"
+            If (Tipo = "Cobros") Then
+                Tree.Nodes(3).Nodes.Add(result).StateImageIndex = 0
+                Tree.Nodes(3).Expand()
+            End If
+        Next
+    End Sub
+
+    Sub buscarPagoUnicoDiplomados(Tree As TreeView, Matricula As String, TipoMatricula As String, Tipo As String)
+        Dim tablePagoUnico As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, C.Importe, CP.Clave FROM ing_AsignacionCargosPlanes AS AC 
+                                                                      INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
+                                                                      INNER JOIN ing_CatClavesPagos AS CP ON CP.ID = 5
+                                                                      WHERE AC.Matricula = '{Matricula}' AND C.Clave = 'P13'")
+        For Each item As DataRow In tablePagoUnico.Rows
+            Dim result As String = $"[{item("ID")}]|({item("Clave")})|{item("Descripcion")}|{item("Importe")}|{1}|Total: {Me.calcularTotal(item("Importe"), 1, True, False, False)}"
+            If (Tipo = "Cobros") Then
+                Tree.Nodes(4).Nodes.Add(result).StateImageIndex = 0
+                Tree.Nodes(4).Expand()
             End If
         Next
     End Sub

@@ -86,6 +86,72 @@
                 End If
                 concep.porcentajeCondonacion = condonacion(1)
             Next
+        ElseIf (claveConcepto = "COLIN") Then
+            Dim Costo As Decimal
+            Dim Descuento As Decimal
+            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, CON.clave_servicio, C.Importe, C.Descuento FROM ing_AsignacionCargosPlanes AS AC 
+                                                                      INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
+                                                                      INNER JOIN ing_Planes AS PL ON PL.ID = C.ID_Plan
+                                                                      INNER JOIN portal_congreso AS CON ON CON.id_congreso = PL.ID_Congreso
+                                                                      WHERE AC.ID = {conceptoID}")
+            For Each item As DataRow In tableConcepto.Rows
+
+                concep.IDConcepto = item("ID")
+                concep.NombreConcepto = Me.removerEspaciosInicioFin(item("Descripcion"))
+                concep.claveConcepto = claveConcepto
+                concep.cveClase = item("clave_servicio")
+                concep.cveUnidad = "E48"
+                concep.costoUnitario = item("Importe")
+                concep.descuento = item("Descuento")
+                concep.absorbeIVA = True
+                concep.consideraIVA = False
+                concep.IVAExento = False
+                concep.Cantidad = 1
+            Next
+        ElseIf (claveConcepto = "COL") Then
+            Dim Costo As Decimal
+            Dim Descuento As Decimal
+            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, CON.clave_servicio, C.Importe, C.Descuento FROM ing_AsignacionCargosPlanes AS AC 
+                                                                      INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
+                                                                      INNER JOIN ing_Planes AS PL ON PL.ID = C.ID_Plan
+                                                                      INNER JOIN portal_congreso AS CON ON CON.id_congreso = PL.ID_Congreso
+                                                                      WHERE AC.ID = {conceptoID}")
+            For Each item As DataRow In tableConcepto.Rows
+
+                concep.IDConcepto = item("ID")
+                concep.NombreConcepto = Me.removerEspaciosInicioFin(item("Descripcion"))
+                concep.claveConcepto = claveConcepto
+                concep.cveClase = item("clave_servicio")
+                concep.cveUnidad = "E48"
+                concep.costoUnitario = item("Importe")
+                concep.descuento = item("Descuento")
+                concep.absorbeIVA = True
+                concep.consideraIVA = False
+                concep.IVAExento = False
+                concep.Cantidad = 1
+            Next
+        ElseIf (claveConcepto = "COLPU") Then
+            Dim Costo As Decimal
+            Dim Descuento As Decimal
+            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, CON.clave_servicio, C.Importe, C.Descuento FROM ing_AsignacionCargosPlanes AS AC 
+                                                                      INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
+                                                                      INNER JOIN ing_Planes AS PL ON PL.ID = C.ID_Plan
+                                                                      INNER JOIN portal_congreso AS CON ON CON.id_congreso = PL.ID_Congreso
+                                                                      WHERE AC.ID = {conceptoID}")
+            For Each item As DataRow In tableConcepto.Rows
+
+                concep.IDConcepto = item("ID")
+                concep.NombreConcepto = Me.removerEspaciosInicioFin(item("Descripcion"))
+                concep.claveConcepto = claveConcepto
+                concep.cveClase = item("clave_servicio")
+                concep.cveUnidad = "E48"
+                concep.costoUnitario = item("Importe")
+                concep.descuento = item("Descuento")
+                concep.absorbeIVA = True
+                concep.consideraIVA = False
+                concep.IVAExento = False
+                concep.Cantidad = 1
+            Next
         End If
         Return concep
     End Function
@@ -106,8 +172,8 @@
             Dim unitariosiniva As Decimal = (CDec(costooriginal) / 1.16)
             Dim unitariodescuento As Decimal = unitariosiniva - CDec(concepto.descuento)
 
-            unitariosiniva = Me.getFormat(unitariosiniva)
-            unitariodescuento = Me.getFormat(unitariodescuento)
+            unitariosiniva = unitariosiniva
+            unitariodescuento = unitariodescuento
 
             concepto.costoUnitario = unitariosiniva
             concepto.costoBase = unitariodescuento * CDec(concepto.Cantidad)

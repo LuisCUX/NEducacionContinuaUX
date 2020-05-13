@@ -2,6 +2,7 @@
     Dim db As DataBaseService = New DataBaseService()
     Dim vc As ValidacionesController = New ValidacionesController()
     Dim ap As AsignacionPlanesController = New AsignacionPlanesController()
+    Dim Matricula As String
     Private Sub AsignacionPlanesEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim tableEDC As DataTable = db.getDataTableFromSQL("SELECT RC.clave_cliente, UPPER(C.nombre + ' ' + RC.apellido_paterno + ' ' + RC.apellido_materno + ' (' + RC.clave_cliente + ')') AS NombreCliente FROM portal_registroCongreso AS RC
                                                             INNER JOIN portal_cliente AS C ON RC.id_cliente = C.id_cliente
@@ -18,7 +19,8 @@
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
-        ap.buscarMatriculaEC(txtMatricula.Text, panelDatos, panelRegistro, txtNombre, txtEmail, cbPlanes)
+        Matricula = txtMatricula.Text
+        ap.buscarMatriculaEC(Matricula, panelDatos, panelRegistro, txtNombre, txtEmail, cbPlanes)
     End Sub
 
 
@@ -42,4 +44,7 @@
         AsignacionPlanesEDC_Load(Me, Nothing)
     End Sub
 
+    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+        ap.asignarPagosMatricula(Matricula, GridPagos)
+    End Sub
 End Class

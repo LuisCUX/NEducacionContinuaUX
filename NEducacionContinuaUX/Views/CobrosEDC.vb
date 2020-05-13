@@ -30,8 +30,14 @@
         End If
         ca.buscarPagosOpcionales(Tree, Matricula, tipoMatricula, "Cobros")
         ca.buscarCongresos(Tree, Matricula, tipoMatricula, "Cobros")
+        ca.buscarColegiaturas(Tree, Matricula, tipoMatricula, "Cobros")
+        ca.buscarInscripcionesDiplomados(Tree, Matricula, tipoMatricula, "Cobros")
+        ca.buscarPagoUnicoDiplomados(Tree, Matricula, tipoMatricula, "Cobros")
         Tree.Nodes(0).Expand()
         Tree.Nodes(1).Expand()
+        Tree.Nodes(2).Expand()
+        Tree.Nodes(3).Expand()
+        Tree.Nodes(4).Expand()
     End Sub
 
     Sub Reiniciar()
@@ -59,8 +65,12 @@
             Exit Sub
         ElseIf Tree.SelectedNode.Text = "Congresos" Then
             Exit Sub
-        ElseIf Tree.SelectedNode.Text = "Diplomados" Then
-            Exit sub
+        ElseIf Tree.SelectedNode.Text = "Inscripción a Diplomados" Then
+            Exit Sub
+        ElseIf Tree.SelectedNode.Text = "Colegiaturas de Diplomados" Then
+            Exit Sub
+        ElseIf Tree.SelectedNode.Text = "Pago Unico de Diplomados" Then
+            Exit Sub
         End If
         Dim tipoPago As String = Tree.SelectedNode.Parent.Name()
 
@@ -100,6 +110,51 @@
                 ch.eliminarconcepto(conceptoID, tipoConcepto)
                 Me.actualizarTotal(ch.getListaConceptos())
                 Tree.Nodes(1).Nodes(index).SelectedImageIndex = 0
+            End If
+        ElseIf (tipoPago = "nodeInscripcionDip") Then
+            Dim index As Integer = Tree.SelectedNode.Index
+            If (Tree.SelectedNode.Checked = False) Then
+                Tree.SelectedNode.Checked = True
+                Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
+                ch.agregarconcepto(conceptoID, "COLIN")
+                Me.actualizarTotal(ch.getListaConceptos())
+                Tree.Nodes(2).Nodes(index).SelectedImageIndex = 1
+            ElseIf (Tree.SelectedNode.Checked = True) Then
+                Tree.SelectedNode.Checked = False
+                Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
+                ch.eliminarconcepto(conceptoID, "COLIN")
+                Me.actualizarTotal(ch.getListaConceptos())
+                Tree.Nodes(2).Nodes(index).SelectedImageIndex = 0
+            End If
+        ElseIf (tipoPago = "nodeColegiaturaDip") Then
+            Dim index As Integer = Tree.SelectedNode.Index
+            If (Tree.SelectedNode.Checked = False) Then
+                Tree.SelectedNode.Checked = True
+                Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
+                ch.agregarconcepto(conceptoID, "COL")
+                Me.actualizarTotal(ch.getListaConceptos())
+                Tree.Nodes(3).Nodes(index).SelectedImageIndex = 1
+            ElseIf (Tree.SelectedNode.Checked = True) Then
+                Tree.SelectedNode.Checked = False
+                Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
+                ch.eliminarconcepto(conceptoID, "COL")
+                Me.actualizarTotal(ch.getListaConceptos())
+                Tree.Nodes(3).Nodes(index).SelectedImageIndex = 0
+            End If
+        ElseIf (tipoPago = "nodePagoUnicoDip") Then
+            Dim index As Integer = Tree.SelectedNode.Index
+            If (Tree.SelectedNode.Checked = False) Then
+                Tree.SelectedNode.Checked = True
+                Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
+                ch.agregarconcepto(conceptoID, "COLPU")
+                Me.actualizarTotal(ch.getListaConceptos())
+                Tree.Nodes(4).Nodes(index).SelectedImageIndex = 1
+            ElseIf (Tree.SelectedNode.Checked = True) Then
+                Tree.SelectedNode.Checked = False
+                Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
+                ch.eliminarconcepto(conceptoID, "COLPU")
+                Me.actualizarTotal(ch.getListaConceptos())
+                Tree.Nodes(4).Nodes(index).SelectedImageIndex = 0
             End If
         End If
     End Sub

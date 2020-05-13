@@ -43,7 +43,23 @@
     End Sub
 
     Sub llenarGridPagos(IDPlan As Integer, GridPagos As DataGridView)
-        Dim tablePagos As DataTable = db.getDataTableFromSQL($"SELECT Clave, Descripcion, Importe, Recargo, Descuento FROM ing_PlanesConceptos WHERE ID_Plan = {IDPlan} AND Activo = 1 ORDER BY Orden")
+        Dim tablePagos As DataTable = db.getDataTableFromSQL($"SELECT ID, Clave, Descripcion, Importe, Recargo, Descuento FROM ing_PlanesConceptos WHERE ID_Plan = {IDPlan} AND Activo = 1 ORDER BY Orden")
         GridPagos.DataSource = tablePagos
+    End Sub
+
+    Sub asignarPagosMatricula(Matricula As String, gridPagos As DataGridView)
+        Try
+            db.startTransaction()
+            For x = 0 To gridPagos.Rows.Count - 1
+                Dim IDPago As Integer = gridPagos.Rows(x).Cells(0).Value
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_AsignacionCargosPlanes(ID_Concepto, Matricula, Fecha_Asignacion, Fecha_Recargo, Activo, Autorizado, Condonado) VALUES ({IDPago}, '{Matricula}', GETDATE(), '1900-01-01', 1, 0, 0)")
+            Next
+            db.commitTransaction()
+            MessageBox.Show("Cargos asignados correctamente")
+            AsignacionPlanesEDC.Reiniciar()
+        Catch ex As Exception
+            db.rollBackTransaction()
+        End Try
+
     End Sub
 End Class
