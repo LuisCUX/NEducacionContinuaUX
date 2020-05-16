@@ -80,7 +80,7 @@
         Dim tableInscripciones As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, C.Importe, CP.Clave FROM ing_AsignacionCargosPlanes AS AC 
                                                                       INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
                                                                       INNER JOIN ing_CatClavesPagos AS CP ON CP.ID = 6
-                                                                      WHERE AC.Matricula = '{Matricula}' AND C.Clave = 'P00'")
+                                                                      WHERE AC.Matricula = '{Matricula}' AND C.Clave = 'P00' AND AC.Activo = 1")
         For Each item As DataRow In tableInscripciones.Rows
             Dim result As String = $"[{item("ID")}]|({item("Clave")})|{item("Descripcion")}|{item("Importe")}|{1}|Total: {Me.calcularTotal(item("Importe"), 1, True, False, False)}"
             If (Tipo = "Cobros") Then
@@ -94,7 +94,7 @@
         Dim tableColegiaturas As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, C.Importe, CP.Clave FROM ing_AsignacionCargosPlanes AS AC 
                                                                       INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
                                                                       INNER JOIN ing_CatClavesPagos AS CP ON CP.ID = 4
-                                                                      WHERE AC.Matricula = '{Matricula}' AND C.Clave != 'P00' AND C.Clave != 'P13'")
+                                                                      WHERE AC.Matricula = '{Matricula}' AND C.Clave != 'P00' AND C.Clave != 'P13' AND AC.Activo = 1")
         For Each item As DataRow In tableColegiaturas.Rows
             Dim result As String = $"[{item("ID")}]|({item("Clave")})|{item("Descripcion")}|{item("Importe")}|{1}|Total: {Me.calcularTotal(item("Importe"), 1, True, False, False)}"
             If (Tipo = "Cobros") Then
@@ -108,7 +108,7 @@
         Dim tablePagoUnico As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, C.Importe, CP.Clave FROM ing_AsignacionCargosPlanes AS AC 
                                                                       INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
                                                                       INNER JOIN ing_CatClavesPagos AS CP ON CP.ID = 5
-                                                                      WHERE AC.Matricula = '{Matricula}' AND C.Clave = 'P13'")
+                                                                      WHERE AC.Matricula = '{Matricula}' AND C.Clave = 'P13' AND AC.Activo = 1")
         For Each item As DataRow In tablePagoUnico.Rows
             Dim result As String = $"[{item("ID")}]|({item("Clave")})|{item("Descripcion")}|{item("Importe")}|{1}|Total: {Me.calcularTotal(item("Importe"), 1, True, False, False)}"
             If (Tipo = "Cobros") Then

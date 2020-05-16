@@ -32,7 +32,7 @@
     End Sub
 
     Sub guardarPagoUnico(ID_Plan As Integer, Orden As Integer, Importe As Decimal, Descuento As Decimal, Fecha_Limite_Desc As String, Fecha_Limite_Pago As String)
-        db.execSQLQueryWithoutParams($"INSERT INTO ing_PlanesConceptos(ID_Plan, Orden, Clave, Descripcion, Importe, Recargo, Descuento, Fecha_Limite_Desc, Fecha_Calcula_Recargo, Considera_Recargo, Fecha_Limite_Pago, Importe_Total, Activo) VALUES ({ID_Plan}, {Orden}, 'P13', 'PAGO COMPLETO DE DIPLOMADO', {Importe}, 0.000000, {Descuento}, '{Fecha_Limite_Desc}', '1900-01-01', 0, '{Fecha_Limite_Pago}', {Importe}, 1)")
+        db.execSQLQueryWithoutParams($"INSERT INTO ing_PlanesConceptos(ID_Plan, Orden, Clave, Descripcion, Importe, Recargo, Descuento, Fecha_Limite_Desc, Fecha_Calcula_Recargo, Considera_Recargo, Fecha_Limite_Pago, Importe_Total, Activo) VALUES ({ID_Plan}, {Orden}, 'P13', 'PAGO COMPLETO DE DIPLOMADO', {Importe}, 0.00, {Descuento}, '{Fecha_Limite_Desc}', '1900-01-01', 0, '{Fecha_Limite_Pago}', {Importe}, 1)")
     End Sub
 
     Sub guardarPagoPlan(ID_Plan As Integer, Orden As Integer, Clave As String, Mes As String, Importe As Decimal, Recargo As Decimal, Descuento As Decimal, Fecha_Limite_Desc As String, Fecha_Calcula_Recargo As String, Considera_Recargo As Boolean)

@@ -52,7 +52,7 @@
             db.startTransaction()
             For x = 0 To gridPagos.Rows.Count - 1
                 Dim IDPago As Integer = gridPagos.Rows(x).Cells(0).Value
-                db.execSQLQueryWithoutParams($"INSERT INTO ing_AsignacionCargosPlanes(ID_Concepto, Matricula, Fecha_Asignacion, Fecha_Recargo, Activo, Autorizado, Condonado) VALUES ({IDPago}, '{Matricula}', GETDATE(), '1900-01-01', 1, 0, 0)")
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_AsignacionCargosPlanes(ID_Concepto, Matricula, Fecha_Asignacion, Fecha_Recargo, Autorizado, Condonado, Activo) VALUES ({IDPago}, '{Matricula}', GETDATE(), '1900-01-01', 0, 0, 1)")
             Next
             db.commitTransaction()
             MessageBox.Show("Cargos asignados correctamente")
