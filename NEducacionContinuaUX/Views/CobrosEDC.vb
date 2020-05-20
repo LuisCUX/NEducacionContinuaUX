@@ -6,6 +6,7 @@
     Dim ca As CargosController = New CargosController()
     Dim ch As ConceptHandlerController = New ConceptHandlerController()
     Dim va As ValidacionesController = New ValidacionesController()
+    Dim siguienteColegiatura As Integer = 0
     Private Sub CobrosEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim tableFormaPago As DataTable = db.getDataTableFromSQL("SELECT Forma_Pago, Descripcion FROM ing_CatFormaPago")
         ComboboxService.llenarCombobox(cbFormaPago, tableFormaPago, "Forma_Pago", "Descripcion")
@@ -128,6 +129,13 @@
             End If
         ElseIf (tipoPago = "nodeColegiaturaDip") Then
             Dim index As Integer = Tree.SelectedNode.Index
+            If (index <> siguienteColegiatura) Then
+                Dim mesActual As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "-", "-")
+                MessageBox.Show($"No puede pagar la colegiatura del mes de {mesActual} sin antes haber pagado los meses anteriores")
+                Exit Sub
+            Else
+                siguienteColegiatura = siguienteColegiatura + 1
+            End If
             If (Tree.SelectedNode.Checked = False) Then
                 Tree.SelectedNode.Checked = True
                 Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")

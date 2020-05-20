@@ -99,6 +99,7 @@
             txtNombrePlan.Enabled = True
         Else
             cbPlanes.DataSource = Nothing
+            cbPlanes.Items.Clear()
             cbPlanes.Items.Add("NUEVO PLAN")
             cbPlanes.SelectedIndex = 0
             txtNombrePlan.Enabled = True
@@ -488,7 +489,7 @@
             Next
             Dim clave As Integer = Convert.ToInt32(txtClavePago1.Text)
             Dim mes As String() = Me.getmesclave(clave)
-            txtConcepto1.Text = $"Pago de colegiatura de {mes(0)}"
+            txtConcepto1.Text = $"Pago de colegiatura de -{mes(0)}-"
 
             If (chbRecargosPagos.Checked = True) Then
                 Dim dia As Integer
@@ -515,7 +516,7 @@
             Next
             Dim clave As Integer = Convert.ToInt32(txtClavePago2.Text)
             Dim mes As String() = Me.getmesclave(clave)
-            txtConcepto2.Text = $"Pago de colegiatura de {mes(0)}"
+            txtConcepto2.Text = $"Pago de colegiatura de -{mes(0)}-"
 
             If (chbRecargosPagos.Checked = True) Then
                 Dim dia As Integer
@@ -542,7 +543,7 @@
             Next
             Dim clave As Integer = Convert.ToInt32(txtClavePago3.Text)
             Dim mes As String() = Me.getmesclave(clave)
-            txtConcepto3.Text = $"Pago de colegiatura de {mes(0)}"
+            txtConcepto3.Text = $"Pago de colegiatura de -{mes(0)}-"
 
             If (chbRecargosPagos.Checked = True) Then
                 Dim dia As Integer
@@ -569,7 +570,7 @@
             Next
             Dim clave As Integer = Convert.ToInt32(txtClavePago4.Text)
             Dim mes As String() = Me.getmesclave(clave)
-            txtConcepto4.Text = $"Pago de colegiatura de {mes(0)}"
+            txtConcepto4.Text = $"Pago de colegiatura de -{mes(0)}-"
 
             If (chbRecargosPagos.Checked = True) Then
                 Dim dia As Integer
@@ -596,7 +597,7 @@
             Next
             Dim clave As Integer = Convert.ToInt32(txtClavePago5.Text)
             Dim mes As String() = Me.getmesclave(clave)
-            txtConcepto5.Text = $"Pago de colegiatura de {mes(0)}"
+            txtConcepto5.Text = $"Pago de colegiatura de -{mes(0)}-"
 
             If (chbRecargosPagos.Checked = True) Then
                 Dim dia As Integer
@@ -623,7 +624,7 @@
             Next
             Dim clave As Integer = Convert.ToInt32(txtClavePago6.Text)
             Dim mes As String() = Me.getmesclave(clave)
-            txtConcepto6.Text = $"Pago de colegiatura de {mes(0)}"
+            txtConcepto6.Text = $"Pago de colegiatura de -{mes(0)}-"
 
             If (chbRecargosPagos.Checked = True) Then
                 Dim dia As Integer
@@ -650,7 +651,7 @@
             Next
             Dim clave As Integer = Convert.ToInt32(txtClavePago7.Text)
             Dim mes As String() = Me.getmesclave(clave)
-            txtConcepto7.Text = $"Pago de colegiatura de {mes(0)}"
+            txtConcepto7.Text = $"Pago de colegiatura de -{mes(0)}-"
 
             If (chbRecargosPagos.Checked = True) Then
                 Dim dia As Integer
@@ -677,7 +678,7 @@
             Next
             Dim clave As Integer = Convert.ToInt32(txtClavePago8.Text)
             Dim mes As String() = Me.getmesclave(clave)
-            txtConcepto8.Text = $"Pago de colegiatura de {mes(0)}"
+            txtConcepto8.Text = $"Pago de colegiatura de -{mes(0)}-"
 
             If (chbRecargosPagos.Checked = True) Then
                 Dim dia As Integer
@@ -704,7 +705,7 @@
             Next
             Dim clave As Integer = Convert.ToInt32(txtClavePago9.Text)
             Dim mes As String() = Me.getmesclave(clave)
-            txtConcepto9.Text = $"Pago de colegiatura de {mes(0)}"
+            txtConcepto9.Text = $"Pago de colegiatura de -{mes(0)}-"
 
             If (chbRecargosPagos.Checked = True) Then
                 Dim dia As Integer
@@ -731,7 +732,7 @@
             Next
             Dim clave As Integer = Convert.ToInt32(txtClavePago10.Text)
             Dim mes As String() = Me.getmesclave(clave)
-            txtConcepto10.Text = $"Pago de colegiatura de {mes(0)}"
+            txtConcepto10.Text = $"Pago de colegiatura de -{mes(0)}-"
 
             If (chbRecargosPagos.Checked = True) Then
                 Dim dia As Integer
@@ -928,7 +929,7 @@
             Next
 
             If (chbPagoUnico.Checked = True) Then
-                pc.guardarPagoUnico(ID_Plan, Orden, txtMontoPagoUnico.Text, txtDescuentoPagoUnico.Text, pc.obtenerFechaString(datePickerDescuentoPagoUnico), pc.obtenerFechaString(datePickerPagoUnico))
+                pc.guardarPagoUnico(ID_Plan, Orden, CDec(txtMontoPagoUnico.Text), txtDescuentoPagoUnico.Text, pc.obtenerFechaString(datePickerDescuentoPagoUnico), pc.obtenerFechaString(datePickerPagoUnico))
                 Orden = Orden + 1
             End If
             db.commitTransaction()

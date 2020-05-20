@@ -50,8 +50,9 @@ Public Class CobrosController
     ''----------------------------------------------------------------------------------------------------------------------------------------
     Sub cobrarColegiaturaDiplomado(concepto As Concepto, Matricula As String, Folio As String, formaPago As String)
         Dim formaPagoint As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatFormaPago WHERE Forma_Pago = '{formaPago}'")
-        db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosDiplomados(Folio, Matricula, valorUnitario, Cantidad, Descuento, ID_FormaPago, ID_ClavePago, Fecha_Pago, Autorizado, Condonado, Usuario, Activo) VALUES ('{Folio}', '{Matricula}', {CDec(concepto.costoBase)}, {CDec(concepto.costoIVAUnitario)}, {CDec(concepto.descuento)}, {formaPagoint}, 4, GETDATE(), 0, 0, '{User.getUsername()}', 1)")
+        db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosDiplomados(Folio, Matricula, valorUnitario, valorIVA, Descuento, ID_FormaPago, ID_ClavePago, Fecha_Pago, Autorizado, Condonado, Usuario, Activo) VALUES ('{Folio}', '{Matricula}', {CDec(concepto.costoBase)}, {CDec(concepto.costoIVAUnitario)}, {CDec(concepto.descuento)}, {formaPagoint}, 4, GETDATE(), 0, 0, '{User.getUsername()}', 1)")
         db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionCargosPlanes SET Activo = 0 WHERE ID = {concepto.IDConcepto}")
+        db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionCargosPlanes SET Activo = 0 WHERE Matricula = '{Matricula}' AND ID_ClaveConcepto = 5")
     End Sub
 
     ''----------------------------------------------------------------------------------------------------------------------------------------
@@ -59,8 +60,9 @@ Public Class CobrosController
     ''----------------------------------------------------------------------------------------------------------------------------------------
     Sub cobrarPagoUnicoDiplomado(concepto As Concepto, Matricula As String, Folio As String, formaPago As String)
         Dim formaPagoint As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatFormaPago WHERE Forma_Pago = '{formaPago}'")
-        db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosDiplomados(Folio, Matricula, valorUnitario, Cantidad, Descuento, ID_FormaPago, ID_ClavePago, Fecha_Pago, Autorizado, Condonado, Usuario, Activo) VALUES ('{Folio}', '{Matricula}', {CDec(concepto.costoBase)}, {CDec(concepto.costoIVAUnitario)}, {CDec(concepto.descuento)}, {formaPagoint}, 5, GETDATE(), 0, 0, '{User.getUsername()}', 1)")
+        db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosDiplomados(Folio, Matricula, valorUnitario, valorIVA, Descuento, ID_FormaPago, ID_ClavePago, Fecha_Pago, Autorizado, Condonado, Usuario, Activo) VALUES ('{Folio}', '{Matricula}', {CDec(concepto.costoBase)}, {CDec(concepto.costoIVAUnitario)}, {CDec(concepto.descuento)}, {formaPagoint}, 5, GETDATE(), 0, 0, '{User.getUsername()}', 1)")
         db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionCargosPlanes SET Activo = 0 WHERE ID = {concepto.IDConcepto}")
+        db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionCargosPlanes SET Activo = 0 WHERE Matricula = '{Matricula}' AND ID_ClaveConcepto = 4")
     End Sub
 
     ''----------------------------------------------------------------------------------------------------------------------------------------
@@ -69,7 +71,7 @@ Public Class CobrosController
     Sub Cobrar(listaConceptos As List(Of Concepto), formaPago As String, Matricula As String)
         Dim folioPago As String = Me.obtenerFolio()
         Try
-            'db.startTransaction()
+            db.startTransaction()
             For Each concepto As Concepto In listaConceptos
                 If (concepto.claveConcepto = "POA") Then
                     Me.cobrarPagoOpcionalAlumno(concepto, Matricula, folioPago)
@@ -124,19 +126,20 @@ Public Class CobrosController
             MessageBox.Show(Fecha)
 
             Dim cadena = xml.cadenaPrueba(Serie, Folio, Fecha, formaPago, NoCertificado, SubTotal, DescuentoS, Total, listaConceptos, totalIVA)
-            ''Dim sello As String = st.Sellado("C:\Users\darkz\Desktop\pfx\uxa_pfx33.pfx", "12345678a", cadena)
-            Dim sello As String = st.Sellado("C:\Users\Luis\Desktop\pfx\uxa_pfx33.pfx", "12345678a", cadena)
+            Dim sello As String = st.Sellado("C:\Users\darkz\Desktop\pfx\uxa_pfx33.pfx", "12345678a", cadena)
+            ''Dim sello As String = st.Sellado("C:\Users\Luis\Desktop\pfx\uxa_pfx33.pfx", "12345678a", cadena)
             Dim xmlString As String = xml.xmlPrueba(Total, SubTotal, DescuentoS, totalIVA, Fecha, sello, Certificado, NoCertificado, formaPago, Folio, Serie, UsoCFDI, listaConceptos)
             xmlString = xmlString.Replace("utf-16", "UTF-8")
             Dim xmlTimbrado As String = st.Timbrado(xmlString, Folio)
-            File.WriteAllText("C:\Users\Luis\Desktop\wea.xml", xmlTimbrado)
+            ''File.WriteAllText("C:\Users\Luis\Desktop\wea.xml", xmlTimbrado)
+            File.WriteAllText("C:\Users\darkz\Desktop\wea.xml", xmlTimbrado)
             db.execSQLQueryWithoutParams("INSERT INTO ing_xmlPruebas(XML) VALUES ('" & xmlTimbrado & "')")
             db.execSQLQueryWithoutParams($"UPDATE ing_CatFolios SET Consecutivo = Consecutivo + 1 WHERE Usuario = '{User.getUsername()}'")
             MessageBox.Show("XML completado")
             CobrosEDC.Reiniciar()
-            'db.commitTransaction()
+            db.commitTransaction()
         Catch ex As Exception
-            'db.rollBackTransaction()
+            db.rollBackTransaction()
             MessageBox.Show(ex.Message)
             CobrosEDC.Reiniciar()
         End Try

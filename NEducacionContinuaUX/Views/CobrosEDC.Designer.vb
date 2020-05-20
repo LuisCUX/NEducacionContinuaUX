@@ -351,7 +351,7 @@ Partial Class CobrosEDC
         'Tree
         '
         Me.Tree.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Tree.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Tree.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Tree.ForeColor = System.Drawing.SystemColors.Control
         Me.Tree.Location = New System.Drawing.Point(10, 55)
         Me.Tree.Name = "Tree"

@@ -137,7 +137,7 @@
                                                                       INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
                                                                       INNER JOIN ing_Planes AS PL ON PL.ID = C.ID_Plan
                                                                       INNER JOIN portal_congreso AS CON ON CON.id_congreso = PL.ID_Congreso
-                                                                      WHERE AC.ID = {conceptoID} AND Activo = 1")
+                                                                      WHERE AC.ID = {conceptoID} AND AC.Activo = 1")
             For Each item As DataRow In tableConcepto.Rows
 
                 concep.IDConcepto = item("ID")

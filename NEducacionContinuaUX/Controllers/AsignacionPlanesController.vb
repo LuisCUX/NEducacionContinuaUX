@@ -52,7 +52,16 @@
             db.startTransaction()
             For x = 0 To gridPagos.Rows.Count - 1
                 Dim IDPago As Integer = gridPagos.Rows(x).Cells(0).Value
-                db.execSQLQueryWithoutParams($"INSERT INTO ing_AsignacionCargosPlanes(ID_Concepto, Matricula, Fecha_Asignacion, Fecha_Recargo, Autorizado, Condonado, Activo) VALUES ({IDPago}, '{Matricula}', GETDATE(), '1900-01-01', 0, 0, 1)")
+                Dim clave As String = gridPagos.Rows(x).Cells(1).Value.ToString()
+                Dim ID_ClavePago As Integer
+                If (clave = "P00") Then
+                    ID_ClavePago = 6
+                ElseIf (clave = "P13") Then
+                    ID_ClavePago = 5
+                Else
+                    ID_ClavePago = 4
+                End If
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_AsignacionCargosPlanes(ID_Concepto, Matricula, Fecha_Asignacion, Fecha_Recargo, ID_ClaveConcepto, Autorizado, Condonado, Activo) VALUES ({IDPago}, '{Matricula}', GETDATE(), '1900-01-01', {ID_ClavePago}, 0, 0, 1)")
             Next
             db.commitTransaction()
             MessageBox.Show("Cargos asignados correctamente")
