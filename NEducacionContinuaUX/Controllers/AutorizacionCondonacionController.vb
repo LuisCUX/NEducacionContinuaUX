@@ -42,7 +42,7 @@
         If (tipoCondonacion = "CONDONACIÓN TOTAL") Then
             ca.buscarCongresos(TreeCondonacion, Matricula, tipoMatricula, "AutCon")
         ElseIf (tipoCondonacion = "CONDONACIÓN PARCIAL") Then
-            ca.buscarCongresos(TreeCondonacion, Matricula, tipoMatricula, "AutCon")
+
         End If
 
     End Sub

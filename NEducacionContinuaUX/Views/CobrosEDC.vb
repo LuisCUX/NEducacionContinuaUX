@@ -117,13 +117,13 @@
             If (Tree.SelectedNode.Checked = False) Then
                 Tree.SelectedNode.Checked = True
                 Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
-                ch.agregarconcepto(conceptoID, "COLIN")
+                ch.agregarconcepto(conceptoID, "DIN")
                 Me.actualizarTotal(ch.getListaConceptos())
                 Tree.Nodes(2).Nodes(index).SelectedImageIndex = 1
             ElseIf (Tree.SelectedNode.Checked = True) Then
                 Tree.SelectedNode.Checked = False
                 Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
-                ch.eliminarconcepto(conceptoID, "COLIN")
+                ch.eliminarconcepto(conceptoID, "DIN")
                 Me.actualizarTotal(ch.getListaConceptos())
                 Tree.Nodes(2).Nodes(index).SelectedImageIndex = 0
             End If
@@ -139,13 +139,13 @@
             If (Tree.SelectedNode.Checked = False) Then
                 Tree.SelectedNode.Checked = True
                 Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
-                ch.agregarconcepto(conceptoID, "COL")
+                ch.agregarconcepto(conceptoID, "DCO")
                 Me.actualizarTotal(ch.getListaConceptos())
                 Tree.Nodes(3).Nodes(index).SelectedImageIndex = 1
             ElseIf (Tree.SelectedNode.Checked = True) Then
                 Tree.SelectedNode.Checked = False
                 Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
-                ch.eliminarconcepto(conceptoID, "COL")
+                ch.eliminarconcepto(conceptoID, "DCO")
                 Me.actualizarTotal(ch.getListaConceptos())
                 Tree.Nodes(3).Nodes(index).SelectedImageIndex = 0
             End If
@@ -154,13 +154,13 @@
             If (Tree.SelectedNode.Checked = False) Then
                 Tree.SelectedNode.Checked = True
                 Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
-                ch.agregarconcepto(conceptoID, "COLPU")
+                ch.agregarconcepto(conceptoID, "DPU")
                 Me.actualizarTotal(ch.getListaConceptos())
                 Tree.Nodes(4).Nodes(index).SelectedImageIndex = 1
             ElseIf (Tree.SelectedNode.Checked = True) Then
                 Tree.SelectedNode.Checked = False
                 Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
-                ch.eliminarconcepto(conceptoID, "COLPU")
+                ch.eliminarconcepto(conceptoID, "DPU")
                 Me.actualizarTotal(ch.getListaConceptos())
                 Tree.Nodes(4).Nodes(index).SelectedImageIndex = 0
             End If

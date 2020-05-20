@@ -86,7 +86,7 @@
                 End If
                 concep.porcentajeCondonacion = condonacion(1)
             Next
-        ElseIf (claveConcepto = "COLIN") Then
+        ElseIf (claveConcepto = "DIN") Then
             Dim Costo As Decimal
             Dim Descuento As Decimal
             Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, CON.clave_servicio, C.Importe, C.Descuento FROM ing_AsignacionCargosPlanes AS AC 
@@ -108,7 +108,7 @@
                 concep.IVAExento = False
                 concep.Cantidad = 1
             Next
-        ElseIf (claveConcepto = "COL") Then
+        ElseIf (claveConcepto = "DCO") Then
             Dim Costo As Decimal
             Dim Descuento As Decimal
             Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, CON.clave_servicio, C.Importe, C.Descuento FROM ing_AsignacionCargosPlanes AS AC 
@@ -130,7 +130,7 @@
                 concep.IVAExento = False
                 concep.Cantidad = 1
             Next
-        ElseIf (claveConcepto = "COLPU") Then
+        ElseIf (claveConcepto = "DPU") Then
             Dim Costo As Decimal
             Dim Descuento As Decimal
             Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, CON.clave_servicio, C.Importe, C.Descuento FROM ing_AsignacionCargosPlanes AS AC 

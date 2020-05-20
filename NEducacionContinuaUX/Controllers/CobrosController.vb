@@ -79,11 +79,11 @@ Public Class CobrosController
                     Me.cobrarPagoOpcionalExterno(concepto, Matricula, folioPago)
                 ElseIf (concepto.claveConcepto = "CON") Then
                     Me.cobrarCongreso(concepto, Matricula, folioPago, formaPago)
-                ElseIf (concepto.claveConcepto = "COL") Then
+                ElseIf (concepto.claveConcepto = "DCO") Then
                     Me.cobrarColegiaturaDiplomado(concepto, Matricula, folioPago, formaPago)
-                ElseIf (concepto.claveConcepto = "COLIN") Then
+                ElseIf (concepto.claveConcepto = "DIN") Then
                     Me.cobrarInscripcionDiplomado(concepto, Matricula, folioPago, formaPago)
-                ElseIf (concepto.claveConcepto = "COLPU") Then
+                ElseIf (concepto.claveConcepto = "DPU") Then
                     Me.cobrarPagoUnicoDiplomado(concepto, Matricula, folioPago, formaPago)
                 End If
             Next
