@@ -28,7 +28,14 @@
         datePickerDescuentoPagoUnico.MinDate = DateTime.Now
     End Sub
 
-
+    Private Sub cbPlanes_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbPlanes.SelectionChangeCommitted
+        If (cbPlanes.Text <> "NUEVO PLAN") Then
+            txtNombrePlan.Text = cbPlanes.Text
+            pc.llenarVentanaPlanesInscripcion(cbPlanes.SelectedValue, chbInscripcion, txtImporteInscripcion, chbRecargoInscripcion, chbDescuentoInscripcion, txtRecargoInscripcion, datePickerRecargoInscripcion, txtDescuentoInscripcion, txtDescripcionDescuentoInscripcion, datePickerLimiteDescuentoInscripcion)
+            pc.llenarVentanaPlanesColegiaturas(cbPlanes.SelectedValue, listaPaneles, listatxtImportes, listatxtRecargos, listatxtDescuentos, listatxtDescripcionDescuentos, listadatePickerRecargos, listadatePickerDescuentos, listatxtClaves, listatxtConcepto, txtImportePagos, txtRecargosPagos, txtDescuentoPagos, txtDescripcionDescuentoPagos, chbRecargosPagos, chbDescuentoPagos, cbNoPagos)
+            pc.llenarVentanaPlanesPagoUnico(cbPlanes.SelectedValue, chbPagoUnico, txtMontoPagoUnico, chbDescuentoPagoUnico, txtDescuentoPagoUnico, datePickerDescuentoPagoUnico, datePickerPagoUnico)
+        End If
+    End Sub
 
     Private Sub txtNombrePlan_TextChanged(sender As Object, e As EventArgs) Handles txtNombrePlan.TextChanged
         If (txtNombrePlan.TextLength > 0) Then
@@ -37,6 +44,7 @@
             txtImportePagos.Enabled = True
             chbRecargosPagos.Enabled = True
             chbDescuentoPagos.Enabled = True
+            cbNoPagos.Enabled = True
         Else
             chbInscripcion.Enabled = False
             chbPagoUnico.Enabled = False
@@ -45,6 +53,7 @@
             txtImportePagos.Enabled = False
             chbRecargosPagos.Enabled = False
             chbDescuentoPagos.Enabled = False
+            cbNoPagos.Enabled = False
         End If
     End Sub
 
@@ -94,6 +103,8 @@
 
     Private Sub cbDiplomados_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbDiplomados.SelectionChangeCommitted
         Dim tablePlanes As DataTable = db.getDataTableFromSQL($"SELECT ID, Nombre_Plan FROM ing_Planes WHERE ID_Congreso = {cbDiplomados.SelectedValue}")
+        Me.resetControls()
+
         If (tablePlanes.Rows.Count > 0) Then
             ComboboxService.llenarCombobox(cbPlanes, tablePlanes, "ID", "Nombre_Plan")
             txtNombrePlan.Enabled = True
@@ -103,6 +114,7 @@
             cbPlanes.Items.Add("NUEVO PLAN")
             cbPlanes.SelectedIndex = 0
             txtNombrePlan.Enabled = True
+            txtNombrePlan.Clear()
         End If
     End Sub
 
@@ -209,6 +221,7 @@
 
             For x = 0 To cbNoPagos.SelectedIndex
                 listadatePickerRecargos(x).Enabled = False
+                listadatePickerRecargos(x).MinDate = "1990-01-01"
                 listadatePickerRecargos(x).Value = "1990-01-01"
             Next
         End If
@@ -246,6 +259,7 @@
 
             For x = 0 To cbNoPagos.SelectedIndex
                 listadatePickerDescuentos(x).Enabled = False
+                listadatePickerDescuentos(x).MinDate = "1990-01-01"
                 listadatePickerDescuentos(x).Value = "1990-01-01"
             Next
         End If
@@ -912,6 +926,25 @@
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+        If (chbInscripcion.Checked = True) Then
+            If (txtImporteInscripcionText.Text = "") Then
+                MessageBox.Show("Ingrese un monto de inscripción")
+                Exit Sub
+            ElseIf (chbRecargoInscripcion.Checked = True And txtRecargoInscripcion.Text = "") Then
+                MessageBox.Show("Ingrese un monto de recargo de inscripción")
+                Exit Sub
+            ElseIf (chbDescuentoInscripcion.Checked = True And txtDescuentoInscripcion.Text = "") Then
+                MessageBox.Show("Ingrese un monto de descuento de inscripción")
+                Exit Sub
+            ElseIf (chbDescuentoInscripcion.Checked = True And txtDescripcionDescuentoInscripcion.Text = "") Then
+                MessageBox.Show("Ingrese una descripción de descuento de inscripción")
+                Exit Sub
+            End If
+        End If
+
+        If (chbPagoUnico.Checked = True) Then
+
+        End If
         Try
             db.startTransaction()
             Dim Orden As Integer = 1
@@ -939,5 +972,43 @@
             db.rollBackTransaction()
             MessageBox.Show(ex.Message)
         End Try
+    End Sub
+
+    Sub resetControls()
+        ''----------INSCRIPCION----------''
+        chbInscripcion.Checked = False
+        txtImporteInscripcion.Clear()
+        chbRecargoInscripcion.Checked = False
+        chbDescuentoInscripcion.Checked = False
+        txtImporteInscripcionText.Clear()
+        txtRecargoInscripcion.Text = "0.00"
+        txtDescuentoInscripcion.Text = "0.00"
+        txtDescripcionDescuentoInscripcion.Clear()
+
+        ''----------COLEGIATURAS----------''
+        txtImportePagos.Clear()
+        txtRecargosPagos.Clear()
+        txtDescuentoPagos.Clear()
+        txtDescripcionDescuentoPagos.Clear()
+        chbRecargosPagos.Checked = False
+        chbDescuentoPagos.Checked = False
+        For x = 0 To 9
+            listaPaneles(x).Visible = False
+            listatxtClaves(x).Clear()
+            listatxtDescripcionDescuentos(x).Clear()
+            listatxtDescuentos(x).Clear()
+            listatxtImportes(x).Clear()
+            listatxtRecargos(x).Clear()
+        Next
+        cbNoPagos.SelectedIndex = 0
+        cbNoPagos.Enabled = False
+
+        ''----------PAGO UNICO----------''
+        chbPagoUnico.Checked = False
+        txtMontoPagoUnico.Clear()
+        chbDescuentoPagoUnico.Checked = False
+        txtMontoPagoUnicoText.Clear()
+        txtDescuentoPagoUnico.Text = "0.00"
+        txtDescripcionDescuentoPagoUnico.Clear()
     End Sub
 End Class

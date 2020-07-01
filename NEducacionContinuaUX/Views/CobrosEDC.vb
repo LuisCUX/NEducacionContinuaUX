@@ -129,20 +129,21 @@
             End If
         ElseIf (tipoPago = "nodeColegiaturaDip") Then
             Dim index As Integer = Tree.SelectedNode.Index
-            If (index <> siguienteColegiatura) Then
-                Dim mesActual As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "-", "-")
-                MessageBox.Show($"No puede pagar la colegiatura del mes de {mesActual} sin antes haber pagado los meses anteriores")
-                Exit Sub
-            Else
-                siguienteColegiatura = siguienteColegiatura + 1
-            End If
             If (Tree.SelectedNode.Checked = False) Then
+                If (index <> siguienteColegiatura) Then
+                    Dim mesActual As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "-", "-")
+                    MessageBox.Show($"No puede pagar la colegiatura del mes de {mesActual} sin antes haber pagado los meses anteriores")
+                    Exit Sub
+                Else
+                    siguienteColegiatura = siguienteColegiatura + 1
+                End If
                 Tree.SelectedNode.Checked = True
                 Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
                 ch.agregarconcepto(conceptoID, "DCO")
                 Me.actualizarTotal(ch.getListaConceptos())
                 Tree.Nodes(3).Nodes(index).SelectedImageIndex = 1
             ElseIf (Tree.SelectedNode.Checked = True) Then
+                siguienteColegiatura = siguienteColegiatura - 1
                 Tree.SelectedNode.Checked = False
                 Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
                 ch.eliminarconcepto(conceptoID, "DCO")
