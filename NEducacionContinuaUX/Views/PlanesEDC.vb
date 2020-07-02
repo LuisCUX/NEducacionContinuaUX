@@ -10,6 +10,8 @@
     Dim listatxtConcepto As New List(Of TextBox)
     Dim pc As PlanesController = New PlanesController()
     Dim db As DataBaseService = New DataBaseService()
+    Dim edicion As Boolean = False
+    Dim colegiaturas As Integer = 0
     Private Sub PlanesEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.llenarListaPanel()
         Me.llenarlistatxtImportes()
@@ -34,6 +36,10 @@
             pc.llenarVentanaPlanesInscripcion(cbPlanes.SelectedValue, chbInscripcion, txtImporteInscripcion, chbRecargoInscripcion, chbDescuentoInscripcion, txtRecargoInscripcion, datePickerRecargoInscripcion, txtDescuentoInscripcion, txtDescripcionDescuentoInscripcion, datePickerLimiteDescuentoInscripcion)
             pc.llenarVentanaPlanesColegiaturas(cbPlanes.SelectedValue, listaPaneles, listatxtImportes, listatxtRecargos, listatxtDescuentos, listatxtDescripcionDescuentos, listadatePickerRecargos, listadatePickerDescuentos, listatxtClaves, listatxtConcepto, txtImportePagos, txtRecargosPagos, txtDescuentoPagos, txtDescripcionDescuentoPagos, chbRecargosPagos, chbDescuentoPagos, cbNoPagos)
             pc.llenarVentanaPlanesPagoUnico(cbPlanes.SelectedValue, chbPagoUnico, txtMontoPagoUnico, chbDescuentoPagoUnico, txtDescuentoPagoUnico, datePickerDescuentoPagoUnico, datePickerPagoUnico)
+            edicion = True
+        Else
+            edicion = False
+            Me.resetControls()
         End If
     End Sub
 
@@ -194,8 +200,10 @@
         End If
 
         Me.ocultarPaneles()
+        colegiaturas = 0
         For x = 0 To cbNoPagos.SelectedIndex
             listaPaneles(x).Visible = True
+            colegiaturas = colegiaturas + 1
         Next
     End Sub
 
@@ -943,9 +951,29 @@
         End If
 
         If (chbPagoUnico.Checked = True) Then
-
+            If (txtMontoPagoUnico.Text = "") Then
+                MessageBox.Show("Ingrese el monto correspondiente al pago unico")
+                Exit Sub
+            ElseIf (chbDescuentoPagoUnico.Checked = True) Then
+                MessageBox.Show("Ingrese el monto correspondiente al descuento del pago unico")
+                Exit Sub
+            End If
         End If
-        Try
+
+        If (colegiaturas = 0) Then
+            MessageBox.Show("Ingrese al menos una colegiatura")
+            Exit Sub
+        End If
+
+        If (edicion = True) Then
+            Dim NoRegistros As Integer = db.exectSQLQueryScalar($"SELECT COUNT(ID) FROM ing_AsignacionCargosPlanes WHERE ID_Concepto IN (SELECT ID FROM ing_PlanesConceptos WHERE ID_Plan = {cbPlanes.SelectedValue})")
+            If (NoRegistros > 0) Then
+                MessageBox.Show($"Hay {NoRegistros} personas registradas con este plan, no puede ser modificado")
+                Exit Sub
+                Me.Reiniciar()
+            End If
+        End If
+            Try
             db.startTransaction()
             Dim Orden As Integer = 1
             Dim ID_Plan As Integer = pc.guardarPlan(txtNombrePlan.Text, cbDiplomados.SelectedValue)
