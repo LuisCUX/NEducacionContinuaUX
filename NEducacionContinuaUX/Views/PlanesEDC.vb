@@ -36,7 +36,11 @@
             pc.llenarVentanaPlanesInscripcion(cbPlanes.SelectedValue, chbInscripcion, txtImporteInscripcion, chbRecargoInscripcion, chbDescuentoInscripcion, txtRecargoInscripcion, datePickerRecargoInscripcion, txtDescuentoInscripcion, txtDescripcionDescuentoInscripcion, datePickerLimiteDescuentoInscripcion)
             pc.llenarVentanaPlanesColegiaturas(cbPlanes.SelectedValue, listaPaneles, listatxtImportes, listatxtRecargos, listatxtDescuentos, listatxtDescripcionDescuentos, listadatePickerRecargos, listadatePickerDescuentos, listatxtClaves, listatxtConcepto, txtImportePagos, txtRecargosPagos, txtDescuentoPagos, txtDescripcionDescuentoPagos, chbRecargosPagos, chbDescuentoPagos, cbNoPagos)
             pc.llenarVentanaPlanesPagoUnico(cbPlanes.SelectedValue, chbPagoUnico, txtMontoPagoUnico, chbDescuentoPagoUnico, txtDescuentoPagoUnico, datePickerDescuentoPagoUnico, datePickerPagoUnico)
+            colegiaturas = cbNoPagos.SelectedIndex + 1
             edicion = True
+            For x = 0 To colegiaturas - 1
+                listaPaneles(x).Visible = True
+            Next
         Else
             edicion = False
             Me.resetControls()
@@ -964,68 +968,94 @@
             MessageBox.Show("Ingrese al menos una colegiatura")
             Exit Sub
         End If
-
-        For x = 0 To cbNoPagos.SelectedIndex - 1
+        For x = 0 To colegiaturas - 1
             If (listatxtClaves(x).Text = "") Then
-                MessageBox.Show("Ingrese todas las claves")
+                MessageBox.Show("Ingrese la clave correspondiente a la colegiatura")
                 Exit Sub
             End If
+
             If (listatxtImportes(x).Text = "") Then
-                MessageBox.Show("Ingrese correctamente el monto de cada colegiatura")
+                MessageBox.Show("Ingrese el importe correspondiente a la colegiatura")
                 Exit Sub
             End If
-            If (listatxtRecargos(x).Text = "" And chbRecargosPagos.Checked = True) Then
-                MessageBox.Show("Ingrese correctamente el monto de cada recargo")
+
+            If (listatxtDescuentos(x).Text = "") Then
+                MessageBox.Show("Ingrese el importe correspondiente a los descuentos de la colegiatura")
                 Exit Sub
             End If
-            If (listatxtDescuentos(x).Text = "" And chbDescuentoPagos.Checked = True) Then
-                MessageBox.Show("Ingrese correctamente el monto de cada descuento")
-                Exit Sub
-            End If
-            If (listatxtDescripcionDescuentos(x).Text = "" And chbDescuentoPagos.Checked = True) Then
-                MessageBox.Show("Ingrese correctamente la descripción de cada descuento")
+
+            If (listatxtRecargos(x).Text = "") Then
+                MessageBox.Show("Ingrese el importe correspondiente a los recargos de la colegiatura")
                 Exit Sub
             End If
         Next
 
         If (edicion = True) Then
-            Dim NoRegistros As Integer = db.exectSQLQueryScalar($"SELECT COUNT(ID) FROM ing_AsignacionCargosPlanes WHERE ID_Concepto IN (SELECT ID FROM ing_PlanesConceptos WHERE ID_Plan = {cbPlanes.SelectedValue})")
+            Dim NoRegistros As Integer = db.exectSQLQueryScalar($"SELECT COUNT(DISTINCT A.Matricula) FROM ing_AsignacionCargosPlanes AS A
+                                                                  INNER JOIN ing_PlanesConceptos AS C ON C.ID = A.ID_Concepto
+                                                                  WHERE C.ID_Plan = {cbPlanes.SelectedValue}")
             If (NoRegistros > 0) Then
-                MessageBox.Show($"Hay {NoRegistros} personas registradas con este plan, no puede ser modificado")
+                MessageBox.Show($"Hay {NoRegistros} persona/s registrada/s con este plan, no puede ser modificado")
                 Exit Sub
                 Me.Reiniciar()
             Else
-                db.execSQLQueryWithoutParams($"UPDATE ing_PlanesConceptos SET Activo = 0 WHERE ID_Plan = {cbPlanes.SelectedValue}")
-                db.execSQLQueryWithoutParams($"UPDATE ing_Planes SET Activo = 0 WHERE ID = {cbPlanes.SelectedValue}")
+                Try
+                    db.startTransaction()
+                    db.execSQLQueryWithoutParams($"UPDATE ing_PlanesConceptos SET Activo = 0 WHERE ID_Plan = {cbPlanes.SelectedValue}")
+                    Dim Orden As Integer = 1
+                    If (chbInscripcion.Checked = True) Then
+                        pc.guardarInscripcion(cbPlanes.SelectedValue, Orden, txtImporteInscripcion.Text, txtRecargoInscripcion.Text, txtDescuentoInscripcion.Text, pc.obtenerFechaString(datePickerLimiteDescuentoInscripcion), pc.obtenerFechaString(datePickerRecargoInscripcion), chbRecargoInscripcion.Checked)
+                        Orden = Orden + 1
+                    End If
+
+                    For x = 0 To cbNoPagos.SelectedIndex
+                        Dim Clave As String = listatxtClaves(x).Text
+                        Dim Mes As String = listatxtConcepto(x).Text.ToUpper()
+                        pc.guardarPagoPlan(cbPlanes.SelectedValue, Orden, Clave, Mes, listatxtImportes(x).Text, listatxtRecargos(x).Text, listatxtDescuentos(x).Text, pc.obtenerFechaString(listadatePickerDescuentos(x)), pc.obtenerFechaString(listadatePickerRecargos(x)), chbRecargosPagos.Checked)
+                        Orden = Orden + 1
+                    Next
+
+                    If (chbPagoUnico.Checked = True) Then
+                        pc.guardarPagoUnico(cbPlanes.SelectedValue, Orden, CDec(txtMontoPagoUnico.Text), txtDescuentoPagoUnico.Text, pc.obtenerFechaString(datePickerDescuentoPagoUnico), pc.obtenerFechaString(datePickerPagoUnico))
+                        Orden = Orden + 1
+                    End If
+                    db.commitTransaction()
+                    MessageBox.Show("Plan modificado correctamente")
+                    Me.Reiniciar()
+                    Exit Sub
+                Catch ex As Exception
+                    db.rollBackTransaction()
+                End Try
             End If
-        End If
+        Else
             Try
-            db.startTransaction()
-            Dim Orden As Integer = 1
-            Dim ID_Plan As Integer = pc.guardarPlan(txtNombrePlan.Text, cbDiplomados.SelectedValue)
-            If (chbInscripcion.Checked = True) Then
-                pc.guardarInscripcion(ID_Plan, Orden, txtImporteInscripcion.Text, txtRecargoInscripcion.Text, txtDescuentoInscripcion.Text, pc.obtenerFechaString(datePickerLimiteDescuentoInscripcion), pc.obtenerFechaString(datePickerRecargoInscripcion), chbRecargoInscripcion.Checked)
-                Orden = Orden + 1
-            End If
+                db.startTransaction()
+                Dim Orden As Integer = 1
+                Dim ID_Plan As Integer = pc.guardarPlan(txtNombrePlan.Text, cbDiplomados.SelectedValue)
+                If (chbInscripcion.Checked = True) Then
+                    pc.guardarInscripcion(ID_Plan, Orden, txtImporteInscripcion.Text, txtRecargoInscripcion.Text, txtDescuentoInscripcion.Text, pc.obtenerFechaString(datePickerLimiteDescuentoInscripcion), pc.obtenerFechaString(datePickerRecargoInscripcion), chbRecargoInscripcion.Checked)
+                    Orden = Orden + 1
+                End If
 
-            For x = 0 To cbNoPagos.SelectedIndex
-                Dim Clave As String = listatxtClaves(x).Text
-                Dim Mes As String = listatxtConcepto(x).Text.ToUpper()
-                pc.guardarPagoPlan(ID_Plan, Orden, Clave, Mes, listatxtImportes(x).Text, listatxtRecargos(x).Text, listatxtDescuentos(x).Text, pc.obtenerFechaString(listadatePickerDescuentos(x)), pc.obtenerFechaString(listadatePickerRecargos(x)), chbRecargosPagos.Checked)
-                Orden = Orden + 1
-            Next
+                For x = 0 To cbNoPagos.SelectedIndex
+                    Dim Clave As String = listatxtClaves(x).Text
+                    Dim Mes As String = listatxtConcepto(x).Text.ToUpper()
+                    pc.guardarPagoPlan(ID_Plan, Orden, Clave, Mes, listatxtImportes(x).Text, listatxtRecargos(x).Text, listatxtDescuentos(x).Text, pc.obtenerFechaString(listadatePickerDescuentos(x)), pc.obtenerFechaString(listadatePickerRecargos(x)), chbRecargosPagos.Checked)
+                    Orden = Orden + 1
+                Next
 
-            If (chbPagoUnico.Checked = True) Then
-                pc.guardarPagoUnico(ID_Plan, Orden, CDec(txtMontoPagoUnico.Text), txtDescuentoPagoUnico.Text, pc.obtenerFechaString(datePickerDescuentoPagoUnico), pc.obtenerFechaString(datePickerPagoUnico))
-                Orden = Orden + 1
-            End If
-            db.commitTransaction()
-            MessageBox.Show("Plan registrado correctamente")
-            Me.Reiniciar()
-        Catch ex As Exception
-            db.rollBackTransaction()
-            MessageBox.Show(ex.Message)
-        End Try
+                If (chbPagoUnico.Checked = True) Then
+                    pc.guardarPagoUnico(ID_Plan, Orden, CDec(txtMontoPagoUnico.Text), txtDescuentoPagoUnico.Text, pc.obtenerFechaString(datePickerDescuentoPagoUnico), pc.obtenerFechaString(datePickerPagoUnico))
+                    Orden = Orden + 1
+                End If
+                db.commitTransaction()
+                MessageBox.Show("Plan registrado correctamente")
+                Me.Reiniciar()
+            Catch ex As Exception
+                db.rollBackTransaction()
+                MessageBox.Show(ex.Message)
+            End Try
+        End If
     End Sub
 
     Sub resetControls()
@@ -1065,4 +1095,5 @@
         txtDescuentoPagoUnico.Text = "0.00"
         txtDescripcionDescuentoPagoUnico.Clear()
     End Sub
+
 End Class

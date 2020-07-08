@@ -26,6 +26,8 @@ Partial Class AutorizacionCondonacionEDC
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AutorizacionCondonacionEDC))
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.panelBusqueda = New System.Windows.Forms.Panel()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.rbEDC = New System.Windows.Forms.RadioButton()
         Me.rbExterno = New System.Windows.Forms.RadioButton()
         Me.cbExterno = New System.Windows.Forms.ComboBox()
@@ -58,14 +60,19 @@ Partial Class AutorizacionCondonacionEDC
         Me.ImageListTree = New System.Windows.Forms.ImageList(Me.components)
         Me.tabAutorizacionCaja = New System.Windows.Forms.TabPage()
         Me.tabAutorizacionProceso = New System.Windows.Forms.TabPage()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.treeAutorizacionCaja = New System.Windows.Forms.TreeView()
+        Me.btnGuardarAutorizacionCaja = New System.Windows.Forms.Button()
+        Me.GridAutorizacionCaja = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.panelBusqueda.SuspendLayout()
         Me.panelDatos.SuspendLayout()
         Me.panelAutCon.SuspendLayout()
         Me.tabAutCon.SuspendLayout()
         Me.tabCondonaciones.SuspendLayout()
         CType(Me.GridCondonaciones, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabAutorizacionCaja.SuspendLayout()
+        CType(Me.GridAutorizacionCaja, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblNombreVentana
@@ -95,6 +102,28 @@ Partial Class AutorizacionCondonacionEDC
         Me.panelBusqueda.Name = "panelBusqueda"
         Me.panelBusqueda.Size = New System.Drawing.Size(1175, 50)
         Me.panelBusqueda.TabIndex = 15
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label2.Location = New System.Drawing.Point(872, 25)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(65, 16)
+        Me.Label2.TabIndex = 79
+        Me.Label2.Text = "matricula:"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label1.Location = New System.Drawing.Point(874, 7)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(58, 16)
+        Me.Label1.TabIndex = 78
+        Me.Label1.Text = "Tipo de "
         '
         'rbEDC
         '
@@ -332,7 +361,7 @@ Partial Class AutorizacionCondonacionEDC
         Me.btnGuardarCondonaciones.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.descargar
         Me.btnGuardarCondonaciones.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnGuardarCondonaciones.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGuardarCondonaciones.Location = New System.Drawing.Point(947, 385)
+        Me.btnGuardarCondonaciones.Location = New System.Drawing.Point(1083, 385)
         Me.btnGuardarCondonaciones.Name = "btnGuardarCondonaciones"
         Me.btnGuardarCondonaciones.Size = New System.Drawing.Size(72, 53)
         Me.btnGuardarCondonaciones.TabIndex = 15
@@ -409,6 +438,9 @@ Partial Class AutorizacionCondonacionEDC
         'tabAutorizacionCaja
         '
         Me.tabAutorizacionCaja.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.tabAutorizacionCaja.Controls.Add(Me.btnGuardarAutorizacionCaja)
+        Me.tabAutorizacionCaja.Controls.Add(Me.GridAutorizacionCaja)
+        Me.tabAutorizacionCaja.Controls.Add(Me.treeAutorizacionCaja)
         Me.tabAutorizacionCaja.Location = New System.Drawing.Point(4, 22)
         Me.tabAutorizacionCaja.Name = "tabAutorizacionCaja"
         Me.tabAutorizacionCaja.Padding = New System.Windows.Forms.Padding(3)
@@ -425,27 +457,49 @@ Partial Class AutorizacionCondonacionEDC
         Me.tabAutorizacionProceso.TabIndex = 2
         Me.tabAutorizacionProceso.Text = "Autorizacion de Proceso"
         '
-        'Label2
+        'treeAutorizacionCaja
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(872, 25)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(65, 16)
-        Me.Label2.TabIndex = 79
-        Me.Label2.Text = "matricula:"
+        Me.treeAutorizacionCaja.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.treeAutorizacionCaja.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.treeAutorizacionCaja.ForeColor = System.Drawing.SystemColors.Control
+        Me.treeAutorizacionCaja.Location = New System.Drawing.Point(16, 15)
+        Me.treeAutorizacionCaja.Name = "treeAutorizacionCaja"
+        Me.treeAutorizacionCaja.Size = New System.Drawing.Size(568, 411)
+        Me.treeAutorizacionCaja.StateImageList = Me.ImageListTree
+        Me.treeAutorizacionCaja.TabIndex = 10
         '
-        'Label1
+        'btnGuardarAutorizacionCaja
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label1.Location = New System.Drawing.Point(874, 7)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(58, 16)
-        Me.Label1.TabIndex = 78
-        Me.Label1.Text = "Tipo de "
+        Me.btnGuardarAutorizacionCaja.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.descargar
+        Me.btnGuardarAutorizacionCaja.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnGuardarAutorizacionCaja.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnGuardarAutorizacionCaja.Location = New System.Drawing.Point(1083, 373)
+        Me.btnGuardarAutorizacionCaja.Name = "btnGuardarAutorizacionCaja"
+        Me.btnGuardarAutorizacionCaja.Size = New System.Drawing.Size(72, 53)
+        Me.btnGuardarAutorizacionCaja.TabIndex = 17
+        Me.btnGuardarAutorizacionCaja.UseVisualStyleBackColor = True
+        '
+        'GridAutorizacionCaja
+        '
+        Me.GridAutorizacionCaja.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.GridAutorizacionCaja.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.GridAutorizacionCaja.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.GridAutorizacionCaja.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2})
+        Me.GridAutorizacionCaja.Location = New System.Drawing.Point(592, 15)
+        Me.GridAutorizacionCaja.Name = "GridAutorizacionCaja"
+        Me.GridAutorizacionCaja.Size = New System.Drawing.Size(563, 330)
+        Me.GridAutorizacionCaja.TabIndex = 16
+        '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.HeaderText = "Node"
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.Visible = False
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        Me.DataGridViewTextBoxColumn2.HeaderText = "Concepto"
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
         '
         'AutorizacionCondonacionEDC
         '
@@ -470,6 +524,8 @@ Partial Class AutorizacionCondonacionEDC
         Me.tabCondonaciones.ResumeLayout(False)
         Me.tabCondonaciones.PerformLayout()
         CType(Me.GridCondonaciones, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabAutorizacionCaja.ResumeLayout(False)
+        CType(Me.GridAutorizacionCaja, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -510,4 +566,9 @@ Partial Class AutorizacionCondonacionEDC
     Friend WithEvents rbExterno As RadioButton
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
+    Friend WithEvents btnGuardarAutorizacionCaja As Button
+    Friend WithEvents GridAutorizacionCaja As DataGridView
+    Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+    Friend WithEvents treeAutorizacionCaja As TreeView
 End Class
