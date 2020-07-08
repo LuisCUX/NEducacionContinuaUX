@@ -965,12 +965,38 @@
             Exit Sub
         End If
 
+        For x = 0 To cbNoPagos.SelectedIndex - 1
+            If (listatxtClaves(x).Text = "") Then
+                MessageBox.Show("Ingrese todas las claves")
+                Exit Sub
+            End If
+            If (listatxtImportes(x).Text = "") Then
+                MessageBox.Show("Ingrese correctamente el monto de cada colegiatura")
+                Exit Sub
+            End If
+            If (listatxtRecargos(x).Text = "" And chbRecargosPagos.Checked = True) Then
+                MessageBox.Show("Ingrese correctamente el monto de cada recargo")
+                Exit Sub
+            End If
+            If (listatxtDescuentos(x).Text = "" And chbDescuentoPagos.Checked = True) Then
+                MessageBox.Show("Ingrese correctamente el monto de cada descuento")
+                Exit Sub
+            End If
+            If (listatxtDescripcionDescuentos(x).Text = "" And chbDescuentoPagos.Checked = True) Then
+                MessageBox.Show("Ingrese correctamente la descripción de cada descuento")
+                Exit Sub
+            End If
+        Next
+
         If (edicion = True) Then
             Dim NoRegistros As Integer = db.exectSQLQueryScalar($"SELECT COUNT(ID) FROM ing_AsignacionCargosPlanes WHERE ID_Concepto IN (SELECT ID FROM ing_PlanesConceptos WHERE ID_Plan = {cbPlanes.SelectedValue})")
             If (NoRegistros > 0) Then
                 MessageBox.Show($"Hay {NoRegistros} personas registradas con este plan, no puede ser modificado")
                 Exit Sub
                 Me.Reiniciar()
+            Else
+                db.execSQLQueryWithoutParams($"UPDATE ing_PlanesConceptos SET Activo = 0 WHERE ID_Plan = {cbPlanes.SelectedValue}")
+                db.execSQLQueryWithoutParams($"UPDATE ing_Planes SET Activo = 0 WHERE ID = {cbPlanes.SelectedValue}")
             End If
         End If
             Try
