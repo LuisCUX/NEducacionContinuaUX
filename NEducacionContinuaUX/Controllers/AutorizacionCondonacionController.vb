@@ -40,10 +40,32 @@
         Next
 
         If (tipoCondonacion = "CONDONACIÓN TOTAL") Then
-            ca.buscarCongresos(TreeCondonacion, Matricula, tipoMatricula, "AutCon")
+            ca.buscarCongresos(TreeCondonacion, Matricula, tipoMatricula, "ConTotal")
         ElseIf (tipoCondonacion = "CONDONACIÓN PARCIAL") Then
-
+            ca.buscarRecargosDiplomados(TreeCondonacion, Matricula, tipoMatricula, "ConParcial")
         End If
+    End Sub
+
+    Sub ActualizarArbolAutorizacionCaja(TreeAutorizacionCaja As TreeView, Matricula As String, tipoMatricula As String)
+        TreeAutorizacionCaja.Nodes.Clear()
+        Dim tableAutorizacionesCaja As DataTable = db.getDataTableFromSQL($"SELECT C.ID, C.Nombre FROM aut_Cat_Claves AS C
+                                                                              INNER JOIN aut_res_AutClaves AS R ON R.ID_Clave = C.ID
+                                                                              INNER JOIN aut_Cat_Autorizaciones AS A ON A.ID = R.ID_Autorizacion
+                                                                              INNER JOIN aut_Cat_TipoAutorizacion AS T ON T.ID = A.ID_TipoAutorizacion AND T.ID = 1")
+        For Each item As DataRow In tableAutorizacionesCaja.Rows
+            TreeAutorizacionCaja.Nodes.Add(item("Nombre")).StateImageIndex = 2
+        Next
+
+        For Each item As TreeNode In TreeAutorizacionCaja.Nodes
+            Dim tableItem As DataTable = db.getDataTableFromSQL($"SELECT A.Nombre FROM aut_Cat_Autorizaciones AS A
+                                                                  INNER JOIN aut_res_AutClaves AS R ON R.ID_Autorizacion = A.ID
+                                                                  INNER JOIN aut_Cat_Claves as C ON C.ID = R.ID_Clave
+                                                                  WHERE A.ID_TipoAutorizacion = 1 AND C.Nombre = '{item.Text}'")
+            For Each row As DataRow In tableItem.Rows
+                TreeAutorizacionCaja.Nodes(0).Nodes.Add(row("Nombre")).StateImageIndex = 2
+            Next
+        Next
+        ca.buscarColegiaturasConRecargosDiplomados(TreeAutorizacionCaja, Matricula, tipoMatricula, "AutCaja")
     End Sub
 
     ''-----------------------------------------------------------------------------------------------------''

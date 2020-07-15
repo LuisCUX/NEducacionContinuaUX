@@ -59,12 +59,12 @@ Partial Class AutorizacionCondonacionEDC
         Me.TreeCondonaciones = New System.Windows.Forms.TreeView()
         Me.ImageListTree = New System.Windows.Forms.ImageList(Me.components)
         Me.tabAutorizacionCaja = New System.Windows.Forms.TabPage()
-        Me.tabAutorizacionProceso = New System.Windows.Forms.TabPage()
-        Me.treeAutorizacionCaja = New System.Windows.Forms.TreeView()
         Me.btnGuardarAutorizacionCaja = New System.Windows.Forms.Button()
         Me.GridAutorizacionCaja = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.treeAutorizacionCaja = New System.Windows.Forms.TreeView()
+        Me.tabAutorizacionProceso = New System.Windows.Forms.TabPage()
         Me.panelBusqueda.SuspendLayout()
         Me.panelDatos.SuspendLayout()
         Me.panelAutCon.SuspendLayout()
@@ -448,26 +448,6 @@ Partial Class AutorizacionCondonacionEDC
         Me.tabAutorizacionCaja.TabIndex = 1
         Me.tabAutorizacionCaja.Text = "Autorizacion de Caja"
         '
-        'tabAutorizacionProceso
-        '
-        Me.tabAutorizacionProceso.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.tabAutorizacionProceso.Location = New System.Drawing.Point(4, 22)
-        Me.tabAutorizacionProceso.Name = "tabAutorizacionProceso"
-        Me.tabAutorizacionProceso.Size = New System.Drawing.Size(1161, 441)
-        Me.tabAutorizacionProceso.TabIndex = 2
-        Me.tabAutorizacionProceso.Text = "Autorizacion de Proceso"
-        '
-        'treeAutorizacionCaja
-        '
-        Me.treeAutorizacionCaja.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.treeAutorizacionCaja.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.treeAutorizacionCaja.ForeColor = System.Drawing.SystemColors.Control
-        Me.treeAutorizacionCaja.Location = New System.Drawing.Point(16, 15)
-        Me.treeAutorizacionCaja.Name = "treeAutorizacionCaja"
-        Me.treeAutorizacionCaja.Size = New System.Drawing.Size(568, 411)
-        Me.treeAutorizacionCaja.StateImageList = Me.ImageListTree
-        Me.treeAutorizacionCaja.TabIndex = 10
-        '
         'btnGuardarAutorizacionCaja
         '
         Me.btnGuardarAutorizacionCaja.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.descargar
@@ -500,6 +480,26 @@ Partial Class AutorizacionCondonacionEDC
         '
         Me.DataGridViewTextBoxColumn2.HeaderText = "Concepto"
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        '
+        'treeAutorizacionCaja
+        '
+        Me.treeAutorizacionCaja.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.treeAutorizacionCaja.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.treeAutorizacionCaja.ForeColor = System.Drawing.SystemColors.Control
+        Me.treeAutorizacionCaja.Location = New System.Drawing.Point(16, 15)
+        Me.treeAutorizacionCaja.Name = "treeAutorizacionCaja"
+        Me.treeAutorizacionCaja.Size = New System.Drawing.Size(568, 411)
+        Me.treeAutorizacionCaja.StateImageList = Me.ImageListTree
+        Me.treeAutorizacionCaja.TabIndex = 10
+        '
+        'tabAutorizacionProceso
+        '
+        Me.tabAutorizacionProceso.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.tabAutorizacionProceso.Location = New System.Drawing.Point(4, 22)
+        Me.tabAutorizacionProceso.Name = "tabAutorizacionProceso"
+        Me.tabAutorizacionProceso.Size = New System.Drawing.Size(1161, 441)
+        Me.tabAutorizacionProceso.TabIndex = 2
+        Me.tabAutorizacionProceso.Text = "Autorizacion de Proceso"
         '
         'AutorizacionCondonacionEDC
         '

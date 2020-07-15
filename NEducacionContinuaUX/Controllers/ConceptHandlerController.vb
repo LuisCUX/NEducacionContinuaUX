@@ -23,7 +23,7 @@
             If (claveConcepto = "POA") Then
                 nombreTabla = "ing_AsignacionPagoOpcionalAlumno"
                 claveConceptoint = 1
-            ElseIf (claveconcepto = "POE") Then
+            ElseIf (claveConcepto = "POE") Then
                 nombreTabla = "ing_AsignacionPagoOpcionalExterno"
                 claveConceptoint = 2
             End If
@@ -151,6 +151,30 @@
                 concep.consideraIVA = False
                 concep.IVAExento = False
                 concep.Cantidad = 1
+            Next
+        ElseIf (claveConcepto = "REC") Then
+            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT ID, Descripcion, Monto FROM ing_PlanesRecargos WHERE ID = {conceptoID} AND Activo = 1")
+
+            Dim condonacion As Object() = Me.obtenerDatosCondonacion(conceptoID, 7)
+
+            For Each item As DataRow In tableConcepto.Rows
+                concep.IDConcepto = item("ID")
+                concep.NombreConcepto = Me.removerEspaciosInicioFin(item("Descripcion"))
+                concep.claveConcepto = claveConcepto
+                concep.cveClase = "86121700"
+                concep.cveUnidad = "E48"
+                concep.costoUnitario = item("Monto")
+                concep.descuento = 0.00
+                concep.absorbeIVA = False
+                concep.consideraIVA = False
+                concep.IVAExento = False
+                concep.Cantidad = 1
+                If (condonacion(0) > 0) Then
+                    concep.Condonacion = True
+                Else
+                    concep.Condonacion = False
+                End If
+                concep.porcentajeCondonacion = condonacion(1)
             Next
         End If
         Return concep

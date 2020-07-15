@@ -1,6 +1,6 @@
 ﻿Public Class CargosController
     Dim db As DataBaseService = New DataBaseService()
-
+    Dim ch As ConceptHandlerController = New ConceptHandlerController()
     ''----------------------------------------------------------------------------------------------------------------------------------------
     ''--------------------------------------------------------BUSCA PAGOS OPCIONALES----------------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
@@ -60,7 +60,7 @@
             Dim result As String = $"[{item("id_registro")}]|({item("Clave")})|{item("nombre")}|{item("costo_total")}|{item("Cantidad")}|Total: {Me.calcularTotal(item("costo_total"), item("Cantidad"), item("considerarIVA"), item("AgregaIVA"), item("exentaIVA"))}"
             Dim IDCondonacion As Integer = db.exectSQLQueryScalar($"SELECT ID FROM aut_Condonaciones WHERE ID_ClaveConcepto = 3 AND ID_Concepto = {item("id_registro")}")
             If (IDCondonacion > 0) Then
-                If (Tipo = "AutCon") Then
+                If (Tipo = "ConTotal") Then
                     Continue For
                 End If
                 Dim porcentaje As Decimal = db.exectSQLQueryScalar($"SELECT Porcentaje FROM aut_Condonaciones WHERE ID = {IDCondonacion}")
@@ -69,7 +69,7 @@
             If (Tipo = "Cobros") Then
                 Tree.Nodes(0).Nodes.Add(result).StateImageIndex = 0
                 Tree.Nodes(0).Expand()
-            ElseIf (Tipo = "AutCon") Then
+            ElseIf (Tipo = "ConTotal") Then
                 Tree.Nodes(0).Nodes(0).Nodes.Add(result).StateImageIndex = 0
                 Tree.Nodes(0).Nodes(0).Expand()
             End If
@@ -110,10 +110,45 @@
                                                                       INNER JOIN ing_CatClavesPagos AS CP ON CP.ID = 5
                                                                       WHERE AC.Matricula = '{Matricula}' AND C.Clave = 'P13' AND AC.Activo = 1")
         For Each item As DataRow In tablePagoUnico.Rows
-            Dim result As String = $"[{item("ID")}]|({item("Clave")})|{item("Descripcion")}|{item("Importe")}|{1}|Total: {Me.calcularTotal(item("Importe"), 1, True, False, False)}"
+            Dim result As String = $"[{item("ID")}]|({item("Clave")})|{item("Descripcion")}|{item("Importe")}|{1}|Total: {Me.calcularTotal(item("Importe"), 1, False, False, False)}"
             If (Tipo = "Cobros") Then
-                Tree.Nodes(4).Nodes.Add(result).StateImageIndex = 0
-                Tree.Nodes(4).Expand()
+                Tree.Nodes(4).Nodes(0).Nodes.Add(result).StateImageIndex = 0
+                Tree.Nodes(4).Nodes(0).Expand()
+            End If
+        Next
+    End Sub
+
+    Sub buscarRecargosDiplomados(Tree As TreeView, Matricula As String, TipoMatricula As String, Tipo As String)
+        Dim tableRecargos As DataTable = db.getDataTableFromSQL($"SELECT P.ID, P.Descripcion, P.Monto, C.Clave FROM ing_PlanesRecargos AS P
+                                                                  INNER JOIN ing_CatClavesPagos AS C ON C.ID = 7
+                                                                  WHERE P.Matricula = '{Matricula}' AND Activo = 1")
+        For Each item As DataRow In tableRecargos.Rows
+            Dim result As String = $"[{item("ID")}]|({item("Clave")})|{item("Descripcion")}|{item("Monto")}|{1}|Total: {Me.calcularTotal(item("Monto"), 1, True, False, False)}"
+            Dim condonacion As Object() = ch.obtenerDatosCondonacion(item("ID"), 7)
+            If (condonacion(0) > 0) Then
+                result = $"{result}|Condonación {Convert.ToInt32(condonacion(1))}%"
+            End If
+            If (Tipo = "Cobros") Then
+                Tree.Nodes(5).Nodes.Add(result).StateImageIndex = 0
+                Tree.Nodes(5).Expand()
+            ElseIf (Tipo = "ConParcial") Then
+                Tree.Nodes(0).Nodes(0).Nodes.Add(result).StateImageIndex = 0
+                Tree.Nodes(0).Nodes(0).Expand()
+            End If
+        Next
+    End Sub
+
+    Sub buscarColegiaturasConRecargosDiplomados(Tree As TreeView, Matricula As String, TipoMatricula As String, Tipo As String)
+        Dim tableRecargos As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, C.Importe, CP.Clave FROM ing_AsignacionCargosPlanes AS AC 
+                                                                      INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
+                                                                      INNER JOIN ing_CatClavesPagos AS CP ON CP.ID = 5
+                                                                      INNER JOIN ing_PlanesRecargos AS R ON R.ID_Concepto = AC.ID
+                                                                      WHERE AC.Matricula = '{Matricula}' AND C.Clave != 'P00' AND C.Clave != 'P13' AND AC.Activo = 1")
+        For Each item As DataRow In tableRecargos.Rows
+            Dim result As String = $"[{item("ID")}]|({item("Clave")})|{item("Descripcion")}|{item("Importe")}|{1}|Total: {Me.calcularTotal(item("Importe"), 1, True, False, False)}"
+            If (Tipo = "AutCaja") Then
+                Tree.Nodes(0).Nodes(0).Nodes.Add(result).StateImageIndex = 0
+                Tree.Nodes(0).Nodes(0).Expand()
             End If
         Next
     End Sub
@@ -129,6 +164,8 @@
             IVA = costoUnitario * 0.16
             total = (costoUnitario + IVA) * cantidad
         ElseIf (consideraIVA = False And agregaIVA = False And exentaIVA = True) Then
+            total = costoUnitario * cantidad
+        ElseIf (consideraIVA = False And agregaIVA = False And exentaIVA = False) Then
             total = costoUnitario * cantidad
         End If
 

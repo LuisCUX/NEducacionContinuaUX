@@ -28,6 +28,7 @@ Partial Class CobrosEDC
         Dim TreeNode3 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Inscripción a Diplomados")
         Dim TreeNode4 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Colegiaturas de Diplomados")
         Dim TreeNode5 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Pago Unico de Diplomado")
+        Dim TreeNode6 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Recargos de Diplomados")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CobrosEDC))
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.panelBusqueda = New System.Windows.Forms.Panel()
@@ -381,7 +382,11 @@ Partial Class CobrosEDC
         TreeNode5.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         TreeNode5.StateImageIndex = 2
         TreeNode5.Text = "Pago Unico de Diplomado"
-        Me.Tree.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2, TreeNode3, TreeNode4, TreeNode5})
+        TreeNode6.Name = "nodeColegiaturasRec"
+        TreeNode6.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        TreeNode6.StateImageIndex = 2
+        TreeNode6.Text = "Recargos de Diplomados"
+        Me.Tree.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2, TreeNode3, TreeNode4, TreeNode5, TreeNode6})
         Me.Tree.Size = New System.Drawing.Size(715, 415)
         Me.Tree.StateImageList = Me.ImageListTree
         Me.Tree.TabIndex = 8

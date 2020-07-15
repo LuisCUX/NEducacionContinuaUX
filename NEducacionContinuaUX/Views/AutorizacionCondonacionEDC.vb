@@ -29,12 +29,16 @@
         ElseIf (tipoMatricula = "EC") Then
             va.buscarMatriculaEC(Matricula, panelDatos, panelAutCon, txtNombre, txtEmail, txtCarrera, txtTurno)
         End If
+        ac.ActualizarArbolAutorizacionCaja(treeAutorizacionCaja, Matricula, tipoMatricula)
     End Sub
 
     Private Sub TreeCondonaciones_DoubleClick(sender As Object, e As EventArgs) Handles TreeCondonaciones.DoubleClick
         Me.NodosCondonaciones()
     End Sub
 
+    Private Sub treeAutorizacionCaja_DoubleClick(sender As Object, e As EventArgs) Handles treeAutorizacionCaja.DoubleClick
+        Me.NodosAutorizacionCaja()
+    End Sub
 
     Sub NodosCondonaciones()
         If (TreeCondonaciones.SelectedNode Is Nothing) Then
@@ -51,7 +55,7 @@
                 Me.Enabled = False
                 Dim NombreAutorizacion As String = TreeCondonaciones.SelectedNode.Parent.Text
                 Dim NombreClave As String = TreeCondonaciones.SelectedNode.Parent.Parent.Text
-                Dim ID_res As Integer = ac.ObtenerIDResAutCon(4, NombreAutorizacion, NombreClave)
+                Dim ID_res As Integer = ac.ObtenerIDResAutCon(3, NombreAutorizacion, NombreClave)
                 ObjectBagService.setItem("ID_RES", ID_res)
                 ObjectBagService.setItem("Text", TreeCondonaciones.SelectedNode.Text)
                 ModalAutConPorcentaje.MdiParent = PrincipalView
@@ -69,6 +73,33 @@
             For x = 0 To GridCondonaciones.Rows.Count() - 1
                 If (GridCondonaciones.Rows(x).Cells(1).Value = TreeCondonaciones.SelectedNode.Text) Then
                     GridCondonaciones.Rows.RemoveAt(x)
+                    Exit Sub
+                End If
+            Next
+        End If
+    End Sub
+
+    Sub NodosAutorizacionCaja()
+        If (treeAutorizacionCaja.SelectedNode Is Nothing) Then
+            Exit Sub
+        ElseIf (treeAutorizacionCaja.SelectedNode.StateImageIndex = 2) Then
+            Exit Sub
+        End If
+
+        Dim index As Integer = treeAutorizacionCaja.SelectedNode.Index
+        If (treeAutorizacionCaja.SelectedNode.Checked = False) Then
+            treeAutorizacionCaja.SelectedNode.Checked = True
+            treeAutorizacionCaja.SelectedNode.SelectedImageIndex = 1
+            Dim NombreAutorizacion As String = treeAutorizacionCaja.SelectedNode.Parent.Text
+            Dim NombreClave As String = treeAutorizacionCaja.SelectedNode.Parent.Parent.Text
+            Dim ID_res As Integer = ac.ObtenerIDResAutCon(1, NombreAutorizacion, NombreClave)
+            GridAutorizacionCaja.Rows.Add(ID_res, treeAutorizacionCaja.SelectedNode.Text)
+        Else
+            treeAutorizacionCaja.SelectedNode.Checked = False
+            treeAutorizacionCaja.SelectedNode.SelectedImageIndex = 0
+            For x = 0 To GridAutorizacionCaja.Rows.Count() - 1
+                If (GridAutorizacionCaja.Rows(x).Cells(1).Value = treeAutorizacionCaja.SelectedNode.Text) Then
+                    GridAutorizacionCaja.Rows.RemoveAt(x)
                     Exit Sub
                 End If
             Next
@@ -120,4 +151,5 @@
 
         End Try
     End Sub
+
 End Class

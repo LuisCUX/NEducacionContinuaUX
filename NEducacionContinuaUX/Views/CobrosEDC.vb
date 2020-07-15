@@ -6,7 +6,6 @@
     Dim ca As CargosController = New CargosController()
     Dim ch As ConceptHandlerController = New ConceptHandlerController()
     Dim va As ValidacionesController = New ValidacionesController()
-    Dim siguienteColegiatura As Integer = 0
     Private Sub CobrosEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim tableFormaPago As DataTable = db.getDataTableFromSQL("SELECT Forma_Pago, Descripcion FROM ing_CatFormaPago")
         ComboboxService.llenarCombobox(cbFormaPago, tableFormaPago, "Forma_Pago", "Descripcion")
@@ -34,11 +33,13 @@
         ca.buscarColegiaturas(Tree, Matricula, tipoMatricula, "Cobros")
         ca.buscarInscripcionesDiplomados(Tree, Matricula, tipoMatricula, "Cobros")
         ca.buscarPagoUnicoDiplomados(Tree, Matricula, tipoMatricula, "Cobros")
+        ca.buscarRecargosDiplomados(Tree, Matricula, tipoMatricula, "Cobros")
         Tree.Nodes(0).Expand()
         Tree.Nodes(1).Expand()
         Tree.Nodes(2).Expand()
         Tree.Nodes(3).Expand()
         Tree.Nodes(4).Expand()
+        Tree.Nodes(5).Expand()
     End Sub
 
     Sub Reiniciar()
@@ -130,20 +131,17 @@
         ElseIf (tipoPago = "nodeColegiaturaDip") Then
             Dim index As Integer = Tree.SelectedNode.Index
             If (Tree.SelectedNode.Checked = False) Then
-                If (index <> siguienteColegiatura) Then
+                Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
+                If (Me.buscarRecargo(conceptoID) = False) Then
                     Dim mesActual As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "-", "-")
-                    MessageBox.Show($"No puede pagar la colegiatura del mes de {mesActual} sin antes haber pagado los meses anteriores")
+                    MessageBox.Show($"No puede pagar la colegiatura del mes de {mesActual} sin antes haber pagado el recargo correspondiente")
                     Exit Sub
-                Else
-                    siguienteColegiatura = siguienteColegiatura + 1
                 End If
                 Tree.SelectedNode.Checked = True
-                Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
                 ch.agregarconcepto(conceptoID, "DCO")
                 Me.actualizarTotal(ch.getListaConceptos())
                 Tree.Nodes(3).Nodes(index).SelectedImageIndex = 1
             ElseIf (Tree.SelectedNode.Checked = True) Then
-                siguienteColegiatura = siguienteColegiatura - 1
                 Tree.SelectedNode.Checked = False
                 Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
                 ch.eliminarconcepto(conceptoID, "DCO")
@@ -164,6 +162,21 @@
                 ch.eliminarconcepto(conceptoID, "DPU")
                 Me.actualizarTotal(ch.getListaConceptos())
                 Tree.Nodes(4).Nodes(index).SelectedImageIndex = 0
+            End If
+        ElseIf (tipoPago = "nodeColegiaturasRec") Then
+            Dim index As Integer = Tree.SelectedNode.Index
+            If (Tree.SelectedNode.Checked = False) Then
+                Tree.SelectedNode.Checked = True
+                Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
+                ch.agregarconcepto(conceptoID, "REC")
+                Me.actualizarTotal(ch.getListaConceptos())
+                Tree.Nodes(5).Nodes(index).SelectedImageIndex = 1
+            ElseIf (Tree.SelectedNode.Checked = True) Then
+                Tree.SelectedNode.Checked = False
+                Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
+                ch.eliminarconcepto(conceptoID, "REC")
+                Me.actualizarTotal(ch.getListaConceptos())
+                Tree.Nodes(5).Nodes(index).SelectedImageIndex = 0
             End If
         End If
     End Sub
@@ -212,6 +225,19 @@
                                                             ORDER BY NombreCliente")
         ComboboxService.llenarCombobox(cbExterno, tableEDC, "clave_cliente", "NombreCliente")
     End Sub
+
+    Function buscarRecargo(ID As Integer) As Boolean
+        Dim IDRecargo As Integer
+        Dim seleccionado As Boolean
+        For Each item As TreeNode In Tree.Nodes(5).Nodes
+            IDRecargo = co.Extrae_Cadena(item.ToString(), "[", "]")
+            Dim idConceptoRecargo As Integer = db.exectSQLQueryScalar($"SELECT ID_Concepto FROM ing_PlanesRecargos WHERE ID = {IDRecargo}")
+            If (idConceptoRecargo = ID And item.SelectedImageIndex <> 1) Then
+                Return False
+            End If
+        Next
+        Return True
+    End Function
 
     Sub Limpiar()
         txtNombre.Clear()
