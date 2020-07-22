@@ -6,7 +6,7 @@
     Dim listatxtDescripcionDescuentos As New List(Of TextBox)
     Dim listadatePickerRecargos As New List(Of DateTimePicker)
     Dim listadatePickerDescuentos As New List(Of DateTimePicker)
-    Dim listatxtClaves As New List(Of TextBox)
+    Dim listacbClaves As New List(Of ComboBox)
     Dim listatxtConcepto As New List(Of TextBox)
     Dim pc As PlanesController = New PlanesController()
     Dim db As DataBaseService = New DataBaseService()
@@ -20,7 +20,8 @@
         Me.llenarlistatxtDescripcionDescuentos()
         Me.llenarlistadatepickerdescuentos()
         Me.llenarlistadatepickerrecargos()
-        Me.llenalistatxtClaves()
+        Me.llenalistacbClaves()
+        Me.llenarComboboxClavePagos()
         Me.llenalistatxtConcepto()
         Me.ocultarPaneles()
         pc.llenarComboBoxes(cbDiplomados, cbNoPagos, cbEspecificacionRecargos)
@@ -34,7 +35,7 @@
         If (cbPlanes.Text <> "NUEVO PLAN") Then
             txtNombrePlan.Text = cbPlanes.Text
             pc.llenarVentanaPlanesInscripcion(cbPlanes.SelectedValue, chbInscripcion, txtImporteInscripcion, chbRecargoInscripcion, chbDescuentoInscripcion, txtRecargoInscripcion, datePickerRecargoInscripcion, txtDescuentoInscripcion, txtDescripcionDescuentoInscripcion, datePickerLimiteDescuentoInscripcion)
-            pc.llenarVentanaPlanesColegiaturas(cbPlanes.SelectedValue, listaPaneles, listatxtImportes, listatxtRecargos, listatxtDescuentos, listatxtDescripcionDescuentos, listadatePickerRecargos, listadatePickerDescuentos, listatxtClaves, listatxtConcepto, txtImportePagos, txtRecargosPagos, txtDescuentoPagos, txtDescripcionDescuentoPagos, chbRecargosPagos, chbDescuentoPagos, cbNoPagos)
+            pc.llenarVentanaPlanesColegiaturas(cbPlanes.SelectedValue, listaPaneles, listatxtImportes, listatxtRecargos, listatxtDescuentos, listatxtDescripcionDescuentos, listadatePickerRecargos, listadatePickerDescuentos, listacbClaves, listatxtConcepto, txtImportePagos, txtRecargosPagos, txtDescuentoPagos, txtDescripcionDescuentoPagos, chbRecargosPagos, chbDescuentoPagos, cbNoPagos)
             pc.llenarVentanaPlanesPagoUnico(cbPlanes.SelectedValue, chbPagoUnico, txtMontoPagoUnico, chbDescuentoPagoUnico, txtDescuentoPagoUnico, datePickerDescuentoPagoUnico, datePickerPagoUnico)
             colegiaturas = cbNoPagos.SelectedIndex + 1
             edicion = True
@@ -330,8 +331,7 @@
     ''-----------------------------------------------------------------------------------------------------------------------------
     ''----------------------------------------------------CONTROLES TEXTBOX--------------------------------------------------------
     ''-----------------------------------------------------------------------------------------------------------------------------
-    Private Sub txt_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtNombrePlan.KeyPress, txtDescripcionDescuentoInscripcion.KeyPress, txtDescripcionDescuentoPagoUnico.KeyPress, txtDescripcionDescuentoPagos.KeyPress,
-                                                                               txtClavePago1.KeyPress, txtClavePago2.KeyPress, txtClavePago3.KeyPress, txtClavePago4.KeyPress, txtClavePago5.KeyPress, txtClavePago6.KeyPress, txtClavePago7.KeyPress, txtClavePago8.KeyPress, txtClavePago9.KeyPress, txtClavePago10.KeyPress
+    Private Sub txt_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtNombrePlan.KeyPress, txtDescripcionDescuentoInscripcion.KeyPress, txtDescripcionDescuentoPagoUnico.KeyPress, txtDescripcionDescuentoPagos.KeyPress
         If Asc(e.KeyChar) = 39 Or Asc(e.KeyChar) = 44 Then
             e.Handled = True
         End If
@@ -485,8 +485,7 @@
         End If
     End Sub
 
-    Private Sub txtDiaRecargo_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtDiaRecargo.KeyPress, txtClavePago1.KeyPress, txtClavePago2.KeyPress, txtClavePago3.KeyPress, txtClavePago4.KeyPress, txtClavePago5.KeyPress,
-                                                                                         txtClavePago6.KeyPress, txtClavePago7.KeyPress, txtClavePago8.KeyPress, txtClavePago9.KeyPress, txtClavePago10.KeyPress
+    Private Sub txtDiaRecargo_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtDiaRecargo.KeyPress
         If Asc(e.KeyChar) <> 8 Then
             If Asc(e.KeyChar) < 48 Or Asc(e.KeyChar) > 57 Then
                 e.Handled = True
@@ -504,16 +503,16 @@
         End Try
     End Sub
 
-    Private Sub txtClavePago1_TextChanged(sender As Object, e As EventArgs) Handles txtClavePago1.TextChanged
+    Private Sub cbClave1_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbClave1.SelectionChangeCommitted
         Try
             For x = 0 To cbNoPagos.SelectedIndex
-                If (listatxtClaves(x).Text = txtClavePago1.Text And x <> 0) Then
-                    listatxtClaves(x).Clear()
-                    txtConcepto1.Clear()
+                If (listacbClaves(x).Text = cbClave1.Text And x <> 0) Then
+                    listacbClaves(x).SelectedIndex = 0
+                    listatxtConcepto(x).Clear()
                     Exit Sub
                 End If
             Next
-            Dim clave As Integer = Convert.ToInt32(txtClavePago1.Text)
+            Dim clave As Integer = Convert.ToInt32(cbClave1.Text)
             Dim mes As String() = Me.getmesclave(clave)
             txtConcepto1.Text = $"Pago de colegiatura de -{mes(0)}-"
 
@@ -531,16 +530,16 @@
         End Try
     End Sub
 
-    Private Sub txtClavePago2_TextChanged(sender As Object, e As EventArgs) Handles txtClavePago2.TextChanged
+    Private Sub cbClave2_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbClave2.SelectionChangeCommitted
         Try
             For x = 0 To cbNoPagos.SelectedIndex
-                If (listatxtClaves(x).Text = txtClavePago2.Text And x <> 1) Then
-                    listatxtClaves(x).Clear()
-                    txtConcepto2.Clear()
+                If (listacbClaves(x).Text = cbClave2.Text And x <> 1) Then
+                    listacbClaves(x).SelectedIndex = 0
+                    listatxtConcepto(x).Clear()
                     Exit Sub
                 End If
             Next
-            Dim clave As Integer = Convert.ToInt32(txtClavePago2.Text)
+            Dim clave As Integer = Convert.ToInt32(cbClave2.Text)
             Dim mes As String() = Me.getmesclave(clave)
             txtConcepto2.Text = $"Pago de colegiatura de -{mes(0)}-"
 
@@ -558,16 +557,16 @@
         End Try
     End Sub
 
-    Private Sub txtClavePago3_TextChanged(sender As Object, e As EventArgs) Handles txtClavePago3.TextChanged
+    Private Sub cbClave3_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbClave3.SelectionChangeCommitted
         Try
             For x = 0 To cbNoPagos.SelectedIndex
-                If (listatxtClaves(x).Text = txtClavePago3.Text And x <> 2) Then
-                    listatxtClaves(x).Clear()
-                    txtConcepto3.Clear()
+                If (listacbClaves(x).Text = cbClave3.Text And x <> 2) Then
+                    listacbClaves(x).SelectedIndex = 0
+                    listatxtConcepto(x).Clear()
                     Exit Sub
                 End If
             Next
-            Dim clave As Integer = Convert.ToInt32(txtClavePago3.Text)
+            Dim clave As Integer = Convert.ToInt32(cbClave3.Text)
             Dim mes As String() = Me.getmesclave(clave)
             txtConcepto3.Text = $"Pago de colegiatura de -{mes(0)}-"
 
@@ -585,16 +584,16 @@
         End Try
     End Sub
 
-    Private Sub txtClavePago4_TextChanged(sender As Object, e As EventArgs) Handles txtClavePago4.TextChanged
+    Private Sub cbClave4_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbClave4.SelectionChangeCommitted
         Try
             For x = 0 To cbNoPagos.SelectedIndex
-                If (listatxtClaves(x).Text = txtClavePago4.Text And x <> 3) Then
-                    listatxtClaves(x).Clear()
-                    txtConcepto4.Clear()
+                If (listacbClaves(x).Text = cbClave4.Text And x <> 3) Then
+                    listacbClaves(x).SelectedIndex = 0
+                    listatxtConcepto(x).Clear()
                     Exit Sub
                 End If
             Next
-            Dim clave As Integer = Convert.ToInt32(txtClavePago4.Text)
+            Dim clave As Integer = Convert.ToInt32(cbClave4.Text)
             Dim mes As String() = Me.getmesclave(clave)
             txtConcepto4.Text = $"Pago de colegiatura de -{mes(0)}-"
 
@@ -612,16 +611,16 @@
         End Try
     End Sub
 
-    Private Sub txtClavePago5_TextChanged(sender As Object, e As EventArgs) Handles txtClavePago5.TextChanged
+    Private Sub cbClave5_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbClave5.SelectionChangeCommitted
         Try
             For x = 0 To cbNoPagos.SelectedIndex
-                If (listatxtClaves(x).Text = txtClavePago5.Text And x <> 4) Then
-                    listatxtClaves(x).Clear()
-                    txtConcepto5.Clear()
+                If (listacbClaves(x).Text = cbClave5.Text And x <> 4) Then
+                    listacbClaves(x).SelectedIndex = 0
+                    listatxtConcepto(x).Clear()
                     Exit Sub
                 End If
             Next
-            Dim clave As Integer = Convert.ToInt32(txtClavePago5.Text)
+            Dim clave As Integer = Convert.ToInt32(cbClave5.Text)
             Dim mes As String() = Me.getmesclave(clave)
             txtConcepto5.Text = $"Pago de colegiatura de -{mes(0)}-"
 
@@ -639,16 +638,16 @@
         End Try
     End Sub
 
-    Private Sub txtClavePago6_TextChanged(sender As Object, e As EventArgs) Handles txtClavePago6.TextChanged
+    Private Sub cbClave6_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbClave6.SelectionChangeCommitted
         Try
             For x = 0 To cbNoPagos.SelectedIndex
-                If (listatxtClaves(x).Text = txtClavePago6.Text And x <> 5) Then
-                    listatxtClaves(x).Clear()
-                    txtConcepto6.Clear()
+                If (listacbClaves(x).Text = cbClave6.Text And x <> 5) Then
+                    listacbClaves(x).SelectedIndex = 0
+                    listatxtConcepto(x).Clear()
                     Exit Sub
                 End If
             Next
-            Dim clave As Integer = Convert.ToInt32(txtClavePago6.Text)
+            Dim clave As Integer = Convert.ToInt32(cbClave6.Text)
             Dim mes As String() = Me.getmesclave(clave)
             txtConcepto6.Text = $"Pago de colegiatura de -{mes(0)}-"
 
@@ -666,16 +665,16 @@
         End Try
     End Sub
 
-    Private Sub txtClavePago7_TextChanged(sender As Object, e As EventArgs) Handles txtClavePago7.TextChanged
+    Private Sub cbClave7_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbClave7.SelectionChangeCommitted
         Try
             For x = 0 To cbNoPagos.SelectedIndex
-                If (listatxtClaves(x).Text = txtClavePago7.Text And x <> 6) Then
-                    listatxtClaves(x).Clear()
-                    txtConcepto7.Clear()
+                If (listacbClaves(x).Text = cbClave7.Text And x <> 6) Then
+                    listacbClaves(x).SelectedIndex = 0
+                    listatxtConcepto(x).Clear()
                     Exit Sub
                 End If
             Next
-            Dim clave As Integer = Convert.ToInt32(txtClavePago7.Text)
+            Dim clave As Integer = Convert.ToInt32(cbClave7.Text)
             Dim mes As String() = Me.getmesclave(clave)
             txtConcepto7.Text = $"Pago de colegiatura de -{mes(0)}-"
 
@@ -693,16 +692,16 @@
         End Try
     End Sub
 
-    Private Sub txtClavePago8_TextChanged(sender As Object, e As EventArgs) Handles txtClavePago8.TextChanged
+    Private Sub cbClave8_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbClave8.SelectionChangeCommitted
         Try
             For x = 0 To cbNoPagos.SelectedIndex
-                If (listatxtClaves(x).Text = txtClavePago8.Text And x <> 7) Then
-                    listatxtClaves(x).Clear()
-                    txtConcepto8.Clear()
+                If (listacbClaves(x).Text = cbClave8.Text And x <> 7) Then
+                    listacbClaves(x).SelectedIndex = 0
+                    listatxtConcepto(x).Clear()
                     Exit Sub
                 End If
             Next
-            Dim clave As Integer = Convert.ToInt32(txtClavePago8.Text)
+            Dim clave As Integer = Convert.ToInt32(cbClave8.Text)
             Dim mes As String() = Me.getmesclave(clave)
             txtConcepto8.Text = $"Pago de colegiatura de -{mes(0)}-"
 
@@ -720,16 +719,16 @@
         End Try
     End Sub
 
-    Private Sub txtClavePago9_TextChanged(sender As Object, e As EventArgs) Handles txtClavePago9.TextChanged
+    Private Sub cbClave9_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbClave9.SelectionChangeCommitted
         Try
             For x = 0 To cbNoPagos.SelectedIndex
-                If (listatxtClaves(x).Text = txtClavePago9.Text And x <> 8) Then
-                    listatxtClaves(x).Clear()
-                    txtConcepto9.Clear()
+                If (listacbClaves(x).Text = cbClave9.Text And x <> 8) Then
+                    listacbClaves(x).SelectedIndex = 0
+                    listatxtConcepto(x).Clear()
                     Exit Sub
                 End If
             Next
-            Dim clave As Integer = Convert.ToInt32(txtClavePago9.Text)
+            Dim clave As Integer = Convert.ToInt32(cbClave9.Text)
             Dim mes As String() = Me.getmesclave(clave)
             txtConcepto9.Text = $"Pago de colegiatura de -{mes(0)}-"
 
@@ -747,16 +746,16 @@
         End Try
     End Sub
 
-    Private Sub txtClavePago10_TextChanged(sender As Object, e As EventArgs) Handles txtClavePago10.TextChanged
+    Private Sub cbClave10_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbClave10.SelectionChangeCommitted
         Try
             For x = 0 To cbNoPagos.SelectedIndex
-                If (listatxtClaves(x).Text = txtClavePago10.Text And x <> 9) Then
-                    listatxtClaves(x).Clear()
-                    txtConcepto10.Clear()
+                If (listacbClaves(x).Text = cbClave10.Text And x <> 9) Then
+                    listacbClaves(x).SelectedIndex = 0
+                    listatxtConcepto(x).Clear()
                     Exit Sub
                 End If
             Next
-            Dim clave As Integer = Convert.ToInt32(txtClavePago10.Text)
+            Dim clave As Integer = Convert.ToInt32(cbClave10.Text)
             Dim mes As String() = Me.getmesclave(clave)
             txtConcepto10.Text = $"Pago de colegiatura de -{mes(0)}-"
 
@@ -777,7 +776,7 @@
     Private Sub btnRefreshPagos_Click(sender As Object, e As EventArgs) Handles btnRefreshPagos.Click
         For x = 0 To 9
             listaPaneles(x).Visible = False
-            listatxtClaves(x).Clear()
+            listacbClaves(x).SelectedIndex = 0
             listatxtDescripcionDescuentos(x).Clear()
             listatxtDescuentos(x).Clear()
             listatxtImportes(x).Clear()
@@ -905,19 +904,6 @@
         listadatePickerDescuentos.Add(datePickerDescuento10)
     End Sub
 
-    Sub llenalistatxtClaves()
-        listatxtClaves.Add(txtClavePago1)
-        listatxtClaves.Add(txtClavePago2)
-        listatxtClaves.Add(txtClavePago3)
-        listatxtClaves.Add(txtClavePago4)
-        listatxtClaves.Add(txtClavePago5)
-        listatxtClaves.Add(txtClavePago6)
-        listatxtClaves.Add(txtClavePago7)
-        listatxtClaves.Add(txtClavePago8)
-        listatxtClaves.Add(txtClavePago9)
-        listatxtClaves.Add(txtClavePago10)
-    End Sub
-
     Sub llenalistatxtConcepto()
         listatxtConcepto.Add(txtConcepto1)
         listatxtConcepto.Add(txtConcepto2)
@@ -929,6 +915,19 @@
         listatxtConcepto.Add(txtConcepto8)
         listatxtConcepto.Add(txtConcepto9)
         listatxtConcepto.Add(txtConcepto10)
+    End Sub
+
+    Sub llenalistacbClaves()
+        listacbClaves.Add(cbClave1)
+        listacbClaves.Add(cbClave2)
+        listacbClaves.Add(cbClave3)
+        listacbClaves.Add(cbClave4)
+        listacbClaves.Add(cbClave5)
+        listacbClaves.Add(cbClave6)
+        listacbClaves.Add(cbClave7)
+        listacbClaves.Add(cbClave8)
+        listacbClaves.Add(cbClave9)
+        listacbClaves.Add(cbClave10)
     End Sub
 
     Sub Reiniciar()
@@ -969,7 +968,7 @@
             Exit Sub
         End If
         For x = 0 To colegiaturas - 1
-            If (listatxtClaves(x).Text = "") Then
+            If (listacbClaves(x).Text = "") Then
                 MessageBox.Show("Ingrese la clave correspondiente a la colegiatura")
                 Exit Sub
             End If
@@ -1009,7 +1008,7 @@
                     End If
 
                     For x = 0 To cbNoPagos.SelectedIndex
-                        Dim Clave As String = listatxtClaves(x).Text
+                        Dim Clave As String = listacbClaves(x).Text
                         Dim Mes As String = listatxtConcepto(x).Text.ToUpper()
                         pc.guardarPagoPlan(cbPlanes.SelectedValue, Orden, Clave, Mes, listatxtImportes(x).Text, listatxtRecargos(x).Text, listatxtDescuentos(x).Text, pc.obtenerFechaString(listadatePickerDescuentos(x)), pc.obtenerFechaString(listadatePickerRecargos(x)), chbRecargosPagos.Checked)
                         Orden = Orden + 1
@@ -1038,7 +1037,7 @@
                 End If
 
                 For x = 0 To cbNoPagos.SelectedIndex
-                    Dim Clave As String = listatxtClaves(x).Text
+                    Dim Clave As String = listacbClaves(x).Text
                     Dim Mes As String = listatxtConcepto(x).Text.ToUpper()
                     pc.guardarPagoPlan(ID_Plan, Orden, Clave, Mes, listatxtImportes(x).Text, listatxtRecargos(x).Text, listatxtDescuentos(x).Text, pc.obtenerFechaString(listadatePickerDescuentos(x)), pc.obtenerFechaString(listadatePickerRecargos(x)), chbRecargosPagos.Checked)
                     Orden = Orden + 1
@@ -1078,7 +1077,7 @@
         chbDescuentoPagos.Checked = False
         For x = 0 To 9
             listaPaneles(x).Visible = False
-            listatxtClaves(x).Clear()
+            listacbClaves(x).SelectedIndex = 0
             listatxtDescripcionDescuentos(x).Clear()
             listatxtDescuentos(x).Clear()
             listatxtImportes(x).Clear()
@@ -1095,5 +1094,26 @@
         txtDescuentoPagoUnico.Text = "0.00"
         txtDescripcionDescuentoPagoUnico.Clear()
     End Sub
+
+    Sub llenarComboboxClavePagos()
+        For Each item As ComboBox In listacbClaves
+            item.Items.Add(" ")
+            item.Items.Add("01")
+            item.Items.Add("02")
+            item.Items.Add("03")
+            item.Items.Add("04")
+            item.Items.Add("05")
+            item.Items.Add("06")
+            item.Items.Add("07")
+            item.Items.Add("08")
+            item.Items.Add("09")
+            item.Items.Add("10")
+            item.Items.Add("11")
+            item.Items.Add("12")
+        Next
+    End Sub
+
+
+
 
 End Class

@@ -73,7 +73,6 @@ Partial Class PlanesEDC
         Me.txtRecargoPago10 = New System.Windows.Forms.TextBox()
         Me.txtMontoPago10 = New System.Windows.Forms.TextBox()
         Me.txtConcepto10 = New System.Windows.Forms.TextBox()
-        Me.txtClavePago10 = New System.Windows.Forms.TextBox()
         Me.lbl10 = New System.Windows.Forms.Label()
         Me.panelPagos9 = New System.Windows.Forms.Panel()
         Me.Label35 = New System.Windows.Forms.Label()
@@ -86,7 +85,6 @@ Partial Class PlanesEDC
         Me.txtRecargoPago9 = New System.Windows.Forms.TextBox()
         Me.txtMontoPago9 = New System.Windows.Forms.TextBox()
         Me.txtConcepto9 = New System.Windows.Forms.TextBox()
-        Me.txtClavePago9 = New System.Windows.Forms.TextBox()
         Me.lbl9 = New System.Windows.Forms.Label()
         Me.panelPagos8 = New System.Windows.Forms.Panel()
         Me.Label34 = New System.Windows.Forms.Label()
@@ -99,7 +97,6 @@ Partial Class PlanesEDC
         Me.txtRecargoPago8 = New System.Windows.Forms.TextBox()
         Me.txtMontoPago8 = New System.Windows.Forms.TextBox()
         Me.txtConcepto8 = New System.Windows.Forms.TextBox()
-        Me.txtClavePago8 = New System.Windows.Forms.TextBox()
         Me.lbl8 = New System.Windows.Forms.Label()
         Me.panelPagos7 = New System.Windows.Forms.Panel()
         Me.Label33 = New System.Windows.Forms.Label()
@@ -112,7 +109,6 @@ Partial Class PlanesEDC
         Me.txtRecargoPago7 = New System.Windows.Forms.TextBox()
         Me.txtMontoPago7 = New System.Windows.Forms.TextBox()
         Me.txtConcepto7 = New System.Windows.Forms.TextBox()
-        Me.txtClavePago7 = New System.Windows.Forms.TextBox()
         Me.lbl7 = New System.Windows.Forms.Label()
         Me.panelPagos6 = New System.Windows.Forms.Panel()
         Me.Label32 = New System.Windows.Forms.Label()
@@ -125,7 +121,6 @@ Partial Class PlanesEDC
         Me.txtRecargoPago6 = New System.Windows.Forms.TextBox()
         Me.txtMontoPago6 = New System.Windows.Forms.TextBox()
         Me.txtConcepto6 = New System.Windows.Forms.TextBox()
-        Me.txtClavePago6 = New System.Windows.Forms.TextBox()
         Me.lbl6 = New System.Windows.Forms.Label()
         Me.panelPagos4 = New System.Windows.Forms.Panel()
         Me.Label30 = New System.Windows.Forms.Label()
@@ -138,7 +133,6 @@ Partial Class PlanesEDC
         Me.txtRecargoPago4 = New System.Windows.Forms.TextBox()
         Me.txtMontoPago4 = New System.Windows.Forms.TextBox()
         Me.txtConcepto4 = New System.Windows.Forms.TextBox()
-        Me.txtClavePago4 = New System.Windows.Forms.TextBox()
         Me.lbl4 = New System.Windows.Forms.Label()
         Me.panelPagos3 = New System.Windows.Forms.Panel()
         Me.Label29 = New System.Windows.Forms.Label()
@@ -151,7 +145,6 @@ Partial Class PlanesEDC
         Me.txtRecargoPago3 = New System.Windows.Forms.TextBox()
         Me.txtMontoPago3 = New System.Windows.Forms.TextBox()
         Me.txtConcepto3 = New System.Windows.Forms.TextBox()
-        Me.txtClavePago3 = New System.Windows.Forms.TextBox()
         Me.lbl3 = New System.Windows.Forms.Label()
         Me.panelPagos5 = New System.Windows.Forms.Panel()
         Me.Label31 = New System.Windows.Forms.Label()
@@ -164,7 +157,6 @@ Partial Class PlanesEDC
         Me.txtRecargoPago5 = New System.Windows.Forms.TextBox()
         Me.txtMontoPago5 = New System.Windows.Forms.TextBox()
         Me.txtConcepto5 = New System.Windows.Forms.TextBox()
-        Me.txtClavePago5 = New System.Windows.Forms.TextBox()
         Me.lbl5 = New System.Windows.Forms.Label()
         Me.panelPagos2 = New System.Windows.Forms.Panel()
         Me.Label28 = New System.Windows.Forms.Label()
@@ -177,7 +169,6 @@ Partial Class PlanesEDC
         Me.txtRecargoPago2 = New System.Windows.Forms.TextBox()
         Me.txtMontoPago2 = New System.Windows.Forms.TextBox()
         Me.txtConcepto2 = New System.Windows.Forms.TextBox()
-        Me.txtClavePago2 = New System.Windows.Forms.TextBox()
         Me.lbl2 = New System.Windows.Forms.Label()
         Me.panelPagos1 = New System.Windows.Forms.Panel()
         Me.Label27 = New System.Windows.Forms.Label()
@@ -190,7 +181,6 @@ Partial Class PlanesEDC
         Me.txtRecargoPago1 = New System.Windows.Forms.TextBox()
         Me.txtMontoPago1 = New System.Windows.Forms.TextBox()
         Me.txtConcepto1 = New System.Windows.Forms.TextBox()
-        Me.txtClavePago1 = New System.Windows.Forms.TextBox()
         Me.lbl1 = New System.Windows.Forms.Label()
         Me.lblDescripcionDescuentoPago = New System.Windows.Forms.Label()
         Me.lblGatito = New System.Windows.Forms.Label()
@@ -235,6 +225,16 @@ Partial Class PlanesEDC
         Me.chbPagoUnico = New System.Windows.Forms.CheckBox()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.btnSalir = New System.Windows.Forms.Button()
+        Me.cbClave1 = New System.Windows.Forms.ComboBox()
+        Me.cbClave2 = New System.Windows.Forms.ComboBox()
+        Me.cbClave3 = New System.Windows.Forms.ComboBox()
+        Me.cbClave4 = New System.Windows.Forms.ComboBox()
+        Me.cbClave5 = New System.Windows.Forms.ComboBox()
+        Me.cbClave6 = New System.Windows.Forms.ComboBox()
+        Me.cbClave7 = New System.Windows.Forms.ComboBox()
+        Me.cbClave8 = New System.Windows.Forms.ComboBox()
+        Me.cbClave9 = New System.Windows.Forms.ComboBox()
+        Me.cbClave10 = New System.Windows.Forms.ComboBox()
         Me.Panel1.SuspendLayout()
         Me.tcPlanes.SuspendLayout()
         Me.pageInscripcion.SuspendLayout()
@@ -731,6 +731,7 @@ Partial Class PlanesEDC
         '
         'panelPagos10
         '
+        Me.panelPagos10.Controls.Add(Me.cbClave10)
         Me.panelPagos10.Controls.Add(Me.Label36)
         Me.panelPagos10.Controls.Add(Me.Label26)
         Me.panelPagos10.Controls.Add(Me.Label16)
@@ -741,11 +742,10 @@ Partial Class PlanesEDC
         Me.panelPagos10.Controls.Add(Me.txtRecargoPago10)
         Me.panelPagos10.Controls.Add(Me.txtMontoPago10)
         Me.panelPagos10.Controls.Add(Me.txtConcepto10)
-        Me.panelPagos10.Controls.Add(Me.txtClavePago10)
         Me.panelPagos10.Controls.Add(Me.lbl10)
         Me.panelPagos10.Location = New System.Drawing.Point(26, 326)
         Me.panelPagos10.Name = "panelPagos10"
-        Me.panelPagos10.Size = New System.Drawing.Size(920, 25)
+        Me.panelPagos10.Size = New System.Drawing.Size(949, 25)
         Me.panelPagos10.TabIndex = 260
         Me.panelPagos10.Visible = False
         '
@@ -753,7 +753,7 @@ Partial Class PlanesEDC
         '
         Me.Label36.AutoSize = True
         Me.Label36.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label36.Location = New System.Drawing.Point(337, 6)
+        Me.Label36.Location = New System.Drawing.Point(363, 5)
         Me.Label36.Name = "Label36"
         Me.Label36.Size = New System.Drawing.Size(13, 13)
         Me.Label36.TabIndex = 277
@@ -763,7 +763,7 @@ Partial Class PlanesEDC
         '
         Me.Label26.AutoSize = True
         Me.Label26.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label26.Location = New System.Drawing.Point(528, 6)
+        Me.Label26.Location = New System.Drawing.Point(561, 5)
         Me.Label26.Name = "Label26"
         Me.Label26.Size = New System.Drawing.Size(13, 13)
         Me.Label26.TabIndex = 277
@@ -773,7 +773,7 @@ Partial Class PlanesEDC
         '
         Me.Label16.AutoSize = True
         Me.Label16.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label16.Location = New System.Drawing.Point(233, 5)
+        Me.Label16.Location = New System.Drawing.Point(252, 5)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(13, 13)
         Me.Label16.TabIndex = 274
@@ -783,7 +783,7 @@ Partial Class PlanesEDC
         '
         Me.txtDescripcionDescuentoPago10.Enabled = False
         Me.txtDescripcionDescuentoPago10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDescripcionDescuentoPago10.Location = New System.Drawing.Point(633, 3)
+        Me.txtDescripcionDescuentoPago10.Location = New System.Drawing.Point(669, 2)
         Me.txtDescripcionDescuentoPago10.Name = "txtDescripcionDescuentoPago10"
         Me.txtDescripcionDescuentoPago10.Size = New System.Drawing.Size(189, 20)
         Me.txtDescripcionDescuentoPago10.TabIndex = 172
@@ -792,7 +792,7 @@ Partial Class PlanesEDC
         '
         Me.txtDescuentoPago10.Enabled = False
         Me.txtDescuentoPago10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDescuentoPago10.Location = New System.Drawing.Point(540, 2)
+        Me.txtDescuentoPago10.Location = New System.Drawing.Point(576, 2)
         Me.txtDescuentoPago10.Name = "txtDescuentoPago10"
         Me.txtDescuentoPago10.Size = New System.Drawing.Size(87, 20)
         Me.txtDescuentoPago10.TabIndex = 171
@@ -801,7 +801,7 @@ Partial Class PlanesEDC
         '
         Me.datePickerDescuento10.Enabled = False
         Me.datePickerDescuento10.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.datePickerDescuento10.Location = New System.Drawing.Point(835, 2)
+        Me.datePickerDescuento10.Location = New System.Drawing.Point(864, 2)
         Me.datePickerDescuento10.Name = "datePickerDescuento10"
         Me.datePickerDescuento10.Size = New System.Drawing.Size(82, 20)
         Me.datePickerDescuento10.TabIndex = 170
@@ -810,7 +810,7 @@ Partial Class PlanesEDC
         '
         Me.datePickerRecargo10.Enabled = False
         Me.datePickerRecargo10.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.datePickerRecargo10.Location = New System.Drawing.Point(440, 2)
+        Me.datePickerRecargo10.Location = New System.Drawing.Point(468, 3)
         Me.datePickerRecargo10.Name = "datePickerRecargo10"
         Me.datePickerRecargo10.Size = New System.Drawing.Size(82, 20)
         Me.datePickerRecargo10.TabIndex = 169
@@ -819,7 +819,7 @@ Partial Class PlanesEDC
         '
         Me.txtRecargoPago10.Enabled = False
         Me.txtRecargoPago10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRecargoPago10.Location = New System.Drawing.Point(349, 2)
+        Me.txtRecargoPago10.Location = New System.Drawing.Point(377, 2)
         Me.txtRecargoPago10.Name = "txtRecargoPago10"
         Me.txtRecargoPago10.Size = New System.Drawing.Size(85, 20)
         Me.txtRecargoPago10.TabIndex = 168
@@ -828,7 +828,7 @@ Partial Class PlanesEDC
         '
         Me.txtMontoPago10.Enabled = False
         Me.txtMontoPago10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMontoPago10.Location = New System.Drawing.Point(245, 2)
+        Me.txtMontoPago10.Location = New System.Drawing.Point(267, 2)
         Me.txtMontoPago10.Name = "txtMontoPago10"
         Me.txtMontoPago10.Size = New System.Drawing.Size(90, 20)
         Me.txtMontoPago10.TabIndex = 167
@@ -837,24 +837,16 @@ Partial Class PlanesEDC
         '
         Me.txtConcepto10.Enabled = False
         Me.txtConcepto10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtConcepto10.Location = New System.Drawing.Point(61, 2)
+        Me.txtConcepto10.Location = New System.Drawing.Point(78, 2)
         Me.txtConcepto10.Name = "txtConcepto10"
         Me.txtConcepto10.Size = New System.Drawing.Size(167, 20)
         Me.txtConcepto10.TabIndex = 166
-        '
-        'txtClavePago10
-        '
-        Me.txtClavePago10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtClavePago10.Location = New System.Drawing.Point(29, 3)
-        Me.txtClavePago10.Name = "txtClavePago10"
-        Me.txtClavePago10.Size = New System.Drawing.Size(20, 20)
-        Me.txtClavePago10.TabIndex = 165
         '
         'lbl10
         '
         Me.lbl10.AutoSize = True
         Me.lbl10.ForeColor = System.Drawing.SystemColors.Control
-        Me.lbl10.Location = New System.Drawing.Point(10, 5)
+        Me.lbl10.Location = New System.Drawing.Point(5, 5)
         Me.lbl10.Name = "lbl10"
         Me.lbl10.Size = New System.Drawing.Size(19, 13)
         Me.lbl10.TabIndex = 164
@@ -862,6 +854,7 @@ Partial Class PlanesEDC
         '
         'panelPagos9
         '
+        Me.panelPagos9.Controls.Add(Me.cbClave9)
         Me.panelPagos9.Controls.Add(Me.Label35)
         Me.panelPagos9.Controls.Add(Me.Label25)
         Me.panelPagos9.Controls.Add(Me.Label15)
@@ -872,11 +865,10 @@ Partial Class PlanesEDC
         Me.panelPagos9.Controls.Add(Me.txtRecargoPago9)
         Me.panelPagos9.Controls.Add(Me.txtMontoPago9)
         Me.panelPagos9.Controls.Add(Me.txtConcepto9)
-        Me.panelPagos9.Controls.Add(Me.txtClavePago9)
         Me.panelPagos9.Controls.Add(Me.lbl9)
         Me.panelPagos9.Location = New System.Drawing.Point(26, 299)
         Me.panelPagos9.Name = "panelPagos9"
-        Me.panelPagos9.Size = New System.Drawing.Size(920, 25)
+        Me.panelPagos9.Size = New System.Drawing.Size(949, 25)
         Me.panelPagos9.TabIndex = 259
         Me.panelPagos9.Visible = False
         '
@@ -884,7 +876,7 @@ Partial Class PlanesEDC
         '
         Me.Label35.AutoSize = True
         Me.Label35.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label35.Location = New System.Drawing.Point(337, 5)
+        Me.Label35.Location = New System.Drawing.Point(363, 5)
         Me.Label35.Name = "Label35"
         Me.Label35.Size = New System.Drawing.Size(13, 13)
         Me.Label35.TabIndex = 276
@@ -894,7 +886,7 @@ Partial Class PlanesEDC
         '
         Me.Label25.AutoSize = True
         Me.Label25.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label25.Location = New System.Drawing.Point(528, 5)
+        Me.Label25.Location = New System.Drawing.Point(561, 5)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(13, 13)
         Me.Label25.TabIndex = 276
@@ -904,7 +896,7 @@ Partial Class PlanesEDC
         '
         Me.Label15.AutoSize = True
         Me.Label15.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label15.Location = New System.Drawing.Point(233, 5)
+        Me.Label15.Location = New System.Drawing.Point(252, 5)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(13, 13)
         Me.Label15.TabIndex = 273
@@ -914,7 +906,7 @@ Partial Class PlanesEDC
         '
         Me.txtDescripcionDescuentoPago9.Enabled = False
         Me.txtDescripcionDescuentoPago9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDescripcionDescuentoPago9.Location = New System.Drawing.Point(633, 2)
+        Me.txtDescripcionDescuentoPago9.Location = New System.Drawing.Point(669, 2)
         Me.txtDescripcionDescuentoPago9.Name = "txtDescripcionDescuentoPago9"
         Me.txtDescripcionDescuentoPago9.Size = New System.Drawing.Size(189, 20)
         Me.txtDescripcionDescuentoPago9.TabIndex = 172
@@ -923,7 +915,7 @@ Partial Class PlanesEDC
         '
         Me.txtDescuentoPago9.Enabled = False
         Me.txtDescuentoPago9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDescuentoPago9.Location = New System.Drawing.Point(540, 2)
+        Me.txtDescuentoPago9.Location = New System.Drawing.Point(576, 2)
         Me.txtDescuentoPago9.Name = "txtDescuentoPago9"
         Me.txtDescuentoPago9.Size = New System.Drawing.Size(87, 20)
         Me.txtDescuentoPago9.TabIndex = 171
@@ -932,7 +924,7 @@ Partial Class PlanesEDC
         '
         Me.datePickerDescuento9.Enabled = False
         Me.datePickerDescuento9.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.datePickerDescuento9.Location = New System.Drawing.Point(835, 2)
+        Me.datePickerDescuento9.Location = New System.Drawing.Point(864, 2)
         Me.datePickerDescuento9.Name = "datePickerDescuento9"
         Me.datePickerDescuento9.Size = New System.Drawing.Size(82, 20)
         Me.datePickerDescuento9.TabIndex = 170
@@ -941,7 +933,7 @@ Partial Class PlanesEDC
         '
         Me.datePickerRecargo9.Enabled = False
         Me.datePickerRecargo9.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.datePickerRecargo9.Location = New System.Drawing.Point(440, 2)
+        Me.datePickerRecargo9.Location = New System.Drawing.Point(468, 2)
         Me.datePickerRecargo9.Name = "datePickerRecargo9"
         Me.datePickerRecargo9.Size = New System.Drawing.Size(82, 20)
         Me.datePickerRecargo9.TabIndex = 169
@@ -950,7 +942,7 @@ Partial Class PlanesEDC
         '
         Me.txtRecargoPago9.Enabled = False
         Me.txtRecargoPago9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRecargoPago9.Location = New System.Drawing.Point(349, 2)
+        Me.txtRecargoPago9.Location = New System.Drawing.Point(377, 2)
         Me.txtRecargoPago9.Name = "txtRecargoPago9"
         Me.txtRecargoPago9.Size = New System.Drawing.Size(85, 20)
         Me.txtRecargoPago9.TabIndex = 168
@@ -959,7 +951,7 @@ Partial Class PlanesEDC
         '
         Me.txtMontoPago9.Enabled = False
         Me.txtMontoPago9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMontoPago9.Location = New System.Drawing.Point(245, 2)
+        Me.txtMontoPago9.Location = New System.Drawing.Point(267, 2)
         Me.txtMontoPago9.Name = "txtMontoPago9"
         Me.txtMontoPago9.Size = New System.Drawing.Size(90, 20)
         Me.txtMontoPago9.TabIndex = 167
@@ -968,18 +960,10 @@ Partial Class PlanesEDC
         '
         Me.txtConcepto9.Enabled = False
         Me.txtConcepto9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtConcepto9.Location = New System.Drawing.Point(61, 2)
+        Me.txtConcepto9.Location = New System.Drawing.Point(79, 2)
         Me.txtConcepto9.Name = "txtConcepto9"
         Me.txtConcepto9.Size = New System.Drawing.Size(166, 20)
         Me.txtConcepto9.TabIndex = 166
-        '
-        'txtClavePago9
-        '
-        Me.txtClavePago9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtClavePago9.Location = New System.Drawing.Point(29, 2)
-        Me.txtClavePago9.Name = "txtClavePago9"
-        Me.txtClavePago9.Size = New System.Drawing.Size(20, 20)
-        Me.txtClavePago9.TabIndex = 165
         '
         'lbl9
         '
@@ -993,6 +977,7 @@ Partial Class PlanesEDC
         '
         'panelPagos8
         '
+        Me.panelPagos8.Controls.Add(Me.cbClave8)
         Me.panelPagos8.Controls.Add(Me.Label34)
         Me.panelPagos8.Controls.Add(Me.Label24)
         Me.panelPagos8.Controls.Add(Me.Label14)
@@ -1003,11 +988,10 @@ Partial Class PlanesEDC
         Me.panelPagos8.Controls.Add(Me.txtRecargoPago8)
         Me.panelPagos8.Controls.Add(Me.txtMontoPago8)
         Me.panelPagos8.Controls.Add(Me.txtConcepto8)
-        Me.panelPagos8.Controls.Add(Me.txtClavePago8)
         Me.panelPagos8.Controls.Add(Me.lbl8)
         Me.panelPagos8.Location = New System.Drawing.Point(26, 273)
         Me.panelPagos8.Name = "panelPagos8"
-        Me.panelPagos8.Size = New System.Drawing.Size(920, 25)
+        Me.panelPagos8.Size = New System.Drawing.Size(949, 25)
         Me.panelPagos8.TabIndex = 258
         Me.panelPagos8.Visible = False
         '
@@ -1015,7 +999,7 @@ Partial Class PlanesEDC
         '
         Me.Label34.AutoSize = True
         Me.Label34.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label34.Location = New System.Drawing.Point(337, 5)
+        Me.Label34.Location = New System.Drawing.Point(363, 5)
         Me.Label34.Name = "Label34"
         Me.Label34.Size = New System.Drawing.Size(13, 13)
         Me.Label34.TabIndex = 275
@@ -1025,7 +1009,7 @@ Partial Class PlanesEDC
         '
         Me.Label24.AutoSize = True
         Me.Label24.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label24.Location = New System.Drawing.Point(528, 5)
+        Me.Label24.Location = New System.Drawing.Point(561, 5)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(13, 13)
         Me.Label24.TabIndex = 275
@@ -1035,7 +1019,7 @@ Partial Class PlanesEDC
         '
         Me.Label14.AutoSize = True
         Me.Label14.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label14.Location = New System.Drawing.Point(233, 5)
+        Me.Label14.Location = New System.Drawing.Point(252, 5)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(13, 13)
         Me.Label14.TabIndex = 272
@@ -1045,7 +1029,7 @@ Partial Class PlanesEDC
         '
         Me.txtDescripcionDescuentoPago8.Enabled = False
         Me.txtDescripcionDescuentoPago8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDescripcionDescuentoPago8.Location = New System.Drawing.Point(633, 2)
+        Me.txtDescripcionDescuentoPago8.Location = New System.Drawing.Point(669, 2)
         Me.txtDescripcionDescuentoPago8.Name = "txtDescripcionDescuentoPago8"
         Me.txtDescripcionDescuentoPago8.Size = New System.Drawing.Size(189, 20)
         Me.txtDescripcionDescuentoPago8.TabIndex = 172
@@ -1054,7 +1038,7 @@ Partial Class PlanesEDC
         '
         Me.txtDescuentoPago8.Enabled = False
         Me.txtDescuentoPago8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDescuentoPago8.Location = New System.Drawing.Point(540, 2)
+        Me.txtDescuentoPago8.Location = New System.Drawing.Point(576, 2)
         Me.txtDescuentoPago8.Name = "txtDescuentoPago8"
         Me.txtDescuentoPago8.Size = New System.Drawing.Size(87, 20)
         Me.txtDescuentoPago8.TabIndex = 171
@@ -1063,7 +1047,7 @@ Partial Class PlanesEDC
         '
         Me.datePickerDescuento8.Enabled = False
         Me.datePickerDescuento8.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.datePickerDescuento8.Location = New System.Drawing.Point(835, 2)
+        Me.datePickerDescuento8.Location = New System.Drawing.Point(864, 2)
         Me.datePickerDescuento8.Name = "datePickerDescuento8"
         Me.datePickerDescuento8.Size = New System.Drawing.Size(82, 20)
         Me.datePickerDescuento8.TabIndex = 170
@@ -1072,7 +1056,7 @@ Partial Class PlanesEDC
         '
         Me.datePickerRecargo8.Enabled = False
         Me.datePickerRecargo8.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.datePickerRecargo8.Location = New System.Drawing.Point(440, 2)
+        Me.datePickerRecargo8.Location = New System.Drawing.Point(468, 3)
         Me.datePickerRecargo8.Name = "datePickerRecargo8"
         Me.datePickerRecargo8.Size = New System.Drawing.Size(82, 20)
         Me.datePickerRecargo8.TabIndex = 169
@@ -1081,7 +1065,7 @@ Partial Class PlanesEDC
         '
         Me.txtRecargoPago8.Enabled = False
         Me.txtRecargoPago8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRecargoPago8.Location = New System.Drawing.Point(349, 2)
+        Me.txtRecargoPago8.Location = New System.Drawing.Point(377, 2)
         Me.txtRecargoPago8.Name = "txtRecargoPago8"
         Me.txtRecargoPago8.Size = New System.Drawing.Size(85, 20)
         Me.txtRecargoPago8.TabIndex = 168
@@ -1090,7 +1074,7 @@ Partial Class PlanesEDC
         '
         Me.txtMontoPago8.Enabled = False
         Me.txtMontoPago8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMontoPago8.Location = New System.Drawing.Point(245, 2)
+        Me.txtMontoPago8.Location = New System.Drawing.Point(267, 2)
         Me.txtMontoPago8.Name = "txtMontoPago8"
         Me.txtMontoPago8.Size = New System.Drawing.Size(90, 20)
         Me.txtMontoPago8.TabIndex = 167
@@ -1099,18 +1083,10 @@ Partial Class PlanesEDC
         '
         Me.txtConcepto8.Enabled = False
         Me.txtConcepto8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtConcepto8.Location = New System.Drawing.Point(61, 2)
+        Me.txtConcepto8.Location = New System.Drawing.Point(79, 2)
         Me.txtConcepto8.Name = "txtConcepto8"
         Me.txtConcepto8.Size = New System.Drawing.Size(166, 20)
         Me.txtConcepto8.TabIndex = 166
-        '
-        'txtClavePago8
-        '
-        Me.txtClavePago8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtClavePago8.Location = New System.Drawing.Point(29, 2)
-        Me.txtClavePago8.Name = "txtClavePago8"
-        Me.txtClavePago8.Size = New System.Drawing.Size(20, 20)
-        Me.txtClavePago8.TabIndex = 165
         '
         'lbl8
         '
@@ -1124,6 +1100,7 @@ Partial Class PlanesEDC
         '
         'panelPagos7
         '
+        Me.panelPagos7.Controls.Add(Me.cbClave7)
         Me.panelPagos7.Controls.Add(Me.Label33)
         Me.panelPagos7.Controls.Add(Me.Label23)
         Me.panelPagos7.Controls.Add(Me.Label13)
@@ -1134,11 +1111,10 @@ Partial Class PlanesEDC
         Me.panelPagos7.Controls.Add(Me.txtRecargoPago7)
         Me.panelPagos7.Controls.Add(Me.txtMontoPago7)
         Me.panelPagos7.Controls.Add(Me.txtConcepto7)
-        Me.panelPagos7.Controls.Add(Me.txtClavePago7)
         Me.panelPagos7.Controls.Add(Me.lbl7)
         Me.panelPagos7.Location = New System.Drawing.Point(26, 247)
         Me.panelPagos7.Name = "panelPagos7"
-        Me.panelPagos7.Size = New System.Drawing.Size(920, 25)
+        Me.panelPagos7.Size = New System.Drawing.Size(949, 25)
         Me.panelPagos7.TabIndex = 257
         Me.panelPagos7.Visible = False
         '
@@ -1146,7 +1122,7 @@ Partial Class PlanesEDC
         '
         Me.Label33.AutoSize = True
         Me.Label33.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label33.Location = New System.Drawing.Point(337, 5)
+        Me.Label33.Location = New System.Drawing.Point(363, 5)
         Me.Label33.Name = "Label33"
         Me.Label33.Size = New System.Drawing.Size(13, 13)
         Me.Label33.TabIndex = 274
@@ -1156,7 +1132,7 @@ Partial Class PlanesEDC
         '
         Me.Label23.AutoSize = True
         Me.Label23.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label23.Location = New System.Drawing.Point(528, 5)
+        Me.Label23.Location = New System.Drawing.Point(561, 5)
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(13, 13)
         Me.Label23.TabIndex = 274
@@ -1166,7 +1142,7 @@ Partial Class PlanesEDC
         '
         Me.Label13.AutoSize = True
         Me.Label13.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label13.Location = New System.Drawing.Point(233, 5)
+        Me.Label13.Location = New System.Drawing.Point(252, 5)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(13, 13)
         Me.Label13.TabIndex = 271
@@ -1176,7 +1152,7 @@ Partial Class PlanesEDC
         '
         Me.txtDescripcionDescuentoPago7.Enabled = False
         Me.txtDescripcionDescuentoPago7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDescripcionDescuentoPago7.Location = New System.Drawing.Point(633, 2)
+        Me.txtDescripcionDescuentoPago7.Location = New System.Drawing.Point(669, 2)
         Me.txtDescripcionDescuentoPago7.Name = "txtDescripcionDescuentoPago7"
         Me.txtDescripcionDescuentoPago7.Size = New System.Drawing.Size(189, 20)
         Me.txtDescripcionDescuentoPago7.TabIndex = 172
@@ -1185,7 +1161,7 @@ Partial Class PlanesEDC
         '
         Me.txtDescuentoPago7.Enabled = False
         Me.txtDescuentoPago7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDescuentoPago7.Location = New System.Drawing.Point(540, 2)
+        Me.txtDescuentoPago7.Location = New System.Drawing.Point(576, 2)
         Me.txtDescuentoPago7.Name = "txtDescuentoPago7"
         Me.txtDescuentoPago7.Size = New System.Drawing.Size(87, 20)
         Me.txtDescuentoPago7.TabIndex = 171
@@ -1194,7 +1170,7 @@ Partial Class PlanesEDC
         '
         Me.datePickerDescuento7.Enabled = False
         Me.datePickerDescuento7.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.datePickerDescuento7.Location = New System.Drawing.Point(835, 2)
+        Me.datePickerDescuento7.Location = New System.Drawing.Point(864, 2)
         Me.datePickerDescuento7.Name = "datePickerDescuento7"
         Me.datePickerDescuento7.Size = New System.Drawing.Size(82, 20)
         Me.datePickerDescuento7.TabIndex = 170
@@ -1203,7 +1179,7 @@ Partial Class PlanesEDC
         '
         Me.datePickerRecargo7.Enabled = False
         Me.datePickerRecargo7.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.datePickerRecargo7.Location = New System.Drawing.Point(440, 2)
+        Me.datePickerRecargo7.Location = New System.Drawing.Point(468, 2)
         Me.datePickerRecargo7.Name = "datePickerRecargo7"
         Me.datePickerRecargo7.Size = New System.Drawing.Size(82, 20)
         Me.datePickerRecargo7.TabIndex = 169
@@ -1212,7 +1188,7 @@ Partial Class PlanesEDC
         '
         Me.txtRecargoPago7.Enabled = False
         Me.txtRecargoPago7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRecargoPago7.Location = New System.Drawing.Point(349, 2)
+        Me.txtRecargoPago7.Location = New System.Drawing.Point(377, 2)
         Me.txtRecargoPago7.Name = "txtRecargoPago7"
         Me.txtRecargoPago7.Size = New System.Drawing.Size(85, 20)
         Me.txtRecargoPago7.TabIndex = 168
@@ -1221,7 +1197,7 @@ Partial Class PlanesEDC
         '
         Me.txtMontoPago7.Enabled = False
         Me.txtMontoPago7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMontoPago7.Location = New System.Drawing.Point(245, 2)
+        Me.txtMontoPago7.Location = New System.Drawing.Point(267, 2)
         Me.txtMontoPago7.Name = "txtMontoPago7"
         Me.txtMontoPago7.Size = New System.Drawing.Size(90, 20)
         Me.txtMontoPago7.TabIndex = 167
@@ -1230,18 +1206,10 @@ Partial Class PlanesEDC
         '
         Me.txtConcepto7.Enabled = False
         Me.txtConcepto7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtConcepto7.Location = New System.Drawing.Point(61, 2)
+        Me.txtConcepto7.Location = New System.Drawing.Point(79, 2)
         Me.txtConcepto7.Name = "txtConcepto7"
         Me.txtConcepto7.Size = New System.Drawing.Size(166, 20)
         Me.txtConcepto7.TabIndex = 166
-        '
-        'txtClavePago7
-        '
-        Me.txtClavePago7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtClavePago7.Location = New System.Drawing.Point(29, 5)
-        Me.txtClavePago7.Name = "txtClavePago7"
-        Me.txtClavePago7.Size = New System.Drawing.Size(20, 20)
-        Me.txtClavePago7.TabIndex = 165
         '
         'lbl7
         '
@@ -1255,6 +1223,7 @@ Partial Class PlanesEDC
         '
         'panelPagos6
         '
+        Me.panelPagos6.Controls.Add(Me.cbClave6)
         Me.panelPagos6.Controls.Add(Me.Label32)
         Me.panelPagos6.Controls.Add(Me.Label22)
         Me.panelPagos6.Controls.Add(Me.Label12)
@@ -1265,11 +1234,10 @@ Partial Class PlanesEDC
         Me.panelPagos6.Controls.Add(Me.txtRecargoPago6)
         Me.panelPagos6.Controls.Add(Me.txtMontoPago6)
         Me.panelPagos6.Controls.Add(Me.txtConcepto6)
-        Me.panelPagos6.Controls.Add(Me.txtClavePago6)
         Me.panelPagos6.Controls.Add(Me.lbl6)
         Me.panelPagos6.Location = New System.Drawing.Point(26, 221)
         Me.panelPagos6.Name = "panelPagos6"
-        Me.panelPagos6.Size = New System.Drawing.Size(920, 25)
+        Me.panelPagos6.Size = New System.Drawing.Size(949, 25)
         Me.panelPagos6.TabIndex = 255
         Me.panelPagos6.Visible = False
         '
@@ -1277,7 +1245,7 @@ Partial Class PlanesEDC
         '
         Me.Label32.AutoSize = True
         Me.Label32.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label32.Location = New System.Drawing.Point(337, 5)
+        Me.Label32.Location = New System.Drawing.Point(363, 5)
         Me.Label32.Name = "Label32"
         Me.Label32.Size = New System.Drawing.Size(13, 13)
         Me.Label32.TabIndex = 273
@@ -1287,7 +1255,7 @@ Partial Class PlanesEDC
         '
         Me.Label22.AutoSize = True
         Me.Label22.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label22.Location = New System.Drawing.Point(528, 6)
+        Me.Label22.Location = New System.Drawing.Point(561, 6)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(13, 13)
         Me.Label22.TabIndex = 273
@@ -1297,7 +1265,7 @@ Partial Class PlanesEDC
         '
         Me.Label12.AutoSize = True
         Me.Label12.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label12.Location = New System.Drawing.Point(233, 6)
+        Me.Label12.Location = New System.Drawing.Point(252, 6)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(13, 13)
         Me.Label12.TabIndex = 270
@@ -1307,7 +1275,7 @@ Partial Class PlanesEDC
         '
         Me.txtDescripcionDescuentoPago6.Enabled = False
         Me.txtDescripcionDescuentoPago6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDescripcionDescuentoPago6.Location = New System.Drawing.Point(633, 3)
+        Me.txtDescripcionDescuentoPago6.Location = New System.Drawing.Point(669, 3)
         Me.txtDescripcionDescuentoPago6.Name = "txtDescripcionDescuentoPago6"
         Me.txtDescripcionDescuentoPago6.Size = New System.Drawing.Size(189, 20)
         Me.txtDescripcionDescuentoPago6.TabIndex = 172
@@ -1316,7 +1284,7 @@ Partial Class PlanesEDC
         '
         Me.txtDescuentoPago6.Enabled = False
         Me.txtDescuentoPago6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDescuentoPago6.Location = New System.Drawing.Point(540, 2)
+        Me.txtDescuentoPago6.Location = New System.Drawing.Point(576, 2)
         Me.txtDescuentoPago6.Name = "txtDescuentoPago6"
         Me.txtDescuentoPago6.Size = New System.Drawing.Size(87, 20)
         Me.txtDescuentoPago6.TabIndex = 171
@@ -1325,7 +1293,7 @@ Partial Class PlanesEDC
         '
         Me.datePickerDescuento6.Enabled = False
         Me.datePickerDescuento6.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.datePickerDescuento6.Location = New System.Drawing.Point(835, 2)
+        Me.datePickerDescuento6.Location = New System.Drawing.Point(864, 2)
         Me.datePickerDescuento6.Name = "datePickerDescuento6"
         Me.datePickerDescuento6.Size = New System.Drawing.Size(82, 20)
         Me.datePickerDescuento6.TabIndex = 170
@@ -1334,7 +1302,7 @@ Partial Class PlanesEDC
         '
         Me.datePickerRecargo6.Enabled = False
         Me.datePickerRecargo6.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.datePickerRecargo6.Location = New System.Drawing.Point(440, 2)
+        Me.datePickerRecargo6.Location = New System.Drawing.Point(468, 2)
         Me.datePickerRecargo6.Name = "datePickerRecargo6"
         Me.datePickerRecargo6.Size = New System.Drawing.Size(82, 20)
         Me.datePickerRecargo6.TabIndex = 169
@@ -1343,7 +1311,7 @@ Partial Class PlanesEDC
         '
         Me.txtRecargoPago6.Enabled = False
         Me.txtRecargoPago6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRecargoPago6.Location = New System.Drawing.Point(349, 2)
+        Me.txtRecargoPago6.Location = New System.Drawing.Point(377, 2)
         Me.txtRecargoPago6.Name = "txtRecargoPago6"
         Me.txtRecargoPago6.Size = New System.Drawing.Size(85, 20)
         Me.txtRecargoPago6.TabIndex = 168
@@ -1352,7 +1320,7 @@ Partial Class PlanesEDC
         '
         Me.txtMontoPago6.Enabled = False
         Me.txtMontoPago6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMontoPago6.Location = New System.Drawing.Point(245, 2)
+        Me.txtMontoPago6.Location = New System.Drawing.Point(267, 2)
         Me.txtMontoPago6.Name = "txtMontoPago6"
         Me.txtMontoPago6.Size = New System.Drawing.Size(90, 20)
         Me.txtMontoPago6.TabIndex = 167
@@ -1361,18 +1329,10 @@ Partial Class PlanesEDC
         '
         Me.txtConcepto6.Enabled = False
         Me.txtConcepto6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtConcepto6.Location = New System.Drawing.Point(61, 2)
+        Me.txtConcepto6.Location = New System.Drawing.Point(79, 2)
         Me.txtConcepto6.Name = "txtConcepto6"
         Me.txtConcepto6.Size = New System.Drawing.Size(166, 20)
         Me.txtConcepto6.TabIndex = 166
-        '
-        'txtClavePago6
-        '
-        Me.txtClavePago6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtClavePago6.Location = New System.Drawing.Point(29, 3)
-        Me.txtClavePago6.Name = "txtClavePago6"
-        Me.txtClavePago6.Size = New System.Drawing.Size(20, 20)
-        Me.txtClavePago6.TabIndex = 165
         '
         'lbl6
         '
@@ -1386,6 +1346,7 @@ Partial Class PlanesEDC
         '
         'panelPagos4
         '
+        Me.panelPagos4.Controls.Add(Me.cbClave4)
         Me.panelPagos4.Controls.Add(Me.Label30)
         Me.panelPagos4.Controls.Add(Me.Label20)
         Me.panelPagos4.Controls.Add(Me.Label10)
@@ -1396,11 +1357,10 @@ Partial Class PlanesEDC
         Me.panelPagos4.Controls.Add(Me.txtRecargoPago4)
         Me.panelPagos4.Controls.Add(Me.txtMontoPago4)
         Me.panelPagos4.Controls.Add(Me.txtConcepto4)
-        Me.panelPagos4.Controls.Add(Me.txtClavePago4)
         Me.panelPagos4.Controls.Add(Me.lbl4)
         Me.panelPagos4.Location = New System.Drawing.Point(26, 169)
         Me.panelPagos4.Name = "panelPagos4"
-        Me.panelPagos4.Size = New System.Drawing.Size(920, 25)
+        Me.panelPagos4.Size = New System.Drawing.Size(949, 25)
         Me.panelPagos4.TabIndex = 255
         Me.panelPagos4.Visible = False
         '
@@ -1408,7 +1368,7 @@ Partial Class PlanesEDC
         '
         Me.Label30.AutoSize = True
         Me.Label30.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label30.Location = New System.Drawing.Point(337, 5)
+        Me.Label30.Location = New System.Drawing.Point(363, 5)
         Me.Label30.Name = "Label30"
         Me.Label30.Size = New System.Drawing.Size(13, 13)
         Me.Label30.TabIndex = 271
@@ -1418,7 +1378,7 @@ Partial Class PlanesEDC
         '
         Me.Label20.AutoSize = True
         Me.Label20.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label20.Location = New System.Drawing.Point(528, 5)
+        Me.Label20.Location = New System.Drawing.Point(561, 5)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(13, 13)
         Me.Label20.TabIndex = 271
@@ -1428,7 +1388,7 @@ Partial Class PlanesEDC
         '
         Me.Label10.AutoSize = True
         Me.Label10.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label10.Location = New System.Drawing.Point(233, 5)
+        Me.Label10.Location = New System.Drawing.Point(252, 5)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(13, 13)
         Me.Label10.TabIndex = 268
@@ -1438,7 +1398,7 @@ Partial Class PlanesEDC
         '
         Me.txtDescripcionDescuentoPago4.Enabled = False
         Me.txtDescripcionDescuentoPago4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDescripcionDescuentoPago4.Location = New System.Drawing.Point(633, 2)
+        Me.txtDescripcionDescuentoPago4.Location = New System.Drawing.Point(669, 2)
         Me.txtDescripcionDescuentoPago4.Name = "txtDescripcionDescuentoPago4"
         Me.txtDescripcionDescuentoPago4.Size = New System.Drawing.Size(189, 20)
         Me.txtDescripcionDescuentoPago4.TabIndex = 172
@@ -1447,7 +1407,7 @@ Partial Class PlanesEDC
         '
         Me.txtDescuentoPago4.Enabled = False
         Me.txtDescuentoPago4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDescuentoPago4.Location = New System.Drawing.Point(540, 1)
+        Me.txtDescuentoPago4.Location = New System.Drawing.Point(576, 2)
         Me.txtDescuentoPago4.Name = "txtDescuentoPago4"
         Me.txtDescuentoPago4.Size = New System.Drawing.Size(87, 20)
         Me.txtDescuentoPago4.TabIndex = 171
@@ -1456,7 +1416,7 @@ Partial Class PlanesEDC
         '
         Me.datePickerDescuento4.Enabled = False
         Me.datePickerDescuento4.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.datePickerDescuento4.Location = New System.Drawing.Point(835, 2)
+        Me.datePickerDescuento4.Location = New System.Drawing.Point(864, 3)
         Me.datePickerDescuento4.Name = "datePickerDescuento4"
         Me.datePickerDescuento4.Size = New System.Drawing.Size(82, 20)
         Me.datePickerDescuento4.TabIndex = 170
@@ -1465,7 +1425,7 @@ Partial Class PlanesEDC
         '
         Me.datePickerRecargo4.Enabled = False
         Me.datePickerRecargo4.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.datePickerRecargo4.Location = New System.Drawing.Point(440, 2)
+        Me.datePickerRecargo4.Location = New System.Drawing.Point(468, 3)
         Me.datePickerRecargo4.Name = "datePickerRecargo4"
         Me.datePickerRecargo4.Size = New System.Drawing.Size(82, 20)
         Me.datePickerRecargo4.TabIndex = 169
@@ -1474,7 +1434,7 @@ Partial Class PlanesEDC
         '
         Me.txtRecargoPago4.Enabled = False
         Me.txtRecargoPago4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRecargoPago4.Location = New System.Drawing.Point(349, 2)
+        Me.txtRecargoPago4.Location = New System.Drawing.Point(377, 2)
         Me.txtRecargoPago4.Name = "txtRecargoPago4"
         Me.txtRecargoPago4.Size = New System.Drawing.Size(85, 20)
         Me.txtRecargoPago4.TabIndex = 168
@@ -1483,7 +1443,7 @@ Partial Class PlanesEDC
         '
         Me.txtMontoPago4.Enabled = False
         Me.txtMontoPago4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMontoPago4.Location = New System.Drawing.Point(245, 2)
+        Me.txtMontoPago4.Location = New System.Drawing.Point(267, 2)
         Me.txtMontoPago4.Name = "txtMontoPago4"
         Me.txtMontoPago4.Size = New System.Drawing.Size(90, 20)
         Me.txtMontoPago4.TabIndex = 167
@@ -1492,18 +1452,10 @@ Partial Class PlanesEDC
         '
         Me.txtConcepto4.Enabled = False
         Me.txtConcepto4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtConcepto4.Location = New System.Drawing.Point(61, 2)
+        Me.txtConcepto4.Location = New System.Drawing.Point(79, 2)
         Me.txtConcepto4.Name = "txtConcepto4"
         Me.txtConcepto4.Size = New System.Drawing.Size(167, 20)
         Me.txtConcepto4.TabIndex = 166
-        '
-        'txtClavePago4
-        '
-        Me.txtClavePago4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtClavePago4.Location = New System.Drawing.Point(29, 2)
-        Me.txtClavePago4.Name = "txtClavePago4"
-        Me.txtClavePago4.Size = New System.Drawing.Size(20, 20)
-        Me.txtClavePago4.TabIndex = 165
         '
         'lbl4
         '
@@ -1517,6 +1469,7 @@ Partial Class PlanesEDC
         '
         'panelPagos3
         '
+        Me.panelPagos3.Controls.Add(Me.cbClave3)
         Me.panelPagos3.Controls.Add(Me.Label29)
         Me.panelPagos3.Controls.Add(Me.Label19)
         Me.panelPagos3.Controls.Add(Me.Label9)
@@ -1527,11 +1480,10 @@ Partial Class PlanesEDC
         Me.panelPagos3.Controls.Add(Me.txtRecargoPago3)
         Me.panelPagos3.Controls.Add(Me.txtMontoPago3)
         Me.panelPagos3.Controls.Add(Me.txtConcepto3)
-        Me.panelPagos3.Controls.Add(Me.txtClavePago3)
         Me.panelPagos3.Controls.Add(Me.lbl3)
         Me.panelPagos3.Location = New System.Drawing.Point(26, 143)
         Me.panelPagos3.Name = "panelPagos3"
-        Me.panelPagos3.Size = New System.Drawing.Size(920, 25)
+        Me.panelPagos3.Size = New System.Drawing.Size(949, 25)
         Me.panelPagos3.TabIndex = 255
         Me.panelPagos3.Visible = False
         '
@@ -1539,7 +1491,7 @@ Partial Class PlanesEDC
         '
         Me.Label29.AutoSize = True
         Me.Label29.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label29.Location = New System.Drawing.Point(337, 5)
+        Me.Label29.Location = New System.Drawing.Point(363, 6)
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(13, 13)
         Me.Label29.TabIndex = 270
@@ -1549,7 +1501,7 @@ Partial Class PlanesEDC
         '
         Me.Label19.AutoSize = True
         Me.Label19.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label19.Location = New System.Drawing.Point(528, 6)
+        Me.Label19.Location = New System.Drawing.Point(561, 6)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(13, 13)
         Me.Label19.TabIndex = 270
@@ -1559,7 +1511,7 @@ Partial Class PlanesEDC
         '
         Me.Label9.AutoSize = True
         Me.Label9.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label9.Location = New System.Drawing.Point(233, 8)
+        Me.Label9.Location = New System.Drawing.Point(252, 8)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(13, 13)
         Me.Label9.TabIndex = 268
@@ -1569,7 +1521,7 @@ Partial Class PlanesEDC
         '
         Me.txtDescripcionDescuentoPago3.Enabled = False
         Me.txtDescripcionDescuentoPago3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDescripcionDescuentoPago3.Location = New System.Drawing.Point(633, 2)
+        Me.txtDescripcionDescuentoPago3.Location = New System.Drawing.Point(669, 2)
         Me.txtDescripcionDescuentoPago3.Name = "txtDescripcionDescuentoPago3"
         Me.txtDescripcionDescuentoPago3.Size = New System.Drawing.Size(189, 20)
         Me.txtDescripcionDescuentoPago3.TabIndex = 172
@@ -1578,7 +1530,7 @@ Partial Class PlanesEDC
         '
         Me.txtDescuentoPago3.Enabled = False
         Me.txtDescuentoPago3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDescuentoPago3.Location = New System.Drawing.Point(540, 3)
+        Me.txtDescuentoPago3.Location = New System.Drawing.Point(576, 3)
         Me.txtDescuentoPago3.Name = "txtDescuentoPago3"
         Me.txtDescuentoPago3.Size = New System.Drawing.Size(87, 20)
         Me.txtDescuentoPago3.TabIndex = 171
@@ -1587,7 +1539,7 @@ Partial Class PlanesEDC
         '
         Me.datePickerDescuento3.Enabled = False
         Me.datePickerDescuento3.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.datePickerDescuento3.Location = New System.Drawing.Point(835, 2)
+        Me.datePickerDescuento3.Location = New System.Drawing.Point(864, 3)
         Me.datePickerDescuento3.Name = "datePickerDescuento3"
         Me.datePickerDescuento3.Size = New System.Drawing.Size(82, 20)
         Me.datePickerDescuento3.TabIndex = 170
@@ -1596,7 +1548,7 @@ Partial Class PlanesEDC
         '
         Me.datePickerRecargo3.Enabled = False
         Me.datePickerRecargo3.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.datePickerRecargo3.Location = New System.Drawing.Point(440, 2)
+        Me.datePickerRecargo3.Location = New System.Drawing.Point(468, 2)
         Me.datePickerRecargo3.Name = "datePickerRecargo3"
         Me.datePickerRecargo3.Size = New System.Drawing.Size(82, 20)
         Me.datePickerRecargo3.TabIndex = 169
@@ -1605,7 +1557,7 @@ Partial Class PlanesEDC
         '
         Me.txtRecargoPago3.Enabled = False
         Me.txtRecargoPago3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRecargoPago3.Location = New System.Drawing.Point(349, 2)
+        Me.txtRecargoPago3.Location = New System.Drawing.Point(377, 2)
         Me.txtRecargoPago3.Name = "txtRecargoPago3"
         Me.txtRecargoPago3.Size = New System.Drawing.Size(85, 20)
         Me.txtRecargoPago3.TabIndex = 168
@@ -1614,7 +1566,7 @@ Partial Class PlanesEDC
         '
         Me.txtMontoPago3.Enabled = False
         Me.txtMontoPago3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMontoPago3.Location = New System.Drawing.Point(245, 2)
+        Me.txtMontoPago3.Location = New System.Drawing.Point(267, 2)
         Me.txtMontoPago3.Name = "txtMontoPago3"
         Me.txtMontoPago3.Size = New System.Drawing.Size(90, 20)
         Me.txtMontoPago3.TabIndex = 167
@@ -1623,18 +1575,10 @@ Partial Class PlanesEDC
         '
         Me.txtConcepto3.Enabled = False
         Me.txtConcepto3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtConcepto3.Location = New System.Drawing.Point(61, 2)
+        Me.txtConcepto3.Location = New System.Drawing.Point(79, 2)
         Me.txtConcepto3.Name = "txtConcepto3"
         Me.txtConcepto3.Size = New System.Drawing.Size(167, 20)
         Me.txtConcepto3.TabIndex = 166
-        '
-        'txtClavePago3
-        '
-        Me.txtClavePago3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtClavePago3.Location = New System.Drawing.Point(29, 3)
-        Me.txtClavePago3.Name = "txtClavePago3"
-        Me.txtClavePago3.Size = New System.Drawing.Size(20, 20)
-        Me.txtClavePago3.TabIndex = 165
         '
         'lbl3
         '
@@ -1648,6 +1592,7 @@ Partial Class PlanesEDC
         '
         'panelPagos5
         '
+        Me.panelPagos5.Controls.Add(Me.cbClave5)
         Me.panelPagos5.Controls.Add(Me.Label31)
         Me.panelPagos5.Controls.Add(Me.Label21)
         Me.panelPagos5.Controls.Add(Me.Label11)
@@ -1658,11 +1603,10 @@ Partial Class PlanesEDC
         Me.panelPagos5.Controls.Add(Me.txtRecargoPago5)
         Me.panelPagos5.Controls.Add(Me.txtMontoPago5)
         Me.panelPagos5.Controls.Add(Me.txtConcepto5)
-        Me.panelPagos5.Controls.Add(Me.txtClavePago5)
         Me.panelPagos5.Controls.Add(Me.lbl5)
         Me.panelPagos5.Location = New System.Drawing.Point(26, 195)
         Me.panelPagos5.Name = "panelPagos5"
-        Me.panelPagos5.Size = New System.Drawing.Size(920, 25)
+        Me.panelPagos5.Size = New System.Drawing.Size(949, 25)
         Me.panelPagos5.TabIndex = 256
         Me.panelPagos5.Visible = False
         '
@@ -1670,7 +1614,7 @@ Partial Class PlanesEDC
         '
         Me.Label31.AutoSize = True
         Me.Label31.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label31.Location = New System.Drawing.Point(337, 6)
+        Me.Label31.Location = New System.Drawing.Point(363, 5)
         Me.Label31.Name = "Label31"
         Me.Label31.Size = New System.Drawing.Size(13, 13)
         Me.Label31.TabIndex = 272
@@ -1680,7 +1624,7 @@ Partial Class PlanesEDC
         '
         Me.Label21.AutoSize = True
         Me.Label21.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label21.Location = New System.Drawing.Point(528, 6)
+        Me.Label21.Location = New System.Drawing.Point(561, 6)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(13, 13)
         Me.Label21.TabIndex = 272
@@ -1690,7 +1634,7 @@ Partial Class PlanesEDC
         '
         Me.Label11.AutoSize = True
         Me.Label11.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label11.Location = New System.Drawing.Point(233, 6)
+        Me.Label11.Location = New System.Drawing.Point(252, 6)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(13, 13)
         Me.Label11.TabIndex = 269
@@ -1700,7 +1644,7 @@ Partial Class PlanesEDC
         '
         Me.txtDescripcionDescuentoPago5.Enabled = False
         Me.txtDescripcionDescuentoPago5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDescripcionDescuentoPago5.Location = New System.Drawing.Point(633, 3)
+        Me.txtDescripcionDescuentoPago5.Location = New System.Drawing.Point(669, 3)
         Me.txtDescripcionDescuentoPago5.Name = "txtDescripcionDescuentoPago5"
         Me.txtDescripcionDescuentoPago5.Size = New System.Drawing.Size(189, 20)
         Me.txtDescripcionDescuentoPago5.TabIndex = 172
@@ -1709,7 +1653,7 @@ Partial Class PlanesEDC
         '
         Me.txtDescuentoPago5.Enabled = False
         Me.txtDescuentoPago5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDescuentoPago5.Location = New System.Drawing.Point(540, 2)
+        Me.txtDescuentoPago5.Location = New System.Drawing.Point(576, 2)
         Me.txtDescuentoPago5.Name = "txtDescuentoPago5"
         Me.txtDescuentoPago5.Size = New System.Drawing.Size(87, 20)
         Me.txtDescuentoPago5.TabIndex = 171
@@ -1718,7 +1662,7 @@ Partial Class PlanesEDC
         '
         Me.datePickerDescuento5.Enabled = False
         Me.datePickerDescuento5.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.datePickerDescuento5.Location = New System.Drawing.Point(835, 2)
+        Me.datePickerDescuento5.Location = New System.Drawing.Point(864, 2)
         Me.datePickerDescuento5.Name = "datePickerDescuento5"
         Me.datePickerDescuento5.Size = New System.Drawing.Size(82, 20)
         Me.datePickerDescuento5.TabIndex = 170
@@ -1727,7 +1671,7 @@ Partial Class PlanesEDC
         '
         Me.datePickerRecargo5.Enabled = False
         Me.datePickerRecargo5.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.datePickerRecargo5.Location = New System.Drawing.Point(440, 2)
+        Me.datePickerRecargo5.Location = New System.Drawing.Point(468, 3)
         Me.datePickerRecargo5.Name = "datePickerRecargo5"
         Me.datePickerRecargo5.Size = New System.Drawing.Size(82, 20)
         Me.datePickerRecargo5.TabIndex = 169
@@ -1736,7 +1680,7 @@ Partial Class PlanesEDC
         '
         Me.txtRecargoPago5.Enabled = False
         Me.txtRecargoPago5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRecargoPago5.Location = New System.Drawing.Point(349, 3)
+        Me.txtRecargoPago5.Location = New System.Drawing.Point(377, 2)
         Me.txtRecargoPago5.Name = "txtRecargoPago5"
         Me.txtRecargoPago5.Size = New System.Drawing.Size(85, 20)
         Me.txtRecargoPago5.TabIndex = 168
@@ -1745,7 +1689,7 @@ Partial Class PlanesEDC
         '
         Me.txtMontoPago5.Enabled = False
         Me.txtMontoPago5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMontoPago5.Location = New System.Drawing.Point(245, 2)
+        Me.txtMontoPago5.Location = New System.Drawing.Point(267, 2)
         Me.txtMontoPago5.Name = "txtMontoPago5"
         Me.txtMontoPago5.Size = New System.Drawing.Size(90, 20)
         Me.txtMontoPago5.TabIndex = 167
@@ -1754,18 +1698,10 @@ Partial Class PlanesEDC
         '
         Me.txtConcepto5.Enabled = False
         Me.txtConcepto5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtConcepto5.Location = New System.Drawing.Point(61, 2)
+        Me.txtConcepto5.Location = New System.Drawing.Point(79, 2)
         Me.txtConcepto5.Name = "txtConcepto5"
         Me.txtConcepto5.Size = New System.Drawing.Size(166, 20)
         Me.txtConcepto5.TabIndex = 166
-        '
-        'txtClavePago5
-        '
-        Me.txtClavePago5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtClavePago5.Location = New System.Drawing.Point(29, 3)
-        Me.txtClavePago5.Name = "txtClavePago5"
-        Me.txtClavePago5.Size = New System.Drawing.Size(20, 20)
-        Me.txtClavePago5.TabIndex = 165
         '
         'lbl5
         '
@@ -1779,6 +1715,7 @@ Partial Class PlanesEDC
         '
         'panelPagos2
         '
+        Me.panelPagos2.Controls.Add(Me.cbClave2)
         Me.panelPagos2.Controls.Add(Me.Label28)
         Me.panelPagos2.Controls.Add(Me.Label18)
         Me.panelPagos2.Controls.Add(Me.Label8)
@@ -1789,11 +1726,10 @@ Partial Class PlanesEDC
         Me.panelPagos2.Controls.Add(Me.txtRecargoPago2)
         Me.panelPagos2.Controls.Add(Me.txtMontoPago2)
         Me.panelPagos2.Controls.Add(Me.txtConcepto2)
-        Me.panelPagos2.Controls.Add(Me.txtClavePago2)
         Me.panelPagos2.Controls.Add(Me.lbl2)
         Me.panelPagos2.Location = New System.Drawing.Point(26, 117)
         Me.panelPagos2.Name = "panelPagos2"
-        Me.panelPagos2.Size = New System.Drawing.Size(920, 25)
+        Me.panelPagos2.Size = New System.Drawing.Size(949, 25)
         Me.panelPagos2.TabIndex = 255
         Me.panelPagos2.Visible = False
         '
@@ -1801,7 +1737,7 @@ Partial Class PlanesEDC
         '
         Me.Label28.AutoSize = True
         Me.Label28.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label28.Location = New System.Drawing.Point(337, 6)
+        Me.Label28.Location = New System.Drawing.Point(363, 6)
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(13, 13)
         Me.Label28.TabIndex = 268
@@ -1811,7 +1747,7 @@ Partial Class PlanesEDC
         '
         Me.Label18.AutoSize = True
         Me.Label18.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label18.Location = New System.Drawing.Point(528, 6)
+        Me.Label18.Location = New System.Drawing.Point(561, 6)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(13, 13)
         Me.Label18.TabIndex = 269
@@ -1821,7 +1757,7 @@ Partial Class PlanesEDC
         '
         Me.Label8.AutoSize = True
         Me.Label8.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label8.Location = New System.Drawing.Point(233, 5)
+        Me.Label8.Location = New System.Drawing.Point(253, 6)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(13, 13)
         Me.Label8.TabIndex = 268
@@ -1831,7 +1767,7 @@ Partial Class PlanesEDC
         '
         Me.txtDescripcionDescuentoPago2.Enabled = False
         Me.txtDescripcionDescuentoPago2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDescripcionDescuentoPago2.Location = New System.Drawing.Point(633, 2)
+        Me.txtDescripcionDescuentoPago2.Location = New System.Drawing.Point(669, 3)
         Me.txtDescripcionDescuentoPago2.Name = "txtDescripcionDescuentoPago2"
         Me.txtDescripcionDescuentoPago2.Size = New System.Drawing.Size(189, 20)
         Me.txtDescripcionDescuentoPago2.TabIndex = 172
@@ -1840,7 +1776,7 @@ Partial Class PlanesEDC
         '
         Me.txtDescuentoPago2.Enabled = False
         Me.txtDescuentoPago2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDescuentoPago2.Location = New System.Drawing.Point(540, 3)
+        Me.txtDescuentoPago2.Location = New System.Drawing.Point(576, 2)
         Me.txtDescuentoPago2.Name = "txtDescuentoPago2"
         Me.txtDescuentoPago2.Size = New System.Drawing.Size(87, 20)
         Me.txtDescuentoPago2.TabIndex = 171
@@ -1849,7 +1785,7 @@ Partial Class PlanesEDC
         '
         Me.datePickerDescuento2.Enabled = False
         Me.datePickerDescuento2.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.datePickerDescuento2.Location = New System.Drawing.Point(835, 3)
+        Me.datePickerDescuento2.Location = New System.Drawing.Point(864, 3)
         Me.datePickerDescuento2.Name = "datePickerDescuento2"
         Me.datePickerDescuento2.Size = New System.Drawing.Size(82, 20)
         Me.datePickerDescuento2.TabIndex = 170
@@ -1858,7 +1794,7 @@ Partial Class PlanesEDC
         '
         Me.datePickerRecargo2.Enabled = False
         Me.datePickerRecargo2.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.datePickerRecargo2.Location = New System.Drawing.Point(440, 3)
+        Me.datePickerRecargo2.Location = New System.Drawing.Point(468, 3)
         Me.datePickerRecargo2.Name = "datePickerRecargo2"
         Me.datePickerRecargo2.Size = New System.Drawing.Size(82, 20)
         Me.datePickerRecargo2.TabIndex = 169
@@ -1867,7 +1803,7 @@ Partial Class PlanesEDC
         '
         Me.txtRecargoPago2.Enabled = False
         Me.txtRecargoPago2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRecargoPago2.Location = New System.Drawing.Point(349, 3)
+        Me.txtRecargoPago2.Location = New System.Drawing.Point(377, 3)
         Me.txtRecargoPago2.Name = "txtRecargoPago2"
         Me.txtRecargoPago2.Size = New System.Drawing.Size(85, 20)
         Me.txtRecargoPago2.TabIndex = 168
@@ -1876,7 +1812,7 @@ Partial Class PlanesEDC
         '
         Me.txtMontoPago2.Enabled = False
         Me.txtMontoPago2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMontoPago2.Location = New System.Drawing.Point(245, 2)
+        Me.txtMontoPago2.Location = New System.Drawing.Point(267, 3)
         Me.txtMontoPago2.Name = "txtMontoPago2"
         Me.txtMontoPago2.Size = New System.Drawing.Size(90, 20)
         Me.txtMontoPago2.TabIndex = 167
@@ -1885,18 +1821,10 @@ Partial Class PlanesEDC
         '
         Me.txtConcepto2.Enabled = False
         Me.txtConcepto2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtConcepto2.Location = New System.Drawing.Point(61, 2)
+        Me.txtConcepto2.Location = New System.Drawing.Point(80, 2)
         Me.txtConcepto2.Name = "txtConcepto2"
         Me.txtConcepto2.Size = New System.Drawing.Size(167, 20)
         Me.txtConcepto2.TabIndex = 166
-        '
-        'txtClavePago2
-        '
-        Me.txtClavePago2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtClavePago2.Location = New System.Drawing.Point(29, 2)
-        Me.txtClavePago2.Name = "txtClavePago2"
-        Me.txtClavePago2.Size = New System.Drawing.Size(20, 20)
-        Me.txtClavePago2.TabIndex = 165
         '
         'lbl2
         '
@@ -1910,6 +1838,7 @@ Partial Class PlanesEDC
         '
         'panelPagos1
         '
+        Me.panelPagos1.Controls.Add(Me.cbClave1)
         Me.panelPagos1.Controls.Add(Me.Label27)
         Me.panelPagos1.Controls.Add(Me.Label17)
         Me.panelPagos1.Controls.Add(Me.Label5)
@@ -1920,11 +1849,10 @@ Partial Class PlanesEDC
         Me.panelPagos1.Controls.Add(Me.txtRecargoPago1)
         Me.panelPagos1.Controls.Add(Me.txtMontoPago1)
         Me.panelPagos1.Controls.Add(Me.txtConcepto1)
-        Me.panelPagos1.Controls.Add(Me.txtClavePago1)
         Me.panelPagos1.Controls.Add(Me.lbl1)
         Me.panelPagos1.Location = New System.Drawing.Point(26, 91)
         Me.panelPagos1.Name = "panelPagos1"
-        Me.panelPagos1.Size = New System.Drawing.Size(920, 25)
+        Me.panelPagos1.Size = New System.Drawing.Size(949, 25)
         Me.panelPagos1.TabIndex = 254
         Me.panelPagos1.Visible = False
         '
@@ -1932,7 +1860,7 @@ Partial Class PlanesEDC
         '
         Me.Label27.AutoSize = True
         Me.Label27.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label27.Location = New System.Drawing.Point(337, 5)
+        Me.Label27.Location = New System.Drawing.Point(363, 6)
         Me.Label27.Name = "Label27"
         Me.Label27.Size = New System.Drawing.Size(13, 13)
         Me.Label27.TabIndex = 268
@@ -1942,7 +1870,7 @@ Partial Class PlanesEDC
         '
         Me.Label17.AutoSize = True
         Me.Label17.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label17.Location = New System.Drawing.Point(528, 6)
+        Me.Label17.Location = New System.Drawing.Point(561, 6)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(13, 13)
         Me.Label17.TabIndex = 174
@@ -1952,7 +1880,7 @@ Partial Class PlanesEDC
         '
         Me.Label5.AutoSize = True
         Me.Label5.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label5.Location = New System.Drawing.Point(233, 5)
+        Me.Label5.Location = New System.Drawing.Point(253, 6)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(13, 13)
         Me.Label5.TabIndex = 173
@@ -1962,7 +1890,7 @@ Partial Class PlanesEDC
         '
         Me.txtDescripcionDescuentoPago1.Enabled = False
         Me.txtDescripcionDescuentoPago1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDescripcionDescuentoPago1.Location = New System.Drawing.Point(633, 2)
+        Me.txtDescripcionDescuentoPago1.Location = New System.Drawing.Point(669, 3)
         Me.txtDescripcionDescuentoPago1.Name = "txtDescripcionDescuentoPago1"
         Me.txtDescripcionDescuentoPago1.Size = New System.Drawing.Size(189, 20)
         Me.txtDescripcionDescuentoPago1.TabIndex = 172
@@ -1971,7 +1899,7 @@ Partial Class PlanesEDC
         '
         Me.txtDescuentoPago1.Enabled = False
         Me.txtDescuentoPago1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDescuentoPago1.Location = New System.Drawing.Point(540, 2)
+        Me.txtDescuentoPago1.Location = New System.Drawing.Point(576, 3)
         Me.txtDescuentoPago1.Name = "txtDescuentoPago1"
         Me.txtDescuentoPago1.Size = New System.Drawing.Size(87, 20)
         Me.txtDescuentoPago1.TabIndex = 171
@@ -1980,7 +1908,7 @@ Partial Class PlanesEDC
         '
         Me.datePickerDescuento1.Enabled = False
         Me.datePickerDescuento1.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.datePickerDescuento1.Location = New System.Drawing.Point(835, 3)
+        Me.datePickerDescuento1.Location = New System.Drawing.Point(864, 3)
         Me.datePickerDescuento1.Name = "datePickerDescuento1"
         Me.datePickerDescuento1.Size = New System.Drawing.Size(82, 20)
         Me.datePickerDescuento1.TabIndex = 170
@@ -1989,7 +1917,7 @@ Partial Class PlanesEDC
         '
         Me.datePickerRecargo1.Enabled = False
         Me.datePickerRecargo1.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.datePickerRecargo1.Location = New System.Drawing.Point(440, 3)
+        Me.datePickerRecargo1.Location = New System.Drawing.Point(468, 2)
         Me.datePickerRecargo1.Name = "datePickerRecargo1"
         Me.datePickerRecargo1.Size = New System.Drawing.Size(82, 20)
         Me.datePickerRecargo1.TabIndex = 169
@@ -1998,7 +1926,7 @@ Partial Class PlanesEDC
         '
         Me.txtRecargoPago1.Enabled = False
         Me.txtRecargoPago1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRecargoPago1.Location = New System.Drawing.Point(349, 3)
+        Me.txtRecargoPago1.Location = New System.Drawing.Point(377, 3)
         Me.txtRecargoPago1.Name = "txtRecargoPago1"
         Me.txtRecargoPago1.Size = New System.Drawing.Size(85, 20)
         Me.txtRecargoPago1.TabIndex = 168
@@ -2007,7 +1935,7 @@ Partial Class PlanesEDC
         '
         Me.txtMontoPago1.Enabled = False
         Me.txtMontoPago1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMontoPago1.Location = New System.Drawing.Point(245, 2)
+        Me.txtMontoPago1.Location = New System.Drawing.Point(267, 3)
         Me.txtMontoPago1.Name = "txtMontoPago1"
         Me.txtMontoPago1.Size = New System.Drawing.Size(90, 20)
         Me.txtMontoPago1.TabIndex = 167
@@ -2016,19 +1944,10 @@ Partial Class PlanesEDC
         '
         Me.txtConcepto1.Enabled = False
         Me.txtConcepto1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtConcepto1.Location = New System.Drawing.Point(61, 3)
+        Me.txtConcepto1.Location = New System.Drawing.Point(80, 3)
         Me.txtConcepto1.Name = "txtConcepto1"
         Me.txtConcepto1.Size = New System.Drawing.Size(167, 20)
         Me.txtConcepto1.TabIndex = 166
-        '
-        'txtClavePago1
-        '
-        Me.txtClavePago1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtClavePago1.Location = New System.Drawing.Point(29, 3)
-        Me.txtClavePago1.MaxLength = 2
-        Me.txtClavePago1.Name = "txtClavePago1"
-        Me.txtClavePago1.Size = New System.Drawing.Size(20, 20)
-        Me.txtClavePago1.TabIndex = 165
         '
         'lbl1
         '
@@ -2044,7 +1963,7 @@ Partial Class PlanesEDC
         '
         Me.lblDescripcionDescuentoPago.AutoSize = True
         Me.lblDescripcionDescuentoPago.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblDescripcionDescuentoPago.Location = New System.Drawing.Point(691, 69)
+        Me.lblDescripcionDescuentoPago.Location = New System.Drawing.Point(726, 69)
         Me.lblDescripcionDescuentoPago.Name = "lblDescripcionDescuentoPago"
         Me.lblDescripcionDescuentoPago.Size = New System.Drawing.Size(133, 13)
         Me.lblDescripcionDescuentoPago.TabIndex = 152
@@ -2065,7 +1984,7 @@ Partial Class PlanesEDC
         '
         Me.lblRecargoPago.AutoSize = True
         Me.lblRecargoPago.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblRecargoPago.Location = New System.Drawing.Point(397, 69)
+        Me.lblRecargoPago.Location = New System.Drawing.Point(421, 69)
         Me.lblRecargoPago.Name = "lblRecargoPago"
         Me.lblRecargoPago.Size = New System.Drawing.Size(48, 13)
         Me.lblRecargoPago.TabIndex = 150
@@ -2075,7 +1994,7 @@ Partial Class PlanesEDC
         '
         Me.lblClavePago.AutoSize = True
         Me.lblClavePago.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblClavePago.Location = New System.Drawing.Point(52, 69)
+        Me.lblClavePago.Location = New System.Drawing.Point(62, 69)
         Me.lblClavePago.Name = "lblClavePago"
         Me.lblClavePago.Size = New System.Drawing.Size(34, 13)
         Me.lblClavePago.TabIndex = 144
@@ -2085,7 +2004,7 @@ Partial Class PlanesEDC
         '
         Me.lblDescripcionPago.AutoSize = True
         Me.lblDescripcionPago.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblDescripcionPago.Location = New System.Drawing.Point(92, 69)
+        Me.lblDescripcionPago.Location = New System.Drawing.Point(135, 69)
         Me.lblDescripcionPago.Name = "lblDescripcionPago"
         Me.lblDescripcionPago.Size = New System.Drawing.Size(128, 13)
         Me.lblDescripcionPago.TabIndex = 145
@@ -2095,7 +2014,7 @@ Partial Class PlanesEDC
         '
         Me.lblFechaRecargo.AutoSize = True
         Me.lblFechaRecargo.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblFechaRecargo.Location = New System.Drawing.Point(463, 69)
+        Me.lblFechaRecargo.Location = New System.Drawing.Point(491, 69)
         Me.lblFechaRecargo.Name = "lblFechaRecargo"
         Me.lblFechaRecargo.Size = New System.Drawing.Size(91, 13)
         Me.lblFechaRecargo.TabIndex = 149
@@ -2105,7 +2024,7 @@ Partial Class PlanesEDC
         '
         Me.lblMontoPago.AutoSize = True
         Me.lblMontoPago.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblMontoPago.Location = New System.Drawing.Point(298, 69)
+        Me.lblMontoPago.Location = New System.Drawing.Point(324, 69)
         Me.lblMontoPago.Name = "lblMontoPago"
         Me.lblMontoPago.Size = New System.Drawing.Size(37, 13)
         Me.lblMontoPago.TabIndex = 146
@@ -2115,7 +2034,7 @@ Partial Class PlanesEDC
         '
         Me.lblDescuentoPago.AutoSize = True
         Me.lblDescuentoPago.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblDescuentoPago.Location = New System.Drawing.Point(577, 69)
+        Me.lblDescuentoPago.Location = New System.Drawing.Point(615, 69)
         Me.lblDescuentoPago.Name = "lblDescuentoPago"
         Me.lblDescuentoPago.Size = New System.Drawing.Size(59, 13)
         Me.lblDescuentoPago.TabIndex = 147
@@ -2125,7 +2044,7 @@ Partial Class PlanesEDC
         '
         Me.lblFechaDescuentoPago.AutoSize = True
         Me.lblFechaDescuentoPago.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblFechaDescuentoPago.Location = New System.Drawing.Point(846, 69)
+        Me.lblFechaDescuentoPago.Location = New System.Drawing.Point(875, 69)
         Me.lblFechaDescuentoPago.Name = "lblFechaDescuentoPago"
         Me.lblFechaDescuentoPago.Size = New System.Drawing.Size(116, 13)
         Me.lblFechaDescuentoPago.TabIndex = 148
@@ -2495,6 +2414,96 @@ Partial Class PlanesEDC
         Me.btnSalir.TabIndex = 18
         Me.btnSalir.UseVisualStyleBackColor = True
         '
+        'cbClave1
+        '
+        Me.cbClave1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbClave1.FormattingEnabled = True
+        Me.cbClave1.Location = New System.Drawing.Point(29, 2)
+        Me.cbClave1.Name = "cbClave1"
+        Me.cbClave1.Size = New System.Drawing.Size(45, 21)
+        Me.cbClave1.TabIndex = 269
+        '
+        'cbClave2
+        '
+        Me.cbClave2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbClave2.FormattingEnabled = True
+        Me.cbClave2.Location = New System.Drawing.Point(29, 2)
+        Me.cbClave2.Name = "cbClave2"
+        Me.cbClave2.Size = New System.Drawing.Size(45, 21)
+        Me.cbClave2.TabIndex = 270
+        '
+        'cbClave3
+        '
+        Me.cbClave3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbClave3.FormattingEnabled = True
+        Me.cbClave3.Location = New System.Drawing.Point(29, 2)
+        Me.cbClave3.Name = "cbClave3"
+        Me.cbClave3.Size = New System.Drawing.Size(45, 21)
+        Me.cbClave3.TabIndex = 271
+        '
+        'cbClave4
+        '
+        Me.cbClave4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbClave4.FormattingEnabled = True
+        Me.cbClave4.Location = New System.Drawing.Point(29, 2)
+        Me.cbClave4.Name = "cbClave4"
+        Me.cbClave4.Size = New System.Drawing.Size(45, 21)
+        Me.cbClave4.TabIndex = 272
+        '
+        'cbClave5
+        '
+        Me.cbClave5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbClave5.FormattingEnabled = True
+        Me.cbClave5.Location = New System.Drawing.Point(29, 3)
+        Me.cbClave5.Name = "cbClave5"
+        Me.cbClave5.Size = New System.Drawing.Size(45, 21)
+        Me.cbClave5.TabIndex = 273
+        '
+        'cbClave6
+        '
+        Me.cbClave6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbClave6.FormattingEnabled = True
+        Me.cbClave6.Location = New System.Drawing.Point(29, 3)
+        Me.cbClave6.Name = "cbClave6"
+        Me.cbClave6.Size = New System.Drawing.Size(45, 21)
+        Me.cbClave6.TabIndex = 274
+        '
+        'cbClave7
+        '
+        Me.cbClave7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbClave7.FormattingEnabled = True
+        Me.cbClave7.Location = New System.Drawing.Point(29, 2)
+        Me.cbClave7.Name = "cbClave7"
+        Me.cbClave7.Size = New System.Drawing.Size(45, 21)
+        Me.cbClave7.TabIndex = 275
+        '
+        'cbClave8
+        '
+        Me.cbClave8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbClave8.FormattingEnabled = True
+        Me.cbClave8.Location = New System.Drawing.Point(29, 2)
+        Me.cbClave8.Name = "cbClave8"
+        Me.cbClave8.Size = New System.Drawing.Size(45, 21)
+        Me.cbClave8.TabIndex = 276
+        '
+        'cbClave9
+        '
+        Me.cbClave9.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbClave9.FormattingEnabled = True
+        Me.cbClave9.Location = New System.Drawing.Point(29, 2)
+        Me.cbClave9.Name = "cbClave9"
+        Me.cbClave9.Size = New System.Drawing.Size(45, 21)
+        Me.cbClave9.TabIndex = 277
+        '
+        'cbClave10
+        '
+        Me.cbClave10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbClave10.FormattingEnabled = True
+        Me.cbClave10.Location = New System.Drawing.Point(29, 2)
+        Me.cbClave10.Name = "cbClave10"
+        Me.cbClave10.Size = New System.Drawing.Size(45, 21)
+        Me.cbClave10.TabIndex = 278
+        '
         'PlanesEDC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2607,7 +2616,6 @@ Partial Class PlanesEDC
     Friend WithEvents txtRecargoPago10 As TextBox
     Friend WithEvents txtMontoPago10 As TextBox
     Friend WithEvents txtConcepto10 As TextBox
-    Friend WithEvents txtClavePago10 As TextBox
     Friend WithEvents lbl10 As Label
     Friend WithEvents panelPagos9 As Panel
     Friend WithEvents txtDescripcionDescuentoPago9 As TextBox
@@ -2617,7 +2625,6 @@ Partial Class PlanesEDC
     Friend WithEvents txtRecargoPago9 As TextBox
     Friend WithEvents txtMontoPago9 As TextBox
     Friend WithEvents txtConcepto9 As TextBox
-    Friend WithEvents txtClavePago9 As TextBox
     Friend WithEvents lbl9 As Label
     Friend WithEvents panelPagos8 As Panel
     Friend WithEvents txtDescripcionDescuentoPago8 As TextBox
@@ -2627,7 +2634,6 @@ Partial Class PlanesEDC
     Friend WithEvents txtRecargoPago8 As TextBox
     Friend WithEvents txtMontoPago8 As TextBox
     Friend WithEvents txtConcepto8 As TextBox
-    Friend WithEvents txtClavePago8 As TextBox
     Friend WithEvents lbl8 As Label
     Friend WithEvents panelPagos7 As Panel
     Friend WithEvents txtDescripcionDescuentoPago7 As TextBox
@@ -2637,7 +2643,6 @@ Partial Class PlanesEDC
     Friend WithEvents txtRecargoPago7 As TextBox
     Friend WithEvents txtMontoPago7 As TextBox
     Friend WithEvents txtConcepto7 As TextBox
-    Friend WithEvents txtClavePago7 As TextBox
     Friend WithEvents lbl7 As Label
     Friend WithEvents panelPagos6 As Panel
     Friend WithEvents txtDescripcionDescuentoPago6 As TextBox
@@ -2647,7 +2652,6 @@ Partial Class PlanesEDC
     Friend WithEvents txtRecargoPago6 As TextBox
     Friend WithEvents txtMontoPago6 As TextBox
     Friend WithEvents txtConcepto6 As TextBox
-    Friend WithEvents txtClavePago6 As TextBox
     Friend WithEvents lbl6 As Label
     Friend WithEvents panelPagos4 As Panel
     Friend WithEvents txtDescripcionDescuentoPago4 As TextBox
@@ -2657,7 +2661,6 @@ Partial Class PlanesEDC
     Friend WithEvents txtRecargoPago4 As TextBox
     Friend WithEvents txtMontoPago4 As TextBox
     Friend WithEvents txtConcepto4 As TextBox
-    Friend WithEvents txtClavePago4 As TextBox
     Friend WithEvents lbl4 As Label
     Friend WithEvents panelPagos3 As Panel
     Friend WithEvents txtDescripcionDescuentoPago3 As TextBox
@@ -2667,7 +2670,6 @@ Partial Class PlanesEDC
     Friend WithEvents txtRecargoPago3 As TextBox
     Friend WithEvents txtMontoPago3 As TextBox
     Friend WithEvents txtConcepto3 As TextBox
-    Friend WithEvents txtClavePago3 As TextBox
     Friend WithEvents lbl3 As Label
     Friend WithEvents panelPagos5 As Panel
     Friend WithEvents txtDescripcionDescuentoPago5 As TextBox
@@ -2677,7 +2679,6 @@ Partial Class PlanesEDC
     Friend WithEvents txtRecargoPago5 As TextBox
     Friend WithEvents txtMontoPago5 As TextBox
     Friend WithEvents txtConcepto5 As TextBox
-    Friend WithEvents txtClavePago5 As TextBox
     Friend WithEvents lbl5 As Label
     Friend WithEvents panelPagos2 As Panel
     Friend WithEvents txtDescripcionDescuentoPago2 As TextBox
@@ -2687,7 +2688,6 @@ Partial Class PlanesEDC
     Friend WithEvents txtRecargoPago2 As TextBox
     Friend WithEvents txtMontoPago2 As TextBox
     Friend WithEvents txtConcepto2 As TextBox
-    Friend WithEvents txtClavePago2 As TextBox
     Friend WithEvents lbl2 As Label
     Friend WithEvents panelPagos1 As Panel
     Friend WithEvents txtDescripcionDescuentoPago1 As TextBox
@@ -2697,7 +2697,6 @@ Partial Class PlanesEDC
     Friend WithEvents txtRecargoPago1 As TextBox
     Friend WithEvents txtMontoPago1 As TextBox
     Friend WithEvents txtConcepto1 As TextBox
-    Friend WithEvents txtClavePago1 As TextBox
     Friend WithEvents lbl1 As Label
     Friend WithEvents txtDescripcionDescuentoPagoUnico As TextBox
     Friend WithEvents txtDescuentoPagoUnico As TextBox
@@ -2757,4 +2756,14 @@ Partial Class PlanesEDC
     Friend WithEvents Label27 As Label
     Friend WithEvents btnGuardar As Button
     Friend WithEvents btnSalir As Button
+    Friend WithEvents cbClave10 As ComboBox
+    Friend WithEvents cbClave9 As ComboBox
+    Friend WithEvents cbClave8 As ComboBox
+    Friend WithEvents cbClave7 As ComboBox
+    Friend WithEvents cbClave6 As ComboBox
+    Friend WithEvents cbClave4 As ComboBox
+    Friend WithEvents cbClave3 As ComboBox
+    Friend WithEvents cbClave5 As ComboBox
+    Friend WithEvents cbClave2 As ComboBox
+    Friend WithEvents cbClave1 As ComboBox
 End Class
