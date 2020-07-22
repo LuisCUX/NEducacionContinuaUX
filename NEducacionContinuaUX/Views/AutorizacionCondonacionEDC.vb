@@ -125,6 +125,10 @@
         ac.GuardarCondonaciones(Matricula, GridCondonaciones)
     End Sub
 
+    Private Sub btnGuardarAutorizacionCaja_Click(sender As Object, e As EventArgs) Handles btnGuardarAutorizacionCaja.Click
+        ac.GuardarAutorizacionesCaja(Matricula, GridAutorizacionCaja)
+    End Sub
+
     Private Sub rbExterno_CheckedChanged(sender As Object, e As EventArgs) Handles rbExterno.CheckedChanged
         cbExterno.DataSource = Nothing
         Dim tableExternos As DataTable = db.getDataTableFromSQL("SELECT CL.clave_cliente, UPPER(C.nombre + ' ' + E.paterno + ' ' + E.materno + ' (' + CL.clave_cliente + ')') As NombreExterno FROM portal_registroExterno AS E
@@ -151,5 +155,6 @@
 
         End Try
     End Sub
+
 
 End Class

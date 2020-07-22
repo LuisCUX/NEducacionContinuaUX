@@ -65,6 +65,11 @@ Partial Class AutorizacionCondonacionEDC
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.treeAutorizacionCaja = New System.Windows.Forms.TreeView()
         Me.tabAutorizacionProceso = New System.Windows.Forms.TabPage()
+        Me.TreeView1 = New System.Windows.Forms.TreeView()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.panelBusqueda.SuspendLayout()
         Me.panelDatos.SuspendLayout()
         Me.panelAutCon.SuspendLayout()
@@ -73,6 +78,8 @@ Partial Class AutorizacionCondonacionEDC
         CType(Me.GridCondonaciones, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabAutorizacionCaja.SuspendLayout()
         CType(Me.GridAutorizacionCaja, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabAutorizacionProceso.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblNombreVentana
@@ -495,11 +502,58 @@ Partial Class AutorizacionCondonacionEDC
         'tabAutorizacionProceso
         '
         Me.tabAutorizacionProceso.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.tabAutorizacionProceso.Controls.Add(Me.Button1)
+        Me.tabAutorizacionProceso.Controls.Add(Me.DataGridView1)
+        Me.tabAutorizacionProceso.Controls.Add(Me.TreeView1)
         Me.tabAutorizacionProceso.Location = New System.Drawing.Point(4, 22)
         Me.tabAutorizacionProceso.Name = "tabAutorizacionProceso"
         Me.tabAutorizacionProceso.Size = New System.Drawing.Size(1161, 441)
         Me.tabAutorizacionProceso.TabIndex = 2
         Me.tabAutorizacionProceso.Text = "Autorizacion de Proceso"
+        '
+        'TreeView1
+        '
+        Me.TreeView1.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.TreeView1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TreeView1.ForeColor = System.Drawing.SystemColors.Control
+        Me.TreeView1.Location = New System.Drawing.Point(16, 15)
+        Me.TreeView1.Name = "TreeView1"
+        Me.TreeView1.Size = New System.Drawing.Size(568, 411)
+        Me.TreeView1.StateImageList = Me.ImageListTree
+        Me.TreeView1.TabIndex = 11
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4})
+        Me.DataGridView1.Location = New System.Drawing.Point(592, 15)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.Size = New System.Drawing.Size(563, 330)
+        Me.DataGridView1.TabIndex = 17
+        '
+        'DataGridViewTextBoxColumn3
+        '
+        Me.DataGridViewTextBoxColumn3.HeaderText = "Node"
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        Me.DataGridViewTextBoxColumn3.Visible = False
+        '
+        'DataGridViewTextBoxColumn4
+        '
+        Me.DataGridViewTextBoxColumn4.HeaderText = "Concepto"
+        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        '
+        'Button1
+        '
+        Me.Button1.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.descargar
+        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(1083, 373)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(72, 53)
+        Me.Button1.TabIndex = 18
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'AutorizacionCondonacionEDC
         '
@@ -526,6 +580,8 @@ Partial Class AutorizacionCondonacionEDC
         CType(Me.GridCondonaciones, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabAutorizacionCaja.ResumeLayout(False)
         CType(Me.GridAutorizacionCaja, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabAutorizacionProceso.ResumeLayout(False)
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -571,4 +627,9 @@ Partial Class AutorizacionCondonacionEDC
     Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     Friend WithEvents treeAutorizacionCaja As TreeView
+    Friend WithEvents Button1 As Button
+    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
+    Friend WithEvents TreeView1 As TreeView
 End Class

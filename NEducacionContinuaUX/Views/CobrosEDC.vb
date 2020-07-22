@@ -132,7 +132,7 @@
             Dim index As Integer = Tree.SelectedNode.Index
             If (Tree.SelectedNode.Checked = False) Then
                 Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
-                If (Me.buscarRecargo(conceptoID) = False) Then
+                If (Me.buscarRecargoColegiaturas(conceptoID) = False) Then
                     Dim mesActual As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "-", "-")
                     MessageBox.Show($"No puede pagar la colegiatura del mes de {mesActual} sin antes haber pagado el recargo correspondiente")
                     Exit Sub
@@ -172,13 +172,18 @@
                 Me.actualizarTotal(ch.getListaConceptos())
                 Tree.Nodes(5).Nodes(index).SelectedImageIndex = 1
             ElseIf (Tree.SelectedNode.Checked = True) Then
+                Dim recargoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
+                If (Me.buscarConceptoConRecargo(recargoID) = False) Then
+                    MessageBox.Show("No puede cobrar conceptos sin antes haber pagado los recargos correspondientes")
+                    Exit Sub
+                End If
                 Tree.SelectedNode.Checked = False
-                Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
-                ch.eliminarconcepto(conceptoID, "REC")
-                Me.actualizarTotal(ch.getListaConceptos())
-                Tree.Nodes(5).Nodes(index).SelectedImageIndex = 0
+                    Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
+                    ch.eliminarconcepto(conceptoID, "REC")
+                    Me.actualizarTotal(ch.getListaConceptos())
+                    Tree.Nodes(5).Nodes(index).SelectedImageIndex = 0
+                End If
             End If
-        End If
     End Sub
 
     Sub actualizarTotal(listaConceptos As List(Of Concepto))
@@ -226,16 +231,31 @@
         ComboboxService.llenarCombobox(cbExterno, tableEDC, "clave_cliente", "NombreCliente")
     End Sub
 
-    Function buscarRecargo(ID As Integer) As Boolean
+    Function buscarRecargoColegiaturas(ID As Integer) As Boolean
         Dim IDRecargo As Integer
         Dim seleccionado As Boolean
         For Each item As TreeNode In Tree.Nodes(5).Nodes
             IDRecargo = co.Extrae_Cadena(item.ToString(), "[", "]")
             Dim idConceptoRecargo As Integer = db.exectSQLQueryScalar($"SELECT ID_Concepto FROM ing_PlanesRecargos WHERE ID = {IDRecargo}")
-            If (idConceptoRecargo = ID And item.SelectedImageIndex <> 1) Then
+            Dim autorizado As Integer = db.exectSQLQueryScalar($"SELECT Autorizado FROM ing_AsignacionCargosPlanes WHERE ID = {idConceptoRecargo}")
+            If (idConceptoRecargo = ID And item.SelectedImageIndex <> 1 And autorizado = False) Then
                 Return False
             End If
         Next
+        Return True
+    End Function
+
+    Function buscarConceptoConRecargo(IDRecargo As Integer) As Boolean
+        Dim IDRecargado As Integer = db.exectSQLQueryScalar($"SELECT ID_Concepto FROM ing_PlanesRecargos WHERE ID = {IDRecargo}")
+        For x = 0 To 5
+            For Each item As TreeNode In Tree.Nodes(x).Nodes
+                Dim IDCOncepto As Integer = co.Extrae_Cadena(item.ToString(), "[", "]")
+                If (IDCOncepto = IDRecargado And item.SelectedImageIndex = 1) Then
+                    Return False
+                End If
+            Next
+        Next
+
         Return True
     End Function
 
@@ -246,6 +266,10 @@
         txtTurno.Clear()
         Tree.Nodes(0).Nodes.Clear()
         Tree.Nodes(1).Nodes.Clear()
+        Tree.Nodes(2).Nodes.Clear()
+        Tree.Nodes(3).Nodes.Clear()
+        Tree.Nodes(4).Nodes.Clear()
+        Tree.Nodes(5).Nodes.Clear()
         lblTotal.Text = ""
         ch.limpiarListaConceptos()
     End Sub

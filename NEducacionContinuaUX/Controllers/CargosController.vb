@@ -112,16 +112,20 @@
         For Each item As DataRow In tablePagoUnico.Rows
             Dim result As String = $"[{item("ID")}]|({item("Clave")})|{item("Descripcion")}|{item("Importe")}|{1}|Total: {Me.calcularTotal(item("Importe"), 1, False, False, False)}"
             If (Tipo = "Cobros") Then
-                Tree.Nodes(4).Nodes(0).Nodes.Add(result).StateImageIndex = 0
-                Tree.Nodes(4).Nodes(0).Expand()
+                Tree.Nodes(4).Nodes.Add(result).StateImageIndex = 0
+                Tree.Nodes(4).Expand()
             End If
         Next
     End Sub
 
     Sub buscarRecargosDiplomados(Tree As TreeView, Matricula As String, TipoMatricula As String, Tipo As String)
+        Dim query As String = ""
+        If (Tipo <> "Cobros") Then
+            query = "AND P.Autorizado = 0 AND P.Condonado = 0"
+        End If
         Dim tableRecargos As DataTable = db.getDataTableFromSQL($"SELECT P.ID, P.Descripcion, P.Monto, C.Clave FROM ing_PlanesRecargos AS P
                                                                   INNER JOIN ing_CatClavesPagos AS C ON C.ID = 7
-                                                                  WHERE P.Matricula = '{Matricula}' AND Activo = 1")
+                                                                  WHERE P.Matricula = '{Matricula}' AND Activo = 1 {query}")
         For Each item As DataRow In tableRecargos.Rows
             Dim result As String = $"[{item("ID")}]|({item("Clave")})|{item("Descripcion")}|{item("Monto")}|{1}|Total: {Me.calcularTotal(item("Monto"), 1, True, False, False)}"
             Dim condonacion As Object() = ch.obtenerDatosCondonacion(item("ID"), 7)
@@ -139,11 +143,15 @@
     End Sub
 
     Sub buscarColegiaturasConRecargosDiplomados(Tree As TreeView, Matricula As String, TipoMatricula As String, Tipo As String)
+        Dim query As String = ""
+        If (Tipo <> "Cobros") Then
+            query = "AND AC.Autorizado = 0 AND AC.Condonado = 0"
+        End If
         Dim tableRecargos As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, C.Importe, CP.Clave FROM ing_AsignacionCargosPlanes AS AC 
                                                                       INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
-                                                                      INNER JOIN ing_CatClavesPagos AS CP ON CP.ID = 5
+                                                                      INNER JOIN ing_CatClavesPagos AS CP ON CP.ID = 4
                                                                       INNER JOIN ing_PlanesRecargos AS R ON R.ID_Concepto = AC.ID
-                                                                      WHERE AC.Matricula = '{Matricula}' AND C.Clave != 'P00' AND C.Clave != 'P13' AND AC.Activo = 1")
+                                                                      WHERE AC.Matricula = '{Matricula}' AND C.Clave != 'P00' AND C.Clave != 'P13' AND AC.Activo = 1 {query}")
         For Each item As DataRow In tableRecargos.Rows
             Dim result As String = $"[{item("ID")}]|({item("Clave")})|{item("Descripcion")}|{item("Importe")}|{1}|Total: {Me.calcularTotal(item("Importe"), 1, True, False, False)}"
             If (Tipo = "AutCaja") Then
