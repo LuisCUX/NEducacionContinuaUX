@@ -61,7 +61,14 @@
                 Else
                     ID_ClavePago = 4
                 End If
-                db.execSQLQueryWithoutParams($"INSERT INTO ing_AsignacionCargosPlanes(ID_Concepto, Matricula, Fecha_Asignacion, Fecha_Recargo, ID_ClaveConcepto, Autorizado, Condonado, Activo) VALUES ({IDPago}, '{Matricula}', GETDATE(), '1900-01-01', {ID_ClavePago}, 0, 0, 1)")
+                Dim fechaRecargo As String
+                Dim aplicaRecargo As Boolean = db.exectSQLQueryScalar($"SELECT Considera_Recargo FROM ing_PlanesConceptos WHERE ID = {IDPago}")
+                If (aplicaRecargo = True) Then
+                    fechaRecargo = db.exectSQLQueryScalar($"SELECT Fecha_Calcula_Recargo FROM ing_PlanesConceptos WHERE ID = {IDPago}")
+                Else
+                    fechaRecargo = "1900-01-01"
+                End If
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_AsignacionCargosPlanes(ID_Concepto, Matricula, Fecha_Asignacion, Fecha_Recargo, ID_ClaveConcepto, Autorizado, Condonado, Activo) VALUES ({IDPago}, '{Matricula}', GETDATE(), '{fechaRecargo}', {ID_ClavePago}, 0, 0, 1)")
             Next
             db.commitTransaction()
             MessageBox.Show("Cargos asignados correctamente")
