@@ -449,7 +449,7 @@
         End If
     End Sub
 
-    Private Sub txtRecargosPagos_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtRecargosPagos.KeyPress
+    Private Sub txtRecargosPagos_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtRecargosPagos.KeyPress, txtRecargoPago1.KeyPress, txtRecargoPago2.KeyPress, txtRecargoPago3.KeyPress, txtRecargoPago4.KeyPress, txtRecargoPago5.KeyPress, txtRecargoPago6.KeyPress, txtRecargoPago7.KeyPress, txtRecargoPago8.KeyPress, txtRecargoPago9.KeyPress, txtRecargoPago10.KeyPress
         Dim num_cantidad As Decimal = 0
         Dim KeyAscii As Short = Asc(e.KeyChar)
         If InStr("0123456789.", Chr(KeyAscii)) = 0 Then
