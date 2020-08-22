@@ -341,6 +341,26 @@
         txtImporteInscripcionText.Text = txtImporteInscripcion.Text
     End Sub
 
+    Private Sub controlCantidades_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtMontoPago1.KeyPress, txtMontoPago2.KeyPress, txtMontoPago3.KeyPress, txtMontoPago4.KeyPress, txtMontoPago5.KeyPress, txtMontoPago6.KeyPress, txtMontoPago7.KeyPress, txtMontoPago8.KeyPress, txtMontoPago9.KeyPress, txtMontoPago10.KeyPress,
+                                                                                             txtRecargoPago1.KeyPress, txtRecargoPago2.KeyPress, txtRecargoPago3.KeyPress, txtRecargoPago4.KeyPress, txtRecargoPago5.KeyPress, txtRecargoPago6.KeyPress, txtRecargoPago7.KeyPress, txtRecargoPago8.KeyPress, txtRecargoPago9.KeyPress, txtRecargoPago10.KeyPress,
+                                                                                             txtDescuentoPago1.KeyPress, txtDescuentoPago2.KeyPress, txtDescuentoPago3.KeyPress, txtDescuentoPago4.KeyPress, txtDescuentoPago5.KeyPress, txtDescuentoPago6.KeyPress, txtDescuentoPago7.KeyPress, txtDescuentoPago8.KeyPress, txtDescuentoPago9.KeyPress, txtDescuentoPago10.KeyPress
+        Dim num_cantidad As Decimal = 0
+        Dim KeyAscii As Short = Asc(e.KeyChar)
+        If InStr("0123456789.", Chr(KeyAscii)) = 0 Then
+            If KeyAscii <> 8 Then
+                KeyAscii = 0
+            End If
+            e.KeyChar = Chr(KeyAscii)
+            If KeyAscii = 0 Then
+                e.Handled = True
+            End If
+        ElseIf InStr(txtImporteInscripcion.Text, ".") > 0 Then
+            If KeyAscii = 46 Then
+                e.Handled = True
+            End If
+        End If
+    End Sub
+
     Private Sub txtImporteInscripcion_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtImporteInscripcion.KeyPress
         Dim num_cantidad As Decimal = 0
         Dim KeyAscii As Short = Asc(e.KeyChar)
@@ -957,7 +977,7 @@
             If (txtMontoPagoUnico.Text = "") Then
                 MessageBox.Show("Ingrese el monto correspondiente al pago unico")
                 Exit Sub
-            ElseIf (chbDescuentoPagoUnico.Checked = True) Then
+            ElseIf (txtDescuentoPagoUnico.Text = "") Then
                 MessageBox.Show("Ingrese el monto correspondiente al descuento del pago unico")
                 Exit Sub
             End If

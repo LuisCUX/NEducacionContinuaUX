@@ -132,6 +132,11 @@
             Dim index As Integer = Tree.SelectedNode.Index
             If (Tree.SelectedNode.Checked = False) Then
                 Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
+                If (Me.validarSeleccionNodosColegiaturas(index, 1) = False) Then
+                    Dim mesActual As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "-", "-")
+                    MessageBox.Show($"No puede pagar la colegiatura del mes {mesActual} sin antes haber pagado las colegiaturas anteriores")
+                    Exit Sub
+                End If
                 If (Me.buscarRecargoColegiaturas(conceptoID) = False) Then
                     Dim mesActual As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "-", "-")
                     MessageBox.Show($"No puede pagar la colegiatura del mes de {mesActual} sin antes haber pagado el recargo correspondiente")
@@ -142,6 +147,11 @@
                 Me.actualizarTotal(ch.getListaConceptos())
                 Tree.Nodes(3).Nodes(index).SelectedImageIndex = 1
             ElseIf (Tree.SelectedNode.Checked = True) Then
+                If (Me.validarSeleccionNodosColegiaturas(index, 2) = False) Then
+                    Dim mesActual As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "-", "-")
+                    MessageBox.Show($"No puede desmarcar el pago del mes de {mesActual} sin antes haber pagado las colegiaturas posteriores")
+                    Exit Sub
+                End If
                 Tree.SelectedNode.Checked = False
                 Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
                 ch.eliminarconcepto(conceptoID, "DCO")
@@ -255,6 +265,24 @@
                 End If
             Next
         Next
+
+        Return True
+    End Function
+
+    Function validarSeleccionNodosColegiaturas(index As Integer, tipo As Integer) As Boolean
+        If (tipo = 1) Then
+            For x = 0 To index - 1
+                If (Tree.Nodes(3).Nodes(x).SelectedImageIndex <> 1) Then
+                    Return False
+                End If
+            Next
+        ElseIf (tipo = 2) Then
+            For x = index To Tree.Nodes(3).Nodes.Count() - 1
+                If (Tree.Nodes(3).Nodes(x).SelectedImageIndex = 1 And Tree.Nodes(3).Nodes(x).Index <> index) Then
+                    Return False
+                End If
+            Next
+        End If
 
         Return True
     End Function
