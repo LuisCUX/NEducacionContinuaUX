@@ -1,8 +1,8 @@
 ﻿Public Class PlanesEDC
     Dim listaPaneles As New List(Of Panel)
     Dim listatxtImportes As New List(Of TextBox)
-    Dim listatxtRecargos As New List(Of TextBox)
-    Dim listatxtDescuentos As New List(Of TextBox)
+    Dim listatxtRecargos As New List(Of NumericUpDown)
+    Dim listatxtDescuentos As New List(Of NumericUpDown)
     Dim listatxtDescripcionDescuentos As New List(Of TextBox)
     Dim listadatePickerRecargos As New List(Of DateTimePicker)
     Dim listadatePickerDescuentos As New List(Of DateTimePicker)
@@ -35,7 +35,7 @@
         If (cbPlanes.Text <> "NUEVO PLAN") Then
             txtNombrePlan.Text = cbPlanes.Text
             pc.llenarVentanaPlanesInscripcion(cbPlanes.SelectedValue, chbInscripcion, txtImporteInscripcion, chbRecargoInscripcion, chbDescuentoInscripcion, txtRecargoInscripcion, datePickerRecargoInscripcion, txtDescuentoInscripcion, txtDescripcionDescuentoInscripcion, datePickerLimiteDescuentoInscripcion)
-            pc.llenarVentanaPlanesColegiaturas(cbPlanes.SelectedValue, listaPaneles, listatxtImportes, listatxtRecargos, listatxtDescuentos, listatxtDescripcionDescuentos, listadatePickerRecargos, listadatePickerDescuentos, listacbClaves, listatxtConcepto, txtImportePagos, txtRecargosPagos, txtDescuentoPagos, txtDescripcionDescuentoPagos, chbRecargosPagos, chbDescuentoPagos, cbNoPagos)
+            pc.llenarVentanaPlanesColegiaturas(cbPlanes.SelectedValue, listaPaneles, listatxtImportes, listatxtRecargos, listatxtDescuentos, listatxtDescripcionDescuentos, listadatePickerRecargos, listadatePickerDescuentos, listacbClaves, listatxtConcepto, txtImportePagos, NURecargo, NUDescuento, txtDescripcionDescuentoPagos, chbRecargosPagos, chbDescuentoPagos, cbNoPagos)
             pc.llenarVentanaPlanesPagoUnico(cbPlanes.SelectedValue, chbPagoUnico, txtMontoPagoUnico, chbDescuentoPagoUnico, txtDescuentoPagoUnico, datePickerDescuentoPagoUnico, datePickerPagoUnico)
             colegiaturas = cbNoPagos.SelectedIndex + 1
             edicion = True
@@ -142,7 +142,7 @@
             Exit Sub
         End If
 
-        If (chbRecargosPagos.Checked = True And txtRecargosPagos.Text.Length = 0) Then
+        If (chbRecargosPagos.Checked = True And NURecargo.Text.Length = 0) Then
             MessageBox.Show("Especifique el monto del recargo")
             cbNoPagos.SelectedIndex = 0
             Exit Sub
@@ -160,7 +160,7 @@
             Exit Sub
         End If
 
-        If (chbDescuentoPagos.Checked = True And txtDescuentoPagos.Text.Length = 0) Then
+        If (chbDescuentoPagos.Checked = True And NUDescuento.Text.Length = 0) Then
             MessageBox.Show("Especifique el monto de descuento")
             cbNoPagos.SelectedIndex = 0
             Exit Sub
@@ -180,7 +180,7 @@
 
         If (chbDescuentoPagos.Checked = True) Then
             For x = 0 To cbNoPagos.SelectedIndex
-                listatxtDescuentos(x).Text = txtDescuentoPagos.Text
+                listatxtDescuentos(x).Text = NUDescuento.Text
                 listatxtDescuentos(x).Enabled = True
                 listatxtDescripcionDescuentos(x).Text = txtDescripcionDescuentoPagos.Text
                 listatxtDescripcionDescuentos(x).Enabled = True
@@ -194,7 +194,7 @@
 
         If (chbRecargosPagos.Checked = True) Then
             For x = 0 To cbNoPagos.SelectedIndex
-                listatxtRecargos(x).Text = txtRecargosPagos.Text
+                listatxtRecargos(x).Text = NURecargo.Text
                 listatxtRecargos(x).Enabled = True
                 listadatePickerRecargos(x).Enabled = True
             Next
@@ -214,7 +214,7 @@
 
     Private Sub chbRecargosPagos_CheckedChanged(sender As Object, e As EventArgs) Handles chbRecargosPagos.CheckedChanged
         If (chbRecargosPagos.Checked = True) Then
-            txtRecargosPagos.Enabled = True
+            NURecargo.Enabled = True
             GBRecargos.Enabled = True
             For x = 0 To cbNoPagos.SelectedIndex
                 listatxtRecargos(x).Enabled = True
@@ -225,11 +225,11 @@
             Next
         Else
             GBRecargos.Enabled = False
-            txtRecargosPagos.Enabled = False
-            txtRecargosPagos.Clear()
+            NURecargo.Enabled = False
+            NURecargo.Value = 0
             For x = 0 To cbNoPagos.SelectedIndex
                 listatxtRecargos(x).Enabled = False
-                listatxtRecargos(x).Clear()
+                listatxtRecargos(x).Value = 0
             Next
 
             For x = 0 To cbNoPagos.SelectedIndex
@@ -242,7 +242,7 @@
 
     Private Sub chbDescuentoPagos_CheckedChanged(sender As Object, e As EventArgs) Handles chbDescuentoPagos.CheckedChanged
         If (chbDescuentoPagos.Checked = True) Then
-            txtDescuentoPagos.Enabled = True
+            NUDescuento.Enabled = True
             txtDescripcionDescuentoPagos.Enabled = True
             For x = 0 To cbNoPagos.SelectedIndex
                 listatxtDescuentos(x).Enabled = True
@@ -256,13 +256,13 @@
                 listadatePickerDescuentos(x).Enabled = True
             Next
         Else
-            txtDescuentoPagos.Enabled = False
+            NUDescuento.Enabled = False
             txtDescripcionDescuentoPagos.Enabled = False
-            txtDescuentoPagos.Clear()
+            NUDescuento.Value = 0
             txtDescripcionDescuentoPagos.Clear()
             For x = 0 To cbNoPagos.SelectedIndex
                 listatxtDescuentos(x).Enabled = False
-                listatxtDescuentos(x).Clear()
+                listatxtDescuentos(x).value = 0
             Next
 
             For x = 0 To cbNoPagos.SelectedIndex
@@ -469,7 +469,19 @@
         End If
     End Sub
 
-    Private Sub txtRecargosPagos_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtRecargosPagos.KeyPress
+    Private Sub txtRecargosPagos_KeyPress(sender As Object, e As KeyPressEventArgs) Handles NURecargo.KeyPress
+        'If (NURecargo.Value > 100 Or NURecargos1.Value > 100 Or NURecargos2.Value > 100 Or NURecargos3.Value > 100 Or NURecargos4.Value > 100 Or NURecargos5.Value > 100 Or NURecargos6.Value > 100 Or NURecargos7.Value > 100 Or NURecargos8.Value > 100 Or NURecargos9.Value > 100 Or NURecargos10.Value > 100) Then
+        '    NURecargos1.Text = 0
+        '    NURecargos2.Text = 0
+        '    NURecargos3.Text = 0
+        '    NURecargos4.Text = 0
+        '    NURecargos5.Text = 0
+        '    NURecargos6.Text = 0
+        '    NURecargos7.Text = 0
+        '    NURecargos8.Text = 0
+        '    NURecargos9.Text = 0
+        '    NURecargos10.Text = 0
+        'End If
         Dim num_cantidad As Decimal = 0
         Dim KeyAscii As Short = Asc(e.KeyChar)
         If InStr("0123456789.", Chr(KeyAscii)) = 0 Then
@@ -480,14 +492,14 @@
             If KeyAscii = 0 Then
                 e.Handled = True
             End If
-        ElseIf InStr(txtRecargosPagos.Text, ".") > 0 Then
+        ElseIf InStr(NURecargo.Text, ".") > 0 Then
             If KeyAscii = 46 Then
                 e.Handled = True
             End If
         End If
     End Sub
 
-    Private Sub txtDescuentoPagos_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtDescuentoPagos.KeyPress
+    Private Sub txtDescuentoPagos_KeyPress(sender As Object, e As KeyPressEventArgs)
         Dim num_cantidad As Decimal = 0
         Dim KeyAscii As Short = Asc(e.KeyChar)
         If InStr("0123456789.", Chr(KeyAscii)) = 0 Then
@@ -498,7 +510,7 @@
             If KeyAscii = 0 Then
                 e.Handled = True
             End If
-        ElseIf InStr(txtDescuentoPagos.Text, ".") > 0 Then
+        ElseIf InStr(NUDescuento.Text, ".") > 0 Then
             If KeyAscii = 46 Then
                 e.Handled = True
             End If
@@ -798,9 +810,9 @@
             listaPaneles(x).Visible = False
             listacbClaves(x).SelectedIndex = 0
             listatxtDescripcionDescuentos(x).Clear()
-            listatxtDescuentos(x).Clear()
+            listatxtDescuentos(x).Value = 0
             listatxtImportes(x).Clear()
-            listatxtRecargos(x).Clear()
+            listatxtRecargos(x).Value = 0
         Next
     End Sub
 
@@ -860,29 +872,29 @@
     End Sub
 
     Sub llenarlistatxtRecargos()
-        listatxtRecargos.Add(txtRecargoPago1)
-        listatxtRecargos.Add(txtRecargoPago2)
-        listatxtRecargos.Add(txtRecargoPago3)
-        listatxtRecargos.Add(txtRecargoPago4)
-        listatxtRecargos.Add(txtRecargoPago5)
-        listatxtRecargos.Add(txtRecargoPago6)
-        listatxtRecargos.Add(txtRecargoPago7)
-        listatxtRecargos.Add(txtRecargoPago8)
-        listatxtRecargos.Add(txtRecargoPago9)
-        listatxtRecargos.Add(txtRecargoPago10)
+        listatxtRecargos.Add(NURecargos1)
+        listatxtRecargos.Add(NURecargos2)
+        listatxtRecargos.Add(NURecargos3)
+        listatxtRecargos.Add(NURecargos4)
+        listatxtRecargos.Add(NURecargos5)
+        listatxtRecargos.Add(NURecargos6)
+        listatxtRecargos.Add(NURecargos7)
+        listatxtRecargos.Add(NURecargos8)
+        listatxtRecargos.Add(NURecargos9)
+        listatxtRecargos.Add(NURecargos10)
     End Sub
 
     Sub llenarlistatxtDescuentos()
-        listatxtDescuentos.Add(txtDescuentoPago1)
-        listatxtDescuentos.Add(txtDescuentoPago2)
-        listatxtDescuentos.Add(txtDescuentoPago3)
-        listatxtDescuentos.Add(txtDescuentoPago4)
-        listatxtDescuentos.Add(txtDescuentoPago5)
-        listatxtDescuentos.Add(txtDescuentoPago6)
-        listatxtDescuentos.Add(txtDescuentoPago7)
-        listatxtDescuentos.Add(txtDescuentoPago8)
-        listatxtDescuentos.Add(txtDescuentoPago9)
-        listatxtDescuentos.Add(txtDescuentoPago10)
+        listatxtDescuentos.Add(NUDescuentos1)
+        listatxtDescuentos.Add(NUDescuentos2)
+        listatxtDescuentos.Add(NUDescuentos3)
+        listatxtDescuentos.Add(NUDescuentos4)
+        listatxtDescuentos.Add(NUDescuentos5)
+        listatxtDescuentos.Add(NUDescuentos6)
+        listatxtDescuentos.Add(NUDescuentos7)
+        listatxtDescuentos.Add(NUDescuentos8)
+        listatxtDescuentos.Add(NUDescuentos9)
+        listatxtDescuentos.Add(NUDescuentos10)
     End Sub
 
     Sub llenarlistatxtDescripcionDescuentos()
@@ -988,8 +1000,13 @@
             Exit Sub
         End If
         For x = 0 To colegiaturas - 1
-            If (listacbClaves(x).Text = "") Then
-                MessageBox.Show("Ingrese la clave correspondiente a la colegiatura")
+            If (listacbClaves(x).Text = " ") Then
+                MessageBox.Show("Ingrese la clave correspondiente a las colegiaturas")
+                Exit Sub
+            End If
+
+            If (listatxtConcepto(x).Text = "" Or listatxtConcepto(x).Text = " ") Then
+                MessageBox.Show("Ingrese la clave correspondiente a las colegiaturas")
                 Exit Sub
             End If
 
@@ -1090,8 +1107,8 @@
 
         ''----------COLEGIATURAS----------''
         txtImportePagos.Clear()
-        txtRecargosPagos.Clear()
-        txtDescuentoPagos.Clear()
+        NURecargo.Value = 0
+        NUDescuento.Value = 0
         txtDescripcionDescuentoPagos.Clear()
         chbRecargosPagos.Checked = False
         chbDescuentoPagos.Checked = False
@@ -1099,9 +1116,9 @@
             listaPaneles(x).Visible = False
             listacbClaves(x).SelectedIndex = 0
             listatxtDescripcionDescuentos(x).Clear()
-            listatxtDescuentos(x).Clear()
+            listatxtDescuentos(x).value = 0
             listatxtImportes(x).Clear()
-            listatxtRecargos(x).Clear()
+            listatxtRecargos(x).Value = 0
         Next
         cbNoPagos.SelectedIndex = 0
         cbNoPagos.Enabled = False

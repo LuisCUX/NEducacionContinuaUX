@@ -78,8 +78,8 @@
         End If
     End Sub
 
-    Sub llenarVentanaPlanesColegiaturas(IDPlan As Integer, listaPaneles As List(Of Panel), listatxtImportes As List(Of TextBox), listatxtRecargos As List(Of TextBox), listatxtDescuentos As List(Of TextBox), listatxtDescripcionDescuentos As List(Of TextBox), listadatePickerRecargos As List(Of DateTimePicker), listadatePickerDescuentos As List(Of DateTimePicker), listacbClaves As List(Of ComboBox), listatxtConcepto As List(Of TextBox),
-                                        txtImporteTotal As TextBox, txtRecargoTotal As TextBox, txtDescuentoTotal As TextBox, txtDescripcionDescuentos As TextBox, chbRecargo As CheckBox, chbDescuento As CheckBox, cbNoPagos As ComboBox)
+    Sub llenarVentanaPlanesColegiaturas(IDPlan As Integer, listaPaneles As List(Of Panel), listatxtImportes As List(Of TextBox), listatxtRecargos As List(Of NumericUpDown), listatxtDescuentos As List(Of NumericUpDown), listatxtDescripcionDescuentos As List(Of TextBox), listadatePickerRecargos As List(Of DateTimePicker), listadatePickerDescuentos As List(Of DateTimePicker), listacbClaves As List(Of ComboBox), listatxtConcepto As List(Of TextBox),
+                                        txtImporteTotal As TextBox, txtRecargoTotal As NumericUpDown, txtDescuentoTotal As NumericUpDown, txtDescripcionDescuentos As TextBox, chbRecargo As CheckBox, chbDescuento As CheckBox, cbNoPagos As ComboBox)
         Dim tableColegiaturas As DataTable = db.getDataTableFromSQL($"SELECT Clave, Descripcion, Importe, Recargo, Fecha_Calcula_Recargo, Descuento, Fecha_Limite_Desc
                                                                       From ing_PlanesConceptos
                                                                       Where ID_Plan = {IDPlan} And Activo = 1 And Clave! = 'P00' AND Clave != 'P13'")
