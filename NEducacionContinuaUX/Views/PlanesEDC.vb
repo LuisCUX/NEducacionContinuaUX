@@ -34,14 +34,16 @@
     Private Sub cbPlanes_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbPlanes.SelectionChangeCommitted
         If (cbPlanes.Text <> "NUEVO PLAN") Then
             txtNombrePlan.Text = cbPlanes.Text
-            pc.llenarVentanaPlanesInscripcion(cbPlanes.SelectedValue, chbInscripcion, txtImporteInscripcion, chbRecargoInscripcion, chbDescuentoInscripcion, txtRecargoInscripcion, datePickerRecargoInscripcion, txtDescuentoInscripcion, txtDescripcionDescuentoInscripcion, datePickerLimiteDescuentoInscripcion)
+            pc.llenarVentanaPlanesInscripcion(cbPlanes.SelectedValue, chbInscripcion, txtImporteInscripcion, chbRecargoInscripcion, chbDescuentoInscripcion, NURecargoInscripcion, datePickerRecargoInscripcion, NUDescuentoInscripcion, txtDescripcionDescuentoInscripcion, datePickerLimiteDescuentoInscripcion)
             pc.llenarVentanaPlanesColegiaturas(cbPlanes.SelectedValue, listaPaneles, listatxtImportes, listatxtRecargos, listatxtDescuentos, listatxtDescripcionDescuentos, listadatePickerRecargos, listadatePickerDescuentos, listacbClaves, listatxtConcepto, txtImportePagos, NURecargo, NUDescuento, txtDescripcionDescuentoPagos, chbRecargosPagos, chbDescuentoPagos, cbNoPagos)
-            pc.llenarVentanaPlanesPagoUnico(cbPlanes.SelectedValue, chbPagoUnico, txtMontoPagoUnico, chbDescuentoPagoUnico, txtDescuentoPagoUnico, datePickerDescuentoPagoUnico, datePickerPagoUnico)
+            pc.llenarVentanaPlanesPagoUnico(cbPlanes.SelectedValue, chbPagoUnico, txtMontoPagoUnico, chbDescuentoPagoUnico, NUDescuentoPagoUnico, datePickerDescuentoPagoUnico, datePickerPagoUnico)
             colegiaturas = cbNoPagos.SelectedIndex + 1
             edicion = True
             For x = 0 To colegiaturas - 1
                 listaPaneles(x).Visible = True
             Next
+            chbInscripcion.Enabled = True
+            chbPagoUnico.Enabled = True
         Else
             edicion = False
             Me.resetControls()
@@ -74,27 +76,27 @@
 
     Private Sub chbRecargoInscripcion_CheckedChanged(sender As Object, e As EventArgs) Handles chbRecargoInscripcion.CheckedChanged
         If (chbRecargoInscripcion.Checked = True) Then
-            txtRecargoInscripcion.Enabled = True
+            NURecargoInscripcion.Enabled = True
             datePickerRecargoInscripcion.Enabled = True
-            txtRecargoInscripcion.Clear()
+            NURecargoInscripcion.Value = 0
         Else
-            txtRecargoInscripcion.Enabled = False
+            NURecargoInscripcion.Enabled = False
             datePickerRecargoInscripcion.Enabled = False
-            txtRecargoInscripcion.Text = "0.00"
+            NURecargoInscripcion.Text = "0.00"
         End If
     End Sub
 
     Private Sub chbDescuentoInscripcion_CheckedChanged(sender As Object, e As EventArgs) Handles chbDescuentoInscripcion.CheckedChanged
         If (chbDescuentoInscripcion.Checked = True) Then
-            txtDescuentoInscripcion.Enabled = True
+            NUDescuentoInscripcion.Enabled = True
             datePickerLimiteDescuentoInscripcion.Enabled = True
             txtDescripcionDescuentoInscripcion.Enabled = True
-            txtDescuentoInscripcion.Clear()
+            NUDescuentoInscripcion.Value = 0
         Else
-            txtDescuentoInscripcion.Enabled = False
+            NUDescuentoInscripcion.Enabled = False
             datePickerLimiteDescuentoInscripcion.Enabled = False
             txtDescripcionDescuentoInscripcion.Enabled = False
-            txtDescuentoInscripcion.Text = "0.00"
+            NUDescuentoInscripcion.Text = "0.00"
         End If
     End Sub
 
@@ -262,7 +264,7 @@
             txtDescripcionDescuentoPagos.Clear()
             For x = 0 To cbNoPagos.SelectedIndex
                 listatxtDescuentos(x).Enabled = False
-                listatxtDescuentos(x).value = 0
+                listatxtDescuentos(x).Value = 0
             Next
 
             For x = 0 To cbNoPagos.SelectedIndex
@@ -297,15 +299,15 @@
 
     Private Sub chbDescuentoPagoUnico_CheckedChanged(sender As Object, e As EventArgs) Handles chbDescuentoPagoUnico.CheckedChanged
         If (chbDescuentoPagoUnico.Checked = True) Then
-            txtDescuentoPagoUnico.Enabled = True
+            NUDescuentoPagoUnico.Enabled = True
             datePickerDescuentoPagoUnico.Enabled = True
             txtDescripcionDescuentoPagoUnico.Enabled = True
-            txtDescuentoPagoUnico.Clear()
+            NUDescuentoPagoUnico.Value = 0
         Else
-            txtDescuentoPagoUnico.Enabled = False
+            NUDescuentoPagoUnico.Enabled = False
             datePickerDescuentoPagoUnico.Enabled = False
             txtDescripcionDescuentoPagoUnico.Enabled = False
-            txtDescuentoPagoUnico.Text = "0.00"
+            NUDescuentoPagoUnico.Text = "0.00"
         End If
     End Sub
 
@@ -342,8 +344,8 @@
     End Sub
 
     Private Sub controlCantidades_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtMontoPago1.KeyPress, txtMontoPago2.KeyPress, txtMontoPago3.KeyPress, txtMontoPago4.KeyPress, txtMontoPago5.KeyPress, txtMontoPago6.KeyPress, txtMontoPago7.KeyPress, txtMontoPago8.KeyPress, txtMontoPago9.KeyPress, txtMontoPago10.KeyPress,
-                                                                                             txtRecargoPago1.KeyPress, txtRecargoPago2.KeyPress, txtRecargoPago3.KeyPress, txtRecargoPago4.KeyPress, txtRecargoPago5.KeyPress, txtRecargoPago6.KeyPress, txtRecargoPago7.KeyPress, txtRecargoPago8.KeyPress, txtRecargoPago9.KeyPress, txtRecargoPago10.KeyPress,
-                                                                                             txtDescuentoPago1.KeyPress, txtDescuentoPago2.KeyPress, txtDescuentoPago3.KeyPress, txtDescuentoPago4.KeyPress, txtDescuentoPago5.KeyPress, txtDescuentoPago6.KeyPress, txtDescuentoPago7.KeyPress, txtDescuentoPago8.KeyPress, txtDescuentoPago9.KeyPress, txtDescuentoPago10.KeyPress
+                                                                                             NURecargos1.KeyPress, NURecargos2.KeyPress, NURecargos3.KeyPress, NURecargos4.KeyPress, NURecargos5.KeyPress, NURecargos6.KeyPress, NURecargos7.KeyPress, NURecargos8.KeyPress, NURecargos9.KeyPress, NURecargos10.KeyPress,
+                                                                                             NUDescuentos1.KeyPress, NUDescuentos2.KeyPress, NUDescuentos3.KeyPress, NUDescuentos4.KeyPress, NUDescuentos5.KeyPress, NUDescuentos6.KeyPress, NUDescuentos7.KeyPress, NUDescuentos8.KeyPress, NUDescuentos9.KeyPress, NUDescuentos10.KeyPress
         Dim num_cantidad As Decimal = 0
         Dim KeyAscii As Short = Asc(e.KeyChar)
         If InStr("0123456789.", Chr(KeyAscii)) = 0 Then
@@ -379,7 +381,7 @@
         End If
     End Sub
 
-    Private Sub txtRecargoInscripcion_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtRecargoInscripcion.KeyPress
+    Private Sub txtRecargoInscripcion_KeyPress(sender As Object, e As KeyPressEventArgs)
         Dim num_cantidad As Decimal = 0
         Dim KeyAscii As Short = Asc(e.KeyChar)
         If InStr("0123456789.", Chr(KeyAscii)) = 0 Then
@@ -390,14 +392,14 @@
             If KeyAscii = 0 Then
                 e.Handled = True
             End If
-        ElseIf InStr(txtRecargoInscripcion.Text, ".") > 0 Then
+        ElseIf InStr(NURecargoInscripcion.Text, ".") > 0 Then
             If KeyAscii = 46 Then
                 e.Handled = True
             End If
         End If
     End Sub
 
-    Private Sub txtDescuentoInscripcion_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtDescuentoInscripcion.KeyPress
+    Private Sub txtDescuentoInscripcion_KeyPress(sender As Object, e As KeyPressEventArgs)
         Dim num_cantidad As Decimal = 0
         Dim KeyAscii As Short = Asc(e.KeyChar)
         If InStr("0123456789.", Chr(KeyAscii)) = 0 Then
@@ -408,7 +410,7 @@
             If KeyAscii = 0 Then
                 e.Handled = True
             End If
-        ElseIf InStr(txtDescuentoInscripcion.Text, ".") > 0 Then
+        ElseIf InStr(NUDescuentoInscripcion.Text, ".") > 0 Then
             If KeyAscii = 46 Then
                 e.Handled = True
             End If
@@ -433,7 +435,7 @@
         End If
     End Sub
 
-    Private Sub txtDescuentoPagoUnico_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtDescuentoPagoUnico.KeyPress
+    Private Sub txtDescuentoPagoUnico_KeyPress(sender As Object, e As KeyPressEventArgs)
         Dim num_cantidad As Decimal = 0
         Dim KeyAscii As Short = Asc(e.KeyChar)
         If InStr("0123456789.", Chr(KeyAscii)) = 0 Then
@@ -444,7 +446,7 @@
             If KeyAscii = 0 Then
                 e.Handled = True
             End If
-        ElseIf InStr(txtDescuentoPagoUnico.Text, ".") > 0 Then
+        ElseIf InStr(NUDescuentoPagoUnico.Text, ".") > 0 Then
             If KeyAscii = 46 Then
                 e.Handled = True
             End If
@@ -973,10 +975,10 @@
             If (txtImporteInscripcionText.Text = "") Then
                 MessageBox.Show("Ingrese un monto de inscripción")
                 Exit Sub
-            ElseIf (chbRecargoInscripcion.Checked = True And txtRecargoInscripcion.Text = "") Then
+            ElseIf (chbRecargoInscripcion.Checked = True And NURecargoInscripcion.Text = "") Then
                 MessageBox.Show("Ingrese un monto de recargo de inscripción")
                 Exit Sub
-            ElseIf (chbDescuentoInscripcion.Checked = True And txtDescuentoInscripcion.Text = "") Then
+            ElseIf (chbDescuentoInscripcion.Checked = True And NUDescuentoInscripcion.Text = "") Then
                 MessageBox.Show("Ingrese un monto de descuento de inscripción")
                 Exit Sub
             ElseIf (chbDescuentoInscripcion.Checked = True And txtDescripcionDescuentoInscripcion.Text = "") Then
@@ -989,7 +991,7 @@
             If (txtMontoPagoUnico.Text = "") Then
                 MessageBox.Show("Ingrese el monto correspondiente al pago unico")
                 Exit Sub
-            ElseIf (txtDescuentoPagoUnico.Text = "") Then
+            ElseIf (NUDescuentoPagoUnico.Text = "") Then
                 MessageBox.Show("Ingrese el monto correspondiente al descuento del pago unico")
                 Exit Sub
             End If
@@ -1040,7 +1042,7 @@
                     db.execSQLQueryWithoutParams($"UPDATE ing_PlanesConceptos SET Activo = 0 WHERE ID_Plan = {cbPlanes.SelectedValue}")
                     Dim Orden As Integer = 1
                     If (chbInscripcion.Checked = True) Then
-                        pc.guardarInscripcion(cbPlanes.SelectedValue, Orden, txtImporteInscripcion.Text, txtRecargoInscripcion.Text, txtDescuentoInscripcion.Text, pc.obtenerFechaString(datePickerLimiteDescuentoInscripcion), pc.obtenerFechaString(datePickerRecargoInscripcion), chbRecargoInscripcion.Checked)
+                        pc.guardarInscripcion(cbPlanes.SelectedValue, Orden, txtImporteInscripcion.Text, NURecargoInscripcion.Text, NUDescuentoInscripcion.Text, pc.obtenerFechaString(datePickerLimiteDescuentoInscripcion), pc.obtenerFechaString(datePickerRecargoInscripcion), chbRecargoInscripcion.Checked)
                         Orden = Orden + 1
                     End If
 
@@ -1052,7 +1054,7 @@
                     Next
 
                     If (chbPagoUnico.Checked = True) Then
-                        pc.guardarPagoUnico(cbPlanes.SelectedValue, Orden, CDec(txtMontoPagoUnico.Text), txtDescuentoPagoUnico.Text, pc.obtenerFechaString(datePickerDescuentoPagoUnico), pc.obtenerFechaString(datePickerPagoUnico))
+                        pc.guardarPagoUnico(cbPlanes.SelectedValue, Orden, CDec(txtMontoPagoUnico.Text), NUDescuentoPagoUnico.Text, pc.obtenerFechaString(datePickerDescuentoPagoUnico), pc.obtenerFechaString(datePickerPagoUnico))
                         Orden = Orden + 1
                     End If
                     db.commitTransaction()
@@ -1069,7 +1071,7 @@
                 Dim Orden As Integer = 1
                 Dim ID_Plan As Integer = pc.guardarPlan(txtNombrePlan.Text, cbDiplomados.SelectedValue)
                 If (chbInscripcion.Checked = True) Then
-                    pc.guardarInscripcion(ID_Plan, Orden, txtImporteInscripcion.Text, txtRecargoInscripcion.Text, txtDescuentoInscripcion.Text, pc.obtenerFechaString(datePickerLimiteDescuentoInscripcion), pc.obtenerFechaString(datePickerRecargoInscripcion), chbRecargoInscripcion.Checked)
+                    pc.guardarInscripcion(ID_Plan, Orden, txtImporteInscripcion.Text, NURecargoInscripcion.Text, NUDescuentoInscripcion.Text, pc.obtenerFechaString(datePickerLimiteDescuentoInscripcion), pc.obtenerFechaString(datePickerRecargoInscripcion), chbRecargoInscripcion.Checked)
                     Orden = Orden + 1
                 End If
 
@@ -1081,7 +1083,7 @@
                 Next
 
                 If (chbPagoUnico.Checked = True) Then
-                    pc.guardarPagoUnico(ID_Plan, Orden, CDec(txtMontoPagoUnico.Text), txtDescuentoPagoUnico.Text, pc.obtenerFechaString(datePickerDescuentoPagoUnico), pc.obtenerFechaString(datePickerPagoUnico))
+                    pc.guardarPagoUnico(ID_Plan, Orden, CDec(txtMontoPagoUnico.Text), NUDescuentoPagoUnico.Text, pc.obtenerFechaString(datePickerDescuentoPagoUnico), pc.obtenerFechaString(datePickerPagoUnico))
                     Orden = Orden + 1
                 End If
                 db.commitTransaction()
@@ -1101,8 +1103,8 @@
         chbRecargoInscripcion.Checked = False
         chbDescuentoInscripcion.Checked = False
         txtImporteInscripcionText.Clear()
-        txtRecargoInscripcion.Text = "0.00"
-        txtDescuentoInscripcion.Text = "0.00"
+        NURecargoInscripcion.Text = "0.00"
+        NUDescuentoInscripcion.Text = "0.00"
         txtDescripcionDescuentoInscripcion.Clear()
 
         ''----------COLEGIATURAS----------''
@@ -1116,7 +1118,7 @@
             listaPaneles(x).Visible = False
             listacbClaves(x).SelectedIndex = 0
             listatxtDescripcionDescuentos(x).Clear()
-            listatxtDescuentos(x).value = 0
+            listatxtDescuentos(x).Value = 0
             listatxtImportes(x).Clear()
             listatxtRecargos(x).Value = 0
         Next
@@ -1128,7 +1130,7 @@
         txtMontoPagoUnico.Clear()
         chbDescuentoPagoUnico.Checked = False
         txtMontoPagoUnicoText.Clear()
-        txtDescuentoPagoUnico.Text = "0.00"
+        NUDescuentoPagoUnico.Text = "0.00"
         txtDescripcionDescuentoPagoUnico.Clear()
     End Sub
 
