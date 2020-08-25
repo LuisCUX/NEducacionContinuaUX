@@ -35,9 +35,7 @@ Partial Class PlanesEDC
         Me.pageInscripcion = New System.Windows.Forms.TabPage()
         Me.datePickerLimiteDescuentoInscripcion = New System.Windows.Forms.DateTimePicker()
         Me.txtDescripcionDescuentoInscripcion = New System.Windows.Forms.TextBox()
-        Me.txtDescuentoInscripcion = New System.Windows.Forms.TextBox()
         Me.datePickerRecargoInscripcion = New System.Windows.Forms.DateTimePicker()
-        Me.txtRecargoInscripcion = New System.Windows.Forms.TextBox()
         Me.txtImporteInscripcionText = New System.Windows.Forms.TextBox()
         Me.lblSimboloInscrpcion = New System.Windows.Forms.Label()
         Me.lblNombreDescripcionInscripcion = New System.Windows.Forms.Label()
@@ -65,7 +63,9 @@ Partial Class PlanesEDC
         Me.txtDiaRecargo = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.panelPagos10 = New System.Windows.Forms.Panel()
+        Me.Label26 = New System.Windows.Forms.Label()
         Me.NURecargos10 = New System.Windows.Forms.NumericUpDown()
+        Me.NUDescuentos10 = New System.Windows.Forms.NumericUpDown()
         Me.cbClave10 = New System.Windows.Forms.ComboBox()
         Me.Label36 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
@@ -76,7 +76,9 @@ Partial Class PlanesEDC
         Me.txtConcepto10 = New System.Windows.Forms.TextBox()
         Me.lbl10 = New System.Windows.Forms.Label()
         Me.panelPagos9 = New System.Windows.Forms.Panel()
+        Me.Label25 = New System.Windows.Forms.Label()
         Me.Label27 = New System.Windows.Forms.Label()
+        Me.NUDescuentos9 = New System.Windows.Forms.NumericUpDown()
         Me.NURecargos9 = New System.Windows.Forms.NumericUpDown()
         Me.cbClave9 = New System.Windows.Forms.ComboBox()
         Me.Label15 = New System.Windows.Forms.Label()
@@ -87,7 +89,9 @@ Partial Class PlanesEDC
         Me.txtConcepto9 = New System.Windows.Forms.TextBox()
         Me.lbl9 = New System.Windows.Forms.Label()
         Me.panelPagos8 = New System.Windows.Forms.Panel()
+        Me.Label24 = New System.Windows.Forms.Label()
         Me.Label28 = New System.Windows.Forms.Label()
+        Me.NUDescuentos8 = New System.Windows.Forms.NumericUpDown()
         Me.NURecargos8 = New System.Windows.Forms.NumericUpDown()
         Me.cbClave8 = New System.Windows.Forms.ComboBox()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -98,7 +102,9 @@ Partial Class PlanesEDC
         Me.txtConcepto8 = New System.Windows.Forms.TextBox()
         Me.lbl8 = New System.Windows.Forms.Label()
         Me.panelPagos7 = New System.Windows.Forms.Panel()
+        Me.Label23 = New System.Windows.Forms.Label()
         Me.Label29 = New System.Windows.Forms.Label()
+        Me.NUDescuentos7 = New System.Windows.Forms.NumericUpDown()
         Me.NURecargos7 = New System.Windows.Forms.NumericUpDown()
         Me.cbClave7 = New System.Windows.Forms.ComboBox()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -109,7 +115,9 @@ Partial Class PlanesEDC
         Me.txtConcepto7 = New System.Windows.Forms.TextBox()
         Me.lbl7 = New System.Windows.Forms.Label()
         Me.panelPagos6 = New System.Windows.Forms.Panel()
+        Me.Label22 = New System.Windows.Forms.Label()
         Me.Label30 = New System.Windows.Forms.Label()
+        Me.NUDescuentos6 = New System.Windows.Forms.NumericUpDown()
         Me.NURecargos6 = New System.Windows.Forms.NumericUpDown()
         Me.cbClave6 = New System.Windows.Forms.ComboBox()
         Me.Label12 = New System.Windows.Forms.Label()
@@ -120,6 +128,8 @@ Partial Class PlanesEDC
         Me.txtConcepto6 = New System.Windows.Forms.TextBox()
         Me.lbl6 = New System.Windows.Forms.Label()
         Me.panelPagos4 = New System.Windows.Forms.Panel()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.NUDescuentos4 = New System.Windows.Forms.NumericUpDown()
         Me.Label32 = New System.Windows.Forms.Label()
         Me.NURecargos4 = New System.Windows.Forms.NumericUpDown()
         Me.cbClave4 = New System.Windows.Forms.ComboBox()
@@ -131,6 +141,8 @@ Partial Class PlanesEDC
         Me.txtConcepto4 = New System.Windows.Forms.TextBox()
         Me.lbl4 = New System.Windows.Forms.Label()
         Me.panelPagos3 = New System.Windows.Forms.Panel()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.NUDescuentos3 = New System.Windows.Forms.NumericUpDown()
         Me.Label33 = New System.Windows.Forms.Label()
         Me.NURecargos3 = New System.Windows.Forms.NumericUpDown()
         Me.cbClave3 = New System.Windows.Forms.ComboBox()
@@ -142,7 +154,9 @@ Partial Class PlanesEDC
         Me.txtConcepto3 = New System.Windows.Forms.TextBox()
         Me.lbl3 = New System.Windows.Forms.Label()
         Me.panelPagos5 = New System.Windows.Forms.Panel()
+        Me.Label21 = New System.Windows.Forms.Label()
         Me.Label31 = New System.Windows.Forms.Label()
+        Me.NUDescuentos5 = New System.Windows.Forms.NumericUpDown()
         Me.NURecargos5 = New System.Windows.Forms.NumericUpDown()
         Me.cbClave5 = New System.Windows.Forms.ComboBox()
         Me.Label11 = New System.Windows.Forms.Label()
@@ -153,6 +167,8 @@ Partial Class PlanesEDC
         Me.txtConcepto5 = New System.Windows.Forms.TextBox()
         Me.lbl5 = New System.Windows.Forms.Label()
         Me.panelPagos2 = New System.Windows.Forms.Panel()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.NUDescuentos2 = New System.Windows.Forms.NumericUpDown()
         Me.Label34 = New System.Windows.Forms.Label()
         Me.NURecargos2 = New System.Windows.Forms.NumericUpDown()
         Me.cbClave2 = New System.Windows.Forms.ComboBox()
@@ -164,6 +180,8 @@ Partial Class PlanesEDC
         Me.txtConcepto2 = New System.Windows.Forms.TextBox()
         Me.lbl2 = New System.Windows.Forms.Label()
         Me.panelPagos1 = New System.Windows.Forms.Panel()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.NUDescuentos1 = New System.Windows.Forms.NumericUpDown()
         Me.Label35 = New System.Windows.Forms.Label()
         Me.NURecargos1 = New System.Windows.Forms.NumericUpDown()
         Me.cbClave1 = New System.Windows.Forms.ComboBox()
@@ -196,7 +214,6 @@ Partial Class PlanesEDC
         Me.lblImportePagos = New System.Windows.Forms.Label()
         Me.pagePagoUnico = New System.Windows.Forms.TabPage()
         Me.txtDescripcionDescuentoPagoUnico = New System.Windows.Forms.TextBox()
-        Me.txtDescuentoPagoUnico = New System.Windows.Forms.TextBox()
         Me.datePickerDescuentoPagoUnico = New System.Windows.Forms.DateTimePicker()
         Me.txtMontoPagoUnicoText = New System.Windows.Forms.TextBox()
         Me.lblDescripcionTextPU = New System.Windows.Forms.Label()
@@ -215,26 +232,9 @@ Partial Class PlanesEDC
         Me.chbPagoUnico = New System.Windows.Forms.CheckBox()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.btnSalir = New System.Windows.Forms.Button()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.NUDescuentos1 = New System.Windows.Forms.NumericUpDown()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.NUDescuentos2 = New System.Windows.Forms.NumericUpDown()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.NUDescuentos3 = New System.Windows.Forms.NumericUpDown()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.NUDescuentos4 = New System.Windows.Forms.NumericUpDown()
-        Me.Label21 = New System.Windows.Forms.Label()
-        Me.NUDescuentos5 = New System.Windows.Forms.NumericUpDown()
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.NUDescuentos6 = New System.Windows.Forms.NumericUpDown()
-        Me.Label23 = New System.Windows.Forms.Label()
-        Me.NUDescuentos7 = New System.Windows.Forms.NumericUpDown()
-        Me.Label24 = New System.Windows.Forms.Label()
-        Me.NUDescuentos8 = New System.Windows.Forms.NumericUpDown()
-        Me.Label25 = New System.Windows.Forms.Label()
-        Me.NUDescuentos9 = New System.Windows.Forms.NumericUpDown()
-        Me.Label26 = New System.Windows.Forms.Label()
-        Me.NUDescuentos10 = New System.Windows.Forms.NumericUpDown()
+        Me.NURecargoInscripcion = New System.Windows.Forms.NumericUpDown()
+        Me.NUDescuentoInscripcion = New System.Windows.Forms.NumericUpDown()
+        Me.NUDescuentoPagoUnico = New System.Windows.Forms.NumericUpDown()
         Me.Panel1.SuspendLayout()
         Me.tcPlanes.SuspendLayout()
         Me.pageInscripcion.SuspendLayout()
@@ -244,35 +244,38 @@ Partial Class PlanesEDC
         Me.GBRecargos.SuspendLayout()
         Me.panelPagos10.SuspendLayout()
         CType(Me.NURecargos10, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.NUDescuentos10, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panelPagos9.SuspendLayout()
+        CType(Me.NUDescuentos9, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NURecargos9, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panelPagos8.SuspendLayout()
+        CType(Me.NUDescuentos8, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NURecargos8, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panelPagos7.SuspendLayout()
+        CType(Me.NUDescuentos7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NURecargos7, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panelPagos6.SuspendLayout()
+        CType(Me.NUDescuentos6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NURecargos6, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panelPagos4.SuspendLayout()
+        CType(Me.NUDescuentos4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NURecargos4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panelPagos3.SuspendLayout()
+        CType(Me.NUDescuentos3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NURecargos3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panelPagos5.SuspendLayout()
+        CType(Me.NUDescuentos5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NURecargos5, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panelPagos2.SuspendLayout()
+        CType(Me.NUDescuentos2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NURecargos2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panelPagos1.SuspendLayout()
+        CType(Me.NUDescuentos1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NURecargos1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pagePagoUnico.SuspendLayout()
-        CType(Me.NUDescuentos1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NUDescuentos2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NUDescuentos3, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NUDescuentos4, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NUDescuentos5, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NUDescuentos6, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NUDescuentos7, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NUDescuentos8, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NUDescuentos9, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NUDescuentos10, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.NURecargoInscripcion, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.NUDescuentoInscripcion, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.NUDescuentoPagoUnico, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblNombreVentana
@@ -387,11 +390,11 @@ Partial Class PlanesEDC
         'pageInscripcion
         '
         Me.pageInscripcion.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.pageInscripcion.Controls.Add(Me.NUDescuentoInscripcion)
+        Me.pageInscripcion.Controls.Add(Me.NURecargoInscripcion)
         Me.pageInscripcion.Controls.Add(Me.datePickerLimiteDescuentoInscripcion)
         Me.pageInscripcion.Controls.Add(Me.txtDescripcionDescuentoInscripcion)
-        Me.pageInscripcion.Controls.Add(Me.txtDescuentoInscripcion)
         Me.pageInscripcion.Controls.Add(Me.datePickerRecargoInscripcion)
-        Me.pageInscripcion.Controls.Add(Me.txtRecargoInscripcion)
         Me.pageInscripcion.Controls.Add(Me.txtImporteInscripcionText)
         Me.pageInscripcion.Controls.Add(Me.lblSimboloInscrpcion)
         Me.pageInscripcion.Controls.Add(Me.lblNombreDescripcionInscripcion)
@@ -434,16 +437,6 @@ Partial Class PlanesEDC
         Me.txtDescripcionDescuentoInscripcion.Size = New System.Drawing.Size(189, 20)
         Me.txtDescripcionDescuentoInscripcion.TabIndex = 135
         '
-        'txtDescuentoInscripcion
-        '
-        Me.txtDescuentoInscripcion.Enabled = False
-        Me.txtDescuentoInscripcion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDescuentoInscripcion.Location = New System.Drawing.Point(551, 106)
-        Me.txtDescuentoInscripcion.Name = "txtDescuentoInscripcion"
-        Me.txtDescuentoInscripcion.Size = New System.Drawing.Size(87, 20)
-        Me.txtDescuentoInscripcion.TabIndex = 134
-        Me.txtDescuentoInscripcion.Text = "0.00"
-        '
         'datePickerRecargoInscripcion
         '
         Me.datePickerRecargoInscripcion.Enabled = False
@@ -452,16 +445,6 @@ Partial Class PlanesEDC
         Me.datePickerRecargoInscripcion.Name = "datePickerRecargoInscripcion"
         Me.datePickerRecargoInscripcion.Size = New System.Drawing.Size(82, 20)
         Me.datePickerRecargoInscripcion.TabIndex = 133
-        '
-        'txtRecargoInscripcion
-        '
-        Me.txtRecargoInscripcion.Enabled = False
-        Me.txtRecargoInscripcion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRecargoInscripcion.Location = New System.Drawing.Point(349, 106)
-        Me.txtRecargoInscripcion.Name = "txtRecargoInscripcion"
-        Me.txtRecargoInscripcion.Size = New System.Drawing.Size(87, 20)
-        Me.txtRecargoInscripcion.TabIndex = 132
-        Me.txtRecargoInscripcion.Text = "0.00"
         '
         'txtImporteInscripcionText
         '
@@ -546,7 +529,7 @@ Partial Class PlanesEDC
         '
         Me.lblDescuentoInscripcion.AutoSize = True
         Me.lblDescuentoInscripcion.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblDescuentoInscripcion.Location = New System.Drawing.Point(568, 86)
+        Me.lblDescuentoInscripcion.Location = New System.Drawing.Point(563, 86)
         Me.lblDescuentoInscripcion.Name = "lblDescuentoInscripcion"
         Me.lblDescuentoInscripcion.Size = New System.Drawing.Size(59, 13)
         Me.lblDescuentoInscripcion.TabIndex = 123
@@ -789,6 +772,16 @@ Partial Class PlanesEDC
         Me.panelPagos10.TabIndex = 260
         Me.panelPagos10.Visible = False
         '
+        'Label26
+        '
+        Me.Label26.AutoSize = True
+        Me.Label26.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label26.Location = New System.Drawing.Point(634, 5)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(15, 13)
+        Me.Label26.TabIndex = 301
+        Me.Label26.Text = "%"
+        '
         'NURecargos10
         '
         Me.NURecargos10.Location = New System.Drawing.Point(363, 4)
@@ -796,6 +789,14 @@ Partial Class PlanesEDC
         Me.NURecargos10.ReadOnly = True
         Me.NURecargos10.Size = New System.Drawing.Size(65, 20)
         Me.NURecargos10.TabIndex = 279
+        '
+        'NUDescuentos10
+        '
+        Me.NUDescuentos10.Location = New System.Drawing.Point(565, 3)
+        Me.NUDescuentos10.Name = "NUDescuentos10"
+        Me.NUDescuentos10.ReadOnly = True
+        Me.NUDescuentos10.Size = New System.Drawing.Size(65, 20)
+        Me.NUDescuentos10.TabIndex = 300
         '
         'cbClave10
         '
@@ -901,6 +902,16 @@ Partial Class PlanesEDC
         Me.panelPagos9.TabIndex = 259
         Me.panelPagos9.Visible = False
         '
+        'Label25
+        '
+        Me.Label25.AutoSize = True
+        Me.Label25.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label25.Location = New System.Drawing.Point(634, 5)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(15, 13)
+        Me.Label25.TabIndex = 299
+        Me.Label25.Text = "%"
+        '
         'Label27
         '
         Me.Label27.AutoSize = True
@@ -910,6 +921,14 @@ Partial Class PlanesEDC
         Me.Label27.Size = New System.Drawing.Size(15, 13)
         Me.Label27.TabIndex = 279
         Me.Label27.Text = "%"
+        '
+        'NUDescuentos9
+        '
+        Me.NUDescuentos9.Location = New System.Drawing.Point(565, 3)
+        Me.NUDescuentos9.Name = "NUDescuentos9"
+        Me.NUDescuentos9.ReadOnly = True
+        Me.NUDescuentos9.Size = New System.Drawing.Size(65, 20)
+        Me.NUDescuentos9.TabIndex = 298
         '
         'NURecargos9
         '
@@ -1013,6 +1032,16 @@ Partial Class PlanesEDC
         Me.panelPagos8.TabIndex = 258
         Me.panelPagos8.Visible = False
         '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label24.Location = New System.Drawing.Point(634, 5)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(15, 13)
+        Me.Label24.TabIndex = 297
+        Me.Label24.Text = "%"
+        '
         'Label28
         '
         Me.Label28.AutoSize = True
@@ -1022,6 +1051,14 @@ Partial Class PlanesEDC
         Me.Label28.Size = New System.Drawing.Size(15, 13)
         Me.Label28.TabIndex = 280
         Me.Label28.Text = "%"
+        '
+        'NUDescuentos8
+        '
+        Me.NUDescuentos8.Location = New System.Drawing.Point(565, 3)
+        Me.NUDescuentos8.Name = "NUDescuentos8"
+        Me.NUDescuentos8.ReadOnly = True
+        Me.NUDescuentos8.Size = New System.Drawing.Size(65, 20)
+        Me.NUDescuentos8.TabIndex = 296
         '
         'NURecargos8
         '
@@ -1125,6 +1162,16 @@ Partial Class PlanesEDC
         Me.panelPagos7.TabIndex = 257
         Me.panelPagos7.Visible = False
         '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label23.Location = New System.Drawing.Point(634, 5)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(15, 13)
+        Me.Label23.TabIndex = 295
+        Me.Label23.Text = "%"
+        '
         'Label29
         '
         Me.Label29.AutoSize = True
@@ -1134,6 +1181,14 @@ Partial Class PlanesEDC
         Me.Label29.Size = New System.Drawing.Size(15, 13)
         Me.Label29.TabIndex = 281
         Me.Label29.Text = "%"
+        '
+        'NUDescuentos7
+        '
+        Me.NUDescuentos7.Location = New System.Drawing.Point(565, 3)
+        Me.NUDescuentos7.Name = "NUDescuentos7"
+        Me.NUDescuentos7.ReadOnly = True
+        Me.NUDescuentos7.Size = New System.Drawing.Size(65, 20)
+        Me.NUDescuentos7.TabIndex = 294
         '
         'NURecargos7
         '
@@ -1237,6 +1292,16 @@ Partial Class PlanesEDC
         Me.panelPagos6.TabIndex = 255
         Me.panelPagos6.Visible = False
         '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label22.Location = New System.Drawing.Point(634, 5)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(15, 13)
+        Me.Label22.TabIndex = 293
+        Me.Label22.Text = "%"
+        '
         'Label30
         '
         Me.Label30.AutoSize = True
@@ -1246,6 +1311,14 @@ Partial Class PlanesEDC
         Me.Label30.Size = New System.Drawing.Size(15, 13)
         Me.Label30.TabIndex = 282
         Me.Label30.Text = "%"
+        '
+        'NUDescuentos6
+        '
+        Me.NUDescuentos6.Location = New System.Drawing.Point(565, 3)
+        Me.NUDescuentos6.Name = "NUDescuentos6"
+        Me.NUDescuentos6.ReadOnly = True
+        Me.NUDescuentos6.Size = New System.Drawing.Size(65, 20)
+        Me.NUDescuentos6.TabIndex = 292
         '
         'NURecargos6
         '
@@ -1348,6 +1421,24 @@ Partial Class PlanesEDC
         Me.panelPagos4.Size = New System.Drawing.Size(949, 25)
         Me.panelPagos4.TabIndex = 255
         Me.panelPagos4.Visible = False
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label20.Location = New System.Drawing.Point(634, 5)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(15, 13)
+        Me.Label20.TabIndex = 289
+        Me.Label20.Text = "%"
+        '
+        'NUDescuentos4
+        '
+        Me.NUDescuentos4.Location = New System.Drawing.Point(565, 3)
+        Me.NUDescuentos4.Name = "NUDescuentos4"
+        Me.NUDescuentos4.ReadOnly = True
+        Me.NUDescuentos4.Size = New System.Drawing.Size(65, 20)
+        Me.NUDescuentos4.TabIndex = 288
         '
         'Label32
         '
@@ -1461,6 +1552,24 @@ Partial Class PlanesEDC
         Me.panelPagos3.TabIndex = 255
         Me.panelPagos3.Visible = False
         '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label19.Location = New System.Drawing.Point(634, 6)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(15, 13)
+        Me.Label19.TabIndex = 289
+        Me.Label19.Text = "%"
+        '
+        'NUDescuentos3
+        '
+        Me.NUDescuentos3.Location = New System.Drawing.Point(565, 4)
+        Me.NUDescuentos3.Name = "NUDescuentos3"
+        Me.NUDescuentos3.ReadOnly = True
+        Me.NUDescuentos3.Size = New System.Drawing.Size(65, 20)
+        Me.NUDescuentos3.TabIndex = 288
+        '
         'Label33
         '
         Me.Label33.AutoSize = True
@@ -1573,6 +1682,16 @@ Partial Class PlanesEDC
         Me.panelPagos5.TabIndex = 256
         Me.panelPagos5.Visible = False
         '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label21.Location = New System.Drawing.Point(634, 5)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(15, 13)
+        Me.Label21.TabIndex = 291
+        Me.Label21.Text = "%"
+        '
         'Label31
         '
         Me.Label31.AutoSize = True
@@ -1582,6 +1701,14 @@ Partial Class PlanesEDC
         Me.Label31.Size = New System.Drawing.Size(15, 13)
         Me.Label31.TabIndex = 283
         Me.Label31.Text = "%"
+        '
+        'NUDescuentos5
+        '
+        Me.NUDescuentos5.Location = New System.Drawing.Point(565, 3)
+        Me.NUDescuentos5.Name = "NUDescuentos5"
+        Me.NUDescuentos5.ReadOnly = True
+        Me.NUDescuentos5.Size = New System.Drawing.Size(65, 20)
+        Me.NUDescuentos5.TabIndex = 290
         '
         'NURecargos5
         '
@@ -1684,6 +1811,24 @@ Partial Class PlanesEDC
         Me.panelPagos2.Size = New System.Drawing.Size(949, 25)
         Me.panelPagos2.TabIndex = 255
         Me.panelPagos2.Visible = False
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label18.Location = New System.Drawing.Point(634, 5)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(15, 13)
+        Me.Label18.TabIndex = 289
+        Me.Label18.Text = "%"
+        '
+        'NUDescuentos2
+        '
+        Me.NUDescuentos2.Location = New System.Drawing.Point(565, 3)
+        Me.NUDescuentos2.Name = "NUDescuentos2"
+        Me.NUDescuentos2.ReadOnly = True
+        Me.NUDescuentos2.Size = New System.Drawing.Size(65, 20)
+        Me.NUDescuentos2.TabIndex = 288
         '
         'Label34
         '
@@ -1796,6 +1941,24 @@ Partial Class PlanesEDC
         Me.panelPagos1.Size = New System.Drawing.Size(949, 25)
         Me.panelPagos1.TabIndex = 254
         Me.panelPagos1.Visible = False
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label17.Location = New System.Drawing.Point(634, 5)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(15, 13)
+        Me.Label17.TabIndex = 289
+        Me.Label17.Text = "%"
+        '
+        'NUDescuentos1
+        '
+        Me.NUDescuentos1.Location = New System.Drawing.Point(565, 3)
+        Me.NUDescuentos1.Name = "NUDescuentos1"
+        Me.NUDescuentos1.ReadOnly = True
+        Me.NUDescuentos1.Size = New System.Drawing.Size(65, 20)
+        Me.NUDescuentos1.TabIndex = 288
         '
         'Label35
         '
@@ -2098,8 +2261,8 @@ Partial Class PlanesEDC
         'pagePagoUnico
         '
         Me.pagePagoUnico.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.pagePagoUnico.Controls.Add(Me.NUDescuentoPagoUnico)
         Me.pagePagoUnico.Controls.Add(Me.txtDescripcionDescuentoPagoUnico)
-        Me.pagePagoUnico.Controls.Add(Me.txtDescuentoPagoUnico)
         Me.pagePagoUnico.Controls.Add(Me.datePickerDescuentoPagoUnico)
         Me.pagePagoUnico.Controls.Add(Me.txtMontoPagoUnicoText)
         Me.pagePagoUnico.Controls.Add(Me.lblDescripcionTextPU)
@@ -2130,16 +2293,6 @@ Partial Class PlanesEDC
         Me.txtDescripcionDescuentoPagoUnico.Name = "txtDescripcionDescuentoPagoUnico"
         Me.txtDescripcionDescuentoPagoUnico.Size = New System.Drawing.Size(189, 20)
         Me.txtDescripcionDescuentoPagoUnico.TabIndex = 176
-        '
-        'txtDescuentoPagoUnico
-        '
-        Me.txtDescuentoPagoUnico.Enabled = False
-        Me.txtDescuentoPagoUnico.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDescuentoPagoUnico.Location = New System.Drawing.Point(480, 122)
-        Me.txtDescuentoPagoUnico.Name = "txtDescuentoPagoUnico"
-        Me.txtDescuentoPagoUnico.Size = New System.Drawing.Size(87, 20)
-        Me.txtDescuentoPagoUnico.TabIndex = 175
-        Me.txtDescuentoPagoUnico.Text = "0.00"
         '
         'datePickerDescuentoPagoUnico
         '
@@ -2326,185 +2479,32 @@ Partial Class PlanesEDC
         Me.btnSalir.TabIndex = 18
         Me.btnSalir.UseVisualStyleBackColor = True
         '
-        'Label17
+        'NURecargoInscripcion
         '
-        Me.Label17.AutoSize = True
-        Me.Label17.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label17.Location = New System.Drawing.Point(634, 5)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(15, 13)
-        Me.Label17.TabIndex = 289
-        Me.Label17.Text = "%"
+        Me.NURecargoInscripcion.Enabled = False
+        Me.NURecargoInscripcion.Location = New System.Drawing.Point(350, 107)
+        Me.NURecargoInscripcion.Name = "NURecargoInscripcion"
+        Me.NURecargoInscripcion.ReadOnly = True
+        Me.NURecargoInscripcion.Size = New System.Drawing.Size(87, 20)
+        Me.NURecargoInscripcion.TabIndex = 269
         '
-        'NUDescuentos1
+        'NUDescuentoInscripcion
         '
-        Me.NUDescuentos1.Location = New System.Drawing.Point(565, 3)
-        Me.NUDescuentos1.Name = "NUDescuentos1"
-        Me.NUDescuentos1.ReadOnly = True
-        Me.NUDescuentos1.Size = New System.Drawing.Size(65, 20)
-        Me.NUDescuentos1.TabIndex = 288
+        Me.NUDescuentoInscripcion.Enabled = False
+        Me.NUDescuentoInscripcion.Location = New System.Drawing.Point(550, 106)
+        Me.NUDescuentoInscripcion.Name = "NUDescuentoInscripcion"
+        Me.NUDescuentoInscripcion.ReadOnly = True
+        Me.NUDescuentoInscripcion.Size = New System.Drawing.Size(87, 20)
+        Me.NUDescuentoInscripcion.TabIndex = 270
         '
-        'Label18
+        'NUDescuentoPagoUnico
         '
-        Me.Label18.AutoSize = True
-        Me.Label18.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label18.Location = New System.Drawing.Point(634, 5)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(15, 13)
-        Me.Label18.TabIndex = 289
-        Me.Label18.Text = "%"
-        '
-        'NUDescuentos2
-        '
-        Me.NUDescuentos2.Location = New System.Drawing.Point(565, 3)
-        Me.NUDescuentos2.Name = "NUDescuentos2"
-        Me.NUDescuentos2.ReadOnly = True
-        Me.NUDescuentos2.Size = New System.Drawing.Size(65, 20)
-        Me.NUDescuentos2.TabIndex = 288
-        '
-        'Label19
-        '
-        Me.Label19.AutoSize = True
-        Me.Label19.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label19.Location = New System.Drawing.Point(634, 6)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(15, 13)
-        Me.Label19.TabIndex = 289
-        Me.Label19.Text = "%"
-        '
-        'NUDescuentos3
-        '
-        Me.NUDescuentos3.Location = New System.Drawing.Point(565, 4)
-        Me.NUDescuentos3.Name = "NUDescuentos3"
-        Me.NUDescuentos3.ReadOnly = True
-        Me.NUDescuentos3.Size = New System.Drawing.Size(65, 20)
-        Me.NUDescuentos3.TabIndex = 288
-        '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label20.Location = New System.Drawing.Point(634, 5)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(15, 13)
-        Me.Label20.TabIndex = 289
-        Me.Label20.Text = "%"
-        '
-        'NUDescuentos4
-        '
-        Me.NUDescuentos4.Location = New System.Drawing.Point(565, 3)
-        Me.NUDescuentos4.Name = "NUDescuentos4"
-        Me.NUDescuentos4.ReadOnly = True
-        Me.NUDescuentos4.Size = New System.Drawing.Size(65, 20)
-        Me.NUDescuentos4.TabIndex = 288
-        '
-        'Label21
-        '
-        Me.Label21.AutoSize = True
-        Me.Label21.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label21.Location = New System.Drawing.Point(634, 5)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(15, 13)
-        Me.Label21.TabIndex = 291
-        Me.Label21.Text = "%"
-        '
-        'NUDescuentos5
-        '
-        Me.NUDescuentos5.Location = New System.Drawing.Point(565, 3)
-        Me.NUDescuentos5.Name = "NUDescuentos5"
-        Me.NUDescuentos5.ReadOnly = True
-        Me.NUDescuentos5.Size = New System.Drawing.Size(65, 20)
-        Me.NUDescuentos5.TabIndex = 290
-        '
-        'Label22
-        '
-        Me.Label22.AutoSize = True
-        Me.Label22.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label22.Location = New System.Drawing.Point(634, 5)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(15, 13)
-        Me.Label22.TabIndex = 293
-        Me.Label22.Text = "%"
-        '
-        'NUDescuentos6
-        '
-        Me.NUDescuentos6.Location = New System.Drawing.Point(565, 3)
-        Me.NUDescuentos6.Name = "NUDescuentos6"
-        Me.NUDescuentos6.ReadOnly = True
-        Me.NUDescuentos6.Size = New System.Drawing.Size(65, 20)
-        Me.NUDescuentos6.TabIndex = 292
-        '
-        'Label23
-        '
-        Me.Label23.AutoSize = True
-        Me.Label23.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label23.Location = New System.Drawing.Point(634, 5)
-        Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(15, 13)
-        Me.Label23.TabIndex = 295
-        Me.Label23.Text = "%"
-        '
-        'NUDescuentos7
-        '
-        Me.NUDescuentos7.Location = New System.Drawing.Point(565, 3)
-        Me.NUDescuentos7.Name = "NUDescuentos7"
-        Me.NUDescuentos7.ReadOnly = True
-        Me.NUDescuentos7.Size = New System.Drawing.Size(65, 20)
-        Me.NUDescuentos7.TabIndex = 294
-        '
-        'Label24
-        '
-        Me.Label24.AutoSize = True
-        Me.Label24.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label24.Location = New System.Drawing.Point(634, 5)
-        Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(15, 13)
-        Me.Label24.TabIndex = 297
-        Me.Label24.Text = "%"
-        '
-        'NUDescuentos8
-        '
-        Me.NUDescuentos8.Location = New System.Drawing.Point(565, 3)
-        Me.NUDescuentos8.Name = "NUDescuentos8"
-        Me.NUDescuentos8.ReadOnly = True
-        Me.NUDescuentos8.Size = New System.Drawing.Size(65, 20)
-        Me.NUDescuentos8.TabIndex = 296
-        '
-        'Label25
-        '
-        Me.Label25.AutoSize = True
-        Me.Label25.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label25.Location = New System.Drawing.Point(634, 5)
-        Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(15, 13)
-        Me.Label25.TabIndex = 299
-        Me.Label25.Text = "%"
-        '
-        'NUDescuentos9
-        '
-        Me.NUDescuentos9.Location = New System.Drawing.Point(565, 3)
-        Me.NUDescuentos9.Name = "NUDescuentos9"
-        Me.NUDescuentos9.ReadOnly = True
-        Me.NUDescuentos9.Size = New System.Drawing.Size(65, 20)
-        Me.NUDescuentos9.TabIndex = 298
-        '
-        'Label26
-        '
-        Me.Label26.AutoSize = True
-        Me.Label26.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label26.Location = New System.Drawing.Point(634, 5)
-        Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(15, 13)
-        Me.Label26.TabIndex = 301
-        Me.Label26.Text = "%"
-        '
-        'NUDescuentos10
-        '
-        Me.NUDescuentos10.Location = New System.Drawing.Point(565, 3)
-        Me.NUDescuentos10.Name = "NUDescuentos10"
-        Me.NUDescuentos10.ReadOnly = True
-        Me.NUDescuentos10.Size = New System.Drawing.Size(65, 20)
-        Me.NUDescuentos10.TabIndex = 300
+        Me.NUDescuentoPagoUnico.Enabled = False
+        Me.NUDescuentoPagoUnico.Location = New System.Drawing.Point(480, 123)
+        Me.NUDescuentoPagoUnico.Name = "NUDescuentoPagoUnico"
+        Me.NUDescuentoPagoUnico.ReadOnly = True
+        Me.NUDescuentoPagoUnico.Size = New System.Drawing.Size(87, 20)
+        Me.NUDescuentoPagoUnico.TabIndex = 270
         '
         'PlanesEDC
         '
@@ -2534,45 +2534,48 @@ Partial Class PlanesEDC
         Me.panelPagos10.ResumeLayout(False)
         Me.panelPagos10.PerformLayout()
         CType(Me.NURecargos10, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NUDescuentos10, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panelPagos9.ResumeLayout(False)
         Me.panelPagos9.PerformLayout()
+        CType(Me.NUDescuentos9, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NURecargos9, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panelPagos8.ResumeLayout(False)
         Me.panelPagos8.PerformLayout()
+        CType(Me.NUDescuentos8, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NURecargos8, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panelPagos7.ResumeLayout(False)
         Me.panelPagos7.PerformLayout()
+        CType(Me.NUDescuentos7, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NURecargos7, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panelPagos6.ResumeLayout(False)
         Me.panelPagos6.PerformLayout()
+        CType(Me.NUDescuentos6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NURecargos6, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panelPagos4.ResumeLayout(False)
         Me.panelPagos4.PerformLayout()
+        CType(Me.NUDescuentos4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NURecargos4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panelPagos3.ResumeLayout(False)
         Me.panelPagos3.PerformLayout()
+        CType(Me.NUDescuentos3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NURecargos3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panelPagos5.ResumeLayout(False)
         Me.panelPagos5.PerformLayout()
+        CType(Me.NUDescuentos5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NURecargos5, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panelPagos2.ResumeLayout(False)
         Me.panelPagos2.PerformLayout()
+        CType(Me.NUDescuentos2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NURecargos2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panelPagos1.ResumeLayout(False)
         Me.panelPagos1.PerformLayout()
+        CType(Me.NUDescuentos1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NURecargos1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pagePagoUnico.ResumeLayout(False)
         Me.pagePagoUnico.PerformLayout()
-        CType(Me.NUDescuentos1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NUDescuentos2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NUDescuentos3, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NUDescuentos4, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NUDescuentos5, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NUDescuentos6, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NUDescuentos7, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NUDescuentos8, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NUDescuentos9, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NUDescuentos10, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NURecargoInscripcion, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NUDescuentoInscripcion, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NUDescuentoPagoUnico, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -2606,9 +2609,7 @@ Partial Class PlanesEDC
     Friend WithEvents lbl00 As Label
     Friend WithEvents datePickerLimiteDescuentoInscripcion As DateTimePicker
     Friend WithEvents txtDescripcionDescuentoInscripcion As TextBox
-    Friend WithEvents txtDescuentoInscripcion As TextBox
     Friend WithEvents datePickerRecargoInscripcion As DateTimePicker
-    Friend WithEvents txtRecargoInscripcion As TextBox
     Friend WithEvents txtImporteInscripcionText As TextBox
     Friend WithEvents lblSimboloInscrpcion As Label
     Friend WithEvents txtImportePagos As TextBox
@@ -2701,7 +2702,6 @@ Partial Class PlanesEDC
     Friend WithEvents txtConcepto1 As TextBox
     Friend WithEvents lbl1 As Label
     Friend WithEvents txtDescripcionDescuentoPagoUnico As TextBox
-    Friend WithEvents txtDescuentoPagoUnico As TextBox
     Friend WithEvents datePickerDescuentoPagoUnico As DateTimePicker
     Friend WithEvents txtMontoPagoUnicoText As TextBox
     Friend WithEvents lblDescripcionTextPU As Label
@@ -2790,4 +2790,7 @@ Partial Class PlanesEDC
     Friend WithEvents NUDescuentos2 As NumericUpDown
     Friend WithEvents Label17 As Label
     Friend WithEvents NUDescuentos1 As NumericUpDown
+    Friend WithEvents NURecargoInscripcion As NumericUpDown
+    Friend WithEvents NUDescuentoInscripcion As NumericUpDown
+    Friend WithEvents NUDescuentoPagoUnico As NumericUpDown
 End Class
