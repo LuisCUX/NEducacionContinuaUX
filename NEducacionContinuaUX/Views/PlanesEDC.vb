@@ -342,8 +342,8 @@
     End Sub
 
     Private Sub controlCantidades_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtMontoPago1.KeyPress, txtMontoPago2.KeyPress, txtMontoPago3.KeyPress, txtMontoPago4.KeyPress, txtMontoPago5.KeyPress, txtMontoPago6.KeyPress, txtMontoPago7.KeyPress, txtMontoPago8.KeyPress, txtMontoPago9.KeyPress, txtMontoPago10.KeyPress,
-                                                                                             txtRecargoPago1.KeyPress, txtRecargoPago2.KeyPress, txtRecargoPago3.KeyPress, txtRecargoPago4.KeyPress, txtRecargoPago5.KeyPress, txtRecargoPago6.KeyPress, txtRecargoPago7.KeyPress, txtRecargoPago8.KeyPress, txtRecargoPago9.KeyPress, txtRecargoPago10.KeyPress,
-                                                                                             txtDescuentoPago1.KeyPress, txtDescuentoPago2.KeyPress, txtDescuentoPago3.KeyPress, txtDescuentoPago4.KeyPress, txtDescuentoPago5.KeyPress, txtDescuentoPago6.KeyPress, txtDescuentoPago7.KeyPress, txtDescuentoPago8.KeyPress, txtDescuentoPago9.KeyPress, txtDescuentoPago10.KeyPress
+                                                                                             NURecargos1.KeyPress, NURecargos2.KeyPress, NURecargos3.KeyPress, NURecargos4.KeyPress, NURecargos5.KeyPress, NURecargos6.KeyPress, NURecargos7.KeyPress, NURecargos8.KeyPress, NURecargos9.KeyPress, NURecargos10.KeyPress,
+                                                                                             NUDescuentos1.KeyPress, NUDescuentos2.KeyPress, NUDescuentos3.KeyPress, NUDescuentos4.KeyPress, NUDescuentos5.KeyPress, NUDescuentos6.KeyPress, NUDescuentos7.KeyPress, NUDescuentos8.KeyPress, NUDescuentos9.KeyPress, NUDescuentos10.KeyPress
         Dim num_cantidad As Decimal = 0
         Dim KeyAscii As Short = Asc(e.KeyChar)
         If InStr("0123456789.", Chr(KeyAscii)) = 0 Then
