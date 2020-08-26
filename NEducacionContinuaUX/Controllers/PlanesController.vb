@@ -31,12 +31,12 @@
         Dim recargoMonto As Decimal = CDec((Importe / 100) * Recargo)
         Dim descuentoMonto As Decimal = CDec((Importe / 100) * Descuento)
 
-        db.execSQLQueryWithoutParams($"INSERT INTO ing_PlanesConceptos(ID_Plan, Orden, Clave, Descripcion, Importe, Recargo, Descuento, Fecha_Limite_Desc, Fecha_Calcula_Recargo, Considera_Recargo, Fecha_Limite_Pago, Importe_Total, Activo) VALUES ({ID_Plan}, {Orden}, 'P00', 'PAGO DE INSCRIPCIÓN A DIPLOMADO', {Importe}, {Recargo}, {Descuento}, '{Fecha_Limite_Desc}', '{Fecha_Calcula_Recargo}', {RecargoBit}, '1900-01-01', {Importe}, 1)")
+        db.execSQLQueryWithoutParams($"INSERT INTO ing_PlanesConceptos(ID_Plan, Orden, Clave, Descripcion, Importe, Recargo, Recargo_Porcentaje, Descuento, Descuento_Porcentaje, Fecha_Limite_Desc, Fecha_Calcula_Recargo, Considera_Recargo, Fecha_Limite_Pago, Importe_Total, Activo) VALUES ({ID_Plan}, {Orden}, 'P00', 'PAGO DE INSCRIPCIÓN A DIPLOMADO', {Importe}, {recargoMonto}, {Recargo}, {descuentoMonto}, {Descuento}, '{Fecha_Limite_Desc}', '{Fecha_Calcula_Recargo}', {RecargoBit}, '1900-01-01', {Importe}, 1)")
     End Sub
 
     Sub guardarPagoUnico(ID_Plan As Integer, Orden As Integer, Importe As Decimal, Descuento As Decimal, Fecha_Limite_Desc As String, Fecha_Limite_Pago As String)
         Dim descuentoMonto As Decimal = CDec((Importe / 100) * Descuento)
-        db.execSQLQueryWithoutParams($"INSERT INTO ing_PlanesConceptos(ID_Plan, Orden, Clave, Descripcion, Importe, Recargo, Descuento, Fecha_Limite_Desc, Fecha_Calcula_Recargo, Considera_Recargo, Fecha_Limite_Pago, Importe_Total, Activo) VALUES ({ID_Plan}, {Orden}, 'P13', 'PAGO COMPLETO DE DIPLOMADO', {Importe}, 0.00, {Descuento}, '{Fecha_Limite_Desc}', '1900-01-01', 0, '{Fecha_Limite_Pago}', {Importe}, 1)")
+        db.execSQLQueryWithoutParams($"INSERT INTO ing_PlanesConceptos(ID_Plan, Orden, Clave, Descripcion, Importe, Recargo, Recargo_Porcentaje,  Descuento, Descuento_Porcentaje, Fecha_Limite_Desc, Fecha_Calcula_Recargo, Considera_Recargo, Fecha_Limite_Pago, Importe_Total, Activo) VALUES ({ID_Plan}, {Orden}, 'P13', 'PAGO COMPLETO DE DIPLOMADO', {Importe}, 0.00, 0, {descuentoMonto}, {Descuento}, '{Fecha_Limite_Desc}', '1900-01-01', 0, '{Fecha_Limite_Pago}', {Importe}, 1)")
     End Sub
 
     Sub guardarPagoPlan(ID_Plan As Integer, Orden As Integer, Clave As String, Mes As String, Importe As Decimal, Recargo As Decimal, Descuento As Decimal, Fecha_Limite_Desc As String, Fecha_Calcula_Recargo As String, Considera_Recargo As Boolean)
@@ -50,11 +50,11 @@
         Dim recargoMonto As Decimal = CDec((Importe / 100) * Recargo)
         Dim descuentoMonto As Decimal = CDec((Importe / 100) * Descuento)
         Dim ClaveString As String = $"P{Clave}"
-        db.execSQLQueryWithoutParams($"INSERT INTO ing_PlanesConceptos(ID_Plan, Orden, Clave, Descripcion, Importe, Recargo, Descuento, Fecha_Limite_Desc, Fecha_Calcula_Recargo, Considera_Recargo, Fecha_Limite_Pago, Importe_Total, Activo) VALUES ({ID_Plan}, {Orden}, '{ClaveString}', '{Mes}', {Importe}, {Recargo}, {Descuento}, '{Fecha_Limite_Desc}', '{Fecha_Calcula_Recargo}', {RecargoBit}, '1900-01-01', {Importe}, 1)")
+        db.execSQLQueryWithoutParams($"INSERT INTO ing_PlanesConceptos(ID_Plan, Orden, Clave, Descripcion, Importe, Recargo, Recargo_Porcentaje, Descuento, Descuento_Porcentaje, Fecha_Limite_Desc, Fecha_Calcula_Recargo, Considera_Recargo, Fecha_Limite_Pago, Importe_Total, Activo) VALUES ({ID_Plan}, {Orden}, '{ClaveString}', '{Mes}', {Importe}, {recargoMonto}, {Recargo}, {descuentoMonto}, {Descuento}, '{Fecha_Limite_Desc}', '{Fecha_Calcula_Recargo}', {RecargoBit}, '1900-01-01', {Importe}, 1)")
     End Sub
 
     Sub llenarVentanaPlanesInscripcion(IDPlan As Integer, chbInscripcion As CheckBox, txtImporte As TextBox, chbRecargo As CheckBox, chbDescuento As CheckBox, txtRecargo As NumericUpDown, datePickerFechaRecargo As DateTimePicker, txtDescuento As NumericUpDown, txtDescripcionDescuento As TextBox, datePickerDescuento As DateTimePicker)
-        Dim tableInscripcion As DataTable = db.getDataTableFromSQL($"SELECT Importe, Recargo, Fecha_Calcula_Recargo, Descuento, Fecha_Limite_Desc 
+        Dim tableInscripcion As DataTable = db.getDataTableFromSQL($"SELECT Importe, Recargo, Recargo_Porcentaje, Fecha_Calcula_Recargo, Descuento, Descuento_Porcentaje, Fecha_Limite_Desc 
                                                                      FROM ing_PlanesConceptos WHERE ID_Plan = {IDPlan} AND Clave = 'P00' AND Activo = 1")
         If (tableInscripcion.Rows.Count = 0) Then
             chbInscripcion.Checked = False
@@ -75,8 +75,8 @@
                     chbDescuento.Checked = True
                 End If
                 txtImporte.Text = item("Importe")
-                txtRecargo.Text = item("Recargo")
-                txtDescuento.Text = item("Descuento")
+                txtRecargo.Text = item("Recargo_Porcentaje")
+                txtDescuento.Text = item("Descuento_Porcentaje")
                 datePickerDescuento.MinDate = item("Fecha_Limite_Desc")
                 datePickerDescuento.Value = item("Fecha_Limite_Desc")
                 datePickerFechaRecargo.MinDate = item("Fecha_Calcula_Recargo")
@@ -87,7 +87,7 @@
 
     Sub llenarVentanaPlanesColegiaturas(IDPlan As Integer, listaPaneles As List(Of Panel), listatxtImportes As List(Of TextBox), listatxtRecargos As List(Of NumericUpDown), listatxtDescuentos As List(Of NumericUpDown), listatxtDescripcionDescuentos As List(Of TextBox), listadatePickerRecargos As List(Of DateTimePicker), listadatePickerDescuentos As List(Of DateTimePicker), listacbClaves As List(Of ComboBox), listatxtConcepto As List(Of TextBox),
                                         txtImporteTotal As TextBox, txtRecargoTotal As NumericUpDown, txtDescuentoTotal As NumericUpDown, txtDescripcionDescuentos As TextBox, chbRecargo As CheckBox, chbDescuento As CheckBox, cbNoPagos As ComboBox)
-        Dim tableColegiaturas As DataTable = db.getDataTableFromSQL($"SELECT Clave, Descripcion, Importe, Recargo, Fecha_Calcula_Recargo, Descuento, Fecha_Limite_Desc
+        Dim tableColegiaturas As DataTable = db.getDataTableFromSQL($"SELECT Clave, Descripcion, Importe, Recargo, Recargo_Porcentaje, Fecha_Calcula_Recargo, Descuento, Descuento_Porcentaje, Fecha_Limite_Desc
                                                                       From ing_PlanesConceptos
                                                                       Where ID_Plan = {IDPlan} And Activo = 1 And Clave! = 'P00' AND Clave != 'P13'")
         Dim importeTotal As Decimal
@@ -112,11 +112,11 @@
             listatxtImportes(x).Text = item("Importe")
             importeTotal = importeTotal + item("Importe")
             listatxtImportes(x).Enabled = True
-            listatxtRecargos(x).Text = item("Recargo")
-            txtRecargoTotal.Text = item("Recargo")
+            listatxtRecargos(x).Text = item("Recargo_Porcentaje")
+            txtRecargoTotal.Text = item("Recargo_Porcentaje")
             listatxtRecargos(x).Enabled = True
-            listatxtDescuentos(x).Text = item("Descuento")
-            txtDescuentoTotal.Text = item("Descuento")
+            listatxtDescuentos(x).Text = item("Descuento_Porcentaje")
+            txtDescuentoTotal.Text = item("Descuento_Porcentaje")
             listatxtDescuentos(x).Enabled = True
             listatxtDescripcionDescuentos(x).Text = "----------"
             txtDescripcionDescuentos.Text = "----------"
@@ -141,7 +141,7 @@
     End Sub
 
     Sub llenarVentanaPlanesPagoUnico(IDPlan As Integer, chbPagoUnico As CheckBox, txtImporte As TextBox, chbDescuento As CheckBox, txtDescuento As NumericUpDown, datepickerDescuento As DateTimePicker, datepickerPagoUnico As DateTimePicker)
-        Dim tablePagoUnico As DataTable = db.getDataTableFromSQL($"SELECT Importe, Descuento, Fecha_Limite_Desc, Fecha_Limite_Pago 
+        Dim tablePagoUnico As DataTable = db.getDataTableFromSQL($"SELECT Importe, Descuento, Descuento_Porcentaje, Fecha_Limite_Desc, Fecha_Limite_Pago 
                                                                    FROM ing_PlanesConceptos WHERE ID_Plan = {IDPlan} AND Clave = 'P13' AND Activo = 1")
         If (tablePagoUnico.Rows.Count = 0) Then
             chbPagoUnico.Checked = False
@@ -156,7 +156,7 @@
                     chbDescuento.Checked = True
                 End If
                 txtImporte.Text = item("Importe")
-                txtDescuento.Text = item("Descuento")
+                txtDescuento.Text = item("Descuento_Porcentaje")
                 datepickerDescuento.MinDate = item("Fecha_Limite_Desc")
                 datepickerDescuento.Value = item("Fecha_Limite_Desc")
                 datepickerPagoUnico.MinDate = item("Fecha_Limite_Pago")
