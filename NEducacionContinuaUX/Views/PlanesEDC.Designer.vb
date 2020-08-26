@@ -658,19 +658,19 @@ Partial Class PlanesEDC
         '
         'NUDescuento
         '
+        Me.NUDescuento.DecimalPlaces = 1
         Me.NUDescuento.Enabled = False
         Me.NUDescuento.Location = New System.Drawing.Point(530, 31)
         Me.NUDescuento.Name = "NUDescuento"
-        Me.NUDescuento.ReadOnly = True
         Me.NUDescuento.Size = New System.Drawing.Size(65, 20)
         Me.NUDescuento.TabIndex = 269
         '
         'NURecargo
         '
+        Me.NURecargo.DecimalPlaces = 1
         Me.NURecargo.Enabled = False
         Me.NURecargo.Location = New System.Drawing.Point(365, 30)
         Me.NURecargo.Name = "NURecargo"
-        Me.NURecargo.ReadOnly = True
         Me.NURecargo.Size = New System.Drawing.Size(65, 20)
         Me.NURecargo.TabIndex = 268
         '
@@ -784,17 +784,17 @@ Partial Class PlanesEDC
         '
         'NURecargos10
         '
+        Me.NURecargos10.DecimalPlaces = 1
         Me.NURecargos10.Location = New System.Drawing.Point(363, 4)
         Me.NURecargos10.Name = "NURecargos10"
-        Me.NURecargos10.ReadOnly = True
         Me.NURecargos10.Size = New System.Drawing.Size(65, 20)
         Me.NURecargos10.TabIndex = 279
         '
         'NUDescuentos10
         '
+        Me.NUDescuentos10.DecimalPlaces = 1
         Me.NUDescuentos10.Location = New System.Drawing.Point(565, 3)
         Me.NUDescuentos10.Name = "NUDescuentos10"
-        Me.NUDescuentos10.ReadOnly = True
         Me.NUDescuentos10.Size = New System.Drawing.Size(65, 20)
         Me.NUDescuentos10.TabIndex = 300
         '
@@ -924,17 +924,17 @@ Partial Class PlanesEDC
         '
         'NUDescuentos9
         '
+        Me.NUDescuentos9.DecimalPlaces = 1
         Me.NUDescuentos9.Location = New System.Drawing.Point(565, 3)
         Me.NUDescuentos9.Name = "NUDescuentos9"
-        Me.NUDescuentos9.ReadOnly = True
         Me.NUDescuentos9.Size = New System.Drawing.Size(65, 20)
         Me.NUDescuentos9.TabIndex = 298
         '
         'NURecargos9
         '
+        Me.NURecargos9.DecimalPlaces = 1
         Me.NURecargos9.Location = New System.Drawing.Point(363, 3)
         Me.NURecargos9.Name = "NURecargos9"
-        Me.NURecargos9.ReadOnly = True
         Me.NURecargos9.Size = New System.Drawing.Size(65, 20)
         Me.NURecargos9.TabIndex = 278
         '
@@ -1054,17 +1054,17 @@ Partial Class PlanesEDC
         '
         'NUDescuentos8
         '
+        Me.NUDescuentos8.DecimalPlaces = 1
         Me.NUDescuentos8.Location = New System.Drawing.Point(565, 3)
         Me.NUDescuentos8.Name = "NUDescuentos8"
-        Me.NUDescuentos8.ReadOnly = True
         Me.NUDescuentos8.Size = New System.Drawing.Size(65, 20)
         Me.NUDescuentos8.TabIndex = 296
         '
         'NURecargos8
         '
+        Me.NURecargos8.DecimalPlaces = 1
         Me.NURecargos8.Location = New System.Drawing.Point(363, 3)
         Me.NURecargos8.Name = "NURecargos8"
-        Me.NURecargos8.ReadOnly = True
         Me.NURecargos8.Size = New System.Drawing.Size(65, 20)
         Me.NURecargos8.TabIndex = 277
         '
@@ -1184,17 +1184,17 @@ Partial Class PlanesEDC
         '
         'NUDescuentos7
         '
+        Me.NUDescuentos7.DecimalPlaces = 1
         Me.NUDescuentos7.Location = New System.Drawing.Point(565, 3)
         Me.NUDescuentos7.Name = "NUDescuentos7"
-        Me.NUDescuentos7.ReadOnly = True
         Me.NUDescuentos7.Size = New System.Drawing.Size(65, 20)
         Me.NUDescuentos7.TabIndex = 294
         '
         'NURecargos7
         '
+        Me.NURecargos7.DecimalPlaces = 1
         Me.NURecargos7.Location = New System.Drawing.Point(363, 3)
         Me.NURecargos7.Name = "NURecargos7"
-        Me.NURecargos7.ReadOnly = True
         Me.NURecargos7.Size = New System.Drawing.Size(65, 20)
         Me.NURecargos7.TabIndex = 276
         '
@@ -1314,17 +1314,17 @@ Partial Class PlanesEDC
         '
         'NUDescuentos6
         '
+        Me.NUDescuentos6.DecimalPlaces = 1
         Me.NUDescuentos6.Location = New System.Drawing.Point(565, 3)
         Me.NUDescuentos6.Name = "NUDescuentos6"
-        Me.NUDescuentos6.ReadOnly = True
         Me.NUDescuentos6.Size = New System.Drawing.Size(65, 20)
         Me.NUDescuentos6.TabIndex = 292
         '
         'NURecargos6
         '
+        Me.NURecargos6.DecimalPlaces = 1
         Me.NURecargos6.Location = New System.Drawing.Point(363, 3)
         Me.NURecargos6.Name = "NURecargos6"
-        Me.NURecargos6.ReadOnly = True
         Me.NURecargos6.Size = New System.Drawing.Size(65, 20)
         Me.NURecargos6.TabIndex = 275
         '
@@ -1434,9 +1434,9 @@ Partial Class PlanesEDC
         '
         'NUDescuentos4
         '
+        Me.NUDescuentos4.DecimalPlaces = 1
         Me.NUDescuentos4.Location = New System.Drawing.Point(565, 3)
         Me.NUDescuentos4.Name = "NUDescuentos4"
-        Me.NUDescuentos4.ReadOnly = True
         Me.NUDescuentos4.Size = New System.Drawing.Size(65, 20)
         Me.NUDescuentos4.TabIndex = 288
         '
@@ -1452,9 +1452,9 @@ Partial Class PlanesEDC
         '
         'NURecargos4
         '
+        Me.NURecargos4.DecimalPlaces = 1
         Me.NURecargos4.Location = New System.Drawing.Point(363, 3)
         Me.NURecargos4.Name = "NURecargos4"
-        Me.NURecargos4.ReadOnly = True
         Me.NURecargos4.Size = New System.Drawing.Size(65, 20)
         Me.NURecargos4.TabIndex = 273
         '
@@ -1564,9 +1564,9 @@ Partial Class PlanesEDC
         '
         'NUDescuentos3
         '
+        Me.NUDescuentos3.DecimalPlaces = 1
         Me.NUDescuentos3.Location = New System.Drawing.Point(565, 4)
         Me.NUDescuentos3.Name = "NUDescuentos3"
-        Me.NUDescuentos3.ReadOnly = True
         Me.NUDescuentos3.Size = New System.Drawing.Size(65, 20)
         Me.NUDescuentos3.TabIndex = 288
         '
@@ -1582,9 +1582,9 @@ Partial Class PlanesEDC
         '
         'NURecargos3
         '
+        Me.NURecargos3.DecimalPlaces = 1
         Me.NURecargos3.Location = New System.Drawing.Point(363, 4)
         Me.NURecargos3.Name = "NURecargos3"
-        Me.NURecargos3.ReadOnly = True
         Me.NURecargos3.Size = New System.Drawing.Size(65, 20)
         Me.NURecargos3.TabIndex = 272
         '
@@ -1704,17 +1704,17 @@ Partial Class PlanesEDC
         '
         'NUDescuentos5
         '
+        Me.NUDescuentos5.DecimalPlaces = 1
         Me.NUDescuentos5.Location = New System.Drawing.Point(565, 3)
         Me.NUDescuentos5.Name = "NUDescuentos5"
-        Me.NUDescuentos5.ReadOnly = True
         Me.NUDescuentos5.Size = New System.Drawing.Size(65, 20)
         Me.NUDescuentos5.TabIndex = 290
         '
         'NURecargos5
         '
+        Me.NURecargos5.DecimalPlaces = 1
         Me.NURecargos5.Location = New System.Drawing.Point(363, 3)
         Me.NURecargos5.Name = "NURecargos5"
-        Me.NURecargos5.ReadOnly = True
         Me.NURecargos5.Size = New System.Drawing.Size(65, 20)
         Me.NURecargos5.TabIndex = 274
         '
@@ -1824,9 +1824,9 @@ Partial Class PlanesEDC
         '
         'NUDescuentos2
         '
+        Me.NUDescuentos2.DecimalPlaces = 1
         Me.NUDescuentos2.Location = New System.Drawing.Point(565, 3)
         Me.NUDescuentos2.Name = "NUDescuentos2"
-        Me.NUDescuentos2.ReadOnly = True
         Me.NUDescuentos2.Size = New System.Drawing.Size(65, 20)
         Me.NUDescuentos2.TabIndex = 288
         '
@@ -1842,9 +1842,9 @@ Partial Class PlanesEDC
         '
         'NURecargos2
         '
+        Me.NURecargos2.DecimalPlaces = 1
         Me.NURecargos2.Location = New System.Drawing.Point(363, 4)
         Me.NURecargos2.Name = "NURecargos2"
-        Me.NURecargos2.ReadOnly = True
         Me.NURecargos2.Size = New System.Drawing.Size(65, 20)
         Me.NURecargos2.TabIndex = 271
         '
@@ -1954,9 +1954,9 @@ Partial Class PlanesEDC
         '
         'NUDescuentos1
         '
+        Me.NUDescuentos1.DecimalPlaces = 1
         Me.NUDescuentos1.Location = New System.Drawing.Point(565, 3)
         Me.NUDescuentos1.Name = "NUDescuentos1"
-        Me.NUDescuentos1.ReadOnly = True
         Me.NUDescuentos1.Size = New System.Drawing.Size(65, 20)
         Me.NUDescuentos1.TabIndex = 288
         '
@@ -1972,9 +1972,9 @@ Partial Class PlanesEDC
         '
         'NURecargos1
         '
+        Me.NURecargos1.DecimalPlaces = 1
         Me.NURecargos1.Location = New System.Drawing.Point(363, 4)
         Me.NURecargos1.Name = "NURecargos1"
-        Me.NURecargos1.ReadOnly = True
         Me.NURecargos1.Size = New System.Drawing.Size(65, 20)
         Me.NURecargos1.TabIndex = 270
         '
@@ -2481,28 +2481,28 @@ Partial Class PlanesEDC
         '
         'NURecargoInscripcion
         '
+        Me.NURecargoInscripcion.DecimalPlaces = 1
         Me.NURecargoInscripcion.Enabled = False
         Me.NURecargoInscripcion.Location = New System.Drawing.Point(350, 107)
         Me.NURecargoInscripcion.Name = "NURecargoInscripcion"
-        Me.NURecargoInscripcion.ReadOnly = True
         Me.NURecargoInscripcion.Size = New System.Drawing.Size(87, 20)
         Me.NURecargoInscripcion.TabIndex = 269
         '
         'NUDescuentoInscripcion
         '
+        Me.NUDescuentoInscripcion.DecimalPlaces = 1
         Me.NUDescuentoInscripcion.Enabled = False
         Me.NUDescuentoInscripcion.Location = New System.Drawing.Point(550, 106)
         Me.NUDescuentoInscripcion.Name = "NUDescuentoInscripcion"
-        Me.NUDescuentoInscripcion.ReadOnly = True
         Me.NUDescuentoInscripcion.Size = New System.Drawing.Size(87, 20)
         Me.NUDescuentoInscripcion.TabIndex = 270
         '
         'NUDescuentoPagoUnico
         '
+        Me.NUDescuentoPagoUnico.DecimalPlaces = 1
         Me.NUDescuentoPagoUnico.Enabled = False
         Me.NUDescuentoPagoUnico.Location = New System.Drawing.Point(480, 123)
         Me.NUDescuentoPagoUnico.Name = "NUDescuentoPagoUnico"
-        Me.NUDescuentoPagoUnico.ReadOnly = True
         Me.NUDescuentoPagoUnico.Size = New System.Drawing.Size(87, 20)
         Me.NUDescuentoPagoUnico.TabIndex = 270
         '

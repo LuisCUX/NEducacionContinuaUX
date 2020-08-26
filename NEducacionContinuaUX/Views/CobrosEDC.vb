@@ -122,6 +122,12 @@
                 Me.actualizarTotal(ch.getListaConceptos())
                 Tree.Nodes(2).Nodes(index).SelectedImageIndex = 1
             ElseIf (Tree.SelectedNode.Checked = True) Then
+                For Each item As TreeNode In Tree.Nodes(3).Nodes
+                    If (item.SelectedImageIndex = 1) Then
+                        MessageBox.Show($"No puede pagar colegiaturas sin antes haber pagado el cargo de inscripción")
+                        Exit Sub
+                    End If
+                Next
                 Tree.SelectedNode.Checked = False
                 Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
                 ch.eliminarconcepto(conceptoID, "DIN")
@@ -132,6 +138,10 @@
             Dim index As Integer = Tree.SelectedNode.Index
             If (Tree.SelectedNode.Checked = False) Then
                 Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
+                If (Tree.Nodes(2).Nodes.Count > 0 And Tree.Nodes(2).Nodes(0).SelectedImageIndex <> 1) Then
+                    MessageBox.Show("No puede pagar colegiaturas sin antes haber pagado el cargo de inscripción")
+                    Exit Sub
+                End If
                 If (Me.validarSeleccionNodosColegiaturas(index, 1) = False) Then
                     Dim mesActual As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "-", "-")
                     MessageBox.Show($"No puede pagar la colegiatura del mes {mesActual} sin antes haber pagado las colegiaturas anteriores")
@@ -157,8 +167,8 @@
                 ch.eliminarconcepto(conceptoID, "DCO")
                 Me.actualizarTotal(ch.getListaConceptos())
                 Tree.Nodes(3).Nodes(index).SelectedImageIndex = 0
-            End If
-        ElseIf (tipoPago = "nodePagoUnicoDip") Then
+                End If
+            ElseIf (tipoPago = "nodePagoUnicoDip") Then
             Dim index As Integer = Tree.SelectedNode.Index
             If (Tree.SelectedNode.Checked = False) Then
                 Tree.SelectedNode.Checked = True
