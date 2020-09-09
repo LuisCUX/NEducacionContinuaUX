@@ -33,6 +33,8 @@ Partial Class PlanesEDC
         Me.lblImporteInscrpcion = New System.Windows.Forms.Label()
         Me.tcPlanes = New System.Windows.Forms.TabControl()
         Me.pageInscripcion = New System.Windows.Forms.TabPage()
+        Me.NUDescuentoInscripcion = New System.Windows.Forms.NumericUpDown()
+        Me.NURecargoInscripcion = New System.Windows.Forms.NumericUpDown()
         Me.datePickerLimiteDescuentoInscripcion = New System.Windows.Forms.DateTimePicker()
         Me.txtDescripcionDescuentoInscripcion = New System.Windows.Forms.TextBox()
         Me.datePickerRecargoInscripcion = New System.Windows.Forms.DateTimePicker()
@@ -213,6 +215,7 @@ Partial Class PlanesEDC
         Me.txtImportePagos = New System.Windows.Forms.TextBox()
         Me.lblImportePagos = New System.Windows.Forms.Label()
         Me.pagePagoUnico = New System.Windows.Forms.TabPage()
+        Me.NUDescuentoPagoUnico = New System.Windows.Forms.NumericUpDown()
         Me.txtDescripcionDescuentoPagoUnico = New System.Windows.Forms.TextBox()
         Me.datePickerDescuentoPagoUnico = New System.Windows.Forms.DateTimePicker()
         Me.txtMontoPagoUnicoText = New System.Windows.Forms.TextBox()
@@ -232,12 +235,11 @@ Partial Class PlanesEDC
         Me.chbPagoUnico = New System.Windows.Forms.CheckBox()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.btnSalir = New System.Windows.Forms.Button()
-        Me.NURecargoInscripcion = New System.Windows.Forms.NumericUpDown()
-        Me.NUDescuentoInscripcion = New System.Windows.Forms.NumericUpDown()
-        Me.NUDescuentoPagoUnico = New System.Windows.Forms.NumericUpDown()
         Me.Panel1.SuspendLayout()
         Me.tcPlanes.SuspendLayout()
         Me.pageInscripcion.SuspendLayout()
+        CType(Me.NUDescuentoInscripcion, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.NURecargoInscripcion, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pagePlanPagos.SuspendLayout()
         CType(Me.NUDescuento, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NURecargo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -273,8 +275,6 @@ Partial Class PlanesEDC
         CType(Me.NUDescuentos1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NURecargos1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pagePagoUnico.SuspendLayout()
-        CType(Me.NURecargoInscripcion, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NUDescuentoInscripcion, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NUDescuentoPagoUnico, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -418,6 +418,24 @@ Partial Class PlanesEDC
         Me.pageInscripcion.Size = New System.Drawing.Size(1171, 362)
         Me.pageInscripcion.TabIndex = 0
         Me.pageInscripcion.Text = "Inscripción"
+        '
+        'NUDescuentoInscripcion
+        '
+        Me.NUDescuentoInscripcion.DecimalPlaces = 1
+        Me.NUDescuentoInscripcion.Enabled = False
+        Me.NUDescuentoInscripcion.Location = New System.Drawing.Point(550, 106)
+        Me.NUDescuentoInscripcion.Name = "NUDescuentoInscripcion"
+        Me.NUDescuentoInscripcion.Size = New System.Drawing.Size(87, 20)
+        Me.NUDescuentoInscripcion.TabIndex = 270
+        '
+        'NURecargoInscripcion
+        '
+        Me.NURecargoInscripcion.DecimalPlaces = 1
+        Me.NURecargoInscripcion.Enabled = False
+        Me.NURecargoInscripcion.Location = New System.Drawing.Point(350, 107)
+        Me.NURecargoInscripcion.Name = "NURecargoInscripcion"
+        Me.NURecargoInscripcion.Size = New System.Drawing.Size(83, 20)
+        Me.NURecargoInscripcion.TabIndex = 269
         '
         'datePickerLimiteDescuentoInscripcion
         '
@@ -2285,6 +2303,15 @@ Partial Class PlanesEDC
         Me.pagePagoUnico.TabIndex = 2
         Me.pagePagoUnico.Text = "Pago unico"
         '
+        'NUDescuentoPagoUnico
+        '
+        Me.NUDescuentoPagoUnico.DecimalPlaces = 1
+        Me.NUDescuentoPagoUnico.Enabled = False
+        Me.NUDescuentoPagoUnico.Location = New System.Drawing.Point(480, 123)
+        Me.NUDescuentoPagoUnico.Name = "NUDescuentoPagoUnico"
+        Me.NUDescuentoPagoUnico.Size = New System.Drawing.Size(87, 20)
+        Me.NUDescuentoPagoUnico.TabIndex = 270
+        '
         'txtDescripcionDescuentoPagoUnico
         '
         Me.txtDescripcionDescuentoPagoUnico.Enabled = False
@@ -2479,33 +2506,6 @@ Partial Class PlanesEDC
         Me.btnSalir.TabIndex = 18
         Me.btnSalir.UseVisualStyleBackColor = True
         '
-        'NURecargoInscripcion
-        '
-        Me.NURecargoInscripcion.DecimalPlaces = 1
-        Me.NURecargoInscripcion.Enabled = False
-        Me.NURecargoInscripcion.Location = New System.Drawing.Point(350, 107)
-        Me.NURecargoInscripcion.Name = "NURecargoInscripcion"
-        Me.NURecargoInscripcion.Size = New System.Drawing.Size(87, 20)
-        Me.NURecargoInscripcion.TabIndex = 269
-        '
-        'NUDescuentoInscripcion
-        '
-        Me.NUDescuentoInscripcion.DecimalPlaces = 1
-        Me.NUDescuentoInscripcion.Enabled = False
-        Me.NUDescuentoInscripcion.Location = New System.Drawing.Point(550, 106)
-        Me.NUDescuentoInscripcion.Name = "NUDescuentoInscripcion"
-        Me.NUDescuentoInscripcion.Size = New System.Drawing.Size(87, 20)
-        Me.NUDescuentoInscripcion.TabIndex = 270
-        '
-        'NUDescuentoPagoUnico
-        '
-        Me.NUDescuentoPagoUnico.DecimalPlaces = 1
-        Me.NUDescuentoPagoUnico.Enabled = False
-        Me.NUDescuentoPagoUnico.Location = New System.Drawing.Point(480, 123)
-        Me.NUDescuentoPagoUnico.Name = "NUDescuentoPagoUnico"
-        Me.NUDescuentoPagoUnico.Size = New System.Drawing.Size(87, 20)
-        Me.NUDescuentoPagoUnico.TabIndex = 270
-        '
         'PlanesEDC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2525,6 +2525,8 @@ Partial Class PlanesEDC
         Me.tcPlanes.ResumeLayout(False)
         Me.pageInscripcion.ResumeLayout(False)
         Me.pageInscripcion.PerformLayout()
+        CType(Me.NUDescuentoInscripcion, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NURecargoInscripcion, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pagePlanPagos.ResumeLayout(False)
         Me.pagePlanPagos.PerformLayout()
         CType(Me.NUDescuento, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2573,8 +2575,6 @@ Partial Class PlanesEDC
         CType(Me.NURecargos1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pagePagoUnico.ResumeLayout(False)
         Me.pagePagoUnico.PerformLayout()
-        CType(Me.NURecargoInscripcion, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NUDescuentoInscripcion, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NUDescuentoPagoUnico, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 

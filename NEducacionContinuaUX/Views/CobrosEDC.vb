@@ -167,8 +167,8 @@
                 ch.eliminarconcepto(conceptoID, "DCO")
                 Me.actualizarTotal(ch.getListaConceptos())
                 Tree.Nodes(3).Nodes(index).SelectedImageIndex = 0
-                End If
-            ElseIf (tipoPago = "nodePagoUnicoDip") Then
+            End If
+        ElseIf (tipoPago = "nodePagoUnicoDip") Then
             Dim index As Integer = Tree.SelectedNode.Index
             If (Tree.SelectedNode.Checked = False) Then
                 Tree.SelectedNode.Checked = True
@@ -198,12 +198,12 @@
                     Exit Sub
                 End If
                 Tree.SelectedNode.Checked = False
-                    Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
-                    ch.eliminarconcepto(conceptoID, "REC")
-                    Me.actualizarTotal(ch.getListaConceptos())
-                    Tree.Nodes(5).Nodes(index).SelectedImageIndex = 0
-                End If
+                Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
+                ch.eliminarconcepto(conceptoID, "REC")
+                Me.actualizarTotal(ch.getListaConceptos())
+                Tree.Nodes(5).Nodes(index).SelectedImageIndex = 0
             End If
+        End If
     End Sub
 
     Sub actualizarTotal(listaConceptos As List(Of Concepto))

@@ -36,7 +36,7 @@
             txtNombrePlan.Text = cbPlanes.Text
             pc.llenarVentanaPlanesInscripcion(cbPlanes.SelectedValue, chbInscripcion, txtImporteInscripcion, chbRecargoInscripcion, chbDescuentoInscripcion, NURecargoInscripcion, datePickerRecargoInscripcion, NUDescuentoInscripcion, txtDescripcionDescuentoInscripcion, datePickerLimiteDescuentoInscripcion)
             pc.llenarVentanaPlanesColegiaturas(cbPlanes.SelectedValue, listaPaneles, listatxtImportes, listatxtRecargos, listatxtDescuentos, listatxtDescripcionDescuentos, listadatePickerRecargos, listadatePickerDescuentos, listacbClaves, listatxtConcepto, txtImportePagos, NURecargo, NUDescuento, txtDescripcionDescuentoPagos, chbRecargosPagos, chbDescuentoPagos, cbNoPagos)
-            pc.llenarVentanaPlanesPagoUnico(cbPlanes.SelectedValue, chbPagoUnico, txtMontoPagoUnico, chbDescuentoPagoUnico, NUDescuentoPagoUnico, datePickerDescuentoPagoUnico, datePickerPagoUnico)
+            pc.llenarVentanaPlanesPagoUnico(cbPlanes.SelectedValue, chbPagoUnico, txtMontoPagoUnico, chbDescuentoPagoUnico, NUDescuentoPagoUnico, txtDescripcionDescuentoPagoUnico, datePickerDescuentoPagoUnico, datePickerPagoUnico)
             colegiaturas = cbNoPagos.SelectedIndex + 1
             edicion = True
             For x = 0 To colegiaturas - 1
@@ -73,7 +73,6 @@
     ''-----------------------------------------------------------------------------------------------------------------------------
     ''------------------------------------------------CONTROLES TAB INSCRIPCION----------------------------------------------------
     ''-----------------------------------------------------------------------------------------------------------------------------
-
     Private Sub chbRecargoInscripcion_CheckedChanged(sender As Object, e As EventArgs) Handles chbRecargoInscripcion.CheckedChanged
         If (chbRecargoInscripcion.Checked = True) Then
             NURecargoInscripcion.Enabled = True

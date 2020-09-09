@@ -63,6 +63,7 @@ Public Class CobrosController
         db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosDiplomados(Folio, Matricula, valorUnitario, valorIVA, Descuento, ID_FormaPago, ID_ClavePago, Fecha_Pago, Autorizado, Condonado, Usuario, Activo) VALUES ('{Folio}', '{Matricula}', {CDec(concepto.costoBase)}, {CDec(concepto.costoIVAUnitario)}, {CDec(concepto.descuento)}, {formaPagoint}, 5, GETDATE(), 0, 0, '{User.getUsername()}', 1)")
         db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionCargosPlanes SET Activo = 0 WHERE ID = {concepto.IDConcepto}")
         db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionCargosPlanes SET Activo = 0 WHERE Matricula = '{Matricula}' AND ID_ClaveConcepto = 4")
+        db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionCargosPlanes SET Activo = 0 WHERE Matricula = '{Matricula}' AND ID_ClaveConcepto = 6")
     End Sub
 
     ''----------------------------------------------------------------------------------------------------------------------------------------
@@ -189,17 +190,17 @@ Public Class CobrosController
         Dim ConsecutivoStr As String
         If (Consecutivo > 0 And Consecutivo < 10) Then
             ConsecutivoStr = $"00000{Consecutivo}"
-        ElseIf (Consecutivo > 10 And Consecutivo < 100) Then
+        ElseIf (Consecutivo >= 10 And Consecutivo < 100) Then
             ConsecutivoStr = $"0000{Consecutivo}"
-        ElseIf (Consecutivo > 100 And Consecutivo < 1000) Then
+        ElseIf (Consecutivo >= 100 And Consecutivo < 1000) Then
             ConsecutivoStr = $"000{Consecutivo}"
-        ElseIf (Consecutivo > 1000 And Consecutivo < 10000) Then
+        ElseIf (Consecutivo >= 1000 And Consecutivo < 10000) Then
             ConsecutivoStr = $"000{Consecutivo}"
-        ElseIf (Consecutivo > 10000 And Consecutivo < 100000) Then
+        ElseIf (Consecutivo >= 10000 And Consecutivo < 100000) Then
             ConsecutivoStr = $"00{Consecutivo}"
-        ElseIf (Consecutivo > 100000 And Consecutivo < 1000000) Then
+        ElseIf (Consecutivo >= 100000 And Consecutivo < 1000000) Then
             ConsecutivoStr = $"0{Consecutivo}"
-        ElseIf (Consecutivo > 1000000 And Consecutivo < 10000000) Then
+        ElseIf (Consecutivo >= 1000000 And Consecutivo < 10000000) Then
             ConsecutivoStr = $"{Consecutivo}"
         End If
 

@@ -74,9 +74,10 @@
                 Else
                     chbDescuento.Checked = True
                 End If
-                txtImporte.Text = item("Importe")
+                txtImporte.Text = Format(CDec(item("Importe")), "#####0.00")
                 txtRecargo.Text = item("Recargo_Porcentaje")
                 txtDescuento.Text = item("Descuento_Porcentaje")
+                txtDescripcionDescuento.Text = "----------"
                 datePickerDescuento.MinDate = item("Fecha_Limite_Desc")
                 datePickerDescuento.Value = item("Fecha_Limite_Desc")
                 datePickerFechaRecargo.MinDate = item("Fecha_Calcula_Recargo")
@@ -109,7 +110,7 @@
                 chbDescuento.Enabled = True
             End If
             listaPaneles(x).Visible = True
-            listatxtImportes(x).Text = item("Importe")
+            listatxtImportes(x).Text = Format(CDec(item("Importe")), "#####0.00")
             importeTotal = importeTotal + item("Importe")
             listatxtImportes(x).Enabled = True
             listatxtRecargos(x).Text = item("Recargo_Porcentaje")
@@ -134,13 +135,13 @@
             listacbClaves(x).Enabled = True
             listatxtConcepto(x).Text = item("Descripcion")
         Next
-        txtImporteTotal.Text = importeTotal
+        txtImporteTotal.Text = Format(CDec(importeTotal), "#####0.00")
         txtImporteTotal.Enabled = True
         cbNoPagos.SelectedIndex = tableColegiaturas.Rows.Count - 1
         cbNoPagos.Enabled = True
     End Sub
 
-    Sub llenarVentanaPlanesPagoUnico(IDPlan As Integer, chbPagoUnico As CheckBox, txtImporte As TextBox, chbDescuento As CheckBox, txtDescuento As NumericUpDown, datepickerDescuento As DateTimePicker, datepickerPagoUnico As DateTimePicker)
+    Sub llenarVentanaPlanesPagoUnico(IDPlan As Integer, chbPagoUnico As CheckBox, txtImporte As TextBox, chbDescuento As CheckBox, txtDescuento As NumericUpDown, txtDescuentoDescripcion As TextBox, datepickerDescuento As DateTimePicker, datepickerPagoUnico As DateTimePicker)
         Dim tablePagoUnico As DataTable = db.getDataTableFromSQL($"SELECT Importe, Descuento, Descuento_Porcentaje, Fecha_Limite_Desc, Fecha_Limite_Pago 
                                                                    FROM ing_PlanesConceptos WHERE ID_Plan = {IDPlan} AND Clave = 'P13' AND Activo = 1")
         If (tablePagoUnico.Rows.Count = 0) Then
@@ -155,8 +156,9 @@
                 Else
                     chbDescuento.Checked = True
                 End If
-                txtImporte.Text = item("Importe")
+                txtImporte.Text = Format(CDec(item("Importe")), "#####0.00")
                 txtDescuento.Text = item("Descuento_Porcentaje")
+                txtDescuentoDescripcion.Text = "----------"
                 datepickerDescuento.MinDate = item("Fecha_Limite_Desc")
                 datepickerDescuento.Value = item("Fecha_Limite_Desc")
                 datepickerPagoUnico.MinDate = item("Fecha_Limite_Pago")
