@@ -7,6 +7,7 @@ Public Class CobrosController
     Dim ch As ConceptHandlerController = New ConceptHandlerController()
     Dim xml As XmlService = New XmlService()
     Dim st As SelladoTimbradoService = New SelladoTimbradoService()
+    Dim rep As ImpresionReportesService = New ImpresionReportesService()
 
 
     ''----------------------------------------------------------------------------------------------------------------------------------------
@@ -127,20 +128,24 @@ Public Class CobrosController
             MessageBox.Show(Fecha)
 
             Dim cadena = xml.cadenaPrueba(Serie, Folio, Fecha, formaPago, NoCertificado, SubTotal, DescuentoS, Total, listaConceptos, totalIVA)
-            Dim sello As String = st.Sellado("C:\Users\darkz\Desktop\pfx\uxa_pfx33.pfx", "12345678a", cadena)
-            ''Dim sello As String = st.Sellado("C:\Users\Luis\Desktop\pfx\uxa_pfx33.pfx", "12345678a", cadena
+            ''Dim sello As String = st.Sellado("C:\Users\darkz\Desktop\pfx\uxa_pfx33.pfx", "12345678a", cadena)
+            Dim sello As String = st.Sellado("C:\Users\Luis\Desktop\pfx\uxa_pfx33.pfx", "12345678a", cadena)
             Dim xmlString As String = xml.xmlPrueba(Total, SubTotal, DescuentoS, totalIVA, Fecha, sello, Certificado, NoCertificado, formaPago, Folio, Serie, UsoCFDI, listaConceptos)
             xmlString = xmlString.Replace("utf-16", "UTF-8")
             Dim xmlTimbrado As String = st.Timbrado(xmlString, Folio)
             Dim folioFiscal As String = Me.Extrae_Cadena(xmlTimbrado, "UUID=", " FechaTimbrado")
-            ''File.WriteAllText("C:\Users\Luis\Desktop\wea.xml", xmlTimbrado)
-            File.WriteAllText("C:\Users\darkz\Desktop\wea.xml", xmlTimbrado)
+            folioFiscal = Me.Extrae_Cadena(folioFiscal, folioFiscal.Chars(0), "")
+            File.WriteAllText("C:\Users\Luis\Desktop\wea.xml", xmlTimbrado)
+            ''File.WriteAllText("C:\Users\darkz\Desktop\wea.xml", xmlTimbrado)
             Dim IDXML As Integer = db.insertAndGetIDInserted($"INSERT INTO ing_xmlTimbrados(Matricula_Clave, Folio, FolioFiscal, Certificado, XMLTimbrado, fac_Cadena, fac_Sello, Tipo_Pago, Forma_Pago, Fecha_Pago, Cajero, RegimenFiscal, Subtotal, Descuento, IVA, Total, usoCFDI) VALUES ('{Matricula}', '{Serie}{Folio}', '{folioFiscal}', '{NoCertificado}', '{xmlTimbrado}', '{cadena}', '{sello}', '', '{formaPago}', '{Fecha}', '{User.getUsername}', 'GENERAL DE LEY(603)', {SubTotal}, {DescuentoS}, {totalIVA}, {Total}, '{UsoCFDI}')")
             For Each item As Concepto In listaConceptos
                 db.execSQLQueryWithoutParams($"INSERT INTO ing_xmlTimbradosConceptos(XMLID, Nombre_Concepto, Clave_Concepto, PrecioUnitario, IVA, Descuento, Cantidad, Total) VALUES ({IDXML}, '{item.NombreConcepto}', {1}, {item.costoUnitario}, {item.costoIVAUnitario}, {item.descuento}, {item.Cantidad}, {item.costoTotal})")
             Next
             db.execSQLQueryWithoutParams($"UPDATE ing_CatFolios SET Consecutivo = Consecutivo + 1 WHERE Usuario = '{User.getUsername()}'")
             MessageBox.Show("XML completado")
+            rep.AgregarFuente("FacturaEDC.rpt")
+            rep.AgregarParametros("IDXML", IDXML)
+            rep.MostrarReporte()
             CobrosEDC.Reiniciar()
             db.commitTransaction()
         Catch ex As Exception

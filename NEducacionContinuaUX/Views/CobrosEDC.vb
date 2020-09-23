@@ -138,9 +138,11 @@
             Dim index As Integer = Tree.SelectedNode.Index
             If (Tree.SelectedNode.Checked = False) Then
                 Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
-                If (Tree.Nodes(2).Nodes.Count > 0 And Tree.Nodes(2).Nodes(0).SelectedImageIndex <> 1) Then
-                    MessageBox.Show("No puede pagar colegiaturas sin antes haber pagado el cargo de inscripción")
-                    Exit Sub
+                If (Tree.Nodes(2).Nodes.Count() > 0) Then
+                    If (Tree.Nodes(2).Nodes.Count > 0 And Tree.Nodes(2).Nodes(0).SelectedImageIndex <> 1) Then
+                        MessageBox.Show("No puede pagar colegiaturas sin antes haber pagado el cargo de inscripción")
+                        Exit Sub
+                    End If
                 End If
                 If (Me.validarSeleccionNodosColegiaturas(index, 1) = False) Then
                     Dim mesActual As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "-", "-")

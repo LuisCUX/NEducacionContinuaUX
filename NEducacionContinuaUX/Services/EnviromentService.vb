@@ -7,6 +7,7 @@ Public Class EnviromentService
     Public Shared Property dbUsername As String
     Public Shared Property dbPassword As String
     Public Shared Property connectionString As String
+    Public Shared Property reportesPath As String
 
     Public Shared Sub setEnviroment()
         If (System.Diagnostics.Debugger.IsAttached) Then
@@ -15,6 +16,7 @@ Public Class EnviromentService
             dbUsername = ConfigurationSettings.AppSettings.Get("user")
             dbPassword = ConfigurationSettings.AppSettings.Get("password")
             connectionString = $"Data Source={serverIP}; Initial Catalog={dbName}; User ID='{dbUsername}'; Password='{dbPassword}';"
+            reportesPath = ConfigurationSettings.AppSettings.Get("PathReportesPrueba").ToString()
         Else
             serverIP = ConfigurationSettings.AppSettings.Get("productionServerIP")
         End If
