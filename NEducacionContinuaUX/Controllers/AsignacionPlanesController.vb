@@ -67,7 +67,7 @@
                 Dim aplicaRecargo As Boolean = db.exectSQLQueryScalar($"SELECT Considera_Recargo FROM ing_PlanesConceptos WHERE ID = {IDPago}")
                 If (aplicaRecargo = True) Then
                     fechaRecargo = db.exectSQLQueryScalar($"SELECT Fecha_Calcula_Recargo FROM ing_PlanesConceptos WHERE ID = {IDPago}")
-                    fechaRecargos = $"{fechaRecargo.Year}/{fechaRecargo.Month}/{fechaRecargo.Day}"
+                    ''fechaRecargos = $"{fechaRecargo.Year}/{fechaRecargo.Month}/{fechaRecargo.Day}"
                 Else
                     fechaRecargo = "1900-01-01"
                 End If

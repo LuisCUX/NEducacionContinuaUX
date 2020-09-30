@@ -111,7 +111,7 @@
         ElseIf (claveConcepto = "DCO") Then
             Dim Costo As Decimal
             Dim Descuento As Decimal
-            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, CON.clave_servicio, C.Importe, C.Descuento FROM ing_AsignacionCargosPlanes AS AC 
+            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, CON.clave_servicio, C.Importe, C.Descuento, C.Fecha_Limite_Desc FROM ing_AsignacionCargosPlanes AS AC 
                                                                       INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
                                                                       INNER JOIN ing_Planes AS PL ON PL.ID = C.ID_Plan
                                                                       INNER JOIN portal_congreso AS CON ON CON.id_congreso = PL.ID_Congreso
