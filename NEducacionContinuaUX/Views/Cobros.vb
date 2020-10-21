@@ -66,13 +66,13 @@ Public Class Cobros
         Dim Fecha As String = db.exectSQLQueryScalar("select STUFF(CONVERT(VARCHAR(50),GETDATE(), 127) ,20,4,'') as fecha")
         MessageBox.Show(Fecha)
 
-        Dim cadena = xml.cadenaPrueba(Serie, Folio, Fecha, FormaPago, NoCertificado, SubTotal, DescuentoS, Total, listaConceptos, totalIVA)
-        Dim sello As String = st.Sellado("C:\Users\Luis\Desktop\pfx\uxa_pfx33.pfx", "12345678a", cadena)
-        Dim xmlString As String = xml.xmlPrueba(Total, SubTotal, DescuentoS, totalIVA, Fecha, sello, Certificado, NoCertificado, FormaPago, Folio, Serie, UsoCFDI, listaConceptos)
-        xmlString = xmlString.Replace("utf-16", "UTF-8")
-        Dim xmlTimbrado As String = st.Timbrado(xmlString, Folio)
-        File.WriteAllText("C:\Users\Luis\Desktop\wea.xml", xmlTimbrado)
-        db.execSQLQueryWithoutParams("INSERT INTO ing_xmlPruebas(XML) VALUES ('" & xmlTimbrado & "')")
+        ''Dim cadena = xml.cadenaPrueba(Serie, Folio, Fecha, FormaPago, NoCertificado, SubTotal, DescuentoS, Total, listaConceptos, totalIVA)
+        ''Dim sello As String = st.Sellado("C:\Users\Luis\Desktop\pfx\uxa_pfx33.pfx", "12345678a", cadena)
+        ''Dim xmlString As String = xml.xmlPrueba(Total, SubTotal, DescuentoS, totalIVA, Fecha, sello, Certificado, NoCertificado, FormaPago, Folio, Serie, UsoCFDI, listaConceptos)
+        ''xmlString = xmlString.Replace("utf-16", "UTF-8")
+        ''Dim xmlTimbrado As String = st.Timbrado(xmlString, Folio)
+        ''File.WriteAllText("C:\Users\Luis\Desktop\wea.xml", xmlTimbrado)
+        ''db.execSQLQueryWithoutParams("INSERT INTO ing_xmlPruebas(XML) VALUES ('" & xmlTimbrado & "')")
         MessageBox.Show("XML completado")
     End Sub
 

@@ -6,11 +6,12 @@ Imports System.Data.SqlClient
 Public Class XmlService
     Dim connectionstring As String = "Server=DESKTOP-RORPGCT\SQLEXPRESS;Database=EducacionContinuaTemp;User Id=chupon;Password=chupon"
     Dim con As New SqlConnection(connectionstring)
+    Dim db As DataBaseService = New DataBaseService()
 
 
-    Function cadenaPrueba(Serie As String, Folio As String, Fecha As String, FormaPago As String, NoCertificado As String, SubTotal As String, Descuento As String, Total As String, listaConceptos As List(Of Concepto), totalIVA As String) As String
+    Function cadenaPrueba(Serie As String, Folio As String, Fecha As String, FormaPago As String, NoCertificado As String, SubTotal As String, Descuento As String, Total As String, listaConceptos As List(Of Concepto), totalIVA As String, RFC As String, NombreCompleto As String) As String
         Dim bandIVA As Boolean = False
-        Dim cadena As String = "||3.3|" & Serie & "|" & Folio & "|" & Fecha & "|" & FormaPago & "|" & NoCertificado & "|" & SubTotal.ToString() & "|" & Descuento.ToString() & "|MXN|" & Total & "|I|PUE|91190|TES030201001|EDUCACION CONTINUA|601|XAXX010101000|LUIS ALBERTO CARMONA RONZON|P01"
+        Dim cadena As String = "||3.3|" & Serie & "|" & Folio & "|" & Fecha & "|" & FormaPago & "|" & NoCertificado & "|" & SubTotal.ToString() & "|" & Descuento.ToString() & "|MXN|" & Total & "|I|PUE|91190|TES030201001|EDUCACION CONTINUA|601|" & RFC & "|" & NombreCompleto & "|P01"
         For Each concepto As Concepto In listaConceptos
             cadena = "" & cadena & "|" & concepto.cveClase & "|" & concepto.Cantidad & "|" & concepto.cveUnidad & "|Pieza|" & concepto.NombreConcepto & "|" & concepto.costoUnitario & "|" & concepto.costoTotal & "|" & concepto.descuento & ""
             If (concepto.absorbeIVA = True Or concepto.consideraIVA = True) Then
@@ -30,7 +31,7 @@ Public Class XmlService
         Return cadena
     End Function
 
-    Function xmlPrueba(Total As String, SubTotal As String, Descuento As String, TotalIVA As String, Fecha As String, Sello As String, Certificado As String, NoCertificado As String, FormaPago As String, Folio As String, Serie As String, UsoCFDI As String, listaConceptos As List(Of Concepto)) As String
+    Function xmlPrueba(Total As String, SubTotal As String, Descuento As String, TotalIVA As String, Fecha As String, Sello As String, Certificado As String, NoCertificado As String, FormaPago As String, Folio As String, Serie As String, UsoCFDI As String, listaConceptos As List(Of Concepto), RFC As String, NombreCompleto As String) As String
         Dim IVABand As Boolean = False
         Dim config As New XmlWriterSettings
         config.Indent = True
@@ -68,8 +69,8 @@ Public Class XmlService
                 wr.WriteEndElement() ''NODO EMISOR END
 
                 wr.WriteStartElement("cfdi", "Receptor", Nothing) ''NODO RECEPTOR START
-                wr.WriteAttributeString("Rfc", Nothing, "XAXX010101000")
-                wr.WriteAttributeString("Nombre", Nothing, "LUIS ALBERTO CARMONA RONZON")
+                wr.WriteAttributeString("Rfc", Nothing, RFC)
+                wr.WriteAttributeString("Nombre", Nothing, NombreCompleto)
                 wr.WriteAttributeString("UsoCFDI", Nothing, UsoCFDI)
                 wr.WriteEndElement() ''NODO RECEPTOR END
 
@@ -80,6 +81,7 @@ Public Class XmlService
                     wr.WriteAttributeString("ClaveProdServ", Nothing, concepto.cveClase)
                     wr.WriteAttributeString("Cantidad", Nothing, concepto.Cantidad)
                     wr.WriteAttributeString("ClaveUnidad", Nothing, concepto.cveUnidad)
+                    ''Dim unidad As String = db.exectSQLQueryScalar($"SELECT nombre FROM ing_cat_unidad WHERE id_claveProd = '{concepto.cveUnidad}'")
                     wr.WriteAttributeString("Unidad", Nothing, "Pieza")
                     wr.WriteAttributeString("Descripcion", Nothing, concepto.NombreConcepto)
                     wr.WriteAttributeString("ValorUnitario", Nothing, concepto.costoUnitario)

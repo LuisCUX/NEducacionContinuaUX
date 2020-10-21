@@ -69,7 +69,7 @@
     ''----------------------------------------------------------------------------------------------------------------------------------------
     ''-------------------------------------------------BUSCA MATRICULA MATRICULA EXTERNA------------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
-    Sub buscarMatriculaEX(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As TextBox, txtEmail As TextBox, txtCarrera As TextBox, txtTurno As TextBox)
+    Sub buscarMatriculaEX(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As TextBox, txtEmail As TextBox, txtCarrera As TextBox, txtTurno As TextBox, txtRFC As TextBox)
         Dim exists As Integer = db.exectSQLQueryScalar($"SELECT id_clave FROM portal_clave WHERE clave_cliente = '{Matricula}'")
 
         If (exists < 1) Then
@@ -78,7 +78,7 @@
             Exit Sub
         End If
 
-        Me.llenarPanelDatosEX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno)
+        Me.llenarPanelDatosEX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno, txtRFC)
     End Sub
 
 
@@ -86,7 +86,7 @@
     ''----------------------------------------------------------------------------------------------------------------------------------------
     ''-----------------------------------------------------LLENA PANEL DE DATOS EXTERNA-------------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
-    Sub llenarPanelDatosEX(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As TextBox, txtEmail As TextBox, txtCarrera As TextBox, txtTurno As TextBox)
+    Sub llenarPanelDatosEX(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As TextBox, txtEmail As TextBox, txtCarrera As TextBox, txtTurno As TextBox, txtRFC As TextBox)
         Dim tableDatos As DataTable = db.getDataTableFromSQL($"SELECT UPPER(C.nombre + ' ' + EX.paterno + ' ' + EX.materno)As Nombre, C.correo FROM portal_cliente AS C 
                                                                INNER JOIN portal_registroExterno AS EX ON C.id_cliente = EX.id_cliente
                                                                WHERE EX.clave_cliente = '{Matricula}'")
@@ -97,6 +97,12 @@
         txtCarrera.Text = ""
         txtTurno.Text = ""
 
+        txtRFC.Text = db.exectSQLQueryScalar($"SELECT RFC.rfc FROM portal_cliente AS C 
+                                               INNER JOIN portal_registroCongreso AS RC ON RC.id_cliente = C.id_cliente
+                                               INNER JOIN portal_rcRFC AS X ON X.id_registro = RC.id_registro
+                                               INNER JOIN portal_catRFC AS RFC ON RFC.id_rfc = X.id_rfc
+                                               WHERE RC.clave_cliente = '{Matricula}'")
+
         panelDatos.Visible = True
         panelCobros.Visible = True
     End Sub
@@ -104,7 +110,7 @@
     ''----------------------------------------------------------------------------------------------------------------------------------------
     ''-------------------------------------------------BUSCA MATRICULA MATRICULA CONGRESO-----------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
-    Sub buscarMatriculaEC(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As TextBox, txtEmail As TextBox, txtCarrera As TextBox, txtTurno As TextBox)
+    Sub buscarMatriculaEC(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As TextBox, txtEmail As TextBox, txtCarrera As TextBox, txtTurno As TextBox, txtRFC As TextBox)
         Dim exists As Integer = db.exectSQLQueryScalar($"SELECT id_clave FROM portal_clave WHERE clave_cliente = '{Matricula}'")
 
         If (exists < 1) Then
@@ -113,7 +119,7 @@
             Exit Sub
         End If
 
-        Me.llenarPanelDatosEC(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno)
+        Me.llenarPanelDatosEC(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno, txtRFC)
     End Sub
 
 
@@ -121,7 +127,7 @@
     ''----------------------------------------------------------------------------------------------------------------------------------------
     ''-----------------------------------------------------LLENA PANEL DE DATOS CONGRESO------------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
-    Sub llenarPanelDatosEC(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As TextBox, txtEmail As TextBox, txtCarrera As TextBox, txtTurno As TextBox)
+    Sub llenarPanelDatosEC(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As TextBox, txtEmail As TextBox, txtCarrera As TextBox, txtTurno As TextBox, txtRFC As TextBox)
         Dim tableDatos As DataTable = db.getDataTableFromSQL($"SELECT UPPER(C.nombre + ' ' + R.apellido_paterno + ' ' + R.apellido_materno) AS Nombre, C.correo FROM portal_cliente AS C 
                                                                INNER JOIN portal_registroCongreso AS R ON R.id_cliente = C.id_cliente
                                                                WHERE R.clave_cliente = '{Matricula}'")
@@ -131,6 +137,12 @@
         Next
         txtCarrera.Text = ""
         txtTurno.Text = ""
+
+        txtRFC.Text = db.exectSQLQueryScalar($"SELECT RFC.rfc FROM portal_cliente AS C 
+                                               INNER JOIN portal_registroCongreso AS RC ON RC.id_cliente = C.id_cliente
+                                               INNER JOIN portal_rcRFC AS X ON X.id_registro = RC.id_registro
+                                               INNER JOIN portal_catRFC AS RFC ON RFC.id_rfc = X.id_rfc
+                                               WHERE RC.clave_cliente = '{Matricula}'")
 
         panelDatos.Visible = True
         panelCobros.Visible = True

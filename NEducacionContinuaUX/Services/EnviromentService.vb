@@ -8,6 +8,7 @@ Public Class EnviromentService
     Public Shared Property dbPassword As String
     Public Shared Property connectionString As String
     Public Shared Property reportesPath As String
+    Public Shared Property RFCEDC As String
 
     Public Shared Sub setEnviroment()
         If (System.Diagnostics.Debugger.IsAttached) Then
@@ -17,6 +18,7 @@ Public Class EnviromentService
             dbPassword = ConfigurationSettings.AppSettings.Get("password")
             connectionString = $"Data Source={serverIP}; Initial Catalog={dbName}; User ID='{dbUsername}'; Password='{dbPassword}';"
             reportesPath = ConfigurationSettings.AppSettings.Get("PathReportesPrueba").ToString()
+            RFCEDC = ConfigurationSettings.AppSettings.Get("RFC").ToString()
         Else
             serverIP = ConfigurationSettings.AppSettings.Get("productionServerIP")
         End If

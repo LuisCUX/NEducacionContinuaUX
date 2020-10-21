@@ -1,6 +1,9 @@
 ﻿Imports System.Configuration
 Imports System.IO
 Imports System.Text.RegularExpressions
+Imports System.Threading
+Imports System.Security.Cryptography
+Imports System.Security.Cryptography.X509Certificates
 
 Public Class CobrosController
     Dim db As DataBaseService = New DataBaseService()
@@ -8,7 +11,7 @@ Public Class CobrosController
     Dim xml As XmlService = New XmlService()
     Dim st As SelladoTimbradoService = New SelladoTimbradoService()
     Dim rep As ImpresionReportesService = New ImpresionReportesService()
-
+    Public QR_Generator As New MessagingToolkit.QRCode.Codec.QRCodeEncoder
 
     ''----------------------------------------------------------------------------------------------------------------------------------------
     ''-----------------------------------------------------COBRA PAGO OPCIONAL DE ALUMNO------------------------------------------------------
@@ -70,7 +73,8 @@ Public Class CobrosController
     ''----------------------------------------------------------------------------------------------------------------------------------------
     ''---------------------------------------------------------COBRA PAGO YA VALIDADO---------------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
-    Sub Cobrar(listaConceptos As List(Of Concepto), formaPago As String, Matricula As String)
+    Sub Cobrar(listaConceptos As List(Of Concepto), formaPago As String, Matricula As String, RFCCLiente As String, NombreCLiente As String)
+        ''---------------------------------------------------------REGISTRO DE COBRO/S EN BASE DE DATOS---------------------------------------------------------
         Dim folioPago As String = Me.obtenerFolio()
         Try
             db.startTransaction()
@@ -90,6 +94,7 @@ Public Class CobrosController
                 End If
             Next
 
+            ''---------------------------------------------------------CALCULO DE TOTALES---------------------------------------------------------
             Dim Certificado As String = ConfigurationSettings.AppSettings.Get("developmentCertificadoContent").ToString()
             Dim NoCertificado As String = ConfigurationSettings.AppSettings.Get("developmentCertificado").ToString()
 
@@ -127,32 +132,41 @@ Public Class CobrosController
             Dim valores As String()
             If (InStr(Total, ".")) Then
                 valores = Split(Total, ".")
-                TotalText = $"{Me.Num2Text(valores(0))} PESOS CON {Me.Num2Text(valores(1))} CENTAVOS"
+                TotalText = $"{Me.Num2Text(valores(0))} PESOS {valores(1)}/100 M.N"
             Else
                 TotalText = $"{Me.Num2Text(Total)} PESOS"
             End If
             Dim Fecha As String = db.exectSQLQueryScalar("select STUFF(CONVERT(VARCHAR(50),GETDATE(), 127) ,20,4,'') as fecha")
             MessageBox.Show(Fecha)
 
-            Dim cadena = xml.cadenaPrueba(Serie, Folio, Fecha, formaPago, NoCertificado, SubTotal, DescuentoS, Total, listaConceptos, totalIVA)
+            ''---------------------------------------------------------TIMBRADO---------------------------------------------------------
+            Dim cadena = xml.cadenaPrueba(Serie, Folio, Fecha, formaPago, NoCertificado, SubTotal, DescuentoS, Total, listaConceptos, totalIVA, RFCCLiente, NombreCLiente)
             ''Dim sello As String = st.Sellado("C:\Users\darkz\Desktop\pfx\uxa_pfx33.pfx", "12345678a", cadena)
             Dim sello As String = st.Sellado("C:\Users\Luis\Desktop\pfx\uxa_pfx33.pfx", "12345678a", cadena)
-            Dim xmlString As String = xml.xmlPrueba(Total, SubTotal, DescuentoS, totalIVA, Fecha, sello, Certificado, NoCertificado, formaPago, Folio, Serie, UsoCFDI, listaConceptos)
+            Dim xmlString As String = xml.xmlPrueba(Total, SubTotal, DescuentoS, totalIVA, Fecha, sello, Certificado, NoCertificado, formaPago, Folio, Serie, UsoCFDI, listaConceptos, RFCCLiente, NombreCLiente)
             xmlString = xmlString.Replace("utf-16", "UTF-8")
             Dim xmlTimbrado As String = st.Timbrado(xmlString, Folio)
             Dim folioFiscal As String = Me.Extrae_Cadena(xmlTimbrado, "UUID=", " FechaTimbrado")
             folioFiscal = Me.Extrae_Cadena(folioFiscal, "=", "")
+            folioFiscal = folioFiscal.Substring(1, folioFiscal.Length() - 1)
             File.WriteAllText("C:\Users\Luis\Desktop\wea.xml", xmlTimbrado)
             ''File.WriteAllText("C:\Users\darkz\Desktop\wea.xml", xmlTimbrado)
+
+            ''---------------------------------------------------------GENERACION DE FACTURA---------------------------------------------------------
             Dim IDXML As Integer = db.insertAndGetIDInserted($"INSERT INTO ing_xmlTimbrados(Matricula_Clave, Folio, FolioFiscal, Certificado, XMLTimbrado, fac_Cadena, fac_Sello, Tipo_Pago, Forma_Pago, Fecha_Pago, Cajero, RegimenFiscal, Subtotal, Descuento, IVA, Total, usoCFDI) VALUES ('{Matricula}', '{Serie}{Folio}', '{folioFiscal}', '{NoCertificado}', '{xmlTimbrado}', '{cadena}', '{sello}', '', '{formaPago}', '{Fecha}', '{User.getUsername}', 'GENERAL DE LEY(603)', {SubTotal}, {DescuentoS}, {totalIVA}, {Total}, '{UsoCFDI}')")
             For Each item As Concepto In listaConceptos
-                db.execSQLQueryWithoutParams($"INSERT INTO ing_xmlTimbradosConceptos(XMLID, Nombre_Concepto, Clave_Concepto, PrecioUnitario, IVA, Descuento, Cantidad, Total) VALUES ({IDXML}, '{item.NombreConcepto}', {1}, {item.costoUnitario}, {item.costoIVAUnitario}, {item.descuento}, {item.Cantidad}, {item.costoTotal})")
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_xmlTimbradosConceptos(XMLID, Nombre_Concepto, Clave_Concepto, ClaveUnidad, PrecioUnitario, IVA, Descuento, Cantidad, Total) VALUES ({IDXML}, '{item.NombreConcepto}', {1}, '{item.cveUnidad}', {item.costoUnitario}, {item.costoIVAUnitario}, {item.descuento}, {item.Cantidad}, {item.costoTotal})")
             Next
             db.execSQLQueryWithoutParams($"UPDATE ing_CatFolios SET Consecutivo = Consecutivo + 1 WHERE Usuario = '{User.getUsername()}'")
             MessageBox.Show("XML completado")
+            Dim descripcionCFDI As String = db.exectSQLQueryScalar($"select UPPER('(' + clave_usoCFDI + ')' + ' ' + descripcion) As Clave from ing_cat_usoCFDI WHERE clave_usoCFDI = '{UsoCFDI}'")
+            Dim QR As String = $"?re={EnviromentService.RFCEDC}&rr={RFCCLiente}id={folioFiscal}tt={Total}"
+            Me.gernerarQr(QR, $"{Serie}{Folio}")
             rep.AgregarFuente("FacturaEDC.rpt")
             rep.AgregarParametros("IDXML", IDXML)
             rep.AgregarParametros("CantidadLetra", TotalText)
+            rep.AgregarParametros("ClaveCliente", Matricula)
+            rep.AgregarParametros("usoCFDI", descripcionCFDI)
             rep.MostrarReporte()
             CobrosEDC.Reiniciar()
             db.commitTransaction()
@@ -295,4 +309,16 @@ Public Class CobrosController
         End Select
 
     End Function
+
+    Public Sub gernerarQr(QR As String, Nombre As String)
+
+        Try
+            Dim img As New Bitmap(QR_Generator.Encode(QR.ToString), New Size(220, 220))
+            img.Save($"\\{EnviromentService.serverIP}\ti\NEducacionContinua\QR\{Nombre}.png", Imaging.ImageFormat.Png)
+            Thread.Sleep(1500)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+    End Sub
 End Class

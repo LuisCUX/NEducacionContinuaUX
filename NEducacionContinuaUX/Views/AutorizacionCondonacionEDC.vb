@@ -25,9 +25,9 @@
         ElseIf (tipoMatricula = "UX") Then
             va.buscarMatriculaUX(Matricula, panelDatos, panelAutCon, txtNombre, txtEmail, txtCarrera, txtTurno)
         ElseIf (tipoMatricula = "EX") Then
-            va.buscarMatriculaEX(Matricula, panelDatos, panelAutCon, txtNombre, txtEmail, txtCarrera, txtTurno)
+            va.buscarMatriculaEX(Matricula, panelDatos, panelAutCon, txtNombre, txtEmail, txtCarrera, txtTurno, txtRFC)
         ElseIf (tipoMatricula = "EC") Then
-            va.buscarMatriculaEC(Matricula, panelDatos, panelAutCon, txtNombre, txtEmail, txtCarrera, txtTurno)
+            va.buscarMatriculaEC(Matricula, panelDatos, panelAutCon, txtNombre, txtEmail, txtCarrera, txtTurno, txtRFC)
         End If
         ac.ActualizarArbolAutorizacionCaja(treeAutorizacionCaja, Matricula, tipoMatricula)
     End Sub

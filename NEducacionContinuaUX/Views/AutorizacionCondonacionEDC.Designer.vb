@@ -65,11 +65,13 @@ Partial Class AutorizacionCondonacionEDC
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.treeAutorizacionCaja = New System.Windows.Forms.TreeView()
         Me.tabAutorizacionProceso = New System.Windows.Forms.TabPage()
-        Me.TreeView1 = New System.Windows.Forms.TreeView()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.TreeView1 = New System.Windows.Forms.TreeView()
+        Me.lblRFC = New System.Windows.Forms.Label()
+        Me.txtRFC = New System.Windows.Forms.TextBox()
         Me.panelBusqueda.SuspendLayout()
         Me.panelDatos.SuspendLayout()
         Me.panelAutCon.SuspendLayout()
@@ -211,6 +213,8 @@ Partial Class AutorizacionCondonacionEDC
         '
         'panelDatos
         '
+        Me.panelDatos.Controls.Add(Me.lblRFC)
+        Me.panelDatos.Controls.Add(Me.txtRFC)
         Me.panelDatos.Controls.Add(Me.txtMatriculaDato)
         Me.panelDatos.Controls.Add(Me.lblMatriculaDato)
         Me.panelDatos.Controls.Add(Me.lblTurno)
@@ -252,7 +256,7 @@ Partial Class AutorizacionCondonacionEDC
         Me.lblTurno.AutoSize = True
         Me.lblTurno.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTurno.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblTurno.Location = New System.Drawing.Point(694, 31)
+        Me.lblTurno.Location = New System.Drawing.Point(674, 31)
         Me.lblTurno.Name = "lblTurno"
         Me.lblTurno.Size = New System.Drawing.Size(42, 15)
         Me.lblTurno.TabIndex = 23
@@ -273,18 +277,18 @@ Partial Class AutorizacionCondonacionEDC
         '
         Me.txtEmail.Enabled = False
         Me.txtEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtEmail.Location = New System.Drawing.Point(764, 6)
+        Me.txtEmail.Location = New System.Drawing.Point(722, 6)
         Me.txtEmail.Name = "txtEmail"
-        Me.txtEmail.Size = New System.Drawing.Size(392, 21)
+        Me.txtEmail.Size = New System.Drawing.Size(440, 21)
         Me.txtEmail.TabIndex = 20
         '
         'txtTurno
         '
         Me.txtTurno.Enabled = False
         Me.txtTurno.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTurno.Location = New System.Drawing.Point(764, 28)
+        Me.txtTurno.Location = New System.Drawing.Point(722, 28)
         Me.txtTurno.Name = "txtTurno"
-        Me.txtTurno.Size = New System.Drawing.Size(392, 21)
+        Me.txtTurno.Size = New System.Drawing.Size(181, 21)
         Me.txtTurno.TabIndex = 24
         '
         'txtCarrera
@@ -310,7 +314,7 @@ Partial Class AutorizacionCondonacionEDC
         Me.lblEmail.AutoSize = True
         Me.lblEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEmail.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblEmail.Location = New System.Drawing.Point(694, 9)
+        Me.lblEmail.Location = New System.Drawing.Point(674, 9)
         Me.lblEmail.Name = "lblEmail"
         Me.lblEmail.Size = New System.Drawing.Size(42, 15)
         Me.lblEmail.TabIndex = 19
@@ -511,16 +515,16 @@ Partial Class AutorizacionCondonacionEDC
         Me.tabAutorizacionProceso.TabIndex = 2
         Me.tabAutorizacionProceso.Text = "Autorizacion de Proceso"
         '
-        'TreeView1
+        'Button1
         '
-        Me.TreeView1.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.TreeView1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TreeView1.ForeColor = System.Drawing.SystemColors.Control
-        Me.TreeView1.Location = New System.Drawing.Point(16, 15)
-        Me.TreeView1.Name = "TreeView1"
-        Me.TreeView1.Size = New System.Drawing.Size(568, 411)
-        Me.TreeView1.StateImageList = Me.ImageListTree
-        Me.TreeView1.TabIndex = 11
+        Me.Button1.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.descargar
+        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(1083, 373)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(72, 53)
+        Me.Button1.TabIndex = 18
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'DataGridView1
         '
@@ -544,16 +548,36 @@ Partial Class AutorizacionCondonacionEDC
         Me.DataGridViewTextBoxColumn4.HeaderText = "Concepto"
         Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
         '
-        'Button1
+        'TreeView1
         '
-        Me.Button1.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.descargar
-        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(1083, 373)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(72, 53)
-        Me.Button1.TabIndex = 18
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.TreeView1.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.TreeView1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TreeView1.ForeColor = System.Drawing.SystemColors.Control
+        Me.TreeView1.Location = New System.Drawing.Point(16, 15)
+        Me.TreeView1.Name = "TreeView1"
+        Me.TreeView1.Size = New System.Drawing.Size(568, 411)
+        Me.TreeView1.StateImageList = Me.ImageListTree
+        Me.TreeView1.TabIndex = 11
+        '
+        'lblRFC
+        '
+        Me.lblRFC.AutoSize = True
+        Me.lblRFC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRFC.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblRFC.Location = New System.Drawing.Point(909, 31)
+        Me.lblRFC.Name = "lblRFC"
+        Me.lblRFC.Size = New System.Drawing.Size(34, 15)
+        Me.lblRFC.TabIndex = 27
+        Me.lblRFC.Text = "RFC:"
+        '
+        'txtRFC
+        '
+        Me.txtRFC.Enabled = False
+        Me.txtRFC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRFC.Location = New System.Drawing.Point(957, 28)
+        Me.txtRFC.Name = "txtRFC"
+        Me.txtRFC.Size = New System.Drawing.Size(205, 21)
+        Me.txtRFC.TabIndex = 28
         '
         'AutorizacionCondonacionEDC
         '
@@ -632,4 +656,6 @@ Partial Class AutorizacionCondonacionEDC
     Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
     Friend WithEvents TreeView1 As TreeView
+    Friend WithEvents lblRFC As Label
+    Friend WithEvents txtRFC As TextBox
 End Class

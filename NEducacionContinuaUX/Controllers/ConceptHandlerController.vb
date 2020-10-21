@@ -89,7 +89,7 @@
         ElseIf (claveConcepto = "DIN") Then
             Dim Costo As Decimal
             Dim Descuento As Decimal
-            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, CON.clave_servicio, C.Importe, C.Descuento FROM ing_AsignacionCargosPlanes AS AC 
+            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, CON.clave_servicio, C.Importe, C.Descuento, C.Fecha_Limite_Desc FROM ing_AsignacionCargosPlanes AS AC 
                                                                       INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
                                                                       INNER JOIN ing_Planes AS PL ON PL.ID = C.ID_Plan
                                                                       INNER JOIN portal_congreso AS CON ON CON.id_congreso = PL.ID_Congreso
@@ -102,7 +102,11 @@
                 concep.cveClase = item("clave_servicio")
                 concep.cveUnidad = "E48"
                 concep.costoUnitario = item("Importe")
-                concep.descuento = item("Descuento")
+                If (item("Fecha_Limite_Desc") < Date.Today) Then
+                    concep.descuento = 0.00
+                Else
+                    concep.descuento = item("Descuento")
+                End If
                 concep.absorbeIVA = True
                 concep.consideraIVA = False
                 concep.IVAExento = False
@@ -124,7 +128,11 @@
                 concep.cveClase = item("clave_servicio")
                 concep.cveUnidad = "E48"
                 concep.costoUnitario = item("Importe")
-                concep.descuento = item("Descuento")
+                If (item("Fecha_Limite_Desc") < Date.Today) Then
+                    concep.descuento = 0.00
+                Else
+                    concep.descuento = item("Descuento")
+                End If
                 concep.absorbeIVA = True
                 concep.consideraIVA = False
                 concep.IVAExento = False
@@ -133,7 +141,7 @@
         ElseIf (claveConcepto = "DPU") Then
             Dim Costo As Decimal
             Dim Descuento As Decimal
-            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, CON.clave_servicio, C.Importe, C.Descuento FROM ing_AsignacionCargosPlanes AS AC 
+            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, CON.clave_servicio, C.Importe, C.Descuento, C.Fecha_Limite_Desc FROM ing_AsignacionCargosPlanes AS AC 
                                                                       INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
                                                                       INNER JOIN ing_Planes AS PL ON PL.ID = C.ID_Plan
                                                                       INNER JOIN portal_congreso AS CON ON CON.id_congreso = PL.ID_Congreso
@@ -146,7 +154,11 @@
                 concep.cveClase = item("clave_servicio")
                 concep.cveUnidad = "E48"
                 concep.costoUnitario = item("Importe")
-                concep.descuento = item("Descuento")
+                If (item("Fecha_Limite_Desc") < Date.Today) Then
+                    concep.descuento = 0.00
+                Else
+                    concep.descuento = item("Descuento")
+                End If
                 concep.absorbeIVA = True
                 concep.consideraIVA = False
                 concep.IVAExento = False

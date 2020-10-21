@@ -6,7 +6,7 @@
         cbEspecificacionRecargos.Items.Add("Bimestral")
         cbEspecificacionRecargos.Items.Add("Semestral")
 
-        Dim tableDiplomados As DataTable = db.getDataTableFromSQL($"SELECT id_congreso, nombre FROM portal_congreso WHERE tipo_congreso = 1")
+        Dim tableDiplomados As DataTable = db.getDataTableFromSQL($"SELECT id_congreso, nombre FROM portal_congreso WHERE id_tipo_evento = 1")
         ComboboxService.llenarCombobox(cbDiplomados, tableDiplomados, "id_congreso", "nombre")
 
         cbNoPagos.Items.Clear()

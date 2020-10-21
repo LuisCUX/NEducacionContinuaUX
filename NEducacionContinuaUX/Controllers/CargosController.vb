@@ -77,12 +77,18 @@
     End Sub
 
     Sub buscarInscripcionesDiplomados(Tree As TreeView, Matricula As String, TipoMatricula As String, Tipo As String)
-        Dim tableInscripciones As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, C.Importe, CP.Clave FROM ing_AsignacionCargosPlanes AS AC 
+        Dim tableInscripciones As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, C.Importe, CP.Clave, C.Descuento, C.Fecha_Limite_Desc FROM ing_AsignacionCargosPlanes AS AC 
                                                                       INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
                                                                       INNER JOIN ing_CatClavesPagos AS CP ON CP.ID = 6
                                                                       WHERE AC.Matricula = '{Matricula}' AND C.Clave = 'P00' AND AC.Activo = 1")
+        Dim descuento As String
         For Each item As DataRow In tableInscripciones.Rows
-            Dim result As String = $"[{item("ID")}]|({item("Clave")})|{item("Descripcion")}|{item("Importe")}|{1}|Total: {Me.calcularTotal(item("Importe"), 1, True, False, False)}"
+            If (item("Fecha_Limite_Desc") < Date.Today) Then
+                descuento = Format(CDec(0.00), "#####0.00")
+            Else
+                descuento = Format(CDec(item("Descuento")), "#####0.00")
+            End If
+            Dim result As String = $"[{item("ID")}]|({item("Clave")})|{item("Descripcion")}|{item("Importe")}|{1}|DESCUENTO: {descuento}|Total: {Me.calcularTotal(item("Importe"), 1, True, False, False)}"
             If (Tipo = "Cobros") Then
                 Tree.Nodes(2).Nodes.Add(result).StateImageIndex = 0
                 Tree.Nodes(2).Expand()
@@ -91,12 +97,18 @@
     End Sub
 
     Sub buscarColegiaturas(Tree As TreeView, Matricula As String, TipoMatricula As String, Tipo As String)
-        Dim tableColegiaturas As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, C.Importe, CP.Clave FROM ing_AsignacionCargosPlanes AS AC 
+        Dim tableColegiaturas As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, C.Importe, CP.Clave, C.Descuento, C.Fecha_Limite_Desc FROM ing_AsignacionCargosPlanes AS AC 
                                                                       INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
                                                                       INNER JOIN ing_CatClavesPagos AS CP ON CP.ID = 4
                                                                       WHERE AC.Matricula = '{Matricula}' AND C.Clave != 'P00' AND C.Clave != 'P13' AND AC.Activo = 1")
+        Dim descuento As String
         For Each item As DataRow In tableColegiaturas.Rows
-            Dim result As String = $"[{item("ID")}]|({item("Clave")})|{item("Descripcion")}|{item("Importe")}|{1}|Total: {Me.calcularTotal(item("Importe"), 1, True, False, False)}"
+            If (item("Fecha_Limite_Desc") < Date.Today) Then
+                descuento = Format(CDec(0.00), "#####0.00")
+            Else
+                descuento = Format(CDec(item("Descuento")), "#####0.00")
+            End If
+            Dim result As String = $"[{item("ID")}]|({item("Clave")})|{item("Descripcion")}|{item("Importe")}|{1}|DESCUENTO: {descuento}|Total: {Me.calcularTotal(item("Importe"), 1, True, False, False)}"
             If (Tipo = "Cobros") Then
                 Tree.Nodes(3).Nodes.Add(result).StateImageIndex = 0
                 Tree.Nodes(3).Expand()
@@ -105,15 +117,25 @@
     End Sub
 
     Sub buscarPagoUnicoDiplomados(Tree As TreeView, Matricula As String, TipoMatricula As String, Tipo As String)
-        Dim tablePagoUnico As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, C.Importe, CP.Clave FROM ing_AsignacionCargosPlanes AS AC 
+        Dim tablePagoUnico As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, C.Importe, CP.Clave, C.Fecha_Limite_Pago, C.Descuento, C.Fecha_Limite_Desc FROM ing_AsignacionCargosPlanes AS AC 
                                                                       INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
                                                                       INNER JOIN ing_CatClavesPagos AS CP ON CP.ID = 5
                                                                       WHERE AC.Matricula = '{Matricula}' AND C.Clave = 'P13' AND AC.Activo = 1")
+        Dim descuento As String
         For Each item As DataRow In tablePagoUnico.Rows
-            Dim result As String = $"[{item("ID")}]|({item("Clave")})|{item("Descripcion")}|{item("Importe")}|{1}|Total: {Me.calcularTotal(item("Importe"), 1, False, False, False)}"
-            If (Tipo = "Cobros") Then
-                Tree.Nodes(4).Nodes.Add(result).StateImageIndex = 0
-                Tree.Nodes(4).Expand()
+            If (item("Fecha_Limite_Desc") < Date.Today) Then
+                descuento = Format(CDec(0.00), "#####0.00")
+            Else
+                descuento = Format(CDec(item("Descuento")), "#####0.00")
+            End If
+            If (item("Fecha_Limite_Pago") >= Date.Today) Then
+                Dim result As String = $"[{item("ID")}]|({item("Clave")})|{item("Descripcion")}|{item("Importe")}|{1}|DESCUENTO: {descuento}|Total: {Me.calcularTotal(item("Importe"), 1, False, False, False)}"
+                If (Tipo = "Cobros") Then
+                    Tree.Nodes(4).Nodes.Add(result).StateImageIndex = 0
+                    Tree.Nodes(4).Expand()
+                End If
+            Else
+
             End If
         Next
     End Sub

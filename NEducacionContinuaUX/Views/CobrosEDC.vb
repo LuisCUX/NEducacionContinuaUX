@@ -24,9 +24,9 @@
         ElseIf (tipoMatricula = "UX") Then
             va.buscarMatriculaUX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno)
         ElseIf (tipoMatricula = "EX") Then
-            va.buscarMatriculaEX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno)
+            va.buscarMatriculaEX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno, txtRFC)
         ElseIf (tipoMatricula = "EC") Then
-            va.buscarMatriculaEC(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno)
+            va.buscarMatriculaEC(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno, txtRFC)
         End If
         ca.buscarPagosOpcionales(Tree, Matricula, tipoMatricula, "Cobros")
         ca.buscarCongresos(Tree, Matricula, tipoMatricula, "Cobros")
@@ -41,6 +41,102 @@
         Tree.Nodes(4).Expand()
         Tree.Nodes(5).Expand()
     End Sub
+
+    Private Sub cbFormaPago_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbFormaPago.SelectionChangeCommitted
+        If (cbFormaPago.Text = "EFECTIVO") Then ''EFECTIVO
+            lblBanco.Visible = False
+            lblTIpoBanco.Visible = False
+            lblFecha.Visible = False
+            lblUltimosDigitos.Visible = False
+            lblNoCuenta.Visible = false
+            lblNoCheque.Visible = False
+            cbBanco.Visible = False
+            cbTipoBanco.Visible = False
+            DTPickerFecha.Visible = False
+            txtNoCuenta.Visible = False
+            txtUltimos4Digitos.Visible = False
+            txtNoCheque.Visible = False
+        ElseIf (cbFormaPago.Text = "TARJETA DE CREDITO" Or cbFormaPago.Text = "TARJETA DE DEBITO") Then ''TARJETA DE CREDITO O DEBITO
+            lblBanco.Visible = True
+            lblTIpoBanco.Visible = True
+            lblFecha.Visible = False
+            lblUltimosDigitos.Visible = True
+            lblNoCuenta.Visible = False
+            lblNoCheque.Visible = False
+            cbBanco.Visible = True
+            cbTipoBanco.Visible = True
+            DTPickerFecha.Visible = False
+            txtUltimos4Digitos.Visible = True
+            txtNoCheque.Visible = False
+            txtNoCuenta.Visible = False
+        ElseIf (cbFormaPago.Text = "CHEQUE") Then ''CHEQUE
+            lblBanco.Visible = True
+            lblTIpoBanco.Visible = False
+            lblFecha.Visible = False
+            lblUltimosDigitos.Visible = False
+            lblNoCuenta.Visible = True
+            lblNoCheque.Visible = True
+            cbBanco.Visible = True
+            cbTipoBanco.Visible = False
+            DTPickerFecha.Visible = False
+            txtUltimos4Digitos.Visible = False
+            txtNoCheque.Visible = True
+            txtNoCuenta.Visible = True
+        ElseIf (cbFormaPago.Text = "TRANSFERENCIA") Then ''TRANSFERENCIA
+            lblBanco.Visible = True
+            lblTIpoBanco.Visible = False
+            lblFecha.Visible = True
+            lblUltimosDigitos.Visible = False
+            lblNoCuenta.Visible = False
+            lblNoCheque.Visible = False
+            cbBanco.Visible = True
+            cbTipoBanco.Visible = False
+            DTPickerFecha.Visible = True
+            txtUltimos4Digitos.Visible = False
+            txtNoCheque.Visible = False
+            txtNoCuenta.Visible = False
+        ElseIf (cbFormaPago.Text = "DEPOSITO BANCARIO C/COMPROBANTE" Or cbFormaPago.Text = "DEPOSITO BANCARIO EDO CTA") Then ''DEPOSITO BANCARIO C/COMPROBANTE
+            lblBanco.Visible = True
+            lblTIpoBanco.Visible = True
+            lblFecha.Visible = True
+            lblUltimosDigitos.Visible = False
+            lblNoCuenta.Visible = False
+            lblNoCheque.Visible = False
+            cbBanco.Visible = True
+            cbTipoBanco.Visible = True
+            DTPickerFecha.Visible = True
+            txtUltimos4Digitos.Visible = False
+            txtNoCheque.Visible = False
+            txtNoCuenta.Visible = False
+        ElseIf (cbFormaPago.Text = "CREDITO") Then ''CREDITO
+            lblBanco.Visible = False
+            lblTIpoBanco.Visible = False
+            lblFecha.Visible = False
+            lblUltimosDigitos.Visible = False
+            lblNoCuenta.Visible = False
+            lblNoCheque.Visible = False
+            cbBanco.Visible = False
+            cbTipoBanco.Visible = False
+            DTPickerFecha.Visible = False
+            txtUltimos4Digitos.Visible = False
+            txtNoCheque.Visible = False
+            txtNoCuenta.Visible = False
+        ElseIf (cbFormaPago.Text = "NOTA DE CREDITO") Then ''NOTA DE CREDITO
+            lblBanco.Visible = False
+            lblTIpoBanco.Visible = False
+            lblFecha.Visible = False
+            lblUltimosDigitos.Visible = False
+            lblNoCuenta.Visible = False
+            lblNoCheque.Visible = False
+            cbBanco.Visible = False
+            cbTipoBanco.Visible = False
+            DTPickerFecha.Visible = False
+            txtUltimos4Digitos.Visible = False
+            txtNoCheque.Visible = False
+            txtNoCuenta.Visible = False
+        End If
+    End Sub
+
 
     Sub Reiniciar()
         Me.Controls.Clear()
@@ -233,7 +329,7 @@
             MessageBox.Show("Ingrese al menos un concepto para poder cobrar")
             Return
         End If
-        co.Cobrar(ch.getListaConceptos(), cbFormaPago.SelectedValue, Matricula)
+        co.Cobrar(ch.getListaConceptos(), cbFormaPago.SelectedValue, Matricula, txtRFC.Text, txtNombre.Text)
     End Sub
 
     Private Sub rbExterno_CheckedChanged(sender As Object, e As EventArgs) Handles rbExterno.CheckedChanged
@@ -313,4 +409,5 @@
         lblTotal.Text = ""
         ch.limpiarListaConceptos()
     End Sub
+
 End Class

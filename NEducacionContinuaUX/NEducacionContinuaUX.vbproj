@@ -93,6 +93,9 @@
       <HintPath>bin\Interop.CrystalReportViewerExportLib.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="MessagingToolkit.QRCode">
+      <HintPath>bin\MessagingToolkit.QRCode.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
