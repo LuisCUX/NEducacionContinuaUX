@@ -11,6 +11,7 @@ Public Class CobrosController
     Dim xml As XmlService = New XmlService()
     Dim st As SelladoTimbradoService = New SelladoTimbradoService()
     Dim rep As ImpresionReportesService = New ImpresionReportesService()
+    Dim abono As Boolean = False
     Public QR_Generator As New MessagingToolkit.QRCode.Codec.QRCodeEncoder
 
     ''----------------------------------------------------------------------------------------------------------------------------------------
@@ -70,51 +71,45 @@ Public Class CobrosController
         db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionCargosPlanes SET Activo = 0 WHERE Matricula = '{Matricula}' AND ID_ClaveConcepto = 6")
     End Sub
 
+    Sub cobrarRecargoDiplomado(concepto As Concepto, Matricula As String, Folio As String, formaPago As String)
+        db.execSQLQueryWithoutParams($"UPDATE ing_PlanesRecargos SET Activo = 0, Folio = '{Folio}' WHERE ID = {concepto.IDConcepto}")
+    End Sub
+
     ''----------------------------------------------------------------------------------------------------------------------------------------
     ''---------------------------------------------------------COBRA PAGO YA VALIDADO---------------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
-    Sub Cobrar(listaConceptos As List(Of Concepto), formaPago As String, Matricula As String, RFCCLiente As String, NombreCLiente As String)
-        ''---------------------------------------------------------REGISTRO DE COBRO/S EN BASE DE DATOS---------------------------------------------------------
-        Dim folioPago As String = Me.obtenerFolio()
+    Function Cobrar(listaConceptos As List(Of Concepto), formaPago As String, Matricula As String, RFCCLiente As String, NombreCLiente As String, montoTotal As Decimal, Credito As Boolean) As Integer
+        Dim folioPago As String = Me.obtenerFolio("Pago")
         Try
             db.startTransaction()
-            For Each concepto As Concepto In listaConceptos
-                If (concepto.claveConcepto = "POA") Then
-                    Me.cobrarPagoOpcionalAlumno(concepto, Matricula, folioPago)
-                ElseIf (concepto.claveConcepto = "POE") Then
-                    Me.cobrarPagoOpcionalExterno(concepto, Matricula, folioPago)
-                ElseIf (concepto.claveConcepto = "CON") Then
-                    Me.cobrarCongreso(concepto, Matricula, folioPago, formaPago)
-                ElseIf (concepto.claveConcepto = "DCO") Then
-                    Me.cobrarColegiaturaDiplomado(concepto, Matricula, folioPago, formaPago)
-                ElseIf (concepto.claveConcepto = "DIN") Then
-                    Me.cobrarInscripcionDiplomado(concepto, Matricula, folioPago, formaPago)
-                ElseIf (concepto.claveConcepto = "DPU") Then
-                    Me.cobrarPagoUnicoDiplomado(concepto, Matricula, folioPago, formaPago)
-                End If
-            Next
+            '---------------------------------------------------------IDENTIFICA ABONO---------------------------------------------------------
 
             ''---------------------------------------------------------CALCULO DE TOTALES---------------------------------------------------------
             Dim Certificado As String = ConfigurationSettings.AppSettings.Get("developmentCertificadoContent").ToString()
             Dim NoCertificado As String = ConfigurationSettings.AppSettings.Get("developmentCertificado").ToString()
 
+            ''-----CALCULA SUBTOTAL-----''
             Dim subtotalSuma As Decimal
             For Each concepto As Concepto In listaConceptos
                 subtotalSuma = subtotalSuma + CDec(concepto.costoTotal)
             Next
             Dim SubTotal As String = subtotalSuma.ToString()
 
+            ''-----CALCULA TOTAL-----''
             Dim totalSuma As Decimal
             For Each concepto As Concepto In listaConceptos
                 totalSuma = totalSuma + CDec(concepto.costoFinal)
             Next
             Dim Total As String = totalSuma.ToString()
+
+            ''-----CALCULA TOTAL IVA-----''
             Dim totalIVASuma As Decimal
             For Each concepto As Concepto In listaConceptos
                 totalIVASuma = totalIVASuma + CDec(concepto.costoIVATotal)
             Next
             Dim totalIVA As String = totalIVASuma.ToString()
 
+            ''-----CALCUOA DECUENTO-----''
             Dim Descuento As Decimal
             For Each concepto As Concepto In listaConceptos
                 Descuento = Descuento + CDec(concepto.descuento)
@@ -128,6 +123,9 @@ Public Class CobrosController
             totalIVA = ch.getFormat(totalIVA)
             DescuentoS = ch.getFormat(DescuentoS)
             Total = ((CDec(SubTotal) - CDec(Descuento)) + CDec(totalIVA))
+
+
+
             Dim TotalText As String
             Dim valores As String()
             If (InStr(Total, ".")) Then
@@ -137,13 +135,33 @@ Public Class CobrosController
                 TotalText = $"{Me.Num2Text(Total)} PESOS"
             End If
             Dim Fecha As String = db.exectSQLQueryScalar("select STUFF(CONVERT(VARCHAR(50),GETDATE(), 127) ,20,4,'') as fecha")
-            MessageBox.Show(Fecha)
+
+            ''---------------------------------------------------------REGISTRO DE COBRO/S EN BASE DE DATOS---------------------------------------------------------
+            For Each concepto As Concepto In listaConceptos
+                If (concepto.Abonado = False) Then
+                    If (concepto.claveConcepto = "POA") Then
+                        Me.cobrarPagoOpcionalAlumno(concepto, Matricula, folioPago)
+                    ElseIf (concepto.claveConcepto = "POE") Then
+                        Me.cobrarPagoOpcionalExterno(concepto, Matricula, folioPago)
+                    ElseIf (concepto.claveConcepto = "CON") Then
+                        Me.cobrarCongreso(concepto, Matricula, folioPago, formaPago)
+                    ElseIf (concepto.claveConcepto = "DCO") Then
+                        Me.cobrarColegiaturaDiplomado(concepto, Matricula, folioPago, formaPago)
+                    ElseIf (concepto.claveConcepto = "DIN") Then
+                        Me.cobrarInscripcionDiplomado(concepto, Matricula, folioPago, formaPago)
+                    ElseIf (concepto.claveConcepto = "DPU") Then
+                        Me.cobrarPagoUnicoDiplomado(concepto, Matricula, folioPago, formaPago)
+                    ElseIf (concepto.claveConcepto = "REC") Then
+                        Me.cobrarRecargoDiplomado(concepto, Matricula, $"{Serie}{Folio}", formaPago)
+                    End If
+                End If
+            Next
 
             ''---------------------------------------------------------TIMBRADO---------------------------------------------------------
-            Dim cadena = xml.cadenaPrueba(Serie, Folio, Fecha, formaPago, NoCertificado, SubTotal, DescuentoS, Total, listaConceptos, totalIVA, RFCCLiente, NombreCLiente)
+            Dim cadena = xml.cadenaPrueba(Serie, Folio, Fecha, formaPago, NoCertificado, SubTotal, DescuentoS, Total, listaConceptos, totalIVA, RFCCLiente, NombreCLiente, Credito)
             ''Dim sello As String = st.Sellado("C:\Users\darkz\Desktop\pfx\uxa_pfx33.pfx", "12345678a", cadena)
             Dim sello As String = st.Sellado("C:\Users\Luis\Desktop\pfx\uxa_pfx33.pfx", "12345678a", cadena)
-            Dim xmlString As String = xml.xmlPrueba(Total, SubTotal, DescuentoS, totalIVA, Fecha, sello, Certificado, NoCertificado, formaPago, Folio, Serie, UsoCFDI, listaConceptos, RFCCLiente, NombreCLiente)
+            Dim xmlString As String = xml.xmlPrueba(Total, SubTotal, DescuentoS, totalIVA, Fecha, sello, Certificado, NoCertificado, formaPago, Folio, Serie, UsoCFDI, listaConceptos, RFCCLiente, NombreCLiente, Credito)
             xmlString = xmlString.Replace("utf-16", "UTF-8")
             Dim xmlTimbrado As String = st.Timbrado(xmlString, Folio)
             Dim folioFiscal As String = Me.Extrae_Cadena(xmlTimbrado, "UUID=", " FechaTimbrado")
@@ -153,11 +171,15 @@ Public Class CobrosController
             ''File.WriteAllText("C:\Users\darkz\Desktop\wea.xml", xmlTimbrado)
 
             ''---------------------------------------------------------GENERACION DE FACTURA---------------------------------------------------------
+            db.execSQLQueryWithoutParams($"INSERT INTO ing_Creditos(Matricula, Folio, FolioFiscal, Cantidad, Cantidad_Abonada, NumAbonos, Fecha, Activo) VALUES ('{Matricula}', '{folioPago}', '{folioFiscal}', {montoTotal}, 0, 0, GETDATE(), 1)")
             Dim IDXML As Integer = db.insertAndGetIDInserted($"INSERT INTO ing_xmlTimbrados(Matricula_Clave, Folio, FolioFiscal, Certificado, XMLTimbrado, fac_Cadena, fac_Sello, Tipo_Pago, Forma_Pago, Fecha_Pago, Cajero, RegimenFiscal, Subtotal, Descuento, IVA, Total, usoCFDI) VALUES ('{Matricula}', '{Serie}{Folio}', '{folioFiscal}', '{NoCertificado}', '{xmlTimbrado}', '{cadena}', '{sello}', '', '{formaPago}', '{Fecha}', '{User.getUsername}', 'GENERAL DE LEY(603)', {SubTotal}, {DescuentoS}, {totalIVA}, {Total}, '{UsoCFDI}')")
             For Each item As Concepto In listaConceptos
-                db.execSQLQueryWithoutParams($"INSERT INTO ing_xmlTimbradosConceptos(XMLID, Nombre_Concepto, Clave_Concepto, ClaveUnidad, PrecioUnitario, IVA, Descuento, Cantidad, Total) VALUES ({IDXML}, '{item.NombreConcepto}', {1}, '{item.cveUnidad}', {item.costoUnitario}, {item.costoIVAUnitario}, {item.descuento}, {item.Cantidad}, {item.costoTotal})")
+                Dim IDClave As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatClavesPagos WHERE Clave = '{item.claveConcepto}'")
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_xmlTimbradosConceptos(Clave_Cliente, XMLID, Nombre_Concepto, IDConcepto, Clave_Concepto, ClaveUnidad, PrecioUnitario, IVA, Descuento, Cantidad, Total) VALUES ('{item.Matricula}', {IDXML}, '{item.NombreConcepto}', {item.IDConcepto}, {IDClave}, '{item.cveUnidad}', {item.costoUnitario}, {item.costoIVAUnitario}, {item.descuento}, {item.Cantidad}, {item.costoTotal})")
             Next
             db.execSQLQueryWithoutParams($"UPDATE ing_CatFolios SET Consecutivo = Consecutivo + 1 WHERE Usuario = '{User.getUsername()}'")
+
+
             MessageBox.Show("XML completado")
             Dim descripcionCFDI As String = db.exectSQLQueryScalar($"select UPPER('(' + clave_usoCFDI + ')' + ' ' + descripcion) As Clave from ing_cat_usoCFDI WHERE clave_usoCFDI = '{UsoCFDI}'")
             Dim QR As String = $"?re={EnviromentService.RFCEDC}&rr={RFCCLiente}id={folioFiscal}tt={Total}"
@@ -168,16 +190,15 @@ Public Class CobrosController
             rep.AgregarParametros("ClaveCliente", Matricula)
             rep.AgregarParametros("usoCFDI", descripcionCFDI)
             rep.MostrarReporte()
-            CobrosEDC.Reiniciar()
             db.commitTransaction()
+            Return IDXML
         Catch ex As Exception
             db.rollBackTransaction()
             MessageBox.Show(ex.Message)
             CobrosEDC.Reiniciar()
         End Try
 
-    End Sub
-
+    End Function
 
     ''----------------------------------------------------------------------------------------------------------------------------------------
     ''--------------------------------------------------------CALCULA TOTAL A PAGAR-----------------------------------------------------------
@@ -215,9 +236,17 @@ Public Class CobrosController
     ''----------------------------------------------------------------------------------------------------------------------------------------
     ''--------------------------------------------------------OBTIENE FOLIO DE PAGO-----------------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
-    Public Function obtenerFolio() As String
-        Dim Serie As String = db.exectSQLQueryScalar($"SELECT Folio FROM ing_CatFolios WHERE Usuario = '{User.getUsername()}' AND Descripcion = 'ING'")
-        Dim Consecutivo As Integer = db.exectSQLQueryScalar($"SELECT Consecutivo + 1 FROM ing_CatFolios WHERE Usuario = '{User.getUsername()}' AND Descripcion = 'ING'")
+    Public Function obtenerFolio(Tipo As String) As String
+        Dim Serie As String
+        Dim Consecutivo As Integer
+        If (Tipo = "Pago") Then
+            Serie = db.exectSQLQueryScalar($"SELECT Folio FROM ing_CatFolios WHERE Usuario = '{User.getUsername()}' AND Descripcion = 'ING'")
+            Consecutivo = db.exectSQLQueryScalar($"SELECT Consecutivo + 1 FROM ing_CatFolios WHERE Usuario = '{User.getUsername()}' AND Descripcion = 'ING'")
+        ElseIf (Tipo = "Abono") Then
+            Serie = db.exectSQLQueryScalar($"SELECT Folio FROM ing_CatFolios WHERE Usuario = 'Abonos' AND Descripcion = 'ABONOS'")
+            Consecutivo = db.exectSQLQueryScalar($"SELECT Consecutivo + 1 FROM ing_CatFolios WHERE Usuario = 'Abonos' AND Descripcion = 'ABONOS'")
+        End If
+
         Dim ConsecutivoStr As String
         If (Consecutivo > 0 And Consecutivo < 10) Then
             ConsecutivoStr = $"00000{Consecutivo}"
@@ -321,4 +350,246 @@ Public Class CobrosController
         End Try
 
     End Sub
+    ''----------------------------------------------------------------------------------------------------------------------------------------
+    ''----------------------------------------------------CALCULA NUEVO COSTO CON ABONO-------------------------------------------------------
+    ''----------------------------------------------------------------------------------------------------------------------------------------
+    Sub recalcularCostoAbono(concepto As Concepto, montoAbono As Decimal, tipoPago As Integer)
+        If (concepto.absorbeIVA = True And concepto.IVAExento = False And concepto.consideraIVA = False) Then ''---ABSORBE IVA
+            Dim costoSinIVA As Decimal = montoAbono / 1.16
+            Dim costoIVA As Decimal = montoAbono - costoSinIVA
+            Dim descuento As Decimal = concepto.descuento
+
+            concepto.costoBase = costoSinIVA
+            concepto.costoUnitario = costoSinIVA
+            concepto.costoTotal = costoSinIVA * concepto.Cantidad
+            concepto.costoIVATotal = costoIVA * concepto.Cantidad
+            concepto.costoIVAUnitario = costoIVA
+            concepto.descuento = 0.00000000
+            concepto.costoFinal = costoSinIVA * concepto.Cantidad
+            If (tipoPago = 2) Then
+                concepto.costoBase = costoSinIVA
+                concepto.costoUnitario = costoSinIVA + descuento
+                concepto.costoTotal = costoSinIVA + descuento
+                concepto.descuento = descuento
+            End If
+            ch.formatoPrecios(concepto)
+        ElseIf (concepto.absorbeIVA = False And concepto.IVAExento = False And concepto.consideraIVA = True) Then ''---AGREGA IVA
+            Dim costoSinIVA As Decimal = montoAbono / 1.16
+            Dim costoIVA As Decimal = montoAbono - costoSinIVA
+            Dim descuento As Decimal = concepto.descuento
+
+            concepto.costoBase = costoSinIVA
+            concepto.costoUnitario = costoSinIVA
+            concepto.costoTotal = costoSinIVA * concepto.Cantidad
+            concepto.costoIVATotal = costoIVA * concepto.Cantidad
+            concepto.costoIVAUnitario = costoIVA
+            concepto.descuento = 0.00000000
+            concepto.costoFinal = costoSinIVA * concepto.Cantidad
+            If (tipoPago = 2) Then
+                concepto.costoBase = costoSinIVA
+                concepto.costoUnitario = costoSinIVA + descuento
+                concepto.costoTotal = (costoSinIVA + descuento) * concepto.Cantidad
+                concepto.descuento = descuento
+            End If
+            ch.formatoPrecios(concepto)
+        ElseIf ((concepto.absorbeIVA = False And concepto.IVAExento = True And concepto.consideraIVA = False) Or (concepto.absorbeIVA = False And concepto.IVAExento = False And concepto.consideraIVA = False)) Then ''---IVA EXENTO
+            Dim descuento As Decimal = concepto.descuento
+            concepto.costoBase = montoAbono
+            concepto.costoUnitario = montoAbono
+            concepto.costoTotal = montoAbono
+            concepto.descuento = 0.00000000
+            concepto.costoFinal = montoAbono
+            If (tipoPago = 2) Then
+                concepto.costoBase = montoAbono
+                concepto.costoUnitario = montoAbono + descuento
+                concepto.costoTotal = montoAbono + descuento
+                concepto.costoFinal = montoAbono + descuento
+                concepto.descuento = descuento
+            End If
+            ch.formatoPrecios(concepto)
+        End If
+    End Sub
+
+    ''----------------------------------------------------------------------------------------------------------------------------------------
+    ''---------------------------------------------------REORGANIZA LISTA DE PAGOS CON ABONO--------------------------------------------------
+    ''----------------------------------------------------------------------------------------------------------------------------------------
+    Function calcularAbonos(listaConceptos As List(Of Concepto), montoIngresado As Decimal, montoTotal As Decimal, Matricula As String) As List(Of Concepto)
+        Dim montoRestante = montoIngresado
+        Dim listaCongresos As New List(Of Concepto)
+        Dim listaPagosOpcionales As New List(Of Concepto)
+        Dim listaColegiaturas As New List(Of Concepto)
+        Dim listaRecargos As New List(Of Concepto)
+
+        listaConceptos = Me.ordenarListaConceptos(listaConceptos, Matricula)
+
+        Dim listaConceptosFinal As New List(Of Concepto)
+        Dim listaConceptosCobrar As New List(Of Concepto)
+        Dim listaConceptosAbonos As New List(Of Concepto)
+        Dim listaConceptosRechazados As New List(Of Concepto)
+        Dim band As Boolean = False
+        Dim band2 As Boolean = False
+        Dim montoAnterior As Decimal
+
+        For Each concepto As Concepto In listaConceptos
+            If (band = True) Then
+                listaConceptosRechazados.Add(concepto)
+            End If
+            If ((montoRestante - concepto.costoFinal >= 0) And band = False) Then
+                montoRestante = montoRestante - concepto.costoFinal
+                listaConceptosCobrar.Add(concepto)
+
+            ElseIf ((montoRestante - concepto.costoFinal < 0) And band = False) Then
+                band = True
+                listaConceptosRechazados.Add(concepto)
+            End If
+        Next
+        listaConceptos.Clear()
+        If (listaConceptosRechazados.Count > 0) Then
+            For Each concepto As Concepto In listaConceptosRechazados
+                If ((concepto.costoFinal <= montoRestante) And (montoRestante - concepto.costoFinal >= 0)) Then
+                    listaConceptosCobrar.Add(concepto)
+                    montoRestante = montoRestante - concepto.costoFinal
+                Else
+                    listaConceptos.Add(concepto)
+                End If
+            Next
+            listaConceptosRechazados.Clear()
+            If (listaConceptos.Count > 0) Then
+                listaConceptosAbonos.Add(listaConceptos(0))
+                montoAnterior = listaConceptos(0).costoFinal
+                Me.recalcularCostoAbono(listaConceptos(0), montoRestante, 1)
+            End If
+        End If
+
+        For Each concepto As Concepto In listaConceptosCobrar
+            listaConceptosRechazados.RemoveAll(Function(x) x.IDConcepto = concepto.IDConcepto And x.NombreConcepto = concepto.NombreConcepto And x.claveConcepto = concepto.claveConcepto)
+        Next
+
+        For Each concepto As Concepto In listaConceptosAbonos
+            listaConceptosRechazados.RemoveAll(Function(x) x.IDConcepto = concepto.IDConcepto And x.NombreConcepto = concepto.NombreConcepto And x.claveConcepto = concepto.claveConcepto)
+        Next
+
+        Dim mensaje As String = "Se cobraran y abonaran los siguientes conceptos: " + vbNewLine
+        mensaje += vbNewLine
+        mensaje += "CONCEPTOS A COBRAR: " + vbNewLine
+        mensaje += vbNewLine
+        For Each concepto As Concepto In listaConceptosCobrar
+            mensaje += $"{concepto.NombreConcepto} - ${concepto.costoFinal}" + vbNewLine
+        Next
+        mensaje += "--------------------" + vbNewLine
+        mensaje += vbNewLine
+        mensaje = mensaje + "CONCEPTOS A ABONAR: " + vbNewLine
+        mensaje += vbNewLine
+        For Each concepto As Concepto In listaConceptosAbonos
+            mensaje += $"{concepto.NombreConcepto} - ABONO: ${CDec(CDec(concepto.costoFinal) + CDec(concepto.costoIVATotal))}" + vbNewLine
+        Next
+        mensaje += "--------------------" + vbNewLine
+        mensaje += vbNewLine
+        mensaje = mensaje + "LOS SIGUIENTES CONCEPTOS NO CUBREN EL MONTO NECESARIO PARA SER COBRADOS Y/O ABONADOS: " + vbNewLine
+        mensaje += vbNewLine
+        For Each concepto As Concepto In listaConceptos
+            mensaje += $"{concepto.NombreConcepto}" + vbNewLine
+        Next
+        mensaje += "--------------------" + vbNewLine
+        mensaje += vbNewLine
+        mensaje = mensaje + "¿QUIERE CONTINUAR CON EL COBRO Y OMITIR LOS CONCEPTOS QUE NO CUBREN EL MONTO NECESARIO PARA SER COBRADOS Y/O ABONADOS?" + vbNewLine
+        Dim result As Integer = MessageBox.Show(mensaje, "Confirmacion", MessageBoxButtons.YesNoCancel)
+        If result = DialogResult.Cancel Then
+            Return Nothing
+        ElseIf result = DialogResult.No Then
+            Return Nothing
+        ElseIf result = DialogResult.Yes Then
+            For Each concepto As Concepto In listaConceptosCobrar
+                Dim IDClavePago As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatClavesPagos WHERE Clave = '{concepto.claveConcepto}'")
+                Dim tieneAbono As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_Abonos WHERE ID_ClavePago = {IDClavePago} AND IDPago = {concepto.IDConcepto}")
+                If (tieneAbono > 0) Then
+                    Me.recalcularCostoAbono(concepto, concepto.costoFinal, 2)
+                End If
+                listaConceptosFinal.Add(concepto)
+            Next
+
+            If (listaConceptosAbonos.Count > 0) Then
+                For Each concepto As Concepto In listaConceptosAbonos
+                    Dim montoDespues As Decimal
+                    Dim IDClavePago As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatClavesPagos WHERE Clave = '{concepto.claveConcepto}'")
+                    Dim tieneAbono As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_Abonos WHERE ID_ClavePago = {IDClavePago} AND IDPago = {concepto.IDConcepto}")
+                    If (tieneAbono > 0) Then
+                        montoAnterior = db.exectSQLQueryScalar($"SELECT Cantidad_Anterior FROM ing_Abonos WHERE ID = {tieneAbono}")
+                        montoDespues = montoAnterior - montoRestante
+                        concepto.Abonado = True
+                    Else
+                        montoDespues = montoAnterior - montoRestante
+                        concepto.Abonado = True
+                    End If
+                    listaConceptos(0).NombreConcepto = $"1{concepto.NombreConcepto}"
+                    db.execSQLQueryWithoutParams($"INSERT INTO ing_Abonos(Folio, Clave_Cliente, Cantidad_Anterior, Cantidad_Abonada, Cantidad_Restante, IDPago, ID_ClavePago, FechaAbono, Activo) VALUES ('WEA', '{Matricula}', {montoAnterior}, {montoRestante}, {montoDespues}, {concepto.IDConcepto}, {IDClavePago}, GETDATE(), 1)")
+                    listaConceptosFinal.Add(concepto)
+                Next
+                MessageBox.Show("Abono registrado correctamente")
+            End If
+            Return listaConceptosFinal
+        End If
+        Return listaConceptosFinal
+    End Function
+
+    ''----------------------------------------------------------------------------------------------------------------------------------------
+    ''-------------------------------------------------ORDENA LISTA DE CONCEPTOS CON ABONO----------------------------------------------------
+    ''----------------------------------------------------------------------------------------------------------------------------------------
+    Function ordenarListaConceptos(listaConceptos As List(Of Concepto), Matricula As String) As List(Of Concepto)
+        Dim listaCongresos As New List(Of Concepto)
+        Dim listaPagosOpcionales As New List(Of Concepto)
+        Dim listaColegiaturas As New List(Of Concepto)
+        Dim listaRecargos As New List(Of Concepto)
+
+        ''--------------DIVIDE LISTA PRINCIPAL EN DIFERENTES LISTAS SEGUN EL CONCEPTO
+        For Each concepto As Concepto In listaConceptos
+            If (concepto.claveConcepto = "POA" Or concepto.claveConcepto = "POE") Then
+                listaPagosOpcionales.Add(concepto)
+            ElseIf (concepto.claveConcepto = "CON") Then
+                listaCongresos.Add(concepto)
+            ElseIf (concepto.claveConcepto = "DCO" Or concepto.claveConcepto = "DIN" Or concepto.claveConcepto = "DPU") Then
+                listaColegiaturas.Add(concepto)
+            ElseIf (concepto.claveConcepto = "REC") Then
+                listaRecargos.Add(concepto)
+            End If
+        Next
+
+        ''--------------ORDENA CADA LISTA SEGUN ID
+        listaCongresos = listaCongresos.OrderBy(Function(x) x.IDConcepto).ToList()
+        listaPagosOpcionales = listaPagosOpcionales.OrderBy(Function(x) x.IDConcepto).ToList()
+        listaColegiaturas = listaColegiaturas.OrderBy(Function(x) x.IDConcepto).ToList()
+        listaRecargos = listaRecargos.OrderBy(Function(x) x.IDConcepto).ToList()
+
+        listaConceptos.Clear()
+
+        ''--------------LLENA LISTA CON CONCEPTOS YA ORDENADOS Y POR LISTA DE IMPORTANCIA
+        For Each concepto As Concepto In listaCongresos
+            listaConceptos.Add(concepto)
+        Next
+
+        For Each concepto As Concepto In listaPagosOpcionales
+            listaConceptos.Add(concepto)
+        Next
+
+        For Each concepto As Concepto In listaColegiaturas
+            Dim conceptoRecargo As New Concepto
+            Dim tieneRecargo As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_PlanesRecargos WHERE ID_Concepto = {concepto.IDConcepto} AND Activo = 1")
+
+            If (tieneRecargo > 0) Then
+                conceptoRecargo = ch.crearConcepto(tieneRecargo, "REC", Matricula)
+                listaRecargos.RemoveAll(Function(x) x.IDConcepto = conceptoRecargo.IDConcepto And x.NombreConcepto = conceptoRecargo.NombreConcepto)
+                listaConceptos.Add(conceptoRecargo)
+                listaConceptos.Add(concepto)
+            Else
+                listaConceptos.Add(concepto)
+            End If
+        Next
+
+        For Each concepto As Concepto In listaRecargos
+            listaConceptos.Add(concepto)
+        Next
+
+        ''--------------DEVUELVE LISTA ORDENADA SEGUN LA IMPORTANCIA DEL CONCEPTO Y POR ID
+        Return listaConceptos
+    End Function
 End Class

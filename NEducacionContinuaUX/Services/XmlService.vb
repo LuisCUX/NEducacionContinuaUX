@@ -9,9 +9,15 @@ Public Class XmlService
     Dim db As DataBaseService = New DataBaseService()
 
 
-    Function cadenaPrueba(Serie As String, Folio As String, Fecha As String, FormaPago As String, NoCertificado As String, SubTotal As String, Descuento As String, Total As String, listaConceptos As List(Of Concepto), totalIVA As String, RFC As String, NombreCompleto As String) As String
+    Function cadenaPrueba(Serie As String, Folio As String, Fecha As String, FormaPago As String, NoCertificado As String, SubTotal As String, Descuento As String, Total As String, listaConceptos As List(Of Concepto), totalIVA As String, RFC As String, NombreCompleto As String, Credito As Boolean) As String
+        Dim metodoPago As String
+        If (Credito = True) Then
+            metodoPago = "PPD"
+        Else
+            metodoPago = "PUE"
+        End If
         Dim bandIVA As Boolean = False
-        Dim cadena As String = "||3.3|" & Serie & "|" & Folio & "|" & Fecha & "|" & FormaPago & "|" & NoCertificado & "|" & SubTotal.ToString() & "|" & Descuento.ToString() & "|MXN|" & Total & "|I|PUE|91190|TES030201001|EDUCACION CONTINUA|601|" & RFC & "|" & NombreCompleto & "|P01"
+        Dim cadena As String = "||3.3|" & Serie & "|" & Folio & "|" & Fecha & "|" & FormaPago & "|" & NoCertificado & "|" & SubTotal.ToString() & "|" & Descuento.ToString() & "|MXN|" & Total & "|I|" & metodoPago & "|91190|TES030201001|EDUCACION CONTINUA|601|" & RFC & "|" & NombreCompleto & "|P01"
         For Each concepto As Concepto In listaConceptos
             cadena = "" & cadena & "|" & concepto.cveClase & "|" & concepto.Cantidad & "|" & concepto.cveUnidad & "|Pieza|" & concepto.NombreConcepto & "|" & concepto.costoUnitario & "|" & concepto.costoTotal & "|" & concepto.descuento & ""
             If (concepto.absorbeIVA = True Or concepto.consideraIVA = True) Then
@@ -31,7 +37,7 @@ Public Class XmlService
         Return cadena
     End Function
 
-    Function xmlPrueba(Total As String, SubTotal As String, Descuento As String, TotalIVA As String, Fecha As String, Sello As String, Certificado As String, NoCertificado As String, FormaPago As String, Folio As String, Serie As String, UsoCFDI As String, listaConceptos As List(Of Concepto), RFC As String, NombreCompleto As String) As String
+    Function xmlPrueba(Total As String, SubTotal As String, Descuento As String, TotalIVA As String, Fecha As String, Sello As String, Certificado As String, NoCertificado As String, FormaPago As String, Folio As String, Serie As String, UsoCFDI As String, listaConceptos As List(Of Concepto), RFC As String, NombreCompleto As String, Credito As Boolean) As String
         Dim IVABand As Boolean = False
         Dim config As New XmlWriterSettings
         config.Indent = True
@@ -57,7 +63,11 @@ Public Class XmlService
                 wr.WriteAttributeString("Moneda", Nothing, "MXN")
                 wr.WriteAttributeString("Total", Nothing, Total)
                 wr.WriteAttributeString("TipoDeComprobante", Nothing, "I")
-                wr.WriteAttributeString("MetodoPago", Nothing, "PUE")
+                If (Credito = True) Then
+                    wr.WriteAttributeString("MetodoPago", Nothing, "PPD")
+                Else
+                    wr.WriteAttributeString("MetodoPago", Nothing, "PUE")
+                End If
                 wr.WriteAttributeString("LugarExpedicion", Nothing, ConfigurationSettings.AppSettings.Get("CP").ToString())
                 wr.WriteAttributeString("Sello", Nothing, Sello)
                 wr.WriteAttributeString("Certificado", Nothing, Certificado)

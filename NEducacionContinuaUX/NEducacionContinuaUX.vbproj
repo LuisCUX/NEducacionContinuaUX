@@ -139,10 +139,12 @@
     <Compile Include="Controllers\CobrosDiferidosController.vb" />
     <Compile Include="Controllers\ConceptHandlerController.vb" />
     <Compile Include="Controllers\GestionExternosController.vb" />
+    <Compile Include="Controllers\PagosCreditoController.vb" />
     <Compile Include="Controllers\PagosOpcionalesController.vb" />
     <Compile Include="Controllers\PlanesController.vb" />
     <Compile Include="Controllers\ValidacionesController.vb" />
     <Compile Include="Models\Concepto.vb" />
+    <Compile Include="Models\ConceptoDiferido.vb" />
     <Compile Include="Models\User.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -160,6 +162,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Services\ComboboxService.vb" />
+    <Compile Include="Services\ConsultaTimbresService.vb" />
     <Compile Include="Services\DataBaseService.vb" />
     <Compile Include="Services\EnviromentService.vb" />
     <Compile Include="Services\ImpresionReportesService.vb" />
@@ -226,6 +229,18 @@
       <DependentUpon>ModalCobrosDiferidosEDC.vb</DependentUpon>
     </Compile>
     <Compile Include="Views\ModalCobrosDiferidosEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\NotasDeCreditoEDC.Designer.vb">
+      <DependentUpon>NotasDeCreditoEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NotasDeCreditoEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PagosCreditoEDC.Designer.vb">
+      <DependentUpon>PagosCreditoEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PagosCreditoEDC.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\PlanesEDC.Designer.vb">
@@ -301,6 +316,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ModalCobrosDiferidosEDC.resx">
       <DependentUpon>ModalCobrosDiferidosEDC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\NotasDeCreditoEDC.resx">
+      <DependentUpon>NotasDeCreditoEDC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PagosCreditoEDC.resx">
+      <DependentUpon>PagosCreditoEDC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PlanesEDC.resx">
       <DependentUpon>PlanesEDC.vb</DependentUpon>

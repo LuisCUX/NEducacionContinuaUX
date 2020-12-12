@@ -23,11 +23,17 @@ Partial Class ModalCobrosDiferidosEDC
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ModalCobrosDiferidosEDC))
-        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Eventos")
+        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Congresos")
         Dim TreeNode2 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Pagos Opcionales")
+        Dim TreeNode3 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Inscripción a Diplomados")
+        Dim TreeNode4 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Colegiaturas de Diplomados")
+        Dim TreeNode5 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Pago Unico de Diplomados")
+        Dim TreeNode6 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Recargos de Diplomados")
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ModalCobrosDiferidosEDC))
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.panelDatos = New System.Windows.Forms.Panel()
+        Me.lblRFC = New System.Windows.Forms.Label()
+        Me.txtRFC = New System.Windows.Forms.TextBox()
         Me.lblTurno = New System.Windows.Forms.Label()
         Me.lblCarrera = New System.Windows.Forms.Label()
         Me.txtEmail = New System.Windows.Forms.TextBox()
@@ -36,20 +42,15 @@ Partial Class ModalCobrosDiferidosEDC
         Me.txtNombre = New System.Windows.Forms.TextBox()
         Me.lblEmail = New System.Windows.Forms.Label()
         Me.lblNombre = New System.Windows.Forms.Label()
-        Me.panelBusqueda = New System.Windows.Forms.Panel()
-        Me.btnBuscar = New System.Windows.Forms.Button()
-        Me.txtMatricula = New System.Windows.Forms.TextBox()
-        Me.lblMatricula = New System.Windows.Forms.Label()
-        Me.panelPagos = New System.Windows.Forms.Panel()
-        Me.btnCobrar = New System.Windows.Forms.Button()
-        Me.btnSalir = New System.Windows.Forms.Button()
-        Me.ImageListTree = New System.Windows.Forms.ImageList(Me.components)
-        Me.Tree = New System.Windows.Forms.TreeView()
+        Me.panelCobros = New System.Windows.Forms.Panel()
         Me.lblPeso = New System.Windows.Forms.Label()
         Me.lblTotal = New System.Windows.Forms.Label()
+        Me.Tree = New System.Windows.Forms.TreeView()
+        Me.ImageListTree = New System.Windows.Forms.ImageList(Me.components)
+        Me.btnSalir = New System.Windows.Forms.Button()
+        Me.btnCobrar = New System.Windows.Forms.Button()
         Me.panelDatos.SuspendLayout()
-        Me.panelBusqueda.SuspendLayout()
-        Me.panelPagos.SuspendLayout()
+        Me.panelCobros.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblNombreVentana
@@ -66,6 +67,8 @@ Partial Class ModalCobrosDiferidosEDC
         '
         'panelDatos
         '
+        Me.panelDatos.Controls.Add(Me.lblRFC)
+        Me.panelDatos.Controls.Add(Me.txtRFC)
         Me.panelDatos.Controls.Add(Me.lblTurno)
         Me.panelDatos.Controls.Add(Me.lblCarrera)
         Me.panelDatos.Controls.Add(Me.txtEmail)
@@ -74,11 +77,31 @@ Partial Class ModalCobrosDiferidosEDC
         Me.panelDatos.Controls.Add(Me.txtNombre)
         Me.panelDatos.Controls.Add(Me.lblEmail)
         Me.panelDatos.Controls.Add(Me.lblNombre)
-        Me.panelDatos.Location = New System.Drawing.Point(261, 72)
+        Me.panelDatos.Location = New System.Drawing.Point(15, 72)
         Me.panelDatos.Name = "panelDatos"
-        Me.panelDatos.Size = New System.Drawing.Size(527, 107)
+        Me.panelDatos.Size = New System.Drawing.Size(773, 107)
         Me.panelDatos.TabIndex = 18
         Me.panelDatos.Visible = False
+        '
+        'lblRFC
+        '
+        Me.lblRFC.AutoSize = True
+        Me.lblRFC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRFC.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblRFC.Location = New System.Drawing.Point(421, 79)
+        Me.lblRFC.Name = "lblRFC"
+        Me.lblRFC.Size = New System.Drawing.Size(42, 15)
+        Me.lblRFC.TabIndex = 25
+        Me.lblRFC.Text = "Turno:"
+        '
+        'txtRFC
+        '
+        Me.txtRFC.Enabled = False
+        Me.txtRFC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRFC.Location = New System.Drawing.Point(490, 76)
+        Me.txtRFC.Name = "txtRFC"
+        Me.txtRFC.Size = New System.Drawing.Size(267, 21)
+        Me.txtRFC.TabIndex = 26
         '
         'lblTurno
         '
@@ -108,7 +131,7 @@ Partial Class ModalCobrosDiferidosEDC
         Me.txtEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtEmail.Location = New System.Drawing.Point(77, 32)
         Me.txtEmail.Name = "txtEmail"
-        Me.txtEmail.Size = New System.Drawing.Size(392, 21)
+        Me.txtEmail.Size = New System.Drawing.Size(680, 21)
         Me.txtEmail.TabIndex = 20
         '
         'txtTurno
@@ -117,7 +140,7 @@ Partial Class ModalCobrosDiferidosEDC
         Me.txtTurno.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtTurno.Location = New System.Drawing.Point(77, 76)
         Me.txtTurno.Name = "txtTurno"
-        Me.txtTurno.Size = New System.Drawing.Size(392, 21)
+        Me.txtTurno.Size = New System.Drawing.Size(267, 21)
         Me.txtTurno.TabIndex = 24
         '
         'txtCarrera
@@ -126,7 +149,7 @@ Partial Class ModalCobrosDiferidosEDC
         Me.txtCarrera.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCarrera.Location = New System.Drawing.Point(77, 54)
         Me.txtCarrera.Name = "txtCarrera"
-        Me.txtCarrera.Size = New System.Drawing.Size(392, 21)
+        Me.txtCarrera.Size = New System.Drawing.Size(680, 21)
         Me.txtCarrera.TabIndex = 22
         '
         'txtNombre
@@ -135,7 +158,7 @@ Partial Class ModalCobrosDiferidosEDC
         Me.txtNombre.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtNombre.Location = New System.Drawing.Point(77, 10)
         Me.txtNombre.Name = "txtNombre"
-        Me.txtNombre.Size = New System.Drawing.Size(392, 21)
+        Me.txtNombre.Size = New System.Drawing.Size(680, 21)
         Me.txtNombre.TabIndex = 18
         '
         'lblEmail
@@ -160,118 +183,23 @@ Partial Class ModalCobrosDiferidosEDC
         Me.lblNombre.TabIndex = 18
         Me.lblNombre.Text = "Nombre: "
         '
-        'panelBusqueda
+        'panelCobros
         '
-        Me.panelBusqueda.Controls.Add(Me.btnBuscar)
-        Me.panelBusqueda.Controls.Add(Me.txtMatricula)
-        Me.panelBusqueda.Controls.Add(Me.lblMatricula)
-        Me.panelBusqueda.Location = New System.Drawing.Point(5, 72)
-        Me.panelBusqueda.Name = "panelBusqueda"
-        Me.panelBusqueda.Size = New System.Drawing.Size(250, 107)
-        Me.panelBusqueda.TabIndex = 17
-        '
-        'btnBuscar
-        '
-        Me.btnBuscar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.search_32px
-        Me.btnBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnBuscar.Location = New System.Drawing.Point(186, 44)
-        Me.btnBuscar.Name = "btnBuscar"
-        Me.btnBuscar.Size = New System.Drawing.Size(41, 34)
-        Me.btnBuscar.TabIndex = 2
-        Me.btnBuscar.UseVisualStyleBackColor = True
-        '
-        'txtMatricula
-        '
-        Me.txtMatricula.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMatricula.Location = New System.Drawing.Point(10, 50)
-        Me.txtMatricula.Name = "txtMatricula"
-        Me.txtMatricula.Size = New System.Drawing.Size(170, 22)
-        Me.txtMatricula.TabIndex = 1
-        '
-        'lblMatricula
-        '
-        Me.lblMatricula.AutoSize = True
-        Me.lblMatricula.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblMatricula.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblMatricula.Location = New System.Drawing.Point(7, 16)
-        Me.lblMatricula.Name = "lblMatricula"
-        Me.lblMatricula.Size = New System.Drawing.Size(65, 16)
-        Me.lblMatricula.TabIndex = 0
-        Me.lblMatricula.Text = "Matricula:"
-        '
-        'panelPagos
-        '
-        Me.panelPagos.Controls.Add(Me.lblPeso)
-        Me.panelPagos.Controls.Add(Me.lblTotal)
-        Me.panelPagos.Controls.Add(Me.Tree)
-        Me.panelPagos.Controls.Add(Me.btnSalir)
-        Me.panelPagos.Controls.Add(Me.btnCobrar)
-        Me.panelPagos.Location = New System.Drawing.Point(4, 185)
-        Me.panelPagos.Name = "panelPagos"
-        Me.panelPagos.Size = New System.Drawing.Size(784, 403)
-        Me.panelPagos.TabIndex = 19
-        Me.panelPagos.Visible = False
-        '
-        'btnCobrar
-        '
-        Me.btnCobrar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.descargar
-        Me.btnCobrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnCobrar.Location = New System.Drawing.Point(187, 356)
-        Me.btnCobrar.Name = "btnCobrar"
-        Me.btnCobrar.Size = New System.Drawing.Size(70, 40)
-        Me.btnCobrar.TabIndex = 21
-        Me.btnCobrar.UseVisualStyleBackColor = True
-        '
-        'btnSalir
-        '
-        Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_32px
-        Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnSalir.Location = New System.Drawing.Point(537, 356)
-        Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New System.Drawing.Size(70, 40)
-        Me.btnSalir.TabIndex = 20
-        Me.btnSalir.UseVisualStyleBackColor = True
-        '
-        'ImageListTree
-        '
-        Me.ImageListTree.ImageStream = CType(resources.GetObject("ImageListTree.ImageStream"), System.Windows.Forms.ImageListStreamer)
-        Me.ImageListTree.TransparentColor = System.Drawing.Color.Transparent
-        Me.ImageListTree.Images.SetKeyName(0, "unchecked_checkbox_40px.png")
-        Me.ImageListTree.Images.SetKeyName(1, "checked_checkbox_40px.png")
-        Me.ImageListTree.Images.SetKeyName(2, "folder_40px.png")
-        '
-        'Tree
-        '
-        Me.Tree.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Tree.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Tree.ForeColor = System.Drawing.SystemColors.Control
-        Me.Tree.Location = New System.Drawing.Point(11, 17)
-        Me.Tree.Name = "Tree"
-        TreeNode1.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        TreeNode1.ForeColor = System.Drawing.SystemColors.Control
-        TreeNode1.Name = "nodeEventos"
-        TreeNode1.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        TreeNode1.SelectedImageIndex = -2
-        TreeNode1.StateImageIndex = 2
-        TreeNode1.Text = "Eventos"
-        TreeNode2.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        TreeNode2.ForeColor = System.Drawing.SystemColors.Control
-        TreeNode2.Name = "nodePagosOpcionales"
-        TreeNode2.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        TreeNode2.SelectedImageIndex = -2
-        TreeNode2.StateImageIndex = 2
-        TreeNode2.Text = "Pagos Opcionales"
-        Me.Tree.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2})
-        Me.Tree.Size = New System.Drawing.Size(766, 268)
-        Me.Tree.StateImageList = Me.ImageListTree
-        Me.Tree.TabIndex = 24
+        Me.panelCobros.Controls.Add(Me.lblPeso)
+        Me.panelCobros.Controls.Add(Me.lblTotal)
+        Me.panelCobros.Controls.Add(Me.Tree)
+        Me.panelCobros.Location = New System.Drawing.Point(4, 185)
+        Me.panelCobros.Name = "panelCobros"
+        Me.panelCobros.Size = New System.Drawing.Size(784, 340)
+        Me.panelCobros.TabIndex = 19
+        Me.panelCobros.Visible = False
         '
         'lblPeso
         '
         Me.lblPeso.AutoSize = True
         Me.lblPeso.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblPeso.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblPeso.Location = New System.Drawing.Point(532, 301)
+        Me.lblPeso.Location = New System.Drawing.Point(517, 302)
         Me.lblPeso.Name = "lblPeso"
         Me.lblPeso.Size = New System.Drawing.Size(26, 29)
         Me.lblPeso.TabIndex = 26
@@ -282,31 +210,99 @@ Partial Class ModalCobrosDiferidosEDC
         Me.lblTotal.AutoSize = True
         Me.lblTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTotal.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblTotal.Location = New System.Drawing.Point(552, 301)
+        Me.lblTotal.Location = New System.Drawing.Point(537, 302)
         Me.lblTotal.Name = "lblTotal"
         Me.lblTotal.Size = New System.Drawing.Size(0, 29)
         Me.lblTotal.TabIndex = 25
         '
+        'Tree
+        '
+        Me.Tree.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Tree.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Tree.ForeColor = System.Drawing.SystemColors.Control
+        Me.Tree.Location = New System.Drawing.Point(11, 17)
+        Me.Tree.Name = "Tree"
+        TreeNode1.Name = "nodeCongresos"
+        TreeNode1.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        TreeNode1.StateImageIndex = 2
+        TreeNode1.Text = "Congresos"
+        TreeNode2.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        TreeNode2.ForeColor = System.Drawing.SystemColors.Control
+        TreeNode2.Name = "nodePagosOpcionales"
+        TreeNode2.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        TreeNode2.SelectedImageIndex = -2
+        TreeNode2.StateImageIndex = 2
+        TreeNode2.Text = "Pagos Opcionales"
+        TreeNode3.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        TreeNode3.ForeColor = System.Drawing.SystemColors.Control
+        TreeNode3.Name = "nodeInscripcionDip"
+        TreeNode3.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        TreeNode3.SelectedImageIndex = -2
+        TreeNode3.StateImageIndex = 2
+        TreeNode3.Text = "Inscripción a Diplomados"
+        TreeNode4.Name = "nodeColegiaturaDip"
+        TreeNode4.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        TreeNode4.StateImageIndex = 2
+        TreeNode4.Text = "Colegiaturas de Diplomados"
+        TreeNode5.Name = "nodePagoUnicoDip"
+        TreeNode5.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        TreeNode5.StateImageIndex = 2
+        TreeNode5.Text = "Pago Unico de Diplomados"
+        TreeNode6.Name = "nodeColegiaturasRec"
+        TreeNode6.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        TreeNode6.StateImageIndex = 2
+        TreeNode6.Text = "Recargos de Diplomados"
+        Me.Tree.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2, TreeNode3, TreeNode4, TreeNode5, TreeNode6})
+        Me.Tree.Size = New System.Drawing.Size(766, 268)
+        Me.Tree.StateImageList = Me.ImageListTree
+        Me.Tree.TabIndex = 24
+        '
+        'ImageListTree
+        '
+        Me.ImageListTree.ImageStream = CType(resources.GetObject("ImageListTree.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.ImageListTree.TransparentColor = System.Drawing.Color.Transparent
+        Me.ImageListTree.Images.SetKeyName(0, "unchecked_checkbox_40px.png")
+        Me.ImageListTree.Images.SetKeyName(1, "checked_checkbox_40px.png")
+        Me.ImageListTree.Images.SetKeyName(2, "folder_40px.png")
+        '
+        'btnSalir
+        '
+        Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_32px
+        Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnSalir.Location = New System.Drawing.Point(189, 541)
+        Me.btnSalir.Name = "btnSalir"
+        Me.btnSalir.Size = New System.Drawing.Size(70, 40)
+        Me.btnSalir.TabIndex = 20
+        Me.btnSalir.UseVisualStyleBackColor = True
+        '
+        'btnCobrar
+        '
+        Me.btnCobrar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.plus_32px
+        Me.btnCobrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnCobrar.Location = New System.Drawing.Point(526, 541)
+        Me.btnCobrar.Name = "btnCobrar"
+        Me.btnCobrar.Size = New System.Drawing.Size(70, 40)
+        Me.btnCobrar.TabIndex = 21
+        Me.btnCobrar.UseVisualStyleBackColor = True
+        '
         'ModalCobrosDiferidosEDC
         '
-        Me.AcceptButton = Me.btnBuscar
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
         Me.ClientSize = New System.Drawing.Size(793, 593)
-        Me.Controls.Add(Me.panelPagos)
+        Me.Controls.Add(Me.panelCobros)
         Me.Controls.Add(Me.panelDatos)
-        Me.Controls.Add(Me.panelBusqueda)
         Me.Controls.Add(Me.lblNombreVentana)
+        Me.Controls.Add(Me.btnCobrar)
+        Me.Controls.Add(Me.btnSalir)
         Me.Name = "ModalCobrosDiferidosEDC"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "ModalCobrosDiferidosEDC"
         Me.panelDatos.ResumeLayout(False)
         Me.panelDatos.PerformLayout()
-        Me.panelBusqueda.ResumeLayout(False)
-        Me.panelBusqueda.PerformLayout()
-        Me.panelPagos.ResumeLayout(False)
-        Me.panelPagos.PerformLayout()
+        Me.panelCobros.ResumeLayout(False)
+        Me.panelCobros.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -321,15 +317,13 @@ Partial Class ModalCobrosDiferidosEDC
     Friend WithEvents txtNombre As TextBox
     Friend WithEvents lblEmail As Label
     Friend WithEvents lblNombre As Label
-    Friend WithEvents panelBusqueda As Panel
-    Friend WithEvents btnBuscar As Button
-    Friend WithEvents txtMatricula As TextBox
-    Friend WithEvents lblMatricula As Label
-    Friend WithEvents panelPagos As Panel
+    Friend WithEvents panelCobros As Panel
     Friend WithEvents btnCobrar As Button
     Friend WithEvents btnSalir As Button
     Friend WithEvents ImageListTree As ImageList
     Friend WithEvents Tree As TreeView
     Friend WithEvents lblPeso As Label
     Friend WithEvents lblTotal As Label
+    Friend WithEvents lblRFC As Label
+    Friend WithEvents txtRFC As TextBox
 End Class

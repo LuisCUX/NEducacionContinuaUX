@@ -2,22 +2,23 @@
     Dim db As DataBaseService = New DataBaseService()
     Dim listaConceptos As New List(Of Concepto)
 
-    Sub agregarconcepto(conceptoID As Integer, claveConcepto As String)
+    Sub agregarconcepto(conceptoID As Integer, claveConcepto As String, Matricula As String)
         Dim concepto As New Concepto
-        concepto = Me.crearConcepto(conceptoID, claveConcepto)
+        concepto = Me.crearConcepto(conceptoID, claveConcepto, Matricula)
         listaConceptos.Add(concepto)
     End Sub
 
-    Sub eliminarconcepto(conceptoID As Integer, claveConcepto As String)
+    Sub eliminarconcepto(conceptoID As Integer, claveConcepto As String, Matricula As String)
         Dim concepto As New Concepto
-        concepto = Me.crearConcepto(conceptoID, claveConcepto)
+        concepto = Me.crearConcepto(conceptoID, claveConcepto, Matricula)
         listaConceptos.RemoveAll(Function(wea) wea.absorbeIVA = concepto.absorbeIVA And wea.Cantidad = concepto.Cantidad And wea.consideraIVA = concepto.consideraIVA And wea.costoBase = concepto.costoBase And wea.costoFinal = concepto.costoFinal And wea.costoIVATotal = concepto.costoIVATotal And wea.claveConcepto = concepto.claveConcepto And wea.IDConcepto = concepto.IDConcepto And
                                  wea.costoIVAUnitario = concepto.costoIVAUnitario And wea.costoTotal = concepto.costoTotal And wea.costoUnitario = concepto.costoUnitario And wea.cveClase = concepto.cveClase And wea.cveUnidad = concepto.cveUnidad And wea.descuento = concepto.descuento And wea.IVAExento = concepto.IVAExento And wea.NombreConcepto = concepto.NombreConcepto)
     End Sub
 
-    Function crearObjeto(conceptoID As Integer, claveConcepto As String) As Concepto
+    Function crearObjeto(conceptoID As Integer, claveConcepto As String, Matricula As String) As Concepto
         Dim concep As Concepto = New Concepto()
         Dim claveConceptoint As Integer
+        ''--------------------PAGOS OPCIONALES--------------------''
         If (claveConcepto = "POA" Or claveConcepto = "POE") Then
             Dim nombreTabla As String
             If (claveConcepto = "POA") Then
@@ -52,7 +53,10 @@
                     concep.Condonacion = False
                 End If
                 concep.porcentajeCondonacion = condonacion(1)
+                Dim cantidadAbono As Decimal = Me.buscarAbonoConcepto(conceptoID, claveConceptoint)
+                concep.Abono = cantidadAbono
             Next
+            ''--------------------CONGRESOS--------------------''
         ElseIf (claveConcepto = "CON") Then
             Dim Costo As Decimal
             Dim Descuento As Decimal
@@ -85,7 +89,10 @@
                     concep.Condonacion = False
                 End If
                 concep.porcentajeCondonacion = condonacion(1)
+                Dim cantidadAbono As Decimal = Me.buscarAbonoConcepto(conceptoID, 3)
+                concep.Abono = cantidadAbono
             Next
+            ''--------------------DIPLOMADOS INSCRIPCION--------------------''
         ElseIf (claveConcepto = "DIN") Then
             Dim Costo As Decimal
             Dim Descuento As Decimal
@@ -111,7 +118,10 @@
                 concep.consideraIVA = False
                 concep.IVAExento = False
                 concep.Cantidad = 1
+                Dim cantidadAbono As Decimal = Me.buscarAbonoConcepto(conceptoID, 6)
+                concep.Abono = cantidadAbono
             Next
+            ''--------------------DIPLOMADOS COLEGIATURAS--------------------''
         ElseIf (claveConcepto = "DCO") Then
             Dim Costo As Decimal
             Dim Descuento As Decimal
@@ -137,7 +147,10 @@
                 concep.consideraIVA = False
                 concep.IVAExento = False
                 concep.Cantidad = 1
+                Dim cantidadAbono As Decimal = Me.buscarAbonoConcepto(conceptoID, 4)
+                concep.Abono = cantidadAbono
             Next
+            ''--------------------DIPLOMADOS PAGO UNICO--------------------''
         ElseIf (claveConcepto = "DPU") Then
             Dim Costo As Decimal
             Dim Descuento As Decimal
@@ -159,11 +172,14 @@
                 Else
                     concep.descuento = item("Descuento")
                 End If
-                concep.absorbeIVA = True
-                concep.consideraIVA = False
+                concep.absorbeIVA = False
+                concep.consideraIVA = True
                 concep.IVAExento = False
                 concep.Cantidad = 1
+                Dim cantidadAbono As Decimal = Me.buscarAbonoConcepto(conceptoID, 5)
+                concep.Abono = cantidadAbono
             Next
+            ''--------------------RECARGOS--------------------''
         ElseIf (claveConcepto = "REC") Then
             Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT ID, Descripcion, Monto FROM ing_PlanesRecargos WHERE ID = {conceptoID} AND Activo = 1")
 
@@ -187,20 +203,24 @@
                     concep.Condonacion = False
                 End If
                 concep.porcentajeCondonacion = condonacion(1)
+                Dim cantidadAbono As Decimal = Me.buscarAbonoConcepto(conceptoID, 7)
+                concep.Abono = cantidadAbono
             Next
         End If
+        concep.Matricula = Matricula
+        concep.Abonado = False
         Return concep
     End Function
 
-    Function crearConcepto(conceptoID As Integer, claveConcepto As String) As Concepto
+    Function crearConcepto(conceptoID As Integer, claveConcepto As String, Matricula As String) As Concepto
         Dim concepto As New Concepto()
-        concepto = Me.crearObjeto(conceptoID, claveConcepto)
-
-        If (concepto.Condonacion = True) Then
-            Dim porcentaje = concepto.costoUnitario * CDec(concepto.porcentajeCondonacion / 100)
-            concepto.costoUnitario = concepto.costoUnitario - porcentaje
-            concepto.descuento = 0.00
-        End If
+        concepto = Me.crearObjeto(conceptoID, claveConcepto, Matricula)
+        concepto.costoUnitario = concepto.costoUnitario
+        'If (concepto.Condonacion = True) Then
+        '    Dim porcentaje = concepto.costoUnitario * CDec(concepto.porcentajeCondonacion / 100)
+        '    concepto.costoUnitario = concepto.costoUnitario - porcentaje
+        '    concepto.descuento = 0.00
+        'End If
 
         If (concepto.absorbeIVA = True And concepto.IVAExento = False And concepto.consideraIVA = False) Then ''---ABSORBE IVA
 
@@ -216,10 +236,10 @@
             concepto.costoIVAUnitario = (unitariodescuento * 0.16)
             concepto.costoIVATotal = (CDec(concepto.costoIVAUnitario) * CDec(concepto.Cantidad))
             concepto.costoTotal = unitariosiniva * CDec(concepto.Cantidad)
-            concepto.costoFinal = (CDec(concepto.costoBase)) + (CDec(concepto.costoIVATotal))
+            concepto.costoFinal = (CDec(concepto.costoBase)) + (CDec(concepto.costoIVATotal)) - CDec(concepto.Abono)
             concepto.descuento = (CDec(concepto.descuento) * CDec(concepto.Cantidad))
 
-        ElseIf (concepto.absorbeIVA = False And concepto.IVAExento = False And concepto.consideraIVA = True) Then ''---CONSIDERA IVA
+        ElseIf (concepto.absorbeIVA = False And concepto.IVAExento = False And concepto.consideraIVA = True) Then ''---AGREGA IVA
 
             Dim unitariodescuento As Decimal = CDec(concepto.costoUnitario) - CDec(concepto.descuento)
             concepto.costoBase = unitariodescuento * CDec(concepto.Cantidad)
@@ -227,23 +247,26 @@
             concepto.costoIVAUnitario = (unitariodescuento * 0.16)
             concepto.costoIVATotal = (CDec(concepto.costoIVAUnitario) * CDec(concepto.Cantidad))
             concepto.costoTotal = (CDec(concepto.costoUnitario) * CDec(concepto.Cantidad))
-            concepto.costoFinal = ((unitariodescuento * CDec(concepto.Cantidad)) + CDec(concepto.costoIVATotal))
+            concepto.costoFinal = ((unitariodescuento * CDec(concepto.Cantidad)) + CDec(concepto.costoIVATotal)) - CDec(concepto.Abono)
             concepto.descuento = (CDec(concepto.descuento) * CDec(concepto.Cantidad))
 
         ElseIf (concepto.absorbeIVA = False And concepto.IVAExento = True And concepto.consideraIVA = False) Then ''---IVA EXENTO
-
+            Dim unitariodescuento As Decimal = CDec(concepto.costoUnitario) - CDec(concepto.descuento)
             concepto.costoIVAUnitario = "0.00000000"
             concepto.costoIVATotal = "0.00000000"
             concepto.costoTotal = (CDec(concepto.costoUnitario) * CDec(concepto.Cantidad))
             concepto.costoBase = concepto.costoTotal
-            concepto.costoFinal = concepto.costoTotal
+            concepto.costoFinal = ((unitariodescuento * CDec(concepto.Cantidad))) - CDec(concepto.Abono)
+            concepto.descuento = (CDec(concepto.descuento) * CDec(concepto.Cantidad))
 
         ElseIf (concepto.absorbeIVA = False And concepto.IVAExento = False And concepto.consideraIVA = False) Then ''--- SIN IVA
-
+            Dim unitariodescuento As Decimal = CDec(concepto.costoUnitario) - CDec(concepto.descuento)
             concepto.costoIVAUnitario = "0.00000000"
             concepto.costoIVATotal = "0.00000000"
             concepto.costoTotal = (CDec(concepto.costoUnitario) * CDec(concepto.Cantidad))
-            concepto.costoFinal = concepto.costoTotal
+            concepto.costoBase = concepto.costoTotal
+            concepto.costoFinal = ((unitariodescuento * CDec(concepto.Cantidad))) - CDec(concepto.Abono)
+            concepto.descuento = (CDec(concepto.descuento) * CDec(concepto.Cantidad))
 
         End If
         concepto = formatoPrecios(concepto)
@@ -274,7 +297,11 @@
     End Function
 
     Function getListaConceptos() As List(Of Concepto)
-        Return listaConceptos
+        Dim listaC As New List(Of Concepto)
+        For Each concepto As Concepto In listaConceptos
+            listaC.Add(concepto)
+        Next
+        Return listaC
     End Function
 
     Function removerEspaciosInicioFin(cadena As String) As String
@@ -292,6 +319,15 @@
             Return cadena
         End If
         Return Nothing
+    End Function
+
+    Function buscarAbonoConcepto(IDConcepto As Integer, claveConcepto As Integer) As Decimal
+        Dim cantidad = db.exectSQLQueryScalar($"SELECT Sum(Cantidad_Abonada) FROM ing_Abonos WHERE IDPago = {IDConcepto} AND ID_ClavePago = {claveConcepto}")
+        If (IsDBNull(cantidad)) Then
+            Return 0
+        Else
+            Return CDec(cantidad)
+        End If
     End Function
 
     Function obtenerDatosCondonacion(conceptoID As Integer, claveID As Integer) As Object()

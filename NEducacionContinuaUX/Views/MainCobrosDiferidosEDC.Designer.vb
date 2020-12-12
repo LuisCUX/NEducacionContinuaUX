@@ -23,8 +23,6 @@ Partial Class MainCobrosDiferidosEDC
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim TreeNode3 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Eventos")
-        Dim TreeNode4 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Pagos Opcionales")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainCobrosDiferidosEDC))
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.panelBusqueda = New System.Windows.Forms.Panel()
@@ -32,6 +30,8 @@ Partial Class MainCobrosDiferidosEDC
         Me.txtMatricula = New System.Windows.Forms.TextBox()
         Me.lblMatricula = New System.Windows.Forms.Label()
         Me.panelDatos = New System.Windows.Forms.Panel()
+        Me.lblRFC = New System.Windows.Forms.Label()
+        Me.txtRFC = New System.Windows.Forms.TextBox()
         Me.lblTurno = New System.Windows.Forms.Label()
         Me.lblCarrera = New System.Windows.Forms.Label()
         Me.txtEmail = New System.Windows.Forms.TextBox()
@@ -46,15 +46,38 @@ Partial Class MainCobrosDiferidosEDC
         Me.btnCobrar = New System.Windows.Forms.Button()
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.panelCobros = New System.Windows.Forms.Panel()
-        Me.btnAgregar = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Tree = New System.Windows.Forms.TreeView()
-        Me.ImageListTree = New System.Windows.Forms.ImageList(Me.components)
+        Me.txtMonto = New System.Windows.Forms.TextBox()
+        Me.lblMonto = New System.Windows.Forms.Label()
+        Me.txtNoCuenta = New System.Windows.Forms.TextBox()
+        Me.lblNoCuenta = New System.Windows.Forms.Label()
+        Me.txtNoCheque = New System.Windows.Forms.TextBox()
+        Me.lblNoCheque = New System.Windows.Forms.Label()
+        Me.txtUltimos4Digitos = New System.Windows.Forms.TextBox()
+        Me.lblUltimosDigitos = New System.Windows.Forms.Label()
+        Me.DTPickerFecha = New System.Windows.Forms.DateTimePicker()
+        Me.lblFecha = New System.Windows.Forms.Label()
+        Me.cbTipoBanco = New System.Windows.Forms.ComboBox()
+        Me.lblTIpoBanco = New System.Windows.Forms.Label()
+        Me.cbBanco = New System.Windows.Forms.ComboBox()
+        Me.lblBanco = New System.Windows.Forms.Label()
+        Me.btnBorrar = New System.Windows.Forms.Button()
+        Me.txtBusquedaMatricula = New System.Windows.Forms.TextBox()
+        Me.lblMatricula2 = New System.Windows.Forms.Label()
+        Me.GridConceptos = New System.Windows.Forms.DataGridView()
+        Me.columnID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.columnClavePago = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MatriculaColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DescripcionColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MontoColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.lblPeso = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.btnAgregar = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.ImageListTree = New System.Windows.Forms.ImageList(Me.components)
         Me.panelBusqueda.SuspendLayout()
         Me.panelDatos.SuspendLayout()
         Me.panelCobros.SuspendLayout()
+        CType(Me.GridConceptos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblNombreVentana
@@ -64,7 +87,7 @@ Partial Class MainCobrosDiferidosEDC
         Me.lblNombreVentana.ForeColor = System.Drawing.Color.Gold
         Me.lblNombreVentana.Location = New System.Drawing.Point(-1, -2)
         Me.lblNombreVentana.Name = "lblNombreVentana"
-        Me.lblNombreVentana.Size = New System.Drawing.Size(980, 69)
+        Me.lblNombreVentana.Size = New System.Drawing.Size(1199, 69)
         Me.lblNombreVentana.TabIndex = 13
         Me.lblNombreVentana.Text = "Cobros"
         Me.lblNombreVentana.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -76,14 +99,14 @@ Partial Class MainCobrosDiferidosEDC
         Me.panelBusqueda.Controls.Add(Me.lblMatricula)
         Me.panelBusqueda.Location = New System.Drawing.Point(5, 70)
         Me.panelBusqueda.Name = "panelBusqueda"
-        Me.panelBusqueda.Size = New System.Drawing.Size(250, 107)
+        Me.panelBusqueda.Size = New System.Drawing.Size(469, 107)
         Me.panelBusqueda.TabIndex = 15
         '
         'btnBuscar
         '
         Me.btnBuscar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.search_32px
         Me.btnBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnBuscar.Location = New System.Drawing.Point(186, 44)
+        Me.btnBuscar.Location = New System.Drawing.Point(312, 7)
         Me.btnBuscar.Name = "btnBuscar"
         Me.btnBuscar.Size = New System.Drawing.Size(41, 34)
         Me.btnBuscar.TabIndex = 2
@@ -92,7 +115,7 @@ Partial Class MainCobrosDiferidosEDC
         'txtMatricula
         '
         Me.txtMatricula.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMatricula.Location = New System.Drawing.Point(10, 50)
+        Me.txtMatricula.Location = New System.Drawing.Point(136, 13)
         Me.txtMatricula.Name = "txtMatricula"
         Me.txtMatricula.Size = New System.Drawing.Size(170, 22)
         Me.txtMatricula.TabIndex = 1
@@ -104,12 +127,14 @@ Partial Class MainCobrosDiferidosEDC
         Me.lblMatricula.ForeColor = System.Drawing.SystemColors.Control
         Me.lblMatricula.Location = New System.Drawing.Point(7, 16)
         Me.lblMatricula.Name = "lblMatricula"
-        Me.lblMatricula.Size = New System.Drawing.Size(65, 16)
+        Me.lblMatricula.Size = New System.Drawing.Size(123, 16)
         Me.lblMatricula.TabIndex = 0
-        Me.lblMatricula.Text = "Matricula:"
+        Me.lblMatricula.Text = "Matricula a facturar:"
         '
         'panelDatos
         '
+        Me.panelDatos.Controls.Add(Me.lblRFC)
+        Me.panelDatos.Controls.Add(Me.txtRFC)
         Me.panelDatos.Controls.Add(Me.lblTurno)
         Me.panelDatos.Controls.Add(Me.lblCarrera)
         Me.panelDatos.Controls.Add(Me.txtEmail)
@@ -118,11 +143,31 @@ Partial Class MainCobrosDiferidosEDC
         Me.panelDatos.Controls.Add(Me.txtNombre)
         Me.panelDatos.Controls.Add(Me.lblEmail)
         Me.panelDatos.Controls.Add(Me.lblNombre)
-        Me.panelDatos.Location = New System.Drawing.Point(261, 70)
+        Me.panelDatos.Location = New System.Drawing.Point(480, 70)
         Me.panelDatos.Name = "panelDatos"
         Me.panelDatos.Size = New System.Drawing.Size(708, 107)
         Me.panelDatos.TabIndex = 16
         Me.panelDatos.Visible = False
+        '
+        'lblRFC
+        '
+        Me.lblRFC.AutoSize = True
+        Me.lblRFC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRFC.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblRFC.Location = New System.Drawing.Point(403, 79)
+        Me.lblRFC.Name = "lblRFC"
+        Me.lblRFC.Size = New System.Drawing.Size(34, 15)
+        Me.lblRFC.TabIndex = 25
+        Me.lblRFC.Text = "RFC:"
+        '
+        'txtRFC
+        '
+        Me.txtRFC.Enabled = False
+        Me.txtRFC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRFC.Location = New System.Drawing.Point(473, 76)
+        Me.txtRFC.Name = "txtRFC"
+        Me.txtRFC.Size = New System.Drawing.Size(217, 21)
+        Me.txtRFC.TabIndex = 26
         '
         'lblTurno
         '
@@ -152,7 +197,7 @@ Partial Class MainCobrosDiferidosEDC
         Me.txtEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtEmail.Location = New System.Drawing.Point(77, 32)
         Me.txtEmail.Name = "txtEmail"
-        Me.txtEmail.Size = New System.Drawing.Size(392, 21)
+        Me.txtEmail.Size = New System.Drawing.Size(613, 21)
         Me.txtEmail.TabIndex = 20
         '
         'txtTurno
@@ -161,7 +206,7 @@ Partial Class MainCobrosDiferidosEDC
         Me.txtTurno.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtTurno.Location = New System.Drawing.Point(77, 76)
         Me.txtTurno.Name = "txtTurno"
-        Me.txtTurno.Size = New System.Drawing.Size(392, 21)
+        Me.txtTurno.Size = New System.Drawing.Size(216, 21)
         Me.txtTurno.TabIndex = 24
         '
         'txtCarrera
@@ -170,7 +215,7 @@ Partial Class MainCobrosDiferidosEDC
         Me.txtCarrera.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCarrera.Location = New System.Drawing.Point(77, 54)
         Me.txtCarrera.Name = "txtCarrera"
-        Me.txtCarrera.Size = New System.Drawing.Size(392, 21)
+        Me.txtCarrera.Size = New System.Drawing.Size(613, 21)
         Me.txtCarrera.TabIndex = 22
         '
         'txtNombre
@@ -179,7 +224,7 @@ Partial Class MainCobrosDiferidosEDC
         Me.txtNombre.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtNombre.Location = New System.Drawing.Point(77, 10)
         Me.txtNombre.Name = "txtNombre"
-        Me.txtNombre.Size = New System.Drawing.Size(392, 21)
+        Me.txtNombre.Size = New System.Drawing.Size(613, 21)
         Me.txtNombre.TabIndex = 18
         '
         'lblEmail
@@ -209,7 +254,7 @@ Partial Class MainCobrosDiferidosEDC
         Me.lblTotal.AutoSize = True
         Me.lblTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTotal.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblTotal.Location = New System.Drawing.Point(653, 577)
+        Me.lblTotal.Location = New System.Drawing.Point(951, 372)
         Me.lblTotal.Name = "lblTotal"
         Me.lblTotal.Size = New System.Drawing.Size(0, 29)
         Me.lblTotal.TabIndex = 21
@@ -218,9 +263,9 @@ Partial Class MainCobrosDiferidosEDC
         '
         Me.cbFormaPago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbFormaPago.FormattingEnabled = True
-        Me.cbFormaPago.Location = New System.Drawing.Point(805, 303)
+        Me.cbFormaPago.Location = New System.Drawing.Point(930, 77)
         Me.cbFormaPago.Name = "cbFormaPago"
-        Me.cbFormaPago.Size = New System.Drawing.Size(155, 21)
+        Me.cbFormaPago.Size = New System.Drawing.Size(235, 21)
         Me.cbFormaPago.TabIndex = 20
         '
         'lblFormadepago
@@ -228,7 +273,7 @@ Partial Class MainCobrosDiferidosEDC
         Me.lblFormadepago.AutoSize = True
         Me.lblFormadepago.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblFormadepago.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblFormadepago.Location = New System.Drawing.Point(695, 304)
+        Me.lblFormadepago.Location = New System.Drawing.Point(824, 78)
         Me.lblFormadepago.Name = "lblFormadepago"
         Me.lblFormadepago.Size = New System.Drawing.Size(104, 16)
         Me.lblFormadepago.TabIndex = 19
@@ -238,7 +283,7 @@ Partial Class MainCobrosDiferidosEDC
         '
         Me.btnCobrar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.cash_register_26px
         Me.btnCobrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnCobrar.Location = New System.Drawing.Point(729, 443)
+        Me.btnCobrar.Location = New System.Drawing.Point(1020, 428)
         Me.btnCobrar.Name = "btnCobrar"
         Me.btnCobrar.Size = New System.Drawing.Size(70, 40)
         Me.btnCobrar.TabIndex = 18
@@ -248,7 +293,7 @@ Partial Class MainCobrosDiferidosEDC
         '
         Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_32px
         Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnSalir.Location = New System.Drawing.Point(876, 443)
+        Me.btnSalir.Location = New System.Drawing.Point(1096, 428)
         Me.btnSalir.Name = "btnSalir"
         Me.btnSalir.Size = New System.Drawing.Size(70, 40)
         Me.btnSalir.TabIndex = 17
@@ -256,83 +301,275 @@ Partial Class MainCobrosDiferidosEDC
         '
         'panelCobros
         '
+        Me.panelCobros.Controls.Add(Me.txtMonto)
+        Me.panelCobros.Controls.Add(Me.lblTotal)
+        Me.panelCobros.Controls.Add(Me.lblMonto)
+        Me.panelCobros.Controls.Add(Me.txtNoCuenta)
+        Me.panelCobros.Controls.Add(Me.lblNoCuenta)
+        Me.panelCobros.Controls.Add(Me.txtNoCheque)
+        Me.panelCobros.Controls.Add(Me.lblNoCheque)
+        Me.panelCobros.Controls.Add(Me.txtUltimos4Digitos)
+        Me.panelCobros.Controls.Add(Me.lblUltimosDigitos)
+        Me.panelCobros.Controls.Add(Me.DTPickerFecha)
+        Me.panelCobros.Controls.Add(Me.lblFecha)
+        Me.panelCobros.Controls.Add(Me.cbTipoBanco)
+        Me.panelCobros.Controls.Add(Me.lblTIpoBanco)
+        Me.panelCobros.Controls.Add(Me.cbBanco)
+        Me.panelCobros.Controls.Add(Me.lblBanco)
+        Me.panelCobros.Controls.Add(Me.btnBorrar)
+        Me.panelCobros.Controls.Add(Me.txtBusquedaMatricula)
+        Me.panelCobros.Controls.Add(Me.lblMatricula2)
+        Me.panelCobros.Controls.Add(Me.GridConceptos)
         Me.panelCobros.Controls.Add(Me.lblPeso)
         Me.panelCobros.Controls.Add(Me.Label2)
         Me.panelCobros.Controls.Add(Me.btnAgregar)
         Me.panelCobros.Controls.Add(Me.Label1)
-        Me.panelCobros.Controls.Add(Me.Tree)
         Me.panelCobros.Controls.Add(Me.lblFormadepago)
         Me.panelCobros.Controls.Add(Me.btnSalir)
         Me.panelCobros.Controls.Add(Me.btnCobrar)
         Me.panelCobros.Controls.Add(Me.cbFormaPago)
         Me.panelCobros.Location = New System.Drawing.Point(5, 183)
         Me.panelCobros.Name = "panelCobros"
-        Me.panelCobros.Size = New System.Drawing.Size(964, 489)
+        Me.panelCobros.Size = New System.Drawing.Size(1183, 489)
         Me.panelCobros.TabIndex = 23
         Me.panelCobros.Visible = False
         '
-        'btnAgregar
+        'txtMonto
         '
-        Me.btnAgregar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.plus_32px
-        Me.btnAgregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnAgregar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAgregar.Location = New System.Drawing.Point(612, 4)
-        Me.btnAgregar.Name = "btnAgregar"
-        Me.btnAgregar.Size = New System.Drawing.Size(77, 41)
-        Me.btnAgregar.TabIndex = 25
-        Me.btnAgregar.UseVisualStyleBackColor = True
+        Me.txtMonto.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMonto.Location = New System.Drawing.Point(930, 110)
+        Me.txtMonto.Name = "txtMonto"
+        Me.txtMonto.Size = New System.Drawing.Size(226, 21)
+        Me.txtMonto.TabIndex = 49
         '
-        'Label1
+        'lblMonto
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label1.Location = New System.Drawing.Point(508, 16)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(98, 16)
-        Me.Label1.TabIndex = 24
-        Me.Label1.Text = "Agregar pago: "
+        Me.lblMonto.AutoSize = True
+        Me.lblMonto.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblMonto.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblMonto.Location = New System.Drawing.Point(824, 113)
+        Me.lblMonto.Name = "lblMonto"
+        Me.lblMonto.Size = New System.Drawing.Size(98, 16)
+        Me.lblMonto.TabIndex = 48
+        Me.lblMonto.Text = "Monto a pagar:"
         '
-        'Tree
+        'txtNoCuenta
         '
-        Me.Tree.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Tree.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Tree.ForeColor = System.Drawing.SystemColors.Control
-        Me.Tree.Location = New System.Drawing.Point(7, 50)
-        Me.Tree.Name = "Tree"
-        TreeNode3.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        TreeNode3.ForeColor = System.Drawing.SystemColors.Control
-        TreeNode3.Name = "nodeEventos"
-        TreeNode3.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        TreeNode3.SelectedImageIndex = -2
-        TreeNode3.StateImageIndex = 2
-        TreeNode3.Text = "Eventos"
-        TreeNode4.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        TreeNode4.ForeColor = System.Drawing.SystemColors.Control
-        TreeNode4.Name = "nodePagosOpcionales"
-        TreeNode4.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        TreeNode4.SelectedImageIndex = -2
-        TreeNode4.StateImageIndex = 2
-        TreeNode4.Text = "Pagos Opcionales"
-        Me.Tree.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode3, TreeNode4})
-        Me.Tree.Size = New System.Drawing.Size(682, 433)
-        Me.Tree.StateImageList = Me.ImageListTree
-        Me.Tree.TabIndex = 23
+        Me.txtNoCuenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtNoCuenta.Location = New System.Drawing.Point(930, 284)
+        Me.txtNoCuenta.Name = "txtNoCuenta"
+        Me.txtNoCuenta.Size = New System.Drawing.Size(226, 21)
+        Me.txtNoCuenta.TabIndex = 47
+        Me.txtNoCuenta.Visible = False
         '
-        'ImageListTree
+        'lblNoCuenta
         '
-        Me.ImageListTree.ImageStream = CType(resources.GetObject("ImageListTree.ImageStream"), System.Windows.Forms.ImageListStreamer)
-        Me.ImageListTree.TransparentColor = System.Drawing.Color.Transparent
-        Me.ImageListTree.Images.SetKeyName(0, "unchecked_checkbox_40px.png")
-        Me.ImageListTree.Images.SetKeyName(1, "checked_checkbox_40px.png")
-        Me.ImageListTree.Images.SetKeyName(2, "folder_40px.png")
+        Me.lblNoCuenta.AutoSize = True
+        Me.lblNoCuenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNoCuenta.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblNoCuenta.Location = New System.Drawing.Point(825, 287)
+        Me.lblNoCuenta.Name = "lblNoCuenta"
+        Me.lblNoCuenta.Size = New System.Drawing.Size(74, 16)
+        Me.lblNoCuenta.TabIndex = 46
+        Me.lblNoCuenta.Text = "No. Cuenta"
+        Me.lblNoCuenta.Visible = False
+        '
+        'txtNoCheque
+        '
+        Me.txtNoCheque.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtNoCheque.Location = New System.Drawing.Point(930, 312)
+        Me.txtNoCheque.Name = "txtNoCheque"
+        Me.txtNoCheque.Size = New System.Drawing.Size(226, 21)
+        Me.txtNoCheque.TabIndex = 45
+        Me.txtNoCheque.Visible = False
+        '
+        'lblNoCheque
+        '
+        Me.lblNoCheque.AutoSize = True
+        Me.lblNoCheque.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNoCheque.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblNoCheque.Location = New System.Drawing.Point(824, 315)
+        Me.lblNoCheque.Name = "lblNoCheque"
+        Me.lblNoCheque.Size = New System.Drawing.Size(96, 16)
+        Me.lblNoCheque.TabIndex = 44
+        Me.lblNoCheque.Text = "No. de cheque"
+        Me.lblNoCheque.Visible = False
+        '
+        'txtUltimos4Digitos
+        '
+        Me.txtUltimos4Digitos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtUltimos4Digitos.Location = New System.Drawing.Point(930, 257)
+        Me.txtUltimos4Digitos.MaxLength = 4
+        Me.txtUltimos4Digitos.Name = "txtUltimos4Digitos"
+        Me.txtUltimos4Digitos.Size = New System.Drawing.Size(226, 21)
+        Me.txtUltimos4Digitos.TabIndex = 43
+        Me.txtUltimos4Digitos.Visible = False
+        '
+        'lblUltimosDigitos
+        '
+        Me.lblUltimosDigitos.AutoSize = True
+        Me.lblUltimosDigitos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblUltimosDigitos.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblUltimosDigitos.Location = New System.Drawing.Point(824, 260)
+        Me.lblUltimosDigitos.Name = "lblUltimosDigitos"
+        Me.lblUltimosDigitos.Size = New System.Drawing.Size(109, 16)
+        Me.lblUltimosDigitos.TabIndex = 42
+        Me.lblUltimosDigitos.Text = "Ultimos 4 digitos:"
+        Me.lblUltimosDigitos.Visible = False
+        '
+        'DTPickerFecha
+        '
+        Me.DTPickerFecha.CalendarFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DTPickerFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.DTPickerFecha.Location = New System.Drawing.Point(930, 228)
+        Me.DTPickerFecha.Name = "DTPickerFecha"
+        Me.DTPickerFecha.Size = New System.Drawing.Size(89, 20)
+        Me.DTPickerFecha.TabIndex = 41
+        Me.DTPickerFecha.Visible = False
+        '
+        'lblFecha
+        '
+        Me.lblFecha.AutoSize = True
+        Me.lblFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFecha.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblFecha.Location = New System.Drawing.Point(825, 232)
+        Me.lblFecha.Name = "lblFecha"
+        Me.lblFecha.Size = New System.Drawing.Size(49, 16)
+        Me.lblFecha.TabIndex = 40
+        Me.lblFecha.Text = "Fecha:"
+        Me.lblFecha.Visible = False
+        '
+        'cbTipoBanco
+        '
+        Me.cbTipoBanco.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbTipoBanco.FormattingEnabled = True
+        Me.cbTipoBanco.Location = New System.Drawing.Point(930, 201)
+        Me.cbTipoBanco.Name = "cbTipoBanco"
+        Me.cbTipoBanco.Size = New System.Drawing.Size(226, 21)
+        Me.cbTipoBanco.TabIndex = 39
+        Me.cbTipoBanco.Visible = False
+        '
+        'lblTIpoBanco
+        '
+        Me.lblTIpoBanco.AutoSize = True
+        Me.lblTIpoBanco.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTIpoBanco.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblTIpoBanco.Location = New System.Drawing.Point(824, 202)
+        Me.lblTIpoBanco.Name = "lblTIpoBanco"
+        Me.lblTIpoBanco.Size = New System.Drawing.Size(39, 16)
+        Me.lblTIpoBanco.TabIndex = 38
+        Me.lblTIpoBanco.Text = "TIpo:"
+        Me.lblTIpoBanco.Visible = False
+        '
+        'cbBanco
+        '
+        Me.cbBanco.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbBanco.FormattingEnabled = True
+        Me.cbBanco.Location = New System.Drawing.Point(930, 172)
+        Me.cbBanco.Name = "cbBanco"
+        Me.cbBanco.Size = New System.Drawing.Size(226, 21)
+        Me.cbBanco.TabIndex = 37
+        Me.cbBanco.Visible = False
+        '
+        'lblBanco
+        '
+        Me.lblBanco.AutoSize = True
+        Me.lblBanco.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblBanco.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblBanco.Location = New System.Drawing.Point(824, 173)
+        Me.lblBanco.Name = "lblBanco"
+        Me.lblBanco.Size = New System.Drawing.Size(50, 16)
+        Me.lblBanco.TabIndex = 36
+        Me.lblBanco.Text = "Banco:"
+        Me.lblBanco.Visible = False
+        '
+        'btnBorrar
+        '
+        Me.btnBorrar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.trash_32px
+        Me.btnBorrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnBorrar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnBorrar.Location = New System.Drawing.Point(722, 26)
+        Me.btnBorrar.Name = "btnBorrar"
+        Me.btnBorrar.Size = New System.Drawing.Size(77, 41)
+        Me.btnBorrar.TabIndex = 29
+        Me.btnBorrar.UseVisualStyleBackColor = True
+        '
+        'txtBusquedaMatricula
+        '
+        Me.txtBusquedaMatricula.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtBusquedaMatricula.Location = New System.Drawing.Point(163, 35)
+        Me.txtBusquedaMatricula.Name = "txtBusquedaMatricula"
+        Me.txtBusquedaMatricula.Size = New System.Drawing.Size(133, 22)
+        Me.txtBusquedaMatricula.TabIndex = 3
+        '
+        'lblMatricula2
+        '
+        Me.lblMatricula2.AutoSize = True
+        Me.lblMatricula2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblMatricula2.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblMatricula2.Location = New System.Drawing.Point(92, 38)
+        Me.lblMatricula2.Name = "lblMatricula2"
+        Me.lblMatricula2.Size = New System.Drawing.Size(65, 16)
+        Me.lblMatricula2.TabIndex = 3
+        Me.lblMatricula2.Text = "Matricula:"
+        '
+        'GridConceptos
+        '
+        Me.GridConceptos.AllowUserToAddRows = False
+        Me.GridConceptos.AllowUserToDeleteRows = False
+        Me.GridConceptos.AllowUserToResizeColumns = False
+        Me.GridConceptos.AllowUserToResizeRows = False
+        Me.GridConceptos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.GridConceptos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.GridConceptos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.GridConceptos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.columnID, Me.columnClavePago, Me.MatriculaColumn, Me.DescripcionColumn, Me.MontoColumn})
+        Me.GridConceptos.Location = New System.Drawing.Point(10, 78)
+        Me.GridConceptos.Name = "GridConceptos"
+        Me.GridConceptos.ReadOnly = True
+        Me.GridConceptos.Size = New System.Drawing.Size(789, 391)
+        Me.GridConceptos.TabIndex = 28
+        '
+        'columnID
+        '
+        Me.columnID.HeaderText = "ID"
+        Me.columnID.Name = "columnID"
+        Me.columnID.ReadOnly = True
+        Me.columnID.Visible = False
+        '
+        'columnClavePago
+        '
+        Me.columnClavePago.HeaderText = "ClavePago"
+        Me.columnClavePago.Name = "columnClavePago"
+        Me.columnClavePago.ReadOnly = True
+        Me.columnClavePago.Visible = False
+        '
+        'MatriculaColumn
+        '
+        Me.MatriculaColumn.FillWeight = 60.9137!
+        Me.MatriculaColumn.HeaderText = "Clave cliente"
+        Me.MatriculaColumn.Name = "MatriculaColumn"
+        Me.MatriculaColumn.ReadOnly = True
+        '
+        'DescripcionColumn
+        '
+        Me.DescripcionColumn.FillWeight = 172.6754!
+        Me.DescripcionColumn.HeaderText = "Descripcion"
+        Me.DescripcionColumn.Name = "DescripcionColumn"
+        Me.DescripcionColumn.ReadOnly = True
+        '
+        'MontoColumn
+        '
+        Me.MontoColumn.FillWeight = 66.41091!
+        Me.MontoColumn.HeaderText = "Monto"
+        Me.MontoColumn.Name = "MontoColumn"
+        Me.MontoColumn.ReadOnly = True
         '
         'lblPeso
         '
         Me.lblPeso.AutoSize = True
         Me.lblPeso.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblPeso.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblPeso.Location = New System.Drawing.Point(699, 343)
+        Me.lblPeso.Location = New System.Drawing.Point(919, 372)
         Me.lblPeso.Name = "lblPeso"
         Me.lblPeso.Size = New System.Drawing.Size(26, 29)
         Me.lblPeso.TabIndex = 27
@@ -343,10 +580,40 @@ Partial Class MainCobrosDiferidosEDC
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(719, 343)
+        Me.Label2.Location = New System.Drawing.Point(939, 372)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(0, 29)
         Me.Label2.TabIndex = 26
+        '
+        'btnAgregar
+        '
+        Me.btnAgregar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.plus_32px
+        Me.btnAgregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnAgregar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregar.Location = New System.Drawing.Point(302, 26)
+        Me.btnAgregar.Name = "btnAgregar"
+        Me.btnAgregar.Size = New System.Drawing.Size(77, 41)
+        Me.btnAgregar.TabIndex = 25
+        Me.btnAgregar.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label1.Location = New System.Drawing.Point(7, 13)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(95, 16)
+        Me.Label1.TabIndex = 24
+        Me.Label1.Text = "Agregar pago:"
+        '
+        'ImageListTree
+        '
+        Me.ImageListTree.ImageStream = CType(resources.GetObject("ImageListTree.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.ImageListTree.TransparentColor = System.Drawing.Color.Transparent
+        Me.ImageListTree.Images.SetKeyName(0, "unchecked_checkbox_40px.png")
+        Me.ImageListTree.Images.SetKeyName(1, "checked_checkbox_40px.png")
+        Me.ImageListTree.Images.SetKeyName(2, "folder_40px.png")
         '
         'MainCobrosDiferidosEDC
         '
@@ -354,9 +621,8 @@ Partial Class MainCobrosDiferidosEDC
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.ClientSize = New System.Drawing.Size(976, 684)
+        Me.ClientSize = New System.Drawing.Size(1200, 684)
         Me.Controls.Add(Me.panelCobros)
-        Me.Controls.Add(Me.lblTotal)
         Me.Controls.Add(Me.panelDatos)
         Me.Controls.Add(Me.panelBusqueda)
         Me.Controls.Add(Me.lblNombreVentana)
@@ -369,8 +635,8 @@ Partial Class MainCobrosDiferidosEDC
         Me.panelDatos.PerformLayout()
         Me.panelCobros.ResumeLayout(False)
         Me.panelCobros.PerformLayout()
+        CType(Me.GridConceptos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
@@ -396,8 +662,32 @@ Partial Class MainCobrosDiferidosEDC
     Friend WithEvents panelCobros As Panel
     Friend WithEvents ImageListTree As ImageList
     Friend WithEvents Label1 As Label
-    Friend WithEvents Tree As TreeView
     Friend WithEvents btnAgregar As Button
     Friend WithEvents lblPeso As Label
     Friend WithEvents Label2 As Label
+    Friend WithEvents lblRFC As Label
+    Friend WithEvents txtRFC As TextBox
+    Friend WithEvents GridConceptos As DataGridView
+    Friend WithEvents txtBusquedaMatricula As TextBox
+    Friend WithEvents lblMatricula2 As Label
+    Friend WithEvents columnID As DataGridViewTextBoxColumn
+    Friend WithEvents columnClavePago As DataGridViewTextBoxColumn
+    Friend WithEvents MatriculaColumn As DataGridViewTextBoxColumn
+    Friend WithEvents DescripcionColumn As DataGridViewTextBoxColumn
+    Friend WithEvents MontoColumn As DataGridViewTextBoxColumn
+    Friend WithEvents btnBorrar As Button
+    Friend WithEvents txtMonto As TextBox
+    Friend WithEvents lblMonto As Label
+    Friend WithEvents txtNoCuenta As TextBox
+    Friend WithEvents lblNoCuenta As Label
+    Friend WithEvents txtNoCheque As TextBox
+    Friend WithEvents lblNoCheque As Label
+    Friend WithEvents txtUltimos4Digitos As TextBox
+    Friend WithEvents lblUltimosDigitos As Label
+    Friend WithEvents DTPickerFecha As DateTimePicker
+    Friend WithEvents lblFecha As Label
+    Friend WithEvents cbTipoBanco As ComboBox
+    Friend WithEvents lblTIpoBanco As Label
+    Friend WithEvents cbBanco As ComboBox
+    Friend WithEvents lblBanco As Label
 End Class

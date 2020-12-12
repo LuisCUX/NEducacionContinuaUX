@@ -31,6 +31,10 @@
                 Dim porcentaje As Decimal = db.exectSQLQueryScalar($"SELECT Porcentaje FROM aut_Condonaciones WHERE ID = {IDCondonacion}")
                 result = result + $"|Condonacion {porcentaje}%"
             End If
+            Dim abonostring As String = Me.buscarAbonoConcepto(item("ID"), claveTipoPago, Matricula)
+            If (abonostring <> "-") Then
+                result = result + $"{abonostring}"
+            End If
             If (Tipo = "Cobros") Then
                 Tree.Nodes(1).Nodes.Add(result).StateImageIndex = 0
                 Tree.Nodes(1).Expand()
@@ -66,6 +70,10 @@
                 Dim porcentaje As Decimal = db.exectSQLQueryScalar($"SELECT Porcentaje FROM aut_Condonaciones WHERE ID = {IDCondonacion}")
                 result = result + $"|Condonacion {porcentaje}%"
             End If
+            Dim abonostring As String = Me.buscarAbonoConcepto(item("id_registro"), 3, Matricula)
+            If (abonostring <> "-") Then
+                result = result + $"{abonostring}"
+            End If
             If (Tipo = "Cobros") Then
                 Tree.Nodes(0).Nodes.Add(result).StateImageIndex = 0
                 Tree.Nodes(0).Expand()
@@ -89,6 +97,10 @@
                 descuento = Format(CDec(item("Descuento")), "#####0.00")
             End If
             Dim result As String = $"[{item("ID")}]|({item("Clave")})|{item("Descripcion")}|{item("Importe")}|{1}|DESCUENTO: {descuento}|Total: {Me.calcularTotal(item("Importe"), 1, True, False, False)}"
+            Dim abonostring As String = Me.buscarAbonoConcepto(item("ID"), 6, Matricula)
+            If (abonostring <> "-") Then
+                result = result + $"{abonostring}"
+            End If
             If (Tipo = "Cobros") Then
                 Tree.Nodes(2).Nodes.Add(result).StateImageIndex = 0
                 Tree.Nodes(2).Expand()
@@ -109,6 +121,10 @@
                 descuento = Format(CDec(item("Descuento")), "#####0.00")
             End If
             Dim result As String = $"[{item("ID")}]|({item("Clave")})|{item("Descripcion")}|{item("Importe")}|{1}|DESCUENTO: {descuento}|Total: {Me.calcularTotal(item("Importe"), 1, True, False, False)}"
+            Dim abonostring As String = Me.buscarAbonoConcepto(item("ID"), 4, Matricula)
+            If (abonostring <> "-") Then
+                result = result + $"{abonostring}"
+            End If
             If (Tipo = "Cobros") Then
                 Tree.Nodes(3).Nodes.Add(result).StateImageIndex = 0
                 Tree.Nodes(3).Expand()
@@ -130,6 +146,10 @@
             End If
             If (item("Fecha_Limite_Pago") >= Date.Today) Then
                 Dim result As String = $"[{item("ID")}]|({item("Clave")})|{item("Descripcion")}|{item("Importe")}|{1}|DESCUENTO: {descuento}|Total: {Me.calcularTotal(item("Importe"), 1, False, False, False)}"
+                Dim abonostring As String = Me.buscarAbonoConcepto(item("ID"), 5, Matricula)
+                If (abonostring <> "-") Then
+                    result = result + $"{abonostring}"
+                End If
                 If (Tipo = "Cobros") Then
                     Tree.Nodes(4).Nodes.Add(result).StateImageIndex = 0
                     Tree.Nodes(4).Expand()
@@ -153,6 +173,10 @@
             Dim condonacion As Object() = ch.obtenerDatosCondonacion(item("ID"), 7)
             If (condonacion(0) > 0) Then
                 result = $"{result}|Condonación {Convert.ToInt32(condonacion(1))}%"
+            End If
+            Dim abonostring As String = Me.buscarAbonoConcepto(item("ID"), 7, Matricula)
+            If (abonostring <> "-") Then
+                result = result + $"{abonostring}"
             End If
             If (Tipo = "Cobros") Then
                 Tree.Nodes(5).Nodes.Add(result).StateImageIndex = 0
@@ -182,6 +206,16 @@
             End If
         Next
     End Sub
+
+    Function buscarAbonoConcepto(IDConcepto As Integer, claveConcepto As Integer, Matricula As String) As String
+        Dim cantidad = db.exectSQLQueryScalar($"SELECT Sum(Cantidad_Abonada) FROM ing_Abonos WHERE Clave_Cliente = '{Matricula}' AND IDPago = {IDConcepto} AND ID_ClavePago = {claveConcepto}")
+        If (IsDBNull(cantidad)) Then
+            Return "-"
+        Else
+            Dim abonostring As String = $"|Abono ${Format(CDec(cantidad), "#####0.00")}"
+            Return abonostring
+        End If
+    End Function
 
     Function calcularTotal(costoUnitario As Decimal, cantidad As Integer, consideraIVA As Boolean, agregaIVA As Boolean, exentaIVA As Boolean) As String
         Dim total As Decimal

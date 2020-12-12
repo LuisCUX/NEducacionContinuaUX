@@ -37,4 +37,23 @@
         AsignacionPlanesEDC.MdiParent = Me
         AsignacionPlanesEDC.Show()
     End Sub
+
+    Private Sub CobroToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CobroToolStripMenuItem.Click
+        MainCobrosDiferidosEDC.MdiParent = Me
+        MainCobrosDiferidosEDC.Show()
+    End Sub
+
+    Private Sub RegistroDeNotaDeCreditoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RegistroDeNotaDeCreditoToolStripMenuItem.Click
+        NotasDeCreditoEDC.MdiParent = Me
+        NotasDeCreditoEDC.Show()
+    End Sub
+
+    Private Sub EwewaewaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EwewaewaToolStripMenuItem.Click
+        ConsultaTimbresService.EstatusTimbre()
+    End Sub
+
+    Private Sub PagosACreditoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PagosACreditoToolStripMenuItem.Click
+        PagosCreditoEDC.MdiParent = Me
+        PagosCreditoEDC.Show()
+    End Sub
 End Class

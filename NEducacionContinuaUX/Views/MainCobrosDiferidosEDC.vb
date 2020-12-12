@@ -3,12 +3,14 @@
     Dim ch As ConceptHandlerController = New ConceptHandlerController()
     Dim Matricula As String
     Dim tipoMatricula As String
-    Dim co As CobrosController = New CobrosController()
+    Dim co As CobrosDiferidosController = New CobrosDiferidosController()
     Dim va As ValidacionesController = New ValidacionesController()
 
     Private Sub MainCobrosDiferidosEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim tableFormaPago As DataTable = db.getDataTableFromSQL("SELECT Forma_Pago, Descripcion FROM ing_CatFormaPago")
         ComboboxService.llenarCombobox(cbFormaPago, tableFormaPago, "Forma_Pago", "Descripcion")
+        Dim tablebancos As DataTable = db.getDataTableFromSQL("SELECT ID, Nombre_Banco FROM ing_Cat_Bancos")
+        ComboboxService.llenarCombobox(cbBanco, tablebancos, "ID", "Nombre_Banco")
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
@@ -19,10 +21,113 @@
             Me.Reiniciar()
             Exit Sub
         ElseIf (tipoMatricula = "UX") Then
-            ''va.buscarMatriculaUX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno)
+            va.buscarMatriculaUX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno)
+        ElseIf (tipoMatricula = "EX") Then
+            va.buscarMatriculaEX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno, txtRFC)
         ElseIf (tipoMatricula = "EC") Then
-            ''va.buscarMatriculaEX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno)
+            va.buscarMatriculaEC(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno, txtRFC)
         End If
+    End Sub
+
+    Private Sub cbFormaPago_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbFormaPago.SelectionChangeCommitted
+        cbTipoBanco.DataSource = Nothing
+        If (cbFormaPago.Text = "EFECTIVO") Then ''EFECTIVO
+            lblBanco.Visible = False
+            lblTIpoBanco.Visible = False
+            lblFecha.Visible = False
+            lblUltimosDigitos.Visible = False
+            lblNoCuenta.Visible = False
+            lblNoCheque.Visible = False
+            cbBanco.Visible = False
+            cbTipoBanco.Visible = False
+            DTPickerFecha.Visible = False
+            txtNoCuenta.Visible = False
+            txtUltimos4Digitos.Visible = False
+            txtNoCheque.Visible = False
+        ElseIf (cbFormaPago.Text = "TARJETA DE CREDITO" Or cbFormaPago.Text = "TARJETA DE DEBITO") Then ''TARJETA DE CREDITO O DEBITO
+            lblBanco.Visible = True
+            lblTIpoBanco.Visible = True
+            lblFecha.Visible = False
+            lblUltimosDigitos.Visible = True
+            lblNoCuenta.Visible = False
+            lblNoCheque.Visible = False
+            cbBanco.Visible = True
+            cbTipoBanco.Visible = True
+            DTPickerFecha.Visible = False
+            txtUltimos4Digitos.Visible = True
+            txtNoCheque.Visible = False
+            txtNoCuenta.Visible = False
+        ElseIf (cbFormaPago.Text = "CHEQUE") Then ''CHEQUE
+            lblBanco.Visible = True
+            lblTIpoBanco.Visible = False
+            lblFecha.Visible = False
+            lblUltimosDigitos.Visible = False
+            lblNoCuenta.Visible = True
+            lblNoCheque.Visible = True
+            cbBanco.Visible = True
+            cbTipoBanco.Visible = False
+            DTPickerFecha.Visible = False
+            txtUltimos4Digitos.Visible = False
+            txtNoCheque.Visible = True
+            txtNoCuenta.Visible = True
+        ElseIf (cbFormaPago.Text = "TRANSFERENCIA") Then ''TRANSFERENCIA
+            lblBanco.Visible = True
+            lblTIpoBanco.Visible = False
+            lblFecha.Visible = True
+            lblUltimosDigitos.Visible = False
+            lblNoCuenta.Visible = False
+            lblNoCheque.Visible = False
+            cbBanco.Visible = True
+            cbTipoBanco.Visible = False
+            DTPickerFecha.Visible = True
+            txtUltimos4Digitos.Visible = False
+            txtNoCheque.Visible = False
+            txtNoCuenta.Visible = False
+        ElseIf (cbFormaPago.Text = "DEPOSITO BANCARIO C/COMPROBANTE" Or cbFormaPago.Text = "DEPOSITO BANCARIO EDO CTA") Then ''DEPOSITO BANCARIO C/COMPROBANTE
+            lblBanco.Visible = True
+            lblTIpoBanco.Visible = True
+            lblFecha.Visible = True
+            lblUltimosDigitos.Visible = False
+            lblNoCuenta.Visible = False
+            lblNoCheque.Visible = False
+            cbBanco.Visible = True
+            cbTipoBanco.Visible = True
+            DTPickerFecha.Visible = True
+            txtUltimos4Digitos.Visible = False
+            txtNoCheque.Visible = False
+            txtNoCuenta.Visible = False
+        ElseIf (cbFormaPago.Text = "CREDITO") Then ''CREDITO
+            lblBanco.Visible = False
+            lblTIpoBanco.Visible = False
+            lblFecha.Visible = False
+            lblUltimosDigitos.Visible = False
+            lblNoCuenta.Visible = False
+            lblNoCheque.Visible = False
+            cbBanco.Visible = False
+            cbTipoBanco.Visible = False
+            DTPickerFecha.Visible = False
+            txtUltimos4Digitos.Visible = False
+            txtNoCheque.Visible = False
+            txtNoCuenta.Visible = False
+        ElseIf (cbFormaPago.Text = "NOTA DE CREDITO") Then ''NOTA DE CREDITO
+            lblBanco.Visible = False
+            lblTIpoBanco.Visible = False
+            lblFecha.Visible = False
+            lblUltimosDigitos.Visible = False
+            lblNoCuenta.Visible = False
+            lblNoCheque.Visible = False
+            cbBanco.Visible = False
+            cbTipoBanco.Visible = False
+            DTPickerFecha.Visible = False
+            txtUltimos4Digitos.Visible = False
+            txtNoCheque.Visible = False
+            txtNoCuenta.Visible = False
+        End If
+    End Sub
+
+    Private Sub cbBanco_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbBanco.SelectionChangeCommitted
+        Dim tableTipoPAgo As DataTable = db.getDataTableFromSQL($"SELECT ID, Tipo_Pago FROM ing_cat_tipoFormaPago WHERE ID_TipoPago = (SELECT ID FROM ing_CatFormaPago WHERE Forma_Pago = {cbFormaPago.SelectedValue} AND Descripcion = '{cbFormaPago.Text}')")
+        ComboboxService.llenarCombobox(cbTipoBanco, tableTipoPAgo, "ID", "Tipo_Pago")
     End Sub
 
     Sub Reiniciar()
@@ -31,7 +136,7 @@
         MainCobrosDiferidosEDC_Load(Me, Nothing)
     End Sub
 
-    Private Sub txtMatricula_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtMatricula.KeyPress
+    Private Sub txtMatricula_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtMatricula.KeyPress, txtBusquedaMatricula.KeyPress
         If Asc(e.KeyChar) = 39 Or Asc(e.KeyChar) = 44 Then
             e.Handled = True
         End If
@@ -42,14 +147,146 @@
         txtEmail.Clear()
         txtCarrera.Clear()
         txtTurno.Clear()
-        Tree.Nodes(0).Nodes.Clear()
-        Tree.Nodes(1).Nodes.Clear()
         lblTotal.Text = ""
         ch.limpiarListaConceptos()
     End Sub
 
     Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
-        ModalCobrosDiferidosEDC.MdiParent = PrincipalView
-        ModalCobrosDiferidosEDC.Show()
+        Dim tipoMatriculaB As String = va.validarMatricula(txtBusquedaMatricula.Text)
+        If (txtBusquedaMatricula.Text = "") Then
+            MessageBox.Show("Por favor ingrese una matricula")
+            Exit Sub
+        ElseIf (tipoMatricula = "False") Then
+            txtBusquedaMatricula.Clear()
+            Exit Sub
+        Else
+            ObjectBagService.setItem("Matricula", txtBusquedaMatricula.Text)
+            ObjectBagService.setItem("tipoMatricula", tipoMatriculaB)
+            ModalCobrosDiferidosEDC.MdiParent = PrincipalView
+            ModalCobrosDiferidosEDC.Show()
+        End If
+    End Sub
+
+    Sub refreshGrid()
+        GridConceptos.Rows.Clear()
+        Dim listaConceptos As List(Of Concepto) = ch.getListaConceptos()
+        For Each concepto As Concepto In listaConceptos
+            GridConceptos.Rows.Add(concepto.IDConcepto, concepto.NombreConcepto, concepto.costoTotal)
+        Next
+    End Sub
+
+    Private Sub btnBorrar_Click(sender As Object, e As EventArgs) Handles btnBorrar.Click
+        Try
+            Dim index As Integer
+            index = GridConceptos.CurrentCell.RowIndex
+            GridConceptos.Rows.RemoveAt(index)
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub controlCantidades_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtMonto.KeyPress, txtUltimos4Digitos.KeyPress, txtNoCheque.KeyPress, txtNoCuenta.KeyPress
+        Dim num_cantidad As Decimal = 0
+        Dim KeyAscii As Short = Asc(e.KeyChar)
+        If InStr("0123456789.", Chr(KeyAscii)) = 0 Then
+            If KeyAscii <> 8 Then
+                KeyAscii = 0
+            End If
+            e.KeyChar = Chr(KeyAscii)
+            If KeyAscii = 0 Then
+                e.Handled = True
+            End If
+        ElseIf InStr(txtMonto.Text, ".") > 0 Then
+            If KeyAscii = 46 Then
+                e.Handled = True
+            End If
+        End If
+    End Sub
+
+    Private Sub btnCobrar_Click(sender As Object, e As EventArgs) Handles btnCobrar.Click
+        Dim listaConceptos As List(Of Concepto) = Me.obtenerListaConceptos()
+        If (listaConceptos.Count() = 0) Then
+            MessageBox.Show("Ingrese al menos un concepto para poder cobrar")
+            Return
+        ElseIf (txtMonto.Text = "" Or txtMonto.Text = " ") Then
+            MessageBox.Show("Ingrese el monto a pagar")
+            Return
+        End If
+
+        ''---------------------------------------------------------VALIDA FORMA DE PAGO---------------------------------------------------------
+        If (cbFormaPago.Text = "TARJETA DE CREDITO" Or cbFormaPago.Text = "TARJETA DE DEBITO") Then
+            If (cbBanco.Text = "") Then
+                MessageBox.Show("Ingrese un banco")
+                Exit Sub
+            ElseIf (cbTipoBanco.Text = "") Then
+                MessageBox.Show("Ingrese el tipo de pago (Ventanilla/Domiciliacion)")
+                Exit Sub
+            ElseIf (txtUltimos4Digitos.TextLength < 4) Then
+                MessageBox.Show("Ingrese los ultimos 4 digitos de la tarjeta")
+                Exit Sub
+            End If
+        ElseIf (cbFormaPago.Text = "CHEQUE") Then
+            If (cbBanco.Text = "") Then
+                MessageBox.Show("Ingrese un banco")
+                Exit Sub
+            ElseIf (txtNoCuenta.Text = "") Then
+                MessageBox.Show("Ingrese el numero de cuenta")
+                Exit Sub
+            ElseIf (txtNoCheque.Text = "") Then
+                MessageBox.Show("Ingrese el numero del cheque")
+                Exit Sub
+            End If
+        ElseIf (cbFormaPago.Text = "TRANSFERENCIA") Then
+            If (cbBanco.Text = "") Then
+                MessageBox.Show("Ingrese un banco")
+                Exit Sub
+            End If
+        ElseIf (cbFormaPago.Text = "DEPOSITO BANCARIO C/COMPROBANTE" Or cbFormaPago.Text = "DEPOSITO BANCARIO EDO CTA") Then
+            If (cbBanco.Text = "") Then
+                MessageBox.Show("Ingrese un banco")
+                Exit Sub
+            ElseIf (cbTipoBanco.Text = "") Then
+                MessageBox.Show("Ingrese el tipo de pago (Efectivo/Otro)")
+                Exit Sub
+            End If
+        End If
+
+
+        Dim IDXML As Integer = co.Cobrar(listaConceptos, cbFormaPago.SelectedValue, txtRFC.Text, txtNombre.Text, txtMonto.Text, Matricula, False)
+
+
+        ''---------------------------------------------------------REGISTRO DE FORMA DE PAGO---------------------------------------------------------
+        If (IDXML > 0) Then
+            If (cbFormaPago.Text = "TARJETA DE CREDITO") Then
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosTarjeta(ID_Factura, ID_Banco, ID_TipoPago, NumTarjeta, Monto, FechaPago, TipoTarjeta) VALUES({IDXML}, {cbBanco.SelectedValue}, {cbTipoBanco.SelectedValue}, '{txtUltimos4Digitos.Text}', {txtMonto.Text}, GETDATE(), 'C')")
+            ElseIf (cbFormaPago.Text = "TARJETA DE DEBITO") Then
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosTarjeta(ID_Factura, ID_Banco, ID_TipoPago, NumTarjeta, Monto, FechaPago, TipoTarjeta) VALUES({IDXML}, {cbBanco.SelectedValue}, {cbTipoBanco.SelectedValue}, '{txtUltimos4Digitos.Text}', {txtMonto.Text}, GETDATE(), 'D')")
+            ElseIf (cbFormaPago.Text = "CHEQUE") Then
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosCheques(ID_Factura, NoCuenta, NoCheque, Monto, FechaPago) VALUES({IDXML}, '{txtNoCuenta.Text}', '{txtNoCheque.Text}', {txtMonto.Text}, GETDATE())")
+            ElseIf (cbFormaPago.Text = "TRANSFERENCIA") Then
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosTransferencias(ID_Factura, ID_Banco, Monto, Fecha_Pago) VALUES ({IDXML}, {cbBanco.SelectedValue}, {txtMonto.Text}, '{DTPickerFecha.Text}')")
+            ElseIf (cbFormaPago.Text = "DEPOSITO BANCARIO C/COMPROBANTE") Then
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosDepositos(ID_Factura, ID_Banco, ID_TipoPago, Monto, TipoDeposito, FechaPago) VALUES({IDXML}, {cbBanco.SelectedValue}, {cbTipoBanco.SelectedValue}, {txtMonto.Text}, 'Comprobante', '{DTPickerFecha.Text}')")
+            ElseIf (cbFormaPago.Text = "DEPOSITO BANCARIO EDO CTA") Then
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosDepositos(ID_Factura, ID_Banco, ID_TipoPago, Monto, TipoDeposito, FechaPago) VALUES({IDXML}, {cbBanco.SelectedValue}, {cbTipoBanco.SelectedValue}, {txtMonto.Text}, 'Edo', '{DTPickerFecha.Text}')")
+            End If
+        End If
+
+        Me.Reiniciar()
+    End Sub
+
+    Function obtenerListaConceptos() As List(Of Concepto)
+        For x = 0 To GridConceptos.Rows.Count - 1
+            ch.agregarconcepto(GridConceptos.Rows(x).Cells(0).Value, GridConceptos.Rows(x).Cells(1).Value, GridConceptos.Rows(x).Cells(2).Value)
+        Next
+        Return ch.getListaConceptos()
+    End Function
+
+    Sub actualizarTotal()
+        Dim total As Decimal
+        For x = 0 To GridConceptos.Rows.Count - 1
+            total = total + GridConceptos.Rows(x).Cells(4).Value
+        Next
+        lblTotal.Text = Format(CDec(total), "#####0.00")
     End Sub
 End Class

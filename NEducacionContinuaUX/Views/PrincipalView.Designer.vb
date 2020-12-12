@@ -28,6 +28,9 @@ Partial Class PrincipalView
         Me.MenuStrip = New System.Windows.Forms.MenuStrip()
         Me.CobrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CobrosToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CobroToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NotasDeCreditoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RegistroDeNotaDeCreditoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AutorizacionesYCondonacionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AutorizacionesYCondonacionesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.PagosOpcionalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -35,9 +38,11 @@ Partial Class PrincipalView
         Me.AsignacionDePagosOpcionalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PlanesDeDiplomadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RegistroDePlanesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AsignacionDePlanToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CatalogosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GestionDeExternosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AsignacionDePlanToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EwewaewaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PagosACreditoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip.SuspendLayout()
         Me.MenuStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -59,7 +64,7 @@ Partial Class PrincipalView
         '
         'MenuStrip
         '
-        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CobrosToolStripMenuItem, Me.AutorizacionesYCondonacionesToolStripMenuItem, Me.PagosOpcionalesToolStripMenuItem, Me.PlanesDeDiplomadosToolStripMenuItem, Me.CatalogosToolStripMenuItem})
+        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CobrosToolStripMenuItem, Me.NotasDeCreditoToolStripMenuItem, Me.AutorizacionesYCondonacionesToolStripMenuItem, Me.PagosOpcionalesToolStripMenuItem, Me.PlanesDeDiplomadosToolStripMenuItem, Me.CatalogosToolStripMenuItem})
         Me.MenuStrip.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip.Name = "MenuStrip"
         Me.MenuStrip.Size = New System.Drawing.Size(1423, 24)
@@ -68,7 +73,7 @@ Partial Class PrincipalView
         '
         'CobrosToolStripMenuItem
         '
-        Me.CobrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CobrosToolStripMenuItem1})
+        Me.CobrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CobrosToolStripMenuItem1, Me.CobroToolStripMenuItem, Me.PagosACreditoToolStripMenuItem})
         Me.CobrosToolStripMenuItem.Name = "CobrosToolStripMenuItem"
         Me.CobrosToolStripMenuItem.Size = New System.Drawing.Size(57, 20)
         Me.CobrosToolStripMenuItem.Text = "Cobros"
@@ -76,8 +81,27 @@ Partial Class PrincipalView
         'CobrosToolStripMenuItem1
         '
         Me.CobrosToolStripMenuItem1.Name = "CobrosToolStripMenuItem1"
-        Me.CobrosToolStripMenuItem1.Size = New System.Drawing.Size(112, 22)
+        Me.CobrosToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
         Me.CobrosToolStripMenuItem1.Text = "Cobros"
+        '
+        'CobroToolStripMenuItem
+        '
+        Me.CobroToolStripMenuItem.Name = "CobroToolStripMenuItem"
+        Me.CobroToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.CobroToolStripMenuItem.Text = "Cobro ----------"
+        '
+        'NotasDeCreditoToolStripMenuItem
+        '
+        Me.NotasDeCreditoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RegistroDeNotaDeCreditoToolStripMenuItem})
+        Me.NotasDeCreditoToolStripMenuItem.Name = "NotasDeCreditoToolStripMenuItem"
+        Me.NotasDeCreditoToolStripMenuItem.Size = New System.Drawing.Size(106, 20)
+        Me.NotasDeCreditoToolStripMenuItem.Text = "Notas de credito"
+        '
+        'RegistroDeNotaDeCreditoToolStripMenuItem
+        '
+        Me.RegistroDeNotaDeCreditoToolStripMenuItem.Name = "RegistroDeNotaDeCreditoToolStripMenuItem"
+        Me.RegistroDeNotaDeCreditoToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
+        Me.RegistroDeNotaDeCreditoToolStripMenuItem.Text = "Registro de nota de credito"
         '
         'AutorizacionesYCondonacionesToolStripMenuItem
         '
@@ -121,12 +145,18 @@ Partial Class PrincipalView
         'RegistroDePlanesToolStripMenuItem
         '
         Me.RegistroDePlanesToolStripMenuItem.Name = "RegistroDePlanesToolStripMenuItem"
-        Me.RegistroDePlanesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.RegistroDePlanesToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
         Me.RegistroDePlanesToolStripMenuItem.Text = "Registro de planes"
+        '
+        'AsignacionDePlanToolStripMenuItem
+        '
+        Me.AsignacionDePlanToolStripMenuItem.Name = "AsignacionDePlanToolStripMenuItem"
+        Me.AsignacionDePlanToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
+        Me.AsignacionDePlanToolStripMenuItem.Text = "Asignacion de plan"
         '
         'CatalogosToolStripMenuItem
         '
-        Me.CatalogosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GestionDeExternosToolStripMenuItem})
+        Me.CatalogosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GestionDeExternosToolStripMenuItem, Me.EwewaewaToolStripMenuItem})
         Me.CatalogosToolStripMenuItem.Name = "CatalogosToolStripMenuItem"
         Me.CatalogosToolStripMenuItem.Size = New System.Drawing.Size(72, 20)
         Me.CatalogosToolStripMenuItem.Text = "Catalogos"
@@ -134,14 +164,20 @@ Partial Class PrincipalView
         'GestionDeExternosToolStripMenuItem
         '
         Me.GestionDeExternosToolStripMenuItem.Name = "GestionDeExternosToolStripMenuItem"
-        Me.GestionDeExternosToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
+        Me.GestionDeExternosToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
         Me.GestionDeExternosToolStripMenuItem.Text = "Gestion de externos"
         '
-        'AsignacionDePlanToolStripMenuItem
+        'EwewaewaToolStripMenuItem
         '
-        Me.AsignacionDePlanToolStripMenuItem.Name = "AsignacionDePlanToolStripMenuItem"
-        Me.AsignacionDePlanToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.AsignacionDePlanToolStripMenuItem.Text = "Asignacion de plan"
+        Me.EwewaewaToolStripMenuItem.Name = "EwewaewaToolStripMenuItem"
+        Me.EwewaewaToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+        Me.EwewaewaToolStripMenuItem.Text = "ewewaewa"
+        '
+        'PagosACreditoToolStripMenuItem
+        '
+        Me.PagosACreditoToolStripMenuItem.Name = "PagosACreditoToolStripMenuItem"
+        Me.PagosACreditoToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PagosACreditoToolStripMenuItem.Text = "Pagos a credito"
         '
         'PrincipalView
         '
@@ -187,4 +223,9 @@ Partial Class PrincipalView
     Friend WithEvents PlanesDeDiplomadosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents RegistroDePlanesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AsignacionDePlanToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CobroToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents NotasDeCreditoToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents RegistroDeNotaDeCreditoToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents EwewaewaToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PagosACreditoToolStripMenuItem As ToolStripMenuItem
 End Class
