@@ -9,9 +9,9 @@
                                                      Username = '{txtUsuario.Text}' AND CAST(Username AS varbinary(4000)) = CAST('{txtUsuario.Text}' AS varbinary(4000)) AND
                                                      Password = '{txtContraseña.Text}' AND CAST(Password AS varbinary(4000)) = CAST('{txtContraseña.Text}' AS varbinary(4000))")
         If (ID > 0) Then
-            Dim tableDatosLogin As DataTable = db.getDataTableFromSQL($"SELECT U.Username, U.NUP, UPPER(E.nombre + ' ' + E.apepat + ' ' + E.apemat) AS Nombre, P.Perfil FROM [NEducacionContinua].dbo.ing_Usuarios AS U
+            Dim tableDatosLogin As DataTable = db.getDataTableFromSQL($"SELECT U.Username, U.NUP, UPPER(E.nombre + ' ' + E.apepat + ' ' + E.apemat) AS Nombre, P.Perfil FROM [{EnviromentService.dbName}].dbo.ing_Usuarios AS U
                                                                        INNER JOIN [ux].dbo.adm_catEmpleados AS E ON E.nup = U.NUP
-                                                                       INNER JOIN [NEducacionContinua].dbo.ing_CatPerfiles AS P ON P.ID = U.ID_Perfil
+                                                                       INNER JOIN [{EnviromentService.dbName}].dbo.ing_CatPerfiles AS P ON P.ID = U.ID_Perfil
                                                                        WHERE U.ID = {ID}")
             For Each row As DataRow In tableDatosLogin.Rows
                 User.setModel(row("Username"), row("NUP"), row("Nombre"), row("Perfil"))
@@ -47,5 +47,9 @@
         If Asc(e.KeyChar) = 39 Or Asc(e.KeyChar) = 44 Then
             e.Handled = True
         End If
+    End Sub
+
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
+        Me.Close()
     End Sub
 End Class

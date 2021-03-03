@@ -21,6 +21,12 @@ Public Class EnviromentService
             RFCEDC = ConfigurationSettings.AppSettings.Get("RFC").ToString()
         Else
             serverIP = ConfigurationSettings.AppSettings.Get("productionServerIP")
+            dbName = ConfigurationSettings.AppSettings.Get("productiondb")
+            dbUsername = ConfigurationSettings.AppSettings.Get("productionuser")
+            dbPassword = ConfigurationSettings.AppSettings.Get("productionpassword")
+            connectionString = $"Data Source={serverIP}; Initial Catalog={dbName}; User ID='{dbUsername}'; Password='{dbPassword}';"
+            reportesPath = ConfigurationSettings.AppSettings.Get("PathReportesPrueba").ToString()
+            RFCEDC = ConfigurationSettings.AppSettings.Get("RFC").ToString()
         End If
     End Sub
 End Class
