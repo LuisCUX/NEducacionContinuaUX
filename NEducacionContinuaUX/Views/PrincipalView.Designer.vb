@@ -29,6 +29,7 @@ Partial Class PrincipalView
         Me.CobrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CobrosToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.CobroToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PagosACreditoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NotasDeCreditoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RegistroDeNotaDeCreditoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AutorizacionesYCondonacionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -42,7 +43,8 @@ Partial Class PrincipalView
         Me.CatalogosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GestionDeExternosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EwewaewaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PagosACreditoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReportesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IVAToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip.SuspendLayout()
         Me.MenuStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -64,7 +66,7 @@ Partial Class PrincipalView
         '
         'MenuStrip
         '
-        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CobrosToolStripMenuItem, Me.NotasDeCreditoToolStripMenuItem, Me.AutorizacionesYCondonacionesToolStripMenuItem, Me.PagosOpcionalesToolStripMenuItem, Me.PlanesDeDiplomadosToolStripMenuItem, Me.CatalogosToolStripMenuItem})
+        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CobrosToolStripMenuItem, Me.NotasDeCreditoToolStripMenuItem, Me.AutorizacionesYCondonacionesToolStripMenuItem, Me.PagosOpcionalesToolStripMenuItem, Me.PlanesDeDiplomadosToolStripMenuItem, Me.CatalogosToolStripMenuItem, Me.ReportesToolStripMenuItem})
         Me.MenuStrip.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip.Name = "MenuStrip"
         Me.MenuStrip.Size = New System.Drawing.Size(1423, 24)
@@ -81,14 +83,20 @@ Partial Class PrincipalView
         'CobrosToolStripMenuItem1
         '
         Me.CobrosToolStripMenuItem1.Name = "CobrosToolStripMenuItem1"
-        Me.CobrosToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
+        Me.CobrosToolStripMenuItem1.Size = New System.Drawing.Size(164, 22)
         Me.CobrosToolStripMenuItem1.Text = "Cobros"
         '
         'CobroToolStripMenuItem
         '
         Me.CobroToolStripMenuItem.Name = "CobroToolStripMenuItem"
-        Me.CobroToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.CobroToolStripMenuItem.Text = "Cobro ----------"
+        Me.CobroToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
+        Me.CobroToolStripMenuItem.Text = "Cobros multiples"
+        '
+        'PagosACreditoToolStripMenuItem
+        '
+        Me.PagosACreditoToolStripMenuItem.Name = "PagosACreditoToolStripMenuItem"
+        Me.PagosACreditoToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
+        Me.PagosACreditoToolStripMenuItem.Text = "Pagos a credito"
         '
         'NotasDeCreditoToolStripMenuItem
         '
@@ -156,7 +164,7 @@ Partial Class PrincipalView
         '
         'CatalogosToolStripMenuItem
         '
-        Me.CatalogosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GestionDeExternosToolStripMenuItem, Me.EwewaewaToolStripMenuItem})
+        Me.CatalogosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GestionDeExternosToolStripMenuItem, Me.EwewaewaToolStripMenuItem, Me.IVAToolStripMenuItem})
         Me.CatalogosToolStripMenuItem.Name = "CatalogosToolStripMenuItem"
         Me.CatalogosToolStripMenuItem.Size = New System.Drawing.Size(72, 20)
         Me.CatalogosToolStripMenuItem.Text = "Catalogos"
@@ -164,20 +172,26 @@ Partial Class PrincipalView
         'GestionDeExternosToolStripMenuItem
         '
         Me.GestionDeExternosToolStripMenuItem.Name = "GestionDeExternosToolStripMenuItem"
-        Me.GestionDeExternosToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+        Me.GestionDeExternosToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.GestionDeExternosToolStripMenuItem.Text = "Gestion de externos"
         '
         'EwewaewaToolStripMenuItem
         '
         Me.EwewaewaToolStripMenuItem.Name = "EwewaewaToolStripMenuItem"
-        Me.EwewaewaToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
-        Me.EwewaewaToolStripMenuItem.Text = "ewewaewa"
+        Me.EwewaewaToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.EwewaewaToolStripMenuItem.Text = "Timbres utilizados"
         '
-        'PagosACreditoToolStripMenuItem
+        'ReportesToolStripMenuItem
         '
-        Me.PagosACreditoToolStripMenuItem.Name = "PagosACreditoToolStripMenuItem"
-        Me.PagosACreditoToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.PagosACreditoToolStripMenuItem.Text = "Pagos a credito"
+        Me.ReportesToolStripMenuItem.Name = "ReportesToolStripMenuItem"
+        Me.ReportesToolStripMenuItem.Size = New System.Drawing.Size(65, 20)
+        Me.ReportesToolStripMenuItem.Text = "Reportes"
+        '
+        'IVAToolStripMenuItem
+        '
+        Me.IVAToolStripMenuItem.Name = "IVAToolStripMenuItem"
+        Me.IVAToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.IVAToolStripMenuItem.Text = "IVA"
         '
         'PrincipalView
         '
@@ -228,4 +242,6 @@ Partial Class PrincipalView
     Friend WithEvents RegistroDeNotaDeCreditoToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents EwewaewaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PagosACreditoToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ReportesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents IVAToolStripMenuItem As ToolStripMenuItem
 End Class

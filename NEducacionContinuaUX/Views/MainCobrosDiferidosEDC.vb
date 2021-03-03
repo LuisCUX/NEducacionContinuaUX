@@ -5,12 +5,22 @@
     Dim tipoMatricula As String
     Dim co As CobrosDiferidosController = New CobrosDiferidosController()
     Dim va As ValidacionesController = New ValidacionesController()
+    Dim listaConceptos As List(Of Concepto)
 
     Private Sub MainCobrosDiferidosEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim tableFormaPago As DataTable = db.getDataTableFromSQL("SELECT Forma_Pago, Descripcion FROM ing_CatFormaPago")
+        Dim tableFormaPago As DataTable = db.getDataTableFromSQL("SELECT Forma_Pago, Descripcion FROM ing_CatFormaPago WHERE Descripcion != 'CREDITO'")
         ComboboxService.llenarCombobox(cbFormaPago, tableFormaPago, "Forma_Pago", "Descripcion")
         Dim tablebancos As DataTable = db.getDataTableFromSQL("SELECT ID, Nombre_Banco FROM ing_Cat_Bancos")
         ComboboxService.llenarCombobox(cbBanco, tablebancos, "ID", "Nombre_Banco")
+        Dim tableEDC As DataTable = db.getDataTableFromSQL("SELECT RC.clave_cliente, UPPER(C.nombre + ' ' + RC.apellido_paterno + ' ' + RC.apellido_materno + ' (' + RC.clave_cliente + ')') AS NombreCliente FROM portal_registroCongreso AS RC
+                                                            INNER JOIN portal_cliente AS C ON RC.id_cliente = C.id_cliente
+                                                            ORDER BY NombreCliente")
+        Dim tableExternos As DataTable = db.getDataTableFromSQL("SELECT CL.clave_cliente, UPPER(C.nombre + ' ' + E.paterno + ' ' + E.materno + ' (' + CL.clave_cliente + ')') As NombreCliente FROM portal_registroExterno AS E
+                                                                 INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
+                                                                 INNER JOIN portal_clave AS CL ON CL.id_cliente = C.id_cliente
+                                                                 ORDER BY C.nombre")
+        ComboboxService.llenarCombobox(cbEDC, tableEDC, "clave_cliente", "NombreCliente")
+        ComboboxService.llenarCombobox(cbExterno, tableExternos, "clave_cliente", "NombreCliente")
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
@@ -20,12 +30,12 @@
         If (tipoMatricula = "False") Then
             Me.Reiniciar()
             Exit Sub
-        ElseIf (tipoMatricula = "UX") Then
-            va.buscarMatriculaUX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno)
         ElseIf (tipoMatricula = "EX") Then
             va.buscarMatriculaEX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno, txtRFC)
-        ElseIf (tipoMatricula = "EC") Then
-            va.buscarMatriculaEC(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno, txtRFC)
+        Else
+            MessageBox.Show("Ingrese una matricula externa")
+            txtMatricula.Clear()
+            Exit Sub
         End If
     End Sub
 
@@ -145,13 +155,17 @@
     Sub Limpiar()
         txtNombre.Clear()
         txtEmail.Clear()
-        txtCarrera.Clear()
-        txtTurno.Clear()
         lblTotal.Text = ""
         ch.limpiarListaConceptos()
     End Sub
 
     Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
+        For x = 0 To GridConceptos.Rows.Count - 1
+            If (GridConceptos.Rows(x).Cells(2).Value = txtBusquedaMatricula.Text) Then
+                MessageBox.Show("La matricula ingresada ya se encuentra lista, ingrese una matricula diferente")
+                Exit Sub
+            End If
+        Next
         Dim tipoMatriculaB As String = va.validarMatricula(txtBusquedaMatricula.Text)
         If (txtBusquedaMatricula.Text = "") Then
             MessageBox.Show("Por favor ingrese una matricula")
@@ -160,10 +174,12 @@
             txtBusquedaMatricula.Clear()
             Exit Sub
         Else
-            ObjectBagService.setItem("Matricula", txtBusquedaMatricula.Text)
-            ObjectBagService.setItem("tipoMatricula", tipoMatriculaB)
-            ModalCobrosDiferidosEDC.MdiParent = PrincipalView
-            ModalCobrosDiferidosEDC.Show()
+            'ObjectBagService.setItem("Matricula", txtBusquedaMatricula.Text)
+            'ObjectBagService.setItem("tipoMatricula", tipoMatriculaB)
+            'ModalCobrosDiferidosEDC.MdiParent = PrincipalView
+            'ModalCobrosDiferidosEDC.Show()
+            Dim IDConcepto As Integer = co.buscarCongreso(txtBusquedaMatricula.Text)
+            Me.actualizarTotal()
         End If
     End Sub
 
@@ -179,7 +195,11 @@
         Try
             Dim index As Integer
             index = GridConceptos.CurrentCell.RowIndex
+            Dim matriculaBuscada As String = GridConceptos.Rows(index).Cells(2).Value
+            Dim IDConcepto As Integer = GridConceptos.Rows(index).Cells(0).Value
             GridConceptos.Rows.RemoveAt(index)
+            ch.eliminarconcepto(IDConcepto, "CON", matriculaBuscada)
+            Me.actualizarTotal()
         Catch ex As Exception
 
         End Try
@@ -211,6 +231,16 @@
         ElseIf (txtMonto.Text = "" Or txtMonto.Text = " ") Then
             MessageBox.Show("Ingrese el monto a pagar")
             Return
+        End If
+
+        If (CDec(lblTotal.Text) <> CDec(txtMonto.Text)) Then
+            If (CDec(txtMonto.Text) > CDec(lblTotal.Text)) Then
+                MessageBox.Show("No puede ingresar un monto mayor al total a pagar, ingrese un monto valido")
+                Exit Sub
+            Else
+                MessageBox.Show("No puede ingresar un monto menor al total a pagar, ingrese un monto valido")
+                Exit Sub
+            End If
         End If
 
         ''---------------------------------------------------------VALIDA FORMA DE PAGO---------------------------------------------------------
@@ -251,8 +281,13 @@
             End If
         End If
 
-
-        Dim IDXML As Integer = co.Cobrar(listaConceptos, cbFormaPago.SelectedValue, txtRFC.Text, txtNombre.Text, txtMonto.Text, Matricula, False)
+        Dim tipocliente As Integer
+        If (tipoMatricula = "EX") Then
+            tipocliente = 2
+        ElseIf (tipoMatricula = "EC") Then
+            tipocliente = 1
+        End If
+        Dim IDXML As Integer = co.Cobrar(listaConceptos, cbFormaPago.SelectedValue, txtRFC.Text, txtNombre.Text, txtMonto.Text, Matricula, False, tipocliente)
 
 
         ''---------------------------------------------------------REGISTRO DE FORMA DE PAGO---------------------------------------------------------
@@ -288,5 +323,25 @@
             total = total + GridConceptos.Rows(x).Cells(4).Value
         Next
         lblTotal.Text = Format(CDec(total), "#####0.00")
+    End Sub
+
+    Private Sub cbExterno_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbExterno.SelectedIndexChanged
+        Try
+            txtMatricula.Text = cbExterno.SelectedValue
+            btnBuscar.PerformClick()
+            txtMatricula.Clear()
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub cbEDC_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbEDC.SelectedIndexChanged
+        Try
+            txtBusquedaMatricula.Text = cbEDC.SelectedValue
+            btnAgregar.PerformClick()
+            txtBusquedaMatricula.Clear()
+        Catch ex As Exception
+
+        End Try
     End Sub
 End Class

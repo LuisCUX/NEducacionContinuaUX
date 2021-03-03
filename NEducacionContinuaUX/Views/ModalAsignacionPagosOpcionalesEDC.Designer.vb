@@ -52,7 +52,7 @@ Partial Class ModalAsignacionPagosOpcionalesEDC
         Me.lblNombreVentana.Name = "lblNombreVentana"
         Me.lblNombreVentana.Size = New System.Drawing.Size(676, 69)
         Me.lblNombreVentana.TabIndex = 12
-        Me.lblNombreVentana.Text = "Asignacion de pagos opcionales"
+        Me.lblNombreVentana.Text = "Asignación de pagos opcionales"
         Me.lblNombreVentana.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lblTipoPago
@@ -167,21 +167,21 @@ Partial Class ModalAsignacionPagosOpcionalesEDC
         '
         'btnGuardar
         '
-        Me.btnGuardar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.descargar
+        Me.btnGuardar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
         Me.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnGuardar.Location = New System.Drawing.Point(219, 401)
+        Me.btnGuardar.Location = New System.Drawing.Point(209, 395)
         Me.btnGuardar.Name = "btnGuardar"
-        Me.btnGuardar.Size = New System.Drawing.Size(70, 40)
+        Me.btnGuardar.Size = New System.Drawing.Size(76, 46)
         Me.btnGuardar.TabIndex = 50
         Me.btnGuardar.UseVisualStyleBackColor = True
         '
         'btnSalir
         '
-        Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_32px
+        Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
         Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnSalir.Location = New System.Drawing.Point(380, 401)
+        Me.btnSalir.Location = New System.Drawing.Point(404, 395)
         Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New System.Drawing.Size(70, 40)
+        Me.btnSalir.Size = New System.Drawing.Size(76, 46)
         Me.btnSalir.TabIndex = 51
         Me.btnSalir.UseVisualStyleBackColor = True
         '

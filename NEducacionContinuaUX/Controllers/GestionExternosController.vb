@@ -177,7 +177,7 @@
                 Dim idRFC As Integer = db.insertAndGetIDInserted($"INSERT INTO portal_catRFC (rfc, direccion, numero, colonia, cp, poblacion, localidad, telefono, correo, id_municipio, razonsocial) VALUES ('{RFC}', '{DireccionF}', '', '{ColoniaF}', '{CPF}', '{CiudadF}', '{CiudadF}', '{TelefonoF}', '{CorreoF}', {IDMunicipioF}, '{RazonSocialF}')")
                 db.execSQLQueryWithoutParams($"INSERT INTO portal_reRFC(id_rfc, id_registro) VALUES ({idRFC}, {idRegistroExterno})")
             Else
-                db.execSQLQueryWithoutParams($"INSERT INTO portal_reRFC(id_rfc, id_registro) VALUES (1, {idRegistroExterno})")
+                db.execSQLQueryWithoutParams($"INSERT INTO portal_reRFC(id_rfc, id_registro) VALUES (2, {idRegistroExterno})")
             End If
 
             db.execSQLQueryWithoutParams($"INSERT INTO portal_clave(clave_cliente, id_cliente, id_tipo_cliente) VALUES ('{clave_cliente}', {idCliente}, 1)")
@@ -291,9 +291,9 @@
         Dim ConsecutivoStr As String
         If (Consecutivo > 0 And Consecutivo < 10) Then
             ConsecutivoStr = $"00{Consecutivo}"
-        ElseIf (Consecutivo > 10 And Consecutivo < 100) Then
+        ElseIf (Consecutivo >= 10 And Consecutivo < 100) Then
             ConsecutivoStr = $"0{Consecutivo}"
-        ElseIf (Consecutivo > 100 And Consecutivo < 1000) Then
+        ElseIf (Consecutivo >= 100 And Consecutivo < 1000) Then
             ConsecutivoStr = $"{Consecutivo}"
         End If
 

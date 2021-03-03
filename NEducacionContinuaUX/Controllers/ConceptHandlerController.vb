@@ -96,7 +96,7 @@
         ElseIf (claveConcepto = "DIN") Then
             Dim Costo As Decimal
             Dim Descuento As Decimal
-            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, CON.clave_servicio, C.Importe, C.Descuento, C.Fecha_Limite_Desc FROM ing_AsignacionCargosPlanes AS AC 
+            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, CON.clave_servicio, C.Importe, C.Descuento, C.Fecha_Limite_Desc, C.AgregaIVA, C.AbsorbeIVA, C.ExentaIVA FROM ing_AsignacionCargosPlanes AS AC 
                                                                       INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
                                                                       INNER JOIN ing_Planes AS PL ON PL.ID = C.ID_Plan
                                                                       INNER JOIN portal_congreso AS CON ON CON.id_congreso = PL.ID_Congreso
@@ -114,9 +114,9 @@
                 Else
                     concep.descuento = item("Descuento")
                 End If
-                concep.absorbeIVA = True
-                concep.consideraIVA = False
-                concep.IVAExento = False
+                concep.absorbeIVA = item("AbsorbeIVA")
+                concep.consideraIVA = item("AgregaIVA")
+                concep.IVAExento = item("ExentaIVA")
                 concep.Cantidad = 1
                 Dim cantidadAbono As Decimal = Me.buscarAbonoConcepto(conceptoID, 6)
                 concep.Abono = cantidadAbono
@@ -125,7 +125,7 @@
         ElseIf (claveConcepto = "DCO") Then
             Dim Costo As Decimal
             Dim Descuento As Decimal
-            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, CON.clave_servicio, C.Importe, C.Descuento, C.Fecha_Limite_Desc FROM ing_AsignacionCargosPlanes AS AC 
+            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, CON.clave_servicio, C.Importe, C.Descuento, C.Fecha_Limite_Desc, C.AgregaIVA, C.AbsorbeIVA, C.ExentaIVA FROM ing_AsignacionCargosPlanes AS AC 
                                                                       INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
                                                                       INNER JOIN ing_Planes AS PL ON PL.ID = C.ID_Plan
                                                                       INNER JOIN portal_congreso AS CON ON CON.id_congreso = PL.ID_Congreso
@@ -143,9 +143,9 @@
                 Else
                     concep.descuento = item("Descuento")
                 End If
-                concep.absorbeIVA = True
-                concep.consideraIVA = False
-                concep.IVAExento = False
+                concep.absorbeIVA = item("AbsorbeIVA")
+                concep.consideraIVA = item("AgregaIVA")
+                concep.IVAExento = item("ExentaIVA")
                 concep.Cantidad = 1
                 Dim cantidadAbono As Decimal = Me.buscarAbonoConcepto(conceptoID, 4)
                 concep.Abono = cantidadAbono
@@ -154,7 +154,7 @@
         ElseIf (claveConcepto = "DPU") Then
             Dim Costo As Decimal
             Dim Descuento As Decimal
-            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, CON.clave_servicio, C.Importe, C.Descuento, C.Fecha_Limite_Desc FROM ing_AsignacionCargosPlanes AS AC 
+            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, CON.clave_servicio, C.Importe, C.Descuento, C.Fecha_Limite_Desc, C.AgregaIVA, C.AbsorbeIVA, C.ExentaIVA FROM ing_AsignacionCargosPlanes AS AC 
                                                                       INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
                                                                       INNER JOIN ing_Planes AS PL ON PL.ID = C.ID_Plan
                                                                       INNER JOIN portal_congreso AS CON ON CON.id_congreso = PL.ID_Congreso
@@ -172,9 +172,9 @@
                 Else
                     concep.descuento = item("Descuento")
                 End If
-                concep.absorbeIVA = False
-                concep.consideraIVA = True
-                concep.IVAExento = False
+                concep.absorbeIVA = item("AbsorbeIVA")
+                concep.consideraIVA = item("AgregaIVA")
+                concep.IVAExento = item("ExentaIVA")
                 concep.Cantidad = 1
                 Dim cantidadAbono As Decimal = Me.buscarAbonoConcepto(conceptoID, 5)
                 concep.Abono = cantidadAbono
@@ -322,7 +322,7 @@
     End Function
 
     Function buscarAbonoConcepto(IDConcepto As Integer, claveConcepto As Integer) As Decimal
-        Dim cantidad = db.exectSQLQueryScalar($"SELECT Sum(Cantidad_Abonada) FROM ing_Abonos WHERE IDPago = {IDConcepto} AND ID_ClavePago = {claveConcepto}")
+        Dim cantidad = db.exectSQLQueryScalar($"SELECT Sum(Cantidad_Abonada) FROM ing_Abonos WHERE IDPago = {IDConcepto} AND ID_ClavePago = {claveConcepto} AND Activo = 1")
         If (IsDBNull(cantidad)) Then
             Return 0
         Else

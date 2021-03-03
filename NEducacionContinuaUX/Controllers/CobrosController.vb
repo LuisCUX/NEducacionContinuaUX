@@ -78,13 +78,14 @@ Public Class CobrosController
     ''----------------------------------------------------------------------------------------------------------------------------------------
     ''---------------------------------------------------------COBRA PAGO YA VALIDADO---------------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
-    Function Cobrar(listaConceptos As List(Of Concepto), formaPago As String, Matricula As String, RFCCLiente As String, NombreCLiente As String, montoTotal As Decimal, Credito As Boolean) As Integer
+    Function Cobrar(listaConceptos As List(Of Concepto), formaPago As String, Matricula As String, RFCCLiente As String, NombreCLiente As String, montoTotal As Decimal, Credito As Boolean, tipoMatricula As Integer) As Integer
+        NombreCLiente = Me.quitaTildesEspecial(NombreCLiente)
         Dim folioPago As String = Me.obtenerFolio("Pago")
         Try
             db.startTransaction()
             '---------------------------------------------------------IDENTIFICA ABONO---------------------------------------------------------
 
-            ''---------------------------------------------------------CALCULO DE TOTALES---------------------------------------------------------
+            ''---------------------------------------------------------CALCULO DE TOTALES------------------------------------------------------
             Dim Certificado As String = ConfigurationSettings.AppSettings.Get("developmentCertificadoContent").ToString()
             Dim NoCertificado As String = ConfigurationSettings.AppSettings.Get("developmentCertificado").ToString()
 
@@ -136,6 +137,10 @@ Public Class CobrosController
             End If
             Dim Fecha As String = db.exectSQLQueryScalar("select STUFF(CONVERT(VARCHAR(50),GETDATE(), 127) ,20,4,'') as fecha")
 
+            For Each concepto As Concepto In listaConceptos
+                concepto.NombreConcepto = Me.quitaTildesEspecial(concepto.NombreConcepto)
+            Next
+
             ''---------------------------------------------------------REGISTRO DE COBRO/S EN BASE DE DATOS---------------------------------------------------------
             For Each concepto As Concepto In listaConceptos
                 If (concepto.Abonado = False) Then
@@ -171,8 +176,19 @@ Public Class CobrosController
             ''File.WriteAllText("C:\Users\darkz\Desktop\wea.xml", xmlTimbrado)
 
             ''---------------------------------------------------------GENERACION DE FACTURA---------------------------------------------------------
-            db.execSQLQueryWithoutParams($"INSERT INTO ing_Creditos(Matricula, Folio, FolioFiscal, Cantidad, Cantidad_Abonada, NumAbonos, Fecha, Activo) VALUES ('{Matricula}', '{folioPago}', '{folioFiscal}', {montoTotal}, 0, 0, GETDATE(), 1)")
-            Dim IDXML As Integer = db.insertAndGetIDInserted($"INSERT INTO ing_xmlTimbrados(Matricula_Clave, Folio, FolioFiscal, Certificado, XMLTimbrado, fac_Cadena, fac_Sello, Tipo_Pago, Forma_Pago, Fecha_Pago, Cajero, RegimenFiscal, Subtotal, Descuento, IVA, Total, usoCFDI) VALUES ('{Matricula}', '{Serie}{Folio}', '{folioFiscal}', '{NoCertificado}', '{xmlTimbrado}', '{cadena}', '{sello}', '', '{formaPago}', '{Fecha}', '{User.getUsername}', 'GENERAL DE LEY(603)', {SubTotal}, {DescuentoS}, {totalIVA}, {Total}, '{UsoCFDI}')")
+
+            Dim tipoPago As String
+            Dim formapagoid As Integer
+            If (Credito = True) Then
+                tipoPago = "COBRO DE CONCEPTO A CREDITO"
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_Creditos(Matricula, Folio, FolioFiscal, Cantidad, Cantidad_Abonada, NumAbonos, Fecha, Activo) VALUES ('{Matricula}', '{folioPago}', '{folioFiscal}', {montoTotal}, 0, 0, GETDATE(), 1)")
+                formapagoid = 9
+            Else
+                tipoPago = "COBRO DE CONCEPTO"
+                formapagoid = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatFormaPago WHERE Forma_Pago = '{formaPago}'")
+            End If
+
+            Dim IDXML As Integer = db.insertAndGetIDInserted($"INSERT INTO ing_xmlTimbrados(Matricula_Clave, Folio, FolioFiscal, Certificado, XMLTimbrado, fac_Cadena, fac_Sello, Tipo_Pago, Forma_Pago, Forma_PagoID, Fecha_Pago, Cajero, RegimenFiscal, Subtotal, Descuento, IVA, Total, usoCFDI) VALUES ('{Matricula}', '{Serie}{Folio}', '{folioFiscal}', '{NoCertificado}', '{xmlTimbrado}', '{cadena}', '{sello}', '{tipoPago}', '{formaPago}', {formapagoid}, '{Fecha}', '{User.getUsername}', 'GENERAL DE LEY(603)', {SubTotal}, {DescuentoS}, {totalIVA}, {Total}, '{UsoCFDI}')")
             For Each item As Concepto In listaConceptos
                 Dim IDClave As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatClavesPagos WHERE Clave = '{item.claveConcepto}'")
                 db.execSQLQueryWithoutParams($"INSERT INTO ing_xmlTimbradosConceptos(Clave_Cliente, XMLID, Nombre_Concepto, IDConcepto, Clave_Concepto, ClaveUnidad, PrecioUnitario, IVA, Descuento, Cantidad, Total) VALUES ('{item.Matricula}', {IDXML}, '{item.NombreConcepto}', {item.IDConcepto}, {IDClave}, '{item.cveUnidad}', {item.costoUnitario}, {item.costoIVAUnitario}, {item.descuento}, {item.Cantidad}, {item.costoTotal})")
@@ -189,6 +205,8 @@ Public Class CobrosController
             rep.AgregarParametros("CantidadLetra", TotalText)
             rep.AgregarParametros("ClaveCliente", Matricula)
             rep.AgregarParametros("usoCFDI", descripcionCFDI)
+            rep.AgregarParametros("TipoCliente", tipoMatricula)
+
             rep.MostrarReporte()
             db.commitTransaction()
             Return IDXML
@@ -446,7 +464,7 @@ Public Class CobrosController
         listaConceptos.Clear()
         If (listaConceptosRechazados.Count > 0) Then
             For Each concepto As Concepto In listaConceptosRechazados
-                If ((concepto.costoFinal <= montoRestante) And (montoRestante - concepto.costoFinal >= 0)) Then
+                If ((concepto.costoFinal <= montoRestante) And (montoRestante - concepto.costoFinal >= 0) And (concepto.claveConcepto <> "REC")) Then
                     listaConceptosCobrar.Add(concepto)
                     montoRestante = montoRestante - concepto.costoFinal
                 Else
@@ -469,37 +487,15 @@ Public Class CobrosController
             listaConceptosRechazados.RemoveAll(Function(x) x.IDConcepto = concepto.IDConcepto And x.NombreConcepto = concepto.NombreConcepto And x.claveConcepto = concepto.claveConcepto)
         Next
 
-        Dim mensaje As String = "Se cobraran y abonaran los siguientes conceptos: " + vbNewLine
-        mensaje += vbNewLine
-        mensaje += "CONCEPTOS A COBRAR: " + vbNewLine
-        mensaje += vbNewLine
-        For Each concepto As Concepto In listaConceptosCobrar
-            mensaje += $"{concepto.NombreConcepto} - ${concepto.costoFinal}" + vbNewLine
-        Next
-        mensaje += "--------------------" + vbNewLine
+        Dim mensaje As String = "Se abonaran los siguientes conceptos: " + vbNewLine
         mensaje += vbNewLine
         mensaje = mensaje + "CONCEPTOS A ABONAR: " + vbNewLine
         mensaje += vbNewLine
         For Each concepto As Concepto In listaConceptosAbonos
             mensaje += $"{concepto.NombreConcepto} - ABONO: ${CDec(CDec(concepto.costoFinal) + CDec(concepto.costoIVATotal))}" + vbNewLine
         Next
-        mensaje += "--------------------" + vbNewLine
-        mensaje += vbNewLine
-        mensaje = mensaje + "LOS SIGUIENTES CONCEPTOS NO CUBREN EL MONTO NECESARIO PARA SER COBRADOS Y/O ABONADOS: " + vbNewLine
-        mensaje += vbNewLine
-        For Each concepto As Concepto In listaConceptos
-            mensaje += $"{concepto.NombreConcepto}" + vbNewLine
-        Next
-        mensaje += "--------------------" + vbNewLine
-        mensaje += vbNewLine
-        mensaje = mensaje + "¿QUIERE CONTINUAR CON EL COBRO Y OMITIR LOS CONCEPTOS QUE NO CUBREN EL MONTO NECESARIO PARA SER COBRADOS Y/O ABONADOS?" + vbNewLine
-        Dim result As Integer = MessageBox.Show(mensaje, "Confirmacion", MessageBoxButtons.YesNoCancel)
-        If result = DialogResult.Cancel Then
-            Return Nothing
-        ElseIf result = DialogResult.No Then
-            Return Nothing
-        ElseIf result = DialogResult.Yes Then
-            For Each concepto As Concepto In listaConceptosCobrar
+        MessageBox.Show(mensaje)
+        For Each concepto As Concepto In listaConceptosCobrar
                 Dim IDClavePago As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatClavesPagos WHERE Clave = '{concepto.claveConcepto}'")
                 Dim tieneAbono As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_Abonos WHERE ID_ClavePago = {IDClavePago} AND IDPago = {concepto.IDConcepto}")
                 If (tieneAbono > 0) Then
@@ -528,8 +524,7 @@ Public Class CobrosController
                 MessageBox.Show("Abono registrado correctamente")
             End If
             Return listaConceptosFinal
-        End If
-        Return listaConceptosFinal
+            Return listaConceptosFinal
     End Function
 
     ''----------------------------------------------------------------------------------------------------------------------------------------
@@ -578,8 +573,8 @@ Public Class CobrosController
             If (tieneRecargo > 0) Then
                 conceptoRecargo = ch.crearConcepto(tieneRecargo, "REC", Matricula)
                 listaRecargos.RemoveAll(Function(x) x.IDConcepto = conceptoRecargo.IDConcepto And x.NombreConcepto = conceptoRecargo.NombreConcepto)
-                listaConceptos.Add(conceptoRecargo)
                 listaConceptos.Add(concepto)
+                listaConceptos.Add(conceptoRecargo)
             Else
                 listaConceptos.Add(concepto)
             End If
@@ -588,8 +583,80 @@ Public Class CobrosController
         For Each concepto As Concepto In listaRecargos
             listaConceptos.Add(concepto)
         Next
-
         ''--------------DEVUELVE LISTA ORDENADA SEGUN LA IMPORTANCIA DEL CONCEPTO Y POR ID
         Return listaConceptos
+    End Function
+
+    Function quitaTildesEspecial(limpia As String) As String
+        If Not IsNothing(limpia) Then
+            limpia = Replace(limpia, "¡", "", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "¿", "", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "'", "", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "á", "a", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "é", "e", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "í", "i", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "ó", "o", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "ú", "u", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "ñ", "n", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "ç", "c", 1, Len(limpia), 1)
+
+            limpia = Replace(limpia, "Á", "A", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "É", "E", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Í", "I", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Ó", "O", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Ú", "U", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Ñ", "N", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Ç", "C", 1, Len(limpia), 1)
+
+            limpia = Replace(limpia, "à", "a", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "è", "e", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "ì", "i", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "ò", "o", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "ù", "u", 1, Len(limpia), 1)
+
+            limpia = Replace(limpia, "À", "A", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "È", "E", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Ì", "I", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Ò", "O", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Ù", "U", 1, Len(limpia), 1)
+
+            limpia = Replace(limpia, "ä", "a", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "ë", "e", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "ï", "i", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "ö", "o", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "ü", "u", 1, Len(limpia), 1)
+
+            limpia = Replace(limpia, "Ä", "A", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Ë", "E", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Ï", "I", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Ö", "O", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Ü", "U", 1, Len(limpia), 1)
+
+            limpia = Replace(limpia, "â", "a", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "ê", "e", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "î", "i", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "ô", "o", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "û", "u", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Â", "A", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Ê", "E", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Î", "I", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Ô", "O", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Û", "U", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Nº", "Numero", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "/", "", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "(", "", 1, Len(limpia), 1)
+            limpia = Replace(limpia, ")", "", 1, Len(limpia), 1)
+            'limpia = Replace(limpia, "-", "", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "$", "", 1, Len(limpia), 1)
+            limpia = Replace(limpia, ":", "", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "°", "", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "´", "", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "#", "", 1, Len(limpia), 1)
+            'limpia = Replace(limpia, "", "", 1, Len(limpia), 1)
+        Else
+            limpia = ""
+        End If
+
+        quitaTildesEspecial = Trim((UCase(limpia)))
     End Function
 End Class

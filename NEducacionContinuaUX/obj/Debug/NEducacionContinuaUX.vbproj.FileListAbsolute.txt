@@ -75,3 +75,5 @@ C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\Crys
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\MessagingToolkit.QRCode.dll
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.NotasDeCreditoEDC.resources
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.PagosCreditoEDC.resources
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.ReportesEDC.resources
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.IVAEDC.resources

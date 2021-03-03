@@ -32,8 +32,9 @@
     End Sub
 
     Private Sub cbPlanes_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbPlanes.SelectionChangeCommitted
-        If (cbPlanes.Text <> "NUEVO PLAN") Then
+        If (cbPlanes.Text <> "NUEVO PLAN" And cbPlanes.Text <> "-PLAN GENERAL-") Then
             txtNombrePlan.Text = cbPlanes.Text
+            txtNombrePlan.Enabled = True
             pc.llenarVentanaPlanesInscripcion(cbPlanes.SelectedValue, chbInscripcion, txtImporteInscripcion, chbRecargoInscripcion, chbDescuentoInscripcion, NURecargoInscripcion, datePickerRecargoInscripcion, NUDescuentoInscripcion, txtDescripcionDescuentoInscripcion, datePickerLimiteDescuentoInscripcion)
             pc.llenarVentanaPlanesColegiaturas(cbPlanes.SelectedValue, listaPaneles, listatxtImportes, listatxtRecargos, listatxtDescuentos, listatxtDescripcionDescuentos, listadatePickerRecargos, listadatePickerDescuentos, listacbClaves, listatxtConcepto, txtImportePagos, NURecargo, NUDescuento, txtDescripcionDescuentoPagos, chbRecargosPagos, chbDescuentoPagos, cbNoPagos)
             pc.llenarVentanaPlanesPagoUnico(cbPlanes.SelectedValue, chbPagoUnico, txtMontoPagoUnico, chbDescuentoPagoUnico, NUDescuentoPagoUnico, txtDescripcionDescuentoPagoUnico, datePickerDescuentoPagoUnico, datePickerPagoUnico)
@@ -44,7 +45,14 @@
             Next
             chbInscripcion.Enabled = True
             chbPagoUnico.Enabled = True
+        ElseIf (cbPlanes.Text = "-PLAN GENERAL-") Then
+            edicion = False
+            Me.resetControls()
+            txtNombrePlan.Text = "PLAN GENERAL"
+            txtNombrePlan.Enabled = False
         Else
+            txtNombrePlan.Clear()
+            txtNombrePlan.Enabled = True
             edicion = False
             Me.resetControls()
         End If
@@ -114,17 +122,36 @@
     End Sub
 
     Private Sub cbDiplomados_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbDiplomados.SelectionChangeCommitted
-        Dim tablePlanes As DataTable = db.getDataTableFromSQL($"SELECT ID, Nombre_Plan FROM ing_Planes WHERE ID_Congreso = {cbDiplomados.SelectedValue}")
+        Dim dtPlaceHolder As New DataTable()
+        Dim planGeneralBand As Boolean
+        dtPlaceHolder.Columns.Add("ID")
+        dtPlaceHolder.Columns.Add("Nombre_Plan")
+
+
+        Dim tablePlanes As DataTable = db.getDataTableFromSQL($"SELECT CAST(ID AS VARCHAR(MAX)) As ID, Nombre_Plan FROM ing_Planes WHERE ID_Congreso = {cbDiplomados.SelectedValue}")
         Me.resetControls()
 
         If (tablePlanes.Rows.Count > 0) Then
-            ComboboxService.llenarCombobox(cbPlanes, tablePlanes, "ID", "Nombre_Plan")
+            For Each row As DataRow In tablePlanes.Rows
+                Dim PG As Boolean = db.exectSQLQueryScalar($"SELECT PlanGeneral FROM ing_Planes WHERE ID = {row("ID")}")
+                If (PG = True) Then
+                    planGeneralBand = True
+                End If
+            Next
+
+            If (planGeneralBand = True) Then
+                dtPlaceHolder.Rows.Add(0, "NUEVO PLAN")
+            Else
+                dtPlaceHolder.Rows.Add(0, "-PLAN GENERAL-")
+                dtPlaceHolder.Rows.Add(0, "NUEVO PLAN")
+            End If
+            dtPlaceHolder.Merge(tablePlanes)
+            ComboboxService.llenarCombobox(cbPlanes, dtPlaceHolder, "ID", "Nombre_Plan")
             txtNombrePlan.Enabled = True
         Else
-            cbPlanes.DataSource = Nothing
-            cbPlanes.Items.Clear()
-            cbPlanes.Items.Add("NUEVO PLAN")
-            cbPlanes.SelectedIndex = 0
+            dtPlaceHolder.Rows.Add(0, "-PLAN GENERAL-")
+            dtPlaceHolder.Rows.Add(0, "NUEVO PLAN")
+            ComboboxService.llenarCombobox(cbPlanes, dtPlaceHolder, "ID", "Nombre_Plan")
             txtNombrePlan.Enabled = True
             txtNombrePlan.Clear()
         End If
@@ -547,7 +574,7 @@
             Next
             Dim clave As Integer = Convert.ToInt32(cbClave1.Text)
             Dim mes As String() = Me.getmesclave(clave)
-            txtConcepto1.Text = $"Pago de colegiatura de -{mes(0)}-"
+            ''txtConcepto1.Text = $"Pago de colegiatura de -{mes(0)}-"
 
             If (chbRecargosPagos.Checked = True) Then
                 Dim dia As Integer
@@ -574,7 +601,7 @@
             Next
             Dim clave As Integer = Convert.ToInt32(cbClave2.Text)
             Dim mes As String() = Me.getmesclave(clave)
-            txtConcepto2.Text = $"Pago de colegiatura de -{mes(0)}-"
+            ''txtConcepto2.Text = $"Pago de colegiatura de -{mes(0)}-"
 
             If (chbRecargosPagos.Checked = True) Then
                 Dim dia As Integer
@@ -601,7 +628,7 @@
             Next
             Dim clave As Integer = Convert.ToInt32(cbClave3.Text)
             Dim mes As String() = Me.getmesclave(clave)
-            txtConcepto3.Text = $"Pago de colegiatura de -{mes(0)}-"
+            ''txtConcepto3.Text = $"Pago de colegiatura de -{mes(0)}-"
 
             If (chbRecargosPagos.Checked = True) Then
                 Dim dia As Integer
@@ -628,7 +655,7 @@
             Next
             Dim clave As Integer = Convert.ToInt32(cbClave4.Text)
             Dim mes As String() = Me.getmesclave(clave)
-            txtConcepto4.Text = $"Pago de colegiatura de -{mes(0)}-"
+            ''txtConcepto4.Text = $"Pago de colegiatura de -{mes(0)}-"
 
             If (chbRecargosPagos.Checked = True) Then
                 Dim dia As Integer
@@ -655,7 +682,7 @@
             Next
             Dim clave As Integer = Convert.ToInt32(cbClave5.Text)
             Dim mes As String() = Me.getmesclave(clave)
-            txtConcepto5.Text = $"Pago de colegiatura de -{mes(0)}-"
+            ''txtConcepto5.Text = $"Pago de colegiatura de -{mes(0)}-"
 
             If (chbRecargosPagos.Checked = True) Then
                 Dim dia As Integer
@@ -682,7 +709,7 @@
             Next
             Dim clave As Integer = Convert.ToInt32(cbClave6.Text)
             Dim mes As String() = Me.getmesclave(clave)
-            txtConcepto6.Text = $"Pago de colegiatura de -{mes(0)}-"
+            ''txtConcepto6.Text = $"Pago de colegiatura de -{mes(0)}-"
 
             If (chbRecargosPagos.Checked = True) Then
                 Dim dia As Integer
@@ -709,7 +736,7 @@
             Next
             Dim clave As Integer = Convert.ToInt32(cbClave7.Text)
             Dim mes As String() = Me.getmesclave(clave)
-            txtConcepto7.Text = $"Pago de colegiatura de -{mes(0)}-"
+            ''txtConcepto7.Text = $"Pago de colegiatura de -{mes(0)}-"
 
             If (chbRecargosPagos.Checked = True) Then
                 Dim dia As Integer
@@ -736,7 +763,7 @@
             Next
             Dim clave As Integer = Convert.ToInt32(cbClave8.Text)
             Dim mes As String() = Me.getmesclave(clave)
-            txtConcepto8.Text = $"Pago de colegiatura de -{mes(0)}-"
+            ''txtConcepto8.Text = $"Pago de colegiatura de -{mes(0)}-"
 
             If (chbRecargosPagos.Checked = True) Then
                 Dim dia As Integer
@@ -763,7 +790,7 @@
             Next
             Dim clave As Integer = Convert.ToInt32(cbClave9.Text)
             Dim mes As String() = Me.getmesclave(clave)
-            txtConcepto9.Text = $"Pago de colegiatura de -{mes(0)}-"
+            ''txtConcepto9.Text = $"Pago de colegiatura de -{mes(0)}-"
 
             If (chbRecargosPagos.Checked = True) Then
                 Dim dia As Integer
@@ -790,7 +817,7 @@
             Next
             Dim clave As Integer = Convert.ToInt32(cbClave10.Text)
             Dim mes As String() = Me.getmesclave(clave)
-            txtConcepto10.Text = $"Pago de colegiatura de -{mes(0)}-"
+            ''txtConcepto10.Text = $"Pago de colegiatura de -{mes(0)}-"
 
             If (chbRecargosPagos.Checked = True) Then
                 Dim dia As Integer
@@ -1026,7 +1053,22 @@
                 Exit Sub
             End If
         Next
-
+        Dim Agrega As Integer
+        Dim Absorbe As Integer
+        Dim Exenta As Integer
+        If (RBAgregaC.Checked = True And RBAbsorbeC.Checked = False And RBExentaC.Checked = False) Then
+            Agrega = 1
+            Absorbe = 0
+            Exenta = 0
+        ElseIf (RBAgregaC.Checked = False And RBAbsorbeC.Checked = True And RBExentaC.Checked = False) Then
+            Agrega = 0
+            Absorbe = 1
+            Exenta = 0
+        ElseIf (RBAgregaC.Checked = False And RBAbsorbeC.Checked = False And RBExentaC.Checked = True) Then
+            Agrega = 0
+            Absorbe = 0
+            Exenta = 1
+        End If
         If (edicion = True) Then
             Dim NoRegistros As Integer = db.exectSQLQueryScalar($"SELECT COUNT(DISTINCT A.Matricula) FROM ing_AsignacionCargosPlanes AS A
                                                                   INNER JOIN ing_PlanesConceptos AS C ON C.ID = A.ID_Concepto
@@ -1041,19 +1083,19 @@
                     db.execSQLQueryWithoutParams($"UPDATE ing_PlanesConceptos SET Activo = 0 WHERE ID_Plan = {cbPlanes.SelectedValue}")
                     Dim Orden As Integer = 1
                     If (chbInscripcion.Checked = True) Then
-                        pc.guardarInscripcion(cbPlanes.SelectedValue, Orden, txtImporteInscripcion.Text, NURecargoInscripcion.Text, NUDescuentoInscripcion.Text, pc.obtenerFechaString(datePickerLimiteDescuentoInscripcion), pc.obtenerFechaString(datePickerRecargoInscripcion), chbRecargoInscripcion.Checked)
+                        pc.guardarInscripcion(cbPlanes.SelectedValue, Orden, txtImporteInscripcion.Text, NURecargoInscripcion.Text, NUDescuentoInscripcion.Text, pc.obtenerFechaString(datePickerLimiteDescuentoInscripcion), pc.obtenerFechaString(datePickerRecargoInscripcion), chbRecargoInscripcion.Checked, Agrega, Absorbe, Exenta)
                         Orden = Orden + 1
                     End If
 
                     For x = 0 To cbNoPagos.SelectedIndex
                         Dim Clave As String = listacbClaves(x).Text
                         Dim Mes As String = listatxtConcepto(x).Text.ToUpper()
-                        pc.guardarPagoPlan(cbPlanes.SelectedValue, Orden, Clave, Mes, listatxtImportes(x).Text, listatxtRecargos(x).Text, listatxtDescuentos(x).Text, pc.obtenerFechaString(listadatePickerDescuentos(x)), pc.obtenerFechaString(listadatePickerRecargos(x)), chbRecargosPagos.Checked)
+                        pc.guardarPagoPlan(cbPlanes.SelectedValue, Orden, Clave, Mes, listatxtImportes(x).Text, listatxtRecargos(x).Text, listatxtDescuentos(x).Text, pc.obtenerFechaString(listadatePickerDescuentos(x)), pc.obtenerFechaString(listadatePickerRecargos(x)), chbRecargosPagos.Checked, Agrega, Absorbe, Exenta)
                         Orden = Orden + 1
                     Next
 
                     If (chbPagoUnico.Checked = True) Then
-                        pc.guardarPagoUnico(cbPlanes.SelectedValue, Orden, CDec(txtMontoPagoUnico.Text), NUDescuentoPagoUnico.Text, pc.obtenerFechaString(datePickerDescuentoPagoUnico), pc.obtenerFechaString(datePickerPagoUnico))
+                        pc.guardarPagoUnico(cbPlanes.SelectedValue, Orden, CDec(txtMontoPagoUnico.Text), NUDescuentoPagoUnico.Text, pc.obtenerFechaString(datePickerDescuentoPagoUnico), pc.obtenerFechaString(datePickerPagoUnico), Agrega, Absorbe, Exenta)
                         Orden = Orden + 1
                     End If
                     db.commitTransaction()
@@ -1068,21 +1110,27 @@
             Try
                 db.startTransaction()
                 Dim Orden As Integer = 1
-                Dim ID_Plan As Integer = pc.guardarPlan(txtNombrePlan.Text, cbDiplomados.SelectedValue)
+                Dim planGeneral As Integer
+                If (cbPlanes.Text = "PLAN GENERAL") Then
+                    planGeneral = 1
+                Else
+                    planGeneral = 0
+                End If
+                Dim ID_Plan As Integer = pc.guardarPlan(txtNombrePlan.Text, cbDiplomados.SelectedValue, planGeneral)
                 If (chbInscripcion.Checked = True) Then
-                    pc.guardarInscripcion(ID_Plan, Orden, txtImporteInscripcion.Text, NURecargoInscripcion.Text, NUDescuentoInscripcion.Text, pc.obtenerFechaString(datePickerLimiteDescuentoInscripcion), pc.obtenerFechaString(datePickerRecargoInscripcion), chbRecargoInscripcion.Checked)
+                    pc.guardarInscripcion(ID_Plan, Orden, txtImporteInscripcion.Text, NURecargoInscripcion.Text, NUDescuentoInscripcion.Text, pc.obtenerFechaString(datePickerLimiteDescuentoInscripcion), pc.obtenerFechaString(datePickerRecargoInscripcion), chbRecargoInscripcion.Checked, Agrega, Absorbe, Exenta)
                     Orden = Orden + 1
                 End If
 
                 For x = 0 To cbNoPagos.SelectedIndex
                     Dim Clave As String = listacbClaves(x).Text
                     Dim Mes As String = listatxtConcepto(x).Text.ToUpper()
-                    pc.guardarPagoPlan(ID_Plan, Orden, Clave, Mes, listatxtImportes(x).Text, listatxtRecargos(x).Text, listatxtDescuentos(x).Text, pc.obtenerFechaString(listadatePickerDescuentos(x)), pc.obtenerFechaString(listadatePickerRecargos(x)), chbRecargosPagos.Checked)
+                    pc.guardarPagoPlan(ID_Plan, Orden, Clave, Mes, listatxtImportes(x).Text, listatxtRecargos(x).Text, listatxtDescuentos(x).Text, pc.obtenerFechaString(listadatePickerDescuentos(x)), pc.obtenerFechaString(listadatePickerRecargos(x)), chbRecargosPagos.Checked, Agrega, Absorbe, Exenta)
                     Orden = Orden + 1
                 Next
 
                 If (chbPagoUnico.Checked = True) Then
-                    pc.guardarPagoUnico(ID_Plan, Orden, CDec(txtMontoPagoUnico.Text), NUDescuentoPagoUnico.Text, pc.obtenerFechaString(datePickerDescuentoPagoUnico), pc.obtenerFechaString(datePickerPagoUnico))
+                    pc.guardarPagoUnico(ID_Plan, Orden, CDec(txtMontoPagoUnico.Text), NUDescuentoPagoUnico.Text, pc.obtenerFechaString(datePickerDescuentoPagoUnico), pc.obtenerFechaString(datePickerPagoUnico), Agrega, Absorbe, Exenta)
                     Orden = Orden + 1
                 End If
                 db.commitTransaction()

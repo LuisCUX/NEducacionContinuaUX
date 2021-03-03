@@ -344,7 +344,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         '
         'btnGuardar
         '
-        Me.btnGuardar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.descargar
+        Me.btnGuardar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
         Me.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnGuardar.Enabled = False
         Me.btnGuardar.Location = New System.Drawing.Point(180, 620)
@@ -355,7 +355,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         '
         'btnSalir
         '
-        Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_32px
+        Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
         Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnSalir.Location = New System.Drawing.Point(461, 620)
         Me.btnSalir.Name = "btnSalir"

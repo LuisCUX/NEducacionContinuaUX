@@ -24,10 +24,6 @@ Partial Class NotasDeCreditoEDC
     Private Sub InitializeComponent()
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.panelBusqueda = New System.Windows.Forms.Panel()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.rbEDC = New System.Windows.Forms.RadioButton()
-        Me.rbExterno = New System.Windows.Forms.RadioButton()
         Me.cbExterno = New System.Windows.Forms.ComboBox()
         Me.lblBusquedaNombre = New System.Windows.Forms.Label()
         Me.btnBuscar = New System.Windows.Forms.Button()
@@ -47,20 +43,26 @@ Partial Class NotasDeCreditoEDC
         Me.lblEmail = New System.Windows.Forms.Label()
         Me.lblNombre = New System.Windows.Forms.Label()
         Me.panelGridNota = New System.Windows.Forms.Panel()
-        Me.GridNota = New System.Windows.Forms.DataGridView()
+        Me.GBNota = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.lblTipoNota = New System.Windows.Forms.Label()
+        Me.cbConcepto = New System.Windows.Forms.ComboBox()
         Me.cbTipoNota = New System.Windows.Forms.ComboBox()
         Me.lblConcepto = New System.Windows.Forms.Label()
-        Me.cbConcepto = New System.Windows.Forms.ComboBox()
-        Me.btnGuardar = New System.Windows.Forms.Button()
-        Me.btnSalir = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
-        Me.GBNota = New System.Windows.Forms.GroupBox()
+        Me.btnSalir = New System.Windows.Forms.Button()
+        Me.btnGuardar = New System.Windows.Forms.Button()
+        Me.GridNota = New System.Windows.Forms.DataGridView()
         Me.panelBusqueda.SuspendLayout()
         Me.panelDatos.SuspendLayout()
         Me.panelGridNota.SuspendLayout()
-        CType(Me.GridNota, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GBNota.SuspendLayout()
+        CType(Me.GridNota, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblNombreVentana
@@ -77,10 +79,6 @@ Partial Class NotasDeCreditoEDC
         '
         'panelBusqueda
         '
-        Me.panelBusqueda.Controls.Add(Me.Label2)
-        Me.panelBusqueda.Controls.Add(Me.Label1)
-        Me.panelBusqueda.Controls.Add(Me.rbEDC)
-        Me.panelBusqueda.Controls.Add(Me.rbExterno)
         Me.panelBusqueda.Controls.Add(Me.cbExterno)
         Me.panelBusqueda.Controls.Add(Me.lblBusquedaNombre)
         Me.panelBusqueda.Controls.Add(Me.btnBuscar)
@@ -91,54 +89,6 @@ Partial Class NotasDeCreditoEDC
         Me.panelBusqueda.Size = New System.Drawing.Size(1102, 50)
         Me.panelBusqueda.TabIndex = 15
         '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(793, 25)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(65, 16)
-        Me.Label2.TabIndex = 77
-        Me.Label2.Text = "matricula:"
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label1.Location = New System.Drawing.Point(795, 7)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(58, 16)
-        Me.Label1.TabIndex = 76
-        Me.Label1.Text = "Tipo de "
-        '
-        'rbEDC
-        '
-        Me.rbEDC.AutoSize = True
-        Me.rbEDC.Checked = True
-        Me.rbEDC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbEDC.ForeColor = System.Drawing.SystemColors.Control
-        Me.rbEDC.Location = New System.Drawing.Point(1007, 14)
-        Me.rbEDC.Name = "rbEDC"
-        Me.rbEDC.Size = New System.Drawing.Size(92, 20)
-        Me.rbEDC.TabIndex = 75
-        Me.rbEDC.TabStop = True
-        Me.rbEDC.Text = "Congresos"
-        Me.rbEDC.UseVisualStyleBackColor = True
-        '
-        'rbExterno
-        '
-        Me.rbExterno.AutoSize = True
-        Me.rbExterno.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbExterno.ForeColor = System.Drawing.SystemColors.Control
-        Me.rbExterno.Location = New System.Drawing.Point(864, 13)
-        Me.rbExterno.Name = "rbExterno"
-        Me.rbExterno.Size = New System.Drawing.Size(136, 20)
-        Me.rbExterno.TabIndex = 74
-        Me.rbExterno.Text = "Pagos opcionales"
-        Me.rbExterno.UseVisualStyleBackColor = True
-        '
         'cbExterno
         '
         Me.cbExterno.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
@@ -146,7 +96,7 @@ Partial Class NotasDeCreditoEDC
         Me.cbExterno.FormattingEnabled = True
         Me.cbExterno.Location = New System.Drawing.Point(300, 14)
         Me.cbExterno.Name = "cbExterno"
-        Me.cbExterno.Size = New System.Drawing.Size(479, 21)
+        Me.cbExterno.Size = New System.Drawing.Size(600, 21)
         Me.cbExterno.TabIndex = 73
         '
         'lblBusquedaNombre
@@ -187,7 +137,7 @@ Partial Class NotasDeCreditoEDC
         Me.lblMatricula.Name = "lblMatricula"
         Me.lblMatricula.Size = New System.Drawing.Size(65, 16)
         Me.lblMatricula.TabIndex = 0
-        Me.lblMatricula.Text = "Matricula:"
+        Me.lblMatricula.Text = "Matrícula:"
         '
         'panelDatos
         '
@@ -247,7 +197,7 @@ Partial Class NotasDeCreditoEDC
         Me.lblMatriculaDato.Name = "lblMatriculaDato"
         Me.lblMatriculaDato.Size = New System.Drawing.Size(61, 15)
         Me.lblMatriculaDato.TabIndex = 25
-        Me.lblMatriculaDato.Text = "Matricula:"
+        Me.lblMatriculaDato.Text = "Matrícula:"
         '
         'lblTurno
         '
@@ -342,13 +292,85 @@ Partial Class NotasDeCreditoEDC
         Me.panelGridNota.TabIndex = 18
         Me.panelGridNota.Visible = False
         '
-        'GridNota
+        'GBNota
         '
-        Me.GridNota.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.GridNota.Location = New System.Drawing.Point(463, 9)
-        Me.GridNota.Name = "GridNota"
-        Me.GridNota.Size = New System.Drawing.Size(636, 299)
-        Me.GridNota.TabIndex = 0
+        Me.GBNota.Controls.Add(Me.Button1)
+        Me.GBNota.Controls.Add(Me.Label5)
+        Me.GBNota.Controls.Add(Me.TextBox2)
+        Me.GBNota.Controls.Add(Me.Label4)
+        Me.GBNota.Controls.Add(Me.TextBox1)
+        Me.GBNota.Controls.Add(Me.Label3)
+        Me.GBNota.Controls.Add(Me.lblTipoNota)
+        Me.GBNota.Controls.Add(Me.cbConcepto)
+        Me.GBNota.Controls.Add(Me.cbTipoNota)
+        Me.GBNota.Controls.Add(Me.lblConcepto)
+        Me.GBNota.ForeColor = System.Drawing.SystemColors.Control
+        Me.GBNota.Location = New System.Drawing.Point(11, 3)
+        Me.GBNota.Name = "GBNota"
+        Me.GBNota.Size = New System.Drawing.Size(446, 379)
+        Me.GBNota.TabIndex = 82
+        Me.GBNota.TabStop = False
+        Me.GBNota.Text = "Datos nota de credito"
+        '
+        'Button1
+        '
+        Me.Button1.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.Add_40px
+        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.Button1.Location = New System.Drawing.Point(175, 325)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 48)
+        Me.Button1.TabIndex = 87
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label5.Location = New System.Drawing.Point(115, 269)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(20, 16)
+        Me.Label5.TabIndex = 86
+        Me.Label5.Text = "%"
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox2.Location = New System.Drawing.Point(80, 266)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(34, 22)
+        Me.TextBox2.TabIndex = 85
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label4.Location = New System.Drawing.Point(5, 269)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(76, 16)
+        Me.Label4.TabIndex = 84
+        Me.Label4.Text = "Porcentaje:"
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Enabled = False
+        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(80, 235)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(89, 22)
+        Me.TextBox1.TabIndex = 83
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label3.Location = New System.Drawing.Point(5, 238)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(48, 16)
+        Me.Label3.TabIndex = 82
+        Me.Label3.Text = "Monto:"
         '
         'lblTipoNota
         '
@@ -360,6 +382,15 @@ Partial Class NotasDeCreditoEDC
         Me.lblTipoNota.Size = New System.Drawing.Size(150, 16)
         Me.lblTipoNota.TabIndex = 78
         Me.lblTipoNota.Text = "Tipo de nota de credito:"
+        '
+        'cbConcepto
+        '
+        Me.cbConcepto.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbConcepto.FormattingEnabled = True
+        Me.cbConcepto.Location = New System.Drawing.Point(6, 102)
+        Me.cbConcepto.Name = "cbConcepto"
+        Me.cbConcepto.Size = New System.Drawing.Size(432, 21)
+        Me.cbConcepto.TabIndex = 81
         '
         'cbTipoNota
         '
@@ -381,38 +412,9 @@ Partial Class NotasDeCreditoEDC
         Me.lblConcepto.TabIndex = 80
         Me.lblConcepto.Text = "Concepto:"
         '
-        'cbConcepto
-        '
-        Me.cbConcepto.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbConcepto.FormattingEnabled = True
-        Me.cbConcepto.Location = New System.Drawing.Point(6, 102)
-        Me.cbConcepto.Name = "cbConcepto"
-        Me.cbConcepto.Size = New System.Drawing.Size(432, 21)
-        Me.cbConcepto.TabIndex = 81
-        '
-        'btnGuardar
-        '
-        Me.btnGuardar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.descargar
-        Me.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnGuardar.Location = New System.Drawing.Point(942, 334)
-        Me.btnGuardar.Name = "btnGuardar"
-        Me.btnGuardar.Size = New System.Drawing.Size(75, 48)
-        Me.btnGuardar.TabIndex = 1
-        Me.btnGuardar.UseVisualStyleBackColor = True
-        '
-        'btnSalir
-        '
-        Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_32px
-        Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnSalir.Location = New System.Drawing.Point(554, 334)
-        Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New System.Drawing.Size(75, 48)
-        Me.btnSalir.TabIndex = 2
-        Me.btnSalir.UseVisualStyleBackColor = True
-        '
         'btnLimpiar
         '
-        Me.btnLimpiar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_32px
+        Me.btnLimpiar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
         Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnLimpiar.Location = New System.Drawing.Point(754, 334)
         Me.btnLimpiar.Name = "btnLimpiar"
@@ -420,19 +422,33 @@ Partial Class NotasDeCreditoEDC
         Me.btnLimpiar.TabIndex = 3
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
-        'GBNota
+        'btnSalir
         '
-        Me.GBNota.Controls.Add(Me.lblTipoNota)
-        Me.GBNota.Controls.Add(Me.cbConcepto)
-        Me.GBNota.Controls.Add(Me.cbTipoNota)
-        Me.GBNota.Controls.Add(Me.lblConcepto)
-        Me.GBNota.ForeColor = System.Drawing.SystemColors.Control
-        Me.GBNota.Location = New System.Drawing.Point(11, 3)
-        Me.GBNota.Name = "GBNota"
-        Me.GBNota.Size = New System.Drawing.Size(446, 379)
-        Me.GBNota.TabIndex = 82
-        Me.GBNota.TabStop = False
-        Me.GBNota.Text = "Datos nota de credito"
+        Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
+        Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnSalir.Location = New System.Drawing.Point(554, 334)
+        Me.btnSalir.Name = "btnSalir"
+        Me.btnSalir.Size = New System.Drawing.Size(75, 48)
+        Me.btnSalir.TabIndex = 2
+        Me.btnSalir.UseVisualStyleBackColor = True
+        '
+        'btnGuardar
+        '
+        Me.btnGuardar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
+        Me.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnGuardar.Location = New System.Drawing.Point(942, 334)
+        Me.btnGuardar.Name = "btnGuardar"
+        Me.btnGuardar.Size = New System.Drawing.Size(75, 48)
+        Me.btnGuardar.TabIndex = 1
+        Me.btnGuardar.UseVisualStyleBackColor = True
+        '
+        'GridNota
+        '
+        Me.GridNota.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.GridNota.Location = New System.Drawing.Point(463, 9)
+        Me.GridNota.Name = "GridNota"
+        Me.GridNota.Size = New System.Drawing.Size(636, 299)
+        Me.GridNota.TabIndex = 0
         '
         'NotasDeCreditoEDC
         '
@@ -453,19 +469,15 @@ Partial Class NotasDeCreditoEDC
         Me.panelDatos.ResumeLayout(False)
         Me.panelDatos.PerformLayout()
         Me.panelGridNota.ResumeLayout(False)
-        CType(Me.GridNota, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GBNota.ResumeLayout(False)
         Me.GBNota.PerformLayout()
+        CType(Me.GridNota, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents lblNombreVentana As Label
     Friend WithEvents panelBusqueda As Panel
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label1 As Label
-    Friend WithEvents rbEDC As RadioButton
-    Friend WithEvents rbExterno As RadioButton
     Friend WithEvents cbExterno As ComboBox
     Friend WithEvents lblBusquedaNombre As Label
     Friend WithEvents btnBuscar As Button
@@ -494,4 +506,10 @@ Partial Class NotasDeCreditoEDC
     Friend WithEvents btnSalir As Button
     Friend WithEvents btnLimpiar As Button
     Friend WithEvents GBNota As GroupBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Button1 As Button
 End Class

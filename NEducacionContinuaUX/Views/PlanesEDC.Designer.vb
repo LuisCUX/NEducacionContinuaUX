@@ -235,6 +235,10 @@ Partial Class PlanesEDC
         Me.chbPagoUnico = New System.Windows.Forms.CheckBox()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.btnSalir = New System.Windows.Forms.Button()
+        Me.GBIVAC = New System.Windows.Forms.GroupBox()
+        Me.RBExentaC = New System.Windows.Forms.RadioButton()
+        Me.RBAbsorbeC = New System.Windows.Forms.RadioButton()
+        Me.RBAgregaC = New System.Windows.Forms.RadioButton()
         Me.Panel1.SuspendLayout()
         Me.tcPlanes.SuspendLayout()
         Me.pageInscripcion.SuspendLayout()
@@ -276,6 +280,7 @@ Partial Class PlanesEDC
         CType(Me.NURecargos1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pagePagoUnico.SuspendLayout()
         CType(Me.NUDescuentoPagoUnico, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GBIVAC.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblNombreVentana
@@ -381,7 +386,7 @@ Partial Class PlanesEDC
         Me.tcPlanes.Controls.Add(Me.pageInscripcion)
         Me.tcPlanes.Controls.Add(Me.pagePlanPagos)
         Me.tcPlanes.Controls.Add(Me.pagePagoUnico)
-        Me.tcPlanes.Location = New System.Drawing.Point(12, 149)
+        Me.tcPlanes.Location = New System.Drawing.Point(12, 198)
         Me.tcPlanes.Name = "tcPlanes"
         Me.tcPlanes.SelectedIndex = 0
         Me.tcPlanes.Size = New System.Drawing.Size(1179, 388)
@@ -883,7 +888,6 @@ Partial Class PlanesEDC
         '
         'txtConcepto10
         '
-        Me.txtConcepto10.Enabled = False
         Me.txtConcepto10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtConcepto10.Location = New System.Drawing.Point(78, 2)
         Me.txtConcepto10.Name = "txtConcepto10"
@@ -1013,7 +1017,6 @@ Partial Class PlanesEDC
         '
         'txtConcepto9
         '
-        Me.txtConcepto9.Enabled = False
         Me.txtConcepto9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtConcepto9.Location = New System.Drawing.Point(79, 2)
         Me.txtConcepto9.Name = "txtConcepto9"
@@ -1143,7 +1146,6 @@ Partial Class PlanesEDC
         '
         'txtConcepto8
         '
-        Me.txtConcepto8.Enabled = False
         Me.txtConcepto8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtConcepto8.Location = New System.Drawing.Point(79, 2)
         Me.txtConcepto8.Name = "txtConcepto8"
@@ -1273,7 +1275,6 @@ Partial Class PlanesEDC
         '
         'txtConcepto7
         '
-        Me.txtConcepto7.Enabled = False
         Me.txtConcepto7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtConcepto7.Location = New System.Drawing.Point(79, 2)
         Me.txtConcepto7.Name = "txtConcepto7"
@@ -1403,7 +1404,6 @@ Partial Class PlanesEDC
         '
         'txtConcepto6
         '
-        Me.txtConcepto6.Enabled = False
         Me.txtConcepto6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtConcepto6.Location = New System.Drawing.Point(79, 2)
         Me.txtConcepto6.Name = "txtConcepto6"
@@ -1533,7 +1533,6 @@ Partial Class PlanesEDC
         '
         'txtConcepto4
         '
-        Me.txtConcepto4.Enabled = False
         Me.txtConcepto4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtConcepto4.Location = New System.Drawing.Point(79, 2)
         Me.txtConcepto4.Name = "txtConcepto4"
@@ -1663,7 +1662,6 @@ Partial Class PlanesEDC
         '
         'txtConcepto3
         '
-        Me.txtConcepto3.Enabled = False
         Me.txtConcepto3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtConcepto3.Location = New System.Drawing.Point(79, 2)
         Me.txtConcepto3.Name = "txtConcepto3"
@@ -1793,7 +1791,6 @@ Partial Class PlanesEDC
         '
         'txtConcepto5
         '
-        Me.txtConcepto5.Enabled = False
         Me.txtConcepto5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtConcepto5.Location = New System.Drawing.Point(79, 2)
         Me.txtConcepto5.Name = "txtConcepto5"
@@ -1923,7 +1920,6 @@ Partial Class PlanesEDC
         '
         'txtConcepto2
         '
-        Me.txtConcepto2.Enabled = False
         Me.txtConcepto2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtConcepto2.Location = New System.Drawing.Point(80, 2)
         Me.txtConcepto2.Name = "txtConcepto2"
@@ -2053,7 +2049,6 @@ Partial Class PlanesEDC
         '
         'txtConcepto1
         '
-        Me.txtConcepto1.Enabled = False
         Me.txtConcepto1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtConcepto1.Location = New System.Drawing.Point(80, 3)
         Me.txtConcepto1.Name = "txtConcepto1"
@@ -2163,7 +2158,7 @@ Partial Class PlanesEDC
         '
         'btnRefreshPagos
         '
-        Me.btnRefreshPagos.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.refresh_32px
+        Me.btnRefreshPagos.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.refresh_16px
         Me.btnRefreshPagos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnRefreshPagos.Location = New System.Drawing.Point(1024, 28)
         Me.btnRefreshPagos.Name = "btnRefreshPagos"
@@ -2438,7 +2433,7 @@ Partial Class PlanesEDC
         Me.lblLimitePagoUnico.Name = "lblLimitePagoUnico"
         Me.lblLimitePagoUnico.Size = New System.Drawing.Size(158, 15)
         Me.lblLimitePagoUnico.TabIndex = 137
-        Me.lblLimitePagoUnico.Text = "Fecha limite del pago unico"
+        Me.lblLimitePagoUnico.Text = "Fecha limite del pago único"
         '
         'txtMontoPagoUnico
         '
@@ -2471,7 +2466,7 @@ Partial Class PlanesEDC
         Me.lblImportePagoUnico.Name = "lblImportePagoUnico"
         Me.lblImportePagoUnico.Size = New System.Drawing.Size(143, 15)
         Me.lblImportePagoUnico.TabIndex = 22
-        Me.lblImportePagoUnico.Text = "Importe de pago unico: $"
+        Me.lblImportePagoUnico.Text = "Importe de pago único: $"
         '
         'chbPagoUnico
         '
@@ -2483,35 +2478,81 @@ Partial Class PlanesEDC
         Me.chbPagoUnico.Name = "chbPagoUnico"
         Me.chbPagoUnico.Size = New System.Drawing.Size(88, 19)
         Me.chbPagoUnico.TabIndex = 1
-        Me.chbPagoUnico.Text = "Pago unico"
+        Me.chbPagoUnico.Text = "Pago único"
         Me.chbPagoUnico.UseVisualStyleBackColor = True
         '
         'btnGuardar
         '
-        Me.btnGuardar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.descargar
+        Me.btnGuardar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
         Me.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnGuardar.Location = New System.Drawing.Point(734, 553)
+        Me.btnGuardar.Location = New System.Drawing.Point(734, 600)
         Me.btnGuardar.Name = "btnGuardar"
-        Me.btnGuardar.Size = New System.Drawing.Size(63, 38)
+        Me.btnGuardar.Size = New System.Drawing.Size(63, 45)
         Me.btnGuardar.TabIndex = 17
         Me.btnGuardar.UseVisualStyleBackColor = True
         '
         'btnSalir
         '
-        Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_32px
+        Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
         Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnSalir.Location = New System.Drawing.Point(400, 553)
+        Me.btnSalir.Location = New System.Drawing.Point(400, 600)
         Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New System.Drawing.Size(63, 38)
+        Me.btnSalir.Size = New System.Drawing.Size(63, 45)
         Me.btnSalir.TabIndex = 18
         Me.btnSalir.UseVisualStyleBackColor = True
+        '
+        'GBIVAC
+        '
+        Me.GBIVAC.Controls.Add(Me.RBExentaC)
+        Me.GBIVAC.Controls.Add(Me.RBAbsorbeC)
+        Me.GBIVAC.Controls.Add(Me.RBAgregaC)
+        Me.GBIVAC.ForeColor = System.Drawing.SystemColors.Control
+        Me.GBIVAC.Location = New System.Drawing.Point(405, 150)
+        Me.GBIVAC.Name = "GBIVAC"
+        Me.GBIVAC.Size = New System.Drawing.Size(398, 48)
+        Me.GBIVAC.TabIndex = 271
+        Me.GBIVAC.TabStop = False
+        Me.GBIVAC.Text = "Uso de IVA en conceptos"
+        '
+        'RBExentaC
+        '
+        Me.RBExentaC.AutoSize = True
+        Me.RBExentaC.Location = New System.Drawing.Point(291, 20)
+        Me.RBExentaC.Name = "RBExentaC"
+        Me.RBExentaC.Size = New System.Drawing.Size(78, 17)
+        Me.RBExentaC.TabIndex = 2
+        Me.RBExentaC.Text = "Exenta IVA"
+        Me.RBExentaC.UseVisualStyleBackColor = True
+        '
+        'RBAbsorbeC
+        '
+        Me.RBAbsorbeC.AutoSize = True
+        Me.RBAbsorbeC.Checked = True
+        Me.RBAbsorbeC.Location = New System.Drawing.Point(158, 20)
+        Me.RBAbsorbeC.Name = "RBAbsorbeC"
+        Me.RBAbsorbeC.Size = New System.Drawing.Size(84, 17)
+        Me.RBAbsorbeC.TabIndex = 1
+        Me.RBAbsorbeC.TabStop = True
+        Me.RBAbsorbeC.Text = "Absorbe IVA"
+        Me.RBAbsorbeC.UseVisualStyleBackColor = True
+        '
+        'RBAgregaC
+        '
+        Me.RBAgregaC.AutoSize = True
+        Me.RBAgregaC.Location = New System.Drawing.Point(20, 20)
+        Me.RBAgregaC.Name = "RBAgregaC"
+        Me.RBAgregaC.Size = New System.Drawing.Size(79, 17)
+        Me.RBAgregaC.TabIndex = 0
+        Me.RBAgregaC.Text = "Agrega IVA"
+        Me.RBAgregaC.UseVisualStyleBackColor = True
         '
         'PlanesEDC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.ClientSize = New System.Drawing.Size(1203, 603)
+        Me.ClientSize = New System.Drawing.Size(1203, 657)
+        Me.Controls.Add(Me.GBIVAC)
         Me.Controls.Add(Me.btnSalir)
         Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.tcPlanes)
@@ -2576,6 +2617,8 @@ Partial Class PlanesEDC
         Me.pagePagoUnico.ResumeLayout(False)
         Me.pagePagoUnico.PerformLayout()
         CType(Me.NUDescuentoPagoUnico, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GBIVAC.ResumeLayout(False)
+        Me.GBIVAC.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -2793,4 +2836,8 @@ Partial Class PlanesEDC
     Friend WithEvents NURecargoInscripcion As NumericUpDown
     Friend WithEvents NUDescuentoInscripcion As NumericUpDown
     Friend WithEvents NUDescuentoPagoUnico As NumericUpDown
+    Friend WithEvents GBIVAC As GroupBox
+    Friend WithEvents RBExentaC As RadioButton
+    Friend WithEvents RBAbsorbeC As RadioButton
+    Friend WithEvents RBAgregaC As RadioButton
 End Class

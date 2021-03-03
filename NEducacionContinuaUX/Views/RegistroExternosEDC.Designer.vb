@@ -84,9 +84,7 @@ Partial Class RegistroExternosEDC
         Me.pageEdicionExternos = New System.Windows.Forms.TabPage()
         Me.cbExterno = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.btnSalirEd = New System.Windows.Forms.Button()
         Me.chbDatosFiscalesEdit = New System.Windows.Forms.CheckBox()
-        Me.btnGuardarEdit = New System.Windows.Forms.Button()
         Me.txtMatriculaEd = New System.Windows.Forms.TextBox()
         Me.lblMatriculaEd = New System.Windows.Forms.Label()
         Me.panelDatosFiscalesEdit = New System.Windows.Forms.Panel()
@@ -136,6 +134,8 @@ Partial Class RegistroExternosEDC
         Me.lblAp_PatEd = New System.Windows.Forms.Label()
         Me.lblnombreEd = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
+        Me.btnSalirEd = New System.Windows.Forms.Button()
+        Me.btnGuardarEdit = New System.Windows.Forms.Button()
         Me.btnBuscarEd = New System.Windows.Forms.Button()
         Me.tabExternos.SuspendLayout()
         Me.tabRegistroExternos.SuspendLayout()
@@ -185,7 +185,7 @@ Partial Class RegistroExternosEDC
         '
         'btnSalir
         '
-        Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_32px
+        Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
         Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnSalir.Location = New System.Drawing.Point(683, 481)
         Me.btnSalir.Name = "btnSalir"
@@ -195,7 +195,7 @@ Partial Class RegistroExternosEDC
         '
         'btnGuardarN
         '
-        Me.btnGuardarN.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.descargar
+        Me.btnGuardarN.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
         Me.btnGuardarN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnGuardarN.Location = New System.Drawing.Point(301, 481)
         Me.btnGuardarN.Name = "btnGuardarN"
@@ -547,7 +547,7 @@ Partial Class RegistroExternosEDC
         '
         'btnLimpiarUX
         '
-        Me.btnLimpiarUX.Image = Global.NEducacionContinuaUX.My.Resources.Resources.broom_32px
+        Me.btnLimpiarUX.Image = Global.NEducacionContinuaUX.My.Resources.Resources.broom_16px
         Me.btnLimpiarUX.Location = New System.Drawing.Point(961, 34)
         Me.btnLimpiarUX.Name = "btnLimpiarUX"
         Me.btnLimpiarUX.Size = New System.Drawing.Size(40, 33)
@@ -752,7 +752,7 @@ Partial Class RegistroExternosEDC
         '
         'btnBuscarUX
         '
-        Me.btnBuscarUX.Image = Global.NEducacionContinuaUX.My.Resources.Resources.search_32px
+        Me.btnBuscarUX.Image = Global.NEducacionContinuaUX.My.Resources.Resources.search_30px
         Me.btnBuscarUX.Location = New System.Drawing.Point(367, 34)
         Me.btnBuscarUX.Name = "btnBuscarUX"
         Me.btnBuscarUX.Size = New System.Drawing.Size(40, 33)
@@ -776,7 +776,7 @@ Partial Class RegistroExternosEDC
         Me.lblMatricula.Name = "lblMatricula"
         Me.lblMatricula.Size = New System.Drawing.Size(86, 16)
         Me.lblMatricula.TabIndex = 29
-        Me.lblMatricula.Text = "Matricula UX:"
+        Me.lblMatricula.Text = "Matrícula UX:"
         '
         'lbldatosPersonales
         '
@@ -795,13 +795,13 @@ Partial Class RegistroExternosEDC
         Me.pageEdicionExternos.BackColor = System.Drawing.SystemColors.ControlDarkDark
         Me.pageEdicionExternos.Controls.Add(Me.cbExterno)
         Me.pageEdicionExternos.Controls.Add(Me.Label9)
-        Me.pageEdicionExternos.Controls.Add(Me.btnSalirEd)
         Me.pageEdicionExternos.Controls.Add(Me.chbDatosFiscalesEdit)
-        Me.pageEdicionExternos.Controls.Add(Me.btnGuardarEdit)
         Me.pageEdicionExternos.Controls.Add(Me.txtMatriculaEd)
         Me.pageEdicionExternos.Controls.Add(Me.lblMatriculaEd)
         Me.pageEdicionExternos.Controls.Add(Me.panelDatosFiscalesEdit)
         Me.pageEdicionExternos.Controls.Add(Me.panelDatosPersonalesEdit)
+        Me.pageEdicionExternos.Controls.Add(Me.btnSalirEd)
+        Me.pageEdicionExternos.Controls.Add(Me.btnGuardarEdit)
         Me.pageEdicionExternos.Controls.Add(Me.btnBuscarEd)
         Me.pageEdicionExternos.Location = New System.Drawing.Point(4, 22)
         Me.pageEdicionExternos.Name = "pageEdicionExternos"
@@ -831,17 +831,6 @@ Partial Class RegistroExternosEDC
         Me.Label9.TabIndex = 71
         Me.Label9.Text = "Nombre Externo:"
         '
-        'btnSalirEd
-        '
-        Me.btnSalirEd.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_32px
-        Me.btnSalirEd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnSalirEd.Location = New System.Drawing.Point(648, 483)
-        Me.btnSalirEd.Name = "btnSalirEd"
-        Me.btnSalirEd.Size = New System.Drawing.Size(75, 55)
-        Me.btnSalirEd.TabIndex = 70
-        Me.btnSalirEd.UseVisualStyleBackColor = True
-        Me.btnSalirEd.Visible = False
-        '
         'chbDatosFiscalesEdit
         '
         Me.chbDatosFiscalesEdit.AutoSize = True
@@ -854,17 +843,6 @@ Partial Class RegistroExternosEDC
         Me.chbDatosFiscalesEdit.Text = "Incluir datos fiscales"
         Me.chbDatosFiscalesEdit.UseVisualStyleBackColor = True
         Me.chbDatosFiscalesEdit.Visible = False
-        '
-        'btnGuardarEdit
-        '
-        Me.btnGuardarEdit.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.descargar
-        Me.btnGuardarEdit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnGuardarEdit.Location = New System.Drawing.Point(306, 483)
-        Me.btnGuardarEdit.Name = "btnGuardarEdit"
-        Me.btnGuardarEdit.Size = New System.Drawing.Size(75, 55)
-        Me.btnGuardarEdit.TabIndex = 68
-        Me.btnGuardarEdit.UseVisualStyleBackColor = True
-        Me.btnGuardarEdit.Visible = False
         '
         'txtMatriculaEd
         '
@@ -883,7 +861,7 @@ Partial Class RegistroExternosEDC
         Me.lblMatriculaEd.Name = "lblMatriculaEd"
         Me.lblMatriculaEd.Size = New System.Drawing.Size(72, 18)
         Me.lblMatriculaEd.TabIndex = 46
-        Me.lblMatriculaEd.Text = "Matricula:"
+        Me.lblMatriculaEd.Text = "Matrícula:"
         '
         'panelDatosFiscalesEdit
         '
@@ -1294,7 +1272,7 @@ Partial Class RegistroExternosEDC
         Me.lblCPEd.Name = "lblCPEd"
         Me.lblCPEd.Size = New System.Drawing.Size(95, 16)
         Me.lblCPEd.TabIndex = 40
-        Me.lblCPEd.Text = "Codigo postal:"
+        Me.lblCPEd.Text = "Código postal:"
         '
         'lblCorreoEd
         '
@@ -1395,6 +1373,28 @@ Partial Class RegistroExternosEDC
         Me.Label19.TabIndex = 28
         Me.Label19.Text = "Datos personales"
         Me.Label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'btnSalirEd
+        '
+        Me.btnSalirEd.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_32px
+        Me.btnSalirEd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnSalirEd.Location = New System.Drawing.Point(648, 483)
+        Me.btnSalirEd.Name = "btnSalirEd"
+        Me.btnSalirEd.Size = New System.Drawing.Size(75, 55)
+        Me.btnSalirEd.TabIndex = 70
+        Me.btnSalirEd.UseVisualStyleBackColor = True
+        Me.btnSalirEd.Visible = False
+        '
+        'btnGuardarEdit
+        '
+        Me.btnGuardarEdit.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.descargar
+        Me.btnGuardarEdit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnGuardarEdit.Location = New System.Drawing.Point(306, 483)
+        Me.btnGuardarEdit.Name = "btnGuardarEdit"
+        Me.btnGuardarEdit.Size = New System.Drawing.Size(75, 55)
+        Me.btnGuardarEdit.TabIndex = 68
+        Me.btnGuardarEdit.UseVisualStyleBackColor = True
+        Me.btnGuardarEdit.Visible = False
         '
         'btnBuscarEd
         '

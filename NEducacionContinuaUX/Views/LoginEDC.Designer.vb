@@ -71,13 +71,13 @@ Partial Class LoginEDC
         '
         'btnSalir
         '
-        Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_32px
+        Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
         Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnSalir.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnSalir.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSalir.Location = New System.Drawing.Point(477, 166)
         Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New System.Drawing.Size(63, 44)
+        Me.btnSalir.Size = New System.Drawing.Size(68, 49)
         Me.btnSalir.TabIndex = 6
         Me.btnSalir.UseVisualStyleBackColor = True
         '
@@ -86,9 +86,9 @@ Partial Class LoginEDC
         Me.btnAceptar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.login_rounded_up_26px
         Me.btnAceptar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnAceptar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAceptar.Location = New System.Drawing.Point(338, 166)
+        Me.btnAceptar.Location = New System.Drawing.Point(321, 166)
         Me.btnAceptar.Name = "btnAceptar"
-        Me.btnAceptar.Size = New System.Drawing.Size(63, 44)
+        Me.btnAceptar.Size = New System.Drawing.Size(68, 49)
         Me.btnAceptar.TabIndex = 5
         Me.btnAceptar.UseVisualStyleBackColor = True
         '

@@ -37,6 +37,15 @@ Public Class XmlService
         Return cadena
     End Function
 
+    Function cadenaCredito(Serie As String, Folio As String, Fecha As String, NoCertificado As String, Certificado As String, RFC As String, NombreCompleto As String, UsoCFDI As String, FolioFiscal As String, SerieOriginal As String, FolioOriginal As String, NumParcialidad As Integer,
+                        SaldoAnterior As Decimal, montoAbonado As Decimal, saldoRestante As Decimal, FechaAbono As String, FormaPago As String) As String
+        Dim cadena As String = $"||3.3|{Serie}|{Folio}|{Fecha}|{NoCertificado}|0|XXX|0|P|{ConfigurationSettings.AppSettings.Get("CP").ToString()}|{ConfigurationSettings.AppSettings.Get("RFC").ToString()}|{ConfigurationSettings.AppSettings.Get("NombreEmpresa").ToString()}|{ConfigurationSettings.AppSettings.Get("RegimenFiscal").ToString()}|{RFC}|{NombreCompleto}|{UsoCFDI}|84111506|1|ACT|Pago|0|0|1.0|{FechaAbono}|{FormaPago}|MXN|{montoAbonado}|{FolioFiscal}|{SerieOriginal}|{FolioOriginal}|MXN|PPD|{NumParcialidad}|{Format(CDec(SaldoAnterior), "#####0.00")}|{Format(CDec(montoAbonado), "#####0.00")}|{Format(CDec(saldoRestante), "#####0.00")}||"
+
+
+        Return cadena
+    End Function
+
+
     Function xmlPrueba(Total As String, SubTotal As String, Descuento As String, TotalIVA As String, Fecha As String, Sello As String, Certificado As String, NoCertificado As String, FormaPago As String, Folio As String, Serie As String, UsoCFDI As String, listaConceptos As List(Of Concepto), RFC As String, NombreCompleto As String, Credito As Boolean) As String
         Dim IVABand As Boolean = False
         Dim config As New XmlWriterSettings
@@ -140,6 +149,88 @@ Public Class XmlService
                 wr.WriteEndDocument()
 
                 wr.Close()
+            End Using
+            xml = sw.ToString()
+        End Using
+        Return xml
+    End Function
+
+
+    Function xmlCredito(Serie As String, Folio As String, Fecha As String, NoCertificado As String, Sello As String, Certificado As String, RFC As String, NombreCompleto As String, UsoCFDI As String, FolioFiscal As String, SerieOriginal As String, FolioOriginal As String, NumParcialidad As Integer,
+                        SaldoAnterior As Decimal, montoAbonado As Decimal, saldoRestante As Decimal, FechaAbono As String, FormaPago As String) As String
+        Dim xml As String
+        Dim config As New XmlWriterSettings
+        config.Indent = True
+        config.Encoding = Encoding.UTF8
+        config.Async = True
+        Dim archivo_xml As String = "C:\Users\Luis\Desktop\wea.xml"
+        Using sw As New StringWriter()
+            Using wr As XmlWriter = XmlWriter.Create(sw, config)
+                wr.WriteStartDocument()
+                wr.WriteStartElement("cfdi", "Comprobante", "http://www.sat.gob.mx/cfd/3") ''NODO COMPROBANTE START
+                wr.WriteAttributeString("xmlns", "xsi", Nothing, "http://www.w3.org/2001/XMLSchema-instance")
+                wr.WriteAttributeString("xmlns", "pago10", Nothing, "http://www.sat.gob.mx/Pagos")
+                wr.WriteAttributeString("xsi", "schemaLocation", Nothing, "http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd http://www.sat.gob.mx/Pagos http://www.sat.gob.mx/sitio_internet/cfd/Pagos/Pagos10.xsd")
+                wr.WriteAttributeString("Moneda", Nothing, "XXX")
+                wr.WriteAttributeString("Version", Nothing, ConfigurationSettings.AppSettings.Get("VersionSAT").ToString())
+                wr.WriteAttributeString("TipoDeComprobante", Nothing, "P")
+                wr.WriteAttributeString("Total", Nothing, "0")
+                wr.WriteAttributeString("SubTotal", Nothing, "0")
+                wr.WriteAttributeString("Fecha", Nothing, Fecha)
+                wr.WriteAttributeString("Sello", Nothing, Sello)
+                wr.WriteAttributeString("Certificado", Nothing, Certificado)
+                wr.WriteAttributeString("LugarExpedicion", Nothing, ConfigurationSettings.AppSettings.Get("CP").ToString())
+                wr.WriteAttributeString("Folio", Nothing, Folio)
+                wr.WriteAttributeString("Serie", Nothing, Serie)
+                wr.WriteAttributeString("NoCertificado", Nothing, NoCertificado)
+
+                wr.WriteStartElement("cfdi", "Emisor", Nothing) ''NODO EMISOR START
+                wr.WriteAttributeString("RegimenFiscal", Nothing, ConfigurationSettings.AppSettings.Get("RegimenFiscal").ToString())
+                wr.WriteAttributeString("Rfc", Nothing, ConfigurationSettings.AppSettings.Get("RFC").ToString())
+                wr.WriteAttributeString("Nombre", Nothing, ConfigurationSettings.AppSettings.Get("NombreEmpresa").ToString())
+
+                wr.WriteEndElement() ''NODO EMISOR END
+
+                wr.WriteStartElement("cfdi", "Receptor", Nothing) ''NODO RECEPTOR START
+                wr.WriteAttributeString("Rfc", Nothing, RFC)
+                wr.WriteAttributeString("Nombre", Nothing, NombreCompleto)
+                wr.WriteAttributeString("UsoCFDI", Nothing, UsoCFDI)
+                wr.WriteEndElement() ''NODO RECEPTOR END
+
+                wr.WriteStartElement("cfdi", "Conceptos", Nothing) ''NODO CONCEPTOS START
+                wr.WriteStartElement("cfdi", "Concepto", Nothing) ''NODO CONCEPTO START
+                wr.WriteAttributeString("ClaveProdServ", Nothing, "84111506")
+                wr.WriteAttributeString("Cantidad", Nothing, 1)
+                wr.WriteAttributeString("ClaveUnidad", Nothing, "ACT")
+                wr.WriteAttributeString("Descripcion", Nothing, "Pago")
+                wr.WriteAttributeString("ValorUnitario", Nothing, "0")
+                wr.WriteAttributeString("Importe", Nothing, "0")
+
+                wr.WriteEndElement() ''NODO CONCEPTO END
+                wr.WriteEndElement() ''NODO CONCEPTOS END
+
+                wr.WriteStartElement("cfdi", "Complemento", Nothing) ''NODO COMPLEMENTO START
+                wr.WriteStartElement("pago10", "Pagos", Nothing) ''NODO PAGO10 START
+                wr.WriteAttributeString("Version", Nothing, "1.0")
+                wr.WriteStartElement("pago10", "Pago", Nothing) ''NODO PAGO10 START
+                wr.WriteAttributeString("FechaPago", Nothing, FechaAbono)
+                wr.WriteAttributeString("FormaDePagoP", Nothing, FormaPago)
+                wr.WriteAttributeString("MonedaP", Nothing, "MXN")
+                wr.WriteAttributeString("Monto", Nothing, montoAbonado)
+                wr.WriteStartElement("pago10", "DoctoRelacionado", Nothing) ''NODO DOCTORELACIONADO START
+                wr.WriteAttributeString("IdDocumento", Nothing, FolioFiscal)
+                wr.WriteAttributeString("Serie", Nothing, SerieOriginal)
+                wr.WriteAttributeString("Folio", Nothing, FolioOriginal)
+                wr.WriteAttributeString("MonedaDR", Nothing, "MXN")
+                wr.WriteAttributeString("MetodoDePagoDR", Nothing, "PPD")
+                wr.WriteAttributeString("NumParcialidad", Nothing, NumParcialidad)
+                wr.WriteAttributeString("ImpSaldoAnt", Nothing, Format(CDec(SaldoAnterior), "#####0.00"))
+                wr.WriteAttributeString("ImpPagado", Nothing, Format(CDec(montoAbonado), "#####0.00"))
+                wr.WriteAttributeString("ImpSaldoInsoluto", Nothing, Format(CDec(saldoRestante), "#####0.00"))
+                wr.WriteEndElement() ''NODO COMPLEMENTO END
+                wr.WriteEndElement() ''NODO PAGO10 END
+                wr.WriteEndElement() ''NODO DOCTORELACIONADO END
+
             End Using
             xml = sw.ToString()
         End Using

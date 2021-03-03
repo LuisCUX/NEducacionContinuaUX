@@ -44,12 +44,22 @@
             Return
         End If
 
+        Dim datosFiscales As Boolean
+
         If (chbDatosFiscales.Checked = True) Then
             Dim validaFiscal As Object() = re.validaTextboxFiscal(txtRFC, txtNR, txtDireccionF, txtColoniaF, txtCiudad, txtCorreoF, txtCPF, txtTelefonoF, cbMunicipioF)
+            Dim idRFC As Integer = db.exectSQLQueryScalar($"SELECT id_rfc FROM portal_catRFC WHERE rfc = '{txtRFC.Text}'")
+            If (idRFC > 0) Then
+                MessageBox.Show("El RFC ingresado ya se encuentra registrado en la base de datos, favor de ingresar un RFC valido")
+                Exit Sub
+            End If
             If (validaFiscal(0) = False) Then
                 MessageBox.Show(validaFiscal(1))
                 Return
             End If
+            datosFiscales = True
+        Else
+            datosFiscales = False
         End If
 
         Dim tipocliente As Integer

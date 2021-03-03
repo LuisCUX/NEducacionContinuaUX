@@ -47,7 +47,7 @@ Partial Class ModalAutConPorcentaje
         '
         'btnGuardar
         '
-        Me.btnGuardar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.descargar
+        Me.btnGuardar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_16px
         Me.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnGuardar.Location = New System.Drawing.Point(63, 44)
         Me.btnGuardar.Name = "btnGuardar"

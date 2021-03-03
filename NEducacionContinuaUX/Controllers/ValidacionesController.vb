@@ -1,4 +1,6 @@
-﻿Public Class ValidacionesController
+﻿Imports System.Text.RegularExpressions
+
+Public Class ValidacionesController
     Dim db As DataBaseService = New DataBaseService()
     ''----------------------------------------------------------------------------------------------------------------------------------------
     ''-----------------------------------------------------VALIDA EL TIPO DE MATRICULA--------------------------------------------------------
@@ -51,6 +53,7 @@
     ''----------------------------------------------------------------------------------------------------------------------------------------
     Sub llenarPanelDatosUX(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As TextBox, txtEmail As TextBox, txtCarrera As TextBox, txtTurno As TextBox)
         Dim nombre As String = db.exectSQLQueryScalar($"SELECT UPPER(nombre + ' ' + ap_pat + ' ' + ap_mat) As NombreAlumno FROM ux.dbo.dae_catAlumnos WHERE Matricula = '{Matricula}'")
+        nombre = Regex.Replace(nombre, " {2,}", " ")
         Dim email As String = db.exectSQLQueryScalar($"SELECT email FROM ux.dbo.dae_catAlumnos WHERE Matricula = '{Matricula}'")
         Dim carrera As String = db.exectSQLQueryScalar($"SELECT nombre FROM ux.dbo.dae_catCarreras WHERE clave = '{Matricula.Substring(4, 2)}'")
 
@@ -91,17 +94,18 @@
                                                                INNER JOIN portal_registroExterno AS EX ON C.id_cliente = EX.id_cliente
                                                                WHERE EX.clave_cliente = '{Matricula}'")
         For Each item As DataRow In tableDatos.Rows
-            txtNombre.Text = item("Nombre")
+            Dim nombre As String = item("Nombre")
+            nombre = Regex.Replace(nombre, " {2,}", " ")
+            txtNombre.Text = nombre
             txtEmail.Text = item("correo")
         Next
         txtCarrera.Text = ""
         txtTurno.Text = ""
 
-        txtRFC.Text = db.exectSQLQueryScalar($"SELECT RFC.rfc FROM portal_cliente AS C 
-                                               INNER JOIN portal_registroCongreso AS RC ON RC.id_cliente = C.id_cliente
-                                               INNER JOIN portal_rcRFC AS X ON X.id_registro = RC.id_registro
-                                               INNER JOIN portal_catRFC AS RFC ON RFC.id_rfc = X.id_rfc
-                                               WHERE RC.clave_cliente = '{Matricula}'")
+        txtRFC.Text = db.exectSQLQueryScalar($"SELECT rfc FROM portal_catRFC AS R
+                                               INNER JOIN portal_reRFC AS RE ON RE.id_rfc = R.id_rfc
+                                               INNER JOIN portal_registroExterno AS EX ON EX.id_registro = RE.id_registro
+                                               WHERE EX.clave_cliente = '{Matricula}'")
 
         panelDatos.Visible = True
         panelCobros.Visible = True
@@ -132,7 +136,9 @@
                                                                INNER JOIN portal_registroCongreso AS R ON R.id_cliente = C.id_cliente
                                                                WHERE R.clave_cliente = '{Matricula}'")
         For Each item As DataRow In tableDatos.Rows
-            txtNombre.Text = item("Nombre")
+            Dim nombre As String = item("Nombre")
+            nombre = Regex.Replace(nombre, " {2,}", " ")
+            txtNombre.Text = nombre
             txtEmail.Text = item("correo")
         Next
         txtCarrera.Text = ""

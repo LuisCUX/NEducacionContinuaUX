@@ -47,6 +47,7 @@
         GridPagos.DataSource = tablePagos
     End Sub
 
+
     Sub asignarPagosMatricula(Matricula As String, gridPagos As DataGridView)
         Try
             db.startTransaction()
@@ -79,6 +80,43 @@
         Catch ex As Exception
             db.rollBackTransaction()
         End Try
+    End Sub
 
+    Sub cambiarPlanPagos(Matricula As String, gridPagos As DataGridView, planID As Integer)
+        Try
+            db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionCargosPlanes SET Activo = 0 WHERE ID IN (SELECT A.ID FROM ing_AsignacionCargosPlanes AS A 
+															                                             INNER JOIN ing_PlanesConceptos AS C ON C.ID = A.ID_Concepto
+															                                             INNER JOIN ing_Planes AS P ON P.ID = C.ID_Plan
+															                                             WHERE A.Matricula = '{Matricula}' AND P.ID = {planID} AND A.Activo = 1)")
+            db.startTransaction()
+            For x = 0 To gridPagos.Rows.Count - 1
+                Dim IDPago As Integer = gridPagos.Rows(x).Cells(0).Value
+                Dim clave As String = gridPagos.Rows(x).Cells(1).Value.ToString()
+                Dim ID_ClavePago As Integer
+                If (clave = "P00") Then
+                    ID_ClavePago = 6
+                ElseIf (clave = "P13") Then
+                    ID_ClavePago = 5
+                Else
+                    ID_ClavePago = 4
+                End If
+                Dim fechaRecargo As Date
+                Dim fechaRecargos As String
+
+                Dim aplicaRecargo As Boolean = db.exectSQLQueryScalar($"SELECT Considera_Recargo FROM ing_PlanesConceptos WHERE ID = {IDPago}")
+                If (aplicaRecargo = True) Then
+                    fechaRecargo = db.exectSQLQueryScalar($"SELECT Fecha_Calcula_Recargo FROM ing_PlanesConceptos WHERE ID = {IDPago}")
+                    ''fechaRecargos = $"{fechaRecargo.Year}/{fechaRecargo.Month}/{fechaRecargo.Day}"
+                Else
+                    fechaRecargo = "1900-01-01"
+                End If
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_AsignacionCargosPlanes(ID_Concepto, Matricula, Fecha_Asignacion, Fecha_Recargo, ID_ClaveConcepto, ClaveUnidad, Autorizado, Condonado, Activo) VALUES ({IDPago}, '{Matricula}', GETDATE(), '{fechaRecargos}', {ID_ClavePago}, 'E48', 0, 0, 1)")
+            Next
+            db.commitTransaction()
+            MessageBox.Show("Cargos asignados correctamente")
+            AsignacionPlanesEDC.Reiniciar()
+        Catch ex As Exception
+
+        End Try
     End Sub
 End Class

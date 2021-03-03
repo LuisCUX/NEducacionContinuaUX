@@ -7,6 +7,16 @@
     Dim va As ValidacionesController = New ValidacionesController()
 
     Private Sub AutorizacionCondonacionEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim tableEDC As DataTable = db.getDataTableFromSQL("SELECT RC.clave_cliente, UPPER(C.nombre + ' ' + RC.apellido_paterno + ' ' + RC.apellido_materno + ' (' + RC.clave_cliente + ')') AS NombreCliente FROM portal_registroCongreso AS RC
+                                                            INNER JOIN portal_cliente AS C ON RC.id_cliente = C.id_cliente
+                                                            ORDER BY NombreCliente")
+        Dim tableExternos As DataTable = db.getDataTableFromSQL("SELECT CL.clave_cliente, UPPER(C.nombre + ' ' + E.paterno + ' ' + E.materno + ' (' + CL.clave_cliente + ')') As NombreCliente FROM portal_registroExterno AS E
+                                                                 INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
+                                                                 INNER JOIN portal_clave AS CL ON CL.id_cliente = C.id_cliente
+                                                                 ORDER BY C.nombre")
+
+        tableExternos.Merge(tableEDC)
+        ComboboxService.llenarCombobox(cbExterno, tableExternos, "clave_cliente", "NombreCliente")
         ac.llenarComboboxes(cbTipoCondonacion)
     End Sub
 
@@ -129,22 +139,6 @@
         ac.GuardarAutorizacionesCaja(Matricula, GridAutorizacionCaja)
     End Sub
 
-    Private Sub rbExterno_CheckedChanged(sender As Object, e As EventArgs) Handles rbExterno.CheckedChanged
-        cbExterno.DataSource = Nothing
-        Dim tableExternos As DataTable = db.getDataTableFromSQL("SELECT CL.clave_cliente, UPPER(C.nombre + ' ' + E.paterno + ' ' + E.materno + ' (' + CL.clave_cliente + ')') As NombreExterno FROM portal_registroExterno AS E
-                                                                 INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
-                                                                 INNER JOIN portal_clave AS CL ON CL.id_cliente = C.id_cliente
-                                                                 ORDER BY C.nombre")
-        ComboboxService.llenarCombobox(cbExterno, tableExternos, "clave_cliente", "NombreExterno")
-    End Sub
-
-    Private Sub rbEDC_CheckedChanged(sender As Object, e As EventArgs) Handles rbEDC.CheckedChanged
-        Dim tableEDC As DataTable = db.getDataTableFromSQL("SELECT RC.clave_cliente, UPPER(C.nombre + ' ' + RC.apellido_paterno + ' ' + RC.apellido_materno + ' (' + RC.clave_cliente + ')') AS NombreCliente FROM portal_registroCongreso AS RC
-                                                            INNER JOIN portal_cliente AS C ON RC.id_cliente = C.id_cliente
-                                                            ORDER BY NombreCliente")
-        ComboboxService.llenarCombobox(cbExterno, tableEDC, "clave_cliente", "NombreCliente")
-    End Sub
-
     Private Sub cbExterno_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbExterno.SelectionChangeCommitted
         Try
             Me.limpiar()
@@ -155,6 +149,4 @@
 
         End Try
     End Sub
-
-
 End Class

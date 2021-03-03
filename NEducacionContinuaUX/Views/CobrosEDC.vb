@@ -7,11 +7,22 @@
     Dim ch As ConceptHandlerController = New ConceptHandlerController()
     Dim va As ValidacionesController = New ValidacionesController()
     Private Sub CobrosEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Dim tableEDC As DataTable = db.getDataTableFromSQL("SELECT RC.clave_cliente, UPPER(C.nombre + ' ' + RC.apellido_paterno + ' ' + RC.apellido_materno + ' (' + RC.clave_cliente + ')') AS NombreCliente FROM portal_registroCongreso AS RC
+                                                            INNER JOIN portal_cliente AS C ON RC.id_cliente = C.id_cliente
+                                                            ORDER BY NombreCliente")
+        Dim tableExternos As DataTable = db.getDataTableFromSQL("SELECT CL.clave_cliente, UPPER(C.nombre + ' ' + E.paterno + ' ' + E.materno + ' (' + CL.clave_cliente + ')') As NombreCliente FROM portal_registroExterno AS E
+                                                                 INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
+                                                                 INNER JOIN portal_clave AS CL ON CL.id_cliente = C.id_cliente
+                                                                 ORDER BY C.nombre")
+
+        tableExternos.Merge(tableEDC)
+        ComboboxService.llenarCombobox(cbExterno, tableExternos, "clave_cliente", "NombreCliente")
+
         Dim tableFormaPago As DataTable = db.getDataTableFromSQL("SELECT Forma_Pago, Descripcion FROM ing_CatFormaPago")
         ComboboxService.llenarCombobox(cbFormaPago, tableFormaPago, "Forma_Pago", "Descripcion")
         Dim tablebancos As DataTable = db.getDataTableFromSQL("SELECT ID, Nombre_Banco FROM ing_Cat_Bancos")
         ComboboxService.llenarCombobox(cbBanco, tablebancos, "ID", "Nombre_Banco")
-        rbExterno.Checked = True
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
@@ -272,11 +283,12 @@
                     MessageBox.Show($"No puede pagar la colegiatura del mes {mesActual} sin antes haber pagado las colegiaturas anteriores")
                     Exit Sub
                 End If
-                If (Me.buscarRecargoColegiaturas(conceptoID) = False) Then
-                    Dim mesActual As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "-", "-")
-                    MessageBox.Show($"No puede pagar la colegiatura del mes de {mesActual} sin antes haber pagado el recargo correspondiente")
-                    Exit Sub
-                End If
+                'If (Me.buscarRecargoColegiaturas(conceptoID) = False) Then
+                '    Dim mesActual As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "-", "-")
+                '    MessageBox.Show($"No puede pagar la colegiatura del mes de {mesActual} sin antes haber pagado el recargo correspondiente")
+                '    Exit Sub
+                'End If
+                Me.marcarRecargo(conceptoID, True)
                 Tree.SelectedNode.Checked = True
                 ch.agregarconcepto(conceptoID, "DCO", Matricula)
                 Me.actualizarTotal(ch.getListaConceptos())
@@ -289,6 +301,7 @@
                 End If
                 Tree.SelectedNode.Checked = False
                 Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
+                Me.marcarRecargo(conceptoID, False)
                 ch.eliminarconcepto(conceptoID, "DCO", Matricula)
                 Me.actualizarTotal(ch.getListaConceptos())
                 Tree.Nodes(3).Nodes(index).SelectedImageIndex = 0
@@ -309,25 +322,25 @@
                 Tree.Nodes(4).Nodes(index).SelectedImageIndex = 0
             End If
         ElseIf (tipoPago = "nodeColegiaturasRec") Then
-            Dim index As Integer = Tree.SelectedNode.Index
-            If (Tree.SelectedNode.Checked = False) Then
-                Tree.SelectedNode.Checked = True
-                Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
-                ch.agregarconcepto(conceptoID, "REC", Matricula)
-                Me.actualizarTotal(ch.getListaConceptos())
-                Tree.Nodes(5).Nodes(index).SelectedImageIndex = 1
-            ElseIf (Tree.SelectedNode.Checked = True) Then
-                Dim recargoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
-                If (Me.buscarConceptoConRecargo(recargoID) = False) Then
-                    MessageBox.Show("No puede cobrar conceptos sin antes haber pagado los recargos correspondientes")
-                    Exit Sub
-                End If
-                Tree.SelectedNode.Checked = False
-                Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
-                ch.eliminarconcepto(conceptoID, "REC", Matricula)
-                Me.actualizarTotal(ch.getListaConceptos())
-                Tree.Nodes(5).Nodes(index).SelectedImageIndex = 0
-            End If
+            'Dim index As Integer = Tree.SelectedNode.Index
+            'If (Tree.SelectedNode.Checked = False) Then
+            '    Tree.SelectedNode.Checked = True
+            '    Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
+            '    ch.agregarconcepto(conceptoID, "REC", Matricula)
+            '    Me.actualizarTotal(ch.getListaConceptos())
+            '    Tree.Nodes(5).Nodes(index).SelectedImageIndex = 1
+            'ElseIf (Tree.SelectedNode.Checked = True) Then
+            '    Dim recargoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
+            '    If (Me.buscarConceptoConRecargo(recargoID) = False) Then
+            '        MessageBox.Show("No puede cobrar conceptos sin antes haber pagado los recargos correspondientes")
+            '        Exit Sub
+            '    End If
+            '    Tree.SelectedNode.Checked = False
+            '    Dim conceptoID As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "[", "]")
+            '    ch.eliminarconcepto(conceptoID, "REC", Matricula)
+            '    Me.actualizarTotal(ch.getListaConceptos())
+            '    Tree.Nodes(5).Nodes(index).SelectedImageIndex = 0
+            'End If
         End If
     End Sub
 
@@ -340,7 +353,7 @@
         lblTotal.Text = Total.ToString()
     End Sub
 
-    Private Sub cbExterno_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbExterno.SelectionChangeCommitted
+    Private Sub cbExterno_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbExterno.SelectedIndexChanged
         Try
             txtMatricula.Text = cbExterno.SelectedValue
             btnBuscar.PerformClick()
@@ -353,6 +366,7 @@
     Private Sub btnCobrar_Click(sender As Object, e As EventArgs) Handles btnCobrar.Click
         Dim listaConceptos As New List(Of Concepto)
         Dim listaConceptosPrueba As New List(Of Concepto)
+        Dim tipocliente As Integer
         listaConceptos = ch.getListaConceptos()
         listaConceptosPrueba = ch.getListaConceptos()
         Dim listaconceptosFinal As New List(Of Concepto)
@@ -401,14 +415,20 @@
                 Exit Sub
             End If
         ElseIf (cbFormaPago.Text = "CREDITO") Then
-            Dim IDXMLC As Integer = co.Cobrar(listaConceptosPrueba, cbFormaPago.SelectedValue, Matricula, txtRFC.Text, txtNombre.Text, lblTotal.Text, True)
-            If (IDXMLC > 0) Then
-                Me.Reiniciar()
-                Exit Sub
-            End If
-        End If
 
-        Dim montoTotal As Decimal = CDec(lblTotal.Text)
+            If (tipoMatricula = "EX") Then
+                tipocliente = 2
+            ElseIf (tipoMatricula = "EC") Then
+                tipocliente = 1
+            End If
+            Dim IDXMLC As Integer = co.Cobrar(listaConceptosPrueba, cbFormaPago.SelectedValue, Matricula, txtRFC.Text, txtNombre.Text, lblTotal.Text, True, tipocliente)
+            If (IDXMLC > 0) Then
+                    Me.Reiniciar()
+                    Exit Sub
+                End If
+            End If
+
+            Dim montoTotal As Decimal = CDec(lblTotal.Text)
         Dim montoIngresado As Decimal = CDec(txtMonto.Text)
         If (montoTotal <> montoIngresado) Then
             If (montoIngresado > montoTotal) Then
@@ -430,8 +450,12 @@
                 End If
             Next
         End If
-
-        Dim IDXML As Integer = co.Cobrar(listaconceptosFinal, cbFormaPago.SelectedValue, Matricula, txtRFC.Text, txtNombre.Text, lblTotal.Text, False)
+        If (tipoMatricula = "EX") Then
+            tipocliente = 2
+        ElseIf (tipoMatricula = "EC") Then
+            tipocliente = 1
+        End If
+        Dim IDXML As Integer = co.Cobrar(listaconceptosFinal, cbFormaPago.SelectedValue, Matricula, txtRFC.Text, txtNombre.Text, lblTotal.Text, False, tipocliente)
 
 
         ''---------------------------------------------------------REGISTRO DE FORMA DE PAGO---------------------------------------------------------
@@ -454,23 +478,6 @@
         Me.Reiniciar()
     End Sub
 
-    Private Sub rbExterno_CheckedChanged(sender As Object, e As EventArgs) Handles rbExterno.CheckedChanged
-        cbExterno.DataSource = Nothing
-        Dim tableExternos As DataTable = db.getDataTableFromSQL("SELECT CL.clave_cliente, UPPER(C.nombre + ' ' + E.paterno + ' ' + E.materno + ' (' + CL.clave_cliente + ')') As NombreExterno FROM portal_registroExterno AS E
-                                                                 INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
-                                                                 INNER JOIN portal_clave AS CL ON CL.id_cliente = C.id_cliente
-                                                                 ORDER BY C.nombre")
-        ComboboxService.llenarCombobox(cbExterno, tableExternos, "clave_cliente", "NombreExterno")
-    End Sub
-
-    Private Sub rbEDC_CheckedChanged(sender As Object, e As EventArgs) Handles rbEDC.CheckedChanged
-        cbExterno.DataSource = Nothing
-        Dim tableEDC As DataTable = db.getDataTableFromSQL("SELECT RC.clave_cliente, UPPER(C.nombre + ' ' + RC.apellido_paterno + ' ' + RC.apellido_materno + ' (' + RC.clave_cliente + ')') AS NombreCliente FROM portal_registroCongreso AS RC
-                                                            INNER JOIN portal_cliente AS C ON RC.id_cliente = C.id_cliente
-                                                            ORDER BY NombreCliente")
-        ComboboxService.llenarCombobox(cbExterno, tableEDC, "clave_cliente", "NombreCliente")
-    End Sub
-
     Function buscarRecargoColegiaturas(ID As Integer) As Boolean
         Dim IDRecargo As Integer
         Dim seleccionado As Boolean
@@ -479,11 +486,31 @@
             Dim idConceptoRecargo As Integer = db.exectSQLQueryScalar($"SELECT ID_Concepto FROM ing_PlanesRecargos WHERE ID = {IDRecargo}")
             Dim autorizado As Integer = db.exectSQLQueryScalar($"SELECT Autorizado FROM ing_AsignacionCargosPlanes WHERE ID = {idConceptoRecargo}")
             If (idConceptoRecargo = ID And item.SelectedImageIndex <> 1 And autorizado = False) Then
-                Return False
+                item.Checked = True
+                item.SelectedImageIndex = 1
             End If
         Next
         Return True
     End Function
+
+    Sub marcarRecargo(ID As Integer, tipo As Boolean)
+        Dim IDRecargo As Integer
+        Dim seleccionado As Boolean
+        For Each item As TreeNode In Tree.Nodes(5).Nodes
+            IDRecargo = co.Extrae_Cadena(item.ToString(), "[", "]")
+            Dim idConceptoRecargo As Integer = db.exectSQLQueryScalar($"SELECT ID_Concepto FROM ing_PlanesRecargos WHERE ID = {IDRecargo}")
+            Dim autorizado As Integer = db.exectSQLQueryScalar($"SELECT Autorizado FROM ing_AsignacionCargosPlanes WHERE ID = {idConceptoRecargo}")
+            If (idConceptoRecargo = ID And item.SelectedImageIndex <> 1 And autorizado = False And tipo = True) Then
+                item.Checked = True
+                item.SelectedImageIndex = 1
+                ch.agregarconcepto(IDRecargo, "REC", Matricula)
+            ElseIf (idConceptoRecargo = ID And item.SelectedImageIndex <> 0 And autorizado = False And tipo = False) Then
+                item.Checked = False
+                item.SelectedImageIndex = 0
+                ch.eliminarconcepto(IDRecargo, "REC", Matricula)
+            End If
+        Next
+    End Sub
 
     Function buscarConceptoConRecargo(IDRecargo As Integer) As Boolean
         Dim IDRecargado As Integer = db.exectSQLQueryScalar($"SELECT ID_Concepto FROM ing_PlanesRecargos WHERE ID = {IDRecargo}")

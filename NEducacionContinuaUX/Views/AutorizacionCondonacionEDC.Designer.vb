@@ -26,16 +26,14 @@ Partial Class AutorizacionCondonacionEDC
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AutorizacionCondonacionEDC))
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.panelBusqueda = New System.Windows.Forms.Panel()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.rbEDC = New System.Windows.Forms.RadioButton()
-        Me.rbExterno = New System.Windows.Forms.RadioButton()
         Me.cbExterno = New System.Windows.Forms.ComboBox()
         Me.lblBusquedaNombre = New System.Windows.Forms.Label()
         Me.btnBuscar = New System.Windows.Forms.Button()
         Me.txtMatricula = New System.Windows.Forms.TextBox()
         Me.lblMatricula = New System.Windows.Forms.Label()
         Me.panelDatos = New System.Windows.Forms.Panel()
+        Me.lblRFC = New System.Windows.Forms.Label()
+        Me.txtRFC = New System.Windows.Forms.TextBox()
         Me.txtMatriculaDato = New System.Windows.Forms.TextBox()
         Me.lblMatriculaDato = New System.Windows.Forms.Label()
         Me.lblTurno = New System.Windows.Forms.Label()
@@ -70,8 +68,6 @@ Partial Class AutorizacionCondonacionEDC
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TreeView1 = New System.Windows.Forms.TreeView()
-        Me.lblRFC = New System.Windows.Forms.Label()
-        Me.txtRFC = New System.Windows.Forms.TextBox()
         Me.panelBusqueda.SuspendLayout()
         Me.panelDatos.SuspendLayout()
         Me.panelAutCon.SuspendLayout()
@@ -98,10 +94,6 @@ Partial Class AutorizacionCondonacionEDC
         '
         'panelBusqueda
         '
-        Me.panelBusqueda.Controls.Add(Me.Label2)
-        Me.panelBusqueda.Controls.Add(Me.Label1)
-        Me.panelBusqueda.Controls.Add(Me.rbEDC)
-        Me.panelBusqueda.Controls.Add(Me.rbExterno)
         Me.panelBusqueda.Controls.Add(Me.cbExterno)
         Me.panelBusqueda.Controls.Add(Me.lblBusquedaNombre)
         Me.panelBusqueda.Controls.Add(Me.btnBuscar)
@@ -111,55 +103,6 @@ Partial Class AutorizacionCondonacionEDC
         Me.panelBusqueda.Name = "panelBusqueda"
         Me.panelBusqueda.Size = New System.Drawing.Size(1175, 50)
         Me.panelBusqueda.TabIndex = 15
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(872, 25)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(65, 16)
-        Me.Label2.TabIndex = 79
-        Me.Label2.Text = "matricula:"
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label1.Location = New System.Drawing.Point(874, 7)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(58, 16)
-        Me.Label1.TabIndex = 78
-        Me.Label1.Text = "Tipo de "
-        '
-        'rbEDC
-        '
-        Me.rbEDC.AutoSize = True
-        Me.rbEDC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbEDC.ForeColor = System.Drawing.SystemColors.Control
-        Me.rbEDC.Location = New System.Drawing.Point(1080, 16)
-        Me.rbEDC.Name = "rbEDC"
-        Me.rbEDC.Size = New System.Drawing.Size(92, 20)
-        Me.rbEDC.TabIndex = 77
-        Me.rbEDC.TabStop = True
-        Me.rbEDC.Text = "Congresos"
-        Me.rbEDC.UseVisualStyleBackColor = True
-        '
-        'rbExterno
-        '
-        Me.rbExterno.AutoSize = True
-        Me.rbExterno.Checked = True
-        Me.rbExterno.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbExterno.ForeColor = System.Drawing.SystemColors.Control
-        Me.rbExterno.Location = New System.Drawing.Point(938, 14)
-        Me.rbExterno.Name = "rbExterno"
-        Me.rbExterno.Size = New System.Drawing.Size(136, 20)
-        Me.rbExterno.TabIndex = 76
-        Me.rbExterno.TabStop = True
-        Me.rbExterno.Text = "Pagos opcionales"
-        Me.rbExterno.UseVisualStyleBackColor = True
         '
         'cbExterno
         '
@@ -184,7 +127,7 @@ Partial Class AutorizacionCondonacionEDC
         '
         'btnBuscar
         '
-        Me.btnBuscar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.search_32px
+        Me.btnBuscar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.search_30px
         Me.btnBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnBuscar.Location = New System.Drawing.Point(186, 7)
         Me.btnBuscar.Name = "btnBuscar"
@@ -209,7 +152,7 @@ Partial Class AutorizacionCondonacionEDC
         Me.lblMatricula.Name = "lblMatricula"
         Me.lblMatricula.Size = New System.Drawing.Size(65, 16)
         Me.lblMatricula.TabIndex = 0
-        Me.lblMatricula.Text = "Matricula:"
+        Me.lblMatricula.Text = "Matrícula:"
         '
         'panelDatos
         '
@@ -231,6 +174,26 @@ Partial Class AutorizacionCondonacionEDC
         Me.panelDatos.TabIndex = 16
         Me.panelDatos.Visible = False
         '
+        'lblRFC
+        '
+        Me.lblRFC.AutoSize = True
+        Me.lblRFC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRFC.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblRFC.Location = New System.Drawing.Point(909, 31)
+        Me.lblRFC.Name = "lblRFC"
+        Me.lblRFC.Size = New System.Drawing.Size(34, 15)
+        Me.lblRFC.TabIndex = 27
+        Me.lblRFC.Text = "RFC:"
+        '
+        'txtRFC
+        '
+        Me.txtRFC.Enabled = False
+        Me.txtRFC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRFC.Location = New System.Drawing.Point(957, 28)
+        Me.txtRFC.Name = "txtRFC"
+        Me.txtRFC.Size = New System.Drawing.Size(205, 21)
+        Me.txtRFC.TabIndex = 28
+        '
         'txtMatriculaDato
         '
         Me.txtMatriculaDato.Enabled = False
@@ -249,7 +212,7 @@ Partial Class AutorizacionCondonacionEDC
         Me.lblMatriculaDato.Name = "lblMatriculaDato"
         Me.lblMatriculaDato.Size = New System.Drawing.Size(61, 15)
         Me.lblMatriculaDato.TabIndex = 25
-        Me.lblMatriculaDato.Text = "Matricula:"
+        Me.lblMatriculaDato.Text = "Matrícula:"
         '
         'lblTurno
         '
@@ -365,11 +328,11 @@ Partial Class AutorizacionCondonacionEDC
         Me.tabCondonaciones.Padding = New System.Windows.Forms.Padding(3)
         Me.tabCondonaciones.Size = New System.Drawing.Size(1161, 441)
         Me.tabCondonaciones.TabIndex = 0
-        Me.tabCondonaciones.Text = "Condonacion parcial o total"
+        Me.tabCondonaciones.Text = "Condonación parcial o total"
         '
         'btnGuardarCondonaciones
         '
-        Me.btnGuardarCondonaciones.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.descargar
+        Me.btnGuardarCondonaciones.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
         Me.btnGuardarCondonaciones.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnGuardarCondonaciones.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnGuardarCondonaciones.Location = New System.Drawing.Point(1083, 385)
@@ -457,7 +420,7 @@ Partial Class AutorizacionCondonacionEDC
         Me.tabAutorizacionCaja.Padding = New System.Windows.Forms.Padding(3)
         Me.tabAutorizacionCaja.Size = New System.Drawing.Size(1161, 441)
         Me.tabAutorizacionCaja.TabIndex = 1
-        Me.tabAutorizacionCaja.Text = "Autorizacion de Caja"
+        Me.tabAutorizacionCaja.Text = "Autorización de Caja"
         '
         'btnGuardarAutorizacionCaja
         '
@@ -513,7 +476,7 @@ Partial Class AutorizacionCondonacionEDC
         Me.tabAutorizacionProceso.Name = "tabAutorizacionProceso"
         Me.tabAutorizacionProceso.Size = New System.Drawing.Size(1161, 441)
         Me.tabAutorizacionProceso.TabIndex = 2
-        Me.tabAutorizacionProceso.Text = "Autorizacion de Proceso"
+        Me.tabAutorizacionProceso.Text = "Autorización de Proceso"
         '
         'Button1
         '
@@ -558,26 +521,6 @@ Partial Class AutorizacionCondonacionEDC
         Me.TreeView1.Size = New System.Drawing.Size(568, 411)
         Me.TreeView1.StateImageList = Me.ImageListTree
         Me.TreeView1.TabIndex = 11
-        '
-        'lblRFC
-        '
-        Me.lblRFC.AutoSize = True
-        Me.lblRFC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblRFC.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblRFC.Location = New System.Drawing.Point(909, 31)
-        Me.lblRFC.Name = "lblRFC"
-        Me.lblRFC.Size = New System.Drawing.Size(34, 15)
-        Me.lblRFC.TabIndex = 27
-        Me.lblRFC.Text = "RFC:"
-        '
-        'txtRFC
-        '
-        Me.txtRFC.Enabled = False
-        Me.txtRFC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRFC.Location = New System.Drawing.Point(957, 28)
-        Me.txtRFC.Name = "txtRFC"
-        Me.txtRFC.Size = New System.Drawing.Size(205, 21)
-        Me.txtRFC.TabIndex = 28
         '
         'AutorizacionCondonacionEDC
         '
@@ -642,10 +585,6 @@ Partial Class AutorizacionCondonacionEDC
     Friend WithEvents Node As DataGridViewTextBoxColumn
     Friend WithEvents Concepto As DataGridViewTextBoxColumn
     Friend WithEvents Porcentaje As DataGridViewTextBoxColumn
-    Friend WithEvents rbEDC As RadioButton
-    Friend WithEvents rbExterno As RadioButton
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label1 As Label
     Friend WithEvents btnGuardarAutorizacionCaja As Button
     Friend WithEvents GridAutorizacionCaja As DataGridView
     Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn

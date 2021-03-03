@@ -56,4 +56,14 @@
         PagosCreditoEDC.MdiParent = Me
         PagosCreditoEDC.Show()
     End Sub
+
+    Private Sub ReportesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReportesToolStripMenuItem.Click
+        ReportesEDC.MdiParent = Me
+        ReportesEDC.Show()
+    End Sub
+
+    Private Sub IVAToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles IVAToolStripMenuItem.Click
+        IVAEDC.MdiParent = Me
+        IVAEDC.Show()
+    End Sub
 End Class

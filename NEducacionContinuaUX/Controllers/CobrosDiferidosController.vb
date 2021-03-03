@@ -14,7 +14,7 @@ Public Class CobrosDiferidosController
     Dim rep As ImpresionReportesService = New ImpresionReportesService()
     Public QR_Generator As New MessagingToolkit.QRCode.Codec.QRCodeEncoder
 
-    Function Cobrar(listaConceptos As List(Of Concepto), formaPago As String, RFCCLiente As String, NombreCLiente As String, Monto As String, MatriculaGeneral As String, Credito As Boolean) As Integer
+    Function Cobrar(listaConceptos As List(Of Concepto), formaPago As String, RFCCLiente As String, NombreCLiente As String, Monto As String, MatriculaGeneral As String, Credito As Boolean, tipocliente As Integer) As Integer
 
         Dim montoDec As Decimal = CDec(Monto)
         Dim folioPago As String = co.obtenerFolio("Pago")
@@ -55,36 +55,7 @@ Public Class CobrosDiferidosController
             DescuentoS = ch.getFormat(DescuentoS)
             Total = ((CDec(SubTotal) - CDec(Descuento)) + CDec(totalIVA))
 
-            If (Total <> montoDec) Then
-                If (montoDec > Total) Then
-                    db.rollBackTransaction()
-                    MessageBox.Show("No puede ingresar un monto mayor al total a pagar, ingrese un monto valido")
-                    Exit Function
-                Else
-                    If (listaConceptos.Count() > 1) Then
-                        db.rollBackTransaction()
-                        MessageBox.Show("No puede abonar a mas de un concepto, favor de seleccionar un concepto valido")
-                        Exit Function
-                    Else
-                        Dim result As Integer = MessageBox.Show($"Se abonara ${montoDec} al concepto seleccionado, el concepto se considerara como pagado hasta que el monto sea pagado en su totalidad. ¿Desea registrar el abono?", "Confirmacion", MessageBoxButtons.YesNoCancel)
-                        If result = DialogResult.Cancel Then
-                            db.rollBackTransaction()
-                            Exit Function
-                        ElseIf result = DialogResult.No Then
-                            db.rollBackTransaction()
-                            Exit Function
-                        ElseIf result = DialogResult.Yes Then
-                            Dim folioAbono As String = co.obtenerFolio("Abono")
-                            Dim IDClavePago As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatClavesPagos WHERE Clave = '{listaConceptos(0).claveConcepto}'")
-                            db.execSQLQueryWithoutParams($"INSERT INTO ing_Abonos(Folio, Clave_Cliente, Cantidad, IDPago, ID_ClavePago, FechaAbono, Activo) VALUES ('{folioAbono}', '{MatriculaGeneral}', {montoDec}, {listaConceptos(0).IDConcepto}, {IDClavePago}, GETDATE(), 1)")
-                            db.execSQLQueryWithoutParams($"UPDATE ing_CatFolios SET Consecutivo = Consecutivo + 1 WHERE Usuario = 'Abonos'")
-                            db.commitTransaction()
-                            MessageBox.Show("Abono registrado correctamente")
-                            Return 0
-                        End If
-                    End If
-                End If
-            End If
+
 
             Dim TotalText As String
             Dim valores As String()
@@ -130,7 +101,8 @@ Public Class CobrosDiferidosController
             ''File.WriteAllText("C:\Users\darkz\Desktop\wea.xml", xmlTimbrado)
 
             ''---------------------------------------------------------GENERACION DE FACTURA---------------------------------------------------------
-            Dim IDXML As Integer = db.insertAndGetIDInserted($"INSERT INTO ing_xmlTimbrados(Matricula_Clave, Folio, FolioFiscal, Certificado, XMLTimbrado, fac_Cadena, fac_Sello, Tipo_Pago, Forma_Pago, Fecha_Pago, Cajero, RegimenFiscal, Subtotal, Descuento, IVA, Total, usoCFDI) VALUES ('{MatriculaGeneral}', '{Serie}{Folio}', '{folioFiscal}', '{NoCertificado}', '{xmlTimbrado}', '{cadena}', '{sello}', '', '{formaPago}', '{Fecha}', '{User.getUsername}', 'GENERAL DE LEY(603)', {SubTotal}, {DescuentoS}, {totalIVA}, {Total}, '{UsoCFDI}')")
+            Dim formapagoid As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatFormaPago WHERE Forma_Pago = '{formaPago}'")
+            Dim IDXML As Integer = db.insertAndGetIDInserted($"INSERT INTO ing_xmlTimbrados(Matricula_Clave, Folio, FolioFiscal, Certificado, XMLTimbrado, fac_Cadena, fac_Sello, Tipo_Pago, Forma_Pago, Forma_PagoID, Fecha_Pago, Cajero, RegimenFiscal, Subtotal, Descuento, IVA, Total, usoCFDI) VALUES ('{MatriculaGeneral}', '{Serie}{Folio}', '{folioFiscal}', '{NoCertificado}', '{xmlTimbrado}', '{cadena}', '{sello}', 'COBRO DIFERIDO DE CONCEPTO A MATRICULA {MatriculaGeneral}', '{formaPago}', {formapagoid}, '{Fecha}', '{User.getUsername}', 'GENERAL DE LEY(603)', {SubTotal}, {DescuentoS}, {totalIVA}, {Total}, '{UsoCFDI}')")
             For Each item As Concepto In listaConceptos
                 db.execSQLQueryWithoutParams($"INSERT INTO ing_xmlTimbradosConceptos(Clave_Cliente, XMLID, Nombre_Concepto, Clave_Concepto, ClaveUnidad, PrecioUnitario, IVA, Descuento, Cantidad, Total) VALUES ('{item.Matricula}', {IDXML}, '{item.NombreConcepto}', {1}, '{item.cveUnidad}', {item.costoUnitario}, {item.costoIVAUnitario}, {item.descuento}, {item.Cantidad}, {item.costoTotal})")
             Next
@@ -146,6 +118,7 @@ Public Class CobrosDiferidosController
             rep.AgregarParametros("CantidadLetra", TotalText)
             rep.AgregarParametros("ClaveCliente", MatriculaGeneral)
             rep.AgregarParametros("usoCFDI", descripcionCFDI)
+            rep.AgregarParametros("TipoCliente", tipocliente)
             rep.MostrarReporte()
             db.commitTransaction()
             Return IDXML
@@ -154,5 +127,21 @@ Public Class CobrosDiferidosController
             MessageBox.Show(ex.Message)
             CobrosEDC.Reiniciar()
         End Try
+    End Function
+
+    Function buscarCongreso(Matricula As String) As Integer
+        Dim IDConcepto As Integer
+        Dim tablePagosOpcionales As DataTable = db.getDataTableFromSQL($"SELECT RC.id_registro, CP.Clave, SUB.costo_total, SUB.descuento, CON.nombre, 1 As Cantidad, 1 As considerarIVA, 0 As AgregaIVA, 0 As exentaIVA FROM portal_registroCongreso AS RC
+                                                                         INNER JOIN portal_cliente AS C ON C.id_cliente = RC.id_cliente
+                                                                         INNER JOIN portal_tipoAsistente AS TA ON TA.id_tipo_asistente = RC.id_tipo_asistente
+                                                                         INNER JOIN portal_congreso AS CON ON CON.id_congreso = TA.id_congreso
+                                                                         INNER JOIN portal_subtotales AS SUB ON SUB.clave_cliente = RC.clave_cliente
+                                                                         INNER JOIN ing_CatClavesPagos AS CP ON CP.ID = 3
+                                                                         WHERE RC.clave_cliente = '{Matricula}' AND RC.clave_cliente NOT IN (SELECT Matricula FROM ing_PagosCongresos)")
+        For Each item As DataRow In tablePagosOpcionales.Rows
+            MainCobrosDiferidosEDC.GridConceptos.Rows.Add(item("id_registro"), "CON", Matricula, item("nombre"), item("costo_total"))
+            IDConcepto = item("id_registro")
+        Next
+        Return IDConcepto
     End Function
 End Class

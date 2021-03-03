@@ -24,29 +24,31 @@ Partial Class PagosCreditoEDC
     Private Sub InitializeComponent()
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.panelBusqueda = New System.Windows.Forms.Panel()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.rbEDC = New System.Windows.Forms.RadioButton()
-        Me.rbExterno = New System.Windows.Forms.RadioButton()
         Me.cbExterno = New System.Windows.Forms.ComboBox()
         Me.lblBusquedaNombre = New System.Windows.Forms.Label()
         Me.btnBuscar = New System.Windows.Forms.Button()
         Me.txtMatricula = New System.Windows.Forms.TextBox()
         Me.lblMatricula = New System.Windows.Forms.Label()
         Me.panelDatos = New System.Windows.Forms.Panel()
+        Me.txtEmail = New System.Windows.Forms.TextBox()
+        Me.lblEmail = New System.Windows.Forms.Label()
         Me.lblRFC = New System.Windows.Forms.Label()
         Me.txtRFC = New System.Windows.Forms.TextBox()
         Me.txtMatriculaDato = New System.Windows.Forms.TextBox()
         Me.lblMatriculaDato = New System.Windows.Forms.Label()
         Me.lblTurno = New System.Windows.Forms.Label()
         Me.lblCarrera = New System.Windows.Forms.Label()
-        Me.txtEmail = New System.Windows.Forms.TextBox()
         Me.txtTurno = New System.Windows.Forms.TextBox()
         Me.txtCarrera = New System.Windows.Forms.TextBox()
         Me.txtNombre = New System.Windows.Forms.TextBox()
-        Me.lblEmail = New System.Windows.Forms.Label()
         Me.lblNombre = New System.Windows.Forms.Label()
         Me.GBFactura = New System.Windows.Forms.GroupBox()
+        Me.gridConceptosFactura = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ClaveIDPago = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Clave = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TotalPago = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnAgregar = New System.Windows.Forms.Button()
         Me.lblTipoNota = New System.Windows.Forms.Label()
         Me.cbFactura = New System.Windows.Forms.ComboBox()
@@ -87,21 +89,15 @@ Partial Class PagosCreditoEDC
         Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Abonado = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.NoPagos = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.gridConceptosFactura = New System.Windows.Forms.DataGridView()
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ClaveIDPago = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Clave = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TotalPago = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.panelBusqueda.SuspendLayout()
         Me.panelDatos.SuspendLayout()
         Me.GBFactura.SuspendLayout()
+        CType(Me.gridConceptosFactura, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panelCobroCredito.SuspendLayout()
         Me.GBDesglose.SuspendLayout()
         CType(Me.GridFacturaPagos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GBFacturaSeleccionada.SuspendLayout()
         CType(Me.GridFacturaSeleccionada, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.gridConceptosFactura, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblNombreVentana
@@ -118,10 +114,6 @@ Partial Class PagosCreditoEDC
         '
         'panelBusqueda
         '
-        Me.panelBusqueda.Controls.Add(Me.Label2)
-        Me.panelBusqueda.Controls.Add(Me.Label1)
-        Me.panelBusqueda.Controls.Add(Me.rbEDC)
-        Me.panelBusqueda.Controls.Add(Me.rbExterno)
         Me.panelBusqueda.Controls.Add(Me.cbExterno)
         Me.panelBusqueda.Controls.Add(Me.lblBusquedaNombre)
         Me.panelBusqueda.Controls.Add(Me.btnBuscar)
@@ -132,54 +124,6 @@ Partial Class PagosCreditoEDC
         Me.panelBusqueda.Size = New System.Drawing.Size(1301, 50)
         Me.panelBusqueda.TabIndex = 16
         '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(900, 25)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(65, 16)
-        Me.Label2.TabIndex = 77
-        Me.Label2.Text = "matricula:"
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label1.Location = New System.Drawing.Point(902, 7)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(58, 16)
-        Me.Label1.TabIndex = 76
-        Me.Label1.Text = "Tipo de "
-        '
-        'rbEDC
-        '
-        Me.rbEDC.AutoSize = True
-        Me.rbEDC.Checked = True
-        Me.rbEDC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbEDC.ForeColor = System.Drawing.SystemColors.Control
-        Me.rbEDC.Location = New System.Drawing.Point(1114, 14)
-        Me.rbEDC.Name = "rbEDC"
-        Me.rbEDC.Size = New System.Drawing.Size(92, 20)
-        Me.rbEDC.TabIndex = 75
-        Me.rbEDC.TabStop = True
-        Me.rbEDC.Text = "Congresos"
-        Me.rbEDC.UseVisualStyleBackColor = True
-        '
-        'rbExterno
-        '
-        Me.rbExterno.AutoSize = True
-        Me.rbExterno.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbExterno.ForeColor = System.Drawing.SystemColors.Control
-        Me.rbExterno.Location = New System.Drawing.Point(971, 13)
-        Me.rbExterno.Name = "rbExterno"
-        Me.rbExterno.Size = New System.Drawing.Size(136, 20)
-        Me.rbExterno.TabIndex = 74
-        Me.rbExterno.Text = "Pagos opcionales"
-        Me.rbExterno.UseVisualStyleBackColor = True
-        '
         'cbExterno
         '
         Me.cbExterno.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
@@ -187,7 +131,7 @@ Partial Class PagosCreditoEDC
         Me.cbExterno.FormattingEnabled = True
         Me.cbExterno.Location = New System.Drawing.Point(355, 14)
         Me.cbExterno.Name = "cbExterno"
-        Me.cbExterno.Size = New System.Drawing.Size(479, 21)
+        Me.cbExterno.Size = New System.Drawing.Size(677, 21)
         Me.cbExterno.TabIndex = 73
         '
         'lblBusquedaNombre
@@ -203,7 +147,7 @@ Partial Class PagosCreditoEDC
         '
         'btnBuscar
         '
-        Me.btnBuscar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.search_32px
+        Me.btnBuscar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.search_30px
         Me.btnBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnBuscar.Location = New System.Drawing.Point(186, 7)
         Me.btnBuscar.Name = "btnBuscar"
@@ -214,7 +158,7 @@ Partial Class PagosCreditoEDC
         'txtMatricula
         '
         Me.txtMatricula.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMatricula.Location = New System.Drawing.Point(69, 13)
+        Me.txtMatricula.Location = New System.Drawing.Point(66, 13)
         Me.txtMatricula.Name = "txtMatricula"
         Me.txtMatricula.Size = New System.Drawing.Size(111, 22)
         Me.txtMatricula.TabIndex = 1
@@ -224,38 +168,58 @@ Partial Class PagosCreditoEDC
         Me.lblMatricula.AutoSize = True
         Me.lblMatricula.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblMatricula.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblMatricula.Location = New System.Drawing.Point(7, 16)
+        Me.lblMatricula.Location = New System.Drawing.Point(5, 16)
         Me.lblMatricula.Name = "lblMatricula"
         Me.lblMatricula.Size = New System.Drawing.Size(65, 16)
         Me.lblMatricula.TabIndex = 0
-        Me.lblMatricula.Text = "Matricula:"
+        Me.lblMatricula.Text = "Matrícula:"
         '
         'panelDatos
         '
+        Me.panelDatos.Controls.Add(Me.txtEmail)
+        Me.panelDatos.Controls.Add(Me.lblEmail)
         Me.panelDatos.Controls.Add(Me.lblRFC)
         Me.panelDatos.Controls.Add(Me.txtRFC)
         Me.panelDatos.Controls.Add(Me.txtMatriculaDato)
         Me.panelDatos.Controls.Add(Me.lblMatriculaDato)
         Me.panelDatos.Controls.Add(Me.lblTurno)
         Me.panelDatos.Controls.Add(Me.lblCarrera)
-        Me.panelDatos.Controls.Add(Me.txtEmail)
         Me.panelDatos.Controls.Add(Me.txtTurno)
         Me.panelDatos.Controls.Add(Me.txtCarrera)
         Me.panelDatos.Controls.Add(Me.txtNombre)
-        Me.panelDatos.Controls.Add(Me.lblEmail)
         Me.panelDatos.Controls.Add(Me.lblNombre)
         Me.panelDatos.Location = New System.Drawing.Point(7, 128)
         Me.panelDatos.Name = "panelDatos"
-        Me.panelDatos.Size = New System.Drawing.Size(1301, 53)
+        Me.panelDatos.Size = New System.Drawing.Size(1301, 104)
         Me.panelDatos.TabIndex = 17
         Me.panelDatos.Visible = False
+        '
+        'txtEmail
+        '
+        Me.txtEmail.Enabled = False
+        Me.txtEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEmail.Location = New System.Drawing.Point(66, 53)
+        Me.txtEmail.Name = "txtEmail"
+        Me.txtEmail.Size = New System.Drawing.Size(768, 21)
+        Me.txtEmail.TabIndex = 30
+        '
+        'lblEmail
+        '
+        Me.lblEmail.AutoSize = True
+        Me.lblEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblEmail.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblEmail.Location = New System.Drawing.Point(9, 56)
+        Me.lblEmail.Name = "lblEmail"
+        Me.lblEmail.Size = New System.Drawing.Size(42, 15)
+        Me.lblEmail.TabIndex = 29
+        Me.lblEmail.Text = "Email:"
         '
         'lblRFC
         '
         Me.lblRFC.AutoSize = True
         Me.lblRFC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblRFC.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblRFC.Location = New System.Drawing.Point(937, 31)
+        Me.lblRFC.Location = New System.Drawing.Point(187, 9)
         Me.lblRFC.Name = "lblRFC"
         Me.lblRFC.Size = New System.Drawing.Size(34, 15)
         Me.lblRFC.TabIndex = 27
@@ -265,7 +229,7 @@ Partial Class PagosCreditoEDC
         '
         Me.txtRFC.Enabled = False
         Me.txtRFC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRFC.Location = New System.Drawing.Point(971, 29)
+        Me.txtRFC.Location = New System.Drawing.Point(227, 7)
         Me.txtRFC.Name = "txtRFC"
         Me.txtRFC.Size = New System.Drawing.Size(315, 21)
         Me.txtRFC.TabIndex = 28
@@ -274,7 +238,7 @@ Partial Class PagosCreditoEDC
         '
         Me.txtMatriculaDato.Enabled = False
         Me.txtMatriculaDato.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMatriculaDato.Location = New System.Drawing.Point(69, 6)
+        Me.txtMatriculaDato.Location = New System.Drawing.Point(66, 6)
         Me.txtMatriculaDato.Name = "txtMatriculaDato"
         Me.txtMatriculaDato.Size = New System.Drawing.Size(111, 21)
         Me.txtMatriculaDato.TabIndex = 26
@@ -288,14 +252,14 @@ Partial Class PagosCreditoEDC
         Me.lblMatriculaDato.Name = "lblMatriculaDato"
         Me.lblMatriculaDato.Size = New System.Drawing.Size(61, 15)
         Me.lblMatriculaDato.TabIndex = 25
-        Me.lblMatriculaDato.Text = "Matricula:"
+        Me.lblMatriculaDato.Text = "Matrícula:"
         '
         'lblTurno
         '
         Me.lblTurno.AutoSize = True
         Me.lblTurno.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTurno.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblTurno.Location = New System.Drawing.Point(737, 31)
+        Me.lblTurno.Location = New System.Drawing.Point(548, 9)
         Me.lblTurno.Name = "lblTurno"
         Me.lblTurno.Size = New System.Drawing.Size(42, 15)
         Me.lblTurno.TabIndex = 23
@@ -306,65 +270,45 @@ Partial Class PagosCreditoEDC
         Me.lblCarrera.AutoSize = True
         Me.lblCarrera.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCarrera.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblCarrera.Location = New System.Drawing.Point(7, 31)
+        Me.lblCarrera.Location = New System.Drawing.Point(7, 80)
         Me.lblCarrera.Name = "lblCarrera"
         Me.lblCarrera.Size = New System.Drawing.Size(51, 15)
         Me.lblCarrera.TabIndex = 21
         Me.lblCarrera.Text = "Carrera:"
         '
-        'txtEmail
-        '
-        Me.txtEmail.Enabled = False
-        Me.txtEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtEmail.Location = New System.Drawing.Point(785, 6)
-        Me.txtEmail.Name = "txtEmail"
-        Me.txtEmail.Size = New System.Drawing.Size(501, 21)
-        Me.txtEmail.TabIndex = 20
-        '
         'txtTurno
         '
         Me.txtTurno.Enabled = False
         Me.txtTurno.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTurno.Location = New System.Drawing.Point(785, 28)
+        Me.txtTurno.Location = New System.Drawing.Point(596, 6)
         Me.txtTurno.Name = "txtTurno"
-        Me.txtTurno.Size = New System.Drawing.Size(149, 21)
+        Me.txtTurno.Size = New System.Drawing.Size(238, 21)
         Me.txtTurno.TabIndex = 24
         '
         'txtCarrera
         '
         Me.txtCarrera.Enabled = False
         Me.txtCarrera.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCarrera.Location = New System.Drawing.Point(69, 28)
+        Me.txtCarrera.Location = New System.Drawing.Point(66, 77)
         Me.txtCarrera.Name = "txtCarrera"
-        Me.txtCarrera.Size = New System.Drawing.Size(662, 21)
+        Me.txtCarrera.Size = New System.Drawing.Size(768, 21)
         Me.txtCarrera.TabIndex = 22
         '
         'txtNombre
         '
         Me.txtNombre.Enabled = False
         Me.txtNombre.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtNombre.Location = New System.Drawing.Point(244, 6)
+        Me.txtNombre.Location = New System.Drawing.Point(66, 29)
         Me.txtNombre.Name = "txtNombre"
-        Me.txtNombre.Size = New System.Drawing.Size(487, 21)
+        Me.txtNombre.Size = New System.Drawing.Size(768, 21)
         Me.txtNombre.TabIndex = 18
-        '
-        'lblEmail
-        '
-        Me.lblEmail.AutoSize = True
-        Me.lblEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblEmail.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblEmail.Location = New System.Drawing.Point(737, 9)
-        Me.lblEmail.Name = "lblEmail"
-        Me.lblEmail.Size = New System.Drawing.Size(42, 15)
-        Me.lblEmail.TabIndex = 19
-        Me.lblEmail.Text = "Email:"
         '
         'lblNombre
         '
         Me.lblNombre.AutoSize = True
         Me.lblNombre.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblNombre.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblNombre.Location = New System.Drawing.Point(183, 9)
+        Me.lblNombre.Location = New System.Drawing.Point(7, 31)
         Me.lblNombre.Name = "lblNombre"
         Me.lblNombre.Size = New System.Drawing.Size(58, 15)
         Me.lblNombre.TabIndex = 18
@@ -384,9 +328,60 @@ Partial Class PagosCreditoEDC
         Me.GBFactura.TabStop = False
         Me.GBFactura.Text = "Facturas cobradas a credito"
         '
+        'gridConceptosFactura
+        '
+        Me.gridConceptosFactura.AllowUserToAddRows = False
+        Me.gridConceptosFactura.AllowUserToDeleteRows = False
+        Me.gridConceptosFactura.AllowUserToResizeColumns = False
+        Me.gridConceptosFactura.AllowUserToResizeRows = False
+        Me.gridConceptosFactura.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.gridConceptosFactura.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.gridConceptosFactura.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.gridConceptosFactura.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.ClaveIDPago, Me.Clave, Me.Descripcion, Me.TotalPago})
+        Me.gridConceptosFactura.Location = New System.Drawing.Point(5, 64)
+        Me.gridConceptosFactura.Name = "gridConceptosFactura"
+        Me.gridConceptosFactura.ReadOnly = True
+        Me.gridConceptosFactura.Size = New System.Drawing.Size(434, 320)
+        Me.gridConceptosFactura.TabIndex = 108
+        '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.FillWeight = 49.16087!
+        Me.DataGridViewTextBoxColumn1.HeaderText = "ID"
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        '
+        'ClaveIDPago
+        '
+        Me.ClaveIDPago.HeaderText = "Clave"
+        Me.ClaveIDPago.Name = "ClaveIDPago"
+        Me.ClaveIDPago.ReadOnly = True
+        Me.ClaveIDPago.Visible = False
+        '
+        'Clave
+        '
+        Me.Clave.FillWeight = 50.48787!
+        Me.Clave.HeaderText = "Clave"
+        Me.Clave.Name = "Clave"
+        Me.Clave.ReadOnly = True
+        '
+        'Descripcion
+        '
+        Me.Descripcion.FillWeight = 198.8284!
+        Me.Descripcion.HeaderText = "Descripcion"
+        Me.Descripcion.Name = "Descripcion"
+        Me.Descripcion.ReadOnly = True
+        '
+        'TotalPago
+        '
+        Me.TotalPago.FillWeight = 101.5228!
+        Me.TotalPago.HeaderText = "Total"
+        Me.TotalPago.Name = "TotalPago"
+        Me.TotalPago.ReadOnly = True
+        '
         'btnAgregar
         '
-        Me.btnAgregar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.plus_32px
+        Me.btnAgregar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.Add_30px
         Me.btnAgregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnAgregar.Location = New System.Drawing.Point(179, 390)
         Me.btnAgregar.Name = "btnAgregar"
@@ -440,7 +435,7 @@ Partial Class PagosCreditoEDC
         Me.panelCobroCredito.Controls.Add(Me.GBDesglose)
         Me.panelCobroCredito.Controls.Add(Me.GBFacturaSeleccionada)
         Me.panelCobroCredito.Controls.Add(Me.GBFactura)
-        Me.panelCobroCredito.Location = New System.Drawing.Point(7, 188)
+        Me.panelCobroCredito.Location = New System.Drawing.Point(7, 238)
         Me.panelCobroCredito.Name = "panelCobroCredito"
         Me.panelCobroCredito.Size = New System.Drawing.Size(1301, 458)
         Me.panelCobroCredito.TabIndex = 84
@@ -448,21 +443,21 @@ Partial Class PagosCreditoEDC
         '
         'btnSalir
         '
-        Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_32px
+        Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
         Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnSalir.Location = New System.Drawing.Point(1190, 405)
+        Me.btnSalir.Location = New System.Drawing.Point(1190, 397)
         Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New System.Drawing.Size(70, 40)
+        Me.btnSalir.Size = New System.Drawing.Size(70, 49)
         Me.btnSalir.TabIndex = 105
         Me.btnSalir.UseVisualStyleBackColor = True
         '
         'btnCobrar
         '
-        Me.btnCobrar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.cash_register_26px
+        Me.btnCobrar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.cash_register_40px
         Me.btnCobrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnCobrar.Location = New System.Drawing.Point(1114, 405)
+        Me.btnCobrar.Location = New System.Drawing.Point(1104, 396)
         Me.btnCobrar.Name = "btnCobrar"
-        Me.btnCobrar.Size = New System.Drawing.Size(70, 40)
+        Me.btnCobrar.Size = New System.Drawing.Size(70, 49)
         Me.btnCobrar.TabIndex = 106
         Me.btnCobrar.UseVisualStyleBackColor = True
         '
@@ -556,7 +551,7 @@ Partial Class PagosCreditoEDC
         Me.lblUltimosDigitos.Name = "lblUltimosDigitos"
         Me.lblUltimosDigitos.Size = New System.Drawing.Size(109, 16)
         Me.lblUltimosDigitos.TabIndex = 97
-        Me.lblUltimosDigitos.Text = "Ultimos 4 digitos:"
+        Me.lblUltimosDigitos.Text = "Últimos 4 digitos:"
         Me.lblUltimosDigitos.Visible = False
         '
         'DTPickerFecha
@@ -786,64 +781,13 @@ Partial Class PagosCreditoEDC
         Me.NoPagos.Name = "NoPagos"
         Me.NoPagos.ReadOnly = True
         '
-        'gridConceptosFactura
-        '
-        Me.gridConceptosFactura.AllowUserToAddRows = False
-        Me.gridConceptosFactura.AllowUserToDeleteRows = False
-        Me.gridConceptosFactura.AllowUserToResizeColumns = False
-        Me.gridConceptosFactura.AllowUserToResizeRows = False
-        Me.gridConceptosFactura.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.gridConceptosFactura.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        Me.gridConceptosFactura.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.gridConceptosFactura.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.ClaveIDPago, Me.Clave, Me.Descripcion, Me.TotalPago})
-        Me.gridConceptosFactura.Location = New System.Drawing.Point(5, 64)
-        Me.gridConceptosFactura.Name = "gridConceptosFactura"
-        Me.gridConceptosFactura.ReadOnly = True
-        Me.gridConceptosFactura.Size = New System.Drawing.Size(434, 320)
-        Me.gridConceptosFactura.TabIndex = 108
-        '
-        'DataGridViewTextBoxColumn1
-        '
-        Me.DataGridViewTextBoxColumn1.FillWeight = 49.16087!
-        Me.DataGridViewTextBoxColumn1.HeaderText = "ID"
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        Me.DataGridViewTextBoxColumn1.ReadOnly = True
-        '
-        'ClaveIDPago
-        '
-        Me.ClaveIDPago.HeaderText = "Clave"
-        Me.ClaveIDPago.Name = "ClaveIDPago"
-        Me.ClaveIDPago.ReadOnly = True
-        Me.ClaveIDPago.Visible = False
-        '
-        'Clave
-        '
-        Me.Clave.FillWeight = 50.48787!
-        Me.Clave.HeaderText = "Clave"
-        Me.Clave.Name = "Clave"
-        Me.Clave.ReadOnly = True
-        '
-        'Descripcion
-        '
-        Me.Descripcion.FillWeight = 198.8284!
-        Me.Descripcion.HeaderText = "Descripcion"
-        Me.Descripcion.Name = "Descripcion"
-        Me.Descripcion.ReadOnly = True
-        '
-        'TotalPago
-        '
-        Me.TotalPago.FillWeight = 101.5228!
-        Me.TotalPago.HeaderText = "Total"
-        Me.TotalPago.Name = "TotalPago"
-        Me.TotalPago.ReadOnly = True
-        '
         'PagosCreditoEDC
         '
         Me.AcceptButton = Me.btnBuscar
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.ClientSize = New System.Drawing.Size(1320, 651)
+        Me.ClientSize = New System.Drawing.Size(1320, 708)
         Me.Controls.Add(Me.panelCobroCredito)
         Me.Controls.Add(Me.panelDatos)
         Me.Controls.Add(Me.panelBusqueda)
@@ -857,23 +801,19 @@ Partial Class PagosCreditoEDC
         Me.panelDatos.PerformLayout()
         Me.GBFactura.ResumeLayout(False)
         Me.GBFactura.PerformLayout()
+        CType(Me.gridConceptosFactura, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panelCobroCredito.ResumeLayout(False)
         Me.panelCobroCredito.PerformLayout()
         Me.GBDesglose.ResumeLayout(False)
         CType(Me.GridFacturaPagos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GBFacturaSeleccionada.ResumeLayout(False)
         CType(Me.GridFacturaSeleccionada, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.gridConceptosFactura, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents lblNombreVentana As Label
     Friend WithEvents panelBusqueda As Panel
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label1 As Label
-    Friend WithEvents rbEDC As RadioButton
-    Friend WithEvents rbExterno As RadioButton
     Friend WithEvents cbExterno As ComboBox
     Friend WithEvents lblBusquedaNombre As Label
     Friend WithEvents btnBuscar As Button
@@ -886,11 +826,9 @@ Partial Class PagosCreditoEDC
     Friend WithEvents lblMatriculaDato As Label
     Friend WithEvents lblTurno As Label
     Friend WithEvents lblCarrera As Label
-    Friend WithEvents txtEmail As TextBox
     Friend WithEvents txtTurno As TextBox
     Friend WithEvents txtCarrera As TextBox
     Friend WithEvents txtNombre As TextBox
-    Friend WithEvents lblEmail As Label
     Friend WithEvents lblNombre As Label
     Friend WithEvents GBFactura As GroupBox
     Friend WithEvents lblTipoNota As Label
@@ -939,4 +877,6 @@ Partial Class PagosCreditoEDC
     Friend WithEvents Clave As DataGridViewTextBoxColumn
     Friend WithEvents Descripcion As DataGridViewTextBoxColumn
     Friend WithEvents TotalPago As DataGridViewTextBoxColumn
+    Friend WithEvents txtEmail As TextBox
+    Friend WithEvents lblEmail As Label
 End Class

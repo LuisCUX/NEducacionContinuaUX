@@ -58,7 +58,7 @@ Partial Class MainAsignacionPagosOpcionalesEDC
         Me.lblNombreVentana.Name = "lblNombreVentana"
         Me.lblNombreVentana.Size = New System.Drawing.Size(886, 69)
         Me.lblNombreVentana.TabIndex = 11
-        Me.lblNombreVentana.Text = "Asignacion de pagos opcionales"
+        Me.lblNombreVentana.Text = "Asignación de pagos opcionales"
         Me.lblNombreVentana.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'panelBuscar
@@ -96,7 +96,7 @@ Partial Class MainAsignacionPagosOpcionalesEDC
         '
         'btnBuscar
         '
-        Me.btnBuscar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.search_32px
+        Me.btnBuscar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.search_30px
         Me.btnBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnBuscar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBuscar.Location = New System.Drawing.Point(193, 11)
@@ -122,7 +122,7 @@ Partial Class MainAsignacionPagosOpcionalesEDC
         Me.lblMatricula.Name = "lblMatricula"
         Me.lblMatricula.Size = New System.Drawing.Size(72, 18)
         Me.lblMatricula.TabIndex = 15
-        Me.lblMatricula.Text = "Matricula:"
+        Me.lblMatricula.Text = "Matrícula:"
         '
         'panelDatos
         '
@@ -160,7 +160,7 @@ Partial Class MainAsignacionPagosOpcionalesEDC
         Me.lblMatriculaDato.Name = "lblMatriculaDato"
         Me.lblMatriculaDato.Size = New System.Drawing.Size(72, 18)
         Me.lblMatriculaDato.TabIndex = 26
-        Me.lblMatriculaDato.Text = "Matricula:"
+        Me.lblMatriculaDato.Text = "Matrícula:"
         '
         'txtTurno
         '
@@ -269,12 +269,12 @@ Partial Class MainAsignacionPagosOpcionalesEDC
         '
         'btnAgregar
         '
-        Me.btnAgregar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.plus_32px
+        Me.btnAgregar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.Add_30px
         Me.btnAgregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnAgregar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAgregar.Location = New System.Drawing.Point(764, 14)
+        Me.btnAgregar.Location = New System.Drawing.Point(764, 13)
         Me.btnAgregar.Name = "btnAgregar"
-        Me.btnAgregar.Size = New System.Drawing.Size(77, 41)
+        Me.btnAgregar.Size = New System.Drawing.Size(77, 42)
         Me.btnAgregar.TabIndex = 18
         Me.btnAgregar.UseVisualStyleBackColor = True
         '
