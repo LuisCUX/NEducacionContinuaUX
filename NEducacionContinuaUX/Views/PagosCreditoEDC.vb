@@ -66,11 +66,11 @@
         Dim tableInfoPagos As DataTable = db.getDataTableFromSQL($"SELECT ID, Folio, Fecha, Cantidad, Cantidad_Abonada, NumAbonos FROM ing_Creditos WHERE ID = {IDFactura}")
         Dim tableHistorialPagos As DataTable = db.getDataTableFromSQL($"SELECT Folio, NumPago, Monto_Anterior, Monto_Abonado, Monto_Actual FROM ing_PagosCredito WHERE ID_Credito = {IDFactura}")
         For Each row As DataRow In tableInfoPagos.Rows
-            GridFacturaSeleccionada.Rows.Add(row("ID"), row("Folio"), row("Fecha"), row("Cantidad"), row("Cantidad_Abonada"), row("NumAbonos"))
+            GridFacturaSeleccionada.Rows.Add(row("ID"), row("Folio"), row("Fecha"), Format(CDec(row("Cantidad")), "#####0.00"), Format(CDec(row("Cantidad_Abonada")), "#####0.00"), row("NumAbonos"))
         Next
 
         For Each row As DataRow In tableHistorialPagos.Rows
-            GridFacturaPagos.Rows.Add(row("Folio"), row("NumPago"), row("Monto_Anterior"), row("Monto_Abonado"), row("Monto_Actual"))
+            GridFacturaPagos.Rows.Add(row("Folio"), row("NumPago"), Format(CDec(row("Monto_Anterior")), "#####0.00"), Format(CDec(row("Monto_Abonado")), "#####0.00"), Format(CDec(row("Monto_Actual")), "#####0.00"))
         Next
 
         Dim noPago As Integer = Convert.ToInt32(GridFacturaSeleccionada.Rows(0).Cells(5).Value) + 1

@@ -50,7 +50,7 @@
             chbConsideraIVA.Checked = False
             chbIncluyeIVA.Checked = False
             Dim precio As Decimal = db.exectSQLQueryScalar($"SELECT valorUnitario FROM ing_resPagoOpcionalAsignacion WHERE ID = {cbPagosOpcionales.SelectedValue}")
-            txtValorUnitario.Text = precio
+            txtValorUnitario.Text = Format(CDec(precio), "#####0.00")
             Dim agregaIVA As Boolean
             Dim exentaIVA As Boolean
             Dim consideraIVA As Boolean

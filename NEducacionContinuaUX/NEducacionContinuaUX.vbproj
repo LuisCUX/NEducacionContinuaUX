@@ -11,14 +11,15 @@
     <AssemblyName>Educacion Continua</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>\\192.168.1.241\ti\NEducacionContinua\Instalador\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
@@ -27,7 +28,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\192.168.1.241\ti\NEducacionContinua\Instalador\</InstallUrl>
     <TargetCulture>es-MX</TargetCulture>
-    <ApplicationRevision>8</ApplicationRevision>
+    <ApplicationRevision>26</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -89,6 +90,9 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.8.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.8.8\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
@@ -109,19 +113,50 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\CrystalDecisions.Windows.Forms.dll</HintPath>
     </Reference>
+    <Reference Include="Google.Apis, Version=1.50.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.50.0\lib\net45\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Admin.Directory.directory_v1, Version=1.49.0.1982, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Admin.Directory.directory_v1.1.49.0.1982\lib\net45\Google.Apis.Admin.Directory.directory_v1.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth, Version=1.50.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.50.0\lib\net45\Google.Apis.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.50.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.50.0\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Core, Version=1.50.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Core.1.50.0\lib\net45\Google.Apis.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.50.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.50.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+    </Reference>
     <Reference Include="Interop.CrystalReportViewerExportLib">
       <HintPath>bin\Interop.CrystalReportViewerExportLib.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="MailKit, Version=2.10.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
+      <HintPath>..\packages\MailKit.2.10.1\lib\net45\MailKit.dll</HintPath>
+    </Reference>
     <Reference Include="MessagingToolkit.QRCode">
       <HintPath>bin\MessagingToolkit.QRCode.dll</HintPath>
     </Reference>
+    <Reference Include="MimeKit, Version=2.10.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
+      <HintPath>..\packages\MimeKit.2.10.1\lib\net45\MimeKit.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\netstandard1.1\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Services" />
@@ -162,9 +197,11 @@
     <Compile Include="Controllers\PagosCreditoController.vb" />
     <Compile Include="Controllers\PagosOpcionalesController.vb" />
     <Compile Include="Controllers\PlanesController.vb" />
+    <Compile Include="Controllers\ReimpresionFacturasController.vb" />
     <Compile Include="Controllers\ValidacionesController.vb" />
     <Compile Include="Models\Concepto.vb" />
     <Compile Include="Models\ConceptoDiferido.vb" />
+    <Compile Include="Models\Mail.vb" />
     <Compile Include="Models\User.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -184,6 +221,7 @@
     <Compile Include="Services\ComboboxService.vb" />
     <Compile Include="Services\ConsultaTimbresService.vb" />
     <Compile Include="Services\DataBaseService.vb" />
+    <Compile Include="Services\EmailService.vb" />
     <Compile Include="Services\EnviromentService.vb" />
     <Compile Include="Services\ImpresionReportesService.vb" />
     <Compile Include="Services\ObjectBagService.vb" />
@@ -299,6 +337,12 @@
     <Compile Include="Views\RegistroExternosEDC.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Views\ReimpresionFacturasEDC.Designer.vb">
+      <DependentUpon>ReimpresionFacturasEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReimpresionFacturasEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\ReportesEDC.Designer.vb">
       <DependentUpon>ReportesEDC.vb</DependentUpon>
     </Compile>
@@ -372,6 +416,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\RegistroExternosEDC.resx">
       <DependentUpon>RegistroExternosEDC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ReimpresionFacturasEDC.resx">
+      <DependentUpon>ReimpresionFacturasEDC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ReportesEDC.resx">
       <DependentUpon>ReportesEDC.vb</DependentUpon>
@@ -458,7 +505,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ec-logo.ico" />
+    <None Include="Resources\send_40px.png" />
+    <None Include="Resources\print_40px.png" />
     <None Include="NEducacionContinuaUX_TemporaryKey.pfx" />
+    <None Include="packages.config" />
     <None Include="Resources\broom_16px.png" />
     <None Include="Resources\refresh_16px.png" />
     <None Include="Resources\broom_40px.png" />

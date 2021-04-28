@@ -159,7 +159,7 @@
             cbTipoPago.SelectedValue = item("ID_cat_TipoPagoOpcional")
             cbPagoOpcional.SelectedValue = item("ID")
             NUCantidad.Value = item("Cantidad")
-            txtCostoUnitario.Text = item("costoUnitario")
+            txtCostoUnitario.Text = Format(CDec(item("costoUnitario")), "#####0.00")
             chbActivo.Checked = item("Activo")
         Next
     End Sub

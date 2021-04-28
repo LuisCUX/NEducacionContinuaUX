@@ -585,6 +585,11 @@
                 End If
                 datePickerRecargo1.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
             End If
+
+            If (chbDescuentoPagos.Checked = True) Then
+                Dim dia As Integer
+                datePickerDescuento1.Value = $"{DateTime.Now.Year}-{mes(1)}-01"
+            End If
         Catch ex As Exception
 
         End Try
@@ -611,6 +616,11 @@
                     dia = Convert.ToInt32(txtDiaRecargo.Text)
                 End If
                 datePickerRecargo2.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
+            End If
+
+            If (chbDescuentoPagos.Checked = True) Then
+                Dim dia As Integer
+                datePickerDescuento2.Value = $"{DateTime.Now.Year}-{mes(1)}-01"
             End If
         Catch ex As Exception
 
@@ -639,6 +649,11 @@
                 End If
                 datePickerRecargo3.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
             End If
+
+            If (chbDescuentoPagos.Checked = True) Then
+                Dim dia As Integer
+                datePickerDescuento3.Value = $"{DateTime.Now.Year}-{mes(1)}-01"
+            End If
         Catch ex As Exception
 
         End Try
@@ -665,6 +680,11 @@
                     dia = Convert.ToInt32(txtDiaRecargo.Text)
                 End If
                 datePickerRecargo4.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
+            End If
+
+            If (chbDescuentoPagos.Checked = True) Then
+                Dim dia As Integer
+                datePickerDescuento4.Value = $"{DateTime.Now.Year}-{mes(1)}-01"
             End If
         Catch ex As Exception
 
@@ -693,6 +713,11 @@
                 End If
                 datePickerRecargo5.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
             End If
+
+            If (chbDescuentoPagos.Checked = True) Then
+                Dim dia As Integer
+                datePickerDescuento5.Value = $"{DateTime.Now.Year}-{mes(1)}-01"
+            End If
         Catch ex As Exception
 
         End Try
@@ -719,6 +744,11 @@
                     dia = Convert.ToInt32(txtDiaRecargo.Text)
                 End If
                 datePickerRecargo6.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
+            End If
+
+            If (chbDescuentoPagos.Checked = True) Then
+                Dim dia As Integer
+                datePickerDescuento6.Value = $"{DateTime.Now.Year}-{mes(1)}-01"
             End If
         Catch ex As Exception
 
@@ -747,6 +777,11 @@
                 End If
                 datePickerRecargo7.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
             End If
+
+            If (chbDescuentoPagos.Checked = True) Then
+                Dim dia As Integer
+                datePickerDescuento7.Value = $"{DateTime.Now.Year}-{mes(1)}-01"
+            End If
         Catch ex As Exception
 
         End Try
@@ -773,6 +808,11 @@
                     dia = Convert.ToInt32(txtDiaRecargo.Text)
                 End If
                 datePickerRecargo8.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
+            End If
+
+            If (chbDescuentoPagos.Checked = True) Then
+                Dim dia As Integer
+                datePickerDescuento8.Value = $"{DateTime.Now.Year}-{mes(1)}-01"
             End If
         Catch ex As Exception
 
@@ -801,6 +841,11 @@
                 End If
                 datePickerRecargo9.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
             End If
+
+            If (chbDescuentoPagos.Checked = True) Then
+                Dim dia As Integer
+                datePickerDescuento9.Value = $"{DateTime.Now.Year}-{mes(1)}-01"
+            End If
         Catch ex As Exception
 
         End Try
@@ -827,6 +872,11 @@
                     dia = Convert.ToInt32(txtDiaRecargo.Text)
                 End If
                 datePickerRecargo10.Value = $"{DateTime.Now.Year}-{mes(1)}-{dia}"
+            End If
+
+            If (chbDescuentoPagos.Checked = True) Then
+                Dim dia As Integer
+                datePickerDescuento10.Value = $"{DateTime.Now.Year}-{mes(1)}-01"
             End If
         Catch ex As Exception
 
@@ -1135,7 +1185,8 @@
                 End If
                 db.commitTransaction()
                 MessageBox.Show("Plan registrado correctamente")
-                Me.Reiniciar()
+                Me.Close()
+                Me.Show()
             Catch ex As Exception
                 db.rollBackTransaction()
                 MessageBox.Show(ex.Message)

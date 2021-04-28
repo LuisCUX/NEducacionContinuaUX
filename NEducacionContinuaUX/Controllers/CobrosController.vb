@@ -4,6 +4,7 @@ Imports System.Text.RegularExpressions
 Imports System.Threading
 Imports System.Security.Cryptography
 Imports System.Security.Cryptography.X509Certificates
+Imports System.Text
 
 Public Class CobrosController
     Dim db As DataBaseService = New DataBaseService()
@@ -11,6 +12,7 @@ Public Class CobrosController
     Dim xml As XmlService = New XmlService()
     Dim st As SelladoTimbradoService = New SelladoTimbradoService()
     Dim rep As ImpresionReportesService = New ImpresionReportesService()
+    Dim es As EmailService = New EmailService()
     Dim abono As Boolean = False
     Public QR_Generator As New MessagingToolkit.QRCode.Codec.QRCodeEncoder
 
@@ -165,17 +167,20 @@ Public Class CobrosController
             ''---------------------------------------------------------TIMBRADO---------------------------------------------------------
             Dim cadena = xml.cadenaPrueba(Serie, Folio, Fecha, formaPago, NoCertificado, SubTotal, DescuentoS, Total, listaConceptos, totalIVA, RFCCLiente, NombreCLiente, Credito)
             ''Dim sello As String = st.Sellado("C:\Users\darkz\Desktop\pfx\uxa_pfx33.pfx", "12345678a", cadena)
-            Dim sello As String = st.Sellado("C:\Users\Luis\Desktop\pfx\uxa_pfx33.pfx", "12345678a", cadena)
+            Dim sello As String = st.Sellado("\\192.168.1.241\ti\NEducacionContinua\Timbrado\pfx\uxa_pfx33.pfx", "12345678a", cadena)
             Dim xmlString As String = xml.xmlPrueba(Total, SubTotal, DescuentoS, totalIVA, Fecha, sello, Certificado, NoCertificado, formaPago, Folio, Serie, UsoCFDI, listaConceptos, RFCCLiente, NombreCLiente, Credito)
             xmlString = xmlString.Replace("utf-16", "UTF-8")
             Dim xmlTimbrado As String = st.Timbrado(xmlString, Folio)
             Dim folioFiscal As String = Me.Extrae_Cadena(xmlTimbrado, "UUID=", " FechaTimbrado")
             folioFiscal = Me.Extrae_Cadena(folioFiscal, "=", "")
             folioFiscal = folioFiscal.Substring(1, folioFiscal.Length() - 1)
-            File.WriteAllText("C:\Users\Luis\Desktop\wea.xml", xmlTimbrado)
+            If (System.Diagnostics.Debugger.IsAttached) Then
+                File.WriteAllText("C:\Users\Luis\Desktop\wea.xml", xmlTimbrado)
+            End If
+
             ''File.WriteAllText("C:\Users\darkz\Desktop\wea.xml", xmlTimbrado)
 
-            ''---------------------------------------------------------GENERACION DE FACTURA---------------------------------------------------------
+            ''---------------------------------------------------------GENERACION DE FACTURA---------------------------------------------------------''
 
             Dim tipoPago As String
             Dim formapagoid As Integer
@@ -196,19 +201,28 @@ Public Class CobrosController
             db.execSQLQueryWithoutParams($"UPDATE ing_CatFolios SET Consecutivo = Consecutivo + 1 WHERE Usuario = '{User.getUsername()}'")
 
 
-            MessageBox.Show("XML completado")
+            MessageBox.Show("Pago registrado correctamente")
             Dim descripcionCFDI As String = db.exectSQLQueryScalar($"select UPPER('(' + clave_usoCFDI + ')' + ' ' + descripcion) As Clave from ing_cat_usoCFDI WHERE clave_usoCFDI = '{UsoCFDI}'")
             Dim QR As String = $"?re={EnviromentService.RFCEDC}&rr={RFCCLiente}id={folioFiscal}tt={Total}"
             Me.gernerarQr(QR, $"{Serie}{Folio}")
             rep.AgregarFuente("FacturaEDC.rpt")
             rep.AgregarParametros("IDXML", IDXML)
-            rep.AgregarParametros("CantidadLetra", TotalText)
             rep.AgregarParametros("ClaveCliente", Matricula)
+            rep.AgregarParametros("CantidadLetra", TotalText)
             rep.AgregarParametros("usoCFDI", descripcionCFDI)
             rep.AgregarParametros("TipoCliente", tipoMatricula)
 
+
+            ObjectBagService.setItem("CantidadLetra", Total)
+            ObjectBagService.setItem("Serie", Serie)
+            ObjectBagService.setItem("usoCFDI", descripcionCFDI)
+            ObjectBagService.setItem("Folio", Folio)
+            ObjectBagService.setItem("RFC", RFCCLiente)
+            ObjectBagService.setItem("FolioF", folioFiscal)
+            ObjectBagService.setItem("tipoCliente", tipoMatricula)
             rep.MostrarReporte()
             db.commitTransaction()
+
             Return IDXML
         Catch ex As Exception
             db.rollBackTransaction()
@@ -496,35 +510,35 @@ Public Class CobrosController
         Next
         MessageBox.Show(mensaje)
         For Each concepto As Concepto In listaConceptosCobrar
+            Dim IDClavePago As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatClavesPagos WHERE Clave = '{concepto.claveConcepto}'")
+            Dim tieneAbono As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_Abonos WHERE ID_ClavePago = {IDClavePago} AND IDPago = {concepto.IDConcepto}")
+            If (tieneAbono > 0) Then
+                Me.recalcularCostoAbono(concepto, concepto.costoFinal, 2)
+            End If
+            listaConceptosFinal.Add(concepto)
+        Next
+
+        If (listaConceptosAbonos.Count > 0) Then
+            For Each concepto As Concepto In listaConceptosAbonos
+                Dim montoDespues As Decimal
                 Dim IDClavePago As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatClavesPagos WHERE Clave = '{concepto.claveConcepto}'")
                 Dim tieneAbono As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_Abonos WHERE ID_ClavePago = {IDClavePago} AND IDPago = {concepto.IDConcepto}")
                 If (tieneAbono > 0) Then
-                    Me.recalcularCostoAbono(concepto, concepto.costoFinal, 2)
+                    montoAnterior = db.exectSQLQueryScalar($"SELECT Cantidad_Anterior FROM ing_Abonos WHERE ID = {tieneAbono}")
+                    montoDespues = montoAnterior - montoRestante
+                    concepto.Abonado = True
+                Else
+                    montoDespues = montoAnterior - montoRestante
+                    concepto.Abonado = True
                 End If
+                listaConceptos(0).NombreConcepto = $"1{concepto.NombreConcepto}"
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_Abonos(Folio, Clave_Cliente, Cantidad_Anterior, Cantidad_Abonada, Cantidad_Restante, IDPago, ID_ClavePago, FechaAbono, Activo) VALUES ('WEA', '{Matricula}', {montoAnterior}, {montoRestante}, {montoDespues}, {concepto.IDConcepto}, {IDClavePago}, GETDATE(), 1)")
                 listaConceptosFinal.Add(concepto)
             Next
-
-            If (listaConceptosAbonos.Count > 0) Then
-                For Each concepto As Concepto In listaConceptosAbonos
-                    Dim montoDespues As Decimal
-                    Dim IDClavePago As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatClavesPagos WHERE Clave = '{concepto.claveConcepto}'")
-                    Dim tieneAbono As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_Abonos WHERE ID_ClavePago = {IDClavePago} AND IDPago = {concepto.IDConcepto}")
-                    If (tieneAbono > 0) Then
-                        montoAnterior = db.exectSQLQueryScalar($"SELECT Cantidad_Anterior FROM ing_Abonos WHERE ID = {tieneAbono}")
-                        montoDespues = montoAnterior - montoRestante
-                        concepto.Abonado = True
-                    Else
-                        montoDespues = montoAnterior - montoRestante
-                        concepto.Abonado = True
-                    End If
-                    listaConceptos(0).NombreConcepto = $"1{concepto.NombreConcepto}"
-                    db.execSQLQueryWithoutParams($"INSERT INTO ing_Abonos(Folio, Clave_Cliente, Cantidad_Anterior, Cantidad_Abonada, Cantidad_Restante, IDPago, ID_ClavePago, FechaAbono, Activo) VALUES ('WEA', '{Matricula}', {montoAnterior}, {montoRestante}, {montoDespues}, {concepto.IDConcepto}, {IDClavePago}, GETDATE(), 1)")
-                    listaConceptosFinal.Add(concepto)
-                Next
-                MessageBox.Show("Abono registrado correctamente")
-            End If
-            Return listaConceptosFinal
-            Return listaConceptosFinal
+            MessageBox.Show("Abono registrado correctamente")
+        End If
+        Return listaConceptosFinal
+        Return listaConceptosFinal
     End Function
 
     ''----------------------------------------------------------------------------------------------------------------------------------------

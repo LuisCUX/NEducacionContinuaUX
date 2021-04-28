@@ -4,6 +4,7 @@ Imports System.Text.RegularExpressions
 Imports System.Threading
 Imports System.Security.Cryptography
 Imports System.Security.Cryptography.X509Certificates
+Imports System.Text
 
 Public Class CobrosDiferidosController
     Dim db As DataBaseService = New DataBaseService()
@@ -11,6 +12,7 @@ Public Class CobrosDiferidosController
     Dim xml As XmlService = New XmlService()
     Dim st As SelladoTimbradoService = New SelladoTimbradoService()
     Dim co As CobrosController = New CobrosController()
+    Dim es As EmailService = New EmailService()
     Dim rep As ImpresionReportesService = New ImpresionReportesService()
     Public QR_Generator As New MessagingToolkit.QRCode.Codec.QRCodeEncoder
 
@@ -90,7 +92,7 @@ Public Class CobrosDiferidosController
             ''---------------------------------------------------------TIMBRADO---------------------------------------------------------
             Dim cadena = xml.cadenaPrueba(Serie, Folio, Fecha, formaPago, NoCertificado, SubTotal, DescuentoS, Total, listaConceptos, totalIVA, RFCCLiente, NombreCLiente, Credito)
             ''Dim sello As String = st.Sellado("C:\Users\darkz\Desktop\pfx\uxa_pfx33.pfx", "12345678a", cadena)
-            Dim sello As String = st.Sellado("C:\Users\Luis\Desktop\pfx\uxa_pfx33.pfx", "12345678a", cadena)
+            Dim sello As String = st.Sellado("\\192.168.1.241\ti\NEducacionContinua\Timbrado\pfx\uxa_pfx33.pfx", "12345678a", cadena)
             Dim xmlString As String = xml.xmlPrueba(Total, SubTotal, DescuentoS, totalIVA, Fecha, sello, Certificado, NoCertificado, formaPago, Folio, Serie, UsoCFDI, listaConceptos, RFCCLiente, NombreCLiente, Credito)
             xmlString = xmlString.Replace("utf-16", "UTF-8")
             Dim xmlTimbrado As String = st.Timbrado(xmlString, Folio)
@@ -108,7 +110,23 @@ Public Class CobrosDiferidosController
             Next
             db.execSQLQueryWithoutParams($"UPDATE ing_CatFolios SET Consecutivo = Consecutivo + 1 WHERE Usuario = '{User.getUsername()}'")
 
+            ''---------------------------------------------------------ENVIO DE EMAIL---------------------------------------------------------''
+            Dim mail As New Mail
+            Dim archivo_pdf As Byte() = Nothing
+            Dim archivo_xml As Byte() = Nothing
 
+            archivo_pdf = rep.obtenerReporteByte()
+            archivo_xml = Encoding.Default.GetBytes(xmlTimbrado)
+
+            mail.Destino = "luis.c@ux.edu.mx"
+            mail.Asunto = "GRACIAS POR SU PAGO"
+            mail.Mensaje = "ANEXAMOS TUS COMPROBANTES DE PAGO ADJUNTOS A ESTE CORREO, GRACIAS."
+            mail.BytesFile = archivo_pdf
+            mail.BytesFile2 = archivo_xml
+            mail.FileName = "Factura"
+            mail.FileName2 = "xml"
+
+            es.sendEmailWithFileBytesCobro(mail)
             MessageBox.Show("XML completado")
             Dim descripcionCFDI As String = db.exectSQLQueryScalar($"select UPPER('(' + clave_usoCFDI + ')' + ' ' + descripcion) As Clave from ing_cat_usoCFDI WHERE clave_usoCFDI = '{UsoCFDI}'")
             Dim QR As String = $"?re={EnviromentService.RFCEDC}&rr={RFCCLiente}id={folioFiscal}tt={Total}"

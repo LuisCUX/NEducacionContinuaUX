@@ -43,8 +43,9 @@ Partial Class PrincipalView
         Me.CatalogosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GestionDeExternosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EwewaewaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReportesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IVAToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReportesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReimpresionDeFacturasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip.SuspendLayout()
         Me.MenuStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -164,7 +165,7 @@ Partial Class PrincipalView
         '
         'CatalogosToolStripMenuItem
         '
-        Me.CatalogosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GestionDeExternosToolStripMenuItem, Me.EwewaewaToolStripMenuItem, Me.IVAToolStripMenuItem})
+        Me.CatalogosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GestionDeExternosToolStripMenuItem, Me.EwewaewaToolStripMenuItem, Me.IVAToolStripMenuItem, Me.ReimpresionDeFacturasToolStripMenuItem})
         Me.CatalogosToolStripMenuItem.Name = "CatalogosToolStripMenuItem"
         Me.CatalogosToolStripMenuItem.Size = New System.Drawing.Size(72, 20)
         Me.CatalogosToolStripMenuItem.Text = "Catalogos"
@@ -172,14 +173,20 @@ Partial Class PrincipalView
         'GestionDeExternosToolStripMenuItem
         '
         Me.GestionDeExternosToolStripMenuItem.Name = "GestionDeExternosToolStripMenuItem"
-        Me.GestionDeExternosToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.GestionDeExternosToolStripMenuItem.Text = "Gestion de externos"
+        Me.GestionDeExternosToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
+        Me.GestionDeExternosToolStripMenuItem.Text = "Alta/Baja de externos"
         '
         'EwewaewaToolStripMenuItem
         '
         Me.EwewaewaToolStripMenuItem.Name = "EwewaewaToolStripMenuItem"
-        Me.EwewaewaToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.EwewaewaToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
         Me.EwewaewaToolStripMenuItem.Text = "Timbres utilizados"
+        '
+        'IVAToolStripMenuItem
+        '
+        Me.IVAToolStripMenuItem.Name = "IVAToolStripMenuItem"
+        Me.IVAToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
+        Me.IVAToolStripMenuItem.Text = "IVA"
         '
         'ReportesToolStripMenuItem
         '
@@ -187,11 +194,11 @@ Partial Class PrincipalView
         Me.ReportesToolStripMenuItem.Size = New System.Drawing.Size(65, 20)
         Me.ReportesToolStripMenuItem.Text = "Reportes"
         '
-        'IVAToolStripMenuItem
+        'ReimpresionDeFacturasToolStripMenuItem
         '
-        Me.IVAToolStripMenuItem.Name = "IVAToolStripMenuItem"
-        Me.IVAToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.IVAToolStripMenuItem.Text = "IVA"
+        Me.ReimpresionDeFacturasToolStripMenuItem.Name = "ReimpresionDeFacturasToolStripMenuItem"
+        Me.ReimpresionDeFacturasToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
+        Me.ReimpresionDeFacturasToolStripMenuItem.Text = "Reimpresion de facturas"
         '
         'PrincipalView
         '
@@ -244,4 +251,5 @@ Partial Class PrincipalView
     Friend WithEvents PagosACreditoToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ReportesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents IVAToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ReimpresionDeFacturasToolStripMenuItem As ToolStripMenuItem
 End Class

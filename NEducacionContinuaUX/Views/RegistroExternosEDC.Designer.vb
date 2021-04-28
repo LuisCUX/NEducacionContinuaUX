@@ -155,7 +155,7 @@ Partial Class RegistroExternosEDC
         Me.lblNombreVentana.Name = "lblNombreVentana"
         Me.lblNombreVentana.Size = New System.Drawing.Size(1050, 69)
         Me.lblNombreVentana.TabIndex = 13
-        Me.lblNombreVentana.Text = "Gestión de externos"
+        Me.lblNombreVentana.Text = "Alta/Baja de externos"
         Me.lblNombreVentana.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'tabExternos

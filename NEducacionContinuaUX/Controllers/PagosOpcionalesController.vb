@@ -63,7 +63,7 @@
 
         Dim tableAsignacion As DataTable = db.getDataTableFromSQL($"SELECT valorUnitario, Para, ID_res_NT FROM ing_resPagoOpcionalAsignacion WHERE ID = {ID}")
         For Each item As DataRow In tableAsignacion.Rows
-            txtCostoUnitario.Text = item("valorUnitario")
+            txtCostoUnitario.Text = Format(CDec(item("valorUnitario")), "#####0.00")
             cbConceptoPara.Text = item("Para")
             If (item("Para") = "ALUMNO") Then
                 lblNivel.Visible = True

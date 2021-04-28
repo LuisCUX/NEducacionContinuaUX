@@ -82,3 +82,30 @@ C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\Educ
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\Educacion Continua.exe
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\Educacion Continua.xml
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\Educacion Continua.pdb
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\Google.Apis.Admin.Directory.directory_v1.dll
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\Google.Apis.Auth.dll
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\Google.Apis.Auth.PlatformServices.dll
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\Google.Apis.Core.dll
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\Google.Apis.dll
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\Google.Apis.PlatformServices.dll
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\MailKit.dll
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\MimeKit.dll
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\System.Buffers.dll
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\BouncyCastle.Crypto.xml
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\Google.Apis.pdb
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\Google.Apis.xml
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\Google.Apis.Admin.Directory.directory_v1.pdb
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\Google.Apis.Admin.Directory.directory_v1.xml
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\Google.Apis.Auth.pdb
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\Google.Apis.Auth.xml
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\Google.Apis.Core.pdb
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\Google.Apis.Core.xml
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\MailKit.pdb
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\MailKit.xml
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\MimeKit.pdb
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\MimeKit.xml
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\System.Buffers.xml
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.ReimpresionFacturasEDC.resources

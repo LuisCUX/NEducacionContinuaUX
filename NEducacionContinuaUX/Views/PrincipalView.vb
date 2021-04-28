@@ -66,4 +66,9 @@
         IVAEDC.MdiParent = Me
         IVAEDC.Show()
     End Sub
+
+    Private Sub ReimpresionDeFacturasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReimpresionDeFacturasToolStripMenuItem.Click
+        ReimpresionFacturasEDC.MdiParent = Me
+        ReimpresionFacturasEDC.Show()
+    End Sub
 End Class

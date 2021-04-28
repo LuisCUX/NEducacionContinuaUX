@@ -1,4 +1,6 @@
-﻿Public Class CobrosEDC
+﻿Imports System.Text
+
+Public Class CobrosEDC
     Dim db As DataBaseService = New DataBaseService()
     Dim Matricula As String
     Dim tipoMatricula As String
@@ -6,6 +8,7 @@
     Dim ca As CargosController = New CargosController()
     Dim ch As ConceptHandlerController = New ConceptHandlerController()
     Dim va As ValidacionesController = New ValidacionesController()
+    Dim es As EmailService = New EmailService()
     Private Sub CobrosEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Dim tableEDC As DataTable = db.getDataTableFromSQL("SELECT RC.clave_cliente, UPPER(C.nombre + ' ' + RC.apellido_paterno + ' ' + RC.apellido_materno + ' (' + RC.clave_cliente + ')') AS NombreCliente FROM portal_registroCongreso AS RC
@@ -423,12 +426,12 @@
             End If
             Dim IDXMLC As Integer = co.Cobrar(listaConceptosPrueba, cbFormaPago.SelectedValue, Matricula, txtRFC.Text, txtNombre.Text, lblTotal.Text, True, tipocliente)
             If (IDXMLC > 0) Then
-                    Me.Reiniciar()
-                    Exit Sub
-                End If
+                Me.Reiniciar()
+                Exit Sub
             End If
+        End If
 
-            Dim montoTotal As Decimal = CDec(lblTotal.Text)
+        Dim montoTotal As Decimal = CDec(lblTotal.Text)
         Dim montoIngresado As Decimal = CDec(txtMonto.Text)
         If (montoTotal <> montoIngresado) Then
             If (montoIngresado > montoTotal) Then
@@ -475,6 +478,50 @@
             End If
         End If
 
+        ''--------------------------------------------------------------ENVIO DE EMAIL--------------------------------------------------------------
+        Dim Total As String = ObjectBagService.getItem("CantidadLetra")
+        Dim usoCFDI As String = ObjectBagService.getItem("usoCFDI")
+        Dim Serie As String = ObjectBagService.getItem("Serie")
+        Dim Folio As String = ObjectBagService.getItem("Folio")
+        Dim RFCCLiente As String = ObjectBagService.getItem("RFC")
+        Dim folioFiscal As String = ObjectBagService.getItem("FolioF")
+        Dim tipoClienteint As Integer = ObjectBagService.getItem("tipoCliente")
+        ObjectBagService.clearBag()
+        Dim rep2 As ImpresionReportesService = New ImpresionReportesService()
+
+        Dim QR As String = $"?re={EnviromentService.RFCEDC}&rr={RFCCLiente}id={folioFiscal}tt={Total}"
+        co.gernerarQr(QR, $"{Serie}{Folio}")
+        rep2.AgregarFuente("FacturaEDC.rpt")
+        rep2.AgregarParametros("IDXML", IDXML)
+        rep2.AgregarParametros("CantidadLetra", Total)
+        rep2.AgregarParametros("ClaveCliente", Matricula)
+        rep2.AgregarParametros("usoCFDI", usoCFDI)
+        rep2.AgregarParametros("TipoCliente", tipoClienteint)
+
+        Dim mail As New Mail
+        Dim archivo_pdf As Byte() = Nothing
+        Dim archivo_xml As Byte() = Nothing
+
+        Dim xmlTimbrado As String = db.exectSQLQueryScalar($"SELECT XMLTimbrado FROM ing_xmlTimbrados WHERE ID = {IDXML}")
+
+        archivo_pdf = rep2.obtenerReporteByte()
+        'archivo_pdf = Encoding.Default.GetBytes(xmlTimbrado)
+        archivo_xml = Encoding.Default.GetBytes(xmlTimbrado)
+
+        mail.Destino = "luis.c@ux.edu.mx"
+        mail.Asunto = "GRACIAS POR SU PAGO"
+        mail.Mensaje = "ANEXAMOS TUS COMPROBANTES DE PAGO ADJUNTOS A ESTE CORREO, GRACIAS."
+        mail.BytesFile = archivo_pdf
+        mail.BytesFile2 = archivo_xml
+        mail.FileName = "Factura"
+        mail.FileName2 = "xml"
+        Try
+            es.sendEmailWithFileBytesCobro(mail)
+            MessageBox.Show("Email enviado correctamente")
+            Me.Reiniciar()
+        Catch ex As Exception
+            MessageBox.Show("Error al enviar email")
+        End Try
         Me.Reiniciar()
     End Sub
 
@@ -579,4 +626,7 @@
         End If
     End Sub
 
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
+        Me.Close()
+    End Sub
 End Class
