@@ -28,7 +28,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\192.168.1.241\ti\NEducacionContinua\Instalador\</InstallUrl>
     <TargetCulture>es-MX</TargetCulture>
-    <ApplicationRevision>26</ApplicationRevision>
+    <ApplicationRevision>27</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -194,6 +194,7 @@
     <Compile Include="Controllers\CobrosDiferidosController.vb" />
     <Compile Include="Controllers\ConceptHandlerController.vb" />
     <Compile Include="Controllers\GestionExternosController.vb" />
+    <Compile Include="Controllers\NotaCreditoController.vb" />
     <Compile Include="Controllers\PagosCreditoController.vb" />
     <Compile Include="Controllers\PagosOpcionalesController.vb" />
     <Compile Include="Controllers\PlanesController.vb" />
@@ -201,6 +202,7 @@
     <Compile Include="Controllers\ValidacionesController.vb" />
     <Compile Include="Models\Concepto.vb" />
     <Compile Include="Models\ConceptoDiferido.vb" />
+    <Compile Include="Models\ConceptoNota.vb" />
     <Compile Include="Models\Mail.vb" />
     <Compile Include="Models\User.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

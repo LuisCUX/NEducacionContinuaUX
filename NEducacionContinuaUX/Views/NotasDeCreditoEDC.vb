@@ -3,6 +3,8 @@
     Dim Matricula As String
     Dim tipoMatricula As String
     Dim va As ValidacionesController = New ValidacionesController()
+    Dim ch As ConceptHandlerController = New ConceptHandlerController()
+    Dim nc As NotaCreditoController = New NotaCreditoController()
     Private Sub NotasDeCreditoEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim tableEDC As DataTable = db.getDataTableFromSQL("SELECT RC.clave_cliente, UPPER(C.nombre + ' ' + RC.apellido_paterno + ' ' + RC.apellido_materno + ' (' + RC.clave_cliente + ')') AS NombreCliente FROM portal_registroCongreso AS RC
                                                             INNER JOIN portal_cliente AS C ON RC.id_cliente = C.id_cliente
@@ -19,6 +21,21 @@
         ComboboxService.llenarCombobox(cbTipoNota, tableTipoNota, "ID", "TipoNota")
     End Sub
 
+    Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
+        Dim ID As Integer = cbConcepto.SelectedValue
+        Dim Descripcion As String
+        Dim Total As Decimal = CDec(txtMonto.Text)
+        Dim IVA As Decimal = 0.00
+        Dim TipoNota As String = db.exectSQLQueryScalar($"SELECT ClaveNota FROM ing_CatTipoNotaCredito WHERE ID = {cbTipoNota.SelectedValue}")
+        Dim FolioFactura As String = cbConcepto.Text.Substring(7, 7)
+        If (TipoNota = "NDCRC") Then
+            Descripcion = $"BONIFICACION DE {db.exectSQLQueryScalar($"SELECT Descripcion FROM ing_PlanesRecargos WHERE ID = {ID}")}"
+        End If
+
+        GridNota.Rows.Add(ID, Descripcion, Total, IVA, TipoNota, FolioFactura)
+        Me.actualizarTotal()
+    End Sub
+
     Private Sub cbExterno_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbExterno.SelectionChangeCommitted
         Try
             txtMatricula.Text = cbExterno.SelectedValue
@@ -27,6 +44,36 @@
         Catch ex As Exception
 
         End Try
+    End Sub
+
+    Private Sub cbTipoNota_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbTipoNota.SelectionChangeCommitted
+        cbConcepto.DataSource = Nothing
+        lblTotal.Text = ""
+        txtMonto.Clear()
+        txtMonto.Visible = False
+        NUPorcentaje.Visible = False
+        NUPorcentaje.Value = 0
+        If (cbTipoNota.SelectedValue = 1) Then
+            Dim tableConceptos As DataTable = db.getDataTableFromSQL($"SELECT R.ID, UPPER('Folio:' + ' ' + R.Folio + ' Fecha: ' + T.Fecha_Pago)As TextoFactura FROM ing_PlanesRecargos AS R
+                                                                       INNER JOIN ing_xmlTimbrados AS T ON T.Folio = R.Folio
+                                                                       WHERE Matricula_Clave = '{Matricula}' AND R.Activo = 0 AND R.Folio IS NOT NULL AND R.Autorizado = 0 AND R.Condonado = 0")
+            ComboboxService.llenarCombobox(cbConcepto, tableConceptos, "ID", "TextoFactura")
+        End If
+    End Sub
+
+
+    Private Sub cbConcepto_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbConcepto.SelectionChangeCommitted
+        lblTotal.Text = ""
+        txtMonto.Clear()
+        NUPorcentaje.Value = 0
+        txtMonto.Visible = False
+        NUPorcentaje.Visible = False
+        If (cbTipoNota.SelectedValue = 1) Then
+            lblTotal.Text = Format(CDec(db.exectSQLQueryScalar($"SELECT Monto FROM ing_PlanesRecargos WHERE ID = {cbConcepto.SelectedValue}")), "#####0.00")
+            txtMonto.Visible = True
+            NUPorcentaje.Visible = True
+            txtMonto.Text = CDec(lblTotal.Text)
+        End If
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
@@ -49,5 +96,62 @@
         Me.Controls.Clear()
         InitializeComponent()
         NotasDeCreditoEDC_Load(Me, Nothing)
+    End Sub
+
+    Private Sub txtPorcentaje_TextChanged(sender As Object, e As EventArgs) Handles NUPorcentaje.TextChanged
+        Dim total As Decimal = CDec(lblTotal.Text)
+        total = (total / 100) * Convert.ToDouble(NUPorcentaje.Text)
+        txtMonto.Text = total
+    End Sub
+
+    Private Sub txtPorcentaje_KeyPress(sender As Object, e As KeyPressEventArgs) Handles NUPorcentaje.KeyPress
+        Dim num_cantidad As Decimal = 0
+        Dim KeyAscii As Short = Asc(e.KeyChar)
+        If InStr("0123456789.", Chr(KeyAscii)) = 0 Then
+            If KeyAscii <> 8 Then
+                KeyAscii = 0
+            End If
+            e.KeyChar = Chr(KeyAscii)
+            If KeyAscii = 0 Then
+                e.Handled = True
+            End If
+        ElseIf InStr(NUPorcentaje.Text, ".") > 0 Then
+            If KeyAscii = 46 Then
+                e.Handled = True
+            End If
+        End If
+    End Sub
+
+    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+        Dim listaConceptos As New List(Of Concepto)
+        Dim listaUUID As New List(Of String)
+        Dim listaUUID2 As New List(Of String)
+        Dim listaUUIDDistinct As New List(Of String)
+        For x = 0 To GridNota.Rows.Count - 1
+            If (GridNota.Rows(x).Cells(4).Value = "NDCRC") Then
+                Dim concepto As New Concepto
+                concepto = ch.crearConcepto(GridNota.Rows(x).Cells(0).Value, "REC", Matricula)
+                concepto.NombreConcepto = GridNota.Rows(x).Cells(1).Value
+                listaConceptos.Add(concepto)
+                listaUUID.Add(GridNota.Rows(x).Cells(5).Value)
+                listaUUID.Add(GridNota.Rows(x).Cells(5).Value)
+            End If
+        Next
+        listaUUID2 = listaUUID
+        listaUUID2 = listaUUID2.Distinct().ToList()
+        For Each item As String In listaUUID2
+            Dim folioFiscal As String = db.exectSQLQueryScalar($"SELECT FolioFiscal FROM ing_xmlTimbrados WHERE Folio = '{item}'")
+            listaUUIDDistinct.Add(folioFiscal)
+        Next
+
+        nc.GenerarNotaCredito(listaConceptos, listaUUIDDistinct, listaUUID, txtRFC.Text, txtNombre.Text, "P01", lblTotalNota.Text, lblTotalNota.Text, "0.00", Matricula, cbTipoNota.Text)
+    End Sub
+
+    Sub actualizarTotal()
+        Dim total As Decimal
+        For x = 0 To GridNota.Rows.Count() - 1
+            total = total + CDec(GridNota.Rows(x).Cells(2).Value)
+        Next
+        lblTotalNota.Text = total
     End Sub
 End Class

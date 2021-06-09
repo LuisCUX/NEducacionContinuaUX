@@ -1161,7 +1161,7 @@
                 db.startTransaction()
                 Dim Orden As Integer = 1
                 Dim planGeneral As Integer
-                If (cbPlanes.Text = "PLAN GENERAL") Then
+                If (cbPlanes.Text = "-PLAN GENERAL-") Then
                     planGeneral = 1
                 Else
                     planGeneral = 0

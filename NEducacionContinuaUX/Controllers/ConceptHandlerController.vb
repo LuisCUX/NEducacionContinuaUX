@@ -181,7 +181,7 @@
             Next
             ''--------------------RECARGOS--------------------''
         ElseIf (claveConcepto = "REC") Then
-            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT ID, Descripcion, Monto FROM ing_PlanesRecargos WHERE ID = {conceptoID} AND Activo = 1")
+            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT ID, Descripcion, Monto FROM ing_PlanesRecargos WHERE ID = {conceptoID}")
 
             Dim condonacion As Object() = Me.obtenerDatosCondonacion(conceptoID, 7)
 
@@ -236,9 +236,11 @@
             concepto.costoIVAUnitario = (unitariodescuento * 0.16)
             concepto.costoIVATotal = (CDec(concepto.costoIVAUnitario) * CDec(concepto.Cantidad))
             concepto.costoTotal = unitariosiniva * CDec(concepto.Cantidad)
-            concepto.costoFinal = (CDec(concepto.costoBase)) + (CDec(concepto.costoIVATotal)) - CDec(concepto.Abono)
+            ''concepto.costoFinal = (CDec(concepto.costoBase)) + (CDec(concepto.costoIVATotal)) - CDec(concepto.Abono)
             concepto.descuento = (CDec(concepto.descuento) * CDec(concepto.Cantidad))
+            concepto = formatoPrecios(concepto)
 
+            concepto.costoFinal = (CDec(concepto.costoBase)) + (CDec(concepto.costoIVATotal)) - CDec(concepto.Abono)
         ElseIf (concepto.absorbeIVA = False And concepto.IVAExento = False And concepto.consideraIVA = True) Then ''---AGREGA IVA
 
             Dim unitariodescuento As Decimal = CDec(concepto.costoUnitario) - CDec(concepto.descuento)

@@ -44,11 +44,13 @@ Partial Class NotasDeCreditoEDC
         Me.lblNombre = New System.Windows.Forms.Label()
         Me.panelGridNota = New System.Windows.Forms.Panel()
         Me.GBNota = New System.Windows.Forms.GroupBox()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.NUPorcentaje = New System.Windows.Forms.NumericUpDown()
+        Me.lblPeso = New System.Windows.Forms.Label()
+        Me.lblTotal = New System.Windows.Forms.Label()
+        Me.btnAgregar = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtMonto = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.lblTipoNota = New System.Windows.Forms.Label()
         Me.cbConcepto = New System.Windows.Forms.ComboBox()
@@ -58,10 +60,19 @@ Partial Class NotasDeCreditoEDC
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.GridNota = New System.Windows.Forms.DataGridView()
+        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IVA = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TipoNota = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FolioFactura = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblTotalNota = New System.Windows.Forms.Label()
         Me.panelBusqueda.SuspendLayout()
         Me.panelDatos.SuspendLayout()
         Me.panelGridNota.SuspendLayout()
         Me.GBNota.SuspendLayout()
+        CType(Me.NUPorcentaje, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridNota, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -281,6 +292,8 @@ Partial Class NotasDeCreditoEDC
         '
         'panelGridNota
         '
+        Me.panelGridNota.Controls.Add(Me.Label1)
+        Me.panelGridNota.Controls.Add(Me.lblTotalNota)
         Me.panelGridNota.Controls.Add(Me.GBNota)
         Me.panelGridNota.Controls.Add(Me.btnLimpiar)
         Me.panelGridNota.Controls.Add(Me.btnSalir)
@@ -288,17 +301,19 @@ Partial Class NotasDeCreditoEDC
         Me.panelGridNota.Controls.Add(Me.GridNota)
         Me.panelGridNota.Location = New System.Drawing.Point(6, 188)
         Me.panelGridNota.Name = "panelGridNota"
-        Me.panelGridNota.Size = New System.Drawing.Size(1103, 388)
+        Me.panelGridNota.Size = New System.Drawing.Size(1103, 427)
         Me.panelGridNota.TabIndex = 18
         Me.panelGridNota.Visible = False
         '
         'GBNota
         '
-        Me.GBNota.Controls.Add(Me.Button1)
+        Me.GBNota.Controls.Add(Me.NUPorcentaje)
+        Me.GBNota.Controls.Add(Me.lblPeso)
+        Me.GBNota.Controls.Add(Me.lblTotal)
+        Me.GBNota.Controls.Add(Me.btnAgregar)
         Me.GBNota.Controls.Add(Me.Label5)
-        Me.GBNota.Controls.Add(Me.TextBox2)
         Me.GBNota.Controls.Add(Me.Label4)
-        Me.GBNota.Controls.Add(Me.TextBox1)
+        Me.GBNota.Controls.Add(Me.txtMonto)
         Me.GBNota.Controls.Add(Me.Label3)
         Me.GBNota.Controls.Add(Me.lblTipoNota)
         Me.GBNota.Controls.Add(Me.cbConcepto)
@@ -307,59 +322,80 @@ Partial Class NotasDeCreditoEDC
         Me.GBNota.ForeColor = System.Drawing.SystemColors.Control
         Me.GBNota.Location = New System.Drawing.Point(11, 3)
         Me.GBNota.Name = "GBNota"
-        Me.GBNota.Size = New System.Drawing.Size(446, 379)
+        Me.GBNota.Size = New System.Drawing.Size(446, 421)
         Me.GBNota.TabIndex = 82
         Me.GBNota.TabStop = False
         Me.GBNota.Text = "Datos nota de credito"
         '
-        'Button1
+        'NUPorcentaje
         '
-        Me.Button1.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.Add_40px
-        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button1.Location = New System.Drawing.Point(175, 325)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 48)
-        Me.Button1.TabIndex = 87
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.NUPorcentaje.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.NUPorcentaje.Location = New System.Drawing.Point(80, 267)
+        Me.NUPorcentaje.Name = "NUPorcentaje"
+        Me.NUPorcentaje.Size = New System.Drawing.Size(65, 22)
+        Me.NUPorcentaje.TabIndex = 90
+        '
+        'lblPeso
+        '
+        Me.lblPeso.AutoSize = True
+        Me.lblPeso.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPeso.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblPeso.Location = New System.Drawing.Point(6, 162)
+        Me.lblPeso.Name = "lblPeso"
+        Me.lblPeso.Size = New System.Drawing.Size(26, 29)
+        Me.lblPeso.TabIndex = 89
+        Me.lblPeso.Text = "$"
+        '
+        'lblTotal
+        '
+        Me.lblTotal.AutoSize = True
+        Me.lblTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTotal.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblTotal.Location = New System.Drawing.Point(26, 162)
+        Me.lblTotal.Name = "lblTotal"
+        Me.lblTotal.Size = New System.Drawing.Size(0, 29)
+        Me.lblTotal.TabIndex = 88
+        '
+        'btnAgregar
+        '
+        Me.btnAgregar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.Add_40px
+        Me.btnAgregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnAgregar.Location = New System.Drawing.Point(176, 356)
+        Me.btnAgregar.Name = "btnAgregar"
+        Me.btnAgregar.Size = New System.Drawing.Size(75, 48)
+        Me.btnAgregar.TabIndex = 87
+        Me.btnAgregar.UseVisualStyleBackColor = True
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label5.Location = New System.Drawing.Point(115, 269)
+        Me.Label5.Location = New System.Drawing.Point(149, 269)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(20, 16)
         Me.Label5.TabIndex = 86
         Me.Label5.Text = "%"
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(80, 266)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(34, 22)
-        Me.TextBox2.TabIndex = 85
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label4.Location = New System.Drawing.Point(5, 269)
+        Me.Label4.Location = New System.Drawing.Point(6, 269)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(76, 16)
         Me.Label4.TabIndex = 84
         Me.Label4.Text = "Porcentaje:"
         '
-        'TextBox1
+        'txtMonto
         '
-        Me.TextBox1.Enabled = False
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(80, 235)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(89, 22)
-        Me.TextBox1.TabIndex = 83
+        Me.txtMonto.Enabled = False
+        Me.txtMonto.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMonto.Location = New System.Drawing.Point(80, 235)
+        Me.txtMonto.Name = "txtMonto"
+        Me.txtMonto.Size = New System.Drawing.Size(89, 22)
+        Me.txtMonto.TabIndex = 83
         '
         'Label3
         '
@@ -416,7 +452,7 @@ Partial Class NotasDeCreditoEDC
         '
         Me.btnLimpiar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
         Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnLimpiar.Location = New System.Drawing.Point(754, 334)
+        Me.btnLimpiar.Location = New System.Drawing.Point(756, 359)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(75, 48)
         Me.btnLimpiar.TabIndex = 3
@@ -426,7 +462,7 @@ Partial Class NotasDeCreditoEDC
         '
         Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
         Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnSalir.Location = New System.Drawing.Point(554, 334)
+        Me.btnSalir.Location = New System.Drawing.Point(556, 359)
         Me.btnSalir.Name = "btnSalir"
         Me.btnSalir.Size = New System.Drawing.Size(75, 48)
         Me.btnSalir.TabIndex = 2
@@ -436,7 +472,7 @@ Partial Class NotasDeCreditoEDC
         '
         Me.btnGuardar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
         Me.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnGuardar.Location = New System.Drawing.Point(942, 334)
+        Me.btnGuardar.Location = New System.Drawing.Point(944, 359)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(75, 48)
         Me.btnGuardar.TabIndex = 1
@@ -444,11 +480,71 @@ Partial Class NotasDeCreditoEDC
         '
         'GridNota
         '
+        Me.GridNota.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.GridNota.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.GridNota.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.GridNota.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Descripcion, Me.Importe, Me.IVA, Me.TipoNota, Me.FolioFactura})
         Me.GridNota.Location = New System.Drawing.Point(463, 9)
         Me.GridNota.Name = "GridNota"
-        Me.GridNota.Size = New System.Drawing.Size(636, 299)
+        Me.GridNota.Size = New System.Drawing.Size(636, 263)
         Me.GridNota.TabIndex = 0
+        '
+        'ID
+        '
+        Me.ID.HeaderText = "ID"
+        Me.ID.Name = "ID"
+        Me.ID.Visible = False
+        '
+        'Descripcion
+        '
+        Me.Descripcion.FillWeight = 99.49239!
+        Me.Descripcion.HeaderText = "Descripción"
+        Me.Descripcion.Name = "Descripcion"
+        '
+        'Importe
+        '
+        Me.Importe.FillWeight = 40.0!
+        Me.Importe.HeaderText = "Importe"
+        Me.Importe.Name = "Importe"
+        '
+        'IVA
+        '
+        Me.IVA.FillWeight = 40.0!
+        Me.IVA.HeaderText = "IVA"
+        Me.IVA.Name = "IVA"
+        '
+        'TipoNota
+        '
+        Me.TipoNota.FillWeight = 30.0!
+        Me.TipoNota.HeaderText = "Tipo de nota"
+        Me.TipoNota.Name = "TipoNota"
+        '
+        'FolioFactura
+        '
+        Me.FolioFactura.HeaderText = "FolioFactura"
+        Me.FolioFactura.Name = "FolioFactura"
+        Me.FolioFactura.Visible = False
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label1.Location = New System.Drawing.Point(735, 298)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(93, 29)
+        Me.Label1.TabIndex = 84
+        Me.Label1.Text = "Total: $"
+        '
+        'lblTotalNota
+        '
+        Me.lblTotalNota.AutoSize = True
+        Me.lblTotalNota.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTotalNota.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblTotalNota.Location = New System.Drawing.Point(831, 298)
+        Me.lblTotalNota.Name = "lblTotalNota"
+        Me.lblTotalNota.Size = New System.Drawing.Size(0, 29)
+        Me.lblTotalNota.TabIndex = 83
         '
         'NotasDeCreditoEDC
         '
@@ -456,7 +552,7 @@ Partial Class NotasDeCreditoEDC
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.ClientSize = New System.Drawing.Size(1117, 588)
+        Me.ClientSize = New System.Drawing.Size(1117, 627)
         Me.Controls.Add(Me.panelGridNota)
         Me.Controls.Add(Me.panelDatos)
         Me.Controls.Add(Me.panelBusqueda)
@@ -469,8 +565,10 @@ Partial Class NotasDeCreditoEDC
         Me.panelDatos.ResumeLayout(False)
         Me.panelDatos.PerformLayout()
         Me.panelGridNota.ResumeLayout(False)
+        Me.panelGridNota.PerformLayout()
         Me.GBNota.ResumeLayout(False)
         Me.GBNota.PerformLayout()
+        CType(Me.NUPorcentaje, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridNota, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -507,9 +605,19 @@ Partial Class NotasDeCreditoEDC
     Friend WithEvents btnLimpiar As Button
     Friend WithEvents GBNota As GroupBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents txtMonto As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnAgregar As Button
+    Friend WithEvents lblPeso As Label
+    Friend WithEvents lblTotal As Label
+    Friend WithEvents NUPorcentaje As NumericUpDown
+    Friend WithEvents ID As DataGridViewTextBoxColumn
+    Friend WithEvents Descripcion As DataGridViewTextBoxColumn
+    Friend WithEvents Importe As DataGridViewTextBoxColumn
+    Friend WithEvents IVA As DataGridViewTextBoxColumn
+    Friend WithEvents TipoNota As DataGridViewTextBoxColumn
+    Friend WithEvents FolioFactura As DataGridViewTextBoxColumn
+    Friend WithEvents Label1 As Label
+    Friend WithEvents lblTotalNota As Label
 End Class
