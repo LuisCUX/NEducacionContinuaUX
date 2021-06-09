@@ -108,8 +108,6 @@ Partial Class MainCobrosDiferidosEDC
         '
         'cbExterno
         '
-        Me.cbExterno.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.cbExterno.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbExterno.FormattingEnabled = True
         Me.cbExterno.Location = New System.Drawing.Point(432, 14)
         Me.cbExterno.Name = "cbExterno"
@@ -301,8 +299,6 @@ Partial Class MainCobrosDiferidosEDC
         '
         'cbEDC
         '
-        Me.cbEDC.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.cbEDC.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbEDC.FormattingEnabled = True
         Me.cbEDC.Location = New System.Drawing.Point(349, 39)
         Me.cbEDC.Name = "cbEDC"
