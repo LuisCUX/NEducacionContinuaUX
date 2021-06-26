@@ -22,6 +22,7 @@ Partial Class PlanesEDC
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PlanesEDC))
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.lblNombrePlan = New System.Windows.Forms.Label()
@@ -2569,6 +2570,7 @@ Partial Class PlanesEDC
         Me.Controls.Add(Me.tcPlanes)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.lblNombreVentana)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "PlanesEDC"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "PlanesEDC"

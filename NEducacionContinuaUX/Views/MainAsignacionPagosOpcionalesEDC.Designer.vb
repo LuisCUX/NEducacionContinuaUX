@@ -22,6 +22,7 @@ Partial Class MainAsignacionPagosOpcionalesEDC
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainAsignacionPagosOpcionalesEDC))
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.panelBuscar = New System.Windows.Forms.Panel()
         Me.cbExterno = New System.Windows.Forms.ComboBox()
@@ -287,6 +288,7 @@ Partial Class MainAsignacionPagosOpcionalesEDC
         Me.Controls.Add(Me.panelDatos)
         Me.Controls.Add(Me.panelBuscar)
         Me.Controls.Add(Me.lblNombreVentana)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "MainAsignacionPagosOpcionalesEDC"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "AsignacionPagosOpcionales"

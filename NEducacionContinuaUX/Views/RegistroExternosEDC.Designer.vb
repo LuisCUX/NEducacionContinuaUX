@@ -22,6 +22,7 @@ Partial Class RegistroExternosEDC
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(RegistroExternosEDC))
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.tabExternos = New System.Windows.Forms.TabControl()
         Me.tabRegistroExternos = New System.Windows.Forms.TabPage()
@@ -1410,6 +1411,7 @@ Partial Class RegistroExternosEDC
         Me.ClientSize = New System.Drawing.Size(1047, 648)
         Me.Controls.Add(Me.tabExternos)
         Me.Controls.Add(Me.lblNombreVentana)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "RegistroExternosEDC"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Gestion de externos"

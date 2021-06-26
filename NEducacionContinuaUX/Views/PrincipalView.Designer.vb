@@ -44,8 +44,8 @@ Partial Class PrincipalView
         Me.GestionDeExternosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EwewaewaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IVAToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReportesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReimpresionDeFacturasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReportesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip.SuspendLayout()
         Me.MenuStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -188,24 +188,24 @@ Partial Class PrincipalView
         Me.IVAToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
         Me.IVAToolStripMenuItem.Text = "IVA"
         '
-        'ReportesToolStripMenuItem
-        '
-        Me.ReportesToolStripMenuItem.Name = "ReportesToolStripMenuItem"
-        Me.ReportesToolStripMenuItem.Size = New System.Drawing.Size(65, 20)
-        Me.ReportesToolStripMenuItem.Text = "Reportes"
-        '
         'ReimpresionDeFacturasToolStripMenuItem
         '
         Me.ReimpresionDeFacturasToolStripMenuItem.Name = "ReimpresionDeFacturasToolStripMenuItem"
         Me.ReimpresionDeFacturasToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
         Me.ReimpresionDeFacturasToolStripMenuItem.Text = "Reimpresion de facturas"
         '
+        'ReportesToolStripMenuItem
+        '
+        Me.ReportesToolStripMenuItem.Name = "ReportesToolStripMenuItem"
+        Me.ReportesToolStripMenuItem.Size = New System.Drawing.Size(65, 20)
+        Me.ReportesToolStripMenuItem.Text = "Reportes"
+        '
         'PrincipalView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.SystemColors.ControlDark
-        Me.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.Construction_4_512
+        Me.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.EDCLogo
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.ClientSize = New System.Drawing.Size(1423, 750)
         Me.Controls.Add(Me.StatusStrip)

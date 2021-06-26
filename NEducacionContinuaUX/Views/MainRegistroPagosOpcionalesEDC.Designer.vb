@@ -22,6 +22,7 @@ Partial Class MainRegistroPagosOpcionalesEDC
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainRegistroPagosOpcionalesEDC))
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.GridPagosOpcionales = New System.Windows.Forms.DataGridView()
         Me.btnNuevoPago = New System.Windows.Forms.Button()
@@ -65,7 +66,7 @@ Partial Class MainRegistroPagosOpcionalesEDC
         Me.btnNuevoPago.Text = "Agregar pago opcional"
         Me.btnNuevoPago.UseVisualStyleBackColor = True
         '
-        'MainPagosOpcionales
+        'MainRegistroPagosOpcionalesEDC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -74,7 +75,8 @@ Partial Class MainRegistroPagosOpcionalesEDC
         Me.Controls.Add(Me.btnNuevoPago)
         Me.Controls.Add(Me.GridPagosOpcionales)
         Me.Controls.Add(Me.lblNombreVentana)
-        Me.Name = "MainPagosOpcionales"
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Name = "MainRegistroPagosOpcionalesEDC"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Pagos Opcionales"
         CType(Me.GridPagosOpcionales, System.ComponentModel.ISupportInitialize).EndInit()

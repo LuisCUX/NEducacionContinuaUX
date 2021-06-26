@@ -22,6 +22,7 @@ Partial Class AsignacionPlanesEDC
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AsignacionPlanesEDC))
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.cbExterno = New System.Windows.Forms.ComboBox()
         Me.lblBusquedaNombre = New System.Windows.Forms.Label()
@@ -778,6 +779,7 @@ Partial Class AsignacionPlanesEDC
         Me.ClientSize = New System.Drawing.Size(827, 792)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.lblNombreVentana)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "AsignacionPlanesEDC"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "AsignacionPlanesEDC"

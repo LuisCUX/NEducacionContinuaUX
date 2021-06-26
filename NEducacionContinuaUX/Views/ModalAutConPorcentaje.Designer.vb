@@ -22,6 +22,7 @@ Partial Class ModalAutConPorcentaje
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ModalAutConPorcentaje))
         Me.lblPorcentaje = New System.Windows.Forms.Label()
         Me.txtPorcentaje = New System.Windows.Forms.TextBox()
         Me.btnGuardar = New System.Windows.Forms.Button()
@@ -65,6 +66,7 @@ Partial Class ModalAutConPorcentaje
         Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.txtPorcentaje)
         Me.Controls.Add(Me.lblPorcentaje)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "ModalAutConPorcentaje"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "ModalAutConPorcentaje"

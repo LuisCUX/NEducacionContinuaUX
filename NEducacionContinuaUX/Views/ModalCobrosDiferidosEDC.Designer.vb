@@ -296,6 +296,7 @@ Partial Class ModalCobrosDiferidosEDC
         Me.Controls.Add(Me.lblNombreVentana)
         Me.Controls.Add(Me.btnCobrar)
         Me.Controls.Add(Me.btnSalir)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "ModalCobrosDiferidosEDC"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "ModalCobrosDiferidosEDC"
