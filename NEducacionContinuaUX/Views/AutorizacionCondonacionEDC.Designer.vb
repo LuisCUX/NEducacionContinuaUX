@@ -106,8 +106,6 @@ Partial Class AutorizacionCondonacionEDC
         '
         'cbExterno
         '
-        Me.cbExterno.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.cbExterno.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbExterno.FormattingEnabled = True
         Me.cbExterno.Location = New System.Drawing.Point(298, 15)
         Me.cbExterno.Name = "cbExterno"

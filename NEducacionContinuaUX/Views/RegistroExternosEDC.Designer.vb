@@ -503,8 +503,6 @@ Partial Class RegistroExternosEDC
         '
         'cbUX
         '
-        Me.cbUX.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.cbUX.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbUX.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbUX.FormattingEnabled = True
         Me.cbUX.Location = New System.Drawing.Point(594, 41)
@@ -812,8 +810,6 @@ Partial Class RegistroExternosEDC
         '
         'cbExterno
         '
-        Me.cbExterno.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.cbExterno.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbExterno.FormattingEnabled = True
         Me.cbExterno.Location = New System.Drawing.Point(459, 18)
         Me.cbExterno.Name = "cbExterno"

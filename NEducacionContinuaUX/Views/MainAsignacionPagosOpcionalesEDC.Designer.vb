@@ -75,8 +75,6 @@ Partial Class MainAsignacionPagosOpcionalesEDC
         '
         'cbExterno
         '
-        Me.cbExterno.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.cbExterno.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbExterno.FormattingEnabled = True
         Me.cbExterno.Location = New System.Drawing.Point(382, 19)
         Me.cbExterno.Name = "cbExterno"

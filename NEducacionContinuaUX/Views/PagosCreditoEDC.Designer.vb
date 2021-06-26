@@ -126,8 +126,6 @@ Partial Class PagosCreditoEDC
         '
         'cbExterno
         '
-        Me.cbExterno.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.cbExterno.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbExterno.FormattingEnabled = True
         Me.cbExterno.Location = New System.Drawing.Point(355, 14)
         Me.cbExterno.Name = "cbExterno"

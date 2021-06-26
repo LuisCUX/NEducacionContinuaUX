@@ -47,6 +47,13 @@
         GridPagos.DataSource = tablePagos
     End Sub
 
+    Sub llenarGridPagosCambioDescuento(IDPlan As Integer, GridPagos As DataGridView)
+        Dim tablePagos As DataTable = db.getDataTableFromSQL($"SELECT ID, Clave, Descripcion, Importe, Recargo, Descuento FROM ing_PlanesConceptos WHERE ID_Plan = {IDPlan} AND Activo = 1 ORDER BY Orden")
+        For Each row As DataRow In tablePagos.Rows
+            GridPagos.Rows.Add(row("ID"), row("Descripcion"), Format(CDec(row("Importe")), "#####0.00"), Format(CDec(row("Recargo")), "#####0.00"), Format(CDec(row("Descuento")), "#####0.00"), 0.00)
+        Next
+    End Sub
+
 
     Sub asignarPagosMatricula(Matricula As String, gridPagos As DataGridView)
         Try
