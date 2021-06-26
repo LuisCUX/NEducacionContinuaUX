@@ -28,7 +28,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\192.168.1.241\ti\NEducacionContinua\Instalador\</InstallUrl>
     <TargetCulture>es-MX</TargetCulture>
-    <ApplicationRevision>27</ApplicationRevision>
+    <ApplicationRevision>29</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -69,7 +69,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>ec-logo.ico</ApplicationIcon>
+    <ApplicationIcon>logo %281%29.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
@@ -507,6 +507,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ec-logo.ico" />
+    <Content Include="logo %281%29.ico" />
     <None Include="Resources\send_40px.png" />
     <None Include="Resources\print_40px.png" />
     <None Include="NEducacionContinuaUX_TemporaryKey.pfx" />
