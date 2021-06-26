@@ -22,6 +22,7 @@ Partial Class ModalAsignacionPagosOpcionalesEDC
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ModalAsignacionPagosOpcionalesEDC))
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.lblTipoPago = New System.Windows.Forms.Label()
         Me.cbTipoPago = New System.Windows.Forms.ComboBox()
@@ -265,6 +266,7 @@ Partial Class ModalAsignacionPagosOpcionalesEDC
         Me.Controls.Add(Me.cbTipoPago)
         Me.Controls.Add(Me.lblTipoPago)
         Me.Controls.Add(Me.lblNombreVentana)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "ModalAsignacionPagosOpcionalesEDC"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "ModalAsignacionPagosOpcionalesEDC"

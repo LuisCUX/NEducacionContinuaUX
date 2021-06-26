@@ -94,11 +94,11 @@ Partial Class LoginEDC
         '
         'panelLogo
         '
-        Me.panelLogo.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.Construction_4_512
+        Me.panelLogo.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.EDCLogo
         Me.panelLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.panelLogo.Location = New System.Drawing.Point(0, -2)
+        Me.panelLogo.Location = New System.Drawing.Point(11, 7)
         Me.panelLogo.Name = "panelLogo"
-        Me.panelLogo.Size = New System.Drawing.Size(284, 271)
+        Me.panelLogo.Size = New System.Drawing.Size(275, 232)
         Me.panelLogo.TabIndex = 0
         '
         'LoginEDC

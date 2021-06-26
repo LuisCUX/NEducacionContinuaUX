@@ -22,6 +22,7 @@ Partial Class ReimpresionFacturasEDC
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ReimpresionFacturasEDC))
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.cbExterno = New System.Windows.Forms.ComboBox()
         Me.lblBusquedaNombre = New System.Windows.Forms.Label()
@@ -36,16 +37,16 @@ Partial Class ReimpresionFacturasEDC
         Me.btnBuscarFolio = New System.Windows.Forms.Button()
         Me.panelFactura = New System.Windows.Forms.Panel()
         Me.GridConceptos = New System.Windows.Forms.DataGridView()
-        Me.btnLimpiar = New System.Windows.Forms.Button()
-        Me.btnReenviar = New System.Windows.Forms.Button()
-        Me.btnReimprimir = New System.Windows.Forms.Button()
-        Me.btnSalir = New System.Windows.Forms.Button()
         Me.NombreConcepto = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PrecioUnitario = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IVA = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descuento = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Total = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnLimpiar = New System.Windows.Forms.Button()
+        Me.btnReenviar = New System.Windows.Forms.Button()
+        Me.btnReimprimir = New System.Windows.Forms.Button()
+        Me.btnSalir = New System.Windows.Forms.Button()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -211,6 +212,36 @@ Partial Class ReimpresionFacturasEDC
         Me.GridConceptos.Size = New System.Drawing.Size(840, 332)
         Me.GridConceptos.TabIndex = 0
         '
+        'NombreConcepto
+        '
+        Me.NombreConcepto.HeaderText = "Nombre del concepto"
+        Me.NombreConcepto.Name = "NombreConcepto"
+        '
+        'Cantidad
+        '
+        Me.Cantidad.HeaderText = "Cantidad"
+        Me.Cantidad.Name = "Cantidad"
+        '
+        'PrecioUnitario
+        '
+        Me.PrecioUnitario.HeaderText = "Precio unitario"
+        Me.PrecioUnitario.Name = "PrecioUnitario"
+        '
+        'IVA
+        '
+        Me.IVA.HeaderText = "IVA"
+        Me.IVA.Name = "IVA"
+        '
+        'Descuento
+        '
+        Me.Descuento.HeaderText = "Descuento"
+        Me.Descuento.Name = "Descuento"
+        '
+        'Total
+        '
+        Me.Total.HeaderText = "Total"
+        Me.Total.Name = "Total"
+        '
         'btnLimpiar
         '
         Me.btnLimpiar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
@@ -263,36 +294,6 @@ Partial Class ReimpresionFacturasEDC
         Me.btnSalir.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnSalir.UseVisualStyleBackColor = True
         '
-        'NombreConcepto
-        '
-        Me.NombreConcepto.HeaderText = "Nombre del concepto"
-        Me.NombreConcepto.Name = "NombreConcepto"
-        '
-        'Cantidad
-        '
-        Me.Cantidad.HeaderText = "Cantidad"
-        Me.Cantidad.Name = "Cantidad"
-        '
-        'PrecioUnitario
-        '
-        Me.PrecioUnitario.HeaderText = "Precio unitario"
-        Me.PrecioUnitario.Name = "PrecioUnitario"
-        '
-        'IVA
-        '
-        Me.IVA.HeaderText = "IVA"
-        Me.IVA.Name = "IVA"
-        '
-        'Descuento
-        '
-        Me.Descuento.HeaderText = "Descuento"
-        Me.Descuento.Name = "Descuento"
-        '
-        'Total
-        '
-        Me.Total.HeaderText = "Total"
-        Me.Total.Name = "Total"
-        '
         'ReimpresionFacturasEDC
         '
         Me.AcceptButton = Me.btnBuscarMatricula
@@ -307,6 +308,7 @@ Partial Class ReimpresionFacturasEDC
         Me.Controls.Add(Me.panelFactura)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.lblNombreVentana)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "ReimpresionFacturasEDC"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "ReimpresionFacturasEDC"

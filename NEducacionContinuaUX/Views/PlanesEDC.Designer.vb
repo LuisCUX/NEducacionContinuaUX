@@ -22,6 +22,7 @@ Partial Class PlanesEDC
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PlanesEDC))
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.lblNombrePlan = New System.Windows.Forms.Label()
@@ -816,6 +817,7 @@ Partial Class PlanesEDC
         'NUDescuentos10
         '
         Me.NUDescuentos10.DecimalPlaces = 1
+        Me.NUDescuentos10.Enabled = False
         Me.NUDescuentos10.Location = New System.Drawing.Point(565, 3)
         Me.NUDescuentos10.Name = "NUDescuentos10"
         Me.NUDescuentos10.Size = New System.Drawing.Size(65, 20)
@@ -947,6 +949,7 @@ Partial Class PlanesEDC
         'NUDescuentos9
         '
         Me.NUDescuentos9.DecimalPlaces = 1
+        Me.NUDescuentos9.Enabled = False
         Me.NUDescuentos9.Location = New System.Drawing.Point(565, 3)
         Me.NUDescuentos9.Name = "NUDescuentos9"
         Me.NUDescuentos9.Size = New System.Drawing.Size(65, 20)
@@ -1076,6 +1079,7 @@ Partial Class PlanesEDC
         'NUDescuentos8
         '
         Me.NUDescuentos8.DecimalPlaces = 1
+        Me.NUDescuentos8.Enabled = False
         Me.NUDescuentos8.Location = New System.Drawing.Point(565, 3)
         Me.NUDescuentos8.Name = "NUDescuentos8"
         Me.NUDescuentos8.Size = New System.Drawing.Size(65, 20)
@@ -1205,6 +1209,7 @@ Partial Class PlanesEDC
         'NUDescuentos7
         '
         Me.NUDescuentos7.DecimalPlaces = 1
+        Me.NUDescuentos7.Enabled = False
         Me.NUDescuentos7.Location = New System.Drawing.Point(565, 3)
         Me.NUDescuentos7.Name = "NUDescuentos7"
         Me.NUDescuentos7.Size = New System.Drawing.Size(65, 20)
@@ -1334,6 +1339,7 @@ Partial Class PlanesEDC
         'NUDescuentos6
         '
         Me.NUDescuentos6.DecimalPlaces = 1
+        Me.NUDescuentos6.Enabled = False
         Me.NUDescuentos6.Location = New System.Drawing.Point(565, 3)
         Me.NUDescuentos6.Name = "NUDescuentos6"
         Me.NUDescuentos6.Size = New System.Drawing.Size(65, 20)
@@ -1453,6 +1459,7 @@ Partial Class PlanesEDC
         'NUDescuentos4
         '
         Me.NUDescuentos4.DecimalPlaces = 1
+        Me.NUDescuentos4.Enabled = False
         Me.NUDescuentos4.Location = New System.Drawing.Point(565, 3)
         Me.NUDescuentos4.Name = "NUDescuentos4"
         Me.NUDescuentos4.Size = New System.Drawing.Size(65, 20)
@@ -1582,6 +1589,7 @@ Partial Class PlanesEDC
         'NUDescuentos3
         '
         Me.NUDescuentos3.DecimalPlaces = 1
+        Me.NUDescuentos3.Enabled = False
         Me.NUDescuentos3.Location = New System.Drawing.Point(565, 4)
         Me.NUDescuentos3.Name = "NUDescuentos3"
         Me.NUDescuentos3.Size = New System.Drawing.Size(65, 20)
@@ -1721,6 +1729,7 @@ Partial Class PlanesEDC
         'NUDescuentos5
         '
         Me.NUDescuentos5.DecimalPlaces = 1
+        Me.NUDescuentos5.Enabled = False
         Me.NUDescuentos5.Location = New System.Drawing.Point(565, 3)
         Me.NUDescuentos5.Name = "NUDescuentos5"
         Me.NUDescuentos5.Size = New System.Drawing.Size(65, 20)
@@ -1840,6 +1849,7 @@ Partial Class PlanesEDC
         'NUDescuentos2
         '
         Me.NUDescuentos2.DecimalPlaces = 1
+        Me.NUDescuentos2.Enabled = False
         Me.NUDescuentos2.Location = New System.Drawing.Point(565, 3)
         Me.NUDescuentos2.Name = "NUDescuentos2"
         Me.NUDescuentos2.Size = New System.Drawing.Size(65, 20)
@@ -1969,6 +1979,7 @@ Partial Class PlanesEDC
         'NUDescuentos1
         '
         Me.NUDescuentos1.DecimalPlaces = 1
+        Me.NUDescuentos1.Enabled = False
         Me.NUDescuentos1.Location = New System.Drawing.Point(565, 3)
         Me.NUDescuentos1.Name = "NUDescuentos1"
         Me.NUDescuentos1.Size = New System.Drawing.Size(65, 20)
@@ -2456,6 +2467,7 @@ Partial Class PlanesEDC
         Me.chbDescuentoPagoUnico.TabIndex = 20
         Me.chbDescuentoPagoUnico.Text = "Descuento"
         Me.chbDescuentoPagoUnico.UseVisualStyleBackColor = True
+        Me.chbDescuentoPagoUnico.Visible = False
         '
         'lblImportePagoUnico
         '
@@ -2558,6 +2570,7 @@ Partial Class PlanesEDC
         Me.Controls.Add(Me.tcPlanes)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.lblNombreVentana)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "PlanesEDC"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "PlanesEDC"

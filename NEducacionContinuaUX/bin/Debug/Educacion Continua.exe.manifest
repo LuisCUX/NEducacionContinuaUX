@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
   <asmv1:assemblyIdentity name="Educacion Continua.exe" version="1.0.0.28" publicKeyToken="0000000000000000" language="es-MX" processorArchitecture="msil" type="win32" />
-  <description asmv2:iconFile="logo (1).ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <description asmv2:iconFile="EDCLogo.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
     <assemblyIdentity name="Educacion Continua" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
@@ -264,14 +264,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Educacion Continua.exe" size="1088984">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Educacion Continua.exe" size="9549784">
       <assemblyIdentity name="Educacion Continua" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Z1hrcj8W8p2gTPfamRnWFArchRRyFTTnhxcFw3B6RrE=</dsig:DigestValue>
+        <dsig:DigestValue>tLIR3I6pTxhNMBr3reduLd+4+bUVDPTmLvXsl9eo53A=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -452,6 +452,15 @@
       <dsig:DigestValue>0JOQmOSj2QHyWC86D4tu5ICcD30wSQPvpKI+gyaxjv8=</dsig:DigestValue>
     </hash>
   </file>
+  <file name="EDCLogo.ico" size="410598">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>jUsAzMTaf1NC7K/akiH2dSANlTctWIQoh7vqHM732uE=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="Educacion Continua.exe.config" size="4676">
     <hash>
       <dsig:Transforms>
@@ -477,6 +486,15 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>jLOWdcwFQYe+GMh3WqkuFlFVuNxucP7Q4065CQ1Ca3Y=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="logo.ico" size="209150">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>7lmT+Q1Hdr/Sk+Thv+AQL0YDLZ2ni8tpaKhTiEv3v9o=</dsig:DigestValue>
     </hash>
   </file>
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">

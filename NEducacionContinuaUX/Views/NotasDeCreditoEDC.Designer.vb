@@ -22,6 +22,7 @@ Partial Class NotasDeCreditoEDC
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(NotasDeCreditoEDC))
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.panelBusqueda = New System.Windows.Forms.Panel()
         Me.cbExterno = New System.Windows.Forms.ComboBox()
@@ -43,6 +44,8 @@ Partial Class NotasDeCreditoEDC
         Me.lblEmail = New System.Windows.Forms.Label()
         Me.lblNombre = New System.Windows.Forms.Label()
         Me.panelGridNota = New System.Windows.Forms.Panel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblTotalNota = New System.Windows.Forms.Label()
         Me.GBNota = New System.Windows.Forms.GroupBox()
         Me.NUPorcentaje = New System.Windows.Forms.NumericUpDown()
         Me.lblPeso = New System.Windows.Forms.Label()
@@ -66,8 +69,6 @@ Partial Class NotasDeCreditoEDC
         Me.IVA = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TipoNota = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FolioFactura = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.lblTotalNota = New System.Windows.Forms.Label()
         Me.panelBusqueda.SuspendLayout()
         Me.panelDatos.SuspendLayout()
         Me.panelGridNota.SuspendLayout()
@@ -102,8 +103,6 @@ Partial Class NotasDeCreditoEDC
         '
         'cbExterno
         '
-        Me.cbExterno.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.cbExterno.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbExterno.FormattingEnabled = True
         Me.cbExterno.Location = New System.Drawing.Point(300, 14)
         Me.cbExterno.Name = "cbExterno"
@@ -304,6 +303,27 @@ Partial Class NotasDeCreditoEDC
         Me.panelGridNota.Size = New System.Drawing.Size(1103, 427)
         Me.panelGridNota.TabIndex = 18
         Me.panelGridNota.Visible = False
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label1.Location = New System.Drawing.Point(735, 298)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(93, 29)
+        Me.Label1.TabIndex = 84
+        Me.Label1.Text = "Total: $"
+        '
+        'lblTotalNota
+        '
+        Me.lblTotalNota.AutoSize = True
+        Me.lblTotalNota.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTotalNota.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblTotalNota.Location = New System.Drawing.Point(831, 298)
+        Me.lblTotalNota.Name = "lblTotalNota"
+        Me.lblTotalNota.Size = New System.Drawing.Size(0, 29)
+        Me.lblTotalNota.TabIndex = 83
         '
         'GBNota
         '
@@ -525,27 +545,6 @@ Partial Class NotasDeCreditoEDC
         Me.FolioFactura.Name = "FolioFactura"
         Me.FolioFactura.Visible = False
         '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label1.Location = New System.Drawing.Point(735, 298)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(93, 29)
-        Me.Label1.TabIndex = 84
-        Me.Label1.Text = "Total: $"
-        '
-        'lblTotalNota
-        '
-        Me.lblTotalNota.AutoSize = True
-        Me.lblTotalNota.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTotalNota.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblTotalNota.Location = New System.Drawing.Point(831, 298)
-        Me.lblTotalNota.Name = "lblTotalNota"
-        Me.lblTotalNota.Size = New System.Drawing.Size(0, 29)
-        Me.lblTotalNota.TabIndex = 83
-        '
         'NotasDeCreditoEDC
         '
         Me.AcceptButton = Me.btnBuscar
@@ -557,6 +556,7 @@ Partial Class NotasDeCreditoEDC
         Me.Controls.Add(Me.panelDatos)
         Me.Controls.Add(Me.panelBusqueda)
         Me.Controls.Add(Me.lblNombreVentana)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "NotasDeCreditoEDC"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "NotasDeCreditoEDC"

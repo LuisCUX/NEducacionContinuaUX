@@ -22,6 +22,7 @@ Partial Class AsignacionPlanesEDC
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AsignacionPlanesEDC))
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.cbExterno = New System.Windows.Forms.ComboBox()
         Me.lblBusquedaNombre = New System.Windows.Forms.Label()
@@ -62,6 +63,29 @@ Partial Class AsignacionPlanesEDC
         Me.lblEmail2 = New System.Windows.Forms.Label()
         Me.txtEmail2 = New System.Windows.Forms.TextBox()
         Me.txtNombre2 = New System.Windows.Forms.TextBox()
+        Me.pageModificacion = New System.Windows.Forms.TabPage()
+        Me.panelModificacion3 = New System.Windows.Forms.Panel()
+        Me.lblPlanActual3 = New System.Windows.Forms.Label()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.GridActual3 = New System.Windows.Forms.DataGridView()
+        Me.IDColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DescripcionColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PrecioUnitarioColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RecargoColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DescuentoActualColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NuevoDescuentoColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.panelInfo3 = New System.Windows.Forms.Panel()
+        Me.lblNombreInfo3 = New System.Windows.Forms.Label()
+        Me.lblEmail3 = New System.Windows.Forms.Label()
+        Me.txtEmail3 = New System.Windows.Forms.TextBox()
+        Me.txtNombre3 = New System.Windows.Forms.TextBox()
+        Me.panelBusqueda3 = New System.Windows.Forms.Panel()
+        Me.txtMatricula3 = New System.Windows.Forms.TextBox()
+        Me.lblMatricula3 = New System.Windows.Forms.Label()
+        Me.btnBuscar3 = New System.Windows.Forms.Button()
+        Me.lblNombre3 = New System.Windows.Forms.Label()
+        Me.cbBuscar3 = New System.Windows.Forms.ComboBox()
         Me.panelBusqueda.SuspendLayout()
         Me.panelDatos.SuspendLayout()
         Me.panelRegistro.SuspendLayout()
@@ -74,6 +98,11 @@ Partial Class AsignacionPlanesEDC
         CType(Me.GridNuevoPlan, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridPlanActual, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panelInfo2.SuspendLayout()
+        Me.pageModificacion.SuspendLayout()
+        Me.panelModificacion3.SuspendLayout()
+        CType(Me.GridActual3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.panelInfo3.SuspendLayout()
+        Me.panelBusqueda3.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblNombreVentana
@@ -90,8 +119,6 @@ Partial Class AsignacionPlanesEDC
         '
         'cbExterno
         '
-        Me.cbExterno.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.cbExterno.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbExterno.FormattingEnabled = True
         Me.cbExterno.Location = New System.Drawing.Point(303, 8)
         Me.cbExterno.Name = "cbExterno"
@@ -274,6 +301,7 @@ Partial Class AsignacionPlanesEDC
         '
         Me.TabControl1.Controls.Add(Me.pageAsignacion)
         Me.TabControl1.Controls.Add(Me.pageCambio)
+        Me.TabControl1.Controls.Add(Me.pageModificacion)
         Me.TabControl1.Location = New System.Drawing.Point(7, 72)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
@@ -360,8 +388,6 @@ Partial Class AsignacionPlanesEDC
         '
         'cbNombre2
         '
-        Me.cbNombre2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.cbNombre2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbNombre2.FormattingEnabled = True
         Me.cbNombre2.Location = New System.Drawing.Point(303, 8)
         Me.cbNombre2.Name = "cbNombre2"
@@ -516,6 +542,234 @@ Partial Class AsignacionPlanesEDC
         Me.txtNombre2.Size = New System.Drawing.Size(474, 21)
         Me.txtNombre2.TabIndex = 79
         '
+        'pageModificacion
+        '
+        Me.pageModificacion.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.pageModificacion.Controls.Add(Me.panelModificacion3)
+        Me.pageModificacion.Controls.Add(Me.panelInfo3)
+        Me.pageModificacion.Controls.Add(Me.panelBusqueda3)
+        Me.pageModificacion.Location = New System.Drawing.Point(4, 22)
+        Me.pageModificacion.Name = "pageModificacion"
+        Me.pageModificacion.Size = New System.Drawing.Size(803, 682)
+        Me.pageModificacion.TabIndex = 2
+        Me.pageModificacion.Text = "Modificación de plan"
+        '
+        'panelModificacion3
+        '
+        Me.panelModificacion3.Controls.Add(Me.lblPlanActual3)
+        Me.panelModificacion3.Controls.Add(Me.Button2)
+        Me.panelModificacion3.Controls.Add(Me.Button3)
+        Me.panelModificacion3.Controls.Add(Me.GridActual3)
+        Me.panelModificacion3.Location = New System.Drawing.Point(7, 122)
+        Me.panelModificacion3.Name = "panelModificacion3"
+        Me.panelModificacion3.Size = New System.Drawing.Size(788, 553)
+        Me.panelModificacion3.TabIndex = 88
+        Me.panelModificacion3.Visible = False
+        '
+        'lblPlanActual3
+        '
+        Me.lblPlanActual3.AutoSize = True
+        Me.lblPlanActual3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPlanActual3.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblPlanActual3.Location = New System.Drawing.Point(8, 7)
+        Me.lblPlanActual3.Name = "lblPlanActual3"
+        Me.lblPlanActual3.Size = New System.Drawing.Size(77, 16)
+        Me.lblPlanActual3.TabIndex = 86
+        Me.lblPlanActual3.Text = "Plan actual:"
+        '
+        'Button2
+        '
+        Me.Button2.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
+        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.Button2.Location = New System.Drawing.Point(238, 504)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(59, 46)
+        Me.Button2.TabIndex = 83
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        Me.Button3.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
+        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.Button3.Location = New System.Drawing.Point(467, 504)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(60, 46)
+        Me.Button3.TabIndex = 82
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'GridActual3
+        '
+        Me.GridActual3.AllowUserToAddRows = False
+        Me.GridActual3.AllowUserToDeleteRows = False
+        Me.GridActual3.AllowUserToResizeColumns = False
+        Me.GridActual3.AllowUserToResizeRows = False
+        Me.GridActual3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.GridActual3.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.GridActual3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.GridActual3.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDColumn, Me.DescripcionColumn, Me.PrecioUnitarioColumn, Me.RecargoColumn, Me.DescuentoActualColumn, Me.NuevoDescuentoColumn})
+        Me.GridActual3.Location = New System.Drawing.Point(6, 27)
+        Me.GridActual3.Name = "GridActual3"
+        Me.GridActual3.Size = New System.Drawing.Size(775, 321)
+        Me.GridActual3.TabIndex = 81
+        '
+        'IDColumn
+        '
+        Me.IDColumn.HeaderText = "ID"
+        Me.IDColumn.Name = "IDColumn"
+        Me.IDColumn.ReadOnly = True
+        Me.IDColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.IDColumn.Visible = False
+        '
+        'DescripcionColumn
+        '
+        Me.DescripcionColumn.HeaderText = "Descripcion"
+        Me.DescripcionColumn.Name = "DescripcionColumn"
+        Me.DescripcionColumn.ReadOnly = True
+        Me.DescripcionColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'PrecioUnitarioColumn
+        '
+        Me.PrecioUnitarioColumn.FillWeight = 50.0!
+        Me.PrecioUnitarioColumn.HeaderText = "Precio unitario"
+        Me.PrecioUnitarioColumn.Name = "PrecioUnitarioColumn"
+        Me.PrecioUnitarioColumn.ReadOnly = True
+        Me.PrecioUnitarioColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'RecargoColumn
+        '
+        Me.RecargoColumn.FillWeight = 50.0!
+        Me.RecargoColumn.HeaderText = "Recargo"
+        Me.RecargoColumn.Name = "RecargoColumn"
+        Me.RecargoColumn.ReadOnly = True
+        Me.RecargoColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'DescuentoActualColumn
+        '
+        Me.DescuentoActualColumn.FillWeight = 50.0!
+        Me.DescuentoActualColumn.HeaderText = "Descuento actual"
+        Me.DescuentoActualColumn.Name = "DescuentoActualColumn"
+        Me.DescuentoActualColumn.ReadOnly = True
+        Me.DescuentoActualColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'NuevoDescuentoColumn
+        '
+        Me.NuevoDescuentoColumn.FillWeight = 50.0!
+        Me.NuevoDescuentoColumn.HeaderText = "Nuevo descuento"
+        Me.NuevoDescuentoColumn.Name = "NuevoDescuentoColumn"
+        Me.NuevoDescuentoColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'panelInfo3
+        '
+        Me.panelInfo3.Controls.Add(Me.lblNombreInfo3)
+        Me.panelInfo3.Controls.Add(Me.lblEmail3)
+        Me.panelInfo3.Controls.Add(Me.txtEmail3)
+        Me.panelInfo3.Controls.Add(Me.txtNombre3)
+        Me.panelInfo3.Location = New System.Drawing.Point(7, 51)
+        Me.panelInfo3.Name = "panelInfo3"
+        Me.panelInfo3.Size = New System.Drawing.Size(788, 65)
+        Me.panelInfo3.TabIndex = 86
+        Me.panelInfo3.Visible = False
+        '
+        'lblNombreInfo3
+        '
+        Me.lblNombreInfo3.AutoSize = True
+        Me.lblNombreInfo3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNombreInfo3.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblNombreInfo3.Location = New System.Drawing.Point(3, 9)
+        Me.lblNombreInfo3.Name = "lblNombreInfo3"
+        Me.lblNombreInfo3.Size = New System.Drawing.Size(58, 15)
+        Me.lblNombreInfo3.TabIndex = 80
+        Me.lblNombreInfo3.Text = "Nombre: "
+        '
+        'lblEmail3
+        '
+        Me.lblEmail3.AutoSize = True
+        Me.lblEmail3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblEmail3.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblEmail3.Location = New System.Drawing.Point(3, 38)
+        Me.lblEmail3.Name = "lblEmail3"
+        Me.lblEmail3.Size = New System.Drawing.Size(42, 15)
+        Me.lblEmail3.TabIndex = 81
+        Me.lblEmail3.Text = "Email:"
+        '
+        'txtEmail3
+        '
+        Me.txtEmail3.Enabled = False
+        Me.txtEmail3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEmail3.Location = New System.Drawing.Point(70, 35)
+        Me.txtEmail3.Name = "txtEmail3"
+        Me.txtEmail3.Size = New System.Drawing.Size(474, 21)
+        Me.txtEmail3.TabIndex = 82
+        '
+        'txtNombre3
+        '
+        Me.txtNombre3.Enabled = False
+        Me.txtNombre3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtNombre3.Location = New System.Drawing.Point(70, 6)
+        Me.txtNombre3.Name = "txtNombre3"
+        Me.txtNombre3.Size = New System.Drawing.Size(474, 21)
+        Me.txtNombre3.TabIndex = 79
+        '
+        'panelBusqueda3
+        '
+        Me.panelBusqueda3.Controls.Add(Me.txtMatricula3)
+        Me.panelBusqueda3.Controls.Add(Me.lblMatricula3)
+        Me.panelBusqueda3.Controls.Add(Me.btnBuscar3)
+        Me.panelBusqueda3.Controls.Add(Me.lblNombre3)
+        Me.panelBusqueda3.Controls.Add(Me.cbBuscar3)
+        Me.panelBusqueda3.Location = New System.Drawing.Point(7, 6)
+        Me.panelBusqueda3.Name = "panelBusqueda3"
+        Me.panelBusqueda3.Size = New System.Drawing.Size(788, 39)
+        Me.panelBusqueda3.TabIndex = 84
+        '
+        'txtMatricula3
+        '
+        Me.txtMatricula3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMatricula3.Location = New System.Drawing.Point(70, 6)
+        Me.txtMatricula3.Name = "txtMatricula3"
+        Me.txtMatricula3.Size = New System.Drawing.Size(111, 22)
+        Me.txtMatricula3.TabIndex = 75
+        '
+        'lblMatricula3
+        '
+        Me.lblMatricula3.AutoSize = True
+        Me.lblMatricula3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblMatricula3.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblMatricula3.Location = New System.Drawing.Point(8, 9)
+        Me.lblMatricula3.Name = "lblMatricula3"
+        Me.lblMatricula3.Size = New System.Drawing.Size(65, 16)
+        Me.lblMatricula3.TabIndex = 74
+        Me.lblMatricula3.Text = "Matrícula:"
+        '
+        'btnBuscar3
+        '
+        Me.btnBuscar3.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.search_30px
+        Me.btnBuscar3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnBuscar3.Location = New System.Drawing.Point(187, 0)
+        Me.btnBuscar3.Name = "btnBuscar3"
+        Me.btnBuscar3.Size = New System.Drawing.Size(41, 39)
+        Me.btnBuscar3.TabIndex = 76
+        Me.btnBuscar3.UseVisualStyleBackColor = True
+        '
+        'lblNombre3
+        '
+        Me.lblNombre3.AutoSize = True
+        Me.lblNombre3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNombre3.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblNombre3.Location = New System.Drawing.Point(234, 9)
+        Me.lblNombre3.Name = "lblNombre3"
+        Me.lblNombre3.Size = New System.Drawing.Size(63, 16)
+        Me.lblNombre3.TabIndex = 77
+        Me.lblNombre3.Text = "Nombre: "
+        '
+        'cbBuscar3
+        '
+        Me.cbBuscar3.FormattingEnabled = True
+        Me.cbBuscar3.Location = New System.Drawing.Point(303, 8)
+        Me.cbBuscar3.Name = "cbBuscar3"
+        Me.cbBuscar3.Size = New System.Drawing.Size(478, 21)
+        Me.cbBuscar3.TabIndex = 78
+        '
         'AsignacionPlanesEDC
         '
         Me.AcceptButton = Me.btnBuscar
@@ -525,6 +779,7 @@ Partial Class AsignacionPlanesEDC
         Me.ClientSize = New System.Drawing.Size(827, 792)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.lblNombreVentana)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "AsignacionPlanesEDC"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "AsignacionPlanesEDC"
@@ -546,6 +801,14 @@ Partial Class AsignacionPlanesEDC
         CType(Me.GridPlanActual, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panelInfo2.ResumeLayout(False)
         Me.panelInfo2.PerformLayout()
+        Me.pageModificacion.ResumeLayout(False)
+        Me.panelModificacion3.ResumeLayout(False)
+        Me.panelModificacion3.PerformLayout()
+        CType(Me.GridActual3, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.panelInfo3.ResumeLayout(False)
+        Me.panelInfo3.PerformLayout()
+        Me.panelBusqueda3.ResumeLayout(False)
+        Me.panelBusqueda3.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -590,4 +853,27 @@ Partial Class AsignacionPlanesEDC
     Friend WithEvents lblNuevoPlan As Label
     Friend WithEvents lblPlanActual As Label
     Friend WithEvents cbNuevoPlan As ComboBox
+    Friend WithEvents pageModificacion As TabPage
+    Friend WithEvents panelBusqueda3 As Panel
+    Friend WithEvents txtMatricula3 As TextBox
+    Friend WithEvents lblMatricula3 As Label
+    Friend WithEvents btnBuscar3 As Button
+    Friend WithEvents lblNombre3 As Label
+    Friend WithEvents cbBuscar3 As ComboBox
+    Friend WithEvents panelInfo3 As Panel
+    Friend WithEvents lblNombreInfo3 As Label
+    Friend WithEvents lblEmail3 As Label
+    Friend WithEvents txtEmail3 As TextBox
+    Friend WithEvents txtNombre3 As TextBox
+    Friend WithEvents panelModificacion3 As Panel
+    Friend WithEvents lblPlanActual3 As Label
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button3 As Button
+    Friend WithEvents GridActual3 As DataGridView
+    Friend WithEvents IDColumn As DataGridViewTextBoxColumn
+    Friend WithEvents DescripcionColumn As DataGridViewTextBoxColumn
+    Friend WithEvents PrecioUnitarioColumn As DataGridViewTextBoxColumn
+    Friend WithEvents RecargoColumn As DataGridViewTextBoxColumn
+    Friend WithEvents DescuentoActualColumn As DataGridViewTextBoxColumn
+    Friend WithEvents NuevoDescuentoColumn As DataGridViewTextBoxColumn
 End Class

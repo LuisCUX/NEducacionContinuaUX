@@ -22,6 +22,7 @@ Partial Class IVAEDC
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(IVAEDC))
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblIVAActual = New System.Windows.Forms.Label()
@@ -143,6 +144,7 @@ Partial Class IVAEDC
         Me.Controls.Add(Me.lblIVAActual)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.lblNombreVentana)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "IVAEDC"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "IVA"

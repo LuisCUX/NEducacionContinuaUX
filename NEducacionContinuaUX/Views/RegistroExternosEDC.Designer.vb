@@ -22,6 +22,7 @@ Partial Class RegistroExternosEDC
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(RegistroExternosEDC))
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.tabExternos = New System.Windows.Forms.TabControl()
         Me.tabRegistroExternos = New System.Windows.Forms.TabPage()
@@ -503,8 +504,6 @@ Partial Class RegistroExternosEDC
         '
         'cbUX
         '
-        Me.cbUX.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.cbUX.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbUX.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbUX.FormattingEnabled = True
         Me.cbUX.Location = New System.Drawing.Point(594, 41)
@@ -812,8 +811,6 @@ Partial Class RegistroExternosEDC
         '
         'cbExterno
         '
-        Me.cbExterno.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.cbExterno.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbExterno.FormattingEnabled = True
         Me.cbExterno.Location = New System.Drawing.Point(459, 18)
         Me.cbExterno.Name = "cbExterno"
@@ -1414,6 +1411,7 @@ Partial Class RegistroExternosEDC
         Me.ClientSize = New System.Drawing.Size(1047, 648)
         Me.Controls.Add(Me.tabExternos)
         Me.Controls.Add(Me.lblNombreVentana)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "RegistroExternosEDC"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Gestion de externos"

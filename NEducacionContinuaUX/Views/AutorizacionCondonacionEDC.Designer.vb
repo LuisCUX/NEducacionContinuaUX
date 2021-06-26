@@ -106,8 +106,6 @@ Partial Class AutorizacionCondonacionEDC
         '
         'cbExterno
         '
-        Me.cbExterno.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.cbExterno.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbExterno.FormattingEnabled = True
         Me.cbExterno.Location = New System.Drawing.Point(298, 15)
         Me.cbExterno.Name = "cbExterno"
@@ -533,6 +531,7 @@ Partial Class AutorizacionCondonacionEDC
         Me.Controls.Add(Me.panelDatos)
         Me.Controls.Add(Me.panelBusqueda)
         Me.Controls.Add(Me.lblNombreVentana)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "AutorizacionCondonacionEDC"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "AutorizacionCondonacionEDC"

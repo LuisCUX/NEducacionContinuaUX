@@ -22,6 +22,7 @@ Partial Class ReportesEDC
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ReportesEDC))
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.pageReporteIngresos = New System.Windows.Forms.TabPage()
@@ -297,6 +298,7 @@ Partial Class ReportesEDC
         Me.ClientSize = New System.Drawing.Size(858, 619)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.lblNombreVentana)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "ReportesEDC"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "ReportesEDC"

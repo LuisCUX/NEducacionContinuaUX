@@ -108,8 +108,6 @@ Partial Class MainCobrosDiferidosEDC
         '
         'cbExterno
         '
-        Me.cbExterno.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.cbExterno.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbExterno.FormattingEnabled = True
         Me.cbExterno.Location = New System.Drawing.Point(432, 14)
         Me.cbExterno.Name = "cbExterno"
@@ -301,8 +299,6 @@ Partial Class MainCobrosDiferidosEDC
         '
         'cbEDC
         '
-        Me.cbEDC.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.cbEDC.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbEDC.FormattingEnabled = True
         Me.cbEDC.Location = New System.Drawing.Point(349, 39)
         Me.cbEDC.Name = "cbEDC"
@@ -652,6 +648,7 @@ Partial Class MainCobrosDiferidosEDC
         Me.Controls.Add(Me.panelDatos)
         Me.Controls.Add(Me.panelBusqueda)
         Me.Controls.Add(Me.lblNombreVentana)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "MainCobrosDiferidosEDC"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "MainCobrosDiferidosEDC"

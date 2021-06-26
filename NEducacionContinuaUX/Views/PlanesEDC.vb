@@ -64,7 +64,7 @@
             chbPagoUnico.Enabled = True
             txtImportePagos.Enabled = True
             chbRecargosPagos.Enabled = True
-            chbDescuentoPagos.Enabled = True
+            'chbDescuentoPagos.Enabled = True
             cbNoPagos.Enabled = True
         Else
             chbInscripcion.Enabled = False
@@ -110,7 +110,7 @@
     Private Sub chbInscripcion_CheckedChanged(sender As Object, e As EventArgs) Handles chbInscripcion.CheckedChanged
         If (chbInscripcion.Checked = True) Then
             txtImporteInscripcion.Enabled = True
-            chbDescuentoInscripcion.Enabled = True
+            'chbDescuentoInscripcion.Enabled = True
             chbRecargoInscripcion.Enabled = True
         Else
             txtImporteInscripcion.Enabled = False

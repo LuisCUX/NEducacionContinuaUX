@@ -1,4 +1,6 @@
-﻿Public Class MainCobrosDiferidosEDC
+﻿Imports System.Text.RegularExpressions
+
+Public Class MainCobrosDiferidosEDC
     Dim db As DataBaseService = New DataBaseService()
     Dim ch As ConceptHandlerController = New ConceptHandlerController()
     Dim Matricula As String
@@ -6,21 +8,23 @@
     Dim co As CobrosDiferidosController = New CobrosDiferidosController()
     Dim va As ValidacionesController = New ValidacionesController()
     Dim listaConceptos As List(Of Concepto)
+    Dim combo_filtro As String
+    Dim combo_filtroEDC As String
 
     Private Sub MainCobrosDiferidosEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim tableFormaPago As DataTable = db.getDataTableFromSQL("SELECT Forma_Pago, Descripcion FROM ing_CatFormaPago WHERE Descripcion != 'CREDITO'")
         ComboboxService.llenarCombobox(cbFormaPago, tableFormaPago, "Forma_Pago", "Descripcion")
         Dim tablebancos As DataTable = db.getDataTableFromSQL("SELECT ID, Nombre_Banco FROM ing_Cat_Bancos")
         ComboboxService.llenarCombobox(cbBanco, tablebancos, "ID", "Nombre_Banco")
-        Dim tableEDC As DataTable = db.getDataTableFromSQL("SELECT RC.clave_cliente, UPPER(C.nombre + ' ' + RC.apellido_paterno + ' ' + RC.apellido_materno + ' (' + RC.clave_cliente + ')') AS NombreCliente FROM portal_registroCongreso AS RC
-                                                            INNER JOIN portal_cliente AS C ON RC.id_cliente = C.id_cliente
-                                                            ORDER BY NombreCliente")
-        Dim tableExternos As DataTable = db.getDataTableFromSQL("SELECT CL.clave_cliente, UPPER(C.nombre + ' ' + E.paterno + ' ' + E.materno + ' (' + CL.clave_cliente + ')') As NombreCliente FROM portal_registroExterno AS E
-                                                                 INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
-                                                                 INNER JOIN portal_clave AS CL ON CL.id_cliente = C.id_cliente
-                                                                 ORDER BY C.nombre")
-        ComboboxService.llenarCombobox(cbEDC, tableEDC, "clave_cliente", "NombreCliente")
-        ComboboxService.llenarCombobox(cbExterno, tableExternos, "clave_cliente", "NombreCliente")
+        'Dim tableEDC As DataTable = db.getDataTableFromSQL("SELECT RC.clave_cliente, UPPER(C.nombre + ' ' + RC.apellido_paterno + ' ' + RC.apellido_materno + ' (' + RC.clave_cliente + ')') AS NombreCliente FROM portal_registroCongreso AS RC
+        '                                                    INNER JOIN portal_cliente AS C ON RC.id_cliente = C.id_cliente
+        '                                                    ORDER BY NombreCliente")
+        'Dim tableExternos As DataTable = db.getDataTableFromSQL("SELECT CL.clave_cliente, UPPER(C.nombre + ' ' + E.paterno + ' ' + E.materno + ' (' + CL.clave_cliente + ')') As NombreCliente FROM portal_registroExterno AS E
+        '                                                         INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
+        '                                                         INNER JOIN portal_clave AS CL ON CL.id_cliente = C.id_cliente
+        '                                                         ORDER BY C.nombre")
+        'ComboboxService.llenarCombobox(cbEDC, tableEDC, "clave_cliente", "NombreCliente")
+        'ComboboxService.llenarCombobox(cbExterno, tableExternos, "clave_cliente", "NombreCliente")
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
@@ -325,23 +329,119 @@
         lblTotal.Text = Format(CDec(total), "#####0.00")
     End Sub
 
-    Private Sub cbExterno_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbExterno.SelectedIndexChanged
+    Public Sub keypress_textos_cmb(ByVal TXT As ComboBox, ByVal e As KeyPressEventArgs)
         Try
-            txtMatricula.Text = cbExterno.SelectedValue
-            btnBuscar.PerformClick()
-            txtMatricula.Clear()
+
+            Dim re As New Regex("[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s\:\´]", RegexOptions.IgnoreCase)
+            Dim KeyAscii As Short = Asc(e.KeyChar)
+
+            If KeyAscii <> 8 Then
+                e.Handled = re.IsMatch(e.KeyChar)
+            End If
+
+        Catch ex As Exception
+            MsgBox("Error: en la validación de este campo, por favor verifique o comuniquese con sistemas", MsgBoxStyle.Exclamation, "Error en datos")
+        End Try
+
+    End Sub
+
+    Private Sub cbExterno_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbExterno.SelectionChangeCommitted
+        Try
+            If (cbExterno.SelectedIndex <> -1) Then
+                txtMatricula.Text = cbExterno.SelectedValue
+                btnBuscar.PerformClick()
+                txtMatricula.Clear()
+                cbExterno.Text = ""
+                combo_filtro = ""
+            End If
+
         Catch ex As Exception
 
         End Try
     End Sub
 
-    Private Sub cbEDC_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbEDC.SelectedIndexChanged
+    Private Sub cbEDC_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbEDC.SelectionChangeCommitted
         Try
-            txtBusquedaMatricula.Text = cbEDC.SelectedValue
-            btnAgregar.PerformClick()
-            txtBusquedaMatricula.Clear()
+            If (cbEDC.SelectedIndex <> -1) Then
+                txtBusquedaMatricula.Text = cbEDC.SelectedValue
+                btnAgregar.PerformClick()
+                txtBusquedaMatricula.Clear()
+                cbEDC.Text = ""
+                combo_filtroEDC = ""
+            End If
         Catch ex As Exception
 
         End Try
     End Sub
+
+    Private Sub cbExterno_KeyUp(sender As Object, e As KeyEventArgs) Handles cbExterno.KeyUp
+        If e.KeyCode = Keys.Back Or e.KeyCode = Keys.Delete Then
+            combo_filtro = cbExterno.Text
+        End If
+    End Sub
+
+    Private Sub cbExterno_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbExterno.KeyPress
+        Me.keypress_textos_cmb(cbExterno, e)
+        Dim kc As KeysConverter = New KeysConverter()
+        Dim encontrar As String = cbExterno.Text
+
+        Dim re As New Regex("[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s\´]", RegexOptions.IgnoreCase)
+        Dim KeyAscii As Short = Asc(e.KeyChar)
+
+        If re.IsMatch(e.KeyChar) = False Then
+
+            combo_filtro += kc.ConvertToString(e.KeyChar)
+            Dim filtro As String = cbExterno.Text
+            Dim tableFiltro As DataTable = db.getDataTableFromSQL($"SELECT CL.clave_cliente, UPPER(C.nombre + ' ' + E.paterno + ' ' + E.materno + ' (' + CL.clave_cliente + ')') As NombreCliente FROM portal_registroExterno AS E
+		                                                         INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
+                                                                 INNER JOIN portal_clave AS CL ON CL.id_cliente = C.id_cliente
+                                                                 WHERE (C.nombre + ' ' + E.paterno + ' ' + E.materno) LIKE '%{filtro}%'")
+            ComboboxService.llenarCombobox(cbExterno, tableFiltro, "clave_cliente", "NombreCliente")
+            cbExterno.SelectedValue = -1
+            cbExterno.Text = combo_filtro
+            cbExterno.DroppedDown = True
+            cbExterno.SelectionStart = encontrar.Length
+            cbExterno.SelectionLength = cbExterno.Text.Length - cbExterno.SelectionStart
+        Else
+            If Asc(e.KeyChar) = Keys.Space Then
+                combo_filtro += " "
+            End If
+        End If
+    End Sub
+
+    Private Sub cbEDC_KeyUp(sender As Object, e As KeyEventArgs) Handles cbEDC.KeyUp
+        If e.KeyCode = Keys.Back Or e.KeyCode = Keys.Delete Then
+            combo_filtroEDC = cbEDC.Text
+        End If
+    End Sub
+
+    Private Sub cbEDC_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbEDC.KeyPress
+        Me.keypress_textos_cmb(cbEDC, e)
+        Dim kc As KeysConverter = New KeysConverter()
+        Dim encontrar As String = cbEDC.Text
+
+        Dim re As New Regex("[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s\´]", RegexOptions.IgnoreCase)
+        Dim KeyAscii As Short = Asc(e.KeyChar)
+
+        If re.IsMatch(e.KeyChar) = False Then
+
+            combo_filtroEDC += kc.ConvertToString(e.KeyChar)
+            Dim filtro As String = cbEDC.Text
+            Dim tableFiltro As DataTable = db.getDataTableFromSQL($"SELECT RC.clave_cliente, UPPER(C.nombre + ' ' + RC.apellido_paterno + ' ' + RC.apellido_materno + ' (' + RC.clave_cliente + ')') AS NombreCliente FROM portal_registroCongreso AS RC
+                                                             INNER JOIN portal_cliente AS C ON RC.id_cliente = C.id_cliente
+                                                             WHERE (C.nombre + ' ' + RC.apellido_paterno + ' ' + RC.apellido_materno) like '%{filtro}%'")
+            ComboboxService.llenarCombobox(cbEDC, tableFiltro, "clave_cliente", "NombreCliente")
+            cbEDC.SelectedValue = -1
+            cbEDC.Text = combo_filtroEDC
+            cbEDC.DroppedDown = True
+            cbEDC.SelectionStart = encontrar.Length
+            cbEDC.SelectionLength = cbEDC.Text.Length - cbEDC.SelectionStart
+        Else
+            If Asc(e.KeyChar) = Keys.Space Then
+                combo_filtroEDC += " "
+            End If
+        End If
+    End Sub
+
+
 End Class
