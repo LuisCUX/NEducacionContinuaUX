@@ -240,6 +240,8 @@ Partial Class PlanesEDC
         Me.RBExentaC = New System.Windows.Forms.RadioButton()
         Me.RBAbsorbeC = New System.Windows.Forms.RadioButton()
         Me.RBAgregaC = New System.Windows.Forms.RadioButton()
+        Me.lblPublico = New System.Windows.Forms.Label()
+        Me.txtPublicoPlan = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.tcPlanes.SuspendLayout()
         Me.pageInscripcion.SuspendLayout()
@@ -298,6 +300,8 @@ Partial Class PlanesEDC
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.lblPublico)
+        Me.Panel1.Controls.Add(Me.txtPublicoPlan)
         Me.Panel1.Controls.Add(Me.lblNombrePlan)
         Me.Panel1.Controls.Add(Me.txtNombrePlan)
         Me.Panel1.Controls.Add(Me.cbPlanes)
@@ -314,7 +318,7 @@ Partial Class PlanesEDC
         Me.lblNombrePlan.AutoSize = True
         Me.lblNombrePlan.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblNombrePlan.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblNombrePlan.Location = New System.Drawing.Point(567, 42)
+        Me.lblNombrePlan.Location = New System.Drawing.Point(390, 45)
         Me.lblNombrePlan.Name = "lblNombrePlan"
         Me.lblNombrePlan.Size = New System.Drawing.Size(111, 16)
         Me.lblNombrePlan.TabIndex = 18
@@ -324,9 +328,9 @@ Partial Class PlanesEDC
         '
         Me.txtNombrePlan.Enabled = False
         Me.txtNombrePlan.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtNombrePlan.Location = New System.Drawing.Point(684, 39)
+        Me.txtNombrePlan.Location = New System.Drawing.Point(501, 42)
         Me.txtNombrePlan.Name = "txtNombrePlan"
-        Me.txtNombrePlan.Size = New System.Drawing.Size(295, 22)
+        Me.txtNombrePlan.Size = New System.Drawing.Size(293, 22)
         Me.txtNombrePlan.TabIndex = 17
         '
         'cbPlanes
@@ -334,9 +338,9 @@ Partial Class PlanesEDC
         Me.cbPlanes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbPlanes.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbPlanes.FormattingEnabled = True
-        Me.cbPlanes.Location = New System.Drawing.Point(189, 39)
+        Me.cbPlanes.Location = New System.Drawing.Point(42, 39)
         Me.cbPlanes.Name = "cbPlanes"
-        Me.cbPlanes.Size = New System.Drawing.Size(351, 24)
+        Me.cbPlanes.Size = New System.Drawing.Size(338, 24)
         Me.cbPlanes.TabIndex = 3
         '
         'lblPlan
@@ -344,7 +348,7 @@ Partial Class PlanesEDC
         Me.lblPlan.AutoSize = True
         Me.lblPlan.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblPlan.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblPlan.Location = New System.Drawing.Point(84, 42)
+        Me.lblPlan.Location = New System.Drawing.Point(3, 42)
         Me.lblPlan.Name = "lblPlan"
         Me.lblPlan.Size = New System.Drawing.Size(41, 16)
         Me.lblPlan.TabIndex = 2
@@ -2558,6 +2562,26 @@ Partial Class PlanesEDC
         Me.RBAgregaC.Text = "Agrega IVA"
         Me.RBAgregaC.UseVisualStyleBackColor = True
         '
+        'lblPublico
+        '
+        Me.lblPublico.AutoSize = True
+        Me.lblPublico.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPublico.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblPublico.Location = New System.Drawing.Point(797, 45)
+        Me.lblPublico.Name = "lblPublico"
+        Me.lblPublico.Size = New System.Drawing.Size(104, 16)
+        Me.lblPublico.TabIndex = 20
+        Me.lblPublico.Text = "Público del plan"
+        '
+        'txtPublicoPlan
+        '
+        Me.txtPublicoPlan.Enabled = False
+        Me.txtPublicoPlan.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPublicoPlan.Location = New System.Drawing.Point(901, 42)
+        Me.txtPublicoPlan.Name = "txtPublicoPlan"
+        Me.txtPublicoPlan.Size = New System.Drawing.Size(274, 22)
+        Me.txtPublicoPlan.TabIndex = 19
+        '
         'PlanesEDC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2853,4 +2877,6 @@ Partial Class PlanesEDC
     Friend WithEvents RBExentaC As RadioButton
     Friend WithEvents RBAbsorbeC As RadioButton
     Friend WithEvents RBAgregaC As RadioButton
+    Friend WithEvents lblPublico As Label
+    Friend WithEvents txtPublicoPlan As TextBox
 End Class

@@ -92,7 +92,7 @@ Public Class AsignacionPlanesEDC
             Exit Sub
         Else
             Try
-                ap.llenarGridPagosCambioDescuento(planID, GridActual3)
+                ap.llenarGridPagosCambioDescuento(planID, GridActual3, Matricula)
             Catch ex As Exception
 
             End Try
@@ -286,11 +286,24 @@ Public Class AsignacionPlanesEDC
         End If
     End Sub
 
-    Private Sub GridActual3_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles GridActual3.CellContentClick
+    Private Sub GridActual3_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles GridActual3.CellClick
         Dim row As Integer = e.RowIndex
         Dim column As Integer = e.ColumnIndex
+        Dim costoOriginal As Decimal
+        costoOriginal = CDec(GridActual3.Rows(row).Cells(2).Value)
         ObjectBagService.setItem("Row", row)
         ObjectBagService.setItem("Column", column)
-
+        ObjectBagService.setItem("Costo", costoOriginal)
+        If (column = 4) Then
+            ModalDescuento.MdiParent = PrincipalView
+            ModalDescuento.Show()
+            Me.Enabled = False
+        End If
     End Sub
+
+    Private Sub btnModificacionDesc_Click(sender As Object, e As EventArgs) Handles btnModificacionDesc.Click
+        ap.cambiarDescuentos(Matricula, GridActual3)
+        Me.Reiniciar()
+    End Sub
+
 End Class

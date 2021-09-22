@@ -67,14 +67,8 @@ Partial Class AsignacionPlanesEDC
         Me.panelModificacion3 = New System.Windows.Forms.Panel()
         Me.lblPlanActual3 = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
+        Me.btnModificacionDesc = New System.Windows.Forms.Button()
         Me.GridActual3 = New System.Windows.Forms.DataGridView()
-        Me.IDColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DescripcionColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PrecioUnitarioColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RecargoColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DescuentoActualColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NuevoDescuentoColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.panelInfo3 = New System.Windows.Forms.Panel()
         Me.lblNombreInfo3 = New System.Windows.Forms.Label()
         Me.lblEmail3 = New System.Windows.Forms.Label()
@@ -86,6 +80,11 @@ Partial Class AsignacionPlanesEDC
         Me.btnBuscar3 = New System.Windows.Forms.Button()
         Me.lblNombre3 = New System.Windows.Forms.Label()
         Me.cbBuscar3 = New System.Windows.Forms.ComboBox()
+        Me.IDColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DescripcionColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PrecioUnitarioColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PrecioActual = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NuevoPrecio = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.panelBusqueda.SuspendLayout()
         Me.panelDatos.SuspendLayout()
         Me.panelRegistro.SuspendLayout()
@@ -558,7 +557,7 @@ Partial Class AsignacionPlanesEDC
         '
         Me.panelModificacion3.Controls.Add(Me.lblPlanActual3)
         Me.panelModificacion3.Controls.Add(Me.Button2)
-        Me.panelModificacion3.Controls.Add(Me.Button3)
+        Me.panelModificacion3.Controls.Add(Me.btnModificacionDesc)
         Me.panelModificacion3.Controls.Add(Me.GridActual3)
         Me.panelModificacion3.Location = New System.Drawing.Point(7, 122)
         Me.panelModificacion3.Name = "panelModificacion3"
@@ -587,15 +586,15 @@ Partial Class AsignacionPlanesEDC
         Me.Button2.TabIndex = 83
         Me.Button2.UseVisualStyleBackColor = True
         '
-        'Button3
+        'btnModificacionDesc
         '
-        Me.Button3.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
-        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button3.Location = New System.Drawing.Point(467, 504)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(60, 46)
-        Me.Button3.TabIndex = 82
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.btnModificacionDesc.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
+        Me.btnModificacionDesc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnModificacionDesc.Location = New System.Drawing.Point(467, 504)
+        Me.btnModificacionDesc.Name = "btnModificacionDesc"
+        Me.btnModificacionDesc.Size = New System.Drawing.Size(60, 46)
+        Me.btnModificacionDesc.TabIndex = 82
+        Me.btnModificacionDesc.UseVisualStyleBackColor = True
         '
         'GridActual3
         '
@@ -606,57 +605,11 @@ Partial Class AsignacionPlanesEDC
         Me.GridActual3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridActual3.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.GridActual3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.GridActual3.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDColumn, Me.DescripcionColumn, Me.PrecioUnitarioColumn, Me.RecargoColumn, Me.DescuentoActualColumn, Me.NuevoDescuentoColumn})
+        Me.GridActual3.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDColumn, Me.DescripcionColumn, Me.PrecioUnitarioColumn, Me.PrecioActual, Me.NuevoPrecio})
         Me.GridActual3.Location = New System.Drawing.Point(6, 27)
         Me.GridActual3.Name = "GridActual3"
         Me.GridActual3.Size = New System.Drawing.Size(775, 321)
         Me.GridActual3.TabIndex = 81
-        '
-        'IDColumn
-        '
-        Me.IDColumn.HeaderText = "ID"
-        Me.IDColumn.Name = "IDColumn"
-        Me.IDColumn.ReadOnly = True
-        Me.IDColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.IDColumn.Visible = False
-        '
-        'DescripcionColumn
-        '
-        Me.DescripcionColumn.HeaderText = "Descripcion"
-        Me.DescripcionColumn.Name = "DescripcionColumn"
-        Me.DescripcionColumn.ReadOnly = True
-        Me.DescripcionColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'PrecioUnitarioColumn
-        '
-        Me.PrecioUnitarioColumn.FillWeight = 50.0!
-        Me.PrecioUnitarioColumn.HeaderText = "Precio unitario"
-        Me.PrecioUnitarioColumn.Name = "PrecioUnitarioColumn"
-        Me.PrecioUnitarioColumn.ReadOnly = True
-        Me.PrecioUnitarioColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'RecargoColumn
-        '
-        Me.RecargoColumn.FillWeight = 50.0!
-        Me.RecargoColumn.HeaderText = "Recargo"
-        Me.RecargoColumn.Name = "RecargoColumn"
-        Me.RecargoColumn.ReadOnly = True
-        Me.RecargoColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'DescuentoActualColumn
-        '
-        Me.DescuentoActualColumn.FillWeight = 50.0!
-        Me.DescuentoActualColumn.HeaderText = "Descuento actual"
-        Me.DescuentoActualColumn.Name = "DescuentoActualColumn"
-        Me.DescuentoActualColumn.ReadOnly = True
-        Me.DescuentoActualColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'NuevoDescuentoColumn
-        '
-        Me.NuevoDescuentoColumn.FillWeight = 50.0!
-        Me.NuevoDescuentoColumn.HeaderText = "Nuevo descuento"
-        Me.NuevoDescuentoColumn.Name = "NuevoDescuentoColumn"
-        Me.NuevoDescuentoColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         '
         'panelInfo3
         '
@@ -770,6 +723,45 @@ Partial Class AsignacionPlanesEDC
         Me.cbBuscar3.Size = New System.Drawing.Size(478, 21)
         Me.cbBuscar3.TabIndex = 78
         '
+        'IDColumn
+        '
+        Me.IDColumn.HeaderText = "ID"
+        Me.IDColumn.Name = "IDColumn"
+        Me.IDColumn.ReadOnly = True
+        Me.IDColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.IDColumn.Visible = False
+        '
+        'DescripcionColumn
+        '
+        Me.DescripcionColumn.HeaderText = "Descripcion"
+        Me.DescripcionColumn.Name = "DescripcionColumn"
+        Me.DescripcionColumn.ReadOnly = True
+        Me.DescripcionColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'PrecioUnitarioColumn
+        '
+        Me.PrecioUnitarioColumn.FillWeight = 50.0!
+        Me.PrecioUnitarioColumn.HeaderText = "Precio unitario"
+        Me.PrecioUnitarioColumn.Name = "PrecioUnitarioColumn"
+        Me.PrecioUnitarioColumn.ReadOnly = True
+        Me.PrecioUnitarioColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'PrecioActual
+        '
+        Me.PrecioActual.FillWeight = 50.0!
+        Me.PrecioActual.HeaderText = "PrecioActual"
+        Me.PrecioActual.Name = "PrecioActual"
+        Me.PrecioActual.ReadOnly = True
+        Me.PrecioActual.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'NuevoPrecio
+        '
+        Me.NuevoPrecio.FillWeight = 50.0!
+        Me.NuevoPrecio.HeaderText = "Nuevo Precio"
+        Me.NuevoPrecio.Name = "NuevoPrecio"
+        Me.NuevoPrecio.ReadOnly = True
+        Me.NuevoPrecio.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
         'AsignacionPlanesEDC
         '
         Me.AcceptButton = Me.btnBuscar
@@ -868,12 +860,11 @@ Partial Class AsignacionPlanesEDC
     Friend WithEvents panelModificacion3 As Panel
     Friend WithEvents lblPlanActual3 As Label
     Friend WithEvents Button2 As Button
-    Friend WithEvents Button3 As Button
+    Friend WithEvents btnModificacionDesc As Button
     Friend WithEvents GridActual3 As DataGridView
     Friend WithEvents IDColumn As DataGridViewTextBoxColumn
     Friend WithEvents DescripcionColumn As DataGridViewTextBoxColumn
     Friend WithEvents PrecioUnitarioColumn As DataGridViewTextBoxColumn
-    Friend WithEvents RecargoColumn As DataGridViewTextBoxColumn
-    Friend WithEvents DescuentoActualColumn As DataGridViewTextBoxColumn
-    Friend WithEvents NuevoDescuentoColumn As DataGridViewTextBoxColumn
+    Friend WithEvents PrecioActual As DataGridViewTextBoxColumn
+    Friend WithEvents NuevoPrecio As DataGridViewTextBoxColumn
 End Class

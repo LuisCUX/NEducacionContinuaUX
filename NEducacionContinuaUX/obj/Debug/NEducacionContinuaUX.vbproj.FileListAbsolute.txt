@@ -109,3 +109,4 @@ C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\Mime
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\System.Buffers.xml
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.ReimpresionFacturasEDC.resources
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.ModalDescuento.resources

@@ -96,7 +96,7 @@
         ElseIf (claveConcepto = "DIN") Then
             Dim Costo As Decimal
             Dim Descuento As Decimal
-            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, CON.clave_servicio, C.Importe, C.Descuento, C.Fecha_Limite_Desc, C.AgregaIVA, C.AbsorbeIVA, C.ExentaIVA FROM ing_AsignacionCargosPlanes AS AC 
+            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, CON.clave_servicio, C.Importe, AC.Descuento, C.Fecha_Limite_Desc, C.AgregaIVA, C.AbsorbeIVA, C.ExentaIVA FROM ing_AsignacionCargosPlanes AS AC 
                                                                       INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
                                                                       INNER JOIN ing_Planes AS PL ON PL.ID = C.ID_Plan
                                                                       INNER JOIN portal_congreso AS CON ON CON.id_congreso = PL.ID_Congreso
@@ -109,11 +109,11 @@
                 concep.cveClase = item("clave_servicio")
                 concep.cveUnidad = "E48"
                 concep.costoUnitario = item("Importe")
-                If (item("Fecha_Limite_Desc") < Date.Today) Then
-                    concep.descuento = 0.00
-                Else
-                    concep.descuento = item("Descuento")
-                End If
+                'If (item("Fecha_Limite_Desc") < Date.Today) Then
+                '    concep.descuento = 0.00
+                'Else
+                concep.descuento = item("Descuento")
+                'End If
                 concep.absorbeIVA = item("AbsorbeIVA")
                 concep.consideraIVA = item("AgregaIVA")
                 concep.IVAExento = item("ExentaIVA")
@@ -125,7 +125,7 @@
         ElseIf (claveConcepto = "DCO") Then
             Dim Costo As Decimal
             Dim Descuento As Decimal
-            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, CON.clave_servicio, C.Importe, C.Descuento, C.Fecha_Limite_Desc, C.AgregaIVA, C.AbsorbeIVA, C.ExentaIVA FROM ing_AsignacionCargosPlanes AS AC 
+            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, CON.clave_servicio, C.Importe, AC.Descuento, C.Fecha_Limite_Desc, C.AgregaIVA, C.AbsorbeIVA, C.ExentaIVA FROM ing_AsignacionCargosPlanes AS AC 
                                                                       INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
                                                                       INNER JOIN ing_Planes AS PL ON PL.ID = C.ID_Plan
                                                                       INNER JOIN portal_congreso AS CON ON CON.id_congreso = PL.ID_Congreso
@@ -138,11 +138,11 @@
                 concep.cveClase = item("clave_servicio")
                 concep.cveUnidad = "E48"
                 concep.costoUnitario = item("Importe")
-                If (item("Fecha_Limite_Desc") < Date.Today) Then
-                    concep.descuento = 0.00
-                Else
-                    concep.descuento = item("Descuento")
-                End If
+                'If (item("Fecha_Limite_Desc") < Date.Today) Then
+                '    concep.descuento = 0.00
+                'Else
+                concep.descuento = item("Descuento")
+                'End If
                 concep.absorbeIVA = item("AbsorbeIVA")
                 concep.consideraIVA = item("AgregaIVA")
                 concep.IVAExento = item("ExentaIVA")
@@ -154,7 +154,7 @@
         ElseIf (claveConcepto = "DPU") Then
             Dim Costo As Decimal
             Dim Descuento As Decimal
-            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, CON.clave_servicio, C.Importe, C.Descuento, C.Fecha_Limite_Desc, C.AgregaIVA, C.AbsorbeIVA, C.ExentaIVA FROM ing_AsignacionCargosPlanes AS AC 
+            Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, CON.clave_servicio, C.Importe, AC.Descuento, C.Fecha_Limite_Desc, C.AgregaIVA, C.AbsorbeIVA, C.ExentaIVA FROM ing_AsignacionCargosPlanes AS AC 
                                                                       INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
                                                                       INNER JOIN ing_Planes AS PL ON PL.ID = C.ID_Plan
                                                                       INNER JOIN portal_congreso AS CON ON CON.id_congreso = PL.ID_Congreso
@@ -167,11 +167,11 @@
                 concep.cveClase = item("clave_servicio")
                 concep.cveUnidad = "E48"
                 concep.costoUnitario = item("Importe")
-                If (item("Fecha_Limite_Desc") < Date.Today) Then
-                    concep.descuento = 0.00
-                Else
-                    concep.descuento = item("Descuento")
-                End If
+                'If (item("Fecha_Limite_Desc") < Date.Today) Then
+                '    concep.descuento = 0.00
+                'Else
+                concep.descuento = item("Descuento")
+                'End If
                 concep.absorbeIVA = item("AbsorbeIVA")
                 concep.consideraIVA = item("AgregaIVA")
                 concep.IVAExento = item("ExentaIVA")
@@ -222,7 +222,7 @@
         '    concepto.descuento = 0.00
         'End If
 
-        If (concepto.absorbeIVA = True And concepto.IVAExento = False And concepto.consideraIVA = False) Then ''---ABSORBE IVA
+        If (concepto.absorbeIVA = True And concepto.IVAExento = False And concepto.consideraIVA = False And concepto.claveConcepto = "CON") Then ''---ABSORBE IVA CONGRESO
 
             Dim costooriginal As Decimal = CDec(concepto.costoUnitario)
             Dim unitariosiniva As Decimal = (CDec(costooriginal) / 1.16)
@@ -241,34 +241,85 @@
             concepto = formatoPrecios(concepto)
 
             concepto.costoFinal = (CDec(concepto.costoBase)) + (CDec(concepto.costoIVATotal)) - CDec(concepto.Abono)
-        ElseIf (concepto.absorbeIVA = False And concepto.IVAExento = False And concepto.consideraIVA = True) Then ''---AGREGA IVA
+        ElseIf (concepto.absorbeIVA = True And concepto.IVAExento = False And concepto.consideraIVA = False And concepto.claveConcepto <> "CON") Then ''---ABSORBE IVA NO CONGRESO
+            concepto.costoUnitario = CDec(concepto.costoUnitario) - CDec(concepto.descuento)
+            Dim unitariosiniva As Decimal = (CDec(concepto.costoUnitario) / 1.16)
 
-            Dim unitariodescuento As Decimal = CDec(concepto.costoUnitario) - CDec(concepto.descuento)
-            concepto.costoBase = unitariodescuento * CDec(concepto.Cantidad)
-            unitariodescuento = unitariodescuento
-            concepto.costoIVAUnitario = (unitariodescuento * 0.16)
+            concepto.costoUnitario = unitariosiniva
+            concepto.costoBase = concepto.costoUnitario * concepto.Cantidad
+            concepto.costoIVAUnitario = (concepto.costoUnitario * 0.16)
             concepto.costoIVATotal = (CDec(concepto.costoIVAUnitario) * CDec(concepto.Cantidad))
             concepto.costoTotal = (CDec(concepto.costoUnitario) * CDec(concepto.Cantidad))
-            concepto.costoFinal = ((unitariodescuento * CDec(concepto.Cantidad)) + CDec(concepto.costoIVATotal)) - CDec(concepto.Abono)
-            concepto.descuento = (CDec(concepto.descuento) * CDec(concepto.Cantidad))
+            concepto.descuento = 0.00
+            concepto = formatoPrecios(concepto)
+            concepto.costoFinal = (CDec(concepto.costoBase)) + (CDec(concepto.costoIVATotal)) - CDec(concepto.Abono)
+            'Dim costooriginal As Decimal = CDec(concepto.costoUnitario)
+            'Dim unitariodescuento As Decimal = costooriginal - CDec(concepto.descuento)
+
+            'Dim unitariosiniva As Decimal = (CDec(unitariodescuento) / 1.16)
+
+            'unitariosiniva = unitariosiniva
+            'unitariodescuento = unitariodescuento
+
+            'concepto.costoUnitario = unitariosiniva
+            'concepto.costoBase = unitariodescuento * CDec(concepto.Cantidad)
+            'concepto.costoIVAUnitario = (unitariodescuento * 0.16)
+            'concepto.costoIVATotal = (CDec(concepto.costoIVAUnitario) * CDec(concepto.Cantidad))
+            'concepto.costoTotal = unitariosiniva * CDec(concepto.Cantidad)
+            '''concepto.costoFinal = (CDec(concepto.costoBase)) + (CDec(concepto.costoIVATotal)) - CDec(concepto.Abono)
+            'concepto.descuento = (CDec(concepto.descuento) * CDec(concepto.Cantidad))
+            'concepto = formatoPrecios(concepto)
+
+            'concepto.costoFinal = (CDec(concepto.costoBase)) + (CDec(concepto.costoIVATotal)) - CDec(concepto.Abono)
+
+        ElseIf (concepto.absorbeIVA = False And concepto.IVAExento = False And concepto.consideraIVA = True) Then ''---AGREGA IVA
+            concepto.costoUnitario = CDec(concepto.costoUnitario) - CDec(concepto.descuento)
+            concepto.costoBase = concepto.costoUnitario * CDec(concepto.Cantidad)
+            concepto.costoIVAUnitario = (concepto.costoUnitario * 0.16)
+            concepto.costoIVATotal = (CDec(concepto.costoIVAUnitario) * CDec(concepto.Cantidad))
+            concepto.costoTotal = (CDec(concepto.costoUnitario) * CDec(concepto.Cantidad))
+            concepto.costoFinal = (concepto.costoBase + CDec(concepto.costoIVATotal)) - CDec(concepto.Abono)
+            concepto.descuento = 0.00
+            'Dim unitariodescuento As Decimal = CDec(concepto.costoUnitario) - CDec(concepto.descuento)
+            'concepto.costoBase = unitariodescuento * CDec(concepto.Cantidad)
+            'unitariodescuento = unitariodescuento
+            'concepto.costoIVAUnitario = (unitariodescuento * 0.16)
+            'concepto.costoIVATotal = (CDec(concepto.costoIVAUnitario) * CDec(concepto.Cantidad))
+            'concepto.costoTotal = (CDec(concepto.costoUnitario) * CDec(concepto.Cantidad))
+            'concepto.costoFinal = ((unitariodescuento * CDec(concepto.Cantidad)) + CDec(concepto.costoIVATotal)) - CDec(concepto.Abono)
+            'concepto.descuento = (CDec(concepto.descuento) * CDec(concepto.Cantidad))
 
         ElseIf (concepto.absorbeIVA = False And concepto.IVAExento = True And concepto.consideraIVA = False) Then ''---IVA EXENTO
-            Dim unitariodescuento As Decimal = CDec(concepto.costoUnitario) - CDec(concepto.descuento)
+            concepto.costoUnitario = CDec(concepto.costoUnitario) - CDec(concepto.descuento)
+            concepto.costoBase = concepto.costoUnitario * CDec(concepto.Cantidad)
             concepto.costoIVAUnitario = "0.00000000"
             concepto.costoIVATotal = "0.00000000"
             concepto.costoTotal = (CDec(concepto.costoUnitario) * CDec(concepto.Cantidad))
-            concepto.costoBase = concepto.costoTotal
-            concepto.costoFinal = ((unitariodescuento * CDec(concepto.Cantidad))) - CDec(concepto.Abono)
-            concepto.descuento = (CDec(concepto.descuento) * CDec(concepto.Cantidad))
+            concepto.costoFinal = (concepto.costoBase + CDec(concepto.costoIVATotal)) - CDec(concepto.Abono)
+            concepto.descuento = 0.00
+            'Dim unitariodescuento As Decimal = CDec(concepto.costoUnitario) - CDec(concepto.descuento)
+            'concepto.costoIVAUnitario = "0.00000000"
+            'concepto.costoIVATotal = "0.00000000"
+            'concepto.costoTotal = (CDec(concepto.costoUnitario) * CDec(concepto.Cantidad))
+            'concepto.costoBase = concepto.costoTotal
+            'concepto.costoFinal = ((unitariodescuento * CDec(concepto.Cantidad))) - CDec(concepto.Abono)
+            'concepto.descuento = (CDec(concepto.descuento) * CDec(concepto.Cantidad))
 
         ElseIf (concepto.absorbeIVA = False And concepto.IVAExento = False And concepto.consideraIVA = False) Then ''--- SIN IVA
-            Dim unitariodescuento As Decimal = CDec(concepto.costoUnitario) - CDec(concepto.descuento)
+            concepto.costoUnitario = CDec(concepto.costoUnitario) - CDec(concepto.descuento)
+            concepto.costoBase = concepto.costoUnitario * CDec(concepto.Cantidad)
             concepto.costoIVAUnitario = "0.00000000"
             concepto.costoIVATotal = "0.00000000"
             concepto.costoTotal = (CDec(concepto.costoUnitario) * CDec(concepto.Cantidad))
-            concepto.costoBase = concepto.costoTotal
-            concepto.costoFinal = ((unitariodescuento * CDec(concepto.Cantidad))) - CDec(concepto.Abono)
-            concepto.descuento = (CDec(concepto.descuento) * CDec(concepto.Cantidad))
+            concepto.costoFinal = (concepto.costoBase + CDec(concepto.costoIVATotal)) - CDec(concepto.Abono)
+            concepto.descuento = 0.00
+            'Dim unitariodescuento As Decimal = CDec(concepto.costoUnitario) - CDec(concepto.descuento)
+            'concepto.costoIVAUnitario = "0.00000000"
+            'concepto.costoIVATotal = "0.00000000"
+            'concepto.costoTotal = (CDec(concepto.costoUnitario) * CDec(concepto.Cantidad))
+            'concepto.costoBase = concepto.costoTotal
+            'concepto.costoFinal = ((unitariodescuento * CDec(concepto.Cantidad))) - CDec(concepto.Abono)
+            'concepto.descuento = (CDec(concepto.descuento) * CDec(concepto.Cantidad))
 
         End If
         concepto = formatoPrecios(concepto)

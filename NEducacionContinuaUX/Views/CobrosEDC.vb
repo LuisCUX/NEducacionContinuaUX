@@ -32,7 +32,7 @@ Public Class CobrosEDC
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         Me.Limpiar()
-        Matricula = txtMatricula.Text
+        Matricula = txtMatricula.Text.ToUpper()
         tipoMatricula = va.validarMatricula(Matricula)
         txtMatriculaDato.Text = Matricula
         If (tipoMatricula = "False") Then
@@ -284,8 +284,8 @@ Public Class CobrosEDC
                     End If
                 End If
                 If (Me.validarSeleccionNodosColegiaturas(index, 1) = False) Then
-                    Dim mesActual As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "-", "-")
-                    MessageBox.Show($"No puede pagar la colegiatura del mes {mesActual} sin antes haber pagado las colegiaturas anteriores")
+                    ''Dim mesActual As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "-", "-")
+                    MessageBox.Show($"No puede pagar la colegiatura sin antes haber pagado las colegiaturas anteriores")
                     Exit Sub
                 End If
                 'If (Me.buscarRecargoColegiaturas(conceptoID) = False) Then
@@ -300,8 +300,8 @@ Public Class CobrosEDC
                 Tree.Nodes(3).Nodes(index).SelectedImageIndex = 1
             ElseIf (Tree.SelectedNode.Checked = True) Then
                 If (Me.validarSeleccionNodosColegiaturas(index, 2) = False) Then
-                    Dim mesActual As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "-", "-")
-                    MessageBox.Show($"No puede desmarcar el pago del mes de {mesActual} sin antes haber pagado las colegiaturas posteriores")
+                    ''Dim mesActual As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "-", "-")
+                    MessageBox.Show($"No puede desmarcar el pago sin antes haber pagado las colegiaturas posteriores")
                     Exit Sub
                 End If
                 Tree.SelectedNode.Checked = False
@@ -442,24 +442,28 @@ Public Class CobrosEDC
         Dim montoIngresado As Decimal = CDec(txtMonto.Text)
         If (montoTotal <> montoIngresado) Then
             If (montoIngresado > montoTotal) Then
-                MessageBox.Show("No puede ingresar un monto mayor al total a pagar, ingrese un monto valido")
-                Exit Sub
-            End If
-            listaconceptosFinal = co.calcularAbonos(listaConceptosPrueba, montoIngresado, montoTotal, Matricula)
-            If (IsNothing(listaconceptosFinal)) Then
-                Exit Sub
-            End If
-        Else
-            listaconceptosFinal = ch.getListaConceptos()
-            For Each concepto As Concepto In listaconceptosFinal
-                Dim IDClavePago As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatClavesPagos WHERE Clave = '{concepto.claveConcepto}'")
-                Dim tieneAbono As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_Abonos WHERE ID_ClavePago = {IDClavePago} AND IDPago = {concepto.IDConcepto}")
-                If (tieneAbono > 0) Then
-                    co.recalcularCostoAbono(concepto, concepto.costoFinal, 2)
-                    concepto.NombreConcepto = $"2{concepto.NombreConcepto}"
+                If (cbFormaPago.Text = "EFECTIVO") Then
+                    MessageBox.Show($"El cambio a entregar es de {Format(CDec(montoIngresado - montoTotal), "##0.00")} pesos.")
+                Else
+                    MessageBox.Show("No puede ingresar un monto mayor al total a pagar, ingrese un monto valido")
+                    Exit Sub
                 End If
-            Next
+            Else
+                listaconceptosFinal = co.calcularAbonos(listaConceptosPrueba, montoIngresado, montoTotal, Matricula)
+                If (IsNothing(listaconceptosFinal)) Then
+                    Exit Sub
+                End If
+            End If
         End If
+        listaconceptosFinal = ch.getListaConceptos()
+        For Each concepto As Concepto In listaconceptosFinal
+            Dim IDClavePago As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatClavesPagos WHERE Clave = '{concepto.claveConcepto}'")
+            Dim tieneAbono As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_Abonos WHERE ID_ClavePago = {IDClavePago} AND IDPago = {concepto.IDConcepto}")
+            If (tieneAbono > 0) Then
+                co.recalcularCostoAbono(concepto, concepto.costoFinal, 2)
+                concepto.NombreConcepto = $"2{concepto.NombreConcepto}"
+            End If
+        Next
         If (tipoMatricula = "EX") Then
             tipocliente = 2
         ElseIf (tipoMatricula = "EC") Then

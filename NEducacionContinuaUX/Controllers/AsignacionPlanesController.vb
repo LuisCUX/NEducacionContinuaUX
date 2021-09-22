@@ -47,10 +47,12 @@
         GridPagos.DataSource = tablePagos
     End Sub
 
-    Sub llenarGridPagosCambioDescuento(IDPlan As Integer, GridPagos As DataGridView)
-        Dim tablePagos As DataTable = db.getDataTableFromSQL($"SELECT ID, Clave, Descripcion, Importe, Recargo, Descuento FROM ing_PlanesConceptos WHERE ID_Plan = {IDPlan} AND Activo = 1 ORDER BY Orden")
+    Sub llenarGridPagosCambioDescuento(IDPlan As Integer, GridPagos As DataGridView, Matricula As String)
+        Dim tablePagos As DataTable = db.getDataTableFromSQL($"SELECT PC.ID, PC.Clave, PC.Descripcion, PC.Importe, PC.Recargo, AC.Descuento FROM ing_PlanesConceptos AS PC 
+                                                               INNER JOIN ing_AsignacionCargosPlanes AS AC ON AC.ID_Concepto = PC.ID AND AC.Matricula = '{Matricula}'
+                                                               WHERE PC.ID_Plan = {IDPlan} AND PC.Activo = 1 ORDER BY Orden")
         For Each row As DataRow In tablePagos.Rows
-            GridPagos.Rows.Add(row("ID"), row("Descripcion"), Format(CDec(row("Importe")), "#####0.00"), Format(CDec(row("Recargo")), "#####0.00"), Format(CDec(row("Descuento")), "#####0.00"), 0.00)
+            GridPagos.Rows.Add(row("ID"), row("Descripcion"), Format(CDec(row("Importe")), "#####0.00"), (CDec(row("Importe")) - CDec(row("Descuento"))), "")
         Next
     End Sub
 
@@ -79,7 +81,7 @@
                 Else
                     fechaRecargo = "1900-01-01"
                 End If
-                db.execSQLQueryWithoutParams($"INSERT INTO ing_AsignacionCargosPlanes(ID_Concepto, Matricula, Fecha_Asignacion, Fecha_Recargo, ID_ClaveConcepto, ClaveUnidad, Autorizado, Condonado, Activo) VALUES ({IDPago}, '{Matricula}', GETDATE(), '{fechaRecargos}', {ID_ClavePago}, 'E48', 0, 0, 1)")
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_AsignacionCargosPlanes(ID_Concepto, Matricula, Fecha_Asignacion, Fecha_Recargo, ID_ClaveConcepto, Descuento, ClaveUnidad, Autorizado, Condonado, Activo) VALUES ({IDPago}, '{Matricula}', GETDATE(), '{fechaRecargos}', {ID_ClavePago}, 0.00, 'E48', 0, 0, 1)")
             Next
             db.commitTransaction()
             MessageBox.Show("Cargos asignados correctamente")
@@ -117,13 +119,31 @@
                 Else
                     fechaRecargo = "1900-01-01"
                 End If
-                db.execSQLQueryWithoutParams($"INSERT INTO ing_AsignacionCargosPlanes(ID_Concepto, Matricula, Fecha_Asignacion, Fecha_Recargo, ID_ClaveConcepto, ClaveUnidad, Autorizado, Condonado, Activo) VALUES ({IDPago}, '{Matricula}', GETDATE(), '{fechaRecargos}', {ID_ClavePago}, 'E48', 0, 0, 1)")
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_AsignacionCargosPlanes(ID_Concepto, Matricula, Fecha_Asignacion, Fecha_Recargo, ID_ClaveConcepto, Descuento, ClaveUnidad, Autorizado, Condonado, Activo) VALUES ({IDPago}, '{Matricula}', GETDATE(), '{fechaRecargos}', {ID_ClavePago}, 0.00, 'E48', 0, 0, 1)")
             Next
             db.commitTransaction()
             MessageBox.Show("Cargos asignados correctamente")
             AsignacionPlanesEDC.Reiniciar()
         Catch ex As Exception
 
+        End Try
+    End Sub
+
+    Sub cambiarDescuentos(Matricula As String, gridPagos As DataGridView)
+        Try
+            For x = 0 To gridPagos.Rows.Count - 1
+                Dim descuento As Decimal
+                If (gridPagos.Rows(x).Cells(4).Value = "") Then
+                    descuento = 0.000000
+                Else
+                    descuento = gridPagos.Rows(x).Cells(2).Value - gridPagos.Rows(x).Cells(4).Value
+                End If
+
+                db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionCargosPlanes SET Descuento = {descuento} WHERE ID_Concepto = {gridPagos.Rows(x).Cells(0).Value} AND Matricula = '{Matricula}' AND Activo = 1")
+            Next
+            MessageBox.Show("Descuentos registrados correctamente")
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
         End Try
     End Sub
 End Class
