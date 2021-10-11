@@ -25,6 +25,8 @@ Partial Class PlanesEDC
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PlanesEDC))
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.lblPublico = New System.Windows.Forms.Label()
+        Me.txtPublicoPlan = New System.Windows.Forms.TextBox()
         Me.lblNombrePlan = New System.Windows.Forms.Label()
         Me.txtNombrePlan = New System.Windows.Forms.TextBox()
         Me.cbPlanes = New System.Windows.Forms.ComboBox()
@@ -240,8 +242,6 @@ Partial Class PlanesEDC
         Me.RBExentaC = New System.Windows.Forms.RadioButton()
         Me.RBAbsorbeC = New System.Windows.Forms.RadioButton()
         Me.RBAgregaC = New System.Windows.Forms.RadioButton()
-        Me.lblPublico = New System.Windows.Forms.Label()
-        Me.txtPublicoPlan = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.tcPlanes.SuspendLayout()
         Me.pageInscripcion.SuspendLayout()
@@ -312,6 +312,26 @@ Partial Class PlanesEDC
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1179, 73)
         Me.Panel1.TabIndex = 15
+        '
+        'lblPublico
+        '
+        Me.lblPublico.AutoSize = True
+        Me.lblPublico.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPublico.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblPublico.Location = New System.Drawing.Point(797, 45)
+        Me.lblPublico.Name = "lblPublico"
+        Me.lblPublico.Size = New System.Drawing.Size(104, 16)
+        Me.lblPublico.TabIndex = 20
+        Me.lblPublico.Text = "Público del plan"
+        '
+        'txtPublicoPlan
+        '
+        Me.txtPublicoPlan.Enabled = False
+        Me.txtPublicoPlan.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPublicoPlan.Location = New System.Drawing.Point(901, 42)
+        Me.txtPublicoPlan.Name = "txtPublicoPlan"
+        Me.txtPublicoPlan.Size = New System.Drawing.Size(274, 22)
+        Me.txtPublicoPlan.TabIndex = 19
         '
         'lblNombrePlan
         '
@@ -2561,26 +2581,6 @@ Partial Class PlanesEDC
         Me.RBAgregaC.TabIndex = 0
         Me.RBAgregaC.Text = "Agrega IVA"
         Me.RBAgregaC.UseVisualStyleBackColor = True
-        '
-        'lblPublico
-        '
-        Me.lblPublico.AutoSize = True
-        Me.lblPublico.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPublico.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblPublico.Location = New System.Drawing.Point(797, 45)
-        Me.lblPublico.Name = "lblPublico"
-        Me.lblPublico.Size = New System.Drawing.Size(104, 16)
-        Me.lblPublico.TabIndex = 20
-        Me.lblPublico.Text = "Público del plan"
-        '
-        'txtPublicoPlan
-        '
-        Me.txtPublicoPlan.Enabled = False
-        Me.txtPublicoPlan.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPublicoPlan.Location = New System.Drawing.Point(901, 42)
-        Me.txtPublicoPlan.Name = "txtPublicoPlan"
-        Me.txtPublicoPlan.Size = New System.Drawing.Size(274, 22)
-        Me.txtPublicoPlan.TabIndex = 19
         '
         'PlanesEDC
         '

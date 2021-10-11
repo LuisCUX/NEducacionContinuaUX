@@ -8,7 +8,7 @@
 
         If (exists < 1) Then
             MessageBox.Show("La matricula ingresada no existe, favor de ingresar una matricula valida")
-            AsignacionPlanesEDC.Reiniciar()
+            AsignacionPlanesoldEDC.Reiniciar()
             Exit Sub
         End If
 
@@ -50,9 +50,9 @@
     Sub llenarGridPagosCambioDescuento(IDPlan As Integer, GridPagos As DataGridView, Matricula As String)
         Dim tablePagos As DataTable = db.getDataTableFromSQL($"SELECT PC.ID, PC.Clave, PC.Descripcion, PC.Importe, PC.Recargo, AC.Descuento FROM ing_PlanesConceptos AS PC 
                                                                INNER JOIN ing_AsignacionCargosPlanes AS AC ON AC.ID_Concepto = PC.ID AND AC.Matricula = '{Matricula}'
-                                                               WHERE PC.ID_Plan = {IDPlan} AND PC.Activo = 1 ORDER BY Orden")
+                                                               WHERE PC.ID_Plan = {IDPlan} AND PC.Activo = 1 AND AC.Activo = 1 ORDER BY Orden")
         For Each row As DataRow In tablePagos.Rows
-            GridPagos.Rows.Add(row("ID"), row("Descripcion"), Format(CDec(row("Importe")), "#####0.00"), (CDec(row("Importe")) - CDec(row("Descuento"))), "")
+            GridPagos.Rows.Add(row("ID"), row("Clave"), row("Descripcion"), (CDec(row("Importe")) - CDec(row("Descuento"))), "")
         Next
     End Sub
 
@@ -123,7 +123,7 @@
             Next
             db.commitTransaction()
             MessageBox.Show("Cargos asignados correctamente")
-            AsignacionPlanesEDC.Reiniciar()
+            CambioPlanesEDC.Reiniciar()
         Catch ex As Exception
 
         End Try
@@ -136,7 +136,7 @@
                 If (gridPagos.Rows(x).Cells(4).Value = "") Then
                     descuento = 0.000000
                 Else
-                    descuento = gridPagos.Rows(x).Cells(2).Value - gridPagos.Rows(x).Cells(4).Value
+                    descuento = gridPagos.Rows(x).Cells(3).Value - gridPagos.Rows(x).Cells(4).Value
                 End If
 
                 db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionCargosPlanes SET Descuento = {descuento} WHERE ID_Concepto = {gridPagos.Rows(x).Cells(0).Value} AND Matricula = '{Matricula}' AND Activo = 1")

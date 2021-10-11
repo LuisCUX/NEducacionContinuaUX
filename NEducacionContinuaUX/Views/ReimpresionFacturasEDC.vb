@@ -39,6 +39,7 @@ Public Class ReimpresionFacturasEDC
     End Sub
 
     Private Sub cbFactura_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbFactura.SelectionChangeCommitted
+        GridConceptos.Rows.Clear()
         Dim tableConceptos As DataTable = db.getDataTableFromSQL($"SELECT Nombre_Concepto, Cantidad, PrecioUnitario, IVA, Descuento, Total FROM ing_xmlTimbradosConceptos WHERE XMLID = {cbFactura.SelectedValue}")
         For Each item As DataRow In tableConceptos.Rows
             GridConceptos.Rows.Add(item("Nombre_Concepto"), item("Cantidad"), Format(item("PrecioUnitario"), "#####0.00"), Format(item("IVA"), "#####0.00"), Format(item("Descuento"), "#####0.00"), Format(item("Total"), "#####0.00"))
@@ -53,6 +54,7 @@ Public Class ReimpresionFacturasEDC
 
     Private Sub btnBuscarMatricula_Click(sender As Object, e As EventArgs) Handles btnBuscarMatricula.Click
         Matricula = txtMatricula.Text
+        GridConceptos.Rows.Clear()
         tipoMatricula = re.validarMatricula(Matricula)
         Dim valida As Boolean = re.llenarComboboxFacturas(Matricula, cbFactura)
         If (valida = False) Then
@@ -89,6 +91,9 @@ Public Class ReimpresionFacturasEDC
         Dim folioFiscal As String = db.exectSQLQueryScalar($"SELECT FolioFiscal FROM ing_xmlTimbrados WHERE ID = {IDXML}")
         Dim folioEDC As String = db.exectSQLQueryScalar($"SELECT Folio FROM ing_xmlTimbrados WHERE ID = {IDXML}")
         Dim cantidadInt As Decimal = db.exectSQLQueryScalar($"SELECT Total FROM ing_xmlTimbrados WHERE ID = {IDXML}")
+        Dim esEvento As Boolean = False
+        Dim NombreEvento As String
+
         Dim cantidadString As String
         Dim valores As String()
         If (InStr(cantidadInt, ".")) Then
@@ -111,6 +116,22 @@ Public Class ReimpresionFacturasEDC
 
         Dim RFCCLiente As String = va.obtenerRFC(Matricula, tipoMatricula)
 
+        Dim tableIDConceptos As DataTable = db.getDataTableFromSQL($"SELECT DISTINCT Clave_Concepto FROM ing_xmlTimbradosConceptos WHERE XMLID = {IDXML}")
+        For Each item As DataRow In tableIDConceptos.Rows
+            If (item("Clave_Concepto") <> 1 And item("Clave_Concepto") <> 2) Then
+                esEvento = True
+            End If
+        Next
+
+        If (esEvento = False) Then
+            NombreEvento = "   "
+        Else
+            NombreEvento = db.exectSQLQueryScalar($"SELECT C.nombre FROM portal_registroCongreso AS RC
+                                                        INNER JOIN portal_tipoAsistente AS TA ON TA.id_tipo_asistente = RC.id_tipo_asistente
+                                                        INNER JOIN portal_congreso AS C ON C.id_congreso = TA.id_congreso
+                                                        WHERE RC.clave_cliente = '{Matricula}'")
+        End If
+
         Dim QR As String = $"?re={EnviromentService.RFCEDC}&rr={RFCCLiente}id={folioFiscal}tt={cantidadInt}"
         Me.gernerarQr(QR, $"{folioEDC.Substring(0, 1)}{folioEDC.Substring(1, folioEDC.Length() - 1)}")
         rep.AgregarFuente("FacturaEDC.rpt")
@@ -119,6 +140,7 @@ Public Class ReimpresionFacturasEDC
         rep.AgregarParametros("ClaveCliente", ClaveCliente)
         rep.AgregarParametros("usoCFDI", usoCFDI)
         rep.AgregarParametros("TipoCliente", tipoCliente)
+        rep.AgregarParametros("NombreEvento", NombreEvento)
         rep.MostrarReporte()
     End Sub
 

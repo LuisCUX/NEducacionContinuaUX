@@ -237,10 +237,22 @@
     <Compile Include="Views\AsignacionPlanesEDC.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Views\AsignacionPlanesoldEDC.Designer.vb">
+      <DependentUpon>AsignacionPlanesoldEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AsignacionPlanesoldEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\AutorizacionCondonacionEDC.Designer.vb">
       <DependentUpon>AutorizacionCondonacionEDC.vb</DependentUpon>
     </Compile>
     <Compile Include="Views\AutorizacionCondonacionEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CambioPlanesEDC.Designer.vb">
+      <DependentUpon>CambioPlanesEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CambioPlanesEDC.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\IVAEDC.Designer.vb">
@@ -301,6 +313,12 @@
       <DependentUpon>ModalDescuento.vb</DependentUpon>
     </Compile>
     <Compile Include="Views\ModalDescuento.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ModificacionCostosPlanesEDC.Designer.vb">
+      <DependentUpon>ModificacionCostosPlanesEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModificacionCostosPlanesEDC.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\NotasDeCreditoEDC.Designer.vb">
@@ -374,8 +392,14 @@
     <EmbeddedResource Include="Views\AsignacionPlanesEDC.resx">
       <DependentUpon>AsignacionPlanesEDC.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\AsignacionPlanesoldEDC.resx">
+      <DependentUpon>AsignacionPlanesoldEDC.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\AutorizacionCondonacionEDC.resx">
       <DependentUpon>AutorizacionCondonacionEDC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CambioPlanesEDC.resx">
+      <DependentUpon>CambioPlanesEDC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\IVAEDC.resx">
       <DependentUpon>IVAEDC.vb</DependentUpon>
@@ -406,6 +430,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ModalDescuento.resx">
       <DependentUpon>ModalDescuento.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ModificacionCostosPlanesEDC.resx">
+      <DependentUpon>ModificacionCostosPlanesEDC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\NotasDeCreditoEDC.resx">
       <DependentUpon>NotasDeCreditoEDC.vb</DependentUpon>

@@ -83,6 +83,7 @@ Public Class CobrosController
     Function Cobrar(listaConceptos As List(Of Concepto), formaPago As String, Matricula As String, RFCCLiente As String, NombreCLiente As String, montoTotal As Decimal, Credito As Boolean, tipoMatricula As Integer) As Integer
         NombreCLiente = Me.quitaTildesEspecial(NombreCLiente)
         Dim folioPago As String = Me.obtenerFolio("Pago")
+        Dim esEvento As Boolean = False
         Try
             db.startTransaction()
             '---------------------------------------------------------IDENTIFICA ABONO---------------------------------------------------------
@@ -127,7 +128,11 @@ Public Class CobrosController
             DescuentoS = ch.getFormat(DescuentoS)
             Total = ((CDec(SubTotal) - CDec(Descuento)) + CDec(totalIVA))
 
-
+            For Each concepto As Concepto In listaConceptos
+                If (concepto.claveConcepto <> "POA" And concepto.claveConcepto <> "POE") Then
+                    esEvento = True
+                End If
+            Next
 
             Dim TotalText As String
             Dim valores As String()
@@ -202,6 +207,15 @@ Public Class CobrosController
 
 
             MessageBox.Show("Pago registrado correctamente")
+            Dim NombreEvento As String
+            If (esEvento = False) Then
+                NombreEvento = "   "
+            Else
+                NombreEvento = db.exectSQLQueryScalar($"SELECT C.nombre FROM portal_registroCongreso AS RC
+                                                        INNER JOIN portal_tipoAsistente AS TA ON TA.id_tipo_asistente = RC.id_tipo_asistente
+                                                        INNER JOIN portal_congreso AS C ON C.id_congreso = TA.id_congreso
+                                                        WHERE RC.clave_cliente = '{Matricula}'")
+            End If
             Dim descripcionCFDI As String = db.exectSQLQueryScalar($"select UPPER('(' + clave_usoCFDI + ')' + ' ' + descripcion) As Clave from ing_cat_usoCFDI WHERE clave_usoCFDI = '{UsoCFDI}'")
             Dim QR As String = $"?re={EnviromentService.RFCEDC}&rr={RFCCLiente}id={folioFiscal}tt={Total}"
             Me.gernerarQr(QR, $"{Serie}{Folio}")
@@ -211,6 +225,7 @@ Public Class CobrosController
             rep.AgregarParametros("CantidadLetra", TotalText)
             rep.AgregarParametros("usoCFDI", descripcionCFDI)
             rep.AgregarParametros("TipoCliente", tipoMatricula)
+            rep.AgregarParametros("NombreEvento", NombreEvento)
 
 
             ObjectBagService.setItem("CantidadLetra", Total)
@@ -220,6 +235,7 @@ Public Class CobrosController
             ObjectBagService.setItem("RFC", RFCCLiente)
             ObjectBagService.setItem("FolioF", folioFiscal)
             ObjectBagService.setItem("tipoCliente", tipoMatricula)
+            ObjectBagService.setItem("NombreEvento", NombreEvento)
             rep.MostrarReporte()
             db.commitTransaction()
 

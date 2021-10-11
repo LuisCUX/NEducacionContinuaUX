@@ -498,41 +498,58 @@ Public Class CobrosEDC
         Dim folioFiscal As String = ObjectBagService.getItem("FolioF")
         Dim tipoClienteint As Integer = ObjectBagService.getItem("tipoCliente")
         ObjectBagService.clearBag()
-        Dim rep2 As ImpresionReportesService = New ImpresionReportesService()
+        'Dim rep2 As ImpresionReportesService = New ImpresionReportesService()
 
-        Dim QR As String = $"?re={EnviromentService.RFCEDC}&rr={RFCCLiente}id={folioFiscal}tt={Total}"
-        co.gernerarQr(QR, $"{Serie}{Folio}")
-        rep2.AgregarFuente("FacturaEDC.rpt")
-        rep2.AgregarParametros("IDXML", IDXML)
-        rep2.AgregarParametros("CantidadLetra", Total)
-        rep2.AgregarParametros("ClaveCliente", Matricula)
-        rep2.AgregarParametros("usoCFDI", usoCFDI)
-        rep2.AgregarParametros("TipoCliente", tipoClienteint)
+        'Dim esEvento As Boolean = False
+        'Dim NombreEvento As String
+        'For Each concepto As Concepto In listaConceptos
+        '    If (concepto.claveConcepto <> "POA" Or concepto.claveConcepto <> "POE") Then
+        '        esEvento = True
+        '    End If
+        'Next
+        'If (esEvento = False) Then
+        '    NombreEvento = "   "
+        'Else
+        '    NombreEvento = db.exectSQLQueryScalar($"SELECT C.nombre FROM portal_registroCongreso AS RC
+        '                                                INNER JOIN portal_tipoAsistente AS TA ON TA.id_tipo_asistente = RC.id_tipo_asistente
+        '                                                INNER JOIN portal_congreso AS C ON C.id_congreso = TA.id_congreso
+        '                                                WHERE RC.clave_cliente = '{Matricula}'")
+        'End If
 
-        Dim mail As New Mail
-        Dim archivo_pdf As Byte() = Nothing
-        Dim archivo_xml As Byte() = Nothing
+        'Dim QR As String = $"?re={EnviromentService.RFCEDC}&rr={RFCCLiente}id={folioFiscal}tt={Total}"
+        'co.gernerarQr(QR, $"{Serie}{Folio}")
+        'rep2.AgregarFuente("FacturaEDC.rpt")
+        'rep2.AgregarParametros("IDXML", IDXML)
+        'rep2.AgregarParametros("CantidadLetra", Total)
+        'rep2.AgregarParametros("ClaveCliente", Matricula)
+        'rep2.AgregarParametros("usoCFDI", usoCFDI)
+        'rep2.AgregarParametros("TipoCliente", tipoClienteint)
+        'rep2.AgregarParametros("NombreEvento", NombreEvento)
 
-        Dim xmlTimbrado As String = db.exectSQLQueryScalar($"SELECT XMLTimbrado FROM ing_xmlTimbrados WHERE ID = {IDXML}")
+        'Dim mail As New Mail
+        'Dim archivo_pdf As Byte() = Nothing
+        'Dim archivo_xml As Byte() = Nothing
 
-        archivo_pdf = rep2.obtenerReporteByte()
-        'archivo_pdf = Encoding.Default.GetBytes(xmlTimbrado)
-        archivo_xml = Encoding.Default.GetBytes(xmlTimbrado)
+        'Dim xmlTimbrado As String = db.exectSQLQueryScalar($"SELECT XMLTimbrado FROM ing_xmlTimbrados WHERE ID = {IDXML}")
 
-        mail.Destino = "luis.c@ux.edu.mx"
-        mail.Asunto = "GRACIAS POR SU PAGO"
-        mail.Mensaje = "ANEXAMOS TUS COMPROBANTES DE PAGO ADJUNTOS A ESTE CORREO, GRACIAS."
-        mail.BytesFile = archivo_pdf
-        mail.BytesFile2 = archivo_xml
-        mail.FileName = "Factura"
-        mail.FileName2 = "xml"
-        Try
-            es.sendEmailWithFileBytesCobro(mail)
-            MessageBox.Show("Email enviado correctamente")
-            Me.Reiniciar()
-        Catch ex As Exception
-            MessageBox.Show("Error al enviar email")
-        End Try
+        'archivo_pdf = rep2.obtenerReporteByte()
+        ''archivo_pdf = Encoding.Default.GetBytes(xmlTimbrado)
+        'archivo_xml = Encoding.Default.GetBytes(xmlTimbrado)
+
+        'mail.Destino = "luis.c@ux.edu.mx"
+        'mail.Asunto = "GRACIAS POR SU PAGO"
+        'mail.Mensaje = "ANEXAMOS TUS COMPROBANTES DE PAGO ADJUNTOS A ESTE CORREO, GRACIAS."
+        'mail.BytesFile = archivo_pdf
+        'mail.BytesFile2 = archivo_xml
+        'mail.FileName = "Factura"
+        'mail.FileName2 = "xml"
+        'Try
+        '    es.sendEmailWithFileBytesCobro(mail)
+        '    MessageBox.Show("Email enviado correctamente")
+        '    Me.Reiniciar()
+        'Catch ex As Exception
+        '    MessageBox.Show("Error al enviar email")
+        'End Try
         Me.Reiniciar()
     End Sub
 

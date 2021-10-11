@@ -34,8 +34,8 @@
     End Sub
 
     Private Sub AsignacionDePlanToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AsignacionDePlanToolStripMenuItem.Click
-        AsignacionPlanesEDC.MdiParent = Me
-        AsignacionPlanesEDC.Show()
+        AsignacionPlanesoldEDC.MdiParent = Me
+        AsignacionPlanesoldEDC.Show()
     End Sub
 
     Private Sub CobroToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CobroToolStripMenuItem.Click
@@ -70,5 +70,20 @@
     Private Sub ReimpresionDeFacturasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReimpresionDeFacturasToolStripMenuItem.Click
         ReimpresionFacturasEDC.MdiParent = Me
         ReimpresionFacturasEDC.Show()
+    End Sub
+
+    Private Sub AsignaciónDePlanesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AsignaciónDePlanesToolStripMenuItem.Click
+        AsignacionPlanesEDC.MdiParent = Me
+        AsignacionPlanesEDC.Show()
+    End Sub
+
+    Private Sub CambioDePlanesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CambioDePlanesToolStripMenuItem.Click
+        CambioPlanesEDC.MdiParent = Me
+        CambioPlanesEDC.Show()
+    End Sub
+
+    Private Sub ModificaciónDeCostosDePlanesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ModificaciónDeCostosDePlanesToolStripMenuItem.Click
+        ModificacionCostosPlanesEDC.MdiParent = Me
+        ModificacionCostosPlanesEDC.Show()
     End Sub
 End Class

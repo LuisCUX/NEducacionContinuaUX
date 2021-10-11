@@ -16,7 +16,7 @@ Public Class ModalDescuento
             MessageBox.Show("No puede ingresar una cantidad superior al costo unitario del concepto, ingrese una cantidad valida.")
             Exit Sub
         Else
-            AsignacionPlanesEDC.GridActual3.Rows(row).Cells(column).Value = Format(CDec(txtDescuento.Text), "#####0.00")
+            AsignacionPlanesoldEDC.GridActual3.Rows(row).Cells(column).Value = Format(CDec(txtDescuento.Text), "#####0.00")
             Me.Close()
         End If
 
@@ -41,6 +41,6 @@ Public Class ModalDescuento
     End Sub
 
     Private Sub ModalDescuento_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-        AsignacionPlanesEDC.Enabled = True
+        AsignacionPlanesoldEDC.Enabled = True
     End Sub
 End Class

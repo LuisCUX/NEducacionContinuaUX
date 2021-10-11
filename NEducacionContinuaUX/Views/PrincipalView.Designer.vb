@@ -40,6 +40,10 @@ Partial Class PrincipalView
         Me.PlanesDeDiplomadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RegistroDePlanesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AsignacionDePlanToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MovimientosAlumnosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AsignaciónDePlanesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CambioDePlanesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ModificaciónDeCostosDePlanesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CatalogosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GestionDeExternosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EwewaewaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -67,7 +71,7 @@ Partial Class PrincipalView
         '
         'MenuStrip
         '
-        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CobrosToolStripMenuItem, Me.NotasDeCreditoToolStripMenuItem, Me.AutorizacionesYCondonacionesToolStripMenuItem, Me.PagosOpcionalesToolStripMenuItem, Me.PlanesDeDiplomadosToolStripMenuItem, Me.CatalogosToolStripMenuItem, Me.ReportesToolStripMenuItem})
+        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CobrosToolStripMenuItem, Me.NotasDeCreditoToolStripMenuItem, Me.AutorizacionesYCondonacionesToolStripMenuItem, Me.PagosOpcionalesToolStripMenuItem, Me.PlanesDeDiplomadosToolStripMenuItem, Me.MovimientosAlumnosToolStripMenuItem, Me.CatalogosToolStripMenuItem, Me.ReportesToolStripMenuItem})
         Me.MenuStrip.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip.Name = "MenuStrip"
         Me.MenuStrip.Size = New System.Drawing.Size(1423, 24)
@@ -163,6 +167,31 @@ Partial Class PrincipalView
         Me.AsignacionDePlanToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
         Me.AsignacionDePlanToolStripMenuItem.Text = "Asignacion de plan"
         '
+        'MovimientosAlumnosToolStripMenuItem
+        '
+        Me.MovimientosAlumnosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AsignaciónDePlanesToolStripMenuItem, Me.CambioDePlanesToolStripMenuItem, Me.ModificaciónDeCostosDePlanesToolStripMenuItem})
+        Me.MovimientosAlumnosToolStripMenuItem.Name = "MovimientosAlumnosToolStripMenuItem"
+        Me.MovimientosAlumnosToolStripMenuItem.Size = New System.Drawing.Size(138, 20)
+        Me.MovimientosAlumnosToolStripMenuItem.Text = "Movimientos alumnos"
+        '
+        'AsignaciónDePlanesToolStripMenuItem
+        '
+        Me.AsignaciónDePlanesToolStripMenuItem.Name = "AsignaciónDePlanesToolStripMenuItem"
+        Me.AsignaciónDePlanesToolStripMenuItem.Size = New System.Drawing.Size(250, 22)
+        Me.AsignaciónDePlanesToolStripMenuItem.Text = "Asignación de planes"
+        '
+        'CambioDePlanesToolStripMenuItem
+        '
+        Me.CambioDePlanesToolStripMenuItem.Name = "CambioDePlanesToolStripMenuItem"
+        Me.CambioDePlanesToolStripMenuItem.Size = New System.Drawing.Size(250, 22)
+        Me.CambioDePlanesToolStripMenuItem.Text = "Cambio de planes"
+        '
+        'ModificaciónDeCostosDePlanesToolStripMenuItem
+        '
+        Me.ModificaciónDeCostosDePlanesToolStripMenuItem.Name = "ModificaciónDeCostosDePlanesToolStripMenuItem"
+        Me.ModificaciónDeCostosDePlanesToolStripMenuItem.Size = New System.Drawing.Size(250, 22)
+        Me.ModificaciónDeCostosDePlanesToolStripMenuItem.Text = "Modificación de costos de planes"
+        '
         'CatalogosToolStripMenuItem
         '
         Me.CatalogosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GestionDeExternosToolStripMenuItem, Me.EwewaewaToolStripMenuItem, Me.IVAToolStripMenuItem, Me.ReimpresionDeFacturasToolStripMenuItem})
@@ -252,4 +281,8 @@ Partial Class PrincipalView
     Friend WithEvents ReportesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents IVAToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ReimpresionDeFacturasToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MovimientosAlumnosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AsignaciónDePlanesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CambioDePlanesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ModificaciónDeCostosDePlanesToolStripMenuItem As ToolStripMenuItem
 End Class

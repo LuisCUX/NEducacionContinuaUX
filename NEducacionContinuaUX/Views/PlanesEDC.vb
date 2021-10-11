@@ -63,6 +63,14 @@
 
     End Sub
 
+    Private Sub txtImportePagos_TextChanged(sender As Object, e As EventArgs) Handles txtImportePagos.TextChanged
+        If (txtImportePagos.TextLength <> 0) Then
+            cbNoPagos.Enabled = True
+        Else
+            cbNoPagos.Enabled = False
+        End If
+    End Sub
+
     Private Sub txtNombrePlan_TextChanged(sender As Object, e As EventArgs) Handles txtNombrePlan.TextChanged
         If (txtNombrePlan.TextLength > 0) Then
             chbInscripcion.Enabled = True
@@ -1259,4 +1267,6 @@
             item.Items.Add("12")
         Next
     End Sub
+
+
 End Class
