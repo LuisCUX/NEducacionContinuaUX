@@ -43,7 +43,7 @@ Public Class ImpresionReportesService
 
             Dim bytes(oStream.Length) As Byte
 
-            oStream.Read(bytes, 0, Convert.ToInt32(oStream.Length - 1))
+            oStream.Read(bytes, 0, Convert.ToInt64(oStream.Length - 1))
 
             result = bytes
 
@@ -52,4 +52,26 @@ Public Class ImpresionReportesService
             MessageBox.Show(ex.Message)
         End Try
     End Function
+
+    Public Sub guardarReporte(folio As String)
+        reporte.SetDatabaseLogon(EnviromentService.dbUsername, EnviromentService.dbPassword, EnviromentService.serverIP, EnviromentService.dbName)
+
+        Try
+            Dim CrExportOptions As ExportOptions
+            Dim CrDiskFileDestinationOptions As New DiskFileDestinationOptions()
+            Dim CrFormatTypeOptions As New PdfRtfWordFormatOptions()
+            Dim FilePath As String = $"\\192.168.1.241\ti\NEducacionContinua\FacturaTemp\{folio}.pdf"
+            CrDiskFileDestinationOptions.DiskFileName = FilePath
+            CrExportOptions = reporte.ExportOptions
+            With CrExportOptions
+                .ExportDestinationType = ExportDestinationType.DiskFile
+                .ExportFormatType = ExportFormatType.PortableDocFormat
+                .DestinationOptions = CrDiskFileDestinationOptions
+                .FormatOptions = CrFormatTypeOptions
+            End With
+            reporte.Export()
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        End Try
+    End Sub
 End Class

@@ -36,6 +36,7 @@
             If (cbPlanes.Text <> "NUEVO PLAN" And cbPlanes.Text <> "-PLAN GENERAL-") Then
                 txtNombrePlan.Text = cbPlanes.Text
                 txtNombrePlan.Enabled = True
+                txtPublicoPlan.Text = db.exectSQLQueryScalar($"SELECT PublicoPlan FROM ing_Planes WHERE ID = {cbPlanes.SelectedValue}")
                 pc.llenarVentanaPlanesInscripcion(cbPlanes.SelectedValue, chbInscripcion, txtImporteInscripcion, chbRecargoInscripcion, chbDescuentoInscripcion, NURecargoInscripcion, datePickerRecargoInscripcion, NUDescuentoInscripcion, txtDescripcionDescuentoInscripcion, datePickerLimiteDescuentoInscripcion)
                 pc.llenarVentanaPlanesColegiaturas(cbPlanes.SelectedValue, listaPaneles, listatxtImportes, listatxtRecargos, listatxtDescuentos, listatxtDescripcionDescuentos, listadatePickerRecargos, listadatePickerDescuentos, listacbClaves, listatxtConcepto, txtImportePagos, NURecargo, NUDescuento, txtDescripcionDescuentoPagos, chbRecargosPagos, chbDescuentoPagos, cbNoPagos)
                 pc.llenarVentanaPlanesPagoUnico(cbPlanes.SelectedValue, chbPagoUnico, txtMontoPagoUnico, chbDescuentoPagoUnico, NUDescuentoPagoUnico, txtDescripcionDescuentoPagoUnico, datePickerDescuentoPagoUnico, datePickerPagoUnico)
@@ -1150,11 +1151,14 @@
                 Try
                     db.startTransaction()
                     db.execSQLQueryWithoutParams($"UPDATE ing_PlanesConceptos SET Activo = 0 WHERE ID_Plan = {cbPlanes.SelectedValue}")
+                    db.execSQLQueryWithoutParams($"UPDATE ing_Planes SET Nombre_Plan = '{txtNombrePlan.Text}', PublicoPlan = '{txtPublicoPlan.Text}' WHERE ID = {cbPlanes.SelectedValue}")
                     Dim Orden As Integer = 1
                     If (chbInscripcion.Checked = True) Then
                         pc.guardarInscripcion(cbPlanes.SelectedValue, Orden, txtImporteInscripcion.Text, NURecargoInscripcion.Text, NUDescuentoInscripcion.Text, pc.obtenerFechaString(datePickerLimiteDescuentoInscripcion), pc.obtenerFechaString(datePickerRecargoInscripcion), chbRecargoInscripcion.Checked, Agrega, Absorbe, Exenta)
                         Orden = Orden + 1
                     End If
+
+
 
                     For x = 0 To cbNoPagos.SelectedIndex
                         Dim Clave As String = listacbClaves(x).Text

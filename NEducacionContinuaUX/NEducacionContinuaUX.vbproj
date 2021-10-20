@@ -28,7 +28,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\192.168.1.241\ti\NEducacionContinua\Instalador\</InstallUrl>
     <TargetCulture>es-MX</TargetCulture>
-    <ApplicationRevision>28</ApplicationRevision>
+    <ApplicationRevision>40</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -224,6 +224,8 @@
     <Compile Include="Services\ConsultaTimbresService.vb" />
     <Compile Include="Services\DataBaseService.vb" />
     <Compile Include="Services\EmailService.vb" />
+    <Compile Include="Services\Email\EmailModel.vb" />
+    <Compile Include="Services\Email\UXEmailService.vb" />
     <Compile Include="Services\EnviromentService.vb" />
     <Compile Include="Services\ImpresionReportesService.vb" />
     <Compile Include="Services\ObjectBagService.vb" />

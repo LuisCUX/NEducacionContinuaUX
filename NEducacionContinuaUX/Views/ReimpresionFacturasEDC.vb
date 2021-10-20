@@ -141,6 +141,9 @@ Public Class ReimpresionFacturasEDC
         rep.AgregarParametros("usoCFDI", usoCFDI)
         rep.AgregarParametros("TipoCliente", tipoCliente)
         rep.AgregarParametros("NombreEvento", NombreEvento)
+
+        rep.guardarReporte(folioEDC)
+
         rep.MostrarReporte()
     End Sub
 

@@ -9,7 +9,7 @@ Public Class CobrosEDC
     Dim ca As CargosController = New CargosController()
     Dim ch As ConceptHandlerController = New ConceptHandlerController()
     Dim va As ValidacionesController = New ValidacionesController()
-    Dim es As EmailService = New EmailService()
+    Dim es As UXServiceEmail = New UXServiceEmail()
     Dim combo_filtro As String
     Private Sub CobrosEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -497,59 +497,55 @@ Public Class CobrosEDC
         Dim RFCCLiente As String = ObjectBagService.getItem("RFC")
         Dim folioFiscal As String = ObjectBagService.getItem("FolioF")
         Dim tipoClienteint As Integer = ObjectBagService.getItem("tipoCliente")
+        Dim NombreEvento As String = ObjectBagService.getItem("NombreEvento")
         ObjectBagService.clearBag()
-        'Dim rep2 As ImpresionReportesService = New ImpresionReportesService()
+        Dim rep2 As ImpresionReportesService = New ImpresionReportesService()
 
-        'Dim esEvento As Boolean = False
-        'Dim NombreEvento As String
-        'For Each concepto As Concepto In listaConceptos
-        '    If (concepto.claveConcepto <> "POA" Or concepto.claveConcepto <> "POE") Then
-        '        esEvento = True
-        '    End If
-        'Next
-        'If (esEvento = False) Then
-        '    NombreEvento = "   "
-        'Else
-        '    NombreEvento = db.exectSQLQueryScalar($"SELECT C.nombre FROM portal_registroCongreso AS RC
-        '                                                INNER JOIN portal_tipoAsistente AS TA ON TA.id_tipo_asistente = RC.id_tipo_asistente
-        '                                                INNER JOIN portal_congreso AS C ON C.id_congreso = TA.id_congreso
-        '                                                WHERE RC.clave_cliente = '{Matricula}'")
-        'End If
+        Dim QR As String = $"?re={EnviromentService.RFCEDC}&rr={RFCCLiente}id={folioFiscal}tt={Total}"
+        co.gernerarQr(QR, $"{Serie}{Folio}")
+        rep2.AgregarFuente("FacturaEDC.rpt")
+        rep2.AgregarParametros("IDXML", IDXML)
+        rep2.AgregarParametros("ClaveCliente", Matricula)
+        rep2.AgregarParametros("CantidadLetra", Total)
+        rep2.AgregarParametros("usoCFDI", usoCFDI)
+        rep2.AgregarParametros("TipoCliente", tipocliente)
+        rep2.AgregarParametros("NombreEvento", NombreEvento)
 
-        'Dim QR As String = $"?re={EnviromentService.RFCEDC}&rr={RFCCLiente}id={folioFiscal}tt={Total}"
-        'co.gernerarQr(QR, $"{Serie}{Folio}")
-        'rep2.AgregarFuente("FacturaEDC.rpt")
-        'rep2.AgregarParametros("IDXML", IDXML)
-        'rep2.AgregarParametros("CantidadLetra", Total)
-        'rep2.AgregarParametros("ClaveCliente", Matricula)
-        'rep2.AgregarParametros("usoCFDI", usoCFDI)
-        'rep2.AgregarParametros("TipoCliente", tipoClienteint)
-        'rep2.AgregarParametros("NombreEvento", NombreEvento)
+        Dim mail As New EmailModel
+        Dim archivo_pdf As Byte() = Nothing
+        Dim archivo_xml As Byte() = Nothing
 
-        'Dim mail As New Mail
-        'Dim archivo_pdf As Byte() = Nothing
-        'Dim archivo_xml As Byte() = Nothing
+        Dim xmlTimbrado As String = db.exectSQLQueryScalar($"SELECT XMLTimbrado FROM ing_xmlTimbrados WHERE ID = {IDXML}")
 
-        'Dim xmlTimbrado As String = db.exectSQLQueryScalar($"SELECT XMLTimbrado FROM ing_xmlTimbrados WHERE ID = {IDXML}")
 
-        'archivo_pdf = rep2.obtenerReporteByte()
-        ''archivo_pdf = Encoding.Default.GetBytes(xmlTimbrado)
-        'archivo_xml = Encoding.Default.GetBytes(xmlTimbrado)
+        archivo_pdf = rep2.obtenerReporteByte()
+        archivo_xml = Encoding.Default.GetBytes(xmlTimbrado)
 
-        'mail.Destino = "luis.c@ux.edu.mx"
-        'mail.Asunto = "GRACIAS POR SU PAGO"
-        'mail.Mensaje = "ANEXAMOS TUS COMPROBANTES DE PAGO ADJUNTOS A ESTE CORREO, GRACIAS."
-        'mail.BytesFile = archivo_pdf
-        'mail.BytesFile2 = archivo_xml
-        'mail.FileName = "Factura"
-        'mail.FileName2 = "xml"
-        'Try
-        '    es.sendEmailWithFileBytesCobro(mail)
-        '    MessageBox.Show("Email enviado correctamente")
-        '    Me.Reiniciar()
-        'Catch ex As Exception
-        '    MessageBox.Show("Error al enviar email")
-        'End Try
+        Dim emailCliente As String
+        Dim destino As New List(Of String)
+        If (tipoMatricula = "EX") Then
+            emailCliente = db.exectSQLQueryScalar($"SELECT C.correo FROM portal_cliente AS C
+                                                    INNER JOIN portal_registroExterno AS RC ON RC.id_cliente = C.id_cliente
+                                                    WHERE RC.clave_cliente = '{Matricula}'")
+        ElseIf (tipoMatricula = "EC") Then
+            emailCliente = db.exectSQLQueryScalar($"SELECT C.correo FROM portal_cliente AS C
+                                                    INNER JOIN portal_registroCongreso AS RC ON RC.id_cliente = C.id_cliente
+                                                    WHERE RC.clave_cliente = '{Matricula}'")
+        End If
+
+        destino.Add(emailCliente)
+        mail.Destino = destino
+        mail.Asunto = "GRACIAS POR SU PAGO"
+        mail.Mensaje = "ANEXAMOS TUS COMPROBANTES DE PAGO ADJUNTOS A ESTE CORREO, GRACIAS."
+        mail.BytesFile = archivo_pdf
+        mail.FileName = $"{Folio}.pdf"
+        Try
+            es.sendEmailWithFileBytes(mail)
+            MessageBox.Show("Email enviado correctamente")
+            Me.Reiniciar()
+        Catch ex As Exception
+            MessageBox.Show("Error al enviar email")
+        End Try
         Me.Reiniciar()
     End Sub
 

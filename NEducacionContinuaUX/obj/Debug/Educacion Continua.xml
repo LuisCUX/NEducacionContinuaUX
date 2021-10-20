@@ -177,5 +177,53 @@ Educacion Continua
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="T:NEducacionContinuaUX.EmailModel">
+ <summary>
+ Representa la estructura de un correo electronico con el fin de ser enviado
+ </summary>
+</member>
+<member name="P:NEducacionContinuaUX.EmailModel.Asunto">
+ <summary>
+ Texto del asunto del email
+ </summary>
+</member>
+<member name="P:NEducacionContinuaUX.EmailModel.Mensaje">
+ <summary>
+ Contenido del email, puede ser texto plano o contener etiquetas HTML
+ </summary>
+</member>
+<member name="P:NEducacionContinuaUX.EmailModel.Destino">
+ <summary>
+ Arreglo con los emails destinos
+ </summary>
+</member>
+<member name="P:NEducacionContinuaUX.EmailModel.File">
+ <summary>
+ Path del archivo a adjuntar
+ </summary>
+</member>
+<member name="P:NEducacionContinuaUX.EmailModel.BytesFile">
+ <summary>
+ Arreglo de bytes de un archivo a adjuntar
+ </summary>
+</member>
+<member name="M:NEducacionContinuaUX.UXServiceEmail.sendEmail(NEducacionContinuaUX.EmailModel)">
+ <summary>
+ Envio de email sencillo
+ </summary>
+ <param name="email"></param>
+</member>
+<member name="M:NEducacionContinuaUX.UXServiceEmail.sendEmailWithFile(NEducacionContinuaUX.EmailModel)">
+ <summary>
+ Envio de email con path de archivo adjunto (el archivo debe estar en el servidor)
+ </summary>
+ <param name="email"></param>
+</member>
+<member name="M:NEducacionContinuaUX.UXServiceEmail.sendEmailWithFileBytes(NEducacionContinuaUX.EmailModel)">
+ <summary>
+ Envio de email con archivo adjunto en base64, preferiblemente usar cuando se adjunte un PDF, funciona con archivos locales
+ </summary>
+ <param name="email"></param>
+</member>
 </members>
 </doc>
