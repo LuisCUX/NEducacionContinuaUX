@@ -499,6 +499,9 @@ Public Class CobrosEDC
         Dim tipoClienteint As Integer = ObjectBagService.getItem("tipoCliente")
         Dim NombreEvento As String = ObjectBagService.getItem("NombreEvento")
         ObjectBagService.clearBag()
+        If (IsNothing(NombreEvento)) Then
+            NombreEvento = "------"
+        End If
         Dim rep2 As ImpresionReportesService = New ImpresionReportesService()
 
         Dim QR As String = $"?re={EnviromentService.RFCEDC}&rr={RFCCLiente}id={folioFiscal}tt={Total}"
@@ -541,7 +544,6 @@ Public Class CobrosEDC
         mail.FileName = $"{Folio}.pdf"
         Try
             es.sendEmailWithFileBytes(mail)
-            MessageBox.Show("Email enviado correctamente")
             Me.Reiniciar()
         Catch ex As Exception
             MessageBox.Show("Error al enviar email")

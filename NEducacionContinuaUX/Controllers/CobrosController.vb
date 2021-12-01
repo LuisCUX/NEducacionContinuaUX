@@ -216,6 +216,9 @@ Public Class CobrosController
                                                         INNER JOIN portal_congreso AS C ON C.id_congreso = TA.id_congreso
                                                         WHERE RC.clave_cliente = '{Matricula}'")
             End If
+            If (IsNothing(NombreEvento)) Then
+                NombreEvento = "------"
+            End If
             Dim descripcionCFDI As String = db.exectSQLQueryScalar($"select UPPER('(' + clave_usoCFDI + ')' + ' ' + descripcion) As Clave from ing_cat_usoCFDI WHERE clave_usoCFDI = '{UsoCFDI}'")
             Dim QR As String = $"?re={EnviromentService.RFCEDC}&rr={RFCCLiente}id={folioFiscal}tt={Total}"
             Me.gernerarQr(QR, $"{Serie}{Folio}")
