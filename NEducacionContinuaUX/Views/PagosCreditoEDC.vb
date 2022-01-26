@@ -20,24 +20,24 @@ Public Class PagosCreditoEDC
         'tableExternos.Merge(tableEDC)
         'ComboboxService.llenarCombobox(cbExterno, tableExternos, "clave_cliente", "NombreCliente")
         Dim tableFormaPago As DataTable = db.getDataTableFromSQL("SELECT Forma_Pago, Descripcion FROM ing_CatFormaPago WHERE Descripcion != 'CREDITO'")
-        ComboboxService.llenarCombobox(cbFormaPago, tableFormaPago, "Forma_Pago", "Descripcion")
+        ComboboxService.llenarComboboxVacio(cbFormaPago, tableFormaPago, "Forma_Pago", "Descripcion")
         Dim tablebancos As DataTable = db.getDataTableFromSQL("SELECT ID, Nombre_Banco FROM ing_Cat_Bancos")
-        ComboboxService.llenarCombobox(cbBanco, tablebancos, "ID", "Nombre_Banco")
+        ComboboxService.llenarComboboxVacio(cbBanco, tablebancos, "ID", "Nombre_Banco")
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         Matricula = txtMatricula.Text
         tipoMatricula = va.validarMatricula(Matricula)
-        txtMatriculaDato.Text = Matricula
+        lblMatriculatxt.Text = Matricula
         If (tipoMatricula = "False") Then
             Me.Reiniciar()
             Exit Sub
         ElseIf (tipoMatricula = "UX") Then
-            va.buscarMatriculaUX(Matricula, panelDatos, panelCobroCredito, txtNombre, txtEmail, txtCarrera, txtTurno)
+            va.buscarMatriculaUX(Matricula, panelDatos, panelCobroCredito, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt)
         ElseIf (tipoMatricula = "EX") Then
-            va.buscarMatriculaEX(Matricula, panelDatos, panelCobroCredito, txtNombre, txtEmail, txtCarrera, txtTurno, txtRFC)
+            va.buscarMatriculaEX(Matricula, panelDatos, panelCobroCredito, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt)
         ElseIf (tipoMatricula = "EC") Then
-            va.buscarMatriculaEC(Matricula, panelDatos, panelCobroCredito, txtNombre, txtEmail, txtCarrera, txtTurno, txtRFC)
+            va.buscarMatriculaEC(Matricula, panelDatos, panelCobroCredito, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt)
         End If
         Dim tableFacturasCredito As DataTable = db.getDataTableFromSQL($"SELECT ID, UPPER('FOLIO: ' + Folio + ' - FECHA: ' + CAST(Fecha AS VARCHAR(MAX))) As Descripcion FROM ing_Creditos WHERE Matricula = '{Matricula}' AND Activo = 1")
         ComboboxService.llenarCombobox(cbFactura, tableFacturasCredito, "ID", "Descripcion")
@@ -90,6 +90,7 @@ Public Class PagosCreditoEDC
         Me.Controls.Clear()
         InitializeComponent()
         PagosCreditoEDC_Load(Me, Nothing)
+        txtMatricula.Focus()
     End Sub
 
     Private Sub btnCobrar_Click(sender As Object, e As EventArgs) Handles btnCobrar.Click
@@ -148,7 +149,7 @@ Public Class PagosCreditoEDC
         End If
         Dim montoNuevo As Decimal = montoAnterior - CantidadAbonada
         Dim folioFiscal As String = db.exectSQLQueryScalar($"SELECT FolioFiscal FROM ing_Creditos WHERE ID = {IDCredito}")
-        Dim IDXML As Integer = pc.cobroCredito(IDCredito, CantidadAbonada, montoAnterior, montoNuevo, Matricula, noPago, txtRFC.Text, txtNombre.Text, folioFiscal, noPago, cbFormaPago.SelectedValue)
+        Dim IDXML As Integer = pc.cobroCredito(IDCredito, CantidadAbonada, montoAnterior, montoNuevo, Matricula, noPago, lblRFCtxt.Text, lblNombretxt.Text, folioFiscal, noPago, cbFormaPago.SelectedValue)
 
         ''---------------------------------------------------------REGISTRO DE FORMA DE PAGO---------------------------------------------------------
         If (IDXML > 0) Then
@@ -368,5 +369,9 @@ Public Class PagosCreditoEDC
                 combo_filtro += " "
             End If
         End If
+    End Sub
+
+    Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
+        Me.Reiniciar()
     End Sub
 End Class

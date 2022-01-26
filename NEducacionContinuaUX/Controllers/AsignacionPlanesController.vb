@@ -8,7 +8,7 @@
 
         If (exists < 1) Then
             MessageBox.Show("La matricula ingresada no existe, favor de ingresar una matricula valida")
-            AsignacionPlanesoldEDC.Reiniciar()
+            AsignacionPlanesEDC.Reiniciar()
             Exit Sub
         End If
 

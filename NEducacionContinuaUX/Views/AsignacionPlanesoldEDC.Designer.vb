@@ -33,8 +33,11 @@ Partial Class AsignacionPlanesoldEDC
         Me.lblEmail = New System.Windows.Forms.Label()
         Me.lblNombre = New System.Windows.Forms.Label()
         Me.panelBusqueda = New System.Windows.Forms.Panel()
+        Me.btnBuscar = New System.Windows.Forms.Button()
         Me.panelDatos = New System.Windows.Forms.Panel()
         Me.panelRegistro = New System.Windows.Forms.Panel()
+        Me.btnSalir = New System.Windows.Forms.Button()
+        Me.btnGuardar = New System.Windows.Forms.Button()
         Me.GridPagos = New System.Windows.Forms.DataGridView()
         Me.cbPlanes = New System.Windows.Forms.ComboBox()
         Me.lblPlanes = New System.Windows.Forms.Label()
@@ -44,6 +47,7 @@ Partial Class AsignacionPlanesoldEDC
         Me.panelBusqueda2 = New System.Windows.Forms.Panel()
         Me.txtMatricula2 = New System.Windows.Forms.TextBox()
         Me.lblMatricula2 = New System.Windows.Forms.Label()
+        Me.btnBuscar2 = New System.Windows.Forms.Button()
         Me.lblNombre2 = New System.Windows.Forms.Label()
         Me.cbNombre2 = New System.Windows.Forms.ComboBox()
         Me.panelPlan2 = New System.Windows.Forms.Panel()
@@ -51,6 +55,8 @@ Partial Class AsignacionPlanesoldEDC
         Me.lblPlanActual = New System.Windows.Forms.Label()
         Me.lblNuevoPlan = New System.Windows.Forms.Label()
         Me.GridNuevoPlan = New System.Windows.Forms.DataGridView()
+        Me.btnSalir2 = New System.Windows.Forms.Button()
+        Me.btnGuardar2 = New System.Windows.Forms.Button()
         Me.GridPlanActual = New System.Windows.Forms.DataGridView()
         Me.panelInfo2 = New System.Windows.Forms.Panel()
         Me.lblNombreA2 = New System.Windows.Forms.Label()
@@ -60,6 +66,8 @@ Partial Class AsignacionPlanesoldEDC
         Me.pageModificacion = New System.Windows.Forms.TabPage()
         Me.panelModificacion3 = New System.Windows.Forms.Panel()
         Me.lblPlanActual3 = New System.Windows.Forms.Label()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnModificacionDesc = New System.Windows.Forms.Button()
         Me.GridActual3 = New System.Windows.Forms.DataGridView()
         Me.IDColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DescripcionColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -74,17 +82,9 @@ Partial Class AsignacionPlanesoldEDC
         Me.panelBusqueda3 = New System.Windows.Forms.Panel()
         Me.txtMatricula3 = New System.Windows.Forms.TextBox()
         Me.lblMatricula3 = New System.Windows.Forms.Label()
+        Me.btnBuscar3 = New System.Windows.Forms.Button()
         Me.lblNombre3 = New System.Windows.Forms.Label()
         Me.cbBuscar3 = New System.Windows.Forms.ComboBox()
-        Me.btnBuscar = New System.Windows.Forms.Button()
-        Me.btnSalir = New System.Windows.Forms.Button()
-        Me.btnGuardar = New System.Windows.Forms.Button()
-        Me.btnBuscar2 = New System.Windows.Forms.Button()
-        Me.btnSalir2 = New System.Windows.Forms.Button()
-        Me.btnGuardar2 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.btnModificacionDesc = New System.Windows.Forms.Button()
-        Me.btnBuscar3 = New System.Windows.Forms.Button()
         Me.panelBusqueda.SuspendLayout()
         Me.panelDatos.SuspendLayout()
         Me.panelRegistro.SuspendLayout()
@@ -206,6 +206,16 @@ Partial Class AsignacionPlanesoldEDC
         Me.panelBusqueda.Size = New System.Drawing.Size(788, 39)
         Me.panelBusqueda.TabIndex = 83
         '
+        'btnBuscar
+        '
+        Me.btnBuscar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.search_30px
+        Me.btnBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnBuscar.Location = New System.Drawing.Point(187, 0)
+        Me.btnBuscar.Name = "btnBuscar"
+        Me.btnBuscar.Size = New System.Drawing.Size(41, 39)
+        Me.btnBuscar.TabIndex = 76
+        Me.btnBuscar.UseVisualStyleBackColor = True
+        '
         'panelDatos
         '
         Me.panelDatos.Controls.Add(Me.lblNombre)
@@ -230,6 +240,26 @@ Partial Class AsignacionPlanesoldEDC
         Me.panelRegistro.Size = New System.Drawing.Size(788, 553)
         Me.panelRegistro.TabIndex = 84
         Me.panelRegistro.Visible = False
+        '
+        'btnSalir
+        '
+        Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
+        Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnSalir.Location = New System.Drawing.Point(473, 504)
+        Me.btnSalir.Name = "btnSalir"
+        Me.btnSalir.Size = New System.Drawing.Size(59, 46)
+        Me.btnSalir.TabIndex = 83
+        Me.btnSalir.UseVisualStyleBackColor = True
+        '
+        'btnGuardar
+        '
+        Me.btnGuardar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
+        Me.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnGuardar.Location = New System.Drawing.Point(224, 504)
+        Me.btnGuardar.Name = "btnGuardar"
+        Me.btnGuardar.Size = New System.Drawing.Size(60, 46)
+        Me.btnGuardar.TabIndex = 82
+        Me.btnGuardar.UseVisualStyleBackColor = True
         '
         'GridPagos
         '
@@ -334,6 +364,16 @@ Partial Class AsignacionPlanesoldEDC
         Me.lblMatricula2.TabIndex = 74
         Me.lblMatricula2.Text = "Matrícula:"
         '
+        'btnBuscar2
+        '
+        Me.btnBuscar2.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.search_30px
+        Me.btnBuscar2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnBuscar2.Location = New System.Drawing.Point(187, 0)
+        Me.btnBuscar2.Name = "btnBuscar2"
+        Me.btnBuscar2.Size = New System.Drawing.Size(41, 39)
+        Me.btnBuscar2.TabIndex = 76
+        Me.btnBuscar2.UseVisualStyleBackColor = True
+        '
         'lblNombre2
         '
         Me.lblNombre2.AutoSize = True
@@ -413,6 +453,26 @@ Partial Class AsignacionPlanesoldEDC
         Me.GridNuevoPlan.ReadOnly = True
         Me.GridNuevoPlan.Size = New System.Drawing.Size(775, 223)
         Me.GridNuevoPlan.TabIndex = 84
+        '
+        'btnSalir2
+        '
+        Me.btnSalir2.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
+        Me.btnSalir2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnSalir2.Location = New System.Drawing.Point(238, 504)
+        Me.btnSalir2.Name = "btnSalir2"
+        Me.btnSalir2.Size = New System.Drawing.Size(59, 46)
+        Me.btnSalir2.TabIndex = 83
+        Me.btnSalir2.UseVisualStyleBackColor = True
+        '
+        'btnGuardar2
+        '
+        Me.btnGuardar2.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
+        Me.btnGuardar2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnGuardar2.Location = New System.Drawing.Point(467, 504)
+        Me.btnGuardar2.Name = "btnGuardar2"
+        Me.btnGuardar2.Size = New System.Drawing.Size(60, 46)
+        Me.btnGuardar2.TabIndex = 82
+        Me.btnGuardar2.UseVisualStyleBackColor = True
         '
         'GridPlanActual
         '
@@ -515,6 +575,26 @@ Partial Class AsignacionPlanesoldEDC
         Me.lblPlanActual3.Size = New System.Drawing.Size(77, 16)
         Me.lblPlanActual3.TabIndex = 86
         Me.lblPlanActual3.Text = "Plan actual:"
+        '
+        'Button2
+        '
+        Me.Button2.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
+        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.Button2.Location = New System.Drawing.Point(238, 504)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(59, 46)
+        Me.Button2.TabIndex = 83
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'btnModificacionDesc
+        '
+        Me.btnModificacionDesc.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
+        Me.btnModificacionDesc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnModificacionDesc.Location = New System.Drawing.Point(467, 504)
+        Me.btnModificacionDesc.Name = "btnModificacionDesc"
+        Me.btnModificacionDesc.Size = New System.Drawing.Size(60, 46)
+        Me.btnModificacionDesc.TabIndex = 82
+        Me.btnModificacionDesc.UseVisualStyleBackColor = True
         '
         'GridActual3
         '
@@ -653,6 +733,16 @@ Partial Class AsignacionPlanesoldEDC
         Me.lblMatricula3.TabIndex = 74
         Me.lblMatricula3.Text = "Matrícula:"
         '
+        'btnBuscar3
+        '
+        Me.btnBuscar3.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.search_30px
+        Me.btnBuscar3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnBuscar3.Location = New System.Drawing.Point(187, 0)
+        Me.btnBuscar3.Name = "btnBuscar3"
+        Me.btnBuscar3.Size = New System.Drawing.Size(41, 39)
+        Me.btnBuscar3.TabIndex = 76
+        Me.btnBuscar3.UseVisualStyleBackColor = True
+        '
         'lblNombre3
         '
         Me.lblNombre3.AutoSize = True
@@ -671,96 +761,6 @@ Partial Class AsignacionPlanesoldEDC
         Me.cbBuscar3.Name = "cbBuscar3"
         Me.cbBuscar3.Size = New System.Drawing.Size(478, 21)
         Me.cbBuscar3.TabIndex = 78
-        '
-        'btnBuscar
-        '
-        Me.btnBuscar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.search_30px
-        Me.btnBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnBuscar.Location = New System.Drawing.Point(187, 0)
-        Me.btnBuscar.Name = "btnBuscar"
-        Me.btnBuscar.Size = New System.Drawing.Size(41, 39)
-        Me.btnBuscar.TabIndex = 76
-        Me.btnBuscar.UseVisualStyleBackColor = True
-        '
-        'btnSalir
-        '
-        Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
-        Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnSalir.Location = New System.Drawing.Point(238, 504)
-        Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New System.Drawing.Size(59, 46)
-        Me.btnSalir.TabIndex = 83
-        Me.btnSalir.UseVisualStyleBackColor = True
-        '
-        'btnGuardar
-        '
-        Me.btnGuardar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
-        Me.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnGuardar.Location = New System.Drawing.Point(467, 504)
-        Me.btnGuardar.Name = "btnGuardar"
-        Me.btnGuardar.Size = New System.Drawing.Size(60, 46)
-        Me.btnGuardar.TabIndex = 82
-        Me.btnGuardar.UseVisualStyleBackColor = True
-        '
-        'btnBuscar2
-        '
-        Me.btnBuscar2.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.search_30px
-        Me.btnBuscar2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnBuscar2.Location = New System.Drawing.Point(187, 0)
-        Me.btnBuscar2.Name = "btnBuscar2"
-        Me.btnBuscar2.Size = New System.Drawing.Size(41, 39)
-        Me.btnBuscar2.TabIndex = 76
-        Me.btnBuscar2.UseVisualStyleBackColor = True
-        '
-        'btnSalir2
-        '
-        Me.btnSalir2.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
-        Me.btnSalir2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnSalir2.Location = New System.Drawing.Point(238, 504)
-        Me.btnSalir2.Name = "btnSalir2"
-        Me.btnSalir2.Size = New System.Drawing.Size(59, 46)
-        Me.btnSalir2.TabIndex = 83
-        Me.btnSalir2.UseVisualStyleBackColor = True
-        '
-        'btnGuardar2
-        '
-        Me.btnGuardar2.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
-        Me.btnGuardar2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnGuardar2.Location = New System.Drawing.Point(467, 504)
-        Me.btnGuardar2.Name = "btnGuardar2"
-        Me.btnGuardar2.Size = New System.Drawing.Size(60, 46)
-        Me.btnGuardar2.TabIndex = 82
-        Me.btnGuardar2.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
-        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button2.Location = New System.Drawing.Point(238, 504)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(59, 46)
-        Me.Button2.TabIndex = 83
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'btnModificacionDesc
-        '
-        Me.btnModificacionDesc.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
-        Me.btnModificacionDesc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnModificacionDesc.Location = New System.Drawing.Point(467, 504)
-        Me.btnModificacionDesc.Name = "btnModificacionDesc"
-        Me.btnModificacionDesc.Size = New System.Drawing.Size(60, 46)
-        Me.btnModificacionDesc.TabIndex = 82
-        Me.btnModificacionDesc.UseVisualStyleBackColor = True
-        '
-        'btnBuscar3
-        '
-        Me.btnBuscar3.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.search_30px
-        Me.btnBuscar3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnBuscar3.Location = New System.Drawing.Point(187, 0)
-        Me.btnBuscar3.Name = "btnBuscar3"
-        Me.btnBuscar3.Size = New System.Drawing.Size(41, 39)
-        Me.btnBuscar3.TabIndex = 76
-        Me.btnBuscar3.UseVisualStyleBackColor = True
         '
         'AsignacionPlanesoldEDC
         '

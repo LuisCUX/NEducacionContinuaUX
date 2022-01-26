@@ -19,6 +19,7 @@ Public Class AsignacionPlanesEDC
                                                          WHERE A.Matricula = '{Matricula}' AND A.Activo = 1")
         If (planID > 0) Then
             MessageBox.Show("La matricula ingresada ya tiene un plan asignado")
+            txtMatricula.Clear()
             Me.Reiniciar()
             Exit Sub
         End If
@@ -72,7 +73,7 @@ Public Class AsignacionPlanesEDC
             Dim tableFiltro As DataTable = db.getDataTableFromSQL($"SELECT RC.clave_cliente, UPPER('Congreso: ' + C.nombre + ' ' + RC.apellido_paterno + ' ' + RC.apellido_materno + ' (' + RC.clave_cliente + ')') AS NombreCliente FROM portal_registroCongreso AS RC
                                                                 INNER JOIN portal_cliente AS C ON RC.id_cliente = C.id_cliente
     											    WHERE (C.nombre + ' ' + RC.apellido_paterno + ' ' + RC.apellido_materno LIKE '%{filtro}%')")
-            ComboboxService.llenarCombobox(cbExterno, tableFiltro, "clave_cliente", "NombreCliente")
+            ComboboxService.llenarComboboxVacio(cbExterno, tableFiltro, "clave_cliente", "NombreCliente")
             cbExterno.SelectedValue = -1
             cbExterno.Text = combo_filtro
             cbExterno.DroppedDown = True
@@ -98,12 +99,12 @@ Public Class AsignacionPlanesEDC
         Catch ex As Exception
             MsgBox("Error: en la validación de este campo, por favor verifique o comuniquese con sistemas", MsgBoxStyle.Exclamation, "Error en datos")
         End Try
-
     End Sub
 
     Sub Reiniciar()
         Me.Controls.Clear()
         InitializeComponent()
         AsignacionPlanesEDC_Load(Me, Nothing)
+        txtMatricula.Focus()
     End Sub
 End Class

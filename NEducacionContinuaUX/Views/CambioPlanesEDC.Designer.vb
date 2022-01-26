@@ -35,13 +35,13 @@ Partial Class CambioPlanesEDC
         Me.lblNuevoPlan = New System.Windows.Forms.Label()
         Me.GridNuevoPlan = New System.Windows.Forms.DataGridView()
         Me.btnSalir2 = New System.Windows.Forms.Button()
-        Me.btnGuardar2 = New System.Windows.Forms.Button()
         Me.GridPlanActual = New System.Windows.Forms.DataGridView()
         Me.panelInfo2 = New System.Windows.Forms.Panel()
         Me.lblNombreA2 = New System.Windows.Forms.Label()
         Me.lblEmail2 = New System.Windows.Forms.Label()
         Me.txtEmail2 = New System.Windows.Forms.TextBox()
         Me.txtNombre2 = New System.Windows.Forms.TextBox()
+        Me.btnGuardar2 = New System.Windows.Forms.Button()
         Me.panelBusqueda2.SuspendLayout()
         Me.panelPlan2.SuspendLayout()
         CType(Me.GridNuevoPlan, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -186,21 +186,11 @@ Partial Class CambioPlanesEDC
         '
         Me.btnSalir2.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
         Me.btnSalir2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnSalir2.Location = New System.Drawing.Point(238, 504)
+        Me.btnSalir2.Location = New System.Drawing.Point(485, 504)
         Me.btnSalir2.Name = "btnSalir2"
         Me.btnSalir2.Size = New System.Drawing.Size(59, 46)
         Me.btnSalir2.TabIndex = 83
         Me.btnSalir2.UseVisualStyleBackColor = True
-        '
-        'btnGuardar2
-        '
-        Me.btnGuardar2.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
-        Me.btnGuardar2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnGuardar2.Location = New System.Drawing.Point(467, 504)
-        Me.btnGuardar2.Name = "btnGuardar2"
-        Me.btnGuardar2.Size = New System.Drawing.Size(60, 46)
-        Me.btnGuardar2.TabIndex = 82
-        Me.btnGuardar2.UseVisualStyleBackColor = True
         '
         'GridPlanActual
         '
@@ -269,6 +259,16 @@ Partial Class CambioPlanesEDC
         Me.txtNombre2.Size = New System.Drawing.Size(474, 21)
         Me.txtNombre2.TabIndex = 79
         '
+        'btnGuardar2
+        '
+        Me.btnGuardar2.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
+        Me.btnGuardar2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnGuardar2.Location = New System.Drawing.Point(237, 504)
+        Me.btnGuardar2.Name = "btnGuardar2"
+        Me.btnGuardar2.Size = New System.Drawing.Size(60, 46)
+        Me.btnGuardar2.TabIndex = 82
+        Me.btnGuardar2.UseVisualStyleBackColor = True
+        '
         'CambioPlanesEDC
         '
         Me.AcceptButton = Me.btnBuscar2
@@ -308,11 +308,11 @@ Partial Class CambioPlanesEDC
     Friend WithEvents lblNuevoPlan As Label
     Friend WithEvents GridNuevoPlan As DataGridView
     Friend WithEvents btnSalir2 As Button
-    Friend WithEvents btnGuardar2 As Button
     Friend WithEvents GridPlanActual As DataGridView
     Friend WithEvents panelInfo2 As Panel
     Friend WithEvents lblNombreA2 As Label
     Friend WithEvents lblEmail2 As Label
     Friend WithEvents txtEmail2 As TextBox
     Friend WithEvents txtNombre2 As TextBox
+    Friend WithEvents btnGuardar2 As Button
 End Class

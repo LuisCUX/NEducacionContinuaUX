@@ -28,7 +28,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\192.168.1.241\ti\NEducacionContinua\Instalador\</InstallUrl>
     <TargetCulture>es-MX</TargetCulture>
-    <ApplicationRevision>42</ApplicationRevision>
+    <ApplicationRevision>48</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -154,6 +154,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -189,6 +190,7 @@
     <Compile Include="Controllers\AsignacionPagosOpcionalesController.vb" />
     <Compile Include="Controllers\AsignacionPlanesController.vb" />
     <Compile Include="Controllers\AutorizacionCondonacionController.vb" />
+    <Compile Include="Controllers\CambioFormaPagoController.vb" />
     <Compile Include="Controllers\CargosController.vb" />
     <Compile Include="Controllers\CobrosController.vb" />
     <Compile Include="Controllers\CobrosDiferidosController.vb" />
@@ -249,6 +251,18 @@
       <DependentUpon>AutorizacionCondonacionEDC.vb</DependentUpon>
     </Compile>
     <Compile Include="Views\AutorizacionCondonacionEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\BancosEDC.Designer.vb">
+      <DependentUpon>BancosEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BancosEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CambioFormaPagoEDC.Designer.vb">
+      <DependentUpon>CambioFormaPagoEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CambioFormaPagoEDC.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\CambioPlanesEDC.Designer.vb">
@@ -399,6 +413,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\AutorizacionCondonacionEDC.resx">
       <DependentUpon>AutorizacionCondonacionEDC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\BancosEDC.resx">
+      <DependentUpon>BancosEDC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CambioFormaPagoEDC.resx">
+      <DependentUpon>CambioFormaPagoEDC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\CambioPlanesEDC.resx">
       <DependentUpon>CambioPlanesEDC.vb</DependentUpon>

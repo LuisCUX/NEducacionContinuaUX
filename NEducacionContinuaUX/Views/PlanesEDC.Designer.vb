@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class PlanesEDC
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class PlanesEDC
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PlanesEDC))
         Me.lblNombreVentana = New System.Windows.Forms.Label()
@@ -242,6 +242,7 @@ Partial Class PlanesEDC
         Me.RBExentaC = New System.Windows.Forms.RadioButton()
         Me.RBAbsorbeC = New System.Windows.Forms.RadioButton()
         Me.RBAgregaC = New System.Windows.Forms.RadioButton()
+        Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.tcPlanes.SuspendLayout()
         Me.pageInscripcion.SuspendLayout()
@@ -2582,9 +2583,9 @@ Partial Class PlanesEDC
         '
         Me.btnGuardar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
         Me.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnGuardar.Location = New System.Drawing.Point(734, 600)
+        Me.btnGuardar.Location = New System.Drawing.Point(378, 597)
         Me.btnGuardar.Name = "btnGuardar"
-        Me.btnGuardar.Size = New System.Drawing.Size(63, 45)
+        Me.btnGuardar.Size = New System.Drawing.Size(63, 48)
         Me.btnGuardar.TabIndex = 17
         Me.btnGuardar.UseVisualStyleBackColor = True
         '
@@ -2592,9 +2593,9 @@ Partial Class PlanesEDC
         '
         Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
         Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnSalir.Location = New System.Drawing.Point(400, 600)
+        Me.btnSalir.Location = New System.Drawing.Point(758, 597)
         Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New System.Drawing.Size(63, 45)
+        Me.btnSalir.Size = New System.Drawing.Size(63, 48)
         Me.btnSalir.TabIndex = 18
         Me.btnSalir.UseVisualStyleBackColor = True
         '
@@ -2643,12 +2644,23 @@ Partial Class PlanesEDC
         Me.RBAgregaC.Text = "Agrega IVA"
         Me.RBAgregaC.UseVisualStyleBackColor = True
         '
+        'btnLimpiar
+        '
+        Me.btnLimpiar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
+        Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnLimpiar.Location = New System.Drawing.Point(569, 597)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(63, 48)
+        Me.btnLimpiar.TabIndex = 272
+        Me.btnLimpiar.UseVisualStyleBackColor = True
+        '
         'PlanesEDC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
         Me.ClientSize = New System.Drawing.Size(1203, 657)
+        Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.GBIVAC)
         Me.Controls.Add(Me.btnSalir)
         Me.Controls.Add(Me.btnGuardar)
@@ -2940,4 +2952,5 @@ Partial Class PlanesEDC
     Friend WithEvents RBAgregaC As RadioButton
     Friend WithEvents lblPublico As Label
     Friend WithEvents txtPublicoPlan As TextBox
+    Friend WithEvents btnLimpiar As Button
 End Class

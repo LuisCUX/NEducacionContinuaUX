@@ -316,4 +316,8 @@
             e.Handled = True
         End If
     End Sub
+
+    Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
+        Me.Reiniciar()
+    End Sub
 End Class

@@ -224,7 +224,7 @@
 
         If (concepto.absorbeIVA = True And concepto.IVAExento = False And concepto.consideraIVA = False And concepto.claveConcepto = "CON") Then ''---ABSORBE IVA CONGRESO
 
-            Dim costooriginal As Decimal = CDec(concepto.costoUnitario)
+            Dim costooriginal As Decimal = CDec(concepto.costoUnitario) - CDec(concepto.Abono)
             Dim unitariosiniva As Decimal = (CDec(costooriginal) / 1.16)
             Dim unitariodescuento As Decimal = unitariosiniva - CDec(concepto.descuento)
 
@@ -240,9 +240,9 @@
             concepto.descuento = (CDec(concepto.descuento) * CDec(concepto.Cantidad))
             concepto = formatoPrecios(concepto)
 
-            concepto.costoFinal = (CDec(concepto.costoBase)) + (CDec(concepto.costoIVATotal)) - CDec(concepto.Abono)
+            concepto.costoFinal = (CDec(concepto.costoBase)) + (CDec(concepto.costoIVATotal))
         ElseIf (concepto.absorbeIVA = True And concepto.IVAExento = False And concepto.consideraIVA = False And concepto.claveConcepto <> "CON") Then ''---ABSORBE IVA NO CONGRESO
-            concepto.costoUnitario = CDec(concepto.costoUnitario) - CDec(concepto.descuento)
+            concepto.costoUnitario = (CDec(concepto.costoUnitario) - CDec(concepto.descuento)) - CDec(concepto.Abono)
             Dim unitariosiniva As Decimal = (CDec(concepto.costoUnitario) / 1.16)
 
             concepto.costoUnitario = unitariosiniva
@@ -252,7 +252,7 @@
             concepto.costoTotal = (CDec(concepto.costoUnitario) * CDec(concepto.Cantidad))
             concepto.descuento = 0.00
             concepto = formatoPrecios(concepto)
-            concepto.costoFinal = (CDec(concepto.costoBase)) + (CDec(concepto.costoIVATotal)) - CDec(concepto.Abono)
+            concepto.costoFinal = (CDec(concepto.costoBase)) + (CDec(concepto.costoIVATotal))
             'Dim costooriginal As Decimal = CDec(concepto.costoUnitario)
             'Dim unitariodescuento As Decimal = costooriginal - CDec(concepto.descuento)
 
@@ -273,12 +273,12 @@
             'concepto.costoFinal = (CDec(concepto.costoBase)) + (CDec(concepto.costoIVATotal)) - CDec(concepto.Abono)
 
         ElseIf (concepto.absorbeIVA = False And concepto.IVAExento = False And concepto.consideraIVA = True) Then ''---AGREGA IVA
-            concepto.costoUnitario = CDec(concepto.costoUnitario) - CDec(concepto.descuento)
-            concepto.costoBase = concepto.costoUnitario * CDec(concepto.Cantidad)
+            concepto.costoUnitario = (CDec(concepto.costoUnitario) - CDec(concepto.descuento))
+            concepto.costoBase = concepto.costoUnitario * CDec(concepto.Cantidad) - CDec(concepto.Abono)
             concepto.costoIVAUnitario = (concepto.costoUnitario * 0.16)
             concepto.costoIVATotal = (CDec(concepto.costoIVAUnitario) * CDec(concepto.Cantidad))
-            concepto.costoTotal = (CDec(concepto.costoUnitario) * CDec(concepto.Cantidad))
-            concepto.costoFinal = (concepto.costoBase + CDec(concepto.costoIVATotal)) - CDec(concepto.Abono)
+            concepto.costoTotal = (CDec(concepto.costoUnitario) * CDec(concepto.Cantidad)) - CDec(concepto.Abono)
+            concepto.costoFinal = (concepto.costoBase + CDec(concepto.costoIVATotal))
             concepto.descuento = 0.00
             'Dim unitariodescuento As Decimal = CDec(concepto.costoUnitario) - CDec(concepto.descuento)
             'concepto.costoBase = unitariodescuento * CDec(concepto.Cantidad)
@@ -290,12 +290,12 @@
             'concepto.descuento = (CDec(concepto.descuento) * CDec(concepto.Cantidad))
 
         ElseIf (concepto.absorbeIVA = False And concepto.IVAExento = True And concepto.consideraIVA = False) Then ''---IVA EXENTO
-            concepto.costoUnitario = CDec(concepto.costoUnitario) - CDec(concepto.descuento)
+            concepto.costoUnitario = (CDec(concepto.costoUnitario) - CDec(concepto.descuento)) - CDec(concepto.Abono)
             concepto.costoBase = concepto.costoUnitario * CDec(concepto.Cantidad)
             concepto.costoIVAUnitario = "0.00000000"
             concepto.costoIVATotal = "0.00000000"
             concepto.costoTotal = (CDec(concepto.costoUnitario) * CDec(concepto.Cantidad))
-            concepto.costoFinal = (concepto.costoBase + CDec(concepto.costoIVATotal)) - CDec(concepto.Abono)
+            concepto.costoFinal = (concepto.costoBase + CDec(concepto.costoIVATotal))
             concepto.descuento = 0.00
             'Dim unitariodescuento As Decimal = CDec(concepto.costoUnitario) - CDec(concepto.descuento)
             'concepto.costoIVAUnitario = "0.00000000"
@@ -306,12 +306,12 @@
             'concepto.descuento = (CDec(concepto.descuento) * CDec(concepto.Cantidad))
 
         ElseIf (concepto.absorbeIVA = False And concepto.IVAExento = False And concepto.consideraIVA = False) Then ''--- SIN IVA
-            concepto.costoUnitario = CDec(concepto.costoUnitario) - CDec(concepto.descuento)
+            concepto.costoUnitario = (CDec(concepto.costoUnitario) - CDec(concepto.descuento)) - CDec(concepto.Abono)
             concepto.costoBase = concepto.costoUnitario * CDec(concepto.Cantidad)
             concepto.costoIVAUnitario = "0.00000000"
             concepto.costoIVATotal = "0.00000000"
             concepto.costoTotal = (CDec(concepto.costoUnitario) * CDec(concepto.Cantidad))
-            concepto.costoFinal = (concepto.costoBase + CDec(concepto.costoIVATotal)) - CDec(concepto.Abono)
+            concepto.costoFinal = (concepto.costoBase + CDec(concepto.costoIVATotal))
             concepto.descuento = 0.00
             'Dim unitariodescuento As Decimal = CDec(concepto.costoUnitario) - CDec(concepto.descuento)
             'concepto.costoIVAUnitario = "0.00000000"

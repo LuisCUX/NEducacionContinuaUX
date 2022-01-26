@@ -127,5 +127,6 @@ Public Class CambioPlanesEDC
         Me.Controls.Clear()
         InitializeComponent()
         CambioPlanesEDC_Load(Me, Nothing)
+        txtMatricula2.Focus()
     End Sub
 End Class

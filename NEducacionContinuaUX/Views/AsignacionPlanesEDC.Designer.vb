@@ -135,7 +135,7 @@ Partial Class AsignacionPlanesEDC
         '
         Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
         Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnSalir.Location = New System.Drawing.Point(238, 504)
+        Me.btnSalir.Location = New System.Drawing.Point(467, 504)
         Me.btnSalir.Name = "btnSalir"
         Me.btnSalir.Size = New System.Drawing.Size(59, 46)
         Me.btnSalir.TabIndex = 83
@@ -145,7 +145,7 @@ Partial Class AsignacionPlanesEDC
         '
         Me.btnGuardar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
         Me.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnGuardar.Location = New System.Drawing.Point(467, 504)
+        Me.btnGuardar.Location = New System.Drawing.Point(237, 504)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(60, 46)
         Me.btnGuardar.TabIndex = 82
@@ -240,6 +240,7 @@ Partial Class AsignacionPlanesEDC
         '
         'AsignacionPlanesEDC
         '
+        Me.AcceptButton = Me.btnBuscar
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlDarkDark

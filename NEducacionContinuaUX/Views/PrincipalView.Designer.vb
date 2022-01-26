@@ -28,27 +28,28 @@ Partial Class PrincipalView
         Me.MenuStrip = New System.Windows.Forms.MenuStrip()
         Me.CobrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CobrosToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CobroToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PagosACreditoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.NotasDeCreditoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RegistroDeNotaDeCreditoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CobrosMultiplesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CobroDeCreditosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SustitucioncambioDeDatosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SustitucioncambioDeConceptoclaveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CatálogosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PlanesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AltaDePagosOpcionalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ObservacionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BancosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExternosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AltaYModificaciónDeExternosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AsignaciónDePagosOpcionalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AutorizacionesYCondonacionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AutorizacionesYCondonacionesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PagosOpcionalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RegistroDePagosOpcionalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AsignacionDePagosOpcionalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PlanesDeDiplomadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RegistroDePlanesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AsignacionDePlanToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MovimientosAlumnosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExternosConPlanToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AsignaciónDePlanesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CambioDePlanesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ModificaciónDeCostosDePlanesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CatalogosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GestionDeExternosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EwewaewaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.IVAToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReimpresionDeFacturasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ModificacionDeCostosDePlanesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HerramientasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReimpresiónDeFacturasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TimbresUtilizadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CancelaciónDeFacturasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CambioDeFormaDePagoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReportesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip.SuspendLayout()
         Me.MenuStrip.SuspendLayout()
@@ -71,7 +72,7 @@ Partial Class PrincipalView
         '
         'MenuStrip
         '
-        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CobrosToolStripMenuItem, Me.NotasDeCreditoToolStripMenuItem, Me.AutorizacionesYCondonacionesToolStripMenuItem, Me.PagosOpcionalesToolStripMenuItem, Me.PlanesDeDiplomadosToolStripMenuItem, Me.MovimientosAlumnosToolStripMenuItem, Me.CatalogosToolStripMenuItem, Me.ReportesToolStripMenuItem})
+        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CobrosToolStripMenuItem, Me.CatálogosToolStripMenuItem, Me.ExternosToolStripMenuItem, Me.ExternosConPlanToolStripMenuItem, Me.HerramientasToolStripMenuItem, Me.ReportesToolStripMenuItem})
         Me.MenuStrip.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip.Name = "MenuStrip"
         Me.MenuStrip.Size = New System.Drawing.Size(1423, 24)
@@ -80,7 +81,7 @@ Partial Class PrincipalView
         '
         'CobrosToolStripMenuItem
         '
-        Me.CobrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CobrosToolStripMenuItem1, Me.CobroToolStripMenuItem, Me.PagosACreditoToolStripMenuItem})
+        Me.CobrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CobrosToolStripMenuItem1, Me.CobrosMultiplesToolStripMenuItem, Me.CobroDeCreditosToolStripMenuItem, Me.SustitucioncambioDeDatosToolStripMenuItem, Me.SustitucioncambioDeConceptoclaveToolStripMenuItem})
         Me.CobrosToolStripMenuItem.Name = "CobrosToolStripMenuItem"
         Me.CobrosToolStripMenuItem.Size = New System.Drawing.Size(57, 20)
         Me.CobrosToolStripMenuItem.Text = "Cobros"
@@ -88,91 +89,98 @@ Partial Class PrincipalView
         'CobrosToolStripMenuItem1
         '
         Me.CobrosToolStripMenuItem1.Name = "CobrosToolStripMenuItem1"
-        Me.CobrosToolStripMenuItem1.Size = New System.Drawing.Size(164, 22)
+        Me.CobrosToolStripMenuItem1.Size = New System.Drawing.Size(279, 22)
         Me.CobrosToolStripMenuItem1.Text = "Cobros"
         '
-        'CobroToolStripMenuItem
+        'CobrosMultiplesToolStripMenuItem
         '
-        Me.CobroToolStripMenuItem.Name = "CobroToolStripMenuItem"
-        Me.CobroToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
-        Me.CobroToolStripMenuItem.Text = "Cobros multiples"
+        Me.CobrosMultiplesToolStripMenuItem.Name = "CobrosMultiplesToolStripMenuItem"
+        Me.CobrosMultiplesToolStripMenuItem.Size = New System.Drawing.Size(279, 22)
+        Me.CobrosMultiplesToolStripMenuItem.Text = "Cobros multiples"
         '
-        'PagosACreditoToolStripMenuItem
+        'CobroDeCreditosToolStripMenuItem
         '
-        Me.PagosACreditoToolStripMenuItem.Name = "PagosACreditoToolStripMenuItem"
-        Me.PagosACreditoToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
-        Me.PagosACreditoToolStripMenuItem.Text = "Pagos a credito"
+        Me.CobroDeCreditosToolStripMenuItem.Name = "CobroDeCreditosToolStripMenuItem"
+        Me.CobroDeCreditosToolStripMenuItem.Size = New System.Drawing.Size(279, 22)
+        Me.CobroDeCreditosToolStripMenuItem.Text = "Pago de creditos"
         '
-        'NotasDeCreditoToolStripMenuItem
+        'SustitucioncambioDeDatosToolStripMenuItem
         '
-        Me.NotasDeCreditoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RegistroDeNotaDeCreditoToolStripMenuItem})
-        Me.NotasDeCreditoToolStripMenuItem.Name = "NotasDeCreditoToolStripMenuItem"
-        Me.NotasDeCreditoToolStripMenuItem.Size = New System.Drawing.Size(106, 20)
-        Me.NotasDeCreditoToolStripMenuItem.Text = "Notas de credito"
+        Me.SustitucioncambioDeDatosToolStripMenuItem.Enabled = False
+        Me.SustitucioncambioDeDatosToolStripMenuItem.Name = "SustitucioncambioDeDatosToolStripMenuItem"
+        Me.SustitucioncambioDeDatosToolStripMenuItem.Size = New System.Drawing.Size(279, 22)
+        Me.SustitucioncambioDeDatosToolStripMenuItem.Text = "Sustitucion/cambio de datos"
         '
-        'RegistroDeNotaDeCreditoToolStripMenuItem
+        'SustitucioncambioDeConceptoclaveToolStripMenuItem
         '
-        Me.RegistroDeNotaDeCreditoToolStripMenuItem.Name = "RegistroDeNotaDeCreditoToolStripMenuItem"
-        Me.RegistroDeNotaDeCreditoToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
-        Me.RegistroDeNotaDeCreditoToolStripMenuItem.Text = "Registro de nota de credito"
+        Me.SustitucioncambioDeConceptoclaveToolStripMenuItem.Enabled = False
+        Me.SustitucioncambioDeConceptoclaveToolStripMenuItem.Name = "SustitucioncambioDeConceptoclaveToolStripMenuItem"
+        Me.SustitucioncambioDeConceptoclaveToolStripMenuItem.Size = New System.Drawing.Size(279, 22)
+        Me.SustitucioncambioDeConceptoclaveToolStripMenuItem.Text = "Sustitucion/cambio de concepto-clave"
+        '
+        'CatálogosToolStripMenuItem
+        '
+        Me.CatálogosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlanesToolStripMenuItem, Me.AltaDePagosOpcionalesToolStripMenuItem, Me.ObservacionesToolStripMenuItem, Me.BancosToolStripMenuItem})
+        Me.CatálogosToolStripMenuItem.Name = "CatálogosToolStripMenuItem"
+        Me.CatálogosToolStripMenuItem.Size = New System.Drawing.Size(72, 20)
+        Me.CatálogosToolStripMenuItem.Text = "Catálogos"
+        '
+        'PlanesToolStripMenuItem
+        '
+        Me.PlanesToolStripMenuItem.Name = "PlanesToolStripMenuItem"
+        Me.PlanesToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.PlanesToolStripMenuItem.Text = "Planes"
+        '
+        'AltaDePagosOpcionalesToolStripMenuItem
+        '
+        Me.AltaDePagosOpcionalesToolStripMenuItem.Name = "AltaDePagosOpcionalesToolStripMenuItem"
+        Me.AltaDePagosOpcionalesToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.AltaDePagosOpcionalesToolStripMenuItem.Text = "Alta de pagos opcionales"
+        '
+        'ObservacionesToolStripMenuItem
+        '
+        Me.ObservacionesToolStripMenuItem.Enabled = False
+        Me.ObservacionesToolStripMenuItem.Name = "ObservacionesToolStripMenuItem"
+        Me.ObservacionesToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.ObservacionesToolStripMenuItem.Text = "Observaciones"
+        '
+        'BancosToolStripMenuItem
+        '
+        Me.BancosToolStripMenuItem.Name = "BancosToolStripMenuItem"
+        Me.BancosToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.BancosToolStripMenuItem.Text = "Bancos"
+        '
+        'ExternosToolStripMenuItem
+        '
+        Me.ExternosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AltaYModificaciónDeExternosToolStripMenuItem, Me.AsignaciónDePagosOpcionalesToolStripMenuItem, Me.AutorizacionesYCondonacionesToolStripMenuItem})
+        Me.ExternosToolStripMenuItem.Name = "ExternosToolStripMenuItem"
+        Me.ExternosToolStripMenuItem.Size = New System.Drawing.Size(63, 20)
+        Me.ExternosToolStripMenuItem.Text = "Externos"
+        '
+        'AltaYModificaciónDeExternosToolStripMenuItem
+        '
+        Me.AltaYModificaciónDeExternosToolStripMenuItem.Name = "AltaYModificaciónDeExternosToolStripMenuItem"
+        Me.AltaYModificaciónDeExternosToolStripMenuItem.Size = New System.Drawing.Size(245, 22)
+        Me.AltaYModificaciónDeExternosToolStripMenuItem.Text = "Alta y modificación de externos"
+        '
+        'AsignaciónDePagosOpcionalesToolStripMenuItem
+        '
+        Me.AsignaciónDePagosOpcionalesToolStripMenuItem.Name = "AsignaciónDePagosOpcionalesToolStripMenuItem"
+        Me.AsignaciónDePagosOpcionalesToolStripMenuItem.Size = New System.Drawing.Size(245, 22)
+        Me.AsignaciónDePagosOpcionalesToolStripMenuItem.Text = "Asignación de pagos opcionales"
         '
         'AutorizacionesYCondonacionesToolStripMenuItem
         '
-        Me.AutorizacionesYCondonacionesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AutorizacionesYCondonacionesToolStripMenuItem1})
         Me.AutorizacionesYCondonacionesToolStripMenuItem.Name = "AutorizacionesYCondonacionesToolStripMenuItem"
-        Me.AutorizacionesYCondonacionesToolStripMenuItem.Size = New System.Drawing.Size(192, 20)
-        Me.AutorizacionesYCondonacionesToolStripMenuItem.Text = "Autorizaciones y Condonaciones"
+        Me.AutorizacionesYCondonacionesToolStripMenuItem.Size = New System.Drawing.Size(245, 22)
+        Me.AutorizacionesYCondonacionesToolStripMenuItem.Text = "Autorizaciones y condonaciones"
         '
-        'AutorizacionesYCondonacionesToolStripMenuItem1
+        'ExternosConPlanToolStripMenuItem
         '
-        Me.AutorizacionesYCondonacionesToolStripMenuItem1.Name = "AutorizacionesYCondonacionesToolStripMenuItem1"
-        Me.AutorizacionesYCondonacionesToolStripMenuItem1.Size = New System.Drawing.Size(247, 22)
-        Me.AutorizacionesYCondonacionesToolStripMenuItem1.Text = "Autorizaciones y Condonaciones"
-        '
-        'PagosOpcionalesToolStripMenuItem
-        '
-        Me.PagosOpcionalesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RegistroDePagosOpcionalesToolStripMenuItem, Me.AsignacionDePagosOpcionalesToolStripMenuItem})
-        Me.PagosOpcionalesToolStripMenuItem.Name = "PagosOpcionalesToolStripMenuItem"
-        Me.PagosOpcionalesToolStripMenuItem.Size = New System.Drawing.Size(113, 20)
-        Me.PagosOpcionalesToolStripMenuItem.Text = "Pagos Opcionales"
-        '
-        'RegistroDePagosOpcionalesToolStripMenuItem
-        '
-        Me.RegistroDePagosOpcionalesToolStripMenuItem.Name = "RegistroDePagosOpcionalesToolStripMenuItem"
-        Me.RegistroDePagosOpcionalesToolStripMenuItem.Size = New System.Drawing.Size(244, 22)
-        Me.RegistroDePagosOpcionalesToolStripMenuItem.Text = "Registro de pagos opcionales"
-        '
-        'AsignacionDePagosOpcionalesToolStripMenuItem
-        '
-        Me.AsignacionDePagosOpcionalesToolStripMenuItem.Name = "AsignacionDePagosOpcionalesToolStripMenuItem"
-        Me.AsignacionDePagosOpcionalesToolStripMenuItem.Size = New System.Drawing.Size(244, 22)
-        Me.AsignacionDePagosOpcionalesToolStripMenuItem.Text = "Asignacion de pagos opcionales"
-        '
-        'PlanesDeDiplomadosToolStripMenuItem
-        '
-        Me.PlanesDeDiplomadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RegistroDePlanesToolStripMenuItem, Me.AsignacionDePlanToolStripMenuItem})
-        Me.PlanesDeDiplomadosToolStripMenuItem.Name = "PlanesDeDiplomadosToolStripMenuItem"
-        Me.PlanesDeDiplomadosToolStripMenuItem.Size = New System.Drawing.Size(135, 20)
-        Me.PlanesDeDiplomadosToolStripMenuItem.Text = "Planes de diplomados"
-        '
-        'RegistroDePlanesToolStripMenuItem
-        '
-        Me.RegistroDePlanesToolStripMenuItem.Name = "RegistroDePlanesToolStripMenuItem"
-        Me.RegistroDePlanesToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
-        Me.RegistroDePlanesToolStripMenuItem.Text = "Registro de planes"
-        '
-        'AsignacionDePlanToolStripMenuItem
-        '
-        Me.AsignacionDePlanToolStripMenuItem.Name = "AsignacionDePlanToolStripMenuItem"
-        Me.AsignacionDePlanToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
-        Me.AsignacionDePlanToolStripMenuItem.Text = "Asignacion de plan"
-        '
-        'MovimientosAlumnosToolStripMenuItem
-        '
-        Me.MovimientosAlumnosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AsignaciónDePlanesToolStripMenuItem, Me.CambioDePlanesToolStripMenuItem, Me.ModificaciónDeCostosDePlanesToolStripMenuItem})
-        Me.MovimientosAlumnosToolStripMenuItem.Name = "MovimientosAlumnosToolStripMenuItem"
-        Me.MovimientosAlumnosToolStripMenuItem.Size = New System.Drawing.Size(138, 20)
-        Me.MovimientosAlumnosToolStripMenuItem.Text = "Movimientos alumnos"
+        Me.ExternosConPlanToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AsignaciónDePlanesToolStripMenuItem, Me.CambioDePlanesToolStripMenuItem, Me.ModificacionDeCostosDePlanesToolStripMenuItem})
+        Me.ExternosConPlanToolStripMenuItem.Name = "ExternosConPlanToolStripMenuItem"
+        Me.ExternosConPlanToolStripMenuItem.Size = New System.Drawing.Size(112, 20)
+        Me.ExternosConPlanToolStripMenuItem.Text = "Externos con plan"
         '
         'AsignaciónDePlanesToolStripMenuItem
         '
@@ -186,42 +194,43 @@ Partial Class PrincipalView
         Me.CambioDePlanesToolStripMenuItem.Size = New System.Drawing.Size(250, 22)
         Me.CambioDePlanesToolStripMenuItem.Text = "Cambio de planes"
         '
-        'ModificaciónDeCostosDePlanesToolStripMenuItem
+        'ModificacionDeCostosDePlanesToolStripMenuItem
         '
-        Me.ModificaciónDeCostosDePlanesToolStripMenuItem.Name = "ModificaciónDeCostosDePlanesToolStripMenuItem"
-        Me.ModificaciónDeCostosDePlanesToolStripMenuItem.Size = New System.Drawing.Size(250, 22)
-        Me.ModificaciónDeCostosDePlanesToolStripMenuItem.Text = "Modificación de costos de planes"
+        Me.ModificacionDeCostosDePlanesToolStripMenuItem.Name = "ModificacionDeCostosDePlanesToolStripMenuItem"
+        Me.ModificacionDeCostosDePlanesToolStripMenuItem.Size = New System.Drawing.Size(250, 22)
+        Me.ModificacionDeCostosDePlanesToolStripMenuItem.Text = "Modificacion de costos de planes"
         '
-        'CatalogosToolStripMenuItem
+        'HerramientasToolStripMenuItem
         '
-        Me.CatalogosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GestionDeExternosToolStripMenuItem, Me.EwewaewaToolStripMenuItem, Me.IVAToolStripMenuItem, Me.ReimpresionDeFacturasToolStripMenuItem})
-        Me.CatalogosToolStripMenuItem.Name = "CatalogosToolStripMenuItem"
-        Me.CatalogosToolStripMenuItem.Size = New System.Drawing.Size(72, 20)
-        Me.CatalogosToolStripMenuItem.Text = "Catalogos"
+        Me.HerramientasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReimpresiónDeFacturasToolStripMenuItem, Me.TimbresUtilizadosToolStripMenuItem, Me.CancelaciónDeFacturasToolStripMenuItem, Me.CambioDeFormaDePagoToolStripMenuItem})
+        Me.HerramientasToolStripMenuItem.Name = "HerramientasToolStripMenuItem"
+        Me.HerramientasToolStripMenuItem.Size = New System.Drawing.Size(90, 20)
+        Me.HerramientasToolStripMenuItem.Text = "Herramientas"
         '
-        'GestionDeExternosToolStripMenuItem
+        'ReimpresiónDeFacturasToolStripMenuItem
         '
-        Me.GestionDeExternosToolStripMenuItem.Name = "GestionDeExternosToolStripMenuItem"
-        Me.GestionDeExternosToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
-        Me.GestionDeExternosToolStripMenuItem.Text = "Alta/Baja de externos"
+        Me.ReimpresiónDeFacturasToolStripMenuItem.Name = "ReimpresiónDeFacturasToolStripMenuItem"
+        Me.ReimpresiónDeFacturasToolStripMenuItem.Size = New System.Drawing.Size(213, 22)
+        Me.ReimpresiónDeFacturasToolStripMenuItem.Text = "Reimpresión de facturas"
         '
-        'EwewaewaToolStripMenuItem
+        'TimbresUtilizadosToolStripMenuItem
         '
-        Me.EwewaewaToolStripMenuItem.Name = "EwewaewaToolStripMenuItem"
-        Me.EwewaewaToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
-        Me.EwewaewaToolStripMenuItem.Text = "Timbres utilizados"
+        Me.TimbresUtilizadosToolStripMenuItem.Name = "TimbresUtilizadosToolStripMenuItem"
+        Me.TimbresUtilizadosToolStripMenuItem.Size = New System.Drawing.Size(213, 22)
+        Me.TimbresUtilizadosToolStripMenuItem.Text = "Timbres utilizados"
         '
-        'IVAToolStripMenuItem
+        'CancelaciónDeFacturasToolStripMenuItem
         '
-        Me.IVAToolStripMenuItem.Name = "IVAToolStripMenuItem"
-        Me.IVAToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
-        Me.IVAToolStripMenuItem.Text = "IVA"
+        Me.CancelaciónDeFacturasToolStripMenuItem.Enabled = False
+        Me.CancelaciónDeFacturasToolStripMenuItem.Name = "CancelaciónDeFacturasToolStripMenuItem"
+        Me.CancelaciónDeFacturasToolStripMenuItem.Size = New System.Drawing.Size(213, 22)
+        Me.CancelaciónDeFacturasToolStripMenuItem.Text = "Cancelación de facturas"
         '
-        'ReimpresionDeFacturasToolStripMenuItem
+        'CambioDeFormaDePagoToolStripMenuItem
         '
-        Me.ReimpresionDeFacturasToolStripMenuItem.Name = "ReimpresionDeFacturasToolStripMenuItem"
-        Me.ReimpresionDeFacturasToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
-        Me.ReimpresionDeFacturasToolStripMenuItem.Text = "Reimpresion de facturas"
+        Me.CambioDeFormaDePagoToolStripMenuItem.Name = "CambioDeFormaDePagoToolStripMenuItem"
+        Me.CambioDeFormaDePagoToolStripMenuItem.Size = New System.Drawing.Size(213, 22)
+        Me.CambioDeFormaDePagoToolStripMenuItem.Text = "Cambio de forma de pago"
         '
         'ReportesToolStripMenuItem
         '
@@ -260,29 +269,30 @@ Partial Class PrincipalView
 
     Friend WithEvents StatusStrip As StatusStrip
     Friend WithEvents MenuStrip As MenuStrip
-    Friend WithEvents PagosOpcionalesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents RegistroDePagosOpcionalesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents AsignacionDePagosOpcionalesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents CobrosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents statusLabel As ToolStripStatusLabel
+    Friend WithEvents CobrosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CobrosToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents CatalogosToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents GestionDeExternosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CobrosMultiplesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CobroDeCreditosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SustitucioncambioDeDatosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SustitucioncambioDeConceptoclaveToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CatálogosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PlanesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AltaDePagosOpcionalesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ObservacionesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents BancosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ExternosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AltaYModificaciónDeExternosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AsignaciónDePagosOpcionalesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AutorizacionesYCondonacionesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents AutorizacionesYCondonacionesToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents PlanesDeDiplomadosToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents RegistroDePlanesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents AsignacionDePlanToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents CobroToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents NotasDeCreditoToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents RegistroDeNotaDeCreditoToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents EwewaewaToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents PagosACreditoToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ReportesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents IVAToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ReimpresionDeFacturasToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents MovimientosAlumnosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ExternosConPlanToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AsignaciónDePlanesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CambioDePlanesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ModificaciónDeCostosDePlanesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ModificacionDeCostosDePlanesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents HerramientasToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ReimpresiónDeFacturasToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TimbresUtilizadosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CancelaciónDeFacturasToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CambioDeFormaDePagoToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ReportesToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -204,6 +204,7 @@ Public Class ModificacionCostosPlanesEDC
         Me.Controls.Clear()
         InitializeComponent()
         ModificacionCostosPlanesEDC_Load(Me, Nothing)
+        txtMatricula3.Focus()
     End Sub
 
     Private Sub btnModificacionDesc_Click(sender As Object, e As EventArgs) Handles btnModificacionDesc.Click

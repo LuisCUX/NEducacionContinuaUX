@@ -393,7 +393,8 @@ Public Class CobrosController
 
         Try
             Dim img As New Bitmap(QR_Generator.Encode(QR.ToString), New Size(220, 220))
-            img.Save($"\\{EnviromentService.serverIP}\ti\NEducacionContinua\QR\{Nombre}.png", Imaging.ImageFormat.Png)
+            ''img.Save($"\\{EnviromentService.serverIP}\ti\NEducacionContinua\QR\{Nombre}.png", Imaging.ImageFormat.Png)
+            img.Save($"\\192.168.1.250\Reportes\NEDC\QR\{Nombre}.png", Imaging.ImageFormat.Png)
             Thread.Sleep(1500)
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -439,6 +440,7 @@ Public Class CobrosController
                 concepto.costoBase = costoSinIVA
                 concepto.costoUnitario = costoSinIVA + descuento
                 concepto.costoTotal = (costoSinIVA + descuento) * concepto.Cantidad
+                concepto.costoFinal = (costoSinIVA + concepto.costoIVAUnitario) * concepto.Cantidad
                 concepto.descuento = descuento
             End If
             ch.formatoPrecios(concepto)
@@ -540,16 +542,16 @@ Public Class CobrosController
             For Each concepto As Concepto In listaConceptosAbonos
                 Dim montoDespues As Decimal
                 Dim IDClavePago As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatClavesPagos WHERE Clave = '{concepto.claveConcepto}'")
-                Dim tieneAbono As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_Abonos WHERE ID_ClavePago = {IDClavePago} AND IDPago = {concepto.IDConcepto}")
+                Dim tieneAbono As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_Abonos WHERE ID_ClavePago = {IDClavePago} AND IDPago = {concepto.IDConcepto} ORDER BY ID DESC")
                 If (tieneAbono > 0) Then
-                    montoAnterior = db.exectSQLQueryScalar($"SELECT Cantidad_Anterior FROM ing_Abonos WHERE ID = {tieneAbono}")
+                    montoAnterior = db.exectSQLQueryScalar($"SELECT Cantidad_Restante FROM ing_Abonos WHERE ID = {tieneAbono}")
                     montoDespues = montoAnterior - montoRestante
                     concepto.Abonado = True
                 Else
                     montoDespues = montoAnterior - montoRestante
                     concepto.Abonado = True
                 End If
-                listaConceptos(0).NombreConcepto = $"1{concepto.NombreConcepto}"
+                ''listaConceptos(0).NombreConcepto = $"1{concepto.NombreConcepto}"
                 db.execSQLQueryWithoutParams($"INSERT INTO ing_Abonos(Folio, Clave_Cliente, Cantidad_Anterior, Cantidad_Abonada, Cantidad_Restante, IDPago, ID_ClavePago, FechaAbono, Activo) VALUES ('WEA', '{Matricula}', {montoAnterior}, {montoRestante}, {montoDespues}, {concepto.IDConcepto}, {IDClavePago}, GETDATE(), 1)")
                 listaConceptosFinal.Add(concepto)
             Next

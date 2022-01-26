@@ -59,6 +59,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         Me.chbExentaIVA = New System.Windows.Forms.CheckBox()
         Me.lblBuscarPS = New System.Windows.Forms.Label()
         Me.txtClavePS = New System.Windows.Forms.TextBox()
+        Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblNombreVentana
@@ -348,7 +349,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         Me.btnGuardar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
         Me.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnGuardar.Enabled = False
-        Me.btnGuardar.Location = New System.Drawing.Point(180, 620)
+        Me.btnGuardar.Location = New System.Drawing.Point(194, 620)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(75, 54)
         Me.btnGuardar.TabIndex = 37
@@ -458,12 +459,23 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         Me.txtClavePS.Size = New System.Drawing.Size(136, 21)
         Me.txtClavePS.TabIndex = 46
         '
+        'btnLimpiar
+        '
+        Me.btnLimpiar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
+        Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnLimpiar.Location = New System.Drawing.Point(331, 620)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(75, 54)
+        Me.btnLimpiar.TabIndex = 47
+        Me.btnLimpiar.UseVisualStyleBackColor = True
+        '
         'ModalRegistroPagosOpcionalesEDC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
         Me.ClientSize = New System.Drawing.Size(677, 701)
+        Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.txtClavePS)
         Me.Controls.Add(Me.lblBuscarPS)
         Me.Controls.Add(Me.chbExentaIVA)
@@ -545,4 +557,5 @@ Partial Class ModalRegistroPagosOpcionalesEDC
     Friend WithEvents chbExentaIVA As CheckBox
     Friend WithEvents lblBuscarPS As Label
     Friend WithEvents txtClavePS As TextBox
+    Friend WithEvents btnLimpiar As Button
 End Class

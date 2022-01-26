@@ -160,13 +160,13 @@
                 dtPlaceHolder.Rows.Add(0, "NUEVO PLAN")
             End If
             dtPlaceHolder.Merge(tablePlanes)
-            ComboboxService.llenarCombobox(cbPlanes, dtPlaceHolder, "ID", "Nombre_Plan")
+            ComboboxService.llenarComboboxVacio(cbPlanes, dtPlaceHolder, "ID", "Nombre_Plan")
             txtNombrePlan.Enabled = True
             txtPublicoPlan.Enabled = True
         Else
             dtPlaceHolder.Rows.Add(0, "-PLAN GENERAL-")
             dtPlaceHolder.Rows.Add(0, "NUEVO PLAN")
-            ComboboxService.llenarCombobox(cbPlanes, dtPlaceHolder, "ID", "Nombre_Plan")
+            ComboboxService.llenarComboboxVacio(cbPlanes, dtPlaceHolder, "ID", "Nombre_Plan")
             cbPlanes.SelectedIndex = 0
             txtNombrePlan.Enabled = False
             txtPublicoPlan.Enabled = True
@@ -1272,5 +1272,7 @@
         Next
     End Sub
 
-
+    Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
+        Me.Reiniciar()
+    End Sub
 End Class

@@ -15,11 +15,11 @@
         tipoMatricula = ObjectBagService.getItem("tipoMatricula")
         ObjectBagService.clearBag()
         If (tipoMatricula = "UX") Then
-            va.buscarMatriculaUX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno)
+            va.buscarMatriculaUX(Matricula, panelDatos, panelCobros, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt)
         ElseIf (tipoMatricula = "EX") Then
-            va.buscarMatriculaEX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno, txtRFC)
+            va.buscarMatriculaEX(Matricula, panelDatos, panelCobros, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt)
         ElseIf (tipoMatricula = "EC") Then
-            va.buscarMatriculaEC(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno, txtRFC)
+            va.buscarMatriculaEC(Matricula, panelDatos, panelCobros, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt)
         End If
 
         ca.buscarPagosOpcionales(Tree, Matricula, tipoMatricula, "Cobros")
@@ -310,10 +310,10 @@
     End Sub
 
     Sub Limpiar()
-        txtNombre.Clear()
-        txtEmail.Clear()
-        txtCarrera.Clear()
-        txtTurno.Clear()
+        lblNombretxt.Text = ""
+        lblEmailtxt.Text = ""
+        lblCarreratxt.Text = ""
+        lblTurnotxt.Text = ""
         Tree.Nodes(0).Nodes.Clear()
         Tree.Nodes(1).Nodes.Clear()
         Tree.Nodes(2).Nodes.Clear()

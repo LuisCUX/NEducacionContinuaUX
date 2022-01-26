@@ -283,7 +283,7 @@ Partial Class ModificacionCostosPlanesEDC
         '
         Me.Button2.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
         Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button2.Location = New System.Drawing.Point(365, 361)
+        Me.Button2.Location = New System.Drawing.Point(581, 359)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(59, 46)
         Me.Button2.TabIndex = 85
@@ -346,7 +346,7 @@ Partial Class ModificacionCostosPlanesEDC
         '
         Me.btnModificacionDesc.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
         Me.btnModificacionDesc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnModificacionDesc.Location = New System.Drawing.Point(611, 361)
+        Me.btnModificacionDesc.Location = New System.Drawing.Point(314, 359)
         Me.btnModificacionDesc.Name = "btnModificacionDesc"
         Me.btnModificacionDesc.Size = New System.Drawing.Size(60, 46)
         Me.btnModificacionDesc.TabIndex = 84

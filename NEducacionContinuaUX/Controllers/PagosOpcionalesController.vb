@@ -8,14 +8,14 @@
         cbConceptoPara.Items.Add("ALUMNO")
 
         Dim tableTipoPago As DataTable = db.getDataTableFromSQL("SELECT ID, Nombre FROM ing_CatTipoPagoOpcional WHERE Activo = 1")
-        ComboboxService.llenarCombobox(cbTipoPago, tableTipoPago, "ID", "Nombre")
+        ComboboxService.llenarComboboxVacio(cbTipoPago, tableTipoPago, "ID", "Nombre")
 
         cbTipoConcepto.Items.Clear()
         cbTipoConcepto.Items.Add("PRODUCTO")
         cbTipoConcepto.Items.Add("SERVICIO")
 
         Dim tableNiveles As DataTable = db.getDataTableFromSQL("SELECT Clave, Nivel FROM mov_CatNivel")
-        ComboboxService.llenarCombobox(cbNiveles, tableNiveles, "Clave", "Nivel")
+        ComboboxService.llenarComboboxVacio(cbNiveles, tableNiveles, "Clave", "Nivel")
     End Sub
 
     Sub llenarVentanaPago(ID As Integer, cbConceptoPara As ComboBox, cbNivel As ComboBox, cbTurno As ComboBox, cbTipoPago As ComboBox, cbTipoConcepto As ComboBox, cbDivision As ComboBox, cbGrupo As ComboBox, cbClase As ComboBox, cbProdServ As ComboBox, cbUnidad As ComboBox,

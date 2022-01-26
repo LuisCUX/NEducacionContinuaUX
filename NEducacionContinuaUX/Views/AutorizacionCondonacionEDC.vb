@@ -31,16 +31,16 @@ Public Class AutorizacionCondonacionEDC
         Me.limpiar()
         Matricula = txtMatricula.Text
         tipoMatricula = va.validarMatricula(Matricula)
-        txtMatriculaDato.Text = Matricula
+        lblMatriculatxt.Text = Matricula
         If (tipoMatricula = "False") Then
             Me.Reiniciar()
             Exit Sub
         ElseIf (tipoMatricula = "UX") Then
-            va.buscarMatriculaUX(Matricula, panelDatos, panelAutCon, txtNombre, txtEmail, txtCarrera, txtTurno)
+            va.buscarMatriculaUX(Matricula, panelDatos, panelAutCon, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt)
         ElseIf (tipoMatricula = "EX") Then
-            va.buscarMatriculaEX(Matricula, panelDatos, panelAutCon, txtNombre, txtEmail, txtCarrera, txtTurno, txtRFC)
+            va.buscarMatriculaEX(Matricula, panelDatos, panelAutCon, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt)
         ElseIf (tipoMatricula = "EC") Then
-            va.buscarMatriculaEC(Matricula, panelDatos, panelAutCon, txtNombre, txtEmail, txtCarrera, txtTurno, txtRFC)
+            va.buscarMatriculaEC(Matricula, panelDatos, panelAutCon, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt)
         End If
         ac.ActualizarArbolAutorizacionCaja(treeAutorizacionCaja, Matricula, tipoMatricula)
     End Sub
@@ -120,11 +120,11 @@ Public Class AutorizacionCondonacionEDC
     End Sub
 
     Sub limpiar()
-        txtMatriculaDato.Clear()
-        txtNombre.Clear()
-        txtEmail.Clear()
-        txtCarrera.Clear()
-        txtTurno.Clear()
+        lblMatriculatxt.Text = ""
+        lblNombretxt.Text = ""
+        lblEmailtxt.Text = ""
+        lblCarreratxt.Text = ""
+        lblTurnotxt.Text = ""
         TreeCondonaciones.Nodes.Clear()
     End Sub
 
@@ -132,6 +132,7 @@ Public Class AutorizacionCondonacionEDC
         Me.Controls.Clear()
         InitializeComponent()
         AutorizacionCondonacionEDC_Load(Me, Nothing)
+        txtMatricula.Focus()
     End Sub
 
     Private Sub btnGuardarCondonaciones_Click(sender As Object, e As EventArgs) Handles btnGuardarCondonaciones.Click
@@ -211,5 +212,13 @@ Public Class AutorizacionCondonacionEDC
                 combo_filtro += " "
             End If
         End If
+    End Sub
+
+    Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
+        Me.Reiniciar()
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Me.Close()
     End Sub
 End Class

@@ -8,6 +8,7 @@
         cbTipoCondonacion.Items.Clear()
         cbTipoCondonacion.Items.Add("CONDONACIÓN TOTAL")
         cbTipoCondonacion.Items.Add("CONDONACIÓN PARCIAL")
+        cbTipoCondonacion.SelectedValue = -1
     End Sub
     ''-----------------------------------------------------------------------------------------------------''
     ''----------ACTUALIZA ARBOL DE PESTAÑA DE CONDONACION CUANDO SE CAMBIA EL VALOR DEL COMOBOBOX----------''

@@ -85,6 +85,7 @@ Public Class ReimpresionFacturasEDC
         Me.Controls.Clear()
         InitializeComponent()
         ReimpresionFacturasEDC_Load(Me, Nothing)
+        txtMatricula.Focus()
     End Sub
 
     Private Sub btnReimprimir_Click(sender As Object, e As EventArgs) Handles btnReimprimir.Click

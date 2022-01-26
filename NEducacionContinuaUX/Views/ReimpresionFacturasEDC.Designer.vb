@@ -247,7 +247,7 @@ Partial Class ReimpresionFacturasEDC
         Me.btnLimpiar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
         Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnLimpiar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnLimpiar.Location = New System.Drawing.Point(552, 618)
+        Me.btnLimpiar.Location = New System.Drawing.Point(714, 618)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(75, 71)
         Me.btnLimpiar.TabIndex = 21
@@ -273,7 +273,7 @@ Partial Class ReimpresionFacturasEDC
         Me.btnReimprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnReimprimir.Image = Global.NEducacionContinuaUX.My.Resources.Resources.print_40px
         Me.btnReimprimir.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnReimprimir.Location = New System.Drawing.Point(714, 618)
+        Me.btnReimprimir.Location = New System.Drawing.Point(552, 618)
         Me.btnReimprimir.Name = "btnReimprimir"
         Me.btnReimprimir.Size = New System.Drawing.Size(75, 71)
         Me.btnReimprimir.TabIndex = 19

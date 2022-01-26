@@ -55,6 +55,7 @@ Public Class MainAsignacionPagosOpcionalesEDC
         Me.Controls.Clear()
         InitializeComponent()
         AsignacionPagosOpcionalesEDC_Load(Me, Nothing)
+        txtMatricula.Focus()
     End Sub
 
     Private Sub txtMatricula_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtMatricula.KeyPress

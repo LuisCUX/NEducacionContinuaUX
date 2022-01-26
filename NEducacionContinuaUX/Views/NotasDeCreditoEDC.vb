@@ -72,16 +72,16 @@ Public Class NotasDeCreditoEDC
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         Matricula = txtMatricula.Text
         tipoMatricula = va.validarMatricula(Matricula)
-        txtMatriculaDato.Text = Matricula
+        lblMatriculatxt.Text = Matricula
         If (tipoMatricula = "False") Then
             Me.Reiniciar()
             Exit Sub
         ElseIf (tipoMatricula = "UX") Then
-            va.buscarMatriculaUX(Matricula, panelDatos, panelGridNota, txtNombre, txtEmail, txtCarrera, txtTurno)
+            va.buscarMatriculaUX(Matricula, panelDatos, panelGridNota, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt)
         ElseIf (tipoMatricula = "EX") Then
-            va.buscarMatriculaEX(Matricula, panelDatos, panelGridNota, txtNombre, txtEmail, txtCarrera, txtTurno, txtRFC)
+            va.buscarMatriculaEX(Matricula, panelDatos, panelGridNota, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt)
         ElseIf (tipoMatricula = "EC") Then
-            va.buscarMatriculaEC(Matricula, panelDatos, panelGridNota, txtNombre, txtEmail, txtCarrera, txtTurno, txtRFC)
+            va.buscarMatriculaEC(Matricula, panelDatos, panelGridNota, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt)
         End If
     End Sub
 
@@ -137,7 +137,7 @@ Public Class NotasDeCreditoEDC
             listaUUIDDistinct.Add(folioFiscal)
         Next
 
-        nc.GenerarNotaCredito(listaConceptos, listaUUIDDistinct, listaUUID, txtRFC.Text, txtNombre.Text, "P01", lblTotalNota.Text, lblTotalNota.Text, "0.00", Matricula, cbTipoNota.Text)
+        nc.GenerarNotaCredito(listaConceptos, listaUUIDDistinct, listaUUID, lblRFCtxt.Text, lblRFCtxt.Text, "P01", lblTotalNota.Text, lblTotalNota.Text, "0.00", Matricula, cbTipoNota.Text)
     End Sub
 
     Sub actualizarTotal()
