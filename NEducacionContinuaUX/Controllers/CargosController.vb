@@ -65,7 +65,7 @@
                                                                          INNER JOIN portal_congreso AS CON ON CON.id_congreso = TA.id_congreso
                                                                          INNER JOIN portal_subtotales AS SUB ON SUB.clave_cliente = RC.clave_cliente
                                                                          INNER JOIN ing_CatClavesPagos AS CP ON CP.ID = 3
-                                                                         WHERE RC.clave_cliente = '{Matricula}' AND CON.id_tipo_evento = 2 AND RC.clave_cliente NOT IN (SELECT Matricula FROM ing_PagosCongresos)")
+                                                                         WHERE RC.clave_cliente = '{Matricula}' AND CON.id_tipo_evento = 2 AND RC.clave_cliente NOT IN (SELECT Matricula FROM ing_PagosCongresos WHERE Activo = 1)")
         For Each item As DataRow In tablePagosOpcionales.Rows
             Dim concepto As New Concepto
             concepto = ch.crearConcepto(item("id_registro"), "CON", Matricula)

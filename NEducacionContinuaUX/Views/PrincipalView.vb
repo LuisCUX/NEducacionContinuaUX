@@ -81,4 +81,9 @@
         CambioFormaPagoEDC.MdiParent = Me
         CambioFormaPagoEDC.Show()
     End Sub
+
+    Private Sub CancelaciónDeFacturasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CancelaciónDeFacturasToolStripMenuItem.Click
+        CancelacionFacturasEDC.MdiParent = Me
+        CancelacionFacturasEDC.Show()
+    End Sub
 End Class

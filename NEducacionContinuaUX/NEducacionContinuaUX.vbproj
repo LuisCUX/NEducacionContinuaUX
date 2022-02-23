@@ -191,6 +191,7 @@
     <Compile Include="Controllers\AsignacionPlanesController.vb" />
     <Compile Include="Controllers\AutorizacionCondonacionController.vb" />
     <Compile Include="Controllers\CambioFormaPagoController.vb" />
+    <Compile Include="Controllers\CancelacionFacturasController.vb" />
     <Compile Include="Controllers\CargosController.vb" />
     <Compile Include="Controllers\CobrosController.vb" />
     <Compile Include="Controllers\CobrosDiferidosController.vb" />
@@ -269,6 +270,12 @@
       <DependentUpon>CambioPlanesEDC.vb</DependentUpon>
     </Compile>
     <Compile Include="Views\CambioPlanesEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CancelacionFacturasEDC.Designer.vb">
+      <DependentUpon>CancelacionFacturasEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CancelacionFacturasEDC.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\IVAEDC.Designer.vb">
@@ -422,6 +429,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\CambioPlanesEDC.resx">
       <DependentUpon>CambioPlanesEDC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CancelacionFacturasEDC.resx">
+      <DependentUpon>CancelacionFacturasEDC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\IVAEDC.resx">
       <DependentUpon>IVAEDC.vb</DependentUpon>
