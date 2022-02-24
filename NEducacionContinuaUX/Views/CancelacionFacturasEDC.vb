@@ -3,7 +3,7 @@
     Dim Folio As String
     Dim Matricula As String
     Dim IDFolio As Integer
-    Dim FechaFactura As DateTime
+    Dim FechaFactura As Date
     Dim Tipo_Pago As String
     Dim cf As CancelacionFacturasController = New CancelacionFacturasController
     Private Sub CancelacionFacturasEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -26,11 +26,11 @@
         Tipo_Pago = db.exectSQLQueryScalar($"SELECT Tipo_Pago FROM ing_xmlTimbrados WHERE Folio = '{Folio}'")
         lblMatriculatxt.Text = Matricula
         lblFechaFacturaciontxt.Text = FechaFactura
-        If (cbTipoCancelacion.SelectedIndex = 0 And (FechaFactura < DateTime.Now)) Then
+        If (cbTipoCancelacion.SelectedIndex = 0 And (FechaFactura.Date <> Date.Today)) Then
             MessageBox.Show("La factura seleccionada no fue emitida el dia de hoy, elija una factura que haya sido emitida el dia de hoy")
             Me.Reiniciar()
             Exit Sub
-        ElseIf (cbTipoCancelacion.SelectedIndex = 1 And (FechaFactura = DateTime.Now)) Then
+        ElseIf (cbTipoCancelacion.SelectedIndex = 1 And (FechaFactura.Date = Date.Today)) Then
             MessageBox.Show("La factura seleccionada fue emitida el dia de hoy, elija una factura que no haya sido emitida el dia de hoy")
             Me.Reiniciar()
             Exit Sub

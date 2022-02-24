@@ -28,7 +28,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\192.168.1.241\ti\NEducacionContinua\Instalador\</InstallUrl>
     <TargetCulture>es-MX</TargetCulture>
-    <ApplicationRevision>48</ApplicationRevision>
+    <ApplicationRevision>50</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -350,6 +350,12 @@
     <Compile Include="Views\NotasDeCreditoEDC.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Views\ObservacionesEDC.Designer.vb">
+      <DependentUpon>ObservacionesEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ObservacionesEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\PagosCreditoEDC.Designer.vb">
       <DependentUpon>PagosCreditoEDC.vb</DependentUpon>
     </Compile>
@@ -468,6 +474,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\NotasDeCreditoEDC.resx">
       <DependentUpon>NotasDeCreditoEDC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ObservacionesEDC.resx">
+      <DependentUpon>ObservacionesEDC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PagosCreditoEDC.resx">
       <DependentUpon>PagosCreditoEDC.vb</DependentUpon>

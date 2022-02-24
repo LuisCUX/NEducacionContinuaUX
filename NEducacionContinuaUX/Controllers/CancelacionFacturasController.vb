@@ -12,13 +12,15 @@
             ElseIf (concepto("Clave_Concepto") = 3) Then ''CON CONGRESOS
                 db.execSQLQueryWithoutParams($"UPDATE ing_PagosCongresos SET Activo = 0 WHERE Matricula = '{Matricula}' AND Folio = '{Folio}'")
             ElseIf (concepto("Clave_Concepto") = 4) Then ''DCO COLEGIATURA DIPLOMADO
-
+                db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionCargosPlanes SET Activo = 1, Folio = NULL WHERE ID = {concepto("IDConcepto")}")
             ElseIf (concepto("Clave_Concepto") = 5) Then ''DPU PAGO UNICO DIPLOMADO
-                db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionCargosPlanes SET Activo = 1, Folio = NULL WHERE ID = {}")
+                db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionCargosPlanes SET Activo = 1, Folio = NULL WHERE ID = {concepto("IDConcepto")}")
+                db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionCargosPlanes SET Activo = 1 WHERE Matricula = '{Matricula}' AND ID_ClaveConcepto = 4")
+                db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionCargosPlanes SET Activo = 1 WHERE Matricula = '{Matricula}' AND ID_ClaveConcepto = 6")
             ElseIf (concepto("Clave_Concepto") = 6) Then ''DIN INSCRIPCION DIPLOMADO
-
+                db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionCargosPlanes SET Activo = 1, Folio = NULL WHERE ID = {concepto("IDConcepto")}")
             ElseIf (concepto("Clave_Concepto") = 7) Then ''REC RECARGO
-
+                db.execSQLQueryWithoutParams($"UPDATE ing_PlanesRecargos SET Folio = NULL, Activo = 1 WHERE ID = {concepto("IDConcepto")}")
             End If
         Next
     End Sub

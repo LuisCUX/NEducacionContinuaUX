@@ -221,7 +221,6 @@ Partial Class PrincipalView
         '
         'CancelaciónDeFacturasToolStripMenuItem
         '
-        Me.CancelaciónDeFacturasToolStripMenuItem.Enabled = False
         Me.CancelaciónDeFacturasToolStripMenuItem.Name = "CancelaciónDeFacturasToolStripMenuItem"
         Me.CancelaciónDeFacturasToolStripMenuItem.Size = New System.Drawing.Size(213, 22)
         Me.CancelaciónDeFacturasToolStripMenuItem.Text = "Cancelación de facturas"
