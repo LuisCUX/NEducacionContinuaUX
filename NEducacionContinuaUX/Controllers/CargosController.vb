@@ -65,7 +65,7 @@
                                                                          INNER JOIN portal_congreso AS CON ON CON.id_congreso = TA.id_congreso
                                                                          INNER JOIN portal_subtotales AS SUB ON SUB.clave_cliente = RC.clave_cliente
                                                                          INNER JOIN ing_CatClavesPagos AS CP ON CP.ID = 3
-                                                                         WHERE RC.clave_cliente = '{Matricula}' AND CON.id_tipo_evento = 2 AND RC.clave_cliente NOT IN (SELECT Matricula FROM ing_PagosCongresos)")
+                                                                         WHERE RC.clave_cliente = '{Matricula}' AND CON.id_tipo_evento = 2 AND RC.clave_cliente NOT IN (SELECT Matricula FROM ing_PagosCongresos WHERE Activo = 1)")
         For Each item As DataRow In tablePagosOpcionales.Rows
             Dim concepto As New Concepto
             concepto = ch.crearConcepto(item("id_registro"), "CON", Matricula)
@@ -94,14 +94,14 @@
     End Sub
 
     Sub buscarInscripcionesDiplomados(Tree As TreeView, Matricula As String, TipoMatricula As String, Tipo As String)
-        Dim tableInscripciones As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, C.Importe, CP.Clave, C.Descuento, C.Fecha_Limite_Desc FROM ing_AsignacionCargosPlanes AS AC 
+        Dim tableInscripciones As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, C.Importe, CP.Clave, AC.Descuento, C.Fecha_Limite_Desc FROM ing_AsignacionCargosPlanes AS AC 
                                                                       INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
                                                                       INNER JOIN ing_CatClavesPagos AS CP ON CP.ID = 6
                                                                       WHERE AC.Matricula = '{Matricula}' AND C.Clave = 'P00' AND AC.Activo = 1")
         Dim descuento As String
         For Each item As DataRow In tableInscripciones.Rows
             Dim concepto As New Concepto
-            concepto = ch.crearConcepto(item("ID"), "DIN", Matricula)
+               concepto = ch.crearConcepto(item("ID"), "DIN", Matricula)
             Dim result = Me.generaTexto(concepto, 6)
             'If (item("Fecha_Limite_Desc") < Date.Today) Then
             '    descuento = Format(CDec(0.00), "#####0.00")
@@ -121,7 +121,7 @@
     End Sub
 
     Sub buscarColegiaturas(Tree As TreeView, Matricula As String, TipoMatricula As String, Tipo As String)
-        Dim tableColegiaturas As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, C.Importe, CP.Clave, C.Descuento, C.Fecha_Limite_Desc FROM ing_AsignacionCargosPlanes AS AC 
+        Dim tableColegiaturas As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, C.Importe, CP.Clave, AC.Descuento, C.Fecha_Limite_Desc FROM ing_AsignacionCargosPlanes AS AC 
                                                                       INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
                                                                       INNER JOIN ing_CatClavesPagos AS CP ON CP.ID = 4
                                                                       WHERE AC.Matricula = '{Matricula}' AND C.Clave != 'P00' AND C.Clave != 'P13' AND AC.Activo = 1")
@@ -148,7 +148,7 @@
     End Sub
 
     Sub buscarPagoUnicoDiplomados(Tree As TreeView, Matricula As String, TipoMatricula As String, Tipo As String)
-        Dim tablePagoUnico As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, C.Importe, CP.Clave, C.Fecha_Limite_Pago, C.Descuento, C.Fecha_Limite_Desc FROM ing_AsignacionCargosPlanes AS AC 
+        Dim tablePagoUnico As DataTable = db.getDataTableFromSQL($"SELECT AC.ID, C.Descripcion, C.Importe, CP.Clave, C.Fecha_Limite_Pago, AC.Descuento, C.Fecha_Limite_Desc FROM ing_AsignacionCargosPlanes AS AC 
                                                                       INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
                                                                       INNER JOIN ing_CatClavesPagos AS CP ON CP.ID = 5
                                                                       WHERE AC.Matricula = '{Matricula}' AND C.Clave = 'P13' AND AC.Activo = 1")

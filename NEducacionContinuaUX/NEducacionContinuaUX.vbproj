@@ -28,7 +28,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\192.168.1.241\ti\NEducacionContinua\Instalador\</InstallUrl>
     <TargetCulture>es-MX</TargetCulture>
-    <ApplicationRevision>28</ApplicationRevision>
+    <ApplicationRevision>50</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -154,6 +154,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -189,6 +190,8 @@
     <Compile Include="Controllers\AsignacionPagosOpcionalesController.vb" />
     <Compile Include="Controllers\AsignacionPlanesController.vb" />
     <Compile Include="Controllers\AutorizacionCondonacionController.vb" />
+    <Compile Include="Controllers\CambioFormaPagoController.vb" />
+    <Compile Include="Controllers\CancelacionFacturasController.vb" />
     <Compile Include="Controllers\CargosController.vb" />
     <Compile Include="Controllers\CobrosController.vb" />
     <Compile Include="Controllers\CobrosDiferidosController.vb" />
@@ -224,6 +227,8 @@
     <Compile Include="Services\ConsultaTimbresService.vb" />
     <Compile Include="Services\DataBaseService.vb" />
     <Compile Include="Services\EmailService.vb" />
+    <Compile Include="Services\Email\EmailModel.vb" />
+    <Compile Include="Services\Email\UXEmailService.vb" />
     <Compile Include="Services\EnviromentService.vb" />
     <Compile Include="Services\ImpresionReportesService.vb" />
     <Compile Include="Services\ObjectBagService.vb" />
@@ -237,10 +242,40 @@
     <Compile Include="Views\AsignacionPlanesEDC.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Views\AsignacionPlanesoldEDC.Designer.vb">
+      <DependentUpon>AsignacionPlanesoldEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AsignacionPlanesoldEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\AutorizacionCondonacionEDC.Designer.vb">
       <DependentUpon>AutorizacionCondonacionEDC.vb</DependentUpon>
     </Compile>
     <Compile Include="Views\AutorizacionCondonacionEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\BancosEDC.Designer.vb">
+      <DependentUpon>BancosEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BancosEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CambioFormaPagoEDC.Designer.vb">
+      <DependentUpon>CambioFormaPagoEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CambioFormaPagoEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CambioPlanesEDC.Designer.vb">
+      <DependentUpon>CambioPlanesEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CambioPlanesEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CancelacionFacturasEDC.Designer.vb">
+      <DependentUpon>CancelacionFacturasEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CancelacionFacturasEDC.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\IVAEDC.Designer.vb">
@@ -297,10 +332,28 @@
     <Compile Include="Views\ModalCobrosDiferidosEDC.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Views\ModalDescuento.Designer.vb">
+      <DependentUpon>ModalDescuento.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModalDescuento.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ModificacionCostosPlanesEDC.Designer.vb">
+      <DependentUpon>ModificacionCostosPlanesEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModificacionCostosPlanesEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\NotasDeCreditoEDC.Designer.vb">
       <DependentUpon>NotasDeCreditoEDC.vb</DependentUpon>
     </Compile>
     <Compile Include="Views\NotasDeCreditoEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ObservacionesEDC.Designer.vb">
+      <DependentUpon>ObservacionesEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ObservacionesEDC.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\PagosCreditoEDC.Designer.vb">
@@ -368,8 +421,23 @@
     <EmbeddedResource Include="Views\AsignacionPlanesEDC.resx">
       <DependentUpon>AsignacionPlanesEDC.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\AsignacionPlanesoldEDC.resx">
+      <DependentUpon>AsignacionPlanesoldEDC.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\AutorizacionCondonacionEDC.resx">
       <DependentUpon>AutorizacionCondonacionEDC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\BancosEDC.resx">
+      <DependentUpon>BancosEDC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CambioFormaPagoEDC.resx">
+      <DependentUpon>CambioFormaPagoEDC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CambioPlanesEDC.resx">
+      <DependentUpon>CambioPlanesEDC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CancelacionFacturasEDC.resx">
+      <DependentUpon>CancelacionFacturasEDC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\IVAEDC.resx">
       <DependentUpon>IVAEDC.vb</DependentUpon>
@@ -398,8 +466,17 @@
     <EmbeddedResource Include="Views\ModalCobrosDiferidosEDC.resx">
       <DependentUpon>ModalCobrosDiferidosEDC.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\ModalDescuento.resx">
+      <DependentUpon>ModalDescuento.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ModificacionCostosPlanesEDC.resx">
+      <DependentUpon>ModificacionCostosPlanesEDC.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\NotasDeCreditoEDC.resx">
       <DependentUpon>NotasDeCreditoEDC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ObservacionesEDC.resx">
+      <DependentUpon>ObservacionesEDC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PagosCreditoEDC.resx">
       <DependentUpon>PagosCreditoEDC.vb</DependentUpon>

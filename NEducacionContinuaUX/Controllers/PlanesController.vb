@@ -8,7 +8,7 @@
 
         Dim tableDiplomados As DataTable = db.getDataTableFromSQL($"SELECT id_congreso, nombre FROM portal_congreso WHERE id_tipo_evento = 1 AND clave_servicio IS NOT NULL")
         ''Dim tableDiplomados As DataTable = db.getDataTableFromSQL($"SELECT id_congreso, nombre FROM portal_congreso WHERE id_tipo_evento IS NULL")
-        ComboboxService.llenarCombobox(cbDiplomados, tableDiplomados, "id_congreso", "nombre")
+        ComboboxService.llenarComboboxVacio(cbDiplomados, tableDiplomados, "id_congreso", "nombre")
 
         cbNoPagos.Items.Clear()
         For x = 0 To 9
@@ -16,8 +16,8 @@
         Next
     End Sub
 
-    Function guardarPlan(Nombre_Plan As String, ID_Congreso As Integer, planGeneral As Integer) As Integer
-        Dim ID_Plan As Integer = db.insertAndGetIDInserted($"INSERT INTO ing_Planes (Nombre_Plan, ID_Congreso, PlanGeneral, Activo) VALUES ('{Nombre_Plan}', {ID_Congreso}, {planGeneral}, 1)")
+    Function guardarPlan(Nombre_Plan As String, ID_Congreso As Integer, planGeneral As Integer, Publico As String) As Integer
+        Dim ID_Plan As Integer = db.insertAndGetIDInserted($"INSERT INTO ing_Planes (Nombre_Plan, ID_Congreso, PublicoPlan, PlanGeneral, Activo) VALUES ('{Nombre_Plan}', {ID_Congreso}, '{Publico}', {planGeneral}, 1)")
         Return ID_Plan
     End Function
 
@@ -32,12 +32,12 @@
         Dim recargoMonto As Decimal = CDec((Importe / 100) * Recargo)
         Dim descuentoMonto As Decimal = CDec((Importe / 100) * Descuento)
 
-        db.execSQLQueryWithoutParams($"INSERT INTO ing_PlanesConceptos(ID_Plan, Orden, Clave, Descripcion, Importe, Recargo, Recargo_Porcentaje, Descuento, Descuento_Porcentaje, Fecha_Limite_Desc, Fecha_Calcula_Recargo, Considera_Recargo, Fecha_Limite_Pago, Importe_Total, AgregaIVA, AbsorbeIVA, ExentaIVA, Activo) VALUES ({ID_Plan}, {Orden}, 'P00', 'PAGO DE INSCRIPCIÓN A DIPLOMADO', {Importe}, {recargoMonto}, {Recargo}, {descuentoMonto}, {Descuento}, '{Fecha_Limite_Desc}', '{Fecha_Calcula_Recargo}', {RecargoBit}, '1900-01-01', {Importe}, {AgregaIVA}, {AbsorbeIVA}, {ExentaIVA}, 1)")
+        db.execSQLQueryWithoutParams($"INSERT INTO ing_PlanesConceptos(ID_Plan, Orden, Clave, Descripcion, Importe, Recargo, Recargo_Porcentaje, Descuento, Descuento_Porcentaje, Fecha_Limite_Desc, Fecha_Calcula_Recargo, Considera_Recargo, Fecha_Limite_Pago, Importe_Total, AgregaIVA, AbsorbeIVA, ExentaIVA, Activo) VALUES ({ID_Plan}, {Orden}, 'P00', 'INSCRIPCIÓN', {Importe}, {recargoMonto}, {Recargo}, {descuentoMonto}, {Descuento}, '{Fecha_Limite_Desc}', '{Fecha_Calcula_Recargo}', {RecargoBit}, '1900-01-01', {Importe}, {AgregaIVA}, {AbsorbeIVA}, {ExentaIVA}, 1)")
     End Sub
 
     Sub guardarPagoUnico(ID_Plan As Integer, Orden As Integer, Importe As Decimal, Descuento As Decimal, Fecha_Limite_Desc As String, Fecha_Limite_Pago As String, AgregaIVA As Integer, AbsorbeIVA As Integer, ExentaIVA As Integer)
         Dim descuentoMonto As Decimal = CDec((Importe / 100) * Descuento)
-        db.execSQLQueryWithoutParams($"INSERT INTO ing_PlanesConceptos(ID_Plan, Orden, Clave, Descripcion, Importe, Recargo, Recargo_Porcentaje,  Descuento, Descuento_Porcentaje, Fecha_Limite_Desc, Fecha_Calcula_Recargo, Considera_Recargo, Fecha_Limite_Pago, Importe_Total, AgregaIVA, AbsorbeIVA, ExentaIVA, Activo) VALUES ({ID_Plan}, {Orden}, 'P13', 'PAGO COMPLETO DE DIPLOMADO', {Importe}, 0.00, 0, {descuentoMonto}, {Descuento}, '{Fecha_Limite_Desc}', '1900-01-01', 0, '{Fecha_Limite_Pago}', {Importe}, {AgregaIVA}, {AbsorbeIVA}, {ExentaIVA}, 1)")
+        db.execSQLQueryWithoutParams($"INSERT INTO ing_PlanesConceptos(ID_Plan, Orden, Clave, Descripcion, Importe, Recargo, Recargo_Porcentaje,  Descuento, Descuento_Porcentaje, Fecha_Limite_Desc, Fecha_Calcula_Recargo, Considera_Recargo, Fecha_Limite_Pago, Importe_Total, AgregaIVA, AbsorbeIVA, ExentaIVA, Activo) VALUES ({ID_Plan}, {Orden}, 'P13', 'PAGO UNICO', {Importe}, 0.00, 0, {descuentoMonto}, {Descuento}, '{Fecha_Limite_Desc}', '1900-01-01', 0, '{Fecha_Limite_Pago}', {Importe}, {AgregaIVA}, {AbsorbeIVA}, {ExentaIVA}, 1)")
     End Sub
 
     Sub guardarPagoPlan(ID_Plan As Integer, Orden As Integer, Clave As String, Mes As String, Importe As Decimal, Recargo As Decimal, Descuento As Decimal, Fecha_Limite_Desc As String, Fecha_Calcula_Recargo As String, Considera_Recargo As Boolean, AgregaIVA As Integer, AbsorbeIVA As Integer, ExentaIVA As Integer)

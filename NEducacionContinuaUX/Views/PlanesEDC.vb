@@ -31,30 +31,44 @@
         datePickerDescuentoPagoUnico.MinDate = DateTime.Now
     End Sub
 
-    Private Sub cbPlanes_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbPlanes.SelectionChangeCommitted
-        If (cbPlanes.Text <> "NUEVO PLAN" And cbPlanes.Text <> "-PLAN GENERAL-") Then
-            txtNombrePlan.Text = cbPlanes.Text
-            txtNombrePlan.Enabled = True
-            pc.llenarVentanaPlanesInscripcion(cbPlanes.SelectedValue, chbInscripcion, txtImporteInscripcion, chbRecargoInscripcion, chbDescuentoInscripcion, NURecargoInscripcion, datePickerRecargoInscripcion, NUDescuentoInscripcion, txtDescripcionDescuentoInscripcion, datePickerLimiteDescuentoInscripcion)
-            pc.llenarVentanaPlanesColegiaturas(cbPlanes.SelectedValue, listaPaneles, listatxtImportes, listatxtRecargos, listatxtDescuentos, listatxtDescripcionDescuentos, listadatePickerRecargos, listadatePickerDescuentos, listacbClaves, listatxtConcepto, txtImportePagos, NURecargo, NUDescuento, txtDescripcionDescuentoPagos, chbRecargosPagos, chbDescuentoPagos, cbNoPagos)
-            pc.llenarVentanaPlanesPagoUnico(cbPlanes.SelectedValue, chbPagoUnico, txtMontoPagoUnico, chbDescuentoPagoUnico, NUDescuentoPagoUnico, txtDescripcionDescuentoPagoUnico, datePickerDescuentoPagoUnico, datePickerPagoUnico)
-            colegiaturas = cbNoPagos.SelectedIndex + 1
-            edicion = True
-            For x = 0 To colegiaturas - 1
-                listaPaneles(x).Visible = True
-            Next
-            chbInscripcion.Enabled = True
-            chbPagoUnico.Enabled = True
-        ElseIf (cbPlanes.Text = "-PLAN GENERAL-") Then
-            edicion = False
-            Me.resetControls()
-            txtNombrePlan.Text = "PLAN GENERAL"
-            txtNombrePlan.Enabled = False
+    Private Sub cbPlanes_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbPlanes.SelectedIndexChanged
+        Try
+            If (cbPlanes.Text <> "NUEVO PLAN" And cbPlanes.Text <> "-PLAN GENERAL-") Then
+                txtNombrePlan.Text = cbPlanes.Text
+                txtNombrePlan.Enabled = True
+                txtPublicoPlan.Text = db.exectSQLQueryScalar($"SELECT PublicoPlan FROM ing_Planes WHERE ID = {cbPlanes.SelectedValue}")
+                pc.llenarVentanaPlanesInscripcion(cbPlanes.SelectedValue, chbInscripcion, txtImporteInscripcion, chbRecargoInscripcion, chbDescuentoInscripcion, NURecargoInscripcion, datePickerRecargoInscripcion, NUDescuentoInscripcion, txtDescripcionDescuentoInscripcion, datePickerLimiteDescuentoInscripcion)
+                pc.llenarVentanaPlanesColegiaturas(cbPlanes.SelectedValue, listaPaneles, listatxtImportes, listatxtRecargos, listatxtDescuentos, listatxtDescripcionDescuentos, listadatePickerRecargos, listadatePickerDescuentos, listacbClaves, listatxtConcepto, txtImportePagos, NURecargo, NUDescuento, txtDescripcionDescuentoPagos, chbRecargosPagos, chbDescuentoPagos, cbNoPagos)
+                pc.llenarVentanaPlanesPagoUnico(cbPlanes.SelectedValue, chbPagoUnico, txtMontoPagoUnico, chbDescuentoPagoUnico, NUDescuentoPagoUnico, txtDescripcionDescuentoPagoUnico, datePickerDescuentoPagoUnico, datePickerPagoUnico)
+                colegiaturas = cbNoPagos.SelectedIndex + 1
+                edicion = True
+                For x = 0 To colegiaturas - 1
+                    listaPaneles(x).Visible = True
+                Next
+                chbInscripcion.Enabled = True
+                chbPagoUnico.Enabled = True
+            ElseIf (cbPlanes.Text = "-PLAN GENERAL-") Then
+                edicion = False
+                Me.resetControls()
+                txtNombrePlan.Text = "PLAN GENERAL"
+                txtNombrePlan.Enabled = False
+            Else
+                txtNombrePlan.Clear()
+                txtNombrePlan.Enabled = True
+                edicion = False
+                Me.resetControls()
+            End If
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
+
+    Private Sub txtImportePagos_TextChanged(sender As Object, e As EventArgs) Handles txtImportePagos.TextChanged
+        If (txtImportePagos.TextLength <> 0) Then
+            cbNoPagos.Enabled = True
         Else
-            txtNombrePlan.Clear()
-            txtNombrePlan.Enabled = True
-            edicion = False
-            Me.resetControls()
+            cbNoPagos.Enabled = False
         End If
     End Sub
 
@@ -146,14 +160,16 @@
                 dtPlaceHolder.Rows.Add(0, "NUEVO PLAN")
             End If
             dtPlaceHolder.Merge(tablePlanes)
-            ComboboxService.llenarCombobox(cbPlanes, dtPlaceHolder, "ID", "Nombre_Plan")
+            ComboboxService.llenarComboboxVacio(cbPlanes, dtPlaceHolder, "ID", "Nombre_Plan")
             txtNombrePlan.Enabled = True
+            txtPublicoPlan.Enabled = True
         Else
             dtPlaceHolder.Rows.Add(0, "-PLAN GENERAL-")
             dtPlaceHolder.Rows.Add(0, "NUEVO PLAN")
-            ComboboxService.llenarCombobox(cbPlanes, dtPlaceHolder, "ID", "Nombre_Plan")
-            txtNombrePlan.Enabled = True
-            txtNombrePlan.Clear()
+            ComboboxService.llenarComboboxVacio(cbPlanes, dtPlaceHolder, "ID", "Nombre_Plan")
+            cbPlanes.SelectedIndex = 0
+            txtNombrePlan.Enabled = False
+            txtPublicoPlan.Enabled = True
         End If
     End Sub
 
@@ -359,7 +375,7 @@
     ''-----------------------------------------------------------------------------------------------------------------------------
     ''----------------------------------------------------CONTROLES TEXTBOX--------------------------------------------------------
     ''-----------------------------------------------------------------------------------------------------------------------------
-    Private Sub txt_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtNombrePlan.KeyPress, txtDescripcionDescuentoInscripcion.KeyPress, txtDescripcionDescuentoPagoUnico.KeyPress, txtDescripcionDescuentoPagos.KeyPress
+    Private Sub txt_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtNombrePlan.KeyPress, txtDescripcionDescuentoInscripcion.KeyPress, txtDescripcionDescuentoPagoUnico.KeyPress, txtDescripcionDescuentoPagos.KeyPress, txtPublicoPlan.KeyPress
         If Asc(e.KeyChar) = 39 Or Asc(e.KeyChar) = 44 Then
             e.Handled = True
         End If
@@ -1047,6 +1063,10 @@
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+        If (txtPublicoPlan.Text = "") Then
+            MessageBox.Show("Ingrese el público al que ira dirigido el plan")
+            Exit Sub
+        End If
         If (chbInscripcion.Checked = True) Then
             If (txtImporteInscripcionText.Text = "") Then
                 MessageBox.Show("Ingrese un monto de inscripción")
@@ -1131,11 +1151,14 @@
                 Try
                     db.startTransaction()
                     db.execSQLQueryWithoutParams($"UPDATE ing_PlanesConceptos SET Activo = 0 WHERE ID_Plan = {cbPlanes.SelectedValue}")
+                    db.execSQLQueryWithoutParams($"UPDATE ing_Planes SET Nombre_Plan = '{txtNombrePlan.Text}', PublicoPlan = '{txtPublicoPlan.Text}' WHERE ID = {cbPlanes.SelectedValue}")
                     Dim Orden As Integer = 1
                     If (chbInscripcion.Checked = True) Then
                         pc.guardarInscripcion(cbPlanes.SelectedValue, Orden, txtImporteInscripcion.Text, NURecargoInscripcion.Text, NUDescuentoInscripcion.Text, pc.obtenerFechaString(datePickerLimiteDescuentoInscripcion), pc.obtenerFechaString(datePickerRecargoInscripcion), chbRecargoInscripcion.Checked, Agrega, Absorbe, Exenta)
                         Orden = Orden + 1
                     End If
+
+
 
                     For x = 0 To cbNoPagos.SelectedIndex
                         Dim Clave As String = listacbClaves(x).Text
@@ -1166,7 +1189,7 @@
                 Else
                     planGeneral = 0
                 End If
-                Dim ID_Plan As Integer = pc.guardarPlan(txtNombrePlan.Text, cbDiplomados.SelectedValue, planGeneral)
+                Dim ID_Plan As Integer = pc.guardarPlan(txtNombrePlan.Text, cbDiplomados.SelectedValue, planGeneral, txtPublicoPlan.Text)
                 If (chbInscripcion.Checked = True) Then
                     pc.guardarInscripcion(ID_Plan, Orden, txtImporteInscripcion.Text, NURecargoInscripcion.Text, NUDescuentoInscripcion.Text, pc.obtenerFechaString(datePickerLimiteDescuentoInscripcion), pc.obtenerFechaString(datePickerRecargoInscripcion), chbRecargoInscripcion.Checked, Agrega, Absorbe, Exenta)
                     Orden = Orden + 1
@@ -1204,7 +1227,6 @@
         NURecargoInscripcion.Text = "0.00"
         NUDescuentoInscripcion.Text = "0.00"
         txtDescripcionDescuentoInscripcion.Clear()
-
         ''----------COLEGIATURAS----------''
         txtImportePagos.Clear()
         NURecargo.Value = 0
@@ -1248,5 +1270,9 @@
             item.Items.Add("11")
             item.Items.Add("12")
         Next
+    End Sub
+
+    Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
+        Me.Reiniciar()
     End Sub
 End Class

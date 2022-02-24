@@ -13,9 +13,9 @@ Public Class MainCobrosDiferidosEDC
 
     Private Sub MainCobrosDiferidosEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim tableFormaPago As DataTable = db.getDataTableFromSQL("SELECT Forma_Pago, Descripcion FROM ing_CatFormaPago WHERE Descripcion != 'CREDITO'")
-        ComboboxService.llenarCombobox(cbFormaPago, tableFormaPago, "Forma_Pago", "Descripcion")
+        ComboboxService.llenarComboboxVacio(cbFormaPago, tableFormaPago, "Forma_Pago", "Descripcion")
         Dim tablebancos As DataTable = db.getDataTableFromSQL("SELECT ID, Nombre_Banco FROM ing_Cat_Bancos")
-        ComboboxService.llenarCombobox(cbBanco, tablebancos, "ID", "Nombre_Banco")
+        ComboboxService.llenarComboboxVacio(cbBanco, tablebancos, "ID", "Nombre_Banco")
         'Dim tableEDC As DataTable = db.getDataTableFromSQL("SELECT RC.clave_cliente, UPPER(C.nombre + ' ' + RC.apellido_paterno + ' ' + RC.apellido_materno + ' (' + RC.clave_cliente + ')') AS NombreCliente FROM portal_registroCongreso AS RC
         '                                                    INNER JOIN portal_cliente AS C ON RC.id_cliente = C.id_cliente
         '                                                    ORDER BY NombreCliente")
@@ -35,7 +35,7 @@ Public Class MainCobrosDiferidosEDC
             Me.Reiniciar()
             Exit Sub
         ElseIf (tipoMatricula = "EX") Then
-            va.buscarMatriculaEX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno, txtRFC)
+            va.buscarMatriculaEX(Matricula, panelDatos, panelCobros, lblNombretxt, lblEmailtxt, lblC, lblT, lblRFCtxt)
         Else
             MessageBox.Show("Ingrese una matricula externa")
             txtMatricula.Clear()
@@ -148,6 +148,7 @@ Public Class MainCobrosDiferidosEDC
         Me.Controls.Clear()
         InitializeComponent()
         MainCobrosDiferidosEDC_Load(Me, Nothing)
+        txtMatricula.Focus()
     End Sub
 
     Private Sub txtMatricula_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtMatricula.KeyPress, txtBusquedaMatricula.KeyPress
@@ -157,8 +158,8 @@ Public Class MainCobrosDiferidosEDC
     End Sub
 
     Sub Limpiar()
-        txtNombre.Clear()
-        txtEmail.Clear()
+        lblNombretxt.Text = ""
+        lblEmailtxt.Text = ""
         lblTotal.Text = ""
         ch.limpiarListaConceptos()
     End Sub
@@ -178,10 +179,10 @@ Public Class MainCobrosDiferidosEDC
             txtBusquedaMatricula.Clear()
             Exit Sub
         Else
-            'ObjectBagService.setItem("Matricula", txtBusquedaMatricula.Text)
-            'ObjectBagService.setItem("tipoMatricula", tipoMatriculaB)
-            'ModalCobrosDiferidosEDC.MdiParent = PrincipalView
-            'ModalCobrosDiferidosEDC.Show()
+            ObjectBagService.setItem("Matricula", txtBusquedaMatricula.Text)
+            ObjectBagService.setItem("tipoMatricula", tipoMatriculaB)
+            ModalCobrosDiferidosEDC.MdiParent = PrincipalView
+            ModalCobrosDiferidosEDC.Show()
             Dim IDConcepto As Integer = co.buscarCongreso(txtBusquedaMatricula.Text)
             Me.actualizarTotal()
         End If
@@ -291,7 +292,7 @@ Public Class MainCobrosDiferidosEDC
         ElseIf (tipoMatricula = "EC") Then
             tipocliente = 1
         End If
-        Dim IDXML As Integer = co.Cobrar(listaConceptos, cbFormaPago.SelectedValue, txtRFC.Text, txtNombre.Text, txtMonto.Text, Matricula, False, tipocliente)
+        Dim IDXML As Integer = co.Cobrar(listaConceptos, cbFormaPago.SelectedValue, lblRFCtxt.Text, lblNombretxt.Text, txtMonto.Text, Matricula, False, tipocliente)
 
 
         ''---------------------------------------------------------REGISTRO DE FORMA DE PAGO---------------------------------------------------------
@@ -443,5 +444,8 @@ Public Class MainCobrosDiferidosEDC
         End If
     End Sub
 
-
+    Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
+        ModalCobrosDiferidosEDC.Close()
+        Me.Reiniciar()
+    End Sub
 End Class

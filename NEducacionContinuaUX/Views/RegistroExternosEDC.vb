@@ -240,4 +240,8 @@
     Private Sub btnSalirEd_Click(sender As Object, e As EventArgs) Handles btnSalirEd.Click
         Me.Close()
     End Sub
+
+    Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
+        Me.Reiniciar()
+    End Sub
 End Class

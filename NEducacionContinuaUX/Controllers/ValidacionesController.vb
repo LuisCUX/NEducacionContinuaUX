@@ -28,7 +28,7 @@ Public Class ValidacionesController
     ''----------------------------------------------------------------------------------------------------------------------------------------
     ''-----------------------------------------------------BUSCA MATRICULA MATRICULA----------------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
-    Sub buscarMatriculaUX(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As TextBox, txtEmail As TextBox, txtCarrera As TextBox, txtTurno As TextBox)
+    Sub buscarMatriculaUX(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As Label, txtEmail As Label, txtCarrera As Label, txtTurno As Label)
         Dim matriculaUX As String = db.exectSQLQueryScalar($"SELECT MatriculaUX FROM ing_catMatriculasUX WHERE MatriculaEX = '{Matricula}'")
         Dim exists As String = db.exectSQLQueryScalar($"SELECT nombre FROM ux.dbo.dae_catAlumnos WHERE matricula = '{matriculaUX}'")
         Dim sit_esc As String = db.exectSQLQueryScalar($"SELECT sit_esc FROM ux.dbo.dae_catAlumnos WHERE matricula = '{matriculaUX}'")
@@ -51,7 +51,7 @@ Public Class ValidacionesController
     ''----------------------------------------------------------------------------------------------------------------------------------------
     ''-------------------------------------------------------LLENA PANEL DE DATOS UX----------------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
-    Sub llenarPanelDatosUX(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As TextBox, txtEmail As TextBox, txtCarrera As TextBox, txtTurno As TextBox)
+    Sub llenarPanelDatosUX(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As Label, txtEmail As Label, txtCarrera As Label, txtTurno As Label)
         Dim nombre As String = db.exectSQLQueryScalar($"SELECT UPPER(nombre + ' ' + ap_pat + ' ' + ap_mat) As NombreAlumno FROM ux.dbo.dae_catAlumnos WHERE Matricula = '{Matricula}'")
         nombre = Regex.Replace(nombre, " {2,}", " ")
         Dim email As String = db.exectSQLQueryScalar($"SELECT email FROM ux.dbo.dae_catAlumnos WHERE Matricula = '{Matricula}'")
@@ -72,7 +72,7 @@ Public Class ValidacionesController
     ''----------------------------------------------------------------------------------------------------------------------------------------
     ''-------------------------------------------------BUSCA MATRICULA MATRICULA EXTERNA------------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
-    Sub buscarMatriculaEX(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As TextBox, txtEmail As TextBox, txtCarrera As TextBox, txtTurno As TextBox, txtRFC As TextBox)
+    Sub buscarMatriculaEX(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As Label, txtEmail As Label, txtCarrera As Label, txtTurno As Label, txtRFC As Label)
         Dim exists As Integer = db.exectSQLQueryScalar($"SELECT id_clave FROM portal_clave WHERE clave_cliente = '{Matricula}'")
 
         If (exists < 1) Then
@@ -89,7 +89,7 @@ Public Class ValidacionesController
     ''----------------------------------------------------------------------------------------------------------------------------------------
     ''-----------------------------------------------------LLENA PANEL DE DATOS EXTERNA-------------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
-    Sub llenarPanelDatosEX(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As TextBox, txtEmail As TextBox, txtCarrera As TextBox, txtTurno As TextBox, txtRFC As TextBox)
+    Sub llenarPanelDatosEX(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As Label, txtEmail As Label, txtCarrera As Label, txtTurno As Label, txtRFC As Label)
         Dim tableDatos As DataTable = db.getDataTableFromSQL($"SELECT UPPER(C.nombre + ' ' + EX.paterno + ' ' + EX.materno)As Nombre, C.correo FROM portal_cliente AS C 
                                                                INNER JOIN portal_registroExterno AS EX ON C.id_cliente = EX.id_cliente
                                                                WHERE EX.clave_cliente = '{Matricula}'")
@@ -114,7 +114,7 @@ Public Class ValidacionesController
     ''----------------------------------------------------------------------------------------------------------------------------------------
     ''-------------------------------------------------BUSCA MATRICULA MATRICULA CONGRESO-----------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
-    Sub buscarMatriculaEC(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As TextBox, txtEmail As TextBox, txtCarrera As TextBox, txtTurno As TextBox, txtRFC As TextBox)
+    Sub buscarMatriculaEC(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As Label, txtEmail As Label, txtCarrera As Label, txtTurno As Label, txtRFC As Label)
         Dim exists As Integer = db.exectSQLQueryScalar($"SELECT id_clave FROM portal_clave WHERE clave_cliente = '{Matricula}'")
 
         If (exists < 1) Then
@@ -131,7 +131,7 @@ Public Class ValidacionesController
     ''----------------------------------------------------------------------------------------------------------------------------------------
     ''-----------------------------------------------------LLENA PANEL DE DATOS CONGRESO------------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
-    Sub llenarPanelDatosEC(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As TextBox, txtEmail As TextBox, txtCarrera As TextBox, txtTurno As TextBox, txtRFC As TextBox)
+    Sub llenarPanelDatosEC(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As Label, txtEmail As Label, txtCarrera As Label, txtTurno As Label, txtRFC As Label)
         Dim tableDatos As DataTable = db.getDataTableFromSQL($"SELECT UPPER(C.nombre + ' ' + R.apellido_paterno + ' ' + R.apellido_materno) AS Nombre, C.correo FROM portal_cliente AS C 
                                                                INNER JOIN portal_registroCongreso AS R ON R.id_cliente = C.id_cliente
                                                                WHERE R.clave_cliente = '{Matricula}'")

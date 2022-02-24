@@ -95,13 +95,13 @@
             tablePagosOpcionales = db.getDataTableFromSQL($"SELECT R.ID, P.Nombre FROM ing_PagosOpcionales AS P
                                                            INNER JOIN ing_resPagoOpcionalAsignacion AS R ON R.ID_PagoOpcional = P.ID
                                                            WHERE P.ID_cat_TipoPagoOpcional = {cbTipoPagos.SelectedValue} AND R.Para = 'ALUMNO' AND P.Activo = 1 AND ID_res_NT = {IDNT}")
-            ComboboxService.llenarCombobox(cbPagosOpcionales, tablePagosOpcionales, "ID", "Nombre")
+            ComboboxService.llenarComboboxVacio(cbPagosOpcionales, tablePagosOpcionales, "ID", "Nombre")
             ModalAsignacionPagosOpcionalesEDC.commitChangecbPagosOpcionales()
         ElseIf (tipoMatricula = "EC") Then
             tablePagosOpcionales = db.getDataTableFromSQL($"SELECT R.ID, P.Nombre FROM ing_PagosOpcionales AS P
                                                            INNER JOIN ing_resPagoOpcionalAsignacion AS R ON R.ID_PagoOpcional = P.ID
                                                            WHERE P.ID_cat_TipoPagoOpcional = {cbTipoPagos.SelectedValue} AND R.Para = 'EXTERNO' AND P.Activo = 1")
-            ComboboxService.llenarCombobox(cbPagosOpcionales, tablePagosOpcionales, "ID", "Nombre")
+            ComboboxService.llenarComboboxVacio(cbPagosOpcionales, tablePagosOpcionales, "ID", "Nombre")
             ModalAsignacionPagosOpcionalesEDC.commitChangecbPagosOpcionales()
         End If
     End Sub

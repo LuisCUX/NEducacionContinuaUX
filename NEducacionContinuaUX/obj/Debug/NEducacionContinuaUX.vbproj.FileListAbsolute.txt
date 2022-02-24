@@ -109,3 +109,11 @@ C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\Mime
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\System.Buffers.xml
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.ReimpresionFacturasEDC.resources
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.ModalDescuento.resources
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.AsignacionPlanesoldEDC.resources
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.CambioPlanesEDC.resources
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.ModificacionCostosPlanesEDC.resources
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.BancosEDC.resources
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.CambioFormaPagoEDC.resources
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.CancelacionFacturasEDC.resources
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.ObservacionesEDC.resources

@@ -26,6 +26,7 @@ Partial Class RegistroExternosEDC
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.tabExternos = New System.Windows.Forms.TabControl()
         Me.tabRegistroExternos = New System.Windows.Forms.TabPage()
+        Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.btnGuardarN = New System.Windows.Forms.Button()
         Me.chbDatosFiscales = New System.Windows.Forms.CheckBox()
@@ -172,6 +173,7 @@ Partial Class RegistroExternosEDC
         'tabRegistroExternos
         '
         Me.tabRegistroExternos.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.tabRegistroExternos.Controls.Add(Me.btnLimpiar)
         Me.tabRegistroExternos.Controls.Add(Me.btnSalir)
         Me.tabRegistroExternos.Controls.Add(Me.btnGuardarN)
         Me.tabRegistroExternos.Controls.Add(Me.chbDatosFiscales)
@@ -183,6 +185,16 @@ Partial Class RegistroExternosEDC
         Me.tabRegistroExternos.Size = New System.Drawing.Size(1022, 544)
         Me.tabRegistroExternos.TabIndex = 0
         Me.tabRegistroExternos.Text = "Registro de externos"
+        '
+        'btnLimpiar
+        '
+        Me.btnLimpiar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
+        Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnLimpiar.Location = New System.Drawing.Point(492, 481)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(75, 55)
+        Me.btnLimpiar.TabIndex = 68
+        Me.btnLimpiar.UseVisualStyleBackColor = True
         '
         'btnSalir
         '
@@ -1547,4 +1559,5 @@ Partial Class RegistroExternosEDC
     Friend WithEvents cbUX As ComboBox
     Friend WithEvents lblMatriculaEXEdString As Label
     Friend WithEvents lblMatriculaEXEd As Label
+    Friend WithEvents btnLimpiar As Button
 End Class

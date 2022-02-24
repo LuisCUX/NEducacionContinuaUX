@@ -9,10 +9,11 @@ Public Class CobrosEDC
     Dim ca As CargosController = New CargosController()
     Dim ch As ConceptHandlerController = New ConceptHandlerController()
     Dim va As ValidacionesController = New ValidacionesController()
-    Dim es As EmailService = New EmailService()
+    Dim es As UXServiceEmail = New UXServiceEmail()
     Dim combo_filtro As String
     Private Sub CobrosEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        Dim folioPago As String = co.obtenerFolio("Pago")
+        lblFolio.Text = folioPago
         'Dim tableEDC As DataTable = db.getDataTableFromSQL("SELECT RC.clave_cliente, UPPER(C.nombre + ' ' + RC.apellido_paterno + ' ' + RC.apellido_materno + ' (' + RC.clave_cliente + ')') AS NombreCliente FROM portal_registroCongreso AS RC
         '                                                    INNER JOIN portal_cliente AS C ON RC.id_cliente = C.id_cliente
         '                                                    ORDER BY NombreCliente")
@@ -23,27 +24,27 @@ Public Class CobrosEDC
 
         'tableExternos.Merge(tableEDC)
         'ComboboxService.llenarCombobox(cbExterno, tableExternos, "clave_cliente", "NombreCliente")
-
         Dim tableFormaPago As DataTable = db.getDataTableFromSQL("SELECT Forma_Pago, Descripcion FROM ing_CatFormaPago")
-        ComboboxService.llenarCombobox(cbFormaPago, tableFormaPago, "Forma_Pago", "Descripcion")
-        Dim tablebancos As DataTable = db.getDataTableFromSQL("SELECT ID, Nombre_Banco FROM ing_Cat_Bancos")
-        ComboboxService.llenarCombobox(cbBanco, tablebancos, "ID", "Nombre_Banco")
+        ComboboxService.llenarComboboxVacio(cbFormaPago, tableFormaPago, "Forma_Pago", "Descripcion")
+        Dim tablebancos As DataTable = db.getDataTableFromSQL("SELECT ID, Nombre_Banco FROM ing_Cat_Bancos WHERE Activo = 1")
+        ComboboxService.llenarComboboxVacio(cbBanco, tablebancos, "ID", "Nombre_Banco")
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         Me.Limpiar()
-        Matricula = txtMatricula.Text
+        Matricula = txtMatricula.Text.ToUpper()
         tipoMatricula = va.validarMatricula(Matricula)
-        txtMatriculaDato.Text = Matricula
+        lblMatriculatxt.Text = Matricula
         If (tipoMatricula = "False") Then
             Me.Reiniciar()
+            txtMatricula.Focus()
             Exit Sub
         ElseIf (tipoMatricula = "UX") Then
-            va.buscarMatriculaUX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno)
+            va.buscarMatriculaUX(Matricula, panelDatos, panelCobros, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt)
         ElseIf (tipoMatricula = "EX") Then
-            va.buscarMatriculaEX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno, txtRFC)
+            va.buscarMatriculaEX(Matricula, panelDatos, panelCobros, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt)
         ElseIf (tipoMatricula = "EC") Then
-            va.buscarMatriculaEC(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno, txtRFC)
+            va.buscarMatriculaEC(Matricula, panelDatos, panelCobros, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt)
         End If
         ca.buscarPagosOpcionales(Tree, Matricula, tipoMatricula, "Cobros")
         ca.buscarCongresos(Tree, Matricula, tipoMatricula, "Cobros")
@@ -70,6 +71,8 @@ Public Class CobrosEDC
             lblNoCheque.Visible = False
             cbBanco.Visible = False
             cbTipoBanco.Visible = False
+            lblBancotext.Visible = False
+            txtBancotext.Visible = False
             DTPickerFecha.Visible = False
             txtNoCuenta.Visible = False
             txtUltimos4Digitos.Visible = False
@@ -85,6 +88,8 @@ Public Class CobrosEDC
             lblNoCheque.Visible = False
             cbBanco.Visible = True
             cbTipoBanco.Visible = True
+            lblBancotext.Visible = False
+            txtBancotext.Visible = False
             DTPickerFecha.Visible = False
             txtUltimos4Digitos.Visible = True
             txtNoCheque.Visible = False
@@ -92,14 +97,16 @@ Public Class CobrosEDC
             lblMonto.Visible = True
             txtMonto.Visible = True
         ElseIf (cbFormaPago.Text = "CHEQUE") Then ''CHEQUE
-            lblBanco.Visible = True
+            lblBanco.Visible = False
             lblTIpoBanco.Visible = False
             lblFecha.Visible = False
             lblUltimosDigitos.Visible = False
             lblNoCuenta.Visible = True
             lblNoCheque.Visible = True
-            cbBanco.Visible = True
+            cbBanco.Visible = False
             cbTipoBanco.Visible = False
+            lblBancotext.Visible = True
+            txtBancotext.Visible = True
             DTPickerFecha.Visible = False
             txtUltimos4Digitos.Visible = False
             txtNoCheque.Visible = True
@@ -114,6 +121,8 @@ Public Class CobrosEDC
             lblNoCuenta.Visible = False
             lblNoCheque.Visible = False
             cbBanco.Visible = True
+            lblBancotext.Visible = False
+            txtBancotext.Visible = False
             cbTipoBanco.Visible = False
             DTPickerFecha.Visible = True
             txtUltimos4Digitos.Visible = False
@@ -129,6 +138,8 @@ Public Class CobrosEDC
             lblNoCuenta.Visible = False
             lblNoCheque.Visible = False
             cbBanco.Visible = True
+            lblBancotext.Visible = False
+            txtBancotext.Visible = False
             cbTipoBanco.Visible = True
             DTPickerFecha.Visible = True
             txtUltimos4Digitos.Visible = False
@@ -146,6 +157,8 @@ Public Class CobrosEDC
             cbBanco.Visible = False
             cbTipoBanco.Visible = False
             DTPickerFecha.Visible = False
+            lblBancotext.Visible = False
+            txtBancotext.Visible = False
             txtUltimos4Digitos.Visible = False
             txtNoCheque.Visible = False
             txtNoCuenta.Visible = False
@@ -158,6 +171,8 @@ Public Class CobrosEDC
             lblUltimosDigitos.Visible = False
             lblNoCuenta.Visible = False
             lblNoCheque.Visible = False
+            lblBancotext.Visible = False
+            txtBancotext.Visible = False
             cbBanco.Visible = False
             cbTipoBanco.Visible = False
             DTPickerFecha.Visible = False
@@ -170,8 +185,19 @@ Public Class CobrosEDC
     End Sub
 
     Private Sub cbBanco_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbBanco.SelectionChangeCommitted
-        Dim tableTipoPAgo As DataTable = db.getDataTableFromSQL($"SELECT ID, Tipo_Pago FROM ing_cat_tipoFormaPago WHERE ID_TipoPago = (SELECT ID FROM ing_CatFormaPago WHERE Forma_Pago = {cbFormaPago.SelectedValue} AND Descripcion = '{cbFormaPago.Text}')")
-        ComboboxService.llenarCombobox(cbTipoBanco, tableTipoPAgo, "ID", "Tipo_Pago")
+        If (cbFormaPago.Text = "TARJETA DE CREDITO" Or cbFormaPago.Text = "TARJETA DE DEBITO") Then
+            Dim tableTipoPAgo As DataTable = db.getDataTableFromSQL($"SELECT T.ID, T.Nombre FROM ing_CatTipoTarjeta AS T
+                                                                  INNER JOIN ing_res_BancoTarjeta AS B ON B.ID_TipoTarjeta = T.ID
+                                                                  WHERE B.ID_Banco = {cbBanco.SelectedValue} AND B.Activo = 1")
+            ComboboxService.llenarCombobox(cbTipoBanco, tableTipoPAgo, "ID", "Nombre")
+
+        ElseIf (cbFormaPago.Text = "DEPOSITO BANCARIO C/COMPROBANTE" Or cbFormaPago.Text = "DEPOSITO BANCARIO EDO CTA") Then
+            Dim IDPago As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatFormaPago WHERE Descripcion = '{cbFormaPago.Text}'")
+            Dim tableTipoPAgo As DataTable = db.getDataTableFromSQL($"SELECT ID, Tipo_Pago FROM ing_cat_tipoFormaPago WHERE ID_TipoPago = {IDPago}")
+            ComboboxService.llenarCombobox(cbTipoBanco, tableTipoPAgo, "ID", "Tipo_Pago")
+        End If
+
+
     End Sub
 
     Sub Reiniciar()
@@ -199,11 +225,11 @@ Public Class CobrosEDC
             Exit Sub
         ElseIf Tree.SelectedNode.Text = "Congresos" Then
             Exit Sub
-        ElseIf Tree.SelectedNode.Text = "Inscripción a Diplomados" Then
+        ElseIf Tree.SelectedNode.Text = "Inscripción" Then
             Exit Sub
-        ElseIf Tree.SelectedNode.Text = "Colegiaturas de Diplomados" Then
+        ElseIf Tree.SelectedNode.Text = "Colegiaturas" Then
             Exit Sub
-        ElseIf Tree.SelectedNode.Text = "Pago Unico de Diplomados" Then
+        ElseIf Tree.SelectedNode.Text = "Pago Unico" Then
             Exit Sub
         End If
 
@@ -284,8 +310,8 @@ Public Class CobrosEDC
                     End If
                 End If
                 If (Me.validarSeleccionNodosColegiaturas(index, 1) = False) Then
-                    Dim mesActual As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "-", "-")
-                    MessageBox.Show($"No puede pagar la colegiatura del mes {mesActual} sin antes haber pagado las colegiaturas anteriores")
+                    ''Dim mesActual As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "-", "-")
+                    MessageBox.Show($"No puede pagar la colegiatura sin antes haber pagado las colegiaturas anteriores")
                     Exit Sub
                 End If
                 'If (Me.buscarRecargoColegiaturas(conceptoID) = False) Then
@@ -300,8 +326,8 @@ Public Class CobrosEDC
                 Tree.Nodes(3).Nodes(index).SelectedImageIndex = 1
             ElseIf (Tree.SelectedNode.Checked = True) Then
                 If (Me.validarSeleccionNodosColegiaturas(index, 2) = False) Then
-                    Dim mesActual As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "-", "-")
-                    MessageBox.Show($"No puede desmarcar el pago del mes de {mesActual} sin antes haber pagado las colegiaturas posteriores")
+                    ''Dim mesActual As String = co.Extrae_Cadena(Tree.SelectedNode.ToString(), "-", "-")
+                    MessageBox.Show($"No puede desmarcar el pago sin antes haber pagado las colegiaturas posteriores")
                     Exit Sub
                 End If
                 Tree.SelectedNode.Checked = False
@@ -389,7 +415,10 @@ Public Class CobrosEDC
         End If
 
         ''---------------------------------------------------------VALIDA FORMA DE PAGO---------------------------------------------------------
-        If (cbFormaPago.Text = "TARJETA DE CREDITO" Or cbFormaPago.Text = "TARJETA DE DEBITO") Then
+        If (cbFormaPago.Text = "") Then
+            MessageBox.Show("Seleccione una forma de pago")
+            Exit Sub
+        ElseIf (cbFormaPago.Text = "TARJETA DE CREDITO" Or cbFormaPago.Text = "TARJETA DE DEBITO") Then
             If (cbBanco.Text = "") Then
                 MessageBox.Show("Ingrese un banco")
                 Exit Sub
@@ -401,7 +430,7 @@ Public Class CobrosEDC
                 Exit Sub
             End If
         ElseIf (cbFormaPago.Text = "CHEQUE") Then
-            If (cbBanco.Text = "") Then
+            If (txtBancotext.Text = "") Then
                 MessageBox.Show("Ingrese un banco")
                 Exit Sub
             ElseIf (txtNoCuenta.Text = "") Then
@@ -431,7 +460,7 @@ Public Class CobrosEDC
             ElseIf (tipoMatricula = "EC") Then
                 tipocliente = 1
             End If
-            Dim IDXMLC As Integer = co.Cobrar(listaConceptosPrueba, cbFormaPago.SelectedValue, Matricula, txtRFC.Text, txtNombre.Text, lblTotal.Text, True, tipocliente)
+            Dim IDXMLC As Integer = co.Cobrar(listaConceptosPrueba, cbFormaPago.SelectedValue, Matricula, lblRFCtxt.Text, lblNombretxt.Text, lblTotal.Text, True, tipocliente)
             If (IDXMLC > 0) Then
                 Me.Reiniciar()
                 Exit Sub
@@ -442,40 +471,56 @@ Public Class CobrosEDC
         Dim montoIngresado As Decimal = CDec(txtMonto.Text)
         If (montoTotal <> montoIngresado) Then
             If (montoIngresado > montoTotal) Then
-                MessageBox.Show("No puede ingresar un monto mayor al total a pagar, ingrese un monto valido")
-                Exit Sub
-            End If
-            listaconceptosFinal = co.calcularAbonos(listaConceptosPrueba, montoIngresado, montoTotal, Matricula)
-            If (IsNothing(listaconceptosFinal)) Then
-                Exit Sub
-            End If
-        Else
-            listaconceptosFinal = ch.getListaConceptos()
-            For Each concepto As Concepto In listaconceptosFinal
-                Dim IDClavePago As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatClavesPagos WHERE Clave = '{concepto.claveConcepto}'")
-                Dim tieneAbono As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_Abonos WHERE ID_ClavePago = {IDClavePago} AND IDPago = {concepto.IDConcepto}")
-                If (tieneAbono > 0) Then
-                    co.recalcularCostoAbono(concepto, concepto.costoFinal, 2)
-                    concepto.NombreConcepto = $"2{concepto.NombreConcepto}"
+                If (cbFormaPago.Text = "EFECTIVO") Then
+                    MessageBox.Show($"El cambio a entregar es de {Format(CDec(montoIngresado - montoTotal), "##0.00")} pesos.")
+                Else
+                    MessageBox.Show("No puede ingresar un monto mayor al total a pagar, ingrese un monto valido")
+                    Exit Sub
                 End If
-            Next
+            Else
+                listaconceptosFinal = co.calcularAbonos(listaConceptosPrueba, montoIngresado, montoTotal, Matricula)
+                If (IsNothing(listaconceptosFinal)) Then
+                    Exit Sub
+                End If
+            End If
         End If
+        listaconceptosFinal = ch.getListaConceptos()
+        For Each concepto As Concepto In listaconceptosFinal
+            Dim IDClavePago As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatClavesPagos WHERE Clave = '{concepto.claveConcepto}'")
+            Dim tieneAbono As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_Abonos WHERE ID_ClavePago = {IDClavePago} AND IDPago = {concepto.IDConcepto} ORDER BY ID DESC")
+            If (tieneAbono > 0) Then
+                Dim montoRestante As Decimal = db.exectSQLQueryScalar($"SELECT Cantidad_Restante FROM ing_Abonos WHERE ID = {tieneAbono}")
+                If (concepto.costoFinal = montoRestante) Then
+                    If (concepto.absorbeIVA = False And concepto.IVAExento = False And concepto.consideraIVA = True) Then
+                        co.recalcularCostoAbono(concepto, concepto.costoFinal, 2)
+                    End If
+
+                    concepto.NombreConcepto = $"2{concepto.NombreConcepto}"
+                    Else
+                        concepto.NombreConcepto = $"1{concepto.NombreConcepto}"
+                End If
+                ''co.recalcularCostoAbono(concepto, concepto.costoFinal, 2)
+                ''concepto.NombreConcepto = $"2{concepto.NombreConcepto}"
+            End If
+        Next
         If (tipoMatricula = "EX") Then
             tipocliente = 2
         ElseIf (tipoMatricula = "EC") Then
             tipocliente = 1
         End If
-        Dim IDXML As Integer = co.Cobrar(listaconceptosFinal, cbFormaPago.SelectedValue, Matricula, txtRFC.Text, txtNombre.Text, lblTotal.Text, False, tipocliente)
+        Dim IDXML As Integer = co.Cobrar(listaconceptosFinal, cbFormaPago.SelectedValue, Matricula, lblRFCtxt.Text, lblNombretxt.Text, lblTotal.Text, False, tipocliente)
 
 
         ''---------------------------------------------------------REGISTRO DE FORMA DE PAGO---------------------------------------------------------
         If (IDXML > 0) Then
             If (cbFormaPago.Text = "TARJETA DE CREDITO") Then
-                db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosTarjeta(ID_Factura, ID_Banco, ID_TipoPago, NumTarjeta, Monto, FechaPago, TipoTarjeta) VALUES({IDXML}, {cbBanco.SelectedValue}, {cbTipoBanco.SelectedValue}, '{txtUltimos4Digitos.Text}', {txtMonto.Text}, GETDATE(), 'C')")
+                Dim IDRes As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_res_BancoTarjeta WHERE ID_Banco = {cbBanco.SelectedValue} AND ID_TipoTarjeta = {cbTipoBanco.SelectedValue}")
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosTarjeta(ID_Factura, ID_resBancoTarjeta, NumTarjeta, Monto, FechaPago, TipoTarjeta) VALUES({IDXML}, {IDRes}, '{txtUltimos4Digitos.Text}', {txtMonto.Text}, GETDATE(), 'C')")
             ElseIf (cbFormaPago.Text = "TARJETA DE DEBITO") Then
-                db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosTarjeta(ID_Factura, ID_Banco, ID_TipoPago, NumTarjeta, Monto, FechaPago, TipoTarjeta) VALUES({IDXML}, {cbBanco.SelectedValue}, {cbTipoBanco.SelectedValue}, '{txtUltimos4Digitos.Text}', {txtMonto.Text}, GETDATE(), 'D')")
+                Dim IDRes As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_res_BancoTarjeta WHERE ID_Banco = {cbBanco.SelectedValue} AND ID_TipoTarjeta = {cbTipoBanco.SelectedValue}")
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosTarjeta(ID_Factura, ID_resBancoTarjeta, NumTarjeta, Monto, FechaPago, TipoTarjeta) VALUES({IDXML}, {IDRes}, '{txtUltimos4Digitos.Text}', {txtMonto.Text}, GETDATE(), 'D')")
             ElseIf (cbFormaPago.Text = "CHEQUE") Then
-                db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosCheques(ID_Factura, NoCuenta, NoCheque, Monto, FechaPago) VALUES({IDXML}, '{txtNoCuenta.Text}', '{txtNoCheque.Text}', {txtMonto.Text}, GETDATE())")
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosCheques(ID_Factura, NombreBanco, NoCuenta, NoCheque, Monto, FechaPago, Activo) VALUES({IDXML}, '{txtBancotext.Text}', '{txtNoCuenta.Text}', '{txtNoCheque.Text}', {txtMonto.Text}, GETDATE(), 1)")
             ElseIf (cbFormaPago.Text = "TRANSFERENCIA") Then
                 db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosTransferencias(ID_Factura, ID_Banco, Monto, Fecha_Pago) VALUES ({IDXML}, {cbBanco.SelectedValue}, {txtMonto.Text}, '{DTPickerFecha.Text}')")
             ElseIf (cbFormaPago.Text = "DEPOSITO BANCARIO C/COMPROBANTE") Then
@@ -493,38 +538,53 @@ Public Class CobrosEDC
         Dim RFCCLiente As String = ObjectBagService.getItem("RFC")
         Dim folioFiscal As String = ObjectBagService.getItem("FolioF")
         Dim tipoClienteint As Integer = ObjectBagService.getItem("tipoCliente")
+        Dim NombreEvento As String = ObjectBagService.getItem("NombreEvento")
         ObjectBagService.clearBag()
+        If (IsNothing(NombreEvento)) Then
+            NombreEvento = "------"
+        End If
         Dim rep2 As ImpresionReportesService = New ImpresionReportesService()
 
         Dim QR As String = $"?re={EnviromentService.RFCEDC}&rr={RFCCLiente}id={folioFiscal}tt={Total}"
         co.gernerarQr(QR, $"{Serie}{Folio}")
         rep2.AgregarFuente("FacturaEDC.rpt")
         rep2.AgregarParametros("IDXML", IDXML)
-        rep2.AgregarParametros("CantidadLetra", Total)
         rep2.AgregarParametros("ClaveCliente", Matricula)
+        rep2.AgregarParametros("CantidadLetra", Total)
         rep2.AgregarParametros("usoCFDI", usoCFDI)
-        rep2.AgregarParametros("TipoCliente", tipoClienteint)
+        rep2.AgregarParametros("TipoCliente", tipocliente)
+        rep2.AgregarParametros("NombreEvento", NombreEvento)
 
-        Dim mail As New Mail
+        Dim mail As New EmailModel
         Dim archivo_pdf As Byte() = Nothing
         Dim archivo_xml As Byte() = Nothing
 
         Dim xmlTimbrado As String = db.exectSQLQueryScalar($"SELECT XMLTimbrado FROM ing_xmlTimbrados WHERE ID = {IDXML}")
 
+
         archivo_pdf = rep2.obtenerReporteByte()
-        'archivo_pdf = Encoding.Default.GetBytes(xmlTimbrado)
         archivo_xml = Encoding.Default.GetBytes(xmlTimbrado)
 
-        mail.Destino = "luis.c@ux.edu.mx"
+        Dim emailCliente As String
+        Dim destino As New List(Of String)
+        If (tipoMatricula = "EX") Then
+            emailCliente = db.exectSQLQueryScalar($"SELECT C.correo FROM portal_cliente AS C
+                                                    INNER JOIN portal_registroExterno AS RC ON RC.id_cliente = C.id_cliente
+                                                    WHERE RC.clave_cliente = '{Matricula}'")
+        ElseIf (tipoMatricula = "EC") Then
+            emailCliente = db.exectSQLQueryScalar($"SELECT C.correo FROM portal_cliente AS C
+                                                    INNER JOIN portal_registroCongreso AS RC ON RC.id_cliente = C.id_cliente
+                                                    WHERE RC.clave_cliente = '{Matricula}'")
+        End If
+
+        destino.Add(emailCliente)
+        mail.Destino = destino
         mail.Asunto = "GRACIAS POR SU PAGO"
         mail.Mensaje = "ANEXAMOS TUS COMPROBANTES DE PAGO ADJUNTOS A ESTE CORREO, GRACIAS."
         mail.BytesFile = archivo_pdf
-        mail.BytesFile2 = archivo_xml
-        mail.FileName = "Factura"
-        mail.FileName2 = "xml"
+        mail.FileName = $"{Folio}.pdf"
         Try
-            es.sendEmailWithFileBytesCobro(mail)
-            MessageBox.Show("Email enviado correctamente")
+            es.sendEmailWithFileBytes(mail)
             Me.Reiniciar()
         Catch ex As Exception
             MessageBox.Show("Error al enviar email")
@@ -599,10 +659,10 @@ Public Class CobrosEDC
     End Function
 
     Sub Limpiar()
-        txtNombre.Clear()
-        txtEmail.Clear()
-        txtCarrera.Clear()
-        txtTurno.Clear()
+        lblNombretxt.Text = ""
+        lblEmailtxt.Text = ""
+        lblCarreratxt.Text = ""
+        lblTurnotxt.Text = ""
         Tree.Nodes(0).Nodes.Clear()
         Tree.Nodes(1).Nodes.Clear()
         Tree.Nodes(2).Nodes.Clear()
@@ -691,5 +751,10 @@ Public Class CobrosEDC
             MsgBox("Error: en la validación de este campo, por favor verifique o comuniquese con sistemas", MsgBoxStyle.Exclamation, "Error en datos")
         End Try
 
+    End Sub
+
+    Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
+        Me.Reiniciar()
+        txtMatricula.Focus()
     End Sub
 End Class
