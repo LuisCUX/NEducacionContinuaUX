@@ -33,6 +33,8 @@ Public Class NotasDeCreditoEDC
         Dim FolioFactura As String = cbConcepto.Text.Substring(7, 7)
         If (TipoNota = "NDCRC") Then
             Descripcion = $"BONIFICACION DE {db.exectSQLQueryScalar($"SELECT Descripcion FROM ing_PlanesRecargos WHERE ID = {ID}")}"
+        ElseIf (TipoNota = "NDCDE") Then
+            Descripcion = $"BONIFICACION DE {db.exectSQLQueryScalar($"SELECT Nombre_Concepto FROM ing_xmlTimbradosConceptos WHERE ID = {ID}")}"
         End If
 
         GridNota.Rows.Add(ID, Descripcion, Total, IVA, TipoNota, FolioFactura)
@@ -51,6 +53,11 @@ Public Class NotasDeCreditoEDC
                                                                        INNER JOIN ing_xmlTimbrados AS T ON T.Folio = R.Folio
                                                                        WHERE Matricula_Clave = '{Matricula}' AND R.Activo = 0 AND R.Folio IS NOT NULL AND R.Autorizado = 0 AND R.Condonado = 0")
             ComboboxService.llenarCombobox(cbConcepto, tableConceptos, "ID", "TextoFactura")
+        ElseIf (cbTipoNota.SelectedValue = 2) Then
+            Dim tableConceptos As DataTable = db.getDataTableFromSQL($"SELECT TC.ID, UPPER('Folio:' + ' ' + T.Folio + ' Fecha: ' + T.Fecha_Pago + ' - [' + TC.Nombre_Concepto + ']')As TextoFactura FROM ing_xmlTimbradosConceptos AS TC
+                                                                       INNER JOIN ing_xmlTimbrados AS T ON T.ID = TC.XMLID
+                                                                       WHERE T.Matricula_Clave = '{Matricula}' AND TC.Nota = 0 ")
+            ComboboxService.llenarCombobox(cbConcepto, tableConceptos, "ID", "TextoFactura")
         End If
     End Sub
 
@@ -63,6 +70,11 @@ Public Class NotasDeCreditoEDC
         NUPorcentaje.Visible = False
         If (cbTipoNota.SelectedValue = 1) Then
             lblTotal.Text = Format(CDec(db.exectSQLQueryScalar($"SELECT Monto FROM ing_PlanesRecargos WHERE ID = {cbConcepto.SelectedValue}")), "#####0.00")
+            txtMonto.Visible = True
+            NUPorcentaje.Visible = True
+            txtMonto.Text = CDec(lblTotal.Text)
+        ElseIf (cbTipoNota.SelectedValue = 2) Then
+            lblTotal.Text = Format(CDec(db.exectSQLQueryScalar($"SELECT Total FROM ing_xmlTimbradosConceptos WHERE ID = {cbConcepto.SelectedValue}")), "#####0.00")
             txtMonto.Visible = True
             NUPorcentaje.Visible = True
             txtMonto.Text = CDec(lblTotal.Text)

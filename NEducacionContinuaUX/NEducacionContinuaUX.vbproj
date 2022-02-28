@@ -198,6 +198,7 @@
     <Compile Include="Controllers\ConceptHandlerController.vb" />
     <Compile Include="Controllers\GestionExternosController.vb" />
     <Compile Include="Controllers\NotaCreditoController.vb" />
+    <Compile Include="Controllers\ObservacionesController.vb" />
     <Compile Include="Controllers\PagosCreditoController.vb" />
     <Compile Include="Controllers\PagosOpcionalesController.vb" />
     <Compile Include="Controllers\PlanesController.vb" />
@@ -587,6 +588,7 @@
     <Content Include="EDCLogo.ico" />
     <Content Include="logo %281%29.ico" />
     <Content Include="logo.ico" />
+    <None Include="Resources\card_exchange_40px.png" />
     <None Include="Resources\EDCLogo.png" />
     <None Include="Resources\send_40px.png" />
     <None Include="Resources\print_40px.png" />

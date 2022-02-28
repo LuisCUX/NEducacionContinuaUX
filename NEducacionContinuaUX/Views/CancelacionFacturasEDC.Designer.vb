@@ -28,7 +28,7 @@ Partial Class CancelacionFacturasEDC
         Me.btnGuardarCancelacion = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GridConceptos = New System.Windows.Forms.DataGridView()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.cbObservacionCancelaciones = New System.Windows.Forms.ComboBox()
         Me.lblTipoCancelacion = New System.Windows.Forms.Label()
         Me.cbTipoCancelacion = New System.Windows.Forms.ComboBox()
         Me.lblFolio = New System.Windows.Forms.Label()
@@ -112,15 +112,15 @@ Partial Class CancelacionFacturasEDC
         Me.GridConceptos.Size = New System.Drawing.Size(1004, 403)
         Me.GridConceptos.TabIndex = 45
         '
-        'ComboBox1
+        'cbObservacionCancelaciones
         '
-        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(29, 594)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(551, 24)
-        Me.ComboBox1.TabIndex = 46
+        Me.cbObservacionCancelaciones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbObservacionCancelaciones.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbObservacionCancelaciones.FormattingEnabled = True
+        Me.cbObservacionCancelaciones.Location = New System.Drawing.Point(29, 594)
+        Me.cbObservacionCancelaciones.Name = "cbObservacionCancelaciones"
+        Me.cbObservacionCancelaciones.Size = New System.Drawing.Size(551, 24)
+        Me.cbObservacionCancelaciones.TabIndex = 46
         '
         'lblTipoCancelacion
         '
@@ -253,7 +253,7 @@ Partial Class CancelacionFacturasEDC
         Me.Controls.Add(Me.lblFolio)
         Me.Controls.Add(Me.cbTipoCancelacion)
         Me.Controls.Add(Me.lblTipoCancelacion)
-        Me.Controls.Add(Me.ComboBox1)
+        Me.Controls.Add(Me.cbObservacionCancelaciones)
         Me.Controls.Add(Me.GridConceptos)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnSalir)
@@ -275,7 +275,7 @@ Partial Class CancelacionFacturasEDC
     Friend WithEvents btnGuardarCancelacion As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents GridConceptos As DataGridView
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents cbObservacionCancelaciones As ComboBox
     Friend WithEvents lblTipoCancelacion As Label
     Friend WithEvents cbTipoCancelacion As ComboBox
     Friend WithEvents lblFolio As Label
