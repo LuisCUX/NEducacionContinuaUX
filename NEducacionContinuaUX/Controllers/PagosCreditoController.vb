@@ -7,20 +7,20 @@ Imports System.Security.Cryptography.X509Certificates
 Public Class PagosCreditoController
     Dim db As DataBaseService = New DataBaseService()
     Dim ch As ConceptHandlerController = New ConceptHandlerController()
-    Dim xml As XmlService = New XmlService()
+    Dim xml As XmlService40 = New XmlService40()
     Dim st As SelladoTimbradoService = New SelladoTimbradoService()
     Dim rep As ImpresionReportesService = New ImpresionReportesService()
     Dim abono As Boolean = False
     Dim co As CobrosController = New CobrosController()
     Public QR_Generator As New MessagingToolkit.QRCode.Codec.QRCodeEncoder
 
-    Function cobroCredito(IDCredito As Integer, CantidadAbonada As Decimal, MontoAnterior As Decimal, MontoNuevo As Decimal, Matricula As String, NumPago As Integer, RFC As String, NombreCompleto As String, FolioFiscal As String, NoParcialidad As Integer, FormaPago As String) As Integer
+    Function cobroCredito(IDCredito As Integer, CantidadAbonada As Decimal, MontoAnterior As Decimal, MontoNuevo As Decimal, Matricula As String, NumPago As Integer, RFC As String, NombreCompleto As String, FolioFiscal As String, NoParcialidad As Integer, FormaPago As String, RegFiscal As String, CP As String) As Integer
         Try
             db.startTransaction()
             Dim FolioPago As String = co.obtenerFolio("Pago")
             Dim Folio As String = FolioPago.Substring(1, 6)
             Dim Serie As String = FolioPago.Substring(0, 1)
-            Dim UsoCFDI As String = "P01"
+            Dim UsoCFDI As String = "CP01"
             Dim Fecha As String = db.exectSQLQueryScalar("select STUFF(CONVERT(VARCHAR(50),GETDATE(), 127) ,20,4,'') as fecha")
             Dim Certificado As String = ConfigurationSettings.AppSettings.Get("developmentCertificadoContent").ToString()
             Dim NoCertificado As String = ConfigurationSettings.AppSettings.Get("developmentCertificado").ToString()
@@ -28,10 +28,10 @@ Public Class PagosCreditoController
             Dim folioOriginal As String = db.exectSQLQueryScalar($"select SUBSTRING(Folio, 2, DATALENGTH(Folio)) from ing_Creditos where ID = {IDCredito}")
             Dim FechaOriginal As String = db.exectSQLQueryScalar($"select STUFF(CONVERT(VARCHAR(50),Fecha, 127) ,20,4,'') as fecha from ing_Creditos where ID = {IDCredito}")
 
-            Dim Cadena As String = xml.cadenaCredito(Serie, Folio, Fecha, NoCertificado, Certificado, RFC, NombreCompleto, UsoCFDI, FolioFiscal, serieOriginal, folioOriginal, NoParcialidad, MontoAnterior, CantidadAbonada, MontoNuevo, FechaOriginal, FormaPago)
+            Dim Cadena As String = xml.cadenaCredito(Serie, Folio, Fecha, NoCertificado, Certificado, RFC, NombreCompleto, UsoCFDI, FolioFiscal, serieOriginal, folioOriginal, NoParcialidad, MontoAnterior, CantidadAbonada, MontoNuevo, FechaOriginal, FormaPago, CP, RegFiscal)
             'Dim Sello As String = st.Sellado("C:\Users\Luis\Desktop\pfx\uxa_pfx33.pfx", "12345678a", Cadena)
             Dim sello As String = st.Sellado("\\192.168.1.241\ti\NEducacionContinua\Timbrado\pfx\uxa_pfx33.pfx", "12345678a", Cadena)
-            Dim xmlString As String = xml.xmlCredito(Serie, Folio, Fecha, NoCertificado, Sello, Certificado, RFC, NombreCompleto, UsoCFDI, FolioFiscal, serieOriginal, folioOriginal, NoParcialidad, MontoAnterior, CantidadAbonada, MontoNuevo, FechaOriginal, FormaPago)
+            Dim xmlString As String = xml.xmlCredito(Serie, Folio, Fecha, NoCertificado, sello, Certificado, RFC, NombreCompleto, UsoCFDI, FolioFiscal, serieOriginal, folioOriginal, NoParcialidad, MontoAnterior, CantidadAbonada, MontoNuevo, FechaOriginal, FormaPago, RegFiscal, CP)
             xmlString = xmlString.Replace("utf-16", "UTF-8")
             Dim xmlTimbrado As String = st.Timbrado(xmlString, Folio)
             Dim folioFiscalNuevo As String = Me.Extrae_Cadena(xmlTimbrado, "UUID=", " FechaTimbrado")

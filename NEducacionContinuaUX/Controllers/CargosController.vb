@@ -228,6 +228,17 @@
         Next
     End Sub
 
+    Function buscarNotasCredito(Matricula As String) As Boolean
+        Dim tableNotas As DataTable = db.getDataTableFromSQL($"SELECT N.Descripcion, N.Importe FROM ing_NotasCredito AS N
+                                                               INNER JOIN ing_CatTipoNotaCredito AS TN ON TN.ID = N.IDTipoNota AND TN.Activo = 1 AND TN.Bonifica = 1
+                                                               WHERE N.Activo = 1 AND N.Aplicada = 0 AND N.Matricula = '{Matricula}'")
+        If (tableNotas.Rows.Count > 0) Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
     ''------------------------------GENERA TEXTO PARA VENTANA COBROS------------------------------''
 
     Function generaTexto(concepto As Concepto, claveConcepto As Integer) As String

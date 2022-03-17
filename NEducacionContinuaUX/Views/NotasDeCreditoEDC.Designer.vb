@@ -31,9 +31,15 @@ Partial Class NotasDeCreditoEDC
         Me.txtMatricula = New System.Windows.Forms.TextBox()
         Me.lblMatricula = New System.Windows.Forms.Label()
         Me.panelDatos = New System.Windows.Forms.Panel()
+        Me.lblCFDItxt = New System.Windows.Forms.Label()
+        Me.lblCFDI = New System.Windows.Forms.Label()
+        Me.lblRegFiscaltxt = New System.Windows.Forms.Label()
         Me.lblTurnotxt = New System.Windows.Forms.Label()
+        Me.lblRegFiscal = New System.Windows.Forms.Label()
         Me.lblCarreratxt = New System.Windows.Forms.Label()
+        Me.lblCPtxt = New System.Windows.Forms.Label()
         Me.lblRFCtxt = New System.Windows.Forms.Label()
+        Me.lblCP = New System.Windows.Forms.Label()
         Me.lblEmailtxt = New System.Windows.Forms.Label()
         Me.lblNombretxt = New System.Windows.Forms.Label()
         Me.lblMatriculatxt = New System.Windows.Forms.Label()
@@ -44,9 +50,11 @@ Partial Class NotasDeCreditoEDC
         Me.lblEmail = New System.Windows.Forms.Label()
         Me.lblNombre = New System.Windows.Forms.Label()
         Me.panelGridNota = New System.Windows.Forms.Panel()
+        Me.btnEliminar = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblTotalNota = New System.Windows.Forms.Label()
         Me.GBNota = New System.Windows.Forms.GroupBox()
+        Me.chb100 = New System.Windows.Forms.CheckBox()
         Me.NUPorcentaje = New System.Windows.Forms.NumericUpDown()
         Me.lblPeso = New System.Windows.Forms.Label()
         Me.lblTotal = New System.Windows.Forms.Label()
@@ -69,6 +77,8 @@ Partial Class NotasDeCreditoEDC
         Me.IVA = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TipoNota = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FolioFactura = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Porcentaje = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CostoOriginal = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.panelBusqueda.SuspendLayout()
         Me.panelDatos.SuspendLayout()
         Me.panelGridNota.SuspendLayout()
@@ -151,9 +161,15 @@ Partial Class NotasDeCreditoEDC
         '
         'panelDatos
         '
+        Me.panelDatos.Controls.Add(Me.lblCFDItxt)
+        Me.panelDatos.Controls.Add(Me.lblCFDI)
+        Me.panelDatos.Controls.Add(Me.lblRegFiscaltxt)
         Me.panelDatos.Controls.Add(Me.lblTurnotxt)
+        Me.panelDatos.Controls.Add(Me.lblRegFiscal)
         Me.panelDatos.Controls.Add(Me.lblCarreratxt)
+        Me.panelDatos.Controls.Add(Me.lblCPtxt)
         Me.panelDatos.Controls.Add(Me.lblRFCtxt)
+        Me.panelDatos.Controls.Add(Me.lblCP)
         Me.panelDatos.Controls.Add(Me.lblEmailtxt)
         Me.panelDatos.Controls.Add(Me.lblNombretxt)
         Me.panelDatos.Controls.Add(Me.lblMatriculatxt)
@@ -169,37 +185,100 @@ Partial Class NotasDeCreditoEDC
         Me.panelDatos.TabIndex = 16
         Me.panelDatos.Visible = False
         '
+        'lblCFDItxt
+        '
+        Me.lblCFDItxt.AutoSize = True
+        Me.lblCFDItxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCFDItxt.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblCFDItxt.Location = New System.Drawing.Point(723, 8)
+        Me.lblCFDItxt.Name = "lblCFDItxt"
+        Me.lblCFDItxt.Size = New System.Drawing.Size(0, 15)
+        Me.lblCFDItxt.TabIndex = 97
+        '
+        'lblCFDI
+        '
+        Me.lblCFDI.AutoSize = True
+        Me.lblCFDI.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCFDI.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblCFDI.Location = New System.Drawing.Point(661, 8)
+        Me.lblCFDI.Name = "lblCFDI"
+        Me.lblCFDI.Size = New System.Drawing.Size(62, 15)
+        Me.lblCFDI.TabIndex = 96
+        Me.lblCFDI.Text = "Uso CFDI:"
+        '
+        'lblRegFiscaltxt
+        '
+        Me.lblRegFiscaltxt.AutoSize = True
+        Me.lblRegFiscaltxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRegFiscaltxt.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblRegFiscaltxt.Location = New System.Drawing.Point(577, 8)
+        Me.lblRegFiscaltxt.Name = "lblRegFiscaltxt"
+        Me.lblRegFiscaltxt.Size = New System.Drawing.Size(0, 15)
+        Me.lblRegFiscaltxt.TabIndex = 89
+        '
         'lblTurnotxt
         '
         Me.lblTurnotxt.AutoSize = True
         Me.lblTurnotxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTurnotxt.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblTurnotxt.Location = New System.Drawing.Point(816, 8)
+        Me.lblTurnotxt.Location = New System.Drawing.Point(1005, 39)
         Me.lblTurnotxt.Name = "lblTurnotxt"
         Me.lblTurnotxt.Size = New System.Drawing.Size(0, 15)
         Me.lblTurnotxt.TabIndex = 48
         Me.lblTurnotxt.Visible = False
+        '
+        'lblRegFiscal
+        '
+        Me.lblRegFiscal.AutoSize = True
+        Me.lblRegFiscal.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRegFiscal.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblRegFiscal.Location = New System.Drawing.Point(460, 8)
+        Me.lblRegFiscal.Name = "lblRegFiscal"
+        Me.lblRegFiscal.Size = New System.Drawing.Size(92, 15)
+        Me.lblRegFiscal.TabIndex = 88
+        Me.lblRegFiscal.Text = "Regimen fiscal:"
         '
         'lblCarreratxt
         '
         Me.lblCarreratxt.AutoSize = True
         Me.lblCarreratxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCarreratxt.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblCarreratxt.Location = New System.Drawing.Point(828, 30)
+        Me.lblCarreratxt.Location = New System.Drawing.Point(897, 30)
         Me.lblCarreratxt.Name = "lblCarreratxt"
         Me.lblCarreratxt.Size = New System.Drawing.Size(0, 15)
         Me.lblCarreratxt.TabIndex = 47
         Me.lblCarreratxt.Visible = False
+        '
+        'lblCPtxt
+        '
+        Me.lblCPtxt.AutoSize = True
+        Me.lblCPtxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCPtxt.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblCPtxt.Location = New System.Drawing.Point(361, 8)
+        Me.lblCPtxt.Name = "lblCPtxt"
+        Me.lblCPtxt.Size = New System.Drawing.Size(0, 15)
+        Me.lblCPtxt.TabIndex = 87
         '
         'lblRFCtxt
         '
         Me.lblRFCtxt.AutoSize = True
         Me.lblRFCtxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblRFCtxt.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblRFCtxt.Location = New System.Drawing.Point(497, 7)
+        Me.lblRFCtxt.Location = New System.Drawing.Point(221, 8)
         Me.lblRFCtxt.Name = "lblRFCtxt"
         Me.lblRFCtxt.Size = New System.Drawing.Size(0, 15)
         Me.lblRFCtxt.TabIndex = 46
+        '
+        'lblCP
+        '
+        Me.lblCP.AutoSize = True
+        Me.lblCP.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCP.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblCP.Location = New System.Drawing.Point(327, 8)
+        Me.lblCP.Name = "lblCP"
+        Me.lblCP.Size = New System.Drawing.Size(26, 15)
+        Me.lblCP.TabIndex = 86
+        Me.lblCP.Text = "CP:"
         '
         'lblEmailtxt
         '
@@ -236,7 +315,7 @@ Partial Class NotasDeCreditoEDC
         Me.lblRFC.AutoSize = True
         Me.lblRFC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblRFC.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblRFC.Location = New System.Drawing.Point(460, 7)
+        Me.lblRFC.Location = New System.Drawing.Point(184, 8)
         Me.lblRFC.Name = "lblRFC"
         Me.lblRFC.Size = New System.Drawing.Size(34, 15)
         Me.lblRFC.TabIndex = 42
@@ -258,7 +337,7 @@ Partial Class NotasDeCreditoEDC
         Me.lblTurno.AutoSize = True
         Me.lblTurno.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTurno.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblTurno.Location = New System.Drawing.Point(775, 7)
+        Me.lblTurno.Location = New System.Drawing.Point(964, 38)
         Me.lblTurno.Name = "lblTurno"
         Me.lblTurno.Size = New System.Drawing.Size(42, 15)
         Me.lblTurno.TabIndex = 40
@@ -270,7 +349,7 @@ Partial Class NotasDeCreditoEDC
         Me.lblCarrera.AutoSize = True
         Me.lblCarrera.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCarrera.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblCarrera.Location = New System.Drawing.Point(777, 30)
+        Me.lblCarrera.Location = New System.Drawing.Point(846, 30)
         Me.lblCarrera.Name = "lblCarrera"
         Me.lblCarrera.Size = New System.Drawing.Size(51, 15)
         Me.lblCarrera.TabIndex = 39
@@ -301,6 +380,7 @@ Partial Class NotasDeCreditoEDC
         '
         'panelGridNota
         '
+        Me.panelGridNota.Controls.Add(Me.btnEliminar)
         Me.panelGridNota.Controls.Add(Me.Label1)
         Me.panelGridNota.Controls.Add(Me.lblTotalNota)
         Me.panelGridNota.Controls.Add(Me.GBNota)
@@ -313,6 +393,16 @@ Partial Class NotasDeCreditoEDC
         Me.panelGridNota.Size = New System.Drawing.Size(1103, 427)
         Me.panelGridNota.TabIndex = 18
         Me.panelGridNota.Visible = False
+        '
+        'btnEliminar
+        '
+        Me.btnEliminar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.trash_can_30px
+        Me.btnEliminar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnEliminar.Location = New System.Drawing.Point(458, 108)
+        Me.btnEliminar.Name = "btnEliminar"
+        Me.btnEliminar.Size = New System.Drawing.Size(44, 36)
+        Me.btnEliminar.TabIndex = 85
+        Me.btnEliminar.UseVisualStyleBackColor = True
         '
         'Label1
         '
@@ -337,6 +427,7 @@ Partial Class NotasDeCreditoEDC
         '
         'GBNota
         '
+        Me.GBNota.Controls.Add(Me.chb100)
         Me.GBNota.Controls.Add(Me.NUPorcentaje)
         Me.GBNota.Controls.Add(Me.lblPeso)
         Me.GBNota.Controls.Add(Me.lblTotal)
@@ -356,6 +447,16 @@ Partial Class NotasDeCreditoEDC
         Me.GBNota.TabIndex = 82
         Me.GBNota.TabStop = False
         Me.GBNota.Text = "Datos nota de credito"
+        '
+        'chb100
+        '
+        Me.chb100.AutoSize = True
+        Me.chb100.Location = New System.Drawing.Point(181, 270)
+        Me.chb100.Name = "chb100"
+        Me.chb100.Size = New System.Drawing.Size(52, 17)
+        Me.chb100.TabIndex = 91
+        Me.chb100.Text = "100%"
+        Me.chb100.UseVisualStyleBackColor = True
         '
         'NUPorcentaje
         '
@@ -510,13 +611,17 @@ Partial Class NotasDeCreditoEDC
         '
         'GridNota
         '
+        Me.GridNota.AllowUserToAddRows = False
+        Me.GridNota.AllowUserToDeleteRows = False
+        Me.GridNota.AllowUserToResizeColumns = False
+        Me.GridNota.AllowUserToResizeRows = False
         Me.GridNota.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridNota.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.GridNota.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.GridNota.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Descripcion, Me.Importe, Me.IVA, Me.TipoNota, Me.FolioFactura})
-        Me.GridNota.Location = New System.Drawing.Point(458, 11)
+        Me.GridNota.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Descripcion, Me.Importe, Me.IVA, Me.TipoNota, Me.FolioFactura, Me.Porcentaje, Me.CostoOriginal})
+        Me.GridNota.Location = New System.Drawing.Point(508, 11)
         Me.GridNota.Name = "GridNota"
-        Me.GridNota.Size = New System.Drawing.Size(636, 263)
+        Me.GridNota.Size = New System.Drawing.Size(586, 263)
         Me.GridNota.TabIndex = 0
         '
         'ID
@@ -554,6 +659,18 @@ Partial Class NotasDeCreditoEDC
         Me.FolioFactura.HeaderText = "FolioFactura"
         Me.FolioFactura.Name = "FolioFactura"
         Me.FolioFactura.Visible = False
+        '
+        'Porcentaje
+        '
+        Me.Porcentaje.HeaderText = "Porcentaje"
+        Me.Porcentaje.Name = "Porcentaje"
+        Me.Porcentaje.Visible = False
+        '
+        'CostoOriginal
+        '
+        Me.CostoOriginal.HeaderText = "CostoOriginal"
+        Me.CostoOriginal.Name = "CostoOriginal"
+        Me.CostoOriginal.Visible = False
         '
         'NotasDeCreditoEDC
         '
@@ -610,12 +727,6 @@ Partial Class NotasDeCreditoEDC
     Friend WithEvents lblPeso As Label
     Friend WithEvents lblTotal As Label
     Friend WithEvents NUPorcentaje As NumericUpDown
-    Friend WithEvents ID As DataGridViewTextBoxColumn
-    Friend WithEvents Descripcion As DataGridViewTextBoxColumn
-    Friend WithEvents Importe As DataGridViewTextBoxColumn
-    Friend WithEvents IVA As DataGridViewTextBoxColumn
-    Friend WithEvents TipoNota As DataGridViewTextBoxColumn
-    Friend WithEvents FolioFactura As DataGridViewTextBoxColumn
     Friend WithEvents Label1 As Label
     Friend WithEvents lblTotalNota As Label
     Friend WithEvents lblTurnotxt As Label
@@ -630,4 +741,20 @@ Partial Class NotasDeCreditoEDC
     Friend WithEvents lblCarrera As Label
     Friend WithEvents lblEmail As Label
     Friend WithEvents lblNombre As Label
+    Friend WithEvents btnEliminar As Button
+    Friend WithEvents chb100 As CheckBox
+    Friend WithEvents ID As DataGridViewTextBoxColumn
+    Friend WithEvents Descripcion As DataGridViewTextBoxColumn
+    Friend WithEvents Importe As DataGridViewTextBoxColumn
+    Friend WithEvents IVA As DataGridViewTextBoxColumn
+    Friend WithEvents TipoNota As DataGridViewTextBoxColumn
+    Friend WithEvents FolioFactura As DataGridViewTextBoxColumn
+    Friend WithEvents Porcentaje As DataGridViewTextBoxColumn
+    Friend WithEvents CostoOriginal As DataGridViewTextBoxColumn
+    Friend WithEvents lblRegFiscaltxt As Label
+    Friend WithEvents lblRegFiscal As Label
+    Friend WithEvents lblCPtxt As Label
+    Friend WithEvents lblCP As Label
+    Friend WithEvents lblCFDItxt As Label
+    Friend WithEvents lblCFDI As Label
 End Class

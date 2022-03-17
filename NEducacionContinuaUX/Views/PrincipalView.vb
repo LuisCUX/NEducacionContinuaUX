@@ -92,7 +92,12 @@
         ObservacionesEDC.Show()
     End Sub
 
-    Private Sub NotasDeCreditoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NotasDeCreditoToolStripMenuItem.Click
+    Private Sub NotasDeCreditoToolStripMenuItem_Click(sender As Object, e As EventArgs)
+        NotasDeCreditoEDC.MdiParent = Me
+        NotasDeCreditoEDC.Show()
+    End Sub
+
+    Private Sub NotaDeCreditoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NotaDeCreditoToolStripMenuItem.Click
         NotasDeCreditoEDC.MdiParent = Me
         NotasDeCreditoEDC.Show()
     End Sub

@@ -28,7 +28,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\192.168.1.241\ti\NEducacionContinua\Instalador\</InstallUrl>
     <TargetCulture>es-MX</TargetCulture>
-    <ApplicationRevision>50</ApplicationRevision>
+    <ApplicationRevision>52</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -87,7 +87,10 @@
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.8.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
@@ -237,6 +240,7 @@
     <Compile Include="Services\UtilitiesService.vb" />
     <Compile Include="Services\ValidadorCobrosService.vb" />
     <Compile Include="Services\XmlService.vb" />
+    <Compile Include="Services\XmlService40.vb" />
     <Compile Include="Views\AsignacionPlanesEDC.Designer.vb">
       <DependentUpon>AsignacionPlanesEDC.vb</DependentUpon>
     </Compile>
@@ -337,6 +341,12 @@
       <DependentUpon>ModalDescuento.vb</DependentUpon>
     </Compile>
     <Compile Include="Views\ModalDescuento.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ModalNotasCreditoEDC.Designer.vb">
+      <DependentUpon>ModalNotasCreditoEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModalNotasCreditoEDC.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\ModificacionCostosPlanesEDC.Designer.vb">
@@ -469,6 +479,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ModalDescuento.resx">
       <DependentUpon>ModalDescuento.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ModalNotasCreditoEDC.resx">
+      <DependentUpon>ModalNotasCreditoEDC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ModificacionCostosPlanesEDC.resx">
       <DependentUpon>ModificacionCostosPlanesEDC.vb</DependentUpon>

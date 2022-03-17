@@ -42,9 +42,9 @@ Public Class CobrosEDC
         ElseIf (tipoMatricula = "UX") Then
             va.buscarMatriculaUX(Matricula, panelDatos, panelCobros, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt)
         ElseIf (tipoMatricula = "EX") Then
-            va.buscarMatriculaEX(Matricula, panelDatos, panelCobros, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt)
+            va.buscarMatriculaEX(Matricula, panelDatos, panelCobros, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt, lblCPtxt, lblRegFiscaltxt, lblCFDItxt)
         ElseIf (tipoMatricula = "EC") Then
-            va.buscarMatriculaEC(Matricula, panelDatos, panelCobros, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt)
+            va.buscarMatriculaEC(Matricula, panelDatos, panelCobros, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt, lblCPtxt, lblRegFiscaltxt, lblCFDItxt)
         End If
         ca.buscarPagosOpcionales(Tree, Matricula, tipoMatricula, "Cobros")
         ca.buscarCongresos(Tree, Matricula, tipoMatricula, "Cobros")
@@ -58,6 +58,17 @@ Public Class CobrosEDC
         Tree.Nodes(3).Expand()
         Tree.Nodes(4).Expand()
         Tree.Nodes(5).Expand()
+
+        Dim notaCredito As Boolean = ca.buscarNotasCredito(Matricula)
+        If (notaCredito = True) Then
+            ObjectBagService.setItem("Matricula", Matricula)
+            ModalNotasCreditoEDC.ShowDialog()
+            If (ObjectBagService.getItem("NotaAgregada")) Then
+                Me.Enabled = True
+            Else
+                Me.Reiniciar()
+            End If
+        End If
     End Sub
 
     Private Sub cbFormaPago_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbFormaPago.SelectionChangeCommitted
@@ -79,6 +90,9 @@ Public Class CobrosEDC
             txtNoCheque.Visible = False
             lblMonto.Visible = True
             txtMonto.Visible = True
+            lblNotaAplicada.Visible = False
+            txtNotaAplicada.Visible = False
+            btnBuscarNota.Visible = False
         ElseIf (cbFormaPago.Text = "TARJETA DE CREDITO" Or cbFormaPago.Text = "TARJETA DE DEBITO") Then ''TARJETA DE CREDITO O DEBITO
             lblBanco.Visible = True
             lblTIpoBanco.Visible = True
@@ -96,6 +110,9 @@ Public Class CobrosEDC
             txtNoCuenta.Visible = False
             lblMonto.Visible = True
             txtMonto.Visible = True
+            lblNotaAplicada.Visible = False
+            txtNotaAplicada.Visible = False
+            btnBuscarNota.Visible = False
         ElseIf (cbFormaPago.Text = "CHEQUE") Then ''CHEQUE
             lblBanco.Visible = False
             lblTIpoBanco.Visible = False
@@ -113,6 +130,9 @@ Public Class CobrosEDC
             txtNoCuenta.Visible = True
             lblMonto.Visible = True
             txtMonto.Visible = True
+            lblNotaAplicada.Visible = False
+            txtNotaAplicada.Visible = False
+            btnBuscarNota.Visible = False
         ElseIf (cbFormaPago.Text = "TRANSFERENCIA") Then ''TRANSFERENCIA
             lblBanco.Visible = True
             lblTIpoBanco.Visible = False
@@ -130,6 +150,9 @@ Public Class CobrosEDC
             txtNoCuenta.Visible = False
             lblMonto.Visible = True
             txtMonto.Visible = True
+            lblNotaAplicada.Visible = False
+            txtNotaAplicada.Visible = False
+            btnBuscarNota.Visible = False
         ElseIf (cbFormaPago.Text = "DEPOSITO BANCARIO C/COMPROBANTE" Or cbFormaPago.Text = "DEPOSITO BANCARIO EDO CTA") Then ''DEPOSITO BANCARIO C/COMPROBANTE
             lblBanco.Visible = True
             lblTIpoBanco.Visible = True
@@ -147,6 +170,9 @@ Public Class CobrosEDC
             txtNoCuenta.Visible = False
             lblMonto.Visible = True
             txtMonto.Visible = True
+            lblNotaAplicada.Visible = False
+            txtNotaAplicada.Visible = False
+            btnBuscarNota.Visible = False
         ElseIf (cbFormaPago.Text = "CREDITO") Then ''CREDITO
             lblBanco.Visible = False
             lblTIpoBanco.Visible = False
@@ -164,6 +190,9 @@ Public Class CobrosEDC
             txtNoCuenta.Visible = False
             lblMonto.Visible = False
             txtMonto.Visible = False
+            lblNotaAplicada.Visible = False
+            txtNotaAplicada.Visible = False
+            btnBuscarNota.Visible = False
         ElseIf (cbFormaPago.Text = "NOTA DE CREDITO") Then ''NOTA DE CREDITO
             lblBanco.Visible = False
             lblTIpoBanco.Visible = False
@@ -181,6 +210,9 @@ Public Class CobrosEDC
             txtNoCuenta.Visible = False
             lblMonto.Visible = False
             txtMonto.Visible = False
+            lblNotaAplicada.Visible = True
+            txtNotaAplicada.Visible = True
+            btnBuscarNota.Visible = True
         End If
     End Sub
 
@@ -460,7 +492,7 @@ Public Class CobrosEDC
             ElseIf (tipoMatricula = "EC") Then
                 tipocliente = 1
             End If
-            Dim IDXMLC As Integer = co.Cobrar(listaConceptosPrueba, cbFormaPago.SelectedValue, Matricula, lblRFCtxt.Text, lblNombretxt.Text, lblTotal.Text, True, tipocliente)
+            Dim IDXMLC As Integer = co.Cobrar(listaConceptosPrueba, cbFormaPago.SelectedValue, Matricula, lblRFCtxt.Text, lblNombretxt.Text, lblTotal.Text, True, tipocliente, lblCPtxt.Text, lblRegFiscaltxt.Text, lblCFDItxt.Text)
             If (IDXMLC > 0) Then
                 Me.Reiniciar()
                 Exit Sub
@@ -508,7 +540,7 @@ Public Class CobrosEDC
         ElseIf (tipoMatricula = "EC") Then
             tipocliente = 1
         End If
-        Dim IDXML As Integer = co.Cobrar(listaconceptosFinal, cbFormaPago.SelectedValue, Matricula, lblRFCtxt.Text, lblNombretxt.Text, lblTotal.Text, False, tipocliente)
+        Dim IDXML As Integer = co.Cobrar(listaconceptosFinal, cbFormaPago.SelectedValue, Matricula, lblRFCtxt.Text, lblNombretxt.Text, lblTotal.Text, False, tipocliente, lblCPtxt.Text, lblRegFiscaltxt.Text, lblCFDItxt.Text)
 
 
         ''---------------------------------------------------------REGISTRO DE FORMA DE PAGO---------------------------------------------------------
@@ -527,6 +559,8 @@ Public Class CobrosEDC
                 db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosDepositos(ID_Factura, ID_Banco, ID_TipoPago, Monto, TipoDeposito, FechaPago) VALUES({IDXML}, {cbBanco.SelectedValue}, {cbTipoBanco.SelectedValue}, {txtMonto.Text}, 'Comprobante', '{DTPickerFecha.Text}')")
             ElseIf (cbFormaPago.Text = "DEPOSITO BANCARIO EDO CTA") Then
                 db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosDepositos(ID_Factura, ID_Banco, ID_TipoPago, Monto, TipoDeposito, FechaPago) VALUES({IDXML}, {cbBanco.SelectedValue}, {cbTipoBanco.SelectedValue}, {txtMonto.Text}, 'Edo', '{DTPickerFecha.Text}')")
+            ElseIf (cbFormaPago.Text = "NOTA DE CREDITO") Then
+                db.execSQLQueryWithoutParams($"UPDATE ing_NotasCredito SET Aplicada = 1 WHERE FolioNota = '{txtNotaAplicada.Text}'")
             End If
         End If
 
@@ -636,7 +670,6 @@ Public Class CobrosEDC
                 End If
             Next
         Next
-
         Return True
     End Function
 
@@ -756,5 +789,22 @@ Public Class CobrosEDC
     Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
         Me.Reiniciar()
         txtMatricula.Focus()
+    End Sub
+
+    Private Sub btnBuscarNota_Click(sender As Object, e As EventArgs) Handles btnBuscarNota.Click
+        Dim notaCredito As Boolean = ca.buscarNotasCredito(Matricula)
+        If (notaCredito = True) Then
+            ObjectBagService.setItem("Matricula", Matricula)
+            ModalNotasCreditoEDC.ShowDialog()
+            If (ObjectBagService.getItem("NotaAgregada")) Then
+                Me.Enabled = True
+            Else
+                Me.Reiniciar()
+            End If
+        End If
+    End Sub
+
+    Private Sub panelCobros_Paint(sender As Object, e As PaintEventArgs) Handles panelCobros.Paint
+
     End Sub
 End Class

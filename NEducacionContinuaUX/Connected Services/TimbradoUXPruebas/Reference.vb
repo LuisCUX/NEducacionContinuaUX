@@ -320,6 +320,133 @@ Namespace TimbradoUXPruebas
     
     <System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="DetalleCFDICancelacion", [Namespace]:="http://schemas.datacontract.org/2004/07/TES.TFD.V33.Negocios"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class DetalleCFDICancelacion
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private EsCancelableField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private FolioSustitucionField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private MotivoField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private RFCReceptorField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TotalField As Decimal
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private UUIDField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property EsCancelable() As String
+            Get
+                Return Me.EsCancelableField
+            End Get
+            Set
+                If (Object.ReferenceEquals(Me.EsCancelableField, value) <> true) Then
+                    Me.EsCancelableField = value
+                    Me.RaisePropertyChanged("EsCancelable")
+                End If
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property FolioSustitucion() As String
+            Get
+                Return Me.FolioSustitucionField
+            End Get
+            Set
+                If (Object.ReferenceEquals(Me.FolioSustitucionField, value) <> true) Then
+                    Me.FolioSustitucionField = value
+                    Me.RaisePropertyChanged("FolioSustitucion")
+                End If
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Motivo() As String
+            Get
+                Return Me.MotivoField
+            End Get
+            Set
+                If (Object.ReferenceEquals(Me.MotivoField, value) <> true) Then
+                    Me.MotivoField = value
+                    Me.RaisePropertyChanged("Motivo")
+                End If
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property RFCReceptor() As String
+            Get
+                Return Me.RFCReceptorField
+            End Get
+            Set
+                If (Object.ReferenceEquals(Me.RFCReceptorField, value) <> true) Then
+                    Me.RFCReceptorField = value
+                    Me.RaisePropertyChanged("RFCReceptor")
+                End If
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Total() As Decimal
+            Get
+                Return Me.TotalField
+            End Get
+            Set
+                If (Me.TotalField.Equals(value) <> true) Then
+                    Me.TotalField = value
+                    Me.RaisePropertyChanged("Total")
+                End If
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property UUID() As String
+            Get
+                Return Me.UUIDField
+            End Get
+            Set
+                If (Object.ReferenceEquals(Me.UUIDField, value) <> true) Then
+                    Me.UUIDField = value
+                    Me.RaisePropertyChanged("UUID")
+                End If
+            End Set
+        End Property
+        
+        Public Event PropertyChanged As System.ComponentModel.PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+        
+        Protected Sub RaisePropertyChanged(ByVal propertyName As String)
+            Dim propertyChanged As System.ComponentModel.PropertyChangedEventHandler = Me.PropertyChangedEvent
+            If (Not (propertyChanged) Is Nothing) Then
+                propertyChanged(Me, New System.ComponentModel.PropertyChangedEventArgs(propertyName))
+            End If
+        End Sub
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
      System.Runtime.Serialization.DataContractAttribute(Name:="RespuestaCancelacion", [Namespace]:="http://schemas.datacontract.org/2004/07/TES.TFD.V33.Negocios"),  _
      System.SerializableAttribute()>  _
     Partial Public Class RespuestaCancelacion
@@ -1654,101 +1781,6 @@ Namespace TimbradoUXPruebas
     
     <System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="DetalleCFDICancelacion", [Namespace]:="http://schemas.datacontract.org/2004/07/TES.TFD.V33.Negocios"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class DetalleCFDICancelacion
-        Inherits Object
-        Implements System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged
-        
-        <System.NonSerializedAttribute()>  _
-        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
-        
-        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
-        Private EsCancelableField As String
-        
-        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
-        Private RFCReceptorField As String
-        
-        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
-        Private TotalField As Decimal
-        
-        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
-        Private UUIDField As String
-        
-        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
-        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
-            Get
-                Return Me.extensionDataField
-            End Get
-            Set
-                Me.extensionDataField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute()>  _
-        Public Property EsCancelable() As String
-            Get
-                Return Me.EsCancelableField
-            End Get
-            Set
-                If (Object.ReferenceEquals(Me.EsCancelableField, value) <> true) Then
-                    Me.EsCancelableField = value
-                    Me.RaisePropertyChanged("EsCancelable")
-                End If
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute()>  _
-        Public Property RFCReceptor() As String
-            Get
-                Return Me.RFCReceptorField
-            End Get
-            Set
-                If (Object.ReferenceEquals(Me.RFCReceptorField, value) <> true) Then
-                    Me.RFCReceptorField = value
-                    Me.RaisePropertyChanged("RFCReceptor")
-                End If
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute()>  _
-        Public Property Total() As Decimal
-            Get
-                Return Me.TotalField
-            End Get
-            Set
-                If (Me.TotalField.Equals(value) <> true) Then
-                    Me.TotalField = value
-                    Me.RaisePropertyChanged("Total")
-                End If
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute()>  _
-        Public Property UUID() As String
-            Get
-                Return Me.UUIDField
-            End Get
-            Set
-                If (Object.ReferenceEquals(Me.UUIDField, value) <> true) Then
-                    Me.UUIDField = value
-                    Me.RaisePropertyChanged("UUID")
-                End If
-            End Set
-        End Property
-        
-        Public Event PropertyChanged As System.ComponentModel.PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
-        
-        Protected Sub RaisePropertyChanged(ByVal propertyName As String)
-            Dim propertyChanged As System.ComponentModel.PropertyChangedEventHandler = Me.PropertyChangedEvent
-            If (Not (propertyChanged) Is Nothing) Then
-                propertyChanged(Me, New System.ComponentModel.PropertyChangedEventArgs(propertyName))
-            End If
-        End Sub
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
      System.Runtime.Serialization.DataContractAttribute(Name:="RespuestaRelacionados", [Namespace]:="http://schemas.datacontract.org/2004/07/TES.TFD.V33.Negocios"),  _
      System.SerializableAttribute()>  _
     Partial Public Class RespuestaRelacionados
@@ -2011,10 +2043,10 @@ Namespace TimbradoUXPruebas
         Function TimbrarCFDIAsync(ByVal usuario As String, ByVal password As String, ByVal cadenaXML As String, ByVal referencia As String) As System.Threading.Tasks.Task(Of TimbradoUXPruebas.RespuestaTFD33)
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWSCFDI33/CancelarCFDI", ReplyAction:="http://tempuri.org/IWSCFDI33/CancelarCFDIResponse")>  _
-        Function CancelarCFDI(ByVal usuario As String, ByVal password As String, ByVal rFCEmisor As String, ByVal listaCFDI() As String, ByVal clavePrivada_Base64 As String, ByVal passwordClavePrivada As String) As TimbradoUXPruebas.RespuestaCancelacion
+        Function CancelarCFDI(ByVal usuario As String, ByVal password As String, ByVal rFCEmisor As String, ByVal listaCFDI() As TimbradoUXPruebas.DetalleCFDICancelacion, ByVal clavePrivada_Base64 As String, ByVal passwordClavePrivada As String) As TimbradoUXPruebas.RespuestaCancelacion
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWSCFDI33/CancelarCFDI", ReplyAction:="http://tempuri.org/IWSCFDI33/CancelarCFDIResponse")>  _
-        Function CancelarCFDIAsync(ByVal usuario As String, ByVal password As String, ByVal rFCEmisor As String, ByVal listaCFDI() As String, ByVal clavePrivada_Base64 As String, ByVal passwordClavePrivada As String) As System.Threading.Tasks.Task(Of TimbradoUXPruebas.RespuestaCancelacion)
+        Function CancelarCFDIAsync(ByVal usuario As String, ByVal password As String, ByVal rFCEmisor As String, ByVal listaCFDI() As TimbradoUXPruebas.DetalleCFDICancelacion, ByVal clavePrivada_Base64 As String, ByVal passwordClavePrivada As String) As System.Threading.Tasks.Task(Of TimbradoUXPruebas.RespuestaCancelacion)
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWSCFDI33/CancelacionAsincrona", ReplyAction:="http://tempuri.org/IWSCFDI33/CancelacionAsincronaResponse")>  _
         Function CancelacionAsincrona(ByVal usuario As String, ByVal password As String, ByVal rFCEmisor As String, ByVal listaCFDI() As String, ByVal clavePrivada_Base64 As String, ByVal passwordClavePrivada As String) As TimbradoUXPruebas.RespuestaCancelacionAsincrona
@@ -2107,10 +2139,10 @@ Namespace TimbradoUXPruebas
         Function CancelarCFDIConValidacionAsync(ByVal usuario As String, ByVal password As String, ByVal rFCEmisor As String, ByVal listaCFDI() As TimbradoUXPruebas.DetalleCFDICancelacion, ByVal clavePrivada_Base64 As String, ByVal passwordClavePrivada As String) As System.Threading.Tasks.Task(Of TimbradoUXPruebas.RespuestaCancelacion)
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWSCFDI33/ConsultarComprobantesRelacionados", ReplyAction:="http://tempuri.org/IWSCFDI33/ConsultarComprobantesRelacionadosResponse")>  _
-        Function ConsultarComprobantesRelacionados(ByVal usuario As String, ByVal password As String, ByVal UUID As String, ByVal RFCReceptor As String, ByVal pfxReceptorBase64 As String, ByVal passwdPfx As String) As TimbradoUXPruebas.RespuestaRelacionados
+        Function ConsultarComprobantesRelacionados(ByVal usuario As String, ByVal password As String, ByVal UUID As String, ByVal RFCReceptor As String, ByVal RFCEmisor As String, ByVal pfxReceptorBase64 As String, ByVal passwdPfx As String) As TimbradoUXPruebas.RespuestaRelacionados
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWSCFDI33/ConsultarComprobantesRelacionados", ReplyAction:="http://tempuri.org/IWSCFDI33/ConsultarComprobantesRelacionadosResponse")>  _
-        Function ConsultarComprobantesRelacionadosAsync(ByVal usuario As String, ByVal password As String, ByVal UUID As String, ByVal RFCReceptor As String, ByVal pfxReceptorBase64 As String, ByVal passwdPfx As String) As System.Threading.Tasks.Task(Of TimbradoUXPruebas.RespuestaRelacionados)
+        Function ConsultarComprobantesRelacionadosAsync(ByVal usuario As String, ByVal password As String, ByVal UUID As String, ByVal RFCReceptor As String, ByVal RFCEmisor As String, ByVal pfxReceptorBase64 As String, ByVal passwdPfx As String) As System.Threading.Tasks.Task(Of TimbradoUXPruebas.RespuestaRelacionados)
     End Interface
     
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")>  _
@@ -2152,11 +2184,11 @@ Namespace TimbradoUXPruebas
             Return MyBase.Channel.TimbrarCFDIAsync(usuario, password, cadenaXML, referencia)
         End Function
         
-        Public Function CancelarCFDI(ByVal usuario As String, ByVal password As String, ByVal rFCEmisor As String, ByVal listaCFDI() As String, ByVal clavePrivada_Base64 As String, ByVal passwordClavePrivada As String) As TimbradoUXPruebas.RespuestaCancelacion Implements TimbradoUXPruebas.IWSCFDI33.CancelarCFDI
+        Public Function CancelarCFDI(ByVal usuario As String, ByVal password As String, ByVal rFCEmisor As String, ByVal listaCFDI() As TimbradoUXPruebas.DetalleCFDICancelacion, ByVal clavePrivada_Base64 As String, ByVal passwordClavePrivada As String) As TimbradoUXPruebas.RespuestaCancelacion Implements TimbradoUXPruebas.IWSCFDI33.CancelarCFDI
             Return MyBase.Channel.CancelarCFDI(usuario, password, rFCEmisor, listaCFDI, clavePrivada_Base64, passwordClavePrivada)
         End Function
         
-        Public Function CancelarCFDIAsync(ByVal usuario As String, ByVal password As String, ByVal rFCEmisor As String, ByVal listaCFDI() As String, ByVal clavePrivada_Base64 As String, ByVal passwordClavePrivada As String) As System.Threading.Tasks.Task(Of TimbradoUXPruebas.RespuestaCancelacion) Implements TimbradoUXPruebas.IWSCFDI33.CancelarCFDIAsync
+        Public Function CancelarCFDIAsync(ByVal usuario As String, ByVal password As String, ByVal rFCEmisor As String, ByVal listaCFDI() As TimbradoUXPruebas.DetalleCFDICancelacion, ByVal clavePrivada_Base64 As String, ByVal passwordClavePrivada As String) As System.Threading.Tasks.Task(Of TimbradoUXPruebas.RespuestaCancelacion) Implements TimbradoUXPruebas.IWSCFDI33.CancelarCFDIAsync
             Return MyBase.Channel.CancelarCFDIAsync(usuario, password, rFCEmisor, listaCFDI, clavePrivada_Base64, passwordClavePrivada)
         End Function
         
@@ -2280,12 +2312,12 @@ Namespace TimbradoUXPruebas
             Return MyBase.Channel.CancelarCFDIConValidacionAsync(usuario, password, rFCEmisor, listaCFDI, clavePrivada_Base64, passwordClavePrivada)
         End Function
         
-        Public Function ConsultarComprobantesRelacionados(ByVal usuario As String, ByVal password As String, ByVal UUID As String, ByVal RFCReceptor As String, ByVal pfxReceptorBase64 As String, ByVal passwdPfx As String) As TimbradoUXPruebas.RespuestaRelacionados Implements TimbradoUXPruebas.IWSCFDI33.ConsultarComprobantesRelacionados
-            Return MyBase.Channel.ConsultarComprobantesRelacionados(usuario, password, UUID, RFCReceptor, pfxReceptorBase64, passwdPfx)
+        Public Function ConsultarComprobantesRelacionados(ByVal usuario As String, ByVal password As String, ByVal UUID As String, ByVal RFCReceptor As String, ByVal RFCEmisor As String, ByVal pfxReceptorBase64 As String, ByVal passwdPfx As String) As TimbradoUXPruebas.RespuestaRelacionados Implements TimbradoUXPruebas.IWSCFDI33.ConsultarComprobantesRelacionados
+            Return MyBase.Channel.ConsultarComprobantesRelacionados(usuario, password, UUID, RFCReceptor, RFCEmisor, pfxReceptorBase64, passwdPfx)
         End Function
         
-        Public Function ConsultarComprobantesRelacionadosAsync(ByVal usuario As String, ByVal password As String, ByVal UUID As String, ByVal RFCReceptor As String, ByVal pfxReceptorBase64 As String, ByVal passwdPfx As String) As System.Threading.Tasks.Task(Of TimbradoUXPruebas.RespuestaRelacionados) Implements TimbradoUXPruebas.IWSCFDI33.ConsultarComprobantesRelacionadosAsync
-            Return MyBase.Channel.ConsultarComprobantesRelacionadosAsync(usuario, password, UUID, RFCReceptor, pfxReceptorBase64, passwdPfx)
+        Public Function ConsultarComprobantesRelacionadosAsync(ByVal usuario As String, ByVal password As String, ByVal UUID As String, ByVal RFCReceptor As String, ByVal RFCEmisor As String, ByVal pfxReceptorBase64 As String, ByVal passwdPfx As String) As System.Threading.Tasks.Task(Of TimbradoUXPruebas.RespuestaRelacionados) Implements TimbradoUXPruebas.IWSCFDI33.ConsultarComprobantesRelacionadosAsync
+            Return MyBase.Channel.ConsultarComprobantesRelacionadosAsync(usuario, password, UUID, RFCReceptor, RFCEmisor, pfxReceptorBase64, passwdPfx)
         End Function
     End Class
 End Namespace

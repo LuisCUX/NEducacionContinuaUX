@@ -9,7 +9,7 @@ Imports System.Text
 Public Class CobrosController
     Dim db As DataBaseService = New DataBaseService()
     Dim ch As ConceptHandlerController = New ConceptHandlerController()
-    Dim xml As XmlService = New XmlService()
+    Dim xml As XmlService40 = New XmlService40()
     Dim st As SelladoTimbradoService = New SelladoTimbradoService()
     Dim rep As ImpresionReportesService = New ImpresionReportesService()
     Dim es As EmailService = New EmailService()
@@ -80,7 +80,7 @@ Public Class CobrosController
     ''----------------------------------------------------------------------------------------------------------------------------------------
     ''---------------------------------------------------------COBRA PAGO YA VALIDADO---------------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
-    Function Cobrar(listaConceptos As List(Of Concepto), formaPago As String, Matricula As String, RFCCLiente As String, NombreCLiente As String, montoTotal As Decimal, Credito As Boolean, tipoMatricula As Integer) As Integer
+    Function Cobrar(listaConceptos As List(Of Concepto), formaPago As String, Matricula As String, RFCCLiente As String, NombreCLiente As String, montoTotal As Decimal, Credito As Boolean, tipoMatricula As Integer, Cp As String, RegFiscal As String, usoCFDI As String) As Integer
         NombreCLiente = Me.quitaTildesEspecial(NombreCLiente)
         Dim folioPago As String = Me.obtenerFolio("Pago")
         Dim esEvento As Boolean = False
@@ -113,6 +113,13 @@ Public Class CobrosController
             Next
             Dim totalIVA As String = totalIVASuma.ToString()
 
+            ''-----CALCULA TOTAL BASE-----''
+            Dim totalIVABase As Decimal
+            For Each concepto As Concepto In listaConceptos
+                totalIVABase = totalIVABase + CDec(concepto.CostoIvaBase)
+            Next
+            Dim totalBase As String = totalIVABase.ToString()
+
             ''-----CALCUOA DECUENTO-----''
             Dim Descuento As Decimal
             For Each concepto As Concepto In listaConceptos
@@ -121,7 +128,6 @@ Public Class CobrosController
             Dim DescuentoS As String = Descuento.ToString()
             Dim Folio As String = folioPago.Substring(1, 6)
             Dim Serie As String = folioPago.Substring(0, 1)
-            Dim UsoCFDI As String = "P01"
 
             SubTotal = ch.getFormat(SubTotal)
             totalIVA = ch.getFormat(totalIVA)
@@ -170,10 +176,10 @@ Public Class CobrosController
             Next
 
             ''---------------------------------------------------------TIMBRADO---------------------------------------------------------
-            Dim cadena = xml.cadenaPrueba(Serie, Folio, Fecha, formaPago, NoCertificado, SubTotal, DescuentoS, Total, listaConceptos, totalIVA, RFCCLiente, NombreCLiente, Credito)
+            Dim cadena = xml.cadenaPrueba(Serie, Folio, Fecha, formaPago, NoCertificado, SubTotal, DescuentoS, Total, listaConceptos, totalIVA, RFCCLiente, NombreCLiente, Credito, Cp, RegFiscal, totalBase)
             ''Dim sello As String = st.Sellado("C:\Users\darkz\Desktop\pfx\uxa_pfx33.pfx", "12345678a", cadena)
             Dim sello As String = st.Sellado("\\192.168.1.241\ti\NEducacionContinua\Timbrado\pfx\uxa_pfx33.pfx", "12345678a", cadena)
-            Dim xmlString As String = xml.xmlPrueba(Total, SubTotal, DescuentoS, totalIVA, Fecha, sello, Certificado, NoCertificado, formaPago, Folio, Serie, UsoCFDI, listaConceptos, RFCCLiente, NombreCLiente, Credito)
+            Dim xmlString As String = xml.xmlPrueba(Total, SubTotal, DescuentoS, totalIVA, Fecha, sello, Certificado, NoCertificado, formaPago, Folio, Serie, usoCFDI, listaConceptos, RFCCLiente, NombreCLiente, Credito, Cp, RegFiscal, totalBase)
             xmlString = xmlString.Replace("utf-16", "UTF-8")
             Dim xmlTimbrado As String = st.Timbrado(xmlString, Folio)
             Dim folioFiscal As String = Me.Extrae_Cadena(xmlTimbrado, "UUID=", " FechaTimbrado")
@@ -201,9 +207,9 @@ Public Class CobrosController
             Dim IDXML As Integer = db.insertAndGetIDInserted($"INSERT INTO ing_xmlTimbrados(Matricula_Clave, Folio, FolioFiscal, Certificado, XMLTimbrado, fac_Cadena, fac_Sello, Tipo_Pago, Forma_Pago, Forma_PagoID, Fecha_Pago, Cajero, RegimenFiscal, Subtotal, Descuento, IVA, Total, usoCFDI, CanceladaHoy, CanceladaOtroDia) VALUES ('{Matricula}', '{Serie}{Folio}', '{folioFiscal}', '{NoCertificado}', '{xmlTimbrado}', '{cadena}', '{sello}', '{tipoPago}', '{formaPago}', {formapagoid}, '{Fecha}', '{User.getUsername}', 'GENERAL DE LEY(603)', {SubTotal}, {DescuentoS}, {totalIVA}, {Total}, '{UsoCFDI}', 0, 0)")
             For Each item As Concepto In listaConceptos
                 Dim IDClave As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatClavesPagos WHERE Clave = '{item.claveConcepto}'")
-                db.execSQLQueryWithoutParams($"INSERT INTO ing_xmlTimbradosConceptos(Clave_Cliente, XMLID, Nombre_Concepto, IDConcepto, Clave_Concepto, ClaveUnidad, PrecioUnitario, IVA, Descuento, Cantidad, Total) VALUES ('{item.Matricula}', {IDXML}, '{item.NombreConcepto}', {item.IDConcepto}, {IDClave}, '{item.cveUnidad}', {Format(CDec(item.costoUnitario), "#####0.00")}, {Format(CDec(item.costoIVAUnitario), "#####0.00")}, {Format(CDec(item.descuento), "#####0.00")}, {item.Cantidad}, {Format(CDec(((item.costoTotal - item.descuento) + item.costoIVATotal)), "#####0.00")})")
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_xmlTimbradosConceptos(Clave_Cliente, XMLID, Nombre_Concepto, IDConcepto, Clave_Concepto, ClaveUnidad, PrecioUnitario, IVA, Descuento, Cantidad, Total, Nota) VALUES ('{item.Matricula}', {IDXML}, '{item.NombreConcepto}', {item.IDConcepto}, {IDClave}, '{item.cveUnidad}', {Format(CDec(item.costoUnitario), "#####0.00")}, {Format(CDec(item.costoIVAUnitario), "#####0.00")}, {Format(CDec(item.descuento), "#####0.00")}, {item.Cantidad}, {Format(CDec(((item.costoTotal - item.descuento) + item.costoIVATotal)), "#####0.00")}, 0)")
             Next
-                db.execSQLQueryWithoutParams($"UPDATE ing_CatFolios SET Consecutivo = Consecutivo + 1 WHERE Usuario = '{User.getUsername()}'")
+            db.execSQLQueryWithoutParams($"UPDATE ing_CatFolios SET Consecutivo = Consecutivo + 1 WHERE Usuario = '{User.getUsername()}'")
 
 
             MessageBox.Show("Pago registrado correctamente")

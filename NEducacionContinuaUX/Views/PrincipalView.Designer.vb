@@ -51,7 +51,7 @@ Partial Class PrincipalView
         Me.CancelaciónDeFacturasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CambioDeFormaDePagoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReportesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.NotasDeCreditoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NotaDeCreditoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip.SuspendLayout()
         Me.MenuStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -82,7 +82,7 @@ Partial Class PrincipalView
         '
         'CobrosToolStripMenuItem
         '
-        Me.CobrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CobrosToolStripMenuItem1, Me.CobrosMultiplesToolStripMenuItem, Me.CobroDeCreditosToolStripMenuItem, Me.SustitucioncambioDeDatosToolStripMenuItem, Me.SustitucioncambioDeConceptoclaveToolStripMenuItem, Me.NotasDeCreditoToolStripMenuItem})
+        Me.CobrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CobrosToolStripMenuItem1, Me.CobrosMultiplesToolStripMenuItem, Me.CobroDeCreditosToolStripMenuItem, Me.SustitucioncambioDeDatosToolStripMenuItem, Me.SustitucioncambioDeConceptoclaveToolStripMenuItem, Me.NotaDeCreditoToolStripMenuItem})
         Me.CobrosToolStripMenuItem.Name = "CobrosToolStripMenuItem"
         Me.CobrosToolStripMenuItem.Size = New System.Drawing.Size(57, 20)
         Me.CobrosToolStripMenuItem.Text = "Cobros"
@@ -237,11 +237,11 @@ Partial Class PrincipalView
         Me.ReportesToolStripMenuItem.Size = New System.Drawing.Size(65, 20)
         Me.ReportesToolStripMenuItem.Text = "Reportes"
         '
-        'NotasDeCreditoToolStripMenuItem
+        'NotaDeCreditoToolStripMenuItem
         '
-        Me.NotasDeCreditoToolStripMenuItem.Name = "NotasDeCreditoToolStripMenuItem"
-        Me.NotasDeCreditoToolStripMenuItem.Size = New System.Drawing.Size(279, 22)
-        Me.NotasDeCreditoToolStripMenuItem.Text = "Notas de credito"
+        Me.NotaDeCreditoToolStripMenuItem.Name = "NotaDeCreditoToolStripMenuItem"
+        Me.NotaDeCreditoToolStripMenuItem.Size = New System.Drawing.Size(279, 22)
+        Me.NotaDeCreditoToolStripMenuItem.Text = "Nota de credito"
         '
         'PrincipalView
         '
@@ -300,5 +300,5 @@ Partial Class PrincipalView
     Friend WithEvents CancelaciónDeFacturasToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CambioDeFormaDePagoToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ReportesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents NotasDeCreditoToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents NotaDeCreditoToolStripMenuItem As ToolStripMenuItem
 End Class
