@@ -13,9 +13,21 @@ Public Class NotaCreditoController
     Dim rep As ImpresionReportesService = New ImpresionReportesService()
     Public QR_Generator As New MessagingToolkit.QRCode.Codec.QRCodeEncoder
     Sub GenerarNotaCredito(listaConceptos As List(Of Concepto), listaUUID As List(Of String), listaUUIDOriginal As List(Of String), ListaPorcentajes As List(Of String), ListaCostoOriginal As List(Of String), RFC As String, NombreCompleto As String, usoCFDI As String,
-                           montoTotal As String, subtotal As String, descuento As String, Matricula As String, ClaveNota As String, RegFiscal As String, Cp As String)
+                           Matricula As String, ClaveNota As String, RegFiscal As String, Cp As String)
         Try
             db.startTransaction()
+            Dim montototal As Decimal
+            Dim subtotal As Decimal
+            Dim descuento As Decimal
+            Dim totalIVa As Decimal
+
+            For Each concepto As Concepto In listaConceptos
+                montototal = montototal + concepto.costoTotal
+                subtotal = subtotal + concepto.CostoIvaBase
+                totalIVa = totalIVa + concepto.costoIVATotal
+            Next
+
+
             Dim FolioNota As String = Me.obtenerFolio()
             Dim Serie As String = FolioNota.Substring(0, 4)
             Dim Folio As String = FolioNota.Substring(4, 6)
@@ -199,7 +211,6 @@ Public Class NotaCreditoController
             Case Else : Num2Text = Num2Text(Int(value / 1000000000000.0#)) & " BILLONES"
                 If (value - Int(value / 1000000000000.0#) * 1000000000000.0#) Then Num2Text = Num2Text & " " & Num2Text(value - Int(value / 1000000000000.0#) * 1000000000000.0#)
         End Select
-
     End Function
 
     Public Sub gernerarQr(QR As String, Nombre As String)

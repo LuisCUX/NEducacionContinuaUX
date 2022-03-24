@@ -196,6 +196,10 @@ Public Class NotasDeCreditoEDC
                 concepto.costoFinal = Format(CDec(GridNota.Rows(x).Cells(2).Value), "#####0.00")
                 concepto.costoUnitario = Format(CDec(GridNota.Rows(x).Cells(2).Value), "#####0.00")
                 concepto.costoBase = Format(CDec(GridNota.Rows(x).Cells(2).Value), "#####0.00")
+                concepto.CostoIvaBase = "0.00000000"
+                If ((concepto.absorbeIVA = True) Or (concepto.consideraIVA = True)) Then
+                    Me.obtenerIVAConcepto(concepto, Format(CDec(GridNota.Rows(x).Cells(2).Value), "#####0.00"))
+                End If
                 listaConceptos.Add(concepto)
                 listaUUID.Add(GridNota.Rows(x).Cells(5).Value)
                 listaPorcentajes.Add(GridNota.Rows(x).Cells(6).Value)
@@ -209,7 +213,7 @@ Public Class NotasDeCreditoEDC
             listaUUIDDistinct.Add(folioFiscal)
         Next
 
-        nc.GenerarNotaCredito(listaConceptos, listaUUIDDistinct, listaUUID2, listaPorcentajes, listaCostoOrignial, lblRFCtxt.Text, lblNombretxt.Text, lblCFDItxt.Text, Format(CDec(lblTotalNota.Text), "#####0.00"), Format(CDec(lblTotalNota.Text), "#####0.00"), "0.00", Matricula, cbTipoNota.Text, lblRegFiscaltxt.Text, lblCPtxt.Text)
+        nc.GenerarNotaCredito(listaConceptos, listaUUIDDistinct, listaUUID2, listaPorcentajes, listaCostoOrignial, lblRFCtxt.Text, lblNombretxt.Text, lblCFDItxt.Text, Matricula, cbTipoNota.Text, lblRegFiscaltxt.Text, lblCPtxt.Text)
     End Sub
 
     Sub actualizarTotal()
@@ -289,6 +293,22 @@ Public Class NotasDeCreditoEDC
             End If
         End If
     End Sub
+
+    Function obtenerIVAConcepto(concepto As Concepto, costoOriginal As Decimal) As Concepto
+        Dim unitariosiniva As Decimal = (CDec(costoOriginal) / 1.16)
+        Dim IVA As Decimal = costoOriginal - unitariosiniva
+
+        concepto.costoTotal = Format(CDec(unitariosiniva), "#####0.00")
+        concepto.costoFinal = Format(CDec(unitariosiniva), "#####0.00")
+        concepto.costoUnitario = Format(CDec(unitariosiniva), "#####0.00")
+        concepto.costoBase = Format(CDec(unitariosiniva), "#####0.00")
+
+        concepto.costoIVAUnitario = Format(CDec(IVA), "#####0.00")
+        concepto.costoIVATotal = Format(CDec(IVA), "#####0.00")
+        concepto.CostoIvaBase = unitariosiniva
+
+        Return concepto
+    End Function
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
         Try

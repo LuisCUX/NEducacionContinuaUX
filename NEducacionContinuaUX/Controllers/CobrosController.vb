@@ -154,6 +154,23 @@ Public Class CobrosController
                 concepto.NombreConcepto = Me.quitaTildesEspecial(concepto.NombreConcepto)
             Next
 
+
+
+            ''---------------------------------------------------------TIMBRADO---------------------------------------------------------
+            Dim cadena = xml.cadenaPrueba(Serie, Folio, Fecha, formaPago, NoCertificado, SubTotal, DescuentoS, Total, listaConceptos, totalIVA, RFCCLiente, NombreCLiente, Credito, Cp, RegFiscal, totalBase)
+            ''Dim sello As String = st.Sellado("C:\Users\darkz\Desktop\pfx\uxa_pfx33.pfx", "12345678a", cadena)
+            Dim sello As String = st.Sellado("\\192.168.1.241\ti\NEducacionContinua\Timbrado\pfx\uxa_pfx33.pfx", "12345678a", cadena)
+            Dim xmlString As String = xml.xmlPrueba(Total, SubTotal, DescuentoS, totalIVA, Fecha, sello, Certificado, NoCertificado, formaPago, Folio, Serie, usoCFDI, listaConceptos, RFCCLiente, NombreCLiente, Credito, Cp, RegFiscal, totalBase)
+            xmlString = xmlString.Replace("utf-16", "UTF-8")
+            Dim xmlTimbrado As String = st.Timbrado(xmlString, Folio)
+            Dim folioFiscal As String = Me.Extrae_Cadena(xmlTimbrado, "UUID=", " FechaTimbrado")
+            folioFiscal = Me.Extrae_Cadena(folioFiscal, "=", "")
+            folioFiscal = folioFiscal.Substring(1, folioFiscal.Length() - 1)
+            If (System.Diagnostics.Debugger.IsAttached) Then
+                File.WriteAllText("C:\Users\Luis\Desktop\wea.xml", xmlTimbrado)
+            End If
+
+
             ''---------------------------------------------------------REGISTRO DE COBRO/S EN BASE DE DATOS---------------------------------------------------------
             For Each concepto As Concepto In listaConceptos
                 If (concepto.Abonado = False) Then
@@ -174,20 +191,6 @@ Public Class CobrosController
                     End If
                 End If
             Next
-
-            ''---------------------------------------------------------TIMBRADO---------------------------------------------------------
-            Dim cadena = xml.cadenaPrueba(Serie, Folio, Fecha, formaPago, NoCertificado, SubTotal, DescuentoS, Total, listaConceptos, totalIVA, RFCCLiente, NombreCLiente, Credito, Cp, RegFiscal, totalBase)
-            ''Dim sello As String = st.Sellado("C:\Users\darkz\Desktop\pfx\uxa_pfx33.pfx", "12345678a", cadena)
-            Dim sello As String = st.Sellado("\\192.168.1.241\ti\NEducacionContinua\Timbrado\pfx\uxa_pfx33.pfx", "12345678a", cadena)
-            Dim xmlString As String = xml.xmlPrueba(Total, SubTotal, DescuentoS, totalIVA, Fecha, sello, Certificado, NoCertificado, formaPago, Folio, Serie, usoCFDI, listaConceptos, RFCCLiente, NombreCLiente, Credito, Cp, RegFiscal, totalBase)
-            xmlString = xmlString.Replace("utf-16", "UTF-8")
-            Dim xmlTimbrado As String = st.Timbrado(xmlString, Folio)
-            Dim folioFiscal As String = Me.Extrae_Cadena(xmlTimbrado, "UUID=", " FechaTimbrado")
-            folioFiscal = Me.Extrae_Cadena(folioFiscal, "=", "")
-            folioFiscal = folioFiscal.Substring(1, folioFiscal.Length() - 1)
-            If (System.Diagnostics.Debugger.IsAttached) Then
-                File.WriteAllText("C:\Users\Luis\Desktop\wea.xml", xmlTimbrado)
-            End If
 
             ''File.WriteAllText("C:\Users\darkz\Desktop\wea.xml", xmlTimbrado)
 
@@ -544,25 +547,28 @@ Public Class CobrosController
             listaConceptosFinal.Add(concepto)
         Next
 
-        If (listaConceptosAbonos.Count > 0) Then
-            For Each concepto As Concepto In listaConceptosAbonos
-                Dim montoDespues As Decimal
-                Dim IDClavePago As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatClavesPagos WHERE Clave = '{concepto.claveConcepto}'")
-                Dim tieneAbono As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_Abonos WHERE ID_ClavePago = {IDClavePago} AND IDPago = {concepto.IDConcepto} ORDER BY ID DESC")
-                If (tieneAbono > 0) Then
-                    montoAnterior = db.exectSQLQueryScalar($"SELECT Cantidad_Restante FROM ing_Abonos WHERE ID = {tieneAbono}")
-                    montoDespues = montoAnterior - montoRestante
-                    concepto.Abonado = True
-                Else
-                    montoDespues = montoAnterior - montoRestante
-                    concepto.Abonado = True
-                End If
-                ''listaConceptos(0).NombreConcepto = $"1{concepto.NombreConcepto}"
-                db.execSQLQueryWithoutParams($"INSERT INTO ing_Abonos(Folio, Clave_Cliente, Cantidad_Anterior, Cantidad_Abonada, Cantidad_Restante, IDPago, ID_ClavePago, FechaAbono, Activo) VALUES ('WEA', '{Matricula}', {montoAnterior}, {montoRestante}, {montoDespues}, {concepto.IDConcepto}, {IDClavePago}, GETDATE(), 1)")
-                listaConceptosFinal.Add(concepto)
-            Next
-            MessageBox.Show("Abono registrado correctamente")
-        End If
+        ObjectBagService.setItem("ListaAbonos", listaConceptosAbonos)
+        ObjectBagService.setItem("MontoAnterior", montoAnterior)
+        ObjectBagService.setItem("MontoRestante", montoRestante)
+        'If (listaConceptosAbonos.Count > 0) Then
+        '    For Each concepto As Concepto In listaConceptosAbonos
+        '        Dim montoDespues As Decimal
+        '        Dim IDClavePago As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatClavesPagos WHERE Clave = '{concepto.claveConcepto}'")
+        '        Dim tieneAbono As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_Abonos WHERE ID_ClavePago = {IDClavePago} AND IDPago = {concepto.IDConcepto} ORDER BY ID DESC")
+        '        If (tieneAbono > 0) Then
+        '            montoAnterior = db.exectSQLQueryScalar($"SELECT Cantidad_Restante FROM ing_Abonos WHERE ID = {tieneAbono}")
+        '            montoDespues = montoAnterior - montoRestante
+        '            concepto.Abonado = True
+        '        Else
+        '            montoDespues = montoAnterior - montoRestante
+        '            concepto.Abonado = True
+        '        End If
+        '        'listaConceptos(0).NombreConcepto = $"1{concepto.NombreConcepto}"
+        '        db.execSQLQueryWithoutParams($"INSERT INTO ing_Abonos(Folio, Clave_Cliente, Cantidad_Anterior, Cantidad_Abonada, Cantidad_Restante, IDPago, ID_ClavePago, FechaAbono, Activo) VALUES ('WEA', '{Matricula}', {montoAnterior}, {montoRestante}, {montoDespues}, {concepto.IDConcepto}, {IDClavePago}, GETDATE(), 1)")
+        '        listaConceptosFinal.Add(concepto)
+        '    Next
+        '    MessageBox.Show("Abono registrado correctamente")
+        'End If
         Return listaConceptosFinal
         Return listaConceptosFinal
     End Function
