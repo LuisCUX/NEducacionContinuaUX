@@ -35,7 +35,7 @@ Public Class MainCobrosDiferidosEDC
             Me.Reiniciar()
             Exit Sub
         ElseIf (tipoMatricula = "EX") Then
-            va.buscarMatriculaEX(Matricula, panelDatos, panelCobros, lblNombretxt, lblEmailtxt, lblC, lblT, lblRFCtxt)
+            va.buscarMatriculaEX(Matricula, panelDatos, panelCobros, lblNombretxt, lblEmailtxt, lblC, lblT, lblRFCtxt, lblCP, lblRegFiscal, lblCFDItxt)
         Else
             MessageBox.Show("Ingrese una matricula externa")
             txtMatricula.Clear()

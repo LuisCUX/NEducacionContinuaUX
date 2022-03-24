@@ -9,6 +9,8 @@
     Private Sub CancelacionFacturasEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         cbTipoCancelacion.Items.Add("Cancelación del día")
         cbTipoCancelacion.Items.Add("Cancelación de otro día")
+        Dim tableObservacion As DataTable = db.getDataTableFromSQL($"SELECT ID, Observacion FROM ing_CatObservacionesCancelacion WHERE Activo = 1 AND ID_TipoOtraObservacion = 1")
+        ComboboxService.llenarCombobox(cbObservacionCancelaciones, tableObservacion, "iD", "Observacion")
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
@@ -80,7 +82,7 @@
         Try
             db.startTransaction()
             Dim tableConceptos As DataTable = db.getDataTableFromSQL($"SELECT ID, Clave_Concepto, IDConcepto FROM ing_xmlTimbradosConceptos WHERE XMLID = {IDFolio}")
-            db.execSQLQueryWithoutParams($"INSERT INTO Ing_Cancelaciones(Folio, Matricula, TipoFactura, IDObservacion, FechaCancelacion, TipoCancelacion, Usuario, Activo) VALUES ('{Folio}', '{Matricula}', '{Tipo_Pago}', 0, GETDATE(), {cbTipoCancelacion.SelectedIndex}, '{User.getUsername}', 1)")
+            db.execSQLQueryWithoutParams($"INSERT INTO Ing_Cancelaciones(Folio, Matricula, TipoFactura, IDObservacion, FechaCancelacion, TipoCancelacion, Usuario, Activo) VALUES ('{Folio}', '{Matricula}', '{Tipo_Pago}', {cbObservacionCancelaciones.SelectedValue}, GETDATE(), {cbTipoCancelacion.SelectedIndex}, '{User.getUsername}', 1)")
 
             Dim query As String
             If (cbTipoCancelacion.SelectedIndex = 0) Then

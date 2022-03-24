@@ -61,7 +61,6 @@
         Catch ex As Exception
 
         End Try
-
     End Sub
 
     Private Sub txtImportePagos_TextChanged(sender As Object, e As EventArgs) Handles txtImportePagos.TextChanged
@@ -1057,9 +1056,10 @@
     End Sub
 
     Sub Reiniciar()
-        Me.Controls.Clear()
-        InitializeComponent()
-        PlanesEDC_Load(Me, Nothing)
+        Dim form1 As Form = New PlanesEDC
+        form1.MdiParent = PrincipalView
+        form1.Show()
+        Me.Close()
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
@@ -1158,8 +1158,6 @@
                         Orden = Orden + 1
                     End If
 
-
-
                     For x = 0 To cbNoPagos.SelectedIndex
                         Dim Clave As String = listacbClaves(x).Text
                         Dim Mes As String = listatxtConcepto(x).Text.ToUpper()
@@ -1208,8 +1206,7 @@
                 End If
                 db.commitTransaction()
                 MessageBox.Show("Plan registrado correctamente")
-                Me.Close()
-                Me.Show()
+                Me.Reiniciar()
             Catch ex As Exception
                 db.rollBackTransaction()
                 MessageBox.Show(ex.Message)

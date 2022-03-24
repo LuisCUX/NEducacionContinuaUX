@@ -86,4 +86,19 @@
         CancelacionFacturasEDC.MdiParent = Me
         CancelacionFacturasEDC.Show()
     End Sub
+
+    Private Sub ObservacionesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ObservacionesToolStripMenuItem.Click
+        ObservacionesEDC.MdiParent = Me
+        ObservacionesEDC.Show()
+    End Sub
+
+    Private Sub NotasDeCreditoToolStripMenuItem_Click(sender As Object, e As EventArgs)
+        NotasDeCreditoEDC.MdiParent = Me
+        NotasDeCreditoEDC.Show()
+    End Sub
+
+    Private Sub NotaDeCreditoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NotaDeCreditoToolStripMenuItem.Click
+        NotasDeCreditoEDC.MdiParent = Me
+        NotasDeCreditoEDC.Show()
+    End Sub
 End Class

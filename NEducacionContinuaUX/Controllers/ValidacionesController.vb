@@ -70,9 +70,9 @@ Public Class ValidacionesController
     End Sub
 
     ''----------------------------------------------------------------------------------------------------------------------------------------
-    ''-------------------------------------------------BUSCA MATRICULA MATRICULA EXTERNA------------------------------------------------------
+    ''-------------------------------------------------------BUSCA MATRICULA EXTERNA----------------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
-    Sub buscarMatriculaEX(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As Label, txtEmail As Label, txtCarrera As Label, txtTurno As Label, txtRFC As Label)
+    Sub buscarMatriculaEX(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As Label, txtEmail As Label, txtCarrera As Label, txtTurno As Label, txtRFC As Label, lblCP As Label, lblRegFiscal As Label, lblUsoCFDI As Label)
         Dim exists As Integer = db.exectSQLQueryScalar($"SELECT id_clave FROM portal_clave WHERE clave_cliente = '{Matricula}'")
 
         If (exists < 1) Then
@@ -81,7 +81,7 @@ Public Class ValidacionesController
             Exit Sub
         End If
 
-        Me.llenarPanelDatosEX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno, txtRFC)
+        Me.llenarPanelDatosEX(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno, txtRFC, lblCP, lblRegFiscal, lblUsoCFDI)
     End Sub
 
 
@@ -89,23 +89,27 @@ Public Class ValidacionesController
     ''----------------------------------------------------------------------------------------------------------------------------------------
     ''-----------------------------------------------------LLENA PANEL DE DATOS EXTERNA-------------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
-    Sub llenarPanelDatosEX(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As Label, txtEmail As Label, txtCarrera As Label, txtTurno As Label, txtRFC As Label)
-        Dim tableDatos As DataTable = db.getDataTableFromSQL($"SELECT UPPER(C.nombre + ' ' + EX.paterno + ' ' + EX.materno)As Nombre, C.correo FROM portal_cliente AS C 
-                                                               INNER JOIN portal_registroExterno AS EX ON C.id_cliente = EX.id_cliente
-                                                               WHERE EX.clave_cliente = '{Matricula}'")
+    Sub llenarPanelDatosEX(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As Label, txtEmail As Label, txtCarrera As Label, txtTurno As Label, txtRFC As Label, lblCP As Label, lblRegFiscal As Label, lblUsoCFDI As Label)
+        Dim tableDatos As DataTable = db.getDataTableFromSQL($"SELECT UPPER(C.nombre + ' ' + E.paterno + ' ' + E.materno)As Nombre, RE.correo, RFC.rfc, REG.ID_Contador, CF.clave_usoCFDI, RE.cp FROM portal_reRFC AS RE
+                                                               INNER JOIN portal_registroExterno AS E ON E.id_registro = RE.id_registro
+                                                               INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
+                                                               INNER JOIN ing_res_usoCFDI_regimenFiscal AS RF ON RF.id_res_usoCFDI_regimenFiscal = RE.id_res_cfdi_regimen
+                                                               INNER JOIN ing_cat_usoCFDI AS CF ON CF.clave_usoCFDI = RF.clave_usoCFDI
+                                                               INNER JOIN ing_Cat_RegFis AS REG ON REG.ID_Contador = RF.clave_regimeFiscal
+                                                               INNER JOIN portal_catRFC AS RFC ON RFC.id_rfc = RE.id_rfc
+                                                               WHERE E.clave_cliente = '{Matricula}'")
         For Each item As DataRow In tableDatos.Rows
             Dim nombre As String = item("Nombre")
             nombre = Regex.Replace(nombre, " {2,}", " ")
             txtNombre.Text = nombre
             txtEmail.Text = item("correo")
+            txtRFC.Text = item("rfc")
+            lblCP.Text = item("cp")
+            lblRegFiscal.Text = item("ID_Contador")
+            lblUsoCFDI.Text = item("clave_usoCFDI")
         Next
         txtCarrera.Text = ""
         txtTurno.Text = ""
-
-        txtRFC.Text = db.exectSQLQueryScalar($"SELECT rfc FROM portal_catRFC AS R
-                                               INNER JOIN portal_reRFC AS RE ON RE.id_rfc = R.id_rfc
-                                               INNER JOIN portal_registroExterno AS EX ON EX.id_registro = RE.id_registro
-                                               WHERE EX.clave_cliente = '{Matricula}'")
 
         panelDatos.Visible = True
         panelCobros.Visible = True
@@ -114,7 +118,7 @@ Public Class ValidacionesController
     ''----------------------------------------------------------------------------------------------------------------------------------------
     ''-------------------------------------------------BUSCA MATRICULA MATRICULA CONGRESO-----------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
-    Sub buscarMatriculaEC(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As Label, txtEmail As Label, txtCarrera As Label, txtTurno As Label, txtRFC As Label)
+    Sub buscarMatriculaEC(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As Label, txtEmail As Label, txtCarrera As Label, txtTurno As Label, txtRFC As Label, lblCP As Label, lblRegFiscal As Label, lblUsoCFDI As Label)
         Dim exists As Integer = db.exectSQLQueryScalar($"SELECT id_clave FROM portal_clave WHERE clave_cliente = '{Matricula}'")
 
         If (exists < 1) Then
@@ -123,7 +127,7 @@ Public Class ValidacionesController
             Exit Sub
         End If
 
-        Me.llenarPanelDatosEC(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno, txtRFC)
+        Me.llenarPanelDatosEC(Matricula, panelDatos, panelCobros, txtNombre, txtEmail, txtCarrera, txtTurno, txtRFC, lblCP, lblRegFiscal, lblUsoCFDI)
     End Sub
 
 
@@ -131,25 +135,27 @@ Public Class ValidacionesController
     ''----------------------------------------------------------------------------------------------------------------------------------------
     ''-----------------------------------------------------LLENA PANEL DE DATOS CONGRESO------------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
-    Sub llenarPanelDatosEC(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As Label, txtEmail As Label, txtCarrera As Label, txtTurno As Label, txtRFC As Label)
-        Dim tableDatos As DataTable = db.getDataTableFromSQL($"SELECT UPPER(C.nombre + ' ' + R.apellido_paterno + ' ' + R.apellido_materno) AS Nombre, C.correo FROM portal_cliente AS C 
-                                                               INNER JOIN portal_registroCongreso AS R ON R.id_cliente = C.id_cliente
-                                                               WHERE R.clave_cliente = '{Matricula}'")
+    Sub llenarPanelDatosEC(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As Label, txtEmail As Label, txtCarrera As Label, txtTurno As Label, txtRFC As Label, lblCP As Label, lblRegFiscal As Label, lblUsoCFDI As Label)
+        Dim tableDatos As DataTable = db.getDataTableFromSQL($"SELECT UPPER(C.nombre + ' ' + E.apellido_paterno + ' ' + E.apellido_paterno)As Nombre, RE.correo, RFC.rfc, REG.ID_Contador, CF.clave_usoCFDI, RE.cp FROM portal_rcRFC AS RE
+                                                               INNER JOIN portal_registroCongreso AS E ON E.id_registro = RE.id_registro
+                                                               INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
+                                                               INNER JOIN ing_res_usoCFDI_regimenFiscal AS RF ON RF.id_res_usoCFDI_regimenFiscal = RE.id_res_cfdi_regimen
+                                                               INNER JOIN ing_cat_usoCFDI AS CF ON CF.clave_usoCFDI = RF.clave_usoCFDI
+                                                               INNER JOIN ing_Cat_RegFis AS REG ON REG.ID_Contador = RF.clave_regimeFiscal
+                                                               INNER JOIN portal_catRFC AS RFC ON RFC.id_rfc = RE.id_rfc
+                                                               WHERE E.clave_cliente = '{Matricula}'")
         For Each item As DataRow In tableDatos.Rows
             Dim nombre As String = item("Nombre")
             nombre = Regex.Replace(nombre, " {2,}", " ")
             txtNombre.Text = nombre
             txtEmail.Text = item("correo")
+            txtRFC.Text = item("rfc")
+            lblCP.Text = item("cp")
+            lblRegFiscal.Text = item("ID_Contador")
+            lblUsoCFDI.Text = item("clave_usoCFDI")
         Next
         txtCarrera.Text = ""
         txtTurno.Text = ""
-
-        txtRFC.Text = db.exectSQLQueryScalar($"SELECT RFC.rfc FROM portal_cliente AS C 
-                                               INNER JOIN portal_registroCongreso AS RC ON RC.id_cliente = C.id_cliente
-                                               INNER JOIN portal_rcRFC AS X ON X.id_registro = RC.id_registro
-                                               INNER JOIN portal_catRFC AS RFC ON RFC.id_rfc = X.id_rfc
-                                               WHERE RC.clave_cliente = '{Matricula}'")
-
         panelDatos.Visible = True
         panelCobros.Visible = True
     End Sub
