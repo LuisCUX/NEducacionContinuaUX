@@ -55,6 +55,8 @@
             Else
                 txtNombrePlan.Clear()
                 txtNombrePlan.Enabled = True
+                txtPublicoPlan.Clear()
+                txtPublicoPlan.Enabled = True
                 edicion = False
                 Me.resetControls()
             End If
@@ -1271,5 +1273,9 @@
 
     Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
         Me.Reiniciar()
+    End Sub
+
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
+        Me.Close()
     End Sub
 End Class

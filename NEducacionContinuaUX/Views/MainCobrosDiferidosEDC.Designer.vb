@@ -157,9 +157,9 @@ Partial Class MainCobrosDiferidosEDC
         Me.lblMatricula.ForeColor = System.Drawing.SystemColors.Control
         Me.lblMatricula.Location = New System.Drawing.Point(7, 16)
         Me.lblMatricula.Name = "lblMatricula"
-        Me.lblMatricula.Size = New System.Drawing.Size(123, 16)
+        Me.lblMatricula.Size = New System.Drawing.Size(104, 16)
         Me.lblMatricula.TabIndex = 0
-        Me.lblMatricula.Text = "Matrícula a facturar:"
+        Me.lblMatricula.Text = "Clave a facturar:"
         '
         'panelDatos
         '
@@ -403,7 +403,7 @@ Partial Class MainCobrosDiferidosEDC
         '
         Me.btnLimpiar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
         Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnLimpiar.Location = New System.Drawing.Point(1026, 429)
+        Me.btnLimpiar.Location = New System.Drawing.Point(921, 429)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(76, 51)
         Me.btnLimpiar.TabIndex = 76
@@ -603,9 +603,9 @@ Partial Class MainCobrosDiferidosEDC
         Me.lblMatricula2.ForeColor = System.Drawing.SystemColors.Control
         Me.lblMatricula2.Location = New System.Drawing.Point(9, 41)
         Me.lblMatricula2.Name = "lblMatricula2"
-        Me.lblMatricula2.Size = New System.Drawing.Size(65, 16)
+        Me.lblMatricula2.Size = New System.Drawing.Size(46, 16)
         Me.lblMatricula2.TabIndex = 3
-        Me.lblMatricula2.Text = "Matrícula:"
+        Me.lblMatricula2.Text = "Clave:"
         '
         'GridConceptos
         '
@@ -715,7 +715,7 @@ Partial Class MainCobrosDiferidosEDC
         '
         Me.btnCobrar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.cash_register_40px1
         Me.btnCobrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnCobrar.Location = New System.Drawing.Point(921, 429)
+        Me.btnCobrar.Location = New System.Drawing.Point(1026, 430)
         Me.btnCobrar.Name = "btnCobrar"
         Me.btnCobrar.Size = New System.Drawing.Size(76, 50)
         Me.btnCobrar.TabIndex = 18

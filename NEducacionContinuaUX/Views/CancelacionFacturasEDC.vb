@@ -3,7 +3,8 @@
     Dim Folio As String
     Dim Matricula As String
     Dim IDFolio As Integer
-    Dim FechaFactura As Date
+    Dim FechaFacturaStr As String
+    Dim FechaHoy As String
     Dim Tipo_Pago As String
     Dim cf As CancelacionFacturasController = New CancelacionFacturasController
     Private Sub CancelacionFacturasEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -14,6 +15,10 @@
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
+        Dim dia As String
+        Dim mes As String
+        Dim meshoy
+        Dim year As String
         Folio = txtFolio.Text
 
         IDFolio = db.exectSQLQueryScalar($"SELECT ID FROM ing_xmlTimbrados WHERE Folio = '{Folio}' AND CanceladaHoy = 0 AND CanceladaOtroDia = 0")
@@ -24,15 +29,27 @@
         End If
 
         Matricula = db.exectSQLQueryScalar($"SELECT Matricula_Clave FROM ing_xmlTimbrados WHERE Folio = '{Folio}'")
-        FechaFactura = db.exectSQLQueryScalar($"SELECT (CONVERT(VARCHAR(20), CAST((SUBSTRING(Fecha_Pago, 0, 11))AS date), 103) + ' ' + SUBSTRING(Fecha_Pago, 12, LEN(Fecha_Pago))) AS FECHA FROM ing_xmlTimbrados WHERE Folio = '{Folio}'")
+        FechaFacturaStr = db.exectSQLQueryScalar($"SELECT Fecha_Pago FROM ing_xmlTimbrados WHERE Folio = '{Folio}'")
+        year = FechaFacturaStr.Substring(0, 4)
+        mes = FechaFacturaStr.Substring(5, 2)
+        dia = FechaFacturaStr.Substring(8, 2)
+
+        meshoy = Convert.ToInt32(DateTime.Now.Month)
+        If (meshoy < 10) Then
+            meshoy = $"0{meshoy}"
+        End If
+
+        FechaFacturaStr = $"{dia}/{mes}/{year}"
+        FechaHoy = $"{DateTime.Now.Day}/{meshoy}/{DateTime.Now.Year}"
+
         Tipo_Pago = db.exectSQLQueryScalar($"SELECT Tipo_Pago FROM ing_xmlTimbrados WHERE Folio = '{Folio}'")
         lblMatriculatxt.Text = Matricula
-        lblFechaFacturaciontxt.Text = FechaFactura
-        If (cbTipoCancelacion.SelectedIndex = 0 And (FechaFactura.Date <> Date.Today)) Then
+        lblFechaFacturaciontxt.Text = FechaHoy
+        If (cbTipoCancelacion.SelectedIndex = 0 And (FechaFacturaStr <> FechaHoy)) Then
             MessageBox.Show("La factura seleccionada no fue emitida el dia de hoy, elija una factura que haya sido emitida el dia de hoy")
             Me.Reiniciar()
             Exit Sub
-        ElseIf (cbTipoCancelacion.SelectedIndex = 1 And (FechaFactura.Date = Date.Today)) Then
+        ElseIf (cbTipoCancelacion.SelectedIndex = 1 And (FechaFacturaStr = FechaHoy)) Then
             MessageBox.Show("La factura seleccionada fue emitida el dia de hoy, elija una factura que no haya sido emitida el dia de hoy")
             Me.Reiniciar()
             Exit Sub
@@ -101,4 +118,13 @@
             db.rollBackTransaction()
         End Try
     End Sub
+
+
+    Function getFechaDTPicker(dtpicker As DateTimePicker) As String
+        Dim Fecha
+
+        Fecha = $"{dtpicker.Value.Day}/{dtpicker.Value.Month}/{dtpicker.Value.Year}"
+
+        Return Fecha
+    End Function
 End Class

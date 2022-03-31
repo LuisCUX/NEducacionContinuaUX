@@ -29,21 +29,24 @@ Public Class XmlService40
         If (System.Diagnostics.Debugger.IsAttached) Then
             cpemisor = "72000"
         Else
-            cpemisor = ConfigurationSettings.AppSettings.Get("CP")
+            cpemisor = "72000"
+            ''cpemisor = ConfigurationSettings.AppSettings.Get("CP")
         End If
 
         Dim cpreceptor As String
         If (System.Diagnostics.Debugger.IsAttached) Then
             cpreceptor = "72000"
         Else
-            cpreceptor = CP
+            cpreceptor = "72000"
+            ''cpreceptor = CP
         End If
 
         Dim nombreEmisor As String
         If (System.Diagnostics.Debugger.IsAttached) Then
             nombreEmisor = "Compuhipermegared"
         Else
-            nombreEmisor = "EDUCACION CONTINUA"
+            nombreEmisor = "Compuhipermegared"
+            ''nombreEmisor = "EDUCACION CONTINUA"
         End If
 
         Dim bandIVA As Boolean = False
@@ -91,21 +94,24 @@ Public Class XmlService40
         If (System.Diagnostics.Debugger.IsAttached) Then
             cpemisor = "72000"
         Else
-            cpemisor = ConfigurationSettings.AppSettings.Get("CP")
+            cpemisor = "72000"
+            ''cpemisor = ConfigurationSettings.AppSettings.Get("CP")
         End If
 
         Dim cpreceptor As String
         If (System.Diagnostics.Debugger.IsAttached) Then
             cpreceptor = "72000"
         Else
-            cpreceptor = CP
+            cpreceptor = "72000"
+            ''cpreceptor = CP
         End If
 
         Dim nombreEmisor As String
         If (System.Diagnostics.Debugger.IsAttached) Then
             nombreEmisor = "Compuhipermegared"
         Else
-            nombreEmisor = "EDUCACION CONTINUA"
+            nombreEmisor = "Compuhipermegared"
+            ''nombreEmisor = "EDUCACION CONTINUA"
         End If
 
         Dim cadena As String = $"||4.0|{Serie}|{Folio}|{Fecha}|{NoCertificado}|0|XXX|0|P|01|{cpemisor}|{ConfigurationSettings.AppSettings.Get("RFC").ToString()}|{nombreEmisor}|{ConfigurationSettings.AppSettings.Get("RegimenFiscal").ToString()}|{RFC}|{NombreCompleto}|{cpreceptor}|{RegFiscal}|{UsoCFDI}|84111506|1|ACT|Pago|0|0|01|2.0|{Format(CDec(montoAbonado), "#####0.00")}|{FechaAbono}|{FormaPago}|MXN|1|{Format(CDec(montoAbonado), "#####0.00")}|{FolioFiscal}|{SerieOriginal}|{FolioOriginal}|MXN|1|{NumParcialidad}|{Format(CDec(SaldoAnterior), "#####0.00")}|{Format(CDec(montoAbonado), "#####0.00")}|{Format(CDec(saldoRestante), "#####0.00")}|01||"
@@ -130,21 +136,24 @@ Public Class XmlService40
         If (System.Diagnostics.Debugger.IsAttached) Then
             cpemisor = "72000"
         Else
-            cpemisor = ConfigurationSettings.AppSettings.Get("CP")
+            cpemisor = "72000"
+            ''cpemisor = ConfigurationSettings.AppSettings.Get("CP")
         End If
 
         Dim cpreceptor As String
         If (System.Diagnostics.Debugger.IsAttached) Then
             cpreceptor = "72000"
         Else
-            cpreceptor = CP
+            cpreceptor = "72000"
+            ''cpreceptor = CP
         End If
 
         Dim nombreEmisor As String
         If (System.Diagnostics.Debugger.IsAttached) Then
             nombreEmisor = "Compuhipermegared"
         Else
-            nombreEmisor = "EDUCACION CONTINUA"
+            nombreEmisor = "Compuhipermegared"
+            ''nombreEmisor = "EDUCACION CONTINUA"
         End If
 
 
@@ -204,7 +213,8 @@ Public Class XmlService40
                 If (System.Diagnostics.Debugger.IsAttached) Then
                     wr.WriteAttributeString("LugarExpedicion", Nothing, "72000")
                 Else
-                    wr.WriteAttributeString("LugarExpedicion", Nothing, ConfigurationSettings.AppSettings.Get("CP").ToString())
+                    wr.WriteAttributeString("LugarExpedicion", Nothing, "72000")
+                    ''wr.WriteAttributeString("LugarExpedicion", Nothing, ConfigurationSettings.AppSettings.Get("CP").ToString())
                 End If
 
                 wr.WriteAttributeString("Sello", Nothing, Sello)
@@ -215,7 +225,8 @@ Public Class XmlService40
                 If (System.Diagnostics.Debugger.IsAttached) Then
                     wr.WriteAttributeString("Nombre", Nothing, "Compuhipermegared")
                 Else
-                    wr.WriteAttributeString("Nombre", Nothing, ConfigurationSettings.AppSettings.Get("NombreEmpresa").ToString())
+                    wr.WriteAttributeString("Nombre", Nothing, "Compuhipermegared")
+                    ''wr.WriteAttributeString("Nombre", Nothing, ConfigurationSettings.AppSettings.Get("NombreEmpresa").ToString())
                 End If
 
                 wr.WriteAttributeString("RegimenFiscal", Nothing, ConfigurationSettings.AppSettings.Get("RegimenFiscal").ToString())
@@ -226,7 +237,8 @@ Public Class XmlService40
                 If (System.Diagnostics.Debugger.IsAttached) Then
                     wr.WriteAttributeString("DomicilioFiscalReceptor", Nothing, "72000")
                 Else
-                    wr.WriteAttributeString("DomicilioFiscalReceptor", Nothing, Cp)
+                    wr.WriteAttributeString("DomicilioFiscalReceptor", Nothing, "72000")
+                    ''wr.WriteAttributeString("DomicilioFiscalReceptor", Nothing, Cp)
                 End If
 
                 wr.WriteAttributeString("Rfc", Nothing, RFC)
@@ -340,7 +352,8 @@ Public Class XmlService40
                 If (System.Diagnostics.Debugger.IsAttached) Then
                     wr.WriteAttributeString("LugarExpedicion", Nothing, "72000")
                 Else
-                    wr.WriteAttributeString("LugarExpedicion", Nothing, ConfigurationSettings.AppSettings.Get("CP").ToString())
+                    wr.WriteAttributeString("LugarExpedicion", Nothing, "72000")
+                    ''wr.WriteAttributeString("LugarExpedicion", Nothing, ConfigurationSettings.AppSettings.Get("CP").ToString())
                 End If
                 wr.WriteAttributeString("Folio", Nothing, Folio)
                 wr.WriteAttributeString("Serie", Nothing, Serie)
@@ -352,7 +365,8 @@ Public Class XmlService40
                 If (System.Diagnostics.Debugger.IsAttached) Then
                     wr.WriteAttributeString("Nombre", Nothing, "Compuhipermegared")
                 Else
-                    wr.WriteAttributeString("Nombre", Nothing, ConfigurationSettings.AppSettings.Get("NombreEmpresa").ToString())
+                    wr.WriteAttributeString("Nombre", Nothing, "Compuhipermegared")
+                    ''wr.WriteAttributeString("Nombre", Nothing, ConfigurationSettings.AppSettings.Get("NombreEmpresa").ToString())
                 End If
 
                 wr.WriteEndElement() ''NODO EMISOR END
@@ -361,7 +375,8 @@ Public Class XmlService40
                 If (System.Diagnostics.Debugger.IsAttached) Then
                     wr.WriteAttributeString("DomicilioFiscalReceptor", Nothing, "72000")
                 Else
-                    wr.WriteAttributeString("DomicilioFiscalReceptor", Nothing, Cp)
+                    wr.WriteAttributeString("DomicilioFiscalReceptor", Nothing, "72000")
+                    ''wr.WriteAttributeString("DomicilioFiscalReceptor", Nothing, Cp)
                 End If
                 wr.WriteAttributeString("Rfc", Nothing, RFC)
                 wr.WriteAttributeString("Nombre", Nothing, NombreCompleto)
@@ -448,7 +463,8 @@ Public Class XmlService40
                 If (System.Diagnostics.Debugger.IsAttached) Then
                     wr.WriteAttributeString("LugarExpedicion", Nothing, "72000")
                 Else
-                    wr.WriteAttributeString("LugarExpedicion", Nothing, ConfigurationSettings.AppSettings.Get("CP").ToString())
+                    wr.WriteAttributeString("LugarExpedicion", Nothing, "72000")
+                    ''wr.WriteAttributeString("LugarExpedicion", Nothing, ConfigurationSettings.AppSettings.Get("CP").ToString())
                 End If
                 wr.WriteAttributeString("MetodoPago", Nothing, "PUE")
                 wr.WriteAttributeString("FormaPago", Nothing, "99")
@@ -473,7 +489,8 @@ Public Class XmlService40
                 If (System.Diagnostics.Debugger.IsAttached) Then
                     wr.WriteAttributeString("Nombre", Nothing, "Compuhipermegared")
                 Else
-                    wr.WriteAttributeString("Nombre", Nothing, ConfigurationSettings.AppSettings.Get("NombreEmpresa").ToString())
+                    wr.WriteAttributeString("Nombre", Nothing, "Compuhipermegared")
+                    ''wr.WriteAttributeString("Nombre", Nothing, ConfigurationSettings.AppSettings.Get("NombreEmpresa").ToString())
                 End If
 
                 wr.WriteEndElement() ''NODO EMISOR END
@@ -482,7 +499,8 @@ Public Class XmlService40
                 If (System.Diagnostics.Debugger.IsAttached) Then
                     wr.WriteAttributeString("DomicilioFiscalReceptor", Nothing, "72000")
                 Else
-                    wr.WriteAttributeString("DomicilioFiscalReceptor", Nothing, Cp)
+                    wr.WriteAttributeString("DomicilioFiscalReceptor", Nothing, "72000")
+                    ''wr.WriteAttributeString("DomicilioFiscalReceptor", Nothing, Cp)
                 End If
                 wr.WriteAttributeString("Rfc", Nothing, RFC)
                 wr.WriteAttributeString("Nombre", Nothing, NombreCompleto)

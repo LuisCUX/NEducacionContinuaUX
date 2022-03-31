@@ -119,9 +119,9 @@ Partial Class MainAsignacionPagosOpcionalesEDC
         Me.lblMatricula.ForeColor = System.Drawing.SystemColors.Control
         Me.lblMatricula.Location = New System.Drawing.Point(7, 18)
         Me.lblMatricula.Name = "lblMatricula"
-        Me.lblMatricula.Size = New System.Drawing.Size(72, 18)
+        Me.lblMatricula.Size = New System.Drawing.Size(49, 18)
         Me.lblMatricula.TabIndex = 15
-        Me.lblMatricula.Text = "Matrícula:"
+        Me.lblMatricula.Text = "Clave:"
         '
         'panelDatos
         '

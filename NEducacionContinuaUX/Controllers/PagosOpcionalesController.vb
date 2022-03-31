@@ -19,7 +19,7 @@
     End Sub
 
     Sub llenarVentanaPago(ID As Integer, cbConceptoPara As ComboBox, cbNivel As ComboBox, cbTurno As ComboBox, cbTipoPago As ComboBox, cbTipoConcepto As ComboBox, cbDivision As ComboBox, cbGrupo As ComboBox, cbClase As ComboBox, cbProdServ As ComboBox, cbUnidad As ComboBox,
-                           lblNivel As Label, lblTurno As Label, txtNombre As TextBox, txtDesc As TextBox, txtCostoUnitario As TextBox, txtCostoIVA As TextBox, chbExento As CheckBox, chbAbsorbe As CheckBox, chbAgrega As CheckBox)
+                           lblNivel As Label, lblTurno As Label, txtNombre As TextBox, txtDesc As TextBox, txtCostoUnitario As TextBox, txtCostoIVA As TextBox, chbExento As CheckBox, chbAbsorbe As CheckBox, chbAgrega As CheckBox, txtClavePS As TextBox)
 
         Dim cveProdServ As String
         Dim tableUnidad As DataTable = db.getDataTableFromSQL("SELECT id_claveProd, nombre FROM ing_cat_unidad")
@@ -42,24 +42,8 @@
             cveProdServ = item("claveProductoServicio")
         Next
 
-
-        Dim prodservlike = cveProdServ.Substring(0, cveProdServ.Length() - 2) + "%"
-        Dim tableSAT As DataTable = db.getDataTableFromSQL($"SELECT tipo, cve_division, cve_grupo, cve_clase FROM ing_ClasificacionClavesSAT WHERE cve_clase LIKE '{prodservlike}'")
-        For Each item As DataRow In tableSAT.Rows
-            cbTipoConcepto.Text = item("tipo")
-            ModalRegistroPagosOpcionalesEDC.commitChangeTipo()
-
-            cbDivision.SelectedValue = item("cve_division")
-            ModalRegistroPagosOpcionalesEDC.commitChangecbDivision()
-
-            cbGrupo.SelectedValue = item("cve_grupo")
-            ModalRegistroPagosOpcionalesEDC.commitChangecbGrupo()
-
-            cbClase.SelectedValue = item("cve_clase")
-            ModalRegistroPagosOpcionalesEDC.commitChangecbClase()
-        Next
-
-        cbProdServ.SelectedValue = cveProdServ
+        txtClavePS.Text = cveProdServ
+        Me.BuscarClavePS(cveProdServ, cbTipoConcepto, cbDivision, cbGrupo, cbClase, cbProdServ)
 
         Dim tableAsignacion As DataTable = db.getDataTableFromSQL($"SELECT valorUnitario, Para, ID_res_NT FROM ing_resPagoOpcionalAsignacion WHERE ID = {ID}")
         For Each item As DataRow In tableAsignacion.Rows
@@ -102,8 +86,7 @@
             db.execSQLQueryWithoutParams($"INSERT INTO ing_resPagoOpcionalAsignacion(ID_PagoOpcional, valorUnitario, Para, ID_res_NT, Activo) VALUES ({ID_PagoOpcional}, {valorUnitario}, '{para}', {ID_ResNT}, 1)")
             db.commitTransaction()
             MessageBox.Show("Pago opcional registrado correctamente")
-            MainRegistroPagosOpcionalesEDC.reloadGrid()
-            ModalRegistroPagosOpcionalesEDC.Close()
+            ModalRegistroPagosOpcionalesEDC.Reiniciar()
         Catch ex As Exception
             db.rollBackTransaction()
             MessageBox.Show($"Error: {ex.Message}")

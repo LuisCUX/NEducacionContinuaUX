@@ -84,6 +84,7 @@ Partial Class RegistroExternosEDC
         Me.lblMatricula = New System.Windows.Forms.Label()
         Me.lbldatosPersonales = New System.Windows.Forms.Label()
         Me.pageEdicionExternos = New System.Windows.Forms.TabPage()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.cbExterno = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.chbDatosFiscalesEdit = New System.Windows.Forms.CheckBox()
@@ -139,6 +140,63 @@ Partial Class RegistroExternosEDC
         Me.btnSalirEd = New System.Windows.Forms.Button()
         Me.btnGuardarEdit = New System.Windows.Forms.Button()
         Me.btnBuscarEd = New System.Windows.Forms.Button()
+        Me.tabModDCC = New System.Windows.Forms.TabPage()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.txtClaveEC = New System.Windows.Forms.TextBox()
+        Me.lblClaveEC = New System.Windows.Forms.Label()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.txtTelefonoFEC = New System.Windows.Forms.TextBox()
+        Me.txtCiudadFEC = New System.Windows.Forms.TextBox()
+        Me.txtCPFEC = New System.Windows.Forms.TextBox()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.txtCorreoFEC = New System.Windows.Forms.TextBox()
+        Me.cbMunicipioFEC = New System.Windows.Forms.ComboBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.cbEstadoFEC = New System.Windows.Forms.ComboBox()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.txtRazonSocialFEC = New System.Windows.Forms.TextBox()
+        Me.txtColoniaFEC = New System.Windows.Forms.TextBox()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.txtDireccionFEC = New System.Windows.Forms.TextBox()
+        Me.txtRFCFEC = New System.Windows.Forms.TextBox()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.Label26 = New System.Windows.Forms.Label()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label27 = New System.Windows.Forms.Label()
+        Me.Label28 = New System.Windows.Forms.Label()
+        Me.cbMunicipioEC = New System.Windows.Forms.ComboBox()
+        Me.cbEstadoEC = New System.Windows.Forms.ComboBox()
+        Me.txtTelefonoEC = New System.Windows.Forms.TextBox()
+        Me.txtCPEC = New System.Windows.Forms.TextBox()
+        Me.txtCorreoEC = New System.Windows.Forms.TextBox()
+        Me.txtColoniaEC = New System.Windows.Forms.TextBox()
+        Me.txtDireccionEC = New System.Windows.Forms.TextBox()
+        Me.txtNombreEC = New System.Windows.Forms.TextBox()
+        Me.txtApMaternoEC = New System.Windows.Forms.TextBox()
+        Me.txtApPaternoEC = New System.Windows.Forms.TextBox()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.Label31 = New System.Windows.Forms.Label()
+        Me.Label32 = New System.Windows.Forms.Label()
+        Me.Label33 = New System.Windows.Forms.Label()
+        Me.Label34 = New System.Windows.Forms.Label()
+        Me.Label35 = New System.Windows.Forms.Label()
+        Me.Label36 = New System.Windows.Forms.Label()
+        Me.Label37 = New System.Windows.Forms.Label()
+        Me.Label38 = New System.Windows.Forms.Label()
+        Me.Label39 = New System.Windows.Forms.Label()
+        Me.Label40 = New System.Windows.Forms.Label()
+        Me.btnBuscarEC = New System.Windows.Forms.Button()
         Me.tabExternos.SuspendLayout()
         Me.tabRegistroExternos.SuspendLayout()
         Me.panelDatosFiscales.SuspendLayout()
@@ -146,6 +204,9 @@ Partial Class RegistroExternosEDC
         Me.pageEdicionExternos.SuspendLayout()
         Me.panelDatosFiscalesEdit.SuspendLayout()
         Me.panelDatosPersonalesEdit.SuspendLayout()
+        Me.tabModDCC.SuspendLayout()
+        Me.Panel1.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblNombreVentana
@@ -164,6 +225,7 @@ Partial Class RegistroExternosEDC
         '
         Me.tabExternos.Controls.Add(Me.tabRegistroExternos)
         Me.tabExternos.Controls.Add(Me.pageEdicionExternos)
+        Me.tabExternos.Controls.Add(Me.tabModDCC)
         Me.tabExternos.Location = New System.Drawing.Point(5, 72)
         Me.tabExternos.Name = "tabExternos"
         Me.tabExternos.SelectedIndex = 0
@@ -184,13 +246,13 @@ Partial Class RegistroExternosEDC
         Me.tabRegistroExternos.Padding = New System.Windows.Forms.Padding(3)
         Me.tabRegistroExternos.Size = New System.Drawing.Size(1022, 544)
         Me.tabRegistroExternos.TabIndex = 0
-        Me.tabRegistroExternos.Text = "Registro de externos"
+        Me.tabRegistroExternos.Text = "Alta de externos"
         '
         'btnLimpiar
         '
         Me.btnLimpiar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
         Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnLimpiar.Location = New System.Drawing.Point(492, 481)
+        Me.btnLimpiar.Location = New System.Drawing.Point(301, 481)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(75, 55)
         Me.btnLimpiar.TabIndex = 68
@@ -210,7 +272,7 @@ Partial Class RegistroExternosEDC
         '
         Me.btnGuardarN.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
         Me.btnGuardarN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnGuardarN.Location = New System.Drawing.Point(301, 481)
+        Me.btnGuardarN.Location = New System.Drawing.Point(492, 481)
         Me.btnGuardarN.Name = "btnGuardarN"
         Me.btnGuardarN.Size = New System.Drawing.Size(75, 55)
         Me.btnGuardarN.TabIndex = 24
@@ -541,9 +603,9 @@ Partial Class RegistroExternosEDC
         Me.lblMatriculaEX.ForeColor = System.Drawing.SystemColors.Control
         Me.lblMatriculaEX.Location = New System.Drawing.Point(622, 191)
         Me.lblMatriculaEX.Name = "lblMatriculaEX"
-        Me.lblMatriculaEX.Size = New System.Drawing.Size(115, 16)
+        Me.lblMatriculaEX.Size = New System.Drawing.Size(96, 16)
         Me.lblMatriculaEX.TabIndex = 68
-        Me.lblMatriculaEX.Text = "Matricula externa: "
+        Me.lblMatriculaEX.Text = "Clave externa: "
         '
         'Label8
         '
@@ -804,6 +866,7 @@ Partial Class RegistroExternosEDC
         'pageEdicionExternos
         '
         Me.pageEdicionExternos.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.pageEdicionExternos.Controls.Add(Me.Button4)
         Me.pageEdicionExternos.Controls.Add(Me.cbExterno)
         Me.pageEdicionExternos.Controls.Add(Me.Label9)
         Me.pageEdicionExternos.Controls.Add(Me.chbDatosFiscalesEdit)
@@ -819,7 +882,17 @@ Partial Class RegistroExternosEDC
         Me.pageEdicionExternos.Padding = New System.Windows.Forms.Padding(3)
         Me.pageEdicionExternos.Size = New System.Drawing.Size(1022, 544)
         Me.pageEdicionExternos.TabIndex = 1
-        Me.pageEdicionExternos.Text = "Edicion de externos"
+        Me.pageEdicionExternos.Text = "Modificación de externos"
+        '
+        'Button4
+        '
+        Me.Button4.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
+        Me.Button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.Button4.Location = New System.Drawing.Point(301, 481)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(75, 55)
+        Me.Button4.TabIndex = 73
+        Me.Button4.UseVisualStyleBackColor = True
         '
         'cbExterno
         '
@@ -866,11 +939,11 @@ Partial Class RegistroExternosEDC
         Me.lblMatriculaEd.AutoSize = True
         Me.lblMatriculaEd.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblMatriculaEd.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblMatriculaEd.Location = New System.Drawing.Point(9, 17)
+        Me.lblMatriculaEd.Location = New System.Drawing.Point(8, 17)
         Me.lblMatriculaEd.Name = "lblMatriculaEd"
-        Me.lblMatriculaEd.Size = New System.Drawing.Size(72, 18)
+        Me.lblMatriculaEd.Size = New System.Drawing.Size(53, 18)
         Me.lblMatriculaEd.TabIndex = 46
-        Me.lblMatriculaEd.Text = "Matrícula:"
+        Me.lblMatriculaEd.Text = "Clave :"
         '
         'panelDatosFiscalesEdit
         '
@@ -1385,9 +1458,9 @@ Partial Class RegistroExternosEDC
         '
         'btnSalirEd
         '
-        Me.btnSalirEd.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_32px
+        Me.btnSalirEd.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
         Me.btnSalirEd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnSalirEd.Location = New System.Drawing.Point(648, 483)
+        Me.btnSalirEd.Location = New System.Drawing.Point(683, 481)
         Me.btnSalirEd.Name = "btnSalirEd"
         Me.btnSalirEd.Size = New System.Drawing.Size(75, 55)
         Me.btnSalirEd.TabIndex = 70
@@ -1396,9 +1469,9 @@ Partial Class RegistroExternosEDC
         '
         'btnGuardarEdit
         '
-        Me.btnGuardarEdit.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.descargar
+        Me.btnGuardarEdit.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
         Me.btnGuardarEdit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnGuardarEdit.Location = New System.Drawing.Point(306, 483)
+        Me.btnGuardarEdit.Location = New System.Drawing.Point(492, 481)
         Me.btnGuardarEdit.Name = "btnGuardarEdit"
         Me.btnGuardarEdit.Size = New System.Drawing.Size(75, 55)
         Me.btnGuardarEdit.TabIndex = 68
@@ -1407,12 +1480,635 @@ Partial Class RegistroExternosEDC
         '
         'btnBuscarEd
         '
-        Me.btnBuscarEd.Image = Global.NEducacionContinuaUX.My.Resources.Resources.search_32px
+        Me.btnBuscarEd.Image = Global.NEducacionContinuaUX.My.Resources.Resources.search_30px
         Me.btnBuscarEd.Location = New System.Drawing.Point(250, 11)
         Me.btnBuscarEd.Name = "btnBuscarEd"
         Me.btnBuscarEd.Size = New System.Drawing.Size(40, 33)
         Me.btnBuscarEd.TabIndex = 31
         Me.btnBuscarEd.UseVisualStyleBackColor = True
+        '
+        'tabModDCC
+        '
+        Me.tabModDCC.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.tabModDCC.Controls.Add(Me.Button1)
+        Me.tabModDCC.Controls.Add(Me.Button2)
+        Me.tabModDCC.Controls.Add(Me.Button5)
+        Me.tabModDCC.Controls.Add(Me.ComboBox1)
+        Me.tabModDCC.Controls.Add(Me.Label10)
+        Me.tabModDCC.Controls.Add(Me.CheckBox1)
+        Me.tabModDCC.Controls.Add(Me.txtClaveEC)
+        Me.tabModDCC.Controls.Add(Me.lblClaveEC)
+        Me.tabModDCC.Controls.Add(Me.Panel1)
+        Me.tabModDCC.Controls.Add(Me.Panel2)
+        Me.tabModDCC.Controls.Add(Me.btnBuscarEC)
+        Me.tabModDCC.Location = New System.Drawing.Point(4, 22)
+        Me.tabModDCC.Name = "tabModDCC"
+        Me.tabModDCC.Size = New System.Drawing.Size(1022, 544)
+        Me.tabModDCC.TabIndex = 2
+        Me.tabModDCC.Text = "Modificación Diplomado/Curso/Congreso"
+        '
+        'Button1
+        '
+        Me.Button1.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
+        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.Button1.Location = New System.Drawing.Point(301, 481)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 55)
+        Me.Button1.TabIndex = 85
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
+        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.Button2.Location = New System.Drawing.Point(683, 481)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 55)
+        Me.Button2.TabIndex = 84
+        Me.Button2.UseVisualStyleBackColor = True
+        Me.Button2.Visible = False
+        '
+        'Button5
+        '
+        Me.Button5.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
+        Me.Button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.Button5.Location = New System.Drawing.Point(492, 481)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(75, 55)
+        Me.Button5.TabIndex = 83
+        Me.Button5.UseVisualStyleBackColor = True
+        Me.Button5.Visible = False
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(459, 18)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(557, 21)
+        Me.ComboBox1.TabIndex = 82
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label10.Location = New System.Drawing.Point(345, 19)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(108, 16)
+        Me.Label10.TabIndex = 81
+        Me.Label10.Text = "Nombre Externo:"
+        '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CheckBox1.ForeColor = System.Drawing.SystemColors.Control
+        Me.CheckBox1.Location = New System.Drawing.Point(438, 233)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(160, 22)
+        Me.CheckBox1.TabIndex = 79
+        Me.CheckBox1.Text = "Incluir datos fiscales"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.CheckBox1.Visible = False
+        '
+        'txtClaveEC
+        '
+        Me.txtClaveEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtClaveEC.Location = New System.Drawing.Point(78, 16)
+        Me.txtClaveEC.Name = "txtClaveEC"
+        Me.txtClaveEC.Size = New System.Drawing.Size(166, 22)
+        Me.txtClaveEC.TabIndex = 75
+        '
+        'lblClaveEC
+        '
+        Me.lblClaveEC.AutoSize = True
+        Me.lblClaveEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblClaveEC.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblClaveEC.Location = New System.Drawing.Point(8, 17)
+        Me.lblClaveEC.Name = "lblClaveEC"
+        Me.lblClaveEC.Size = New System.Drawing.Size(53, 18)
+        Me.lblClaveEC.TabIndex = 77
+        Me.lblClaveEC.Text = "Clave :"
+        '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.txtTelefonoFEC)
+        Me.Panel1.Controls.Add(Me.txtCiudadFEC)
+        Me.Panel1.Controls.Add(Me.txtCPFEC)
+        Me.Panel1.Controls.Add(Me.Label12)
+        Me.Panel1.Controls.Add(Me.txtCorreoFEC)
+        Me.Panel1.Controls.Add(Me.cbMunicipioFEC)
+        Me.Panel1.Controls.Add(Me.Label13)
+        Me.Panel1.Controls.Add(Me.Label14)
+        Me.Panel1.Controls.Add(Me.Label15)
+        Me.Panel1.Controls.Add(Me.cbEstadoFEC)
+        Me.Panel1.Controls.Add(Me.Label16)
+        Me.Panel1.Controls.Add(Me.txtRazonSocialFEC)
+        Me.Panel1.Controls.Add(Me.txtColoniaFEC)
+        Me.Panel1.Controls.Add(Me.Label17)
+        Me.Panel1.Controls.Add(Me.txtDireccionFEC)
+        Me.Panel1.Controls.Add(Me.txtRFCFEC)
+        Me.Panel1.Controls.Add(Me.Label18)
+        Me.Panel1.Controls.Add(Me.Label20)
+        Me.Panel1.Controls.Add(Me.Label21)
+        Me.Panel1.Controls.Add(Me.Label23)
+        Me.Panel1.Controls.Add(Me.Label24)
+        Me.Panel1.Controls.Add(Me.Label26)
+        Me.Panel1.Location = New System.Drawing.Point(6, 261)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(1010, 218)
+        Me.Panel1.TabIndex = 74
+        Me.Panel1.Visible = False
+        '
+        'txtTelefonoFEC
+        '
+        Me.txtTelefonoFEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtTelefonoFEC.Location = New System.Drawing.Point(805, 91)
+        Me.txtTelefonoFEC.MaxLength = 16
+        Me.txtTelefonoFEC.Name = "txtTelefonoFEC"
+        Me.txtTelefonoFEC.Size = New System.Drawing.Size(192, 22)
+        Me.txtTelefonoFEC.TabIndex = 44
+        '
+        'txtCiudadFEC
+        '
+        Me.txtCiudadFEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCiudadFEC.Location = New System.Drawing.Point(131, 179)
+        Me.txtCiudadFEC.Name = "txtCiudadFEC"
+        Me.txtCiudadFEC.Size = New System.Drawing.Size(341, 22)
+        Me.txtCiudadFEC.TabIndex = 41
+        '
+        'txtCPFEC
+        '
+        Me.txtCPFEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCPFEC.Location = New System.Drawing.Point(574, 91)
+        Me.txtCPFEC.MaxLength = 5
+        Me.txtCPFEC.Name = "txtCPFEC"
+        Me.txtCPFEC.Size = New System.Drawing.Size(125, 22)
+        Me.txtCPFEC.TabIndex = 43
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label12.Location = New System.Drawing.Point(15, 182)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(54, 16)
+        Me.Label12.TabIndex = 63
+        Me.Label12.Text = "Ciudad:"
+        '
+        'txtCorreoFEC
+        '
+        Me.txtCorreoFEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCorreoFEC.Location = New System.Drawing.Point(574, 65)
+        Me.txtCorreoFEC.Name = "txtCorreoFEC"
+        Me.txtCorreoFEC.Size = New System.Drawing.Size(423, 22)
+        Me.txtCorreoFEC.TabIndex = 42
+        '
+        'cbMunicipioFEC
+        '
+        Me.cbMunicipioFEC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbMunicipioFEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbMunicipioFEC.FormattingEnabled = True
+        Me.cbMunicipioFEC.Location = New System.Drawing.Point(131, 149)
+        Me.cbMunicipioFEC.Name = "cbMunicipioFEC"
+        Me.cbMunicipioFEC.Size = New System.Drawing.Size(341, 24)
+        Me.cbMunicipioFEC.TabIndex = 40
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label13.Location = New System.Drawing.Point(735, 94)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(65, 16)
+        Me.Label13.TabIndex = 57
+        Me.Label13.Text = "Telefono:"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label14.Location = New System.Drawing.Point(482, 51)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(86, 16)
+        Me.Label14.TabIndex = 49
+        Me.Label14.Text = "Razón social"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label15.Location = New System.Drawing.Point(482, 94)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(95, 16)
+        Me.Label15.TabIndex = 56
+        Me.Label15.Text = "Codigo postal:"
+        '
+        'cbEstadoFEC
+        '
+        Me.cbEstadoFEC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbEstadoFEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbEstadoFEC.FormattingEnabled = True
+        Me.cbEstadoFEC.Location = New System.Drawing.Point(131, 119)
+        Me.cbEstadoFEC.Name = "cbEstadoFEC"
+        Me.cbEstadoFEC.Size = New System.Drawing.Size(341, 24)
+        Me.cbEstadoFEC.TabIndex = 39
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label16.Location = New System.Drawing.Point(482, 68)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(52, 16)
+        Me.Label16.TabIndex = 55
+        Me.Label16.Text = "Correo:"
+        '
+        'txtRazonSocialFEC
+        '
+        Me.txtRazonSocialFEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRazonSocialFEC.Location = New System.Drawing.Point(574, 39)
+        Me.txtRazonSocialFEC.Name = "txtRazonSocialFEC"
+        Me.txtRazonSocialFEC.Size = New System.Drawing.Size(423, 22)
+        Me.txtRazonSocialFEC.TabIndex = 36
+        '
+        'txtColoniaFEC
+        '
+        Me.txtColoniaFEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtColoniaFEC.Location = New System.Drawing.Point(131, 91)
+        Me.txtColoniaFEC.Name = "txtColoniaFEC"
+        Me.txtColoniaFEC.Size = New System.Drawing.Size(342, 22)
+        Me.txtColoniaFEC.TabIndex = 38
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label17.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label17.Location = New System.Drawing.Point(482, 34)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(64, 16)
+        Me.Label17.TabIndex = 47
+        Me.Label17.Text = "Nombre /"
+        '
+        'txtDireccionFEC
+        '
+        Me.txtDireccionFEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDireccionFEC.Location = New System.Drawing.Point(132, 65)
+        Me.txtDireccionFEC.Name = "txtDireccionFEC"
+        Me.txtDireccionFEC.Size = New System.Drawing.Size(341, 22)
+        Me.txtDireccionFEC.TabIndex = 37
+        '
+        'txtRFCFEC
+        '
+        Me.txtRFCFEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRFCFEC.Location = New System.Drawing.Point(132, 39)
+        Me.txtRFCFEC.MaxLength = 13
+        Me.txtRFCFEC.Name = "txtRFCFEC"
+        Me.txtRFCFEC.Size = New System.Drawing.Size(341, 22)
+        Me.txtRFCFEC.TabIndex = 35
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label18.Location = New System.Drawing.Point(15, 152)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(68, 16)
+        Me.Label18.TabIndex = 58
+        Me.Label18.Text = "Municipio:"
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label20.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label20.Location = New System.Drawing.Point(16, 42)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(38, 16)
+        Me.Label20.TabIndex = 45
+        Me.Label20.Text = "RFC:"
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label21.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label21.Location = New System.Drawing.Point(16, 122)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(54, 16)
+        Me.Label21.TabIndex = 57
+        Me.Label21.Text = "Estado:"
+        '
+        'Label23
+        '
+        Me.Label23.BackColor = System.Drawing.Color.Maroon
+        Me.Label23.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label23.ForeColor = System.Drawing.Color.Gold
+        Me.Label23.Location = New System.Drawing.Point(3, 4)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(1004, 27)
+        Me.Label23.TabIndex = 29
+        Me.Label23.Text = "Datos fiscales"
+        Me.Label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label24.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label24.Location = New System.Drawing.Point(16, 94)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(57, 16)
+        Me.Label24.TabIndex = 56
+        Me.Label24.Text = "Colonia:"
+        '
+        'Label26
+        '
+        Me.Label26.AutoSize = True
+        Me.Label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label26.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label26.Location = New System.Drawing.Point(16, 68)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(68, 16)
+        Me.Label26.TabIndex = 55
+        Me.Label26.Text = "Dirección:"
+        '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.Label27)
+        Me.Panel2.Controls.Add(Me.Label28)
+        Me.Panel2.Controls.Add(Me.cbMunicipioEC)
+        Me.Panel2.Controls.Add(Me.cbEstadoEC)
+        Me.Panel2.Controls.Add(Me.txtTelefonoEC)
+        Me.Panel2.Controls.Add(Me.txtCPEC)
+        Me.Panel2.Controls.Add(Me.txtCorreoEC)
+        Me.Panel2.Controls.Add(Me.txtColoniaEC)
+        Me.Panel2.Controls.Add(Me.txtDireccionEC)
+        Me.Panel2.Controls.Add(Me.txtNombreEC)
+        Me.Panel2.Controls.Add(Me.txtApMaternoEC)
+        Me.Panel2.Controls.Add(Me.txtApPaternoEC)
+        Me.Panel2.Controls.Add(Me.Label30)
+        Me.Panel2.Controls.Add(Me.Label31)
+        Me.Panel2.Controls.Add(Me.Label32)
+        Me.Panel2.Controls.Add(Me.Label33)
+        Me.Panel2.Controls.Add(Me.Label34)
+        Me.Panel2.Controls.Add(Me.Label35)
+        Me.Panel2.Controls.Add(Me.Label36)
+        Me.Panel2.Controls.Add(Me.Label37)
+        Me.Panel2.Controls.Add(Me.Label38)
+        Me.Panel2.Controls.Add(Me.Label39)
+        Me.Panel2.Controls.Add(Me.Label40)
+        Me.Panel2.Location = New System.Drawing.Point(6, 50)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(1010, 177)
+        Me.Panel2.TabIndex = 73
+        Me.Panel2.Visible = False
+        '
+        'Label27
+        '
+        Me.Label27.AutoSize = True
+        Me.Label27.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label27.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label27.ForeColor = System.Drawing.Color.Gold
+        Me.Label27.Location = New System.Drawing.Point(706, 145)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(0, 24)
+        Me.Label27.TabIndex = 71
+        '
+        'Label28
+        '
+        Me.Label28.AutoSize = True
+        Me.Label28.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label28.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label28.Location = New System.Drawing.Point(585, 148)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(115, 16)
+        Me.Label28.TabIndex = 70
+        Me.Label28.Text = "Matricula externa: "
+        '
+        'cbMunicipioEC
+        '
+        Me.cbMunicipioEC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbMunicipioEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbMunicipioEC.FormattingEnabled = True
+        Me.cbMunicipioEC.Location = New System.Drawing.Point(131, 148)
+        Me.cbMunicipioEC.Name = "cbMunicipioEC"
+        Me.cbMunicipioEC.Size = New System.Drawing.Size(341, 24)
+        Me.cbMunicipioEC.TabIndex = 31
+        '
+        'cbEstadoEC
+        '
+        Me.cbEstadoEC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbEstadoEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbEstadoEC.FormattingEnabled = True
+        Me.cbEstadoEC.Location = New System.Drawing.Point(131, 118)
+        Me.cbEstadoEC.Name = "cbEstadoEC"
+        Me.cbEstadoEC.Size = New System.Drawing.Size(341, 24)
+        Me.cbEstadoEC.TabIndex = 30
+        '
+        'txtTelefonoEC
+        '
+        Me.txtTelefonoEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtTelefonoEC.Location = New System.Drawing.Point(849, 90)
+        Me.txtTelefonoEC.MaxLength = 13
+        Me.txtTelefonoEC.Name = "txtTelefonoEC"
+        Me.txtTelefonoEC.Size = New System.Drawing.Size(148, 22)
+        Me.txtTelefonoEC.TabIndex = 34
+        '
+        'txtCPEC
+        '
+        Me.txtCPEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCPEC.Location = New System.Drawing.Point(588, 90)
+        Me.txtCPEC.MaxLength = 5
+        Me.txtCPEC.Name = "txtCPEC"
+        Me.txtCPEC.Size = New System.Drawing.Size(141, 22)
+        Me.txtCPEC.TabIndex = 33
+        '
+        'txtCorreoEC
+        '
+        Me.txtCorreoEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCorreoEC.Location = New System.Drawing.Point(588, 62)
+        Me.txtCorreoEC.Name = "txtCorreoEC"
+        Me.txtCorreoEC.Size = New System.Drawing.Size(409, 22)
+        Me.txtCorreoEC.TabIndex = 32
+        '
+        'txtColoniaEC
+        '
+        Me.txtColoniaEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtColoniaEC.Location = New System.Drawing.Point(131, 90)
+        Me.txtColoniaEC.Name = "txtColoniaEC"
+        Me.txtColoniaEC.Size = New System.Drawing.Size(341, 22)
+        Me.txtColoniaEC.TabIndex = 29
+        '
+        'txtDireccionEC
+        '
+        Me.txtDireccionEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDireccionEC.Location = New System.Drawing.Point(131, 62)
+        Me.txtDireccionEC.Name = "txtDireccionEC"
+        Me.txtDireccionEC.Size = New System.Drawing.Size(341, 22)
+        Me.txtDireccionEC.TabIndex = 28
+        '
+        'txtNombreEC
+        '
+        Me.txtNombreEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtNombreEC.Location = New System.Drawing.Point(131, 36)
+        Me.txtNombreEC.Name = "txtNombreEC"
+        Me.txtNombreEC.Size = New System.Drawing.Size(341, 22)
+        Me.txtNombreEC.TabIndex = 25
+        '
+        'txtApMaternoEC
+        '
+        Me.txtApMaternoEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtApMaternoEC.Location = New System.Drawing.Point(849, 34)
+        Me.txtApMaternoEC.Name = "txtApMaternoEC"
+        Me.txtApMaternoEC.Size = New System.Drawing.Size(148, 22)
+        Me.txtApMaternoEC.TabIndex = 27
+        '
+        'txtApPaternoEC
+        '
+        Me.txtApPaternoEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtApPaternoEC.Location = New System.Drawing.Point(588, 36)
+        Me.txtApPaternoEC.Name = "txtApPaternoEC"
+        Me.txtApPaternoEC.Size = New System.Drawing.Size(141, 22)
+        Me.txtApPaternoEC.TabIndex = 26
+        '
+        'Label30
+        '
+        Me.Label30.AutoSize = True
+        Me.Label30.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label30.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label30.Location = New System.Drawing.Point(735, 93)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(65, 16)
+        Me.Label30.TabIndex = 41
+        Me.Label30.Text = "Telefono:"
+        '
+        'Label31
+        '
+        Me.Label31.AutoSize = True
+        Me.Label31.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label31.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label31.Location = New System.Drawing.Point(482, 93)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(95, 16)
+        Me.Label31.TabIndex = 40
+        Me.Label31.Text = "Código postal:"
+        '
+        'Label32
+        '
+        Me.Label32.AutoSize = True
+        Me.Label32.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label32.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label32.Location = New System.Drawing.Point(482, 65)
+        Me.Label32.Name = "Label32"
+        Me.Label32.Size = New System.Drawing.Size(52, 16)
+        Me.Label32.TabIndex = 39
+        Me.Label32.Text = "Correo:"
+        '
+        'Label33
+        '
+        Me.Label33.AutoSize = True
+        Me.Label33.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label33.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label33.Location = New System.Drawing.Point(15, 151)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(68, 16)
+        Me.Label33.TabIndex = 38
+        Me.Label33.Text = "Municipio:"
+        '
+        'Label34
+        '
+        Me.Label34.AutoSize = True
+        Me.Label34.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label34.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label34.Location = New System.Drawing.Point(15, 121)
+        Me.Label34.Name = "Label34"
+        Me.Label34.Size = New System.Drawing.Size(54, 16)
+        Me.Label34.TabIndex = 37
+        Me.Label34.Text = "Estado:"
+        '
+        'Label35
+        '
+        Me.Label35.AutoSize = True
+        Me.Label35.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label35.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label35.Location = New System.Drawing.Point(15, 93)
+        Me.Label35.Name = "Label35"
+        Me.Label35.Size = New System.Drawing.Size(57, 16)
+        Me.Label35.TabIndex = 36
+        Me.Label35.Text = "Colonia:"
+        '
+        'Label36
+        '
+        Me.Label36.AutoSize = True
+        Me.Label36.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label36.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label36.Location = New System.Drawing.Point(15, 65)
+        Me.Label36.Name = "Label36"
+        Me.Label36.Size = New System.Drawing.Size(68, 16)
+        Me.Label36.TabIndex = 35
+        Me.Label36.Text = "Dirección:"
+        '
+        'Label37
+        '
+        Me.Label37.AutoSize = True
+        Me.Label37.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label37.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label37.Location = New System.Drawing.Point(735, 39)
+        Me.Label37.Name = "Label37"
+        Me.Label37.Size = New System.Drawing.Size(113, 16)
+        Me.Label37.TabIndex = 34
+        Me.Label37.Text = "Apellido materno:"
+        '
+        'Label38
+        '
+        Me.Label38.AutoSize = True
+        Me.Label38.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label38.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label38.Location = New System.Drawing.Point(482, 39)
+        Me.Label38.Name = "Label38"
+        Me.Label38.Size = New System.Drawing.Size(110, 16)
+        Me.Label38.TabIndex = 33
+        Me.Label38.Text = "Apellido paterno:"
+        '
+        'Label39
+        '
+        Me.Label39.AutoSize = True
+        Me.Label39.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label39.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label39.Location = New System.Drawing.Point(15, 39)
+        Me.Label39.Name = "Label39"
+        Me.Label39.Size = New System.Drawing.Size(60, 16)
+        Me.Label39.TabIndex = 32
+        Me.Label39.Text = "Nombre:"
+        '
+        'Label40
+        '
+        Me.Label40.BackColor = System.Drawing.Color.Maroon
+        Me.Label40.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label40.ForeColor = System.Drawing.Color.Gold
+        Me.Label40.Location = New System.Drawing.Point(3, 4)
+        Me.Label40.Name = "Label40"
+        Me.Label40.Size = New System.Drawing.Size(1004, 27)
+        Me.Label40.TabIndex = 28
+        Me.Label40.Text = "Datos personales"
+        Me.Label40.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'btnBuscarEC
+        '
+        Me.btnBuscarEC.Image = Global.NEducacionContinuaUX.My.Resources.Resources.search_30px
+        Me.btnBuscarEC.Location = New System.Drawing.Point(250, 11)
+        Me.btnBuscarEC.Name = "btnBuscarEC"
+        Me.btnBuscarEC.Size = New System.Drawing.Size(40, 33)
+        Me.btnBuscarEC.TabIndex = 76
+        Me.btnBuscarEC.UseVisualStyleBackColor = True
         '
         'RegistroExternosEDC
         '
@@ -1440,6 +2136,12 @@ Partial Class RegistroExternosEDC
         Me.panelDatosFiscalesEdit.PerformLayout()
         Me.panelDatosPersonalesEdit.ResumeLayout(False)
         Me.panelDatosPersonalesEdit.PerformLayout()
+        Me.tabModDCC.ResumeLayout(False)
+        Me.tabModDCC.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1560,4 +2262,62 @@ Partial Class RegistroExternosEDC
     Friend WithEvents lblMatriculaEXEdString As Label
     Friend WithEvents lblMatriculaEXEd As Label
     Friend WithEvents btnLimpiar As Button
+    Friend WithEvents tabModDCC As TabPage
+    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents Label10 As Label
+    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents txtClaveEC As TextBox
+    Friend WithEvents lblClaveEC As Label
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents txtTelefonoFEC As TextBox
+    Friend WithEvents txtCiudadFEC As TextBox
+    Friend WithEvents txtCPFEC As TextBox
+    Friend WithEvents Label12 As Label
+    Friend WithEvents txtCorreoFEC As TextBox
+    Friend WithEvents cbMunicipioFEC As ComboBox
+    Friend WithEvents Label13 As Label
+    Friend WithEvents Label14 As Label
+    Friend WithEvents Label15 As Label
+    Friend WithEvents cbEstadoFEC As ComboBox
+    Friend WithEvents Label16 As Label
+    Friend WithEvents txtRazonSocialFEC As TextBox
+    Friend WithEvents txtColoniaFEC As TextBox
+    Friend WithEvents Label17 As Label
+    Friend WithEvents txtDireccionFEC As TextBox
+    Friend WithEvents txtRFCFEC As TextBox
+    Friend WithEvents Label18 As Label
+    Friend WithEvents Label20 As Label
+    Friend WithEvents Label21 As Label
+    Friend WithEvents Label23 As Label
+    Friend WithEvents Label24 As Label
+    Friend WithEvents Label26 As Label
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents Label27 As Label
+    Friend WithEvents Label28 As Label
+    Friend WithEvents cbMunicipioEC As ComboBox
+    Friend WithEvents cbEstadoEC As ComboBox
+    Friend WithEvents txtTelefonoEC As TextBox
+    Friend WithEvents txtCPEC As TextBox
+    Friend WithEvents txtCorreoEC As TextBox
+    Friend WithEvents txtColoniaEC As TextBox
+    Friend WithEvents txtDireccionEC As TextBox
+    Friend WithEvents txtNombreEC As TextBox
+    Friend WithEvents txtApMaternoEC As TextBox
+    Friend WithEvents txtApPaternoEC As TextBox
+    Friend WithEvents Label30 As Label
+    Friend WithEvents Label31 As Label
+    Friend WithEvents Label32 As Label
+    Friend WithEvents Label33 As Label
+    Friend WithEvents Label34 As Label
+    Friend WithEvents Label35 As Label
+    Friend WithEvents Label36 As Label
+    Friend WithEvents Label37 As Label
+    Friend WithEvents Label38 As Label
+    Friend WithEvents Label39 As Label
+    Friend WithEvents Label40 As Label
+    Friend WithEvents Button4 As Button
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button5 As Button
+    Friend WithEvents btnBuscarEC As Button
 End Class

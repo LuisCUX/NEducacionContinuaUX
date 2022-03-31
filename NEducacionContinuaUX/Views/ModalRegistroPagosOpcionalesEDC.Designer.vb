@@ -88,6 +88,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         'cbConceptoPara
         '
         Me.cbConceptoPara.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbConceptoPara.Enabled = False
         Me.cbConceptoPara.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbConceptoPara.FormattingEnabled = True
         Me.cbConceptoPara.Location = New System.Drawing.Point(180, 85)
@@ -349,7 +350,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         Me.btnGuardar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
         Me.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnGuardar.Enabled = False
-        Me.btnGuardar.Location = New System.Drawing.Point(194, 620)
+        Me.btnGuardar.Location = New System.Drawing.Point(328, 620)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(75, 54)
         Me.btnGuardar.TabIndex = 37
@@ -463,7 +464,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         '
         Me.btnLimpiar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
         Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnLimpiar.Location = New System.Drawing.Point(331, 620)
+        Me.btnLimpiar.Location = New System.Drawing.Point(194, 620)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(75, 54)
         Me.btnLimpiar.TabIndex = 47

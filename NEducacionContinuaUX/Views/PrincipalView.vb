@@ -23,11 +23,6 @@
         PlanesEDC.Show()
     End Sub
 
-    Private Sub AltaDePagosOpcionalesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AltaDePagosOpcionalesToolStripMenuItem.Click
-        MainRegistroPagosOpcionalesEDC.MdiParent = Me
-        MainRegistroPagosOpcionalesEDC.Show()
-    End Sub
-
     Private Sub AltaYModificaciónDeExternosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AltaYModificaciónDeExternosToolStripMenuItem.Click
         RegistroExternosEDC.MdiParent = Me
         RegistroExternosEDC.Show()
@@ -100,5 +95,20 @@
     Private Sub NotaDeCreditoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NotaDeCreditoToolStripMenuItem.Click
         NotasDeCreditoEDC.MdiParent = Me
         NotasDeCreditoEDC.Show()
+    End Sub
+
+    Private Sub AltaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AltaToolStripMenuItem.Click
+        ModalRegistroPagosOpcionalesEDC.MdiParent = Me
+        ModalRegistroPagosOpcionalesEDC.Show()
+    End Sub
+
+    Private Sub ModificaciónToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ModificaciónToolStripMenuItem.Click
+        MainRegistroPagosOpcionalesEDC.MdiParent = Me
+        MainRegistroPagosOpcionalesEDC.Show()
+    End Sub
+
+    Private Sub CatalogoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CatalogoToolStripMenuItem.Click
+        RegistroTipoPagosOpcionales.MdiParent = Me
+        RegistroTipoPagosOpcionales.Show()
     End Sub
 End Class

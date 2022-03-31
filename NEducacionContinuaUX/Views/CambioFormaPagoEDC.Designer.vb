@@ -35,8 +35,11 @@ Partial Class CambioFormaPagoEDC
         Me.txtFolio = New System.Windows.Forms.TextBox()
         Me.btnBuscarFolio = New System.Windows.Forms.Button()
         Me.panelDatos = New System.Windows.Forms.Panel()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.Label11 = New System.Windows.Forms.Label()
+        Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.txtBancotext = New System.Windows.Forms.TextBox()
+        Me.btnGuardarCondonaciones = New System.Windows.Forms.Button()
         Me.lblBancotext = New System.Windows.Forms.Label()
         Me.txtMonto = New System.Windows.Forms.TextBox()
         Me.lblMonto = New System.Windows.Forms.Label()
@@ -54,9 +57,6 @@ Partial Class CambioFormaPagoEDC
         Me.lblBanco = New System.Windows.Forms.Label()
         Me.cbFormaPago = New System.Windows.Forms.ComboBox()
         Me.lblFormadepago = New System.Windows.Forms.Label()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.btnLimpiar = New System.Windows.Forms.Button()
-        Me.btnGuardarCondonaciones = New System.Windows.Forms.Button()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -126,9 +126,9 @@ Partial Class CambioFormaPagoEDC
         Me.lblMatricula.ForeColor = System.Drawing.SystemColors.Control
         Me.lblMatricula.Location = New System.Drawing.Point(5, 16)
         Me.lblMatricula.Name = "lblMatricula"
-        Me.lblMatricula.Size = New System.Drawing.Size(72, 18)
+        Me.lblMatricula.Size = New System.Drawing.Size(49, 18)
         Me.lblMatricula.TabIndex = 15
-        Me.lblMatricula.Text = "Matrícula:"
+        Me.lblMatricula.Text = "Clave:"
         '
         'lblFacturaCB
         '
@@ -231,6 +231,16 @@ Partial Class CambioFormaPagoEDC
         Me.panelDatos.TabIndex = 18
         Me.panelDatos.Visible = False
         '
+        'Button2
+        '
+        Me.Button2.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
+        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.Button2.Location = New System.Drawing.Point(486, 389)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(72, 53)
+        Me.Button2.TabIndex = 43
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'Label11
         '
         Me.Label11.AutoSize = True
@@ -242,6 +252,16 @@ Partial Class CambioFormaPagoEDC
         Me.Label11.TabIndex = 75
         Me.Label11.Text = "Nuevos datos"
         '
+        'btnLimpiar
+        '
+        Me.btnLimpiar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
+        Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnLimpiar.Location = New System.Drawing.Point(205, 389)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(72, 53)
+        Me.btnLimpiar.TabIndex = 42
+        Me.btnLimpiar.UseVisualStyleBackColor = True
+        '
         'txtBancotext
         '
         Me.txtBancotext.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -250,6 +270,17 @@ Partial Class CambioFormaPagoEDC
         Me.txtBancotext.Size = New System.Drawing.Size(226, 21)
         Me.txtBancotext.TabIndex = 74
         Me.txtBancotext.Visible = False
+        '
+        'btnGuardarCondonaciones
+        '
+        Me.btnGuardarCondonaciones.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
+        Me.btnGuardarCondonaciones.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnGuardarCondonaciones.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnGuardarCondonaciones.Location = New System.Drawing.Point(354, 389)
+        Me.btnGuardarCondonaciones.Name = "btnGuardarCondonaciones"
+        Me.btnGuardarCondonaciones.Size = New System.Drawing.Size(72, 53)
+        Me.btnGuardarCondonaciones.TabIndex = 41
+        Me.btnGuardarCondonaciones.UseVisualStyleBackColor = True
         '
         'lblBancotext
         '
@@ -433,37 +464,6 @@ Partial Class CambioFormaPagoEDC
         Me.lblFormadepago.Size = New System.Drawing.Size(104, 16)
         Me.lblFormadepago.TabIndex = 57
         Me.lblFormadepago.Text = "Forma de pago:"
-        '
-        'Button2
-        '
-        Me.Button2.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
-        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button2.Location = New System.Drawing.Point(486, 389)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(72, 53)
-        Me.Button2.TabIndex = 43
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'btnLimpiar
-        '
-        Me.btnLimpiar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
-        Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnLimpiar.Location = New System.Drawing.Point(354, 389)
-        Me.btnLimpiar.Name = "btnLimpiar"
-        Me.btnLimpiar.Size = New System.Drawing.Size(72, 53)
-        Me.btnLimpiar.TabIndex = 42
-        Me.btnLimpiar.UseVisualStyleBackColor = True
-        '
-        'btnGuardarCondonaciones
-        '
-        Me.btnGuardarCondonaciones.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
-        Me.btnGuardarCondonaciones.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnGuardarCondonaciones.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGuardarCondonaciones.Location = New System.Drawing.Point(205, 389)
-        Me.btnGuardarCondonaciones.Name = "btnGuardarCondonaciones"
-        Me.btnGuardarCondonaciones.Size = New System.Drawing.Size(72, 53)
-        Me.btnGuardarCondonaciones.TabIndex = 41
-        Me.btnGuardarCondonaciones.UseVisualStyleBackColor = True
         '
         'CambioFormaPagoEDC
         '

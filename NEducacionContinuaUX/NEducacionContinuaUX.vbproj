@@ -28,7 +28,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\192.168.1.241\ti\NEducacionContinua\Instalador\</InstallUrl>
     <TargetCulture>es-MX</TargetCulture>
-    <ApplicationRevision>52</ApplicationRevision>
+    <ApplicationRevision>56</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -403,6 +403,12 @@
     <Compile Include="Views\RegistroExternosEDC.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Views\RegistroTipoPagosOpcionales.Designer.vb">
+      <DependentUpon>RegistroTipoPagosOpcionales.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegistroTipoPagosOpcionales.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\ReimpresionFacturasEDC.Designer.vb">
       <DependentUpon>ReimpresionFacturasEDC.vb</DependentUpon>
     </Compile>
@@ -509,6 +515,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\RegistroExternosEDC.resx">
       <DependentUpon>RegistroExternosEDC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\RegistroTipoPagosOpcionales.resx">
+      <DependentUpon>RegistroTipoPagosOpcionales.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ReimpresionFacturasEDC.resx">
       <DependentUpon>ReimpresionFacturasEDC.vb</DependentUpon>

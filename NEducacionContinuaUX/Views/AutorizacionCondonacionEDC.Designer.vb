@@ -156,9 +156,9 @@ Partial Class AutorizacionCondonacionEDC
         Me.lblMatricula.ForeColor = System.Drawing.SystemColors.Control
         Me.lblMatricula.Location = New System.Drawing.Point(7, 16)
         Me.lblMatricula.Name = "lblMatricula"
-        Me.lblMatricula.Size = New System.Drawing.Size(65, 16)
+        Me.lblMatricula.Size = New System.Drawing.Size(46, 16)
         Me.lblMatricula.TabIndex = 0
-        Me.lblMatricula.Text = "Matrícula:"
+        Me.lblMatricula.Text = "Clave:"
         '
         'panelDatos
         '
@@ -431,7 +431,7 @@ Partial Class AutorizacionCondonacionEDC
         '
         Me.btnLimpiar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
         Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnLimpiar.Location = New System.Drawing.Point(986, 385)
+        Me.btnLimpiar.Location = New System.Drawing.Point(894, 385)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(72, 53)
         Me.btnLimpiar.TabIndex = 39
@@ -442,7 +442,7 @@ Partial Class AutorizacionCondonacionEDC
         Me.btnGuardarCondonaciones.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
         Me.btnGuardarCondonaciones.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnGuardarCondonaciones.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGuardarCondonaciones.Location = New System.Drawing.Point(885, 385)
+        Me.btnGuardarCondonaciones.Location = New System.Drawing.Point(989, 385)
         Me.btnGuardarCondonaciones.Name = "btnGuardarCondonaciones"
         Me.btnGuardarCondonaciones.Size = New System.Drawing.Size(72, 53)
         Me.btnGuardarCondonaciones.TabIndex = 15

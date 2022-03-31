@@ -45,7 +45,7 @@ Public Class AsignacionPlanesoldEDC
                                                          INNER JOIN ing_Planes AS P ON P.ID = C.ID_Plan
                                                          WHERE A.Matricula = '{Matricula}' AND A.Activo = 1")
         If (planID > 0) Then
-            MessageBox.Show("La matricula ingresada ya tiene un plan asignado")
+            MessageBox.Show("La clave ingresada ya tiene un plan asignado")
             Me.Reiniciar()
             Exit Sub
         End If
@@ -59,7 +59,7 @@ Public Class AsignacionPlanesoldEDC
                                                          INNER JOIN ing_Planes AS P ON P.ID = C.ID_Plan
                                                          WHERE A.Matricula = '{Matricula}' AND A.Activo = 1")
         If (planID < 1) Then
-            MessageBox.Show("La matricula ingresada no tiene planes registrados")
+            MessageBox.Show("La clave ingresada no tiene planes registrados")
             Me.Reiniciar()
             Exit Sub
         Else
@@ -87,7 +87,7 @@ Public Class AsignacionPlanesoldEDC
                                                          INNER JOIN ing_Planes AS P ON P.ID = C.ID_Plan
                                                          WHERE A.Matricula = '{Matricula}' AND A.Activo = 1")
         If (planID < 1) Then
-            MessageBox.Show("La matricula ingresada no tiene planes registrados")
+            MessageBox.Show("La clave ingresada no tiene planes registrados")
             Me.Reiniciar()
             Exit Sub
         Else

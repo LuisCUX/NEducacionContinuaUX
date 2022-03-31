@@ -186,7 +186,7 @@ Partial Class ObservacionesEDC
         Me.btnEditarObCancelacion.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.card_exchange_40px
         Me.btnEditarObCancelacion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnEditarObCancelacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEditarObCancelacion.Location = New System.Drawing.Point(110, 405)
+        Me.btnEditarObCancelacion.Location = New System.Drawing.Point(32, 405)
         Me.btnEditarObCancelacion.Name = "btnEditarObCancelacion"
         Me.btnEditarObCancelacion.Size = New System.Drawing.Size(72, 53)
         Me.btnEditarObCancelacion.TabIndex = 47
@@ -206,7 +206,7 @@ Partial Class ObservacionesEDC
         '
         Me.btnLimpiarObCancelacion.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
         Me.btnLimpiarObCancelacion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnLimpiarObCancelacion.Location = New System.Drawing.Point(188, 405)
+        Me.btnLimpiarObCancelacion.Location = New System.Drawing.Point(110, 405)
         Me.btnLimpiarObCancelacion.Name = "btnLimpiarObCancelacion"
         Me.btnLimpiarObCancelacion.Size = New System.Drawing.Size(72, 53)
         Me.btnLimpiarObCancelacion.TabIndex = 45
@@ -217,7 +217,7 @@ Partial Class ObservacionesEDC
         Me.btnGuardarObCancelacion.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
         Me.btnGuardarObCancelacion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnGuardarObCancelacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGuardarObCancelacion.Location = New System.Drawing.Point(32, 405)
+        Me.btnGuardarObCancelacion.Location = New System.Drawing.Point(188, 405)
         Me.btnGuardarObCancelacion.Name = "btnGuardarObCancelacion"
         Me.btnGuardarObCancelacion.Size = New System.Drawing.Size(72, 53)
         Me.btnGuardarObCancelacion.TabIndex = 44

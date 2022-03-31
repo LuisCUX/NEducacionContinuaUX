@@ -171,6 +171,7 @@ Public Class CobrosController
             End If
 
 
+
             ''---------------------------------------------------------REGISTRO DE COBRO/S EN BASE DE DATOS---------------------------------------------------------
             For Each concepto As Concepto In listaConceptos
                 If (concepto.Abonado = False) Then
@@ -426,6 +427,7 @@ Public Class CobrosController
             concepto.costoIVAUnitario = costoIVA
             concepto.descuento = 0.00000000
             concepto.costoFinal = costoSinIVA * concepto.Cantidad
+            concepto.CostoIvaBase = concepto.costoTotal
             If (tipoPago = 2) Then
                 concepto.costoBase = costoSinIVA
                 concepto.costoUnitario = costoSinIVA + descuento
@@ -460,6 +462,7 @@ Public Class CobrosController
             concepto.costoTotal = montoAbono
             concepto.descuento = 0.00000000
             concepto.costoFinal = montoAbono
+            concepto.CostoIvaBase = concepto.costoTotal
             If (tipoPago = 2) Then
                 concepto.costoBase = montoAbono
                 concepto.costoUnitario = montoAbono + descuento
@@ -532,8 +535,6 @@ Public Class CobrosController
 
         Dim mensaje As String = "Se abonaran los siguientes conceptos: " + vbNewLine
         mensaje += vbNewLine
-        mensaje = mensaje + "CONCEPTOS A ABONAR: " + vbNewLine
-        mensaje += vbNewLine
         For Each concepto As Concepto In listaConceptosAbonos
             mensaje += $"{concepto.NombreConcepto} - ABONO: ${CDec(CDec(concepto.costoFinal) + CDec(concepto.costoIVATotal))}" + vbNewLine
         Next
@@ -544,31 +545,21 @@ Public Class CobrosController
             If (tieneAbono > 0) Then
                 Me.recalcularCostoAbono(concepto, concepto.costoFinal, 2)
             End If
+            concepto.Abonado = True
             listaConceptosFinal.Add(concepto)
         Next
-
+        If (listaConceptosAbonos.Count > 0) Then
+            For Each concepto As Concepto In listaConceptosAbonos
+                If (concepto.Abonado = False) Then
+                    concepto.Abonado = True
+                    listaConceptos(0).NombreConcepto = $"1{concepto.NombreConcepto}"
+                End If
+            Next
+        End If
         ObjectBagService.setItem("ListaAbonos", listaConceptosAbonos)
         ObjectBagService.setItem("MontoAnterior", montoAnterior)
         ObjectBagService.setItem("MontoRestante", montoRestante)
-        'If (listaConceptosAbonos.Count > 0) Then
-        '    For Each concepto As Concepto In listaConceptosAbonos
-        '        Dim montoDespues As Decimal
-        '        Dim IDClavePago As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatClavesPagos WHERE Clave = '{concepto.claveConcepto}'")
-        '        Dim tieneAbono As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_Abonos WHERE ID_ClavePago = {IDClavePago} AND IDPago = {concepto.IDConcepto} ORDER BY ID DESC")
-        '        If (tieneAbono > 0) Then
-        '            montoAnterior = db.exectSQLQueryScalar($"SELECT Cantidad_Restante FROM ing_Abonos WHERE ID = {tieneAbono}")
-        '            montoDespues = montoAnterior - montoRestante
-        '            concepto.Abonado = True
-        '        Else
-        '            montoDespues = montoAnterior - montoRestante
-        '            concepto.Abonado = True
-        '        End If
-        '        'listaConceptos(0).NombreConcepto = $"1{concepto.NombreConcepto}"
-        '        db.execSQLQueryWithoutParams($"INSERT INTO ing_Abonos(Folio, Clave_Cliente, Cantidad_Anterior, Cantidad_Abonada, Cantidad_Restante, IDPago, ID_ClavePago, FechaAbono, Activo) VALUES ('WEA', '{Matricula}', {montoAnterior}, {montoRestante}, {montoDespues}, {concepto.IDConcepto}, {IDClavePago}, GETDATE(), 1)")
-        '        listaConceptosFinal.Add(concepto)
-        '    Next
-        '    MessageBox.Show("Abono registrado correctamente")
-        'End If
+
         Return listaConceptosFinal
         Return listaConceptosFinal
     End Function

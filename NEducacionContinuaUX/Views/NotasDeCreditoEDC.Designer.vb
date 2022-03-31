@@ -155,9 +155,9 @@ Partial Class NotasDeCreditoEDC
         Me.lblMatricula.ForeColor = System.Drawing.SystemColors.Control
         Me.lblMatricula.Location = New System.Drawing.Point(7, 16)
         Me.lblMatricula.Name = "lblMatricula"
-        Me.lblMatricula.Size = New System.Drawing.Size(65, 16)
+        Me.lblMatricula.Size = New System.Drawing.Size(46, 16)
         Me.lblMatricula.TabIndex = 0
-        Me.lblMatricula.Text = "Matrícula:"
+        Me.lblMatricula.Text = "Clave:"
         '
         'panelDatos
         '
@@ -583,7 +583,7 @@ Partial Class NotasDeCreditoEDC
         '
         Me.btnLimpiar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
         Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnLimpiar.Location = New System.Drawing.Point(756, 359)
+        Me.btnLimpiar.Location = New System.Drawing.Point(557, 359)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(75, 48)
         Me.btnLimpiar.TabIndex = 3
@@ -603,7 +603,7 @@ Partial Class NotasDeCreditoEDC
         '
         Me.btnGuardar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
         Me.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnGuardar.Location = New System.Drawing.Point(557, 359)
+        Me.btnGuardar.Location = New System.Drawing.Point(753, 359)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(75, 48)
         Me.btnGuardar.TabIndex = 1
