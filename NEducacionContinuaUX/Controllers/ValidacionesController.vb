@@ -8,7 +8,7 @@ Public Class ValidacionesController
 
     Function validarMatricula(Matricula As String) As String
         If (Matricula.Length() < 9 Or Matricula.Length() > 9) Then
-            MessageBox.Show("La matricula ingresada no existe, favor de ingresar una matricula valida")
+            MessageBox.Show("La clave ingresada no existe, favor de ingresar una clave valida")
             Return "False"
         Else
             Dim MatriculaUX As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_catMatriculasUX WHERE MatriculaEX = '{Matricula}'")
@@ -34,13 +34,13 @@ Public Class ValidacionesController
         Dim sit_esc As String = db.exectSQLQueryScalar($"SELECT sit_esc FROM ux.dbo.dae_catAlumnos WHERE matricula = '{matriculaUX}'")
 
         If (exists = Nothing) Then
-            MessageBox.Show("La matricula ingresada no existe, favor de ingresar una matricula valida")
+            MessageBox.Show("La clave ingresada no existe, favor de ingresar una clave valida")
             CobrosEDC.Reiniciar()
             Exit Sub
         End If
 
         If (sit_esc = "B") Then
-            MessageBox.Show("La matricula ingresada se encuentra dada de baja, favor de ingresar una matricula valida")
+            MessageBox.Show("La clave ingresada se encuentra dada de baja, favor de ingresar una clave valida")
             CobrosEDC.Reiniciar()
             Exit Sub
         End If
@@ -76,7 +76,7 @@ Public Class ValidacionesController
         Dim exists As Integer = db.exectSQLQueryScalar($"SELECT id_clave FROM portal_clave WHERE clave_cliente = '{Matricula}'")
 
         If (exists < 1) Then
-            MessageBox.Show("La matricula ingresada no existe, favor de ingresar una matricula valida")
+            MessageBox.Show("La clave ingresada no existe, favor de ingresar una clave valida")
             CobrosEDC.Reiniciar()
             Exit Sub
         End If
@@ -122,7 +122,7 @@ Public Class ValidacionesController
         Dim exists As Integer = db.exectSQLQueryScalar($"SELECT id_clave FROM portal_clave WHERE clave_cliente = '{Matricula}'")
 
         If (exists < 1) Then
-            MessageBox.Show("La matricula ingresada no existe, favor de ingresar una matricula valida")
+            MessageBox.Show("La clave ingresada no existe, favor de ingresar una clave valida")
             CobrosEDC.Reiniciar()
             Exit Sub
         End If

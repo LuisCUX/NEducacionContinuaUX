@@ -69,7 +69,7 @@ Partial Class CancelacionFacturasEDC
         '
         Me.btnLimpiar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
         Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnLimpiar.Location = New System.Drawing.Point(865, 629)
+        Me.btnLimpiar.Location = New System.Drawing.Point(767, 629)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(72, 53)
         Me.btnLimpiar.TabIndex = 42
@@ -80,7 +80,7 @@ Partial Class CancelacionFacturasEDC
         Me.btnGuardarCancelacion.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
         Me.btnGuardarCancelacion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnGuardarCancelacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGuardarCancelacion.Location = New System.Drawing.Point(767, 629)
+        Me.btnGuardarCancelacion.Location = New System.Drawing.Point(866, 629)
         Me.btnGuardarCancelacion.Name = "btnGuardarCancelacion"
         Me.btnGuardarCancelacion.Size = New System.Drawing.Size(72, 53)
         Me.btnGuardarCancelacion.TabIndex = 41
@@ -179,9 +179,9 @@ Partial Class CancelacionFacturasEDC
         Me.lblMatricula.ForeColor = System.Drawing.SystemColors.Control
         Me.lblMatricula.Location = New System.Drawing.Point(234, 128)
         Me.lblMatricula.Name = "lblMatricula"
-        Me.lblMatricula.Size = New System.Drawing.Size(65, 16)
+        Me.lblMatricula.Size = New System.Drawing.Size(46, 16)
         Me.lblMatricula.TabIndex = 52
-        Me.lblMatricula.Text = "Matricula:"
+        Me.lblMatricula.Text = "Clave:"
         '
         'lblFechaFacturacion
         '

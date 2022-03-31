@@ -31,14 +31,14 @@
         Dim existsEDC As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_catMatriculasUX WHERE MatriculaUX = '{Matricula}'")
 
         If (exists = Nothing) Then
-            MessageBox.Show("La matricula ingresada no existe, favor de ingresar una matricula valida")
+            MessageBox.Show("La clave ingresada no existe, favor de ingresar una clave valida")
             RegistroExternosEDC.matriculaExterna = False
             RegistroExternosEDC.Reiniciar()
             Exit Sub
         End If
 
         If (sit_esc = "B") Then
-            MessageBox.Show("La matricula ingresada se encuentra dada de baja, favor de ingresar una matricula valida")
+            MessageBox.Show("La clave ingresada se encuentra dada de baja, favor de ingresar una clave valida")
             RegistroExternosEDC.matriculaExterna = False
             RegistroExternosEDC.Reiniciar()
             Exit Sub
@@ -46,7 +46,7 @@
 
         If (existsEDC > 0) Then
             Dim matriculaEX As String = db.exectSQLQueryScalar($"SELECT MatriculaEX FROM ing_catMatriculasUX WHERE MatriculaUX = '{Matricula}'")
-            MessageBox.Show($"La matricula ingresada ya esta dada de alta en educacion continua con la matricula externa: {matriculaEX}")
+            MessageBox.Show($"La clave ingresada ya esta dada de alta en educacion continua con la clave externa: {matriculaEX}")
             RegistroExternosEDC.matriculaExterna = False
             RegistroExternosEDC.Reiniciar()
         End If
@@ -90,7 +90,7 @@
                                                                INNER JOIN portal_municipio AS M ON M.id_municipio = C.id_municipio
                                                                WHERE RE.clave_cliente = '{Matricula}'")
         If (tableDatos.Rows.Count() = 0) Then
-            MessageBox.Show("La matricula ingresada no existe, ingrese una matricula valida")
+            MessageBox.Show("La clave ingresada no existe, ingrese una clave valida")
             RegistroExternosEDC.Reiniciar()
             Return
         End If
@@ -278,7 +278,7 @@
 
         If (IDCliente <> 0) Then
             Dim MatriculaEX As String = db.exectSQLQueryScalar($"SELECT clave_cliente FROM portal_clave WHERE id_cliente = {IDCliente}")
-            Return {False, $"El correo ingresado ya se encuentra registrado con la matricula {MatriculaEX}"}
+            Return {False, $"El correo ingresado ya se encuentra registrado con la clave {MatriculaEX}"}
         End If
         Return {True, ""}
     End Function

@@ -34,7 +34,6 @@ Public Class CobrosEDC
         Me.Limpiar()
         Matricula = txtMatricula.Text.ToUpper()
         tipoMatricula = va.validarMatricula(Matricula)
-        lblMatriculatxt.Text = Matricula
         If (tipoMatricula = "False") Then
             Me.Reiniciar()
             txtMatricula.Focus()
@@ -405,6 +404,11 @@ Public Class CobrosEDC
             '    Tree.Nodes(5).Nodes(index).SelectedImageIndex = 0
             'End If
         End If
+        If (ch.getConceptosCount() < 1) Then
+            panelTipoPago.Enabled = False
+        Else
+            panelTipoPago.Enabled = True
+        End If
     End Sub
 
     Sub actualizarTotal(listaConceptos As List(Of Concepto))
@@ -585,7 +589,9 @@ Public Class CobrosEDC
                         concepto.Abonado = True
                     End If
                     ''listaConceptos(0).NombreConcepto = $"1{concepto.NombreConcepto}"
-                    db.execSQLQueryWithoutParams($"INSERT INTO ing_Abonos(Folio, Clave_Cliente, Cantidad_Anterior, Cantidad_Abonada, Cantidad_Restante, IDPago, ID_ClavePago, FechaAbono, Activo) VALUES ('WEA', '{Matricula}', {montoAnterior}, {montoRestante}, {montoDespues}, {concepto.IDConcepto}, {IDClavePago}, GETDATE(), 1)")
+                    Dim Folio As String = ObjectBagService.getItem("Folio")
+                    Dim Serie As String = ObjectBagService.getItem("Serie")
+                    db.execSQLQueryWithoutParams($"INSERT INTO ing_Abonos(Folio, Clave_Cliente, Cantidad_Anterior, Cantidad_Abonada, Cantidad_Restante, IDPago, ID_ClavePago, FechaAbono, Activo) VALUES ('{Serie}{Folio}', '{Matricula}', {montoAnterior}, {montoRestante}, {montoDespues}, {concepto.IDConcepto}, {IDClavePago}, GETDATE(), 1)")
                     listaconceptosFinal.Add(concepto)
                 Next
                 MessageBox.Show("Abono registrado correctamente")

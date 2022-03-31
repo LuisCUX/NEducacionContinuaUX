@@ -2583,7 +2583,7 @@ Partial Class PlanesEDC
         '
         Me.btnGuardar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
         Me.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnGuardar.Location = New System.Drawing.Point(378, 597)
+        Me.btnGuardar.Location = New System.Drawing.Point(569, 597)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(63, 48)
         Me.btnGuardar.TabIndex = 17
@@ -2648,7 +2648,7 @@ Partial Class PlanesEDC
         '
         Me.btnLimpiar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
         Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnLimpiar.Location = New System.Drawing.Point(569, 597)
+        Me.btnLimpiar.Location = New System.Drawing.Point(378, 597)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(63, 48)
         Me.btnLimpiar.TabIndex = 272

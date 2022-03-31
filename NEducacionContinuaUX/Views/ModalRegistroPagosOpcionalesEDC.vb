@@ -8,13 +8,20 @@
         po.llenarCombobox(cbConceptoPara, cbTipoPago, cbTipoConcepto, cbNivel)
         tipoVentana = ObjectBagService.getItem("tipoVentana")
 
+        If (IsNothing(tipoVentana)) Then
+            tipoVentana = "Nuevo"
+            lblNombreVentana.Text = "Alta de pagos opcionales"
+        End If
+
         If (tipoVentana = "Edicion") Then
+            lblNombreVentana.Text = "Modificación de pagos opcionales"
             IDPago = ObjectBagService.getItem("IDPago")
-            po.llenarVentanaPago(IDPago, cbConceptoPara, cbNivel, cbTurno, cbTipoPago, cbTipoConcepto, cbDivision, cbGrupo, cbClase, cbProdServ, cbUnidad, lblNivel, lblTurno, txtConcepto, txtDescripcion, txtValorUnitario, txtValorUnitarioSinIVA, chbExentaIVA, chbConsideraIVA, chbIncluyeIVA)
+            po.llenarVentanaPago(IDPago, cbConceptoPara, cbNivel, cbTurno, cbTipoPago, cbTipoConcepto, cbDivision, cbGrupo, cbClase, cbProdServ, cbUnidad, lblNivel, lblTurno, txtConcepto, txtDescripcion, txtValorUnitario, txtValorUnitarioSinIVA, chbExentaIVA, chbConsideraIVA, chbIncluyeIVA, txtClavePS)
             Me.enableControls()
             btnGuardar.Enabled = True
             txtClavePS.Enabled = True
         End If
+        cbConceptoPara.SelectedIndex = 0
         ObjectBagService.clearBag()
         first = True
     End Sub
@@ -166,7 +173,7 @@
         first = False
     End Sub
 
-    Private Sub cbConceptoPara_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbConceptoPara.SelectionChangeCommitted
+    Private Sub cbConceptoPara_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbConceptoPara.SelectedIndexChanged
         If (cbConceptoPara.Text = "EXTERNO") Then
             cbTipoPago.Enabled = True
             txtConcepto.Enabled = True

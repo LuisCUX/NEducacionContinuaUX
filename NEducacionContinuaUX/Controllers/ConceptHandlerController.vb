@@ -389,6 +389,11 @@
         End If
     End Function
 
+    Function getConceptosCount() As Integer
+        Dim count As Integer = listaConceptos.Count()
+        Return count
+    End Function
+
     Function obtenerDatosCondonacion(conceptoID As Integer, claveID As Integer) As Object()
         Dim IDCondonacion As Integer = db.exectSQLQueryScalar($"SELECT ID FROM aut_Condonaciones WHERE ID_Concepto = {conceptoID} AND ID_ClaveConcepto = {claveID} AND Activo = 1")
 

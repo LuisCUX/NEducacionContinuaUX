@@ -5,7 +5,7 @@
         Dim tableFacturas As DataTable = db.getDataTableFromSQL($"SELECT ID, UPPER('Folio: ' + ' ' + Folio + ' Fecha: ' + Fecha_Pago)As TextoFactura FROM ing_xmlTimbrados WHERE Matricula_Clave = '{Matricula}'")
 
         If (tableFacturas.Rows.Count() = 0) Then
-            MessageBox.Show("La matricula ingresada no existe o no tiene facturas cobradas, ingrese una matricula diferente")
+            MessageBox.Show("La clave ingresada no existe o no tiene facturas cobradas, ingrese una clave diferente")
             Return False
         End If
 
@@ -16,7 +16,7 @@
 
     Function validarMatricula(Matricula As String) As String
         If (Matricula.Length() < 9 Or Matricula.Length() > 9) Then
-            MessageBox.Show("La matricula ingresada no existe, favor de ingresar una matricula valida")
+            MessageBox.Show("La clave ingresada no existe, favor de ingresar una clave valida")
             Return "False"
         Else
             Dim MatriculaUX As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_catMatriculasUX WHERE MatriculaEX = '{Matricula}'")

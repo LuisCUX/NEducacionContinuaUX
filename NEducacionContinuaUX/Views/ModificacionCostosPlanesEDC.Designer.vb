@@ -158,9 +158,9 @@ Partial Class ModificacionCostosPlanesEDC
         Me.lblMatricula3.ForeColor = System.Drawing.SystemColors.Control
         Me.lblMatricula3.Location = New System.Drawing.Point(8, 9)
         Me.lblMatricula3.Name = "lblMatricula3"
-        Me.lblMatricula3.Size = New System.Drawing.Size(65, 16)
+        Me.lblMatricula3.Size = New System.Drawing.Size(46, 16)
         Me.lblMatricula3.TabIndex = 74
-        Me.lblMatricula3.Text = "Matrícula:"
+        Me.lblMatricula3.Text = "Clave:"
         '
         'btnBuscar3
         '
