@@ -5,7 +5,7 @@
     Public Shared matriculaExterna As Boolean
 
     Private Sub RegistroExternosEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        re.loadComboboxExternos(cbEstado, cbEstadoF, cbEstadoEd, cbEstadoFEd, cbExterno, cbUX)
+        re.loadComboboxExternos(cbEstado, cbEstadoF, cbEstadoEd, cbEstadoFEd, cbExterno, cbUX, cbEstadoEC, cbEstadoFEC)
         lblMatriculaEXString.Text = re.obtenerNuevaMatricula()
         matriculaExterna = False
     End Sub
@@ -107,8 +107,47 @@
     Private Sub btnBuscarEd_Click(sender As Object, e As EventArgs) Handles btnBuscarEd.Click
         Matricula = txtMatricula.Text
         re.buscarDatosMatriculaExterna(txtMatriculaEd.Text, txtNombreEd, txtAp_PatEd, txtAp_MatEd, txtDireccionEd, txtColoniaEd, cbEstadoEd, cbMunicipioEd, txtCorreoEd, txtCPEd, txtTelefonoEd,
-                                       txtRFCEd, txtNREd, txtDireccionFEd, txtColoniaFEd, cbEstadoFEd, cbMunicipioFEd, txtCiudadFEd, txtCorreoFEd, txtCPFEd, txtTelefonoFEd, chbDatosFiscalesEdit, panelDatosPersonalesEdit, panelDatosFiscalesEdit, btnGuardarEdit, btnSalirEd)
+                                       txtRFCEd, txtNREd, txtDireccionFEd, txtColoniaFEd, cbEstadoFEd, cbMunicipioFEd, txtCiudadFEd, txtCorreoFEd, txtCPFEd, txtTelefonoFEd, chbDatosFiscalesEdit, panelDatosPersonalesEdit, panelDatosFiscalesEdit, btnGuardarEdit, btnSalirEd, btnLimpiarEd)
         lblMatriculaEXEdString.Text = Matricula
+    End Sub
+
+    Private Sub btnBuscarEC_Click(sender As Object, e As EventArgs) Handles btnBuscarEC.Click
+        Matricula = txtClaveEC.Text
+        re.buscarDatosMatriculaEc(txtClaveEC.Text, txtNombreEC, txtApPaternoEC, txtApMaternoEC, txtDireccionEC, txtColoniaEC, cbEstadoEC, cbMunicipioEC, txtCorreoEC, txtCPEC, txtTelefonoEC,
+                                  txtRFCFEC, txtRazonSocialFEC, txtDireccionFEC, txtColoniaFEC, cbEstadoFEC, cbMunicipioFEC, txtCiudadFEC, txtCorreoFEC, txtCPFEC, txtTelefonoFEC, chbDatosFiscalesEC, panelDatosPersonalesEC, panelDatosFiscalesEC, btnGuardarEC, btnSalirEC, btnLimpiarEC)
+    End Sub
+
+    Private Sub btnGuardarEC_Click(sender As Object, e As EventArgs) Handles btnGuardarEC.Click
+        Dim validaTXT As Object() = re.validaTextboxDatos(txtNombreEC, txtApPaternoEC, txtApMaternoEC, txtDireccionEC, txtColoniaEC, txtCorreoEC, txtCPEC, txtTelefonoEC, cbMunicipioEC)
+        Dim validaCorreo As Object() = re.validaCorreo(txtCorreoEd.Text, "Edicion", Matricula)
+
+        If (validaTXT(0) = False) Then
+            MessageBox.Show(validaTXT(1))
+            Return
+        End If
+
+        If (chbDatosFiscalesEC.Checked = True) Then
+            Dim validaFiscal As Object() = re.validaTextboxFiscal(txtRFCFEC, txtRazonSocialFEC, txtDireccionFEC, txtColoniaFEC, txtCiudadFEC, txtCorreoFEC, txtCPFEC, txtTelefonoFEC, cbMunicipioFEC)
+            If (validaFiscal(0) = False) Then
+                MessageBox.Show(validaFiscal(1))
+                Return
+            End If
+        End If
+
+        If (validaCorreo(0) = False) Then
+            MessageBox.Show(validaCorreo(1))
+            Return
+        End If
+
+        Dim tipocliente As Integer
+        If (chbDatosFiscalesEC.Checked = True) Then
+            tipocliente = 1
+        Else
+            tipocliente = 2
+        End If
+
+        re.EdicionEC(txtClaveEC.Text, txtCorreoEC.Text, txtNombreEC.Text, txtDireccionEC.Text, txtColoniaEC.Text, txtCPEC.Text, cbMunicipioEC.SelectedValue, tipocliente, txtTelefonoEC.Text, 104, txtApPaternoEC.Text, txtApMaternoEC.Text, chbDatosFiscalesEC.Checked,
+                     txtRFCFEC.Text, txtDireccionFEC.Text, 0, txtColoniaFEC.Text, txtCPFEC.Text, txtCiudadFEC.Text, txtTelefonoFEC.Text, txtCorreoFEC.Text, cbMunicipioFEC.SelectedValue, txtRazonSocialFEC.Text)
     End Sub
 
     Private Sub cbEstado_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbEstado.SelectionChangeCommitted
@@ -131,11 +170,21 @@
         ComboboxService.llenarCombobox(cbMunicipioFEd, tableMunicipiosFEd, "id_municipio", "nombre")
     End Sub
 
+    Private Sub cbEstadoEC_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbEstadoEC.SelectionChangeCommitted
+        Dim tableMunicipiosEC As DataTable = db.getDataTableFromSQL($"SELECT id_municipio, nombre FROM portal_municipio WHERE id_estado = {cbEstadoEC.SelectedValue} ORDER BY nombre")
+        ComboboxService.llenarCombobox(cbMunicipioEC, tableMunicipiosEC, "id_municipio", "nombre")
+    End Sub
+
+    Private Sub cbEstadoFEC_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbEstadoFEC.SelectionChangeCommitted
+        Dim tableMunicipiosFEC As DataTable = db.getDataTableFromSQL($"SELECT id_municipio, nombre FROM portal_municipio WHERE id_estado = {cbEstadoFEC.SelectedValue} ORDER BY nombre")
+        ComboboxService.llenarCombobox(cbMunicipioFEC, tableMunicipiosFEC, "id_municipio", "nombre")
+    End Sub
+
     Private Sub cbExterno_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbExterno.SelectedIndexChanged
         Try
             Matricula = cbExterno.SelectedValue
             re.buscarDatosMatriculaExterna(cbExterno.SelectedValue, txtNombreEd, txtAp_PatEd, txtAp_MatEd, txtDireccionEd, txtColoniaEd, cbEstadoEd, cbMunicipioEd, txtCorreoEd, txtCPEd, txtTelefonoEd,
-                                       txtRFCEd, txtNREd, txtDireccionFEd, txtColoniaFEd, cbEstadoFEd, cbMunicipioFEd, txtCiudadFEd, txtCorreoFEd, txtCPFEd, txtTelefonoFEd, chbDatosFiscalesEdit, panelDatosPersonalesEdit, panelDatosFiscalesEdit, btnGuardarEdit, btnSalirEd)
+                                       txtRFCEd, txtNREd, txtDireccionFEd, txtColoniaFEd, cbEstadoFEd, cbMunicipioFEd, txtCiudadFEd, txtCorreoFEd, txtCPFEd, txtTelefonoFEd, chbDatosFiscalesEdit, panelDatosPersonalesEdit, panelDatosFiscalesEdit, btnGuardarEdit, btnSalirEd, btnLimpiarEd)
             lblMatriculaEXEdString.Text = Matricula
         Catch ex As Exception
 
@@ -211,6 +260,14 @@
         End If
     End Sub
 
+    Private Sub chbDatosFiscalesEC_CheckedChanged(sender As Object, e As EventArgs) Handles chbDatosFiscalesEC.CheckedChanged
+        If (chbDatosFiscalesEC.Checked = True) Then
+            panelDatosFiscalesEC.Visible = True
+        Else
+            panelDatosFiscalesEC.Visible = False
+        End If
+    End Sub
+
     Sub commitCheckChanged()
         chbDatosFiscalesEdit_CheckedChanged(Nothing, Nothing)
     End Sub
@@ -227,6 +284,15 @@
         cbEstadoFEd_SelectionChangeCommitted(Nothing, Nothing)
     End Sub
 
+    Sub commitChangeEstadoEC()
+        cbEstadoEC_SelectionChangeCommitted(Nothing, Nothing)
+    End Sub
+
+    Sub commitChangeEstadoFEC()
+        cbEstadoFEC_SelectionChangeCommitted(Nothing, Nothing)
+    End Sub
+
+
     Sub Reiniciar()
         Me.Controls.Clear()
         InitializeComponent()
@@ -241,7 +307,7 @@
         Me.Close()
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnSalirEC.Click
         Me.Close()
     End Sub
 
@@ -249,15 +315,11 @@
         Me.Reiniciar()
     End Sub
 
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles btnLimpiarEd.Click
         Me.Reiniciar()
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnLimpiarEC.Click
         Me.Reiniciar()
-    End Sub
-
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-
     End Sub
 End Class
