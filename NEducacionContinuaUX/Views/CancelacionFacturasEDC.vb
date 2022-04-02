@@ -18,6 +18,7 @@
         Dim dia As String
         Dim mes As String
         Dim meshoy
+        Dim diahoy
         Dim year As String
         Folio = txtFolio.Text
 
@@ -38,9 +39,13 @@
         If (meshoy < 10) Then
             meshoy = $"0{meshoy}"
         End If
+        diahoy = Convert.ToInt32(DateTime.Now.Day)
+        If (diahoy < 10) Then
+            diahoy = $"0{diahoy}"
+        End If
 
         FechaFacturaStr = $"{dia}/{mes}/{year}"
-        FechaHoy = $"{DateTime.Now.Day}/{meshoy}/{DateTime.Now.Year}"
+        FechaHoy = $"{diahoy}/{meshoy}/{DateTime.Now.Year}"
 
         Tipo_Pago = db.exectSQLQueryScalar($"SELECT Tipo_Pago FROM ing_xmlTimbrados WHERE Folio = '{Folio}'")
         lblMatriculatxt.Text = Matricula
@@ -127,4 +132,8 @@
 
         Return Fecha
     End Function
+
+    Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
+        Me.Reiniciar()
+    End Sub
 End Class
