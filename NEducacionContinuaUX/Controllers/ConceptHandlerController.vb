@@ -100,7 +100,7 @@
                                                                       INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
                                                                       INNER JOIN ing_Planes AS PL ON PL.ID = C.ID_Plan
                                                                       INNER JOIN portal_congreso AS CON ON CON.id_congreso = PL.ID_Congreso
-                                                                      WHERE AC.ID = {conceptoID} AND AC.Activo = 1")
+                                                                      WHERE AC.ID = {conceptoID}")
             For Each item As DataRow In tableConcepto.Rows
 
                 concep.IDConcepto = item("ID")
@@ -129,7 +129,7 @@
                                                                       INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
                                                                       INNER JOIN ing_Planes AS PL ON PL.ID = C.ID_Plan
                                                                       INNER JOIN portal_congreso AS CON ON CON.id_congreso = PL.ID_Congreso
-                                                                      WHERE AC.ID = {conceptoID} AND AC.Activo = 1")
+                                                                      WHERE AC.ID = {conceptoID}")
             For Each item As DataRow In tableConcepto.Rows
 
                 concep.IDConcepto = item("ID")
@@ -158,7 +158,7 @@
                                                                       INNER JOIN ing_PlanesConceptos AS C ON C.ID = AC.ID_Concepto
                                                                       INNER JOIN ing_Planes AS PL ON PL.ID = C.ID_Plan
                                                                       INNER JOIN portal_congreso AS CON ON CON.id_congreso = PL.ID_Congreso
-                                                                      WHERE AC.ID = {conceptoID} AND AC.Activo = 1")
+                                                                      WHERE AC.ID = {conceptoID}")
             For Each item As DataRow In tableConcepto.Rows
 
                 concep.IDConcepto = item("ID")
@@ -236,6 +236,7 @@
             concepto.costoIVAUnitario = (unitariodescuento * 0.16)
             concepto.costoIVATotal = (CDec(concepto.costoIVAUnitario) * CDec(concepto.Cantidad))
             concepto.costoTotal = unitariosiniva * CDec(concepto.Cantidad)
+            concepto.CostoIvaBase = concepto.costoTotal
             ''concepto.costoFinal = (CDec(concepto.costoBase)) + (CDec(concepto.costoIVATotal)) - CDec(concepto.Abono)
             concepto.descuento = (CDec(concepto.descuento) * CDec(concepto.Cantidad))
             concepto = formatoPrecios(concepto)
@@ -250,6 +251,7 @@
             concepto.costoIVAUnitario = (concepto.costoUnitario * 0.16)
             concepto.costoIVATotal = (CDec(concepto.costoIVAUnitario) * CDec(concepto.Cantidad))
             concepto.costoTotal = (CDec(concepto.costoUnitario) * CDec(concepto.Cantidad))
+            concepto.CostoIvaBase = concepto.costoTotal
             concepto.descuento = 0.00
             concepto = formatoPrecios(concepto)
             concepto.costoFinal = (CDec(concepto.costoBase)) + (CDec(concepto.costoIVATotal))
@@ -280,6 +282,7 @@
             concepto.costoTotal = (CDec(concepto.costoUnitario) * CDec(concepto.Cantidad)) - CDec(concepto.Abono)
             concepto.costoFinal = (concepto.costoBase + CDec(concepto.costoIVATotal))
             concepto.descuento = 0.00
+            concepto.CostoIvaBase = concepto.costoTotal
             'Dim unitariodescuento As Decimal = CDec(concepto.costoUnitario) - CDec(concepto.descuento)
             'concepto.costoBase = unitariodescuento * CDec(concepto.Cantidad)
             'unitariodescuento = unitariodescuento
@@ -294,6 +297,7 @@
             concepto.costoBase = concepto.costoUnitario * CDec(concepto.Cantidad)
             concepto.costoIVAUnitario = "0.00000000"
             concepto.costoIVATotal = "0.00000000"
+            concepto.CostoIvaBase = "0.00000000"
             concepto.costoTotal = (CDec(concepto.costoUnitario) * CDec(concepto.Cantidad))
             concepto.costoFinal = (concepto.costoBase + CDec(concepto.costoIVATotal))
             concepto.descuento = 0.00
@@ -310,6 +314,7 @@
             concepto.costoBase = concepto.costoUnitario * CDec(concepto.Cantidad)
             concepto.costoIVAUnitario = "0.00000000"
             concepto.costoIVATotal = "0.00000000"
+            concepto.CostoIvaBase = "0.00000000"
             concepto.costoTotal = (CDec(concepto.costoUnitario) * CDec(concepto.Cantidad))
             concepto.costoFinal = (concepto.costoBase + CDec(concepto.costoIVATotal))
             concepto.descuento = 0.00
@@ -334,6 +339,7 @@
         concepto.descuento = Format(CDec(concepto.descuento), "#####0.00")
         concepto.costoBase = Format(CDec(concepto.costoBase), "#####0.00")
         concepto.costoFinal = Format(CDec(concepto.costoFinal), "#####0.00")
+        concepto.CostoIvaBase = Format(CDec(concepto.CostoIvaBase), "#####0.00")
         Return concepto
     End Function
 
@@ -381,6 +387,11 @@
         Else
             Return CDec(cantidad)
         End If
+    End Function
+
+    Function getConceptosCount() As Integer
+        Dim count As Integer = listaConceptos.Count()
+        Return count
     End Function
 
     Function obtenerDatosCondonacion(conceptoID As Integer, claveID As Integer) As Object()

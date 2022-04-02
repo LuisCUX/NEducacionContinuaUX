@@ -18,7 +18,7 @@ Public Class AsignacionPlanesEDC
                                                          INNER JOIN ing_Planes AS P ON P.ID = C.ID_Plan
                                                          WHERE A.Matricula = '{Matricula}' AND A.Activo = 1")
         If (planID > 0) Then
-            MessageBox.Show("La matricula ingresada ya tiene un plan asignado")
+            MessageBox.Show("La clave ingresada ya tiene un plan asignado")
             txtMatricula.Clear()
             Me.Reiniciar()
             Exit Sub

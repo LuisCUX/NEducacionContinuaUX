@@ -23,5 +23,14 @@
                 db.execSQLQueryWithoutParams($"UPDATE ing_PlanesRecargos SET Folio = NULL, Activo = 1 WHERE ID = {concepto("IDConcepto")}")
             End If
         Next
+
+        Dim IDAbono As Integer = Me.buscarAbono(Folio)
+        If (IDAbono > 0) Then
+            db.execSQLQueryWithoutParams($"UPDATE ing_Abonos SET Activo = 0 WHERE ID = {IDAbono}")
+        End If
     End Sub
+
+    Function buscarAbono(Folio As String) As Integer
+        Return db.exectSQLQueryScalar($"SELECT ID FROM ing_Abonos WHERE Folio = '{Folio}'")
+    End Function
 End Class

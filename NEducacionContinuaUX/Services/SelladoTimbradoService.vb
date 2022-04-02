@@ -2,6 +2,8 @@
 Imports System.Security.Cryptography.X509Certificates
 
 Public Class SelladoTimbradoService
+    Dim UUID As String
+
     Function Sellado(rutaCert As String, passCert As String, cadenaXML As String) As String
         Dim sello As String
         Dim verify As Boolean

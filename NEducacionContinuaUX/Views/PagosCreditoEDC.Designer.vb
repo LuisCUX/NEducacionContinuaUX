@@ -31,6 +31,12 @@ Partial Class PagosCreditoEDC
         Me.txtMatricula = New System.Windows.Forms.TextBox()
         Me.lblMatricula = New System.Windows.Forms.Label()
         Me.panelDatos = New System.Windows.Forms.Panel()
+        Me.lblCFDItxt = New System.Windows.Forms.Label()
+        Me.lblCFDI = New System.Windows.Forms.Label()
+        Me.lblRegFiscaltxt = New System.Windows.Forms.Label()
+        Me.lblRegFiscal = New System.Windows.Forms.Label()
+        Me.lblCPtxt = New System.Windows.Forms.Label()
+        Me.lblCP = New System.Windows.Forms.Label()
         Me.lblTurnotxt = New System.Windows.Forms.Label()
         Me.lblCarreratxt = New System.Windows.Forms.Label()
         Me.lblRFCtxt = New System.Windows.Forms.Label()
@@ -170,12 +176,18 @@ Partial Class PagosCreditoEDC
         Me.lblMatricula.ForeColor = System.Drawing.SystemColors.Control
         Me.lblMatricula.Location = New System.Drawing.Point(5, 16)
         Me.lblMatricula.Name = "lblMatricula"
-        Me.lblMatricula.Size = New System.Drawing.Size(65, 16)
+        Me.lblMatricula.Size = New System.Drawing.Size(46, 16)
         Me.lblMatricula.TabIndex = 0
-        Me.lblMatricula.Text = "Matrícula:"
+        Me.lblMatricula.Text = "Clave:"
         '
         'panelDatos
         '
+        Me.panelDatos.Controls.Add(Me.lblCFDItxt)
+        Me.panelDatos.Controls.Add(Me.lblCFDI)
+        Me.panelDatos.Controls.Add(Me.lblRegFiscaltxt)
+        Me.panelDatos.Controls.Add(Me.lblRegFiscal)
+        Me.panelDatos.Controls.Add(Me.lblCPtxt)
+        Me.panelDatos.Controls.Add(Me.lblCP)
         Me.panelDatos.Controls.Add(Me.lblTurnotxt)
         Me.panelDatos.Controls.Add(Me.lblCarreratxt)
         Me.panelDatos.Controls.Add(Me.lblRFCtxt)
@@ -194,12 +206,75 @@ Partial Class PagosCreditoEDC
         Me.panelDatos.TabIndex = 17
         Me.panelDatos.Visible = False
         '
+        'lblCFDItxt
+        '
+        Me.lblCFDItxt.AutoSize = True
+        Me.lblCFDItxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCFDItxt.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblCFDItxt.Location = New System.Drawing.Point(836, 11)
+        Me.lblCFDItxt.Name = "lblCFDItxt"
+        Me.lblCFDItxt.Size = New System.Drawing.Size(0, 15)
+        Me.lblCFDItxt.TabIndex = 95
+        '
+        'lblCFDI
+        '
+        Me.lblCFDI.AutoSize = True
+        Me.lblCFDI.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCFDI.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblCFDI.Location = New System.Drawing.Point(774, 12)
+        Me.lblCFDI.Name = "lblCFDI"
+        Me.lblCFDI.Size = New System.Drawing.Size(62, 15)
+        Me.lblCFDI.TabIndex = 94
+        Me.lblCFDI.Text = "Uso CFDI:"
+        '
+        'lblRegFiscaltxt
+        '
+        Me.lblRegFiscaltxt.AutoSize = True
+        Me.lblRegFiscaltxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRegFiscaltxt.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblRegFiscaltxt.Location = New System.Drawing.Point(631, 8)
+        Me.lblRegFiscaltxt.Name = "lblRegFiscaltxt"
+        Me.lblRegFiscaltxt.Size = New System.Drawing.Size(0, 15)
+        Me.lblRegFiscaltxt.TabIndex = 93
+        '
+        'lblRegFiscal
+        '
+        Me.lblRegFiscal.AutoSize = True
+        Me.lblRegFiscal.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRegFiscal.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblRegFiscal.Location = New System.Drawing.Point(533, 12)
+        Me.lblRegFiscal.Name = "lblRegFiscal"
+        Me.lblRegFiscal.Size = New System.Drawing.Size(92, 15)
+        Me.lblRegFiscal.TabIndex = 92
+        Me.lblRegFiscal.Text = "Regimen fiscal:"
+        '
+        'lblCPtxt
+        '
+        Me.lblCPtxt.AutoSize = True
+        Me.lblCPtxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCPtxt.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblCPtxt.Location = New System.Drawing.Point(434, 12)
+        Me.lblCPtxt.Name = "lblCPtxt"
+        Me.lblCPtxt.Size = New System.Drawing.Size(0, 15)
+        Me.lblCPtxt.TabIndex = 91
+        '
+        'lblCP
+        '
+        Me.lblCP.AutoSize = True
+        Me.lblCP.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCP.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblCP.Location = New System.Drawing.Point(400, 12)
+        Me.lblCP.Name = "lblCP"
+        Me.lblCP.Size = New System.Drawing.Size(26, 15)
+        Me.lblCP.TabIndex = 90
+        Me.lblCP.Text = "CP:"
+        '
         'lblTurnotxt
         '
         Me.lblTurnotxt.AutoSize = True
         Me.lblTurnotxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTurnotxt.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblTurnotxt.Location = New System.Drawing.Point(544, 9)
+        Me.lblTurnotxt.Location = New System.Drawing.Point(925, 80)
         Me.lblTurnotxt.Name = "lblTurnotxt"
         Me.lblTurnotxt.Size = New System.Drawing.Size(0, 15)
         Me.lblTurnotxt.TabIndex = 48
@@ -283,7 +358,7 @@ Partial Class PagosCreditoEDC
         Me.lblTurno.AutoSize = True
         Me.lblTurno.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTurno.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblTurno.Location = New System.Drawing.Point(503, 8)
+        Me.lblTurno.Location = New System.Drawing.Point(884, 79)
         Me.lblTurno.Name = "lblTurno"
         Me.lblTurno.Size = New System.Drawing.Size(42, 15)
         Me.lblTurno.TabIndex = 40
@@ -456,7 +531,7 @@ Partial Class PagosCreditoEDC
         '
         Me.btnLimpiar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
         Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnLimpiar.Location = New System.Drawing.Point(1092, 389)
+        Me.btnLimpiar.Location = New System.Drawing.Point(985, 389)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(70, 52)
         Me.btnLimpiar.TabIndex = 107
@@ -476,7 +551,7 @@ Partial Class PagosCreditoEDC
         '
         Me.btnCobrar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.cash_register_40px
         Me.btnCobrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnCobrar.Location = New System.Drawing.Point(985, 389)
+        Me.btnCobrar.Location = New System.Drawing.Point(1097, 389)
         Me.btnCobrar.Name = "btnCobrar"
         Me.btnCobrar.Size = New System.Drawing.Size(70, 52)
         Me.btnCobrar.TabIndex = 106
@@ -902,4 +977,10 @@ Partial Class PagosCreditoEDC
     Friend WithEvents lblEmail As Label
     Friend WithEvents lblNombre As Label
     Friend WithEvents btnLimpiar As Button
+    Friend WithEvents lblRegFiscaltxt As Label
+    Friend WithEvents lblRegFiscal As Label
+    Friend WithEvents lblCPtxt As Label
+    Friend WithEvents lblCP As Label
+    Friend WithEvents lblCFDItxt As Label
+    Friend WithEvents lblCFDI As Label
 End Class

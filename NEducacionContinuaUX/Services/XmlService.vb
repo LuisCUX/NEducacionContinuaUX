@@ -46,14 +46,14 @@ Public Class XmlService
     End Function
 
     Function cadenaNotaCredito(listaConceptos As List(Of Concepto), listaUUID As List(Of String), montoTotal As String, subtotal As String, descuento As String, fecha As String, folio As String, serie As String, noCertificado As String, RFC As String, NombreCompleto As String, usoCFDI As String)
-        Dim cadena As String = $"||3.3|{serie}|{folio}|{fecha}|99|{noCertificado}|{Format(CDec(montoTotal), "#####0.00")}|{Format(CDec(descuento), "#####0.00")}|MXN|{Format(CDec(subtotal), "#####0.00")}|E|PUE|91190|01"
+        Dim cadena As String = $"||3.3|{serie}|{folio}|{fecha}|99|{noCertificado}|{CDec(montoTotal)}|{CDec(descuento)}|MXN|{CDec(subtotal)}|E|PUE|91190|01"
         For Each item As String In listaUUID
             cadena = $"{cadena}|{item}"
         Next
         cadena = $"{cadena}|{ConfigurationSettings.AppSettings.Get("RFC").ToString()}|{ConfigurationSettings.AppSettings.Get("NombreEmpresa").ToString()}|{ConfigurationSettings.AppSettings.Get("RegimenFiscal").ToString()}|{RFC}|{NombreCompleto}|{usoCFDI}"
 
         For Each concepto As Concepto In listaConceptos
-            cadena = $"{cadena}|{concepto.cveClase}|{concepto.Cantidad}|{concepto.cveUnidad}|actividad|{concepto.NombreConcepto}|{concepto.costoUnitario}|{concepto.costoTotal}|{concepto.descuento}"
+            cadena = $"{cadena}|{concepto.cveClase}|{concepto.Cantidad}|ACT|actividad|{concepto.NombreConcepto}|{concepto.costoUnitario}|{concepto.costoTotal}|{concepto.descuento}"
         Next
 
         cadena = $"{cadena}||"
@@ -270,9 +270,9 @@ Public Class XmlService
                 wr.WriteAttributeString("Moneda", Nothing, "MXN")
                 wr.WriteAttributeString("Version", Nothing, ConfigurationSettings.AppSettings.Get("VersionSAT").ToString())
                 wr.WriteAttributeString("TipoDeComprobante", Nothing, "E")
-                wr.WriteAttributeString("Total", Nothing, Total)
-                wr.WriteAttributeString("SubTotal", Nothing, SubTotal)
-                wr.WriteAttributeString("Descuento", Nothing, Descuento)
+                wr.WriteAttributeString("Total", Nothing, Format(CDec(Total), "#####0.00"))
+                wr.WriteAttributeString("SubTotal", Nothing, Format(CDec(SubTotal), "#####0.00"))
+                wr.WriteAttributeString("Descuento", Nothing, Format(CDec(Descuento), "#####0.00"))
                 wr.WriteAttributeString("Fecha", Nothing, Fecha)
                 wr.WriteAttributeString("Sello", Nothing, Sello)
                 wr.WriteAttributeString("Certificado", Nothing, Certificado)
@@ -285,11 +285,13 @@ Public Class XmlService
 
                 wr.WriteStartElement("cfdi", "CfdiRelacionados", Nothing) ''NODO CFDI RELACIONADOS
                 wr.WriteAttributeString("TipoRelacion", Nothing, "01")
-                wr.WriteStartElement("cfdi", "CfdiRelacionado", Nothing) ''NODO CFDI RELACIONADO
+
                 For Each item As String In listaUUID
+                    wr.WriteStartElement("cfdi", "CfdiRelacionado", Nothing) ''NODO CFDI RELACIONADO
                     wr.WriteAttributeString("UUID", Nothing, item)
+                    wr.WriteEndElement() ''END CFDI RELACIONADO
                 Next
-                wr.WriteEndElement() ''END CFDI RELACIONADO
+
                 wr.WriteEndElement() ''END CFDI RELACIONADOS
 
                 wr.WriteStartElement("cfdi", "Emisor", Nothing) ''NODO EMISOR START
@@ -310,7 +312,7 @@ Public Class XmlService
                     wr.WriteStartElement("cfdi", "Concepto", Nothing) ''NODO CONCEPTO START
                     wr.WriteAttributeString("ClaveProdServ", Nothing, concepto.cveClase)
                     wr.WriteAttributeString("Cantidad", Nothing, concepto.Cantidad)
-                    wr.WriteAttributeString("ClaveUnidad", Nothing, concepto.cveUnidad)
+                    wr.WriteAttributeString("ClaveUnidad", Nothing, "ACT")
                     wr.WriteAttributeString("Unidad", Nothing, "actividad")
                     wr.WriteAttributeString("Descripcion", Nothing, concepto.NombreConcepto)
                     wr.WriteAttributeString("ValorUnitario", Nothing, concepto.costoUnitario)

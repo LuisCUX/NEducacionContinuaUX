@@ -35,9 +35,9 @@ Public Class PagosCreditoEDC
         ElseIf (tipoMatricula = "UX") Then
             va.buscarMatriculaUX(Matricula, panelDatos, panelCobroCredito, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt)
         ElseIf (tipoMatricula = "EX") Then
-            va.buscarMatriculaEX(Matricula, panelDatos, panelCobroCredito, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt)
+            va.buscarMatriculaEX(Matricula, panelDatos, panelCobroCredito, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt, lblCPtxt, lblRegFiscaltxt, lblCFDItxt)
         ElseIf (tipoMatricula = "EC") Then
-            va.buscarMatriculaEC(Matricula, panelDatos, panelCobroCredito, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt)
+            va.buscarMatriculaEC(Matricula, panelDatos, panelCobroCredito, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt, lblCPtxt, lblRegFiscaltxt, lblCFDItxt)
         End If
         Dim tableFacturasCredito As DataTable = db.getDataTableFromSQL($"SELECT ID, UPPER('FOLIO: ' + Folio + ' - FECHA: ' + CAST(Fecha AS VARCHAR(MAX))) As Descripcion FROM ing_Creditos WHERE Matricula = '{Matricula}' AND Activo = 1")
         ComboboxService.llenarCombobox(cbFactura, tableFacturasCredito, "ID", "Descripcion")
@@ -64,6 +64,12 @@ Public Class PagosCreditoEDC
         If (gridConceptosFactura.Rows.Count = 0) Then
             MessageBox.Show("Seleccione una factura a agregar")
             Exit Sub
+        End If
+
+        If (GridFacturaSeleccionada.Rows.Count > 0) Then
+            GridFacturaSeleccionada.Rows.Clear()
+            GridFacturaPagos.Rows.Clear()
+            lblTotal.Text = ""
         End If
         Dim IDFactura As Integer = cbFactura.SelectedValue
         Dim tableInfoPagos As DataTable = db.getDataTableFromSQL($"SELECT ID, Folio, Fecha, Cantidad, Cantidad_Abonada, NumAbonos FROM ing_Creditos WHERE ID = {IDFactura}")
@@ -149,7 +155,7 @@ Public Class PagosCreditoEDC
         End If
         Dim montoNuevo As Decimal = montoAnterior - CantidadAbonada
         Dim folioFiscal As String = db.exectSQLQueryScalar($"SELECT FolioFiscal FROM ing_Creditos WHERE ID = {IDCredito}")
-        Dim IDXML As Integer = pc.cobroCredito(IDCredito, CantidadAbonada, montoAnterior, montoNuevo, Matricula, noPago, lblRFCtxt.Text, lblNombretxt.Text, folioFiscal, noPago, cbFormaPago.SelectedValue)
+        Dim IDXML As Integer = pc.cobroCredito(IDCredito, CantidadAbonada, montoAnterior, montoNuevo, Matricula, noPago, lblRFCtxt.Text, lblNombretxt.Text, folioFiscal, noPago, cbFormaPago.SelectedValue, lblRegFiscaltxt.Text, lblCPtxt.Text)
 
         ''---------------------------------------------------------REGISTRO DE FORMA DE PAGO---------------------------------------------------------
         If (IDXML > 0) Then

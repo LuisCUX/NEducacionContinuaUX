@@ -35,9 +35,9 @@ Public Class MainCobrosDiferidosEDC
             Me.Reiniciar()
             Exit Sub
         ElseIf (tipoMatricula = "EX") Then
-            va.buscarMatriculaEX(Matricula, panelDatos, panelCobros, lblNombretxt, lblEmailtxt, lblC, lblT, lblRFCtxt)
+            va.buscarMatriculaEX(Matricula, panelDatos, panelCobros, lblNombretxt, lblEmailtxt, lblC, lblT, lblRFCtxt, lblCP, lblRegFiscal, lblCFDItxt)
         Else
-            MessageBox.Show("Ingrese una matricula externa")
+            MessageBox.Show("Ingrese una clave externa")
             txtMatricula.Clear()
             Exit Sub
         End If
@@ -167,13 +167,13 @@ Public Class MainCobrosDiferidosEDC
     Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
         For x = 0 To GridConceptos.Rows.Count - 1
             If (GridConceptos.Rows(x).Cells(2).Value = txtBusquedaMatricula.Text) Then
-                MessageBox.Show("La matricula ingresada ya se encuentra lista, ingrese una matricula diferente")
+                MessageBox.Show("La clave ingresada ya se encuentra lista, ingrese una clave diferente")
                 Exit Sub
             End If
         Next
         Dim tipoMatriculaB As String = va.validarMatricula(txtBusquedaMatricula.Text)
         If (txtBusquedaMatricula.Text = "") Then
-            MessageBox.Show("Por favor ingrese una matricula")
+            MessageBox.Show("Por favor ingrese una clave")
             Exit Sub
         ElseIf (tipoMatricula = "False") Then
             txtBusquedaMatricula.Clear()

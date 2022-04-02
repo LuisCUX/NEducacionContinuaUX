@@ -1,11 +1,13 @@
 ﻿Public Class GestionExternosController
     Dim db As DataBaseService = New DataBaseService()
 
-    Sub loadComboboxExternos(cbEstadoInfo As ComboBox, cbEstadoFiscal As ComboBox, cbEstadoEdit As ComboBox, cbEstadoFiscalEdit As ComboBox, cbExternos As ComboBox, cbUX As ComboBox)
+    Sub loadComboboxExternos(cbEstadoInfo As ComboBox, cbEstadoFiscal As ComboBox, cbEstadoEdit As ComboBox, cbEstadoFiscalEdit As ComboBox, cbExternos As ComboBox, cbUX As ComboBox, cbEstadoEC As ComboBox, cbEstadoFiscalEC As ComboBox)
         Dim tableEstadosI As DataTable = db.getDataTableFromSQL("SELECT id_estado, nombre FROM portal_estado")
         Dim tableEstadosF As DataTable = db.getDataTableFromSQL("SELECT id_estado, nombre FROM portal_estado")
         Dim tableEstadosED As DataTable = db.getDataTableFromSQL("SELECT id_estado, nombre FROM portal_estado")
         Dim tableEstadosFED As DataTable = db.getDataTableFromSQL("SELECT id_estado, nombre FROM portal_estado")
+        Dim tableEstadosEC As DataTable = db.getDataTableFromSQL("SELECT id_estado, nombre FROM portal_estado")
+        Dim tableEstadosFEC As DataTable = db.getDataTableFromSQL("SELECT id_estado, nombre FROM portal_estado")
         Dim tableExternos As DataTable = db.getDataTableFromSQL("SELECT CL.clave_cliente, UPPER(C.nombre + ' ' + E.paterno + ' ' + E.materno) As NombreExterno FROM portal_registroExterno AS E
                                                                  INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
                                                                  INNER JOIN portal_clave AS CL ON CL.id_cliente = C.id_cliente
@@ -21,6 +23,8 @@
         ComboboxService.llenarCombobox(cbEstadoFiscal, tableEstadosF, "id_estado", "nombre")
         ComboboxService.llenarCombobox(cbEstadoEdit, tableEstadosED, "id_estado", "nombre")
         ComboboxService.llenarCombobox(cbEstadoFiscalEdit, tableEstadosFED, "id_estado", "nombre")
+        ComboboxService.llenarCombobox(cbEstadoEC, tableEstadosEC, "id_estado", "nombre")
+        ComboboxService.llenarCombobox(cbEstadoFiscalEC, tableEstadosFEC, "id_estado", "nombre")
         ComboboxService.llenarCombobox(cbExternos, tableExternos, "clave_cliente", "NombreExterno")
         ComboboxService.llenarCombobox(cbUX, tableUX, "Matricula", "NombreAlumno")
     End Sub
@@ -31,14 +35,14 @@
         Dim existsEDC As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_catMatriculasUX WHERE MatriculaUX = '{Matricula}'")
 
         If (exists = Nothing) Then
-            MessageBox.Show("La matricula ingresada no existe, favor de ingresar una matricula valida")
+            MessageBox.Show("La clave ingresada no existe, favor de ingresar una clave valida")
             RegistroExternosEDC.matriculaExterna = False
             RegistroExternosEDC.Reiniciar()
             Exit Sub
         End If
 
         If (sit_esc = "B") Then
-            MessageBox.Show("La matricula ingresada se encuentra dada de baja, favor de ingresar una matricula valida")
+            MessageBox.Show("La clave ingresada se encuentra dada de baja, favor de ingresar una clave valida")
             RegistroExternosEDC.matriculaExterna = False
             RegistroExternosEDC.Reiniciar()
             Exit Sub
@@ -46,7 +50,7 @@
 
         If (existsEDC > 0) Then
             Dim matriculaEX As String = db.exectSQLQueryScalar($"SELECT MatriculaEX FROM ing_catMatriculasUX WHERE MatriculaUX = '{Matricula}'")
-            MessageBox.Show($"La matricula ingresada ya esta dada de alta en educacion continua con la matricula externa: {matriculaEX}")
+            MessageBox.Show($"La clave ingresada ya esta dada de alta en educacion continua con la clave externa: {matriculaEX}")
             RegistroExternosEDC.matriculaExterna = False
             RegistroExternosEDC.Reiniciar()
         End If
@@ -81,7 +85,7 @@
 
     Sub buscarDatosMatriculaExterna(Matricula As String, txtNombre As TextBox, txtAP_Pat As TextBox, txtAP_Mat As TextBox, txtDireccion As TextBox, txtColonia As TextBox, cbEstado As ComboBox, cbMunicipio As ComboBox, txtCorreo As TextBox, txtCP As TextBox, txtTelefono As TextBox,
                                     txtRFC As TextBox, txtNR As TextBox, txtDireccionF As TextBox, txtColoniaF As TextBox, cbEstadoF As ComboBox, cbMunicipioF As ComboBox, txtCiudadF As TextBox, txtCorreoF As TextBox, txtCPF As TextBox, txtTelefonoF As TextBox, chbDatosFiscales As CheckBox,
-                                    panelDatosPersonalesEdit As Panel, panelDatosFiscalesEdit As Panel, btnGuardarEdit As Button, btnSalirEd As Button)
+                                    panelDatosPersonalesEdit As Panel, panelDatosFiscalesEdit As Panel, btnGuardarEdit As Button, btnSalirEd As Button, btnLimpiar As Button)
 
         Dim MatUX As String = db.exectSQLQueryScalar($"SELECT MatriculaUX FROM ing_catMatriculasUX WHERE MatriculaEX = '{Matricula}'")
 
@@ -90,7 +94,7 @@
                                                                INNER JOIN portal_municipio AS M ON M.id_municipio = C.id_municipio
                                                                WHERE RE.clave_cliente = '{Matricula}'")
         If (tableDatos.Rows.Count() = 0) Then
-            MessageBox.Show("La matricula ingresada no existe, ingrese una matricula valida")
+            MessageBox.Show("La clave ingresada no existe, ingrese una clave valida")
             RegistroExternosEDC.Reiniciar()
             Return
         End If
@@ -166,6 +170,72 @@
         End If
     End Sub
 
+    Sub buscarDatosMatriculaEc(Matricula As String, txtNombre As TextBox, txtAP_Pat As TextBox, txtAP_Mat As TextBox, txtDireccion As TextBox, txtColonia As TextBox, cbEstado As ComboBox, cbMunicipio As ComboBox, txtCorreo As TextBox, txtCP As TextBox, txtTelefono As TextBox,
+                                    txtRFC As TextBox, txtNR As TextBox, txtDireccionF As TextBox, txtColoniaF As TextBox, cbEstadoF As ComboBox, cbMunicipioF As ComboBox, txtCiudadF As TextBox, txtCorreoF As TextBox, txtCPF As TextBox, txtTelefonoF As TextBox, chbDatosFiscales As CheckBox,
+                                    panelDatosPersonalesEdit As Panel, panelDatosFiscalesEdit As Panel, btnGuardarEdit As Button, btnSalirEd As Button, btnLimpiar As Button)
+
+        Dim tableDatos As DataTable = db.getDataTableFromSQL($"SELECT C.nombre, RC.apellido_paterno, RC.apellido_materno, C.calle, C.colonia, E.id_estado, M.id_municipio, C.correo, C.cp, RC.telefono FROM portal_cliente AS C
+                                                               INNER JOIN portal_registroCongreso AS RC ON RC.id_cliente = C.id_cliente
+                                                               INNER JOIN portal_municipio AS M ON M.id_municipio = C.id_municipio
+                                                               INNER JOIN portal_estado AS E ON E.id_estado = M.id_estado  
+                                                               WHERE RC.clave_cliente = '{Matricula}'")
+        If (tableDatos.Rows.Count() = 0) Then
+            MessageBox.Show("La clave ingresada no existe, ingrese una clave valida")
+            RegistroExternosEDC.Reiniciar()
+            Return
+        End If
+        For Each item As DataRow In tableDatos.Rows
+            txtNombre.Text = item("nombre")
+            txtAP_Pat.Text = item("apellido_paterno")
+            txtAP_Mat.Text = item("apellido_materno")
+            txtDireccion.Text = item("calle")
+            txtColonia.Text = item("colonia")
+            cbEstado.SelectedValue = item("id_estado")
+            RegistroExternosEDC.commitChangeEstadoEC()
+            cbMunicipio.SelectedValue = item("id_municipio")
+            txtCorreo.Text = item("correo")
+            txtCP.Text = item("cp")
+            txtTelefono.Text = item("telefono")
+        Next
+
+        panelDatosPersonalesEdit.Visible = True
+        chbDatosFiscales.Visible = True
+        btnGuardarEdit.Visible = True
+        btnSalirEd.Visible = True
+        btnLimpiar.Visible = True
+
+
+        Dim IDRegistroCongreso As Integer = db.exectSQLQueryScalar($"SELECT id_registro FROM portal_registroCongreso WHERE clave_cliente = '{Matricula}'")
+        Dim DatosFiscales As Integer = db.exectSQLQueryScalar($"SELECT id_rfc FROM portal_rcRFC WHERE id_registro = {IDRegistroCongreso}")
+        If (DatosFiscales <> 2) Then
+            Dim tableDatosFiscales As DataTable = db.getDataTableFromSQL($"SELECT RFC.rfc, RC.direccion, RC.colonia, E.id_estado, M.id_municipio, RC.localidad, RC.razonsocial, RC.correo, RC.telefono, RC.cp FROM portal_rcRFC AS RC 
+                                                                           INNER JOIN portal_catRFC AS RFC ON RFC.id_rfc = RC.id_rfc
+                                                                           INNER JOIN portal_municipio AS M ON M.id_municipio = RC.id_municipio
+                                                                           INNER JOIN portal_estado AS E ON E.id_estado = M.id_estado
+                                                                           WHERE RC.id_registro = {IDRegistroCongreso}")
+
+            For Each item As DataRow In tableDatosFiscales.Rows
+                txtRFC.Text = item("rfc")
+                txtNR.Text = item("razonsocial")
+                txtDireccionF.Text = item("direccion")
+                txtColoniaF.Text = item("colonia")
+                cbEstadoF.SelectedValue = item("id_estado")
+                RegistroExternosEDC.commitChangeEstadoFEC()
+                cbMunicipioF.SelectedValue = item("id_municipio")
+                txtCiudadF.Text = item("localidad")
+                txtCorreoF.Text = item("correo")
+                txtCPF.Text = item("cp")
+                txtTelefonoF.Text = item("telefono")
+            Next
+
+            chbDatosFiscales.Checked = True
+            panelDatosFiscalesEdit.Visible = True
+        Else
+            chbDatosFiscales.Checked = False
+            panelDatosFiscalesEdit.Visible = False
+        End If
+    End Sub
+
     Sub RegistroExterno(Matricula As Boolean, MatriculaUX As String, Correo As String, Nombre As String, Calle As String, Colonia As String, CP As String, IDMunicipio As Integer, tipo_Persona As Integer, telefono As String, IDNacionalidad As Integer, ap_pat As String, ap_mat As String, clave_cliente As String, datosFiscales As Boolean,
                         RFC As String, DireccionF As String, NumeroF As String, ColoniaF As String, CPF As String, CiudadF As String, TelefonoF As String, CorreoF As String, IDMunicipioF As Integer, RazonSocialF As String)
         Try
@@ -211,6 +281,34 @@
                 idRFC = db.insertAndGetIDInserted($"INSERT INTO portal_catRFC (rfc, direccion, numero, colonia, cp, poblacion, localidad, telefono, correo, id_municipio, razonsocial) VALUES ('{RFC}', '{DireccionF}', '', '{ColoniaF}', '{CPF}', '{CiudadF}', '{CiudadF}', '{TelefonoF}', '{CorreoF}', {IDMunicipioF}, '{RazonSocialF}')")
                 db.execSQLQueryWithoutParams($"UPDATE portal_reRFC SET id_rfc = {idRFC} WHERE id_registro = {idregistro}")
             End If
+            db.commitTransaction()
+            MessageBox.Show("Datos modificados correctamente")
+            RegistroExternosEDC.Reiniciar()
+        Catch ex As Exception
+            db.rollBackTransaction()
+            MessageBox.Show(ex.Message)
+        End Try
+    End Sub
+
+    Sub EdicionEC(Matricula As String, Correo As String, Nombre As String, Calle As String, Colonia As String, CP As String, IDMunicipio As Integer, tipo_Persona As Integer, telefono As String, IDNacionalidad As Integer, ap_pat As String, ap_mat As String, datosFiscales As Boolean,
+                        RFC As String, DireccionF As String, NumeroF As String, ColoniaF As String, CPF As String, CiudadF As String, TelefonoF As String, CorreoF As String, IDMunicipioF As Integer, RazonSocialF As String)
+        Try
+            db.startTransaction()
+            Dim idcliente As Integer = db.exectSQLQueryScalar($"SELECT id_cliente FROM portal_registroCongreso WHERE clave_cliente = '{Matricula}'")
+            Dim idregistro As Integer = db.exectSQLQueryScalar($"SELECT id_registro FROM portal_registroCongreso WHERE clave_cliente = '{Matricula}'")
+            Dim idRFC As Integer = db.exectSQLQueryScalar($"SELECT id_rfc FROM portal_rcRFC WHERE id_registro = {idregistro}")
+            db.execSQLQueryWithoutParams($"UPDATE portal_cliente SET correo = '{Correo}', nombre = '{Nombre}', calle = '{Calle}', colonia = '{Colonia}', cp = '{CP}', id_municipio = {IDMunicipio}, telefono = '{telefono}' WHERE id_cliente = '{idcliente}'")
+            db.execSQLQueryWithoutParams($"UPDATE portal_registroCongreso SET apellido_paterno = '{ap_pat}', apellido_materno = '{ap_mat}' WHERE id_registro = {idregistro}")
+
+
+            If (idRFC > 1) Then
+                db.execSQLQueryWithoutParams($"UPDATE portal_rcRFC SET direccion = '{DireccionF}', colonia = '{ColoniaF}', cp = '{CPF}', poblacion = '{CiudadF}', localidad = '{CiudadF}', telefono = '{TelefonoF}', correo = '{CorreoF}', id_municipio = '{IDMunicipioF}', razonsocial = '{RazonSocialF}' WHERE id_rfc = {idRFC}")
+            ElseIf (idRFC = 1) Then
+                idRFC = db.insertAndGetIDInserted($"INSERT INTO portal_catRFC (rfc, direccion, numero, colonia, cp, poblacion, localidad, telefono, correo, id_municipio, razonsocial) VALUES ('{RFC}', '{DireccionF}', '', '{ColoniaF}', '{CPF}', '{CiudadF}', '{CiudadF}', '{TelefonoF}', '{CorreoF}', {IDMunicipioF}, '{RazonSocialF}')")
+                db.execSQLQueryWithoutParams($"UPDATE portal_reRFC SET id_rfc = {idRFC} WHERE id_registro = {idregistro}")
+            End If
+
+
             db.commitTransaction()
             MessageBox.Show("Datos modificados correctamente")
             RegistroExternosEDC.Reiniciar()
@@ -278,7 +376,7 @@
 
         If (IDCliente <> 0) Then
             Dim MatriculaEX As String = db.exectSQLQueryScalar($"SELECT clave_cliente FROM portal_clave WHERE id_cliente = {IDCliente}")
-            Return {False, $"El correo ingresado ya se encuentra registrado con la matricula {MatriculaEX}"}
+            Return {False, $"El correo ingresado ya se encuentra registrado con la clave {MatriculaEX}"}
         End If
         Return {True, ""}
     End Function

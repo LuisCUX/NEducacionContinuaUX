@@ -7,7 +7,7 @@
         Dim exists As Integer = db.exectSQLQueryScalar($"SELECT id_clave FROM portal_clave WHERE clave_cliente = '{Matricula}'")
 
         If (exists < 1) Then
-            MessageBox.Show("La matricula ingresada no existe, favor de ingresar una matricula valida")
+            MessageBox.Show("La clave ingresada no existe, favor de ingresar una clave valida")
             AsignacionPlanesEDC.Reiniciar()
             Exit Sub
         End If

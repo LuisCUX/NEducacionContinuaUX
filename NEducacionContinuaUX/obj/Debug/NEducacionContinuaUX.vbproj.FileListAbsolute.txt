@@ -117,3 +117,5 @@ C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEdu
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.CambioFormaPagoEDC.resources
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.CancelacionFacturasEDC.resources
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.ObservacionesEDC.resources
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.ModalNotasCreditoEDC.resources
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.RegistroTipoPagosOpcionales.resources

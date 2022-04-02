@@ -28,7 +28,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\192.168.1.241\ti\NEducacionContinua\Instalador\</InstallUrl>
     <TargetCulture>es-MX</TargetCulture>
-    <ApplicationRevision>57</ApplicationRevision>
+    <ApplicationRevision>56</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -88,6 +88,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.8.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
@@ -198,6 +201,7 @@
     <Compile Include="Controllers\ConceptHandlerController.vb" />
     <Compile Include="Controllers\GestionExternosController.vb" />
     <Compile Include="Controllers\NotaCreditoController.vb" />
+    <Compile Include="Controllers\ObservacionesController.vb" />
     <Compile Include="Controllers\PagosCreditoController.vb" />
     <Compile Include="Controllers\PagosOpcionalesController.vb" />
     <Compile Include="Controllers\PlanesController.vb" />
@@ -236,6 +240,7 @@
     <Compile Include="Services\UtilitiesService.vb" />
     <Compile Include="Services\ValidadorCobrosService.vb" />
     <Compile Include="Services\XmlService.vb" />
+    <Compile Include="Services\XmlService40.vb" />
     <Compile Include="Views\AsignacionPlanesEDC.Designer.vb">
       <DependentUpon>AsignacionPlanesEDC.vb</DependentUpon>
     </Compile>
@@ -338,6 +343,12 @@
     <Compile Include="Views\ModalDescuento.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Views\ModalNotasCreditoEDC.Designer.vb">
+      <DependentUpon>ModalNotasCreditoEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModalNotasCreditoEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\ModificacionCostosPlanesEDC.Designer.vb">
       <DependentUpon>ModificacionCostosPlanesEDC.vb</DependentUpon>
     </Compile>
@@ -390,6 +401,12 @@
       <DependentUpon>RegistroExternosEDC.vb</DependentUpon>
     </Compile>
     <Compile Include="Views\RegistroExternosEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\RegistroTipoPagosOpcionales.Designer.vb">
+      <DependentUpon>RegistroTipoPagosOpcionales.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegistroTipoPagosOpcionales.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\ReimpresionFacturasEDC.Designer.vb">
@@ -469,6 +486,9 @@
     <EmbeddedResource Include="Views\ModalDescuento.resx">
       <DependentUpon>ModalDescuento.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\ModalNotasCreditoEDC.resx">
+      <DependentUpon>ModalNotasCreditoEDC.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\ModificacionCostosPlanesEDC.resx">
       <DependentUpon>ModificacionCostosPlanesEDC.vb</DependentUpon>
     </EmbeddedResource>
@@ -495,6 +515,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\RegistroExternosEDC.resx">
       <DependentUpon>RegistroExternosEDC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\RegistroTipoPagosOpcionales.resx">
+      <DependentUpon>RegistroTipoPagosOpcionales.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ReimpresionFacturasEDC.resx">
       <DependentUpon>ReimpresionFacturasEDC.vb</DependentUpon>
@@ -587,6 +610,7 @@
     <Content Include="EDCLogo.ico" />
     <Content Include="logo %281%29.ico" />
     <Content Include="logo.ico" />
+    <None Include="Resources\card_exchange_40px.png" />
     <None Include="Resources\EDCLogo.png" />
     <None Include="Resources\send_40px.png" />
     <None Include="Resources\print_40px.png" />

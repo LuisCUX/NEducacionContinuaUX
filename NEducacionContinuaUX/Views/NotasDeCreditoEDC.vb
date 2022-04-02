@@ -25,7 +25,20 @@ Public Class NotasDeCreditoEDC
     End Sub
 
     Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
+        If (txtMonto.Text = "" Or NUPorcentaje.Value = 0) Then
+            MessageBox.Show("Elija un porcentaje de devolución o bonificación")
+            Exit Sub
+        End If
+
         Dim ID As Integer = cbConcepto.SelectedValue
+
+        For x = 0 To GridNota.Rows.Count - 1
+            If (ID = GridNota.Rows(x).Cells(0).Value) Then
+                MessageBox.Show("El concepto seleccionado ya fue ingresado")
+                Exit Sub
+            End If
+        Next
+
         Dim Descripcion As String
         Dim Total As Decimal = CDec(txtMonto.Text)
         Dim IVA As Decimal = 0.00
@@ -33,9 +46,11 @@ Public Class NotasDeCreditoEDC
         Dim FolioFactura As String = cbConcepto.Text.Substring(7, 7)
         If (TipoNota = "NDCRC") Then
             Descripcion = $"BONIFICACION DE {db.exectSQLQueryScalar($"SELECT Descripcion FROM ing_PlanesRecargos WHERE ID = {ID}")}"
+        ElseIf (TipoNota = "NDCDE") Then
+            Descripcion = $"BONIFICACION DE {db.exectSQLQueryScalar($"SELECT Nombre_Concepto FROM ing_xmlTimbradosConceptos WHERE ID = {ID}")}"
         End If
 
-        GridNota.Rows.Add(ID, Descripcion, Total, IVA, TipoNota, FolioFactura)
+        GridNota.Rows.Add(ID, Descripcion, Total, IVA, TipoNota, FolioFactura, NUPorcentaje.Value, lblTotal.Text)
         Me.actualizarTotal()
     End Sub
 
@@ -51,6 +66,17 @@ Public Class NotasDeCreditoEDC
                                                                        INNER JOIN ing_xmlTimbrados AS T ON T.Folio = R.Folio
                                                                        WHERE Matricula_Clave = '{Matricula}' AND R.Activo = 0 AND R.Folio IS NOT NULL AND R.Autorizado = 0 AND R.Condonado = 0")
             ComboboxService.llenarCombobox(cbConcepto, tableConceptos, "ID", "TextoFactura")
+        ElseIf (cbTipoNota.SelectedValue = 2) Then
+            Dim tableConceptos As DataTable = db.getDataTableFromSQL($"(SELECT TC.ID, UPPER('Folio:' + ' ' + T.Folio + ' Fecha: ' + T.Fecha_Pago + ' - [' + TC.Nombre_Concepto + ']')As TextoFactura FROM ing_xmlTimbradosConceptos AS TC
+                                                                       INNER JOIN ing_xmlTimbrados AS T ON T.ID = TC.XMLID AND T.Tipo_Pago != 'NOTA DE CREDITO'
+                                                                       WHERE T.Matricula_Clave = '{Matricula}' AND TC.Nota = 0)
+                                                                       UNION
+                                                                       (SELECT TC.ID, UPPER('Folio:' + ' ' + T.Folio + ' Fecha: ' + T.Fecha_Pago + ' - [' + TC.Nombre_Concepto + ']')As TextoFactura
+                                                                       FROM ing_NotasCreditoPorcentajes AS NP
+                                                                       INNER JOIN ing_xmlTimbradosConceptos AS TC ON TC.IDConcepto = NP.IDConcepto AND TC.Clave_Concepto = NP.IDClavePago
+                                                                       INNER JOIN ing_xmlTimbrados AS T ON TC.XMLID = T.ID
+                                                                       WHERE NP.Activo = 1 AND T.Tipo_Pago != 'NOTA DE CREDITO' AND NP.Matricula = '{Matricula}')")
+            ComboboxService.llenarCombobox(cbConcepto, tableConceptos, "ID", "TextoFactura")
         End If
     End Sub
 
@@ -65,8 +91,23 @@ Public Class NotasDeCreditoEDC
             lblTotal.Text = Format(CDec(db.exectSQLQueryScalar($"SELECT Monto FROM ing_PlanesRecargos WHERE ID = {cbConcepto.SelectedValue}")), "#####0.00")
             txtMonto.Visible = True
             NUPorcentaje.Visible = True
-            txtMonto.Text = CDec(lblTotal.Text)
-        End If
+            txtMonto.Clear()
+            NUPorcentaje.Value = 0
+        ElseIf (cbTipoNota.SelectedValue = 2) Then
+
+            Dim IDNota As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_NotasCreditoPorcentajes WHERE IDXMLConcepto = {cbConcepto.SelectedValue}")
+            If (IDNota > 0) Then
+                lblTotal.Text = Format(CDec(db.exectSQLQueryScalar($"SELECT Importe_Restante FROM ing_NotasCreditoPorcentajes WHERE ID = {IDNota}")), "#####0.00")
+            Else
+                lblTotal.Text = Format(CDec(db.exectSQLQueryScalar($"SELECT Total FROM ing_xmlTimbradosConceptos WHERE ID = {cbConcepto.SelectedValue}")), "#####0.00")
+            End If
+
+
+            txtMonto.Visible = True
+                NUPorcentaje.Visible = True
+                txtMonto.Clear()
+                NUPorcentaje.Value = 0
+            End If
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
@@ -79,9 +120,9 @@ Public Class NotasDeCreditoEDC
         ElseIf (tipoMatricula = "UX") Then
             va.buscarMatriculaUX(Matricula, panelDatos, panelGridNota, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt)
         ElseIf (tipoMatricula = "EX") Then
-            va.buscarMatriculaEX(Matricula, panelDatos, panelGridNota, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt)
+            va.buscarMatriculaEX(Matricula, panelDatos, panelGridNota, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt, lblCPtxt, lblRegFiscaltxt, lblCFDItxt)
         ElseIf (tipoMatricula = "EC") Then
-            va.buscarMatriculaEC(Matricula, panelDatos, panelGridNota, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt)
+            va.buscarMatriculaEC(Matricula, panelDatos, panelGridNota, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt, lblCPtxt, lblRegFiscaltxt, lblCFDItxt)
         End If
     End Sub
 
@@ -92,9 +133,13 @@ Public Class NotasDeCreditoEDC
     End Sub
 
     Private Sub txtPorcentaje_TextChanged(sender As Object, e As EventArgs) Handles NUPorcentaje.TextChanged
-        Dim total As Decimal = CDec(lblTotal.Text)
-        total = (total / 100) * Convert.ToDouble(NUPorcentaje.Text)
-        txtMonto.Text = total
+        Try
+            Dim total As Decimal = CDec(lblTotal.Text)
+            total = (total / 100) * Convert.ToDouble(NUPorcentaje.Text)
+            txtMonto.Text = total
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub txtPorcentaje_KeyPress(sender As Object, e As KeyPressEventArgs) Handles NUPorcentaje.KeyPress
@@ -116,18 +161,49 @@ Public Class NotasDeCreditoEDC
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+        If (GridNota.Rows.Count = 0) Then
+            MessageBox.Show("Ingrese al menos un concepto")
+            Exit Sub
+        End If
         Dim listaConceptos As New List(Of Concepto)
         Dim listaUUID As New List(Of String)
         Dim listaUUID2 As New List(Of String)
         Dim listaUUIDDistinct As New List(Of String)
+        Dim listaPorcentajes As New List(Of String)
+        Dim listaCostoOrignial As New List(Of String)
         For x = 0 To GridNota.Rows.Count - 1
             If (GridNota.Rows(x).Cells(4).Value = "NDCRC") Then
                 Dim concepto As New Concepto
                 concepto = ch.crearConcepto(GridNota.Rows(x).Cells(0).Value, "REC", Matricula)
                 concepto.NombreConcepto = GridNota.Rows(x).Cells(1).Value
+                concepto.costoTotal = Format(CDec(GridNota.Rows(x).Cells(2).Value), "#####0.00")
+                concepto.costoFinal = Format(CDec(GridNota.Rows(x).Cells(2).Value), "#####0.00")
+                concepto.costoUnitario = Format(CDec(GridNota.Rows(x).Cells(2).Value), "#####0.00")
+                concepto.costoBase = Format(CDec(GridNota.Rows(x).Cells(2).Value), "#####0.00")
                 listaConceptos.Add(concepto)
                 listaUUID.Add(GridNota.Rows(x).Cells(5).Value)
+                listaPorcentajes.Add(GridNota.Rows(x).Cells(6).Value)
+                listaCostoOrignial.Add(GridNota.Rows(x).Cells(7).Value)
+            ElseIf (GridNota.Rows(x).Cells(4).Value = "NDCDE") Then
+                Dim concepto As New Concepto
+                Dim IDConcepto As Integer = db.exectSQLQueryScalar($"SELECT IDConcepto FROM ing_xmlTimbradosConceptos WHERE ID = {GridNota.Rows(x).Cells(0).Value}")
+                Dim tipoConcepto As String = db.exectSQLQueryScalar($"SELECT C.Clave FROM ing_xmlTimbradosConceptos AS T
+                                                                      INNER JOIN ing_CatClavesPagos AS C ON C.ID = T.Clave_Concepto
+                                                                      WHERE T.ID = {GridNota.Rows(x).Cells(0).Value}")
+                concepto = ch.crearConcepto(IDConcepto, tipoConcepto, Matricula)
+                concepto.NombreConcepto = GridNota.Rows(x).Cells(1).Value
+                concepto.costoTotal = Format(CDec(GridNota.Rows(x).Cells(2).Value), "#####0.00")
+                concepto.costoFinal = Format(CDec(GridNota.Rows(x).Cells(2).Value), "#####0.00")
+                concepto.costoUnitario = Format(CDec(GridNota.Rows(x).Cells(2).Value), "#####0.00")
+                concepto.costoBase = Format(CDec(GridNota.Rows(x).Cells(2).Value), "#####0.00")
+                concepto.CostoIvaBase = "0.00000000"
+                If ((concepto.absorbeIVA = True) Or (concepto.consideraIVA = True)) Then
+                    Me.obtenerIVAConcepto(concepto, Format(CDec(GridNota.Rows(x).Cells(2).Value), "#####0.00"))
+                End If
+                listaConceptos.Add(concepto)
                 listaUUID.Add(GridNota.Rows(x).Cells(5).Value)
+                listaPorcentajes.Add(GridNota.Rows(x).Cells(6).Value)
+                listaCostoOrignial.Add(GridNota.Rows(x).Cells(7).Value)
             End If
         Next
         listaUUID2 = listaUUID
@@ -137,7 +213,7 @@ Public Class NotasDeCreditoEDC
             listaUUIDDistinct.Add(folioFiscal)
         Next
 
-        nc.GenerarNotaCredito(listaConceptos, listaUUIDDistinct, listaUUID, lblRFCtxt.Text, lblRFCtxt.Text, "P01", lblTotalNota.Text, lblTotalNota.Text, "0.00", Matricula, cbTipoNota.Text)
+        nc.GenerarNotaCredito(listaConceptos, listaUUIDDistinct, listaUUID2, listaPorcentajes, listaCostoOrignial, lblRFCtxt.Text, lblNombretxt.Text, lblCFDItxt.Text, Matricula, cbTipoNota.Text, lblRegFiscaltxt.Text, lblCPtxt.Text)
     End Sub
 
     Sub actualizarTotal()
@@ -173,7 +249,6 @@ Public Class NotasDeCreditoEDC
                 cbExterno.Text = ""
                 combo_filtro = ""
             End If
-
         Catch ex As Exception
 
         End Try
@@ -216,6 +291,51 @@ Public Class NotasDeCreditoEDC
             If Asc(e.KeyChar) = Keys.Space Then
                 combo_filtro += " "
             End If
+        End If
+    End Sub
+
+    Function obtenerIVAConcepto(concepto As Concepto, costoOriginal As Decimal) As Concepto
+        Dim unitariosiniva As Decimal = (CDec(costoOriginal) / 1.16)
+        Dim IVA As Decimal = costoOriginal - unitariosiniva
+
+        concepto.costoTotal = Format(CDec(unitariosiniva), "#####0.00")
+        concepto.costoFinal = Format(CDec(unitariosiniva), "#####0.00")
+        concepto.costoUnitario = Format(CDec(unitariosiniva), "#####0.00")
+        concepto.costoBase = Format(CDec(unitariosiniva), "#####0.00")
+
+        concepto.costoIVAUnitario = Format(CDec(IVA), "#####0.00")
+        concepto.costoIVATotal = Format(CDec(IVA), "#####0.00")
+        concepto.CostoIvaBase = unitariosiniva
+
+        Return concepto
+    End Function
+
+    Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
+        Try
+            Dim index As Integer
+            index = GridNota.CurrentCell.RowIndex
+            GridNota.Rows.RemoveAt(index)
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
+        Me.Close()
+    End Sub
+
+    Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
+        Me.Reiniciar()
+    End Sub
+
+    Private Sub chb100_CheckedChanged(sender As Object, e As EventArgs) Handles chb100.CheckedChanged
+        If (chb100.Checked = True) Then
+            NUPorcentaje.Enabled = False
+            NUPorcentaje.Value = 100
+        Else
+            txtMonto.Clear()
+            NUPorcentaje.Enabled = True
+            NUPorcentaje.Value = 0
         End If
     End Sub
 End Class

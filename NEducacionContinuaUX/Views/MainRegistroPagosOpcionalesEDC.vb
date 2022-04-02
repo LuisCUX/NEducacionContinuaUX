@@ -7,12 +7,6 @@
         GridPagosOpcionales.DataSource = tablePagos
     End Sub
 
-    Private Sub btnNuevoPago_Click(sender As Object, e As EventArgs) Handles btnNuevoPago.Click
-        ObjectBagService.setItem("tipoVentana", "Nuevo")
-        ModalRegistroPagosOpcionalesEDC.MdiParent = PrincipalView
-        ModalRegistroPagosOpcionalesEDC.Show()
-    End Sub
-
     Sub reloadGrid()
         Dim tablePagos As DataTable = db.getDataTableFromSQL("SELECT P.ID, P.claveProductoServicio, P.Nombre, ('$' + CAST(R.valorUnitario AS varchar(MAX))) As valorUnitario, R.Para FROM ing_PagosOpcionales AS P
                                                               INNER JOIN ing_resPagoOpcionalAsignacion AS R ON R.ID_PagoOpcional = P.ID")
