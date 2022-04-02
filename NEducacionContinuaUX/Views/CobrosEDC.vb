@@ -525,21 +525,30 @@ Public Class CobrosEDC
         listaconceptosFinal = ch.getListaConceptos()
         For Each concepto As Concepto In listaconceptosFinal
             Dim IDClavePago As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatClavesPagos WHERE Clave = '{concepto.claveConcepto}'")
-            Dim tieneAbono As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_Abonos WHERE ID_ClavePago = {IDClavePago} AND IDPago = {concepto.IDConcepto} ORDER BY ID DESC")
+            Dim tieneAbono As Integer = db.exectSQLQueryScalar($"SELECT TOP 1 ID FROM ing_Abonos WHERE ID_ClavePago = {IDClavePago} AND IDPago = {concepto.IDConcepto} ORDER BY ID DESC")
             If (tieneAbono > 0) Then
                 Dim montoRestante As Decimal = db.exectSQLQueryScalar($"SELECT Cantidad_Restante FROM ing_Abonos WHERE ID = {tieneAbono}")
                 If (concepto.costoFinal = montoRestante) Then
                     If (concepto.absorbeIVA = False And concepto.IVAExento = False And concepto.consideraIVA = True) Then
                         co.recalcularCostoAbono(concepto, concepto.costoFinal, 2)
                     End If
+                    Dim first As String = concepto.NombreConcepto.Substring(0, 1)
+                    If (first = "1") Then
+                        Dim x As String = concepto.NombreConcepto.Substring(1, concepto.NombreConcepto.Length() - 1)
+                        concepto.NombreConcepto = $"2{x}"
+                    Else
+                        concepto.NombreConcepto = $"2{concepto.NombreConcepto}"
+                    End If
 
-                    concepto.NombreConcepto = $"2{concepto.NombreConcepto}"
                 Else
-                    concepto.NombreConcepto = $"1{concepto.NombreConcepto}"
+                    Dim first As String = concepto.NombreConcepto.Substring(0, 1)
+                    If (first <> "1") Then
+                        concepto.NombreConcepto = $"1{concepto.NombreConcepto}"
+                    End If
                 End If
-                ''co.recalcularCostoAbono(concepto, concepto.costoFinal, 2)
-                ''concepto.NombreConcepto = $"2{concepto.NombreConcepto}"
-            End If
+                    ''co.recalcularCostoAbono(concepto, concepto.costoFinal, 2)
+                    ''concepto.NombreConcepto = $"2{concepto.NombreConcepto}"
+                End If
         Next
         If (tipoMatricula = "EX") Then
             tipocliente = 2
@@ -847,4 +856,5 @@ Public Class CobrosEDC
 
         Return Fecha
     End Function
+
 End Class
