@@ -465,6 +465,7 @@ Partial Class CobrosEDC
         Me.panelTipoPago.Controls.Add(Me.txtNoCheque)
         Me.panelTipoPago.Controls.Add(Me.txtUltimos4Digitos)
         Me.panelTipoPago.Controls.Add(Me.lblNoCheque)
+        Me.panelTipoPago.Enabled = False
         Me.panelTipoPago.Location = New System.Drawing.Point(901, 29)
         Me.panelTipoPago.Name = "panelTipoPago"
         Me.panelTipoPago.Size = New System.Drawing.Size(391, 382)
