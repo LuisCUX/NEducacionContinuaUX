@@ -44,6 +44,23 @@
         Me.Close()
     End Sub
 
+    Private Sub cbTipoPago_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbTipoPago.SelectionChangeCommitted
+        Dim tablePagosOpcionales As DataTable
+        If (tipoMatricula = "UX") Then
+            Dim NT As String() = UtilitiesService.getNivelTurno(Matricula)
+            Dim IDNT As Integer = db.exectSQLQueryScalar($"SELECT * FROM mov_Res_Nivel_Turno WHERE Clave_Nivel = '{NT(0)}' AND Clave_Turno = '{NT(1)}'")
+            tablePagosOpcionales = db.getDataTableFromSQL($"SELECT R.ID, P.Nombre FROM ing_PagosOpcionales AS P
+                                                           INNER JOIN ing_resPagoOpcionalAsignacion AS R ON R.ID_PagoOpcional = P.ID
+                                                           WHERE P.ID_cat_TipoPagoOpcional = {cbTipoPago.SelectedValue} AND R.Para = 'ALUMNO' AND P.Activo = 1 AND ID_res_NT = {IDNT}")
+            ComboboxService.llenarComboboxVacio(cbPagosOpcionales, tablePagosOpcionales, "ID", "Nombre")
+        ElseIf (tipoMatricula = "EC") Then
+            tablePagosOpcionales = db.getDataTableFromSQL($"SELECT R.ID, P.Nombre FROM ing_PagosOpcionales AS P
+                                                           INNER JOIN ing_resPagoOpcionalAsignacion AS R ON R.ID_PagoOpcional = P.ID
+                                                           WHERE P.ID_cat_TipoPagoOpcional = {cbTipoPago.SelectedValue} AND R.Para = 'EXTERNO' AND P.Activo = 1")
+            ComboboxService.llenarComboboxVacio(cbPagosOpcionales, tablePagosOpcionales, "ID", "Nombre")
+        End If
+    End Sub
+
     Private Sub cbPagosOpcionales_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbPagosOpcionales.SelectionChangeCommitted
         Try
             chbExentaIVA.Checked = False

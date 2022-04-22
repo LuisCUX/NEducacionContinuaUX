@@ -96,7 +96,7 @@ Public Class ValidacionesController
                                                                INNER JOIN ing_res_usoCFDI_regimenFiscal AS RF ON RF.id_res_usoCFDI_regimenFiscal = RE.id_res_cfdi_regimen
                                                                INNER JOIN ing_cat_usoCFDI AS CF ON CF.clave_usoCFDI = RF.clave_usoCFDI
                                                                INNER JOIN ing_Cat_RegFis AS REG ON REG.ID_Contador = RF.clave_regimeFiscal
-                                                               INNER JOIN portal_catRFC AS RFC ON RFC.id_rfc = RE.id_rfc
+                                                               INNER JOIN portal_catRFC AS RFC ON RFC.id_rfc = RE.id_rfc AND RE.Activo = 1
                                                                WHERE E.clave_cliente = '{Matricula}'")
         For Each item As DataRow In tableDatos.Rows
             Dim nombre As String = item("Nombre")
@@ -142,7 +142,7 @@ Public Class ValidacionesController
                                                                INNER JOIN ing_res_usoCFDI_regimenFiscal AS RF ON RF.id_res_usoCFDI_regimenFiscal = RE.id_res_cfdi_regimen
                                                                INNER JOIN ing_cat_usoCFDI AS CF ON CF.clave_usoCFDI = RF.clave_usoCFDI
                                                                INNER JOIN ing_Cat_RegFis AS REG ON REG.ID_Contador = RF.clave_regimeFiscal
-                                                               INNER JOIN portal_catRFC AS RFC ON RFC.id_rfc = RE.id_rfc
+                                                               INNER JOIN portal_catRFC AS RFC ON RFC.id_rfc = RE.id_rfc AND RE.Activo = 1
                                                                WHERE E.clave_cliente = '{Matricula}'")
         For Each item As DataRow In tableDatos.Rows
             Dim nombre As String = item("Nombre")
@@ -167,13 +167,13 @@ Public Class ValidacionesController
         Dim RFC As String
         If (tipoMatricula = "EX") Then
             RFC = db.exectSQLQueryScalar($"SELECT rfc FROM portal_catRFC AS R
-                                               INNER JOIN portal_reRFC AS RE ON RE.id_rfc = R.id_rfc
+                                               INNER JOIN portal_reRFC AS RE ON RE.id_rfc = R.id_rfc AND RE.Activo = 1
                                                INNER JOIN portal_registroExterno AS EX ON EX.id_registro = RE.id_registro
                                                WHERE EX.clave_cliente = '{Matricula}'")
         ElseIf (tipoMatricula = "EC") Then
             RFC = db.exectSQLQueryScalar($"SELECT RFC.rfc FROM portal_cliente AS C 
                                                INNER JOIN portal_registroCongreso AS RC ON RC.id_cliente = C.id_cliente
-                                               INNER JOIN portal_rcRFC AS X ON X.id_registro = RC.id_registro
+                                               INNER JOIN portal_rcRFC AS X ON X.id_registro = RC.id_registro AND RC.Activo = 1
                                                INNER JOIN portal_catRFC AS RFC ON RFC.id_rfc = X.id_rfc
                                                WHERE RC.clave_cliente = '{Matricula}'")
         End If
