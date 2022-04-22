@@ -227,8 +227,6 @@ Public Class CobrosEDC
             Dim tableTipoPAgo As DataTable = db.getDataTableFromSQL($"SELECT ID, Tipo_Pago FROM ing_cat_tipoFormaPago WHERE ID_TipoPago = {IDPago}")
             ComboboxService.llenarCombobox(cbTipoBanco, tableTipoPAgo, "ID", "Tipo_Pago")
         End If
-
-
     End Sub
 
     Sub Reiniciar()
@@ -442,6 +440,7 @@ Public Class CobrosEDC
         Dim cobrarAbono As Boolean = False
         Dim creditoband As Boolean = False
         Dim formaPagoClave As String
+        Dim formaPagoID As Integer
         listaConceptos = ch.getListaConceptos()
         listaConceptosPrueba = ch.getListaConceptos()
         Dim listaconceptosFinal As New List(Of Concepto)
@@ -570,7 +569,7 @@ Public Class CobrosEDC
             ElseIf (tipoMatricula = "EC") Then
                 tipocliente = 1
             End If
-            Dim IDXMLC As Integer = co.Cobrar(listaConceptosPrueba, cbFormaPago.SelectedValue, Matricula, RFCTimbrar, lblNombretxt.Text, lblTotal.Text, True, tipocliente, lblCPtxt.Text, lblRegFiscaltxt.Text, lblCFDItxt.Text)
+            Dim IDXMLC As Integer = co.Cobrar(listaConceptosPrueba, cbFormaPago.SelectedValue, 9, Matricula, RFCTimbrar, lblNombretxt.Text, lblTotal.Text, True, tipocliente, lblCPtxt.Text, lblRegFiscaltxt.Text, lblCFDItxt.Text)
             If (IDXMLC > 0) Then
                 Me.Reiniciar()
                 Exit Sub
@@ -581,13 +580,24 @@ Public Class CobrosEDC
         If (cbFormaPago.Text = "DEPOSITO BANCARIO C/COMPROBANTE" Or cbFormaPago.Text = "DEPOSITO BANCARIO EDO CTA") Then
             If (cbTipoBanco.Text = "EFECTIVO") Then
                 formaPagoClave = "01"
+                If (cbFormaPago.Text = "DEPOSITO BANCARIO C/COMPROBANTE") Then
+                    formaPagoID = 7
+                ElseIf (cbFormaPago.Text = "DEPOSITO BANCARIO EDO CTA") Then
+                    formaPagoID = 8
+                End If
             ElseIf (cbTipoBanco.Text = "OTRO") Then
                 formaPagoClave = "99"
+                If (cbFormaPago.Text = "DEPOSITO BANCARIO C/COMPROBANTE") Then
+                    formaPagoID = 7
+                ElseIf (cbFormaPago.Text = "DEPOSITO BANCARIO EDO CTA") Then
+                    formaPagoID = 8
+                End If
             End If
         Else
             formaPagoClave = cbFormaPago.SelectedValue
+            formaPagoID = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatFormaPago WHERE Forma_Pago = '{formaPagoClave}'")
         End If
-        Dim IDXML As Integer = co.Cobrar(listaconceptosFinal, formaPagoClave, Matricula, RFCTimbrar, lblNombretxt.Text, lblTotal.Text, False, tipocliente, lblCPtxt.Text, lblRegFiscaltxt.Text, "S01")
+        Dim IDXML As Integer = co.Cobrar(listaconceptosFinal, formaPagoClave, formaPagoID, Matricula, RFCTimbrar, lblNombretxt.Text, lblTotal.Text, False, tipocliente, lblCPtxt.Text, lblRegFiscaltxt.Text, "S01")
 
 
         ''---------------------------------------------------------REGISTRO DE FORMA DE PAGO---------------------------------------------------------
@@ -645,7 +655,6 @@ Public Class CobrosEDC
             Dim usoCFDI As String = ObjectBagService.getItem("usoCFDI")
             Dim Serie As String = ObjectBagService.getItem("Serie")
             Dim Folio As String = ObjectBagService.getItem("Folio")
-            Dim RFCCLiente As String = ObjectBagService.getItem("RFC")
             Dim folioFiscal As String = ObjectBagService.getItem("FolioF")
             Dim tipoClienteint As Integer = ObjectBagService.getItem("tipoCliente")
             Dim NombreEvento As String = ObjectBagService.getItem("NombreEvento")
@@ -655,7 +664,7 @@ Public Class CobrosEDC
             End If
             Dim rep2 As ImpresionReportesService = New ImpresionReportesService()
 
-            Dim QR As String = $"?re={EnviromentService.RFCEDC}&rr={RFCCLiente}id={folioFiscal}tt={Total}"
+            Dim QR As String = $"?re={EnviromentService.RFCEDC}&rr={RFCTimbrar}id={folioFiscal}tt={Total}"
             co.gernerarQr(QR, $"{Serie}{Folio}")
             rep2.AgregarFuente("FacturaEDC.rpt")
             rep2.AgregarParametros("IDXML", IDXML)
@@ -664,6 +673,7 @@ Public Class CobrosEDC
             rep2.AgregarParametros("usoCFDI", usoCFDI)
             rep2.AgregarParametros("TipoCliente", tipocliente)
             rep2.AgregarParametros("NombreEvento", NombreEvento)
+            rep2.AgregarParametros("RFC", RFCTimbrar)
 
             Dim mail As New EmailModel
             Dim archivo_pdf As Byte() = Nothing

@@ -80,7 +80,7 @@ Public Class CobrosController
     ''----------------------------------------------------------------------------------------------------------------------------------------
     ''---------------------------------------------------------COBRA PAGO YA VALIDADO---------------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
-    Function Cobrar(listaConceptos As List(Of Concepto), formaPago As String, Matricula As String, RFCCLiente As String, NombreCLiente As String, montoTotal As Decimal, Credito As Boolean, tipoMatricula As Integer, Cp As String, RegFiscal As String, usoCFDI As String) As Integer
+    Function Cobrar(listaConceptos As List(Of Concepto), formaPago As String, formaPagoID As Integer, Matricula As String, RFCCLiente As String, NombreCLiente As String, montoTotal As Decimal, Credito As Boolean, tipoMatricula As Integer, Cp As String, RegFiscal As String, usoCFDI As String) As Integer
         NombreCLiente = Me.quitaTildesEspecial(NombreCLiente)
         Dim folioPago As String = Me.obtenerFolio("Pago")
         Dim esEvento As Boolean = False
@@ -198,17 +198,14 @@ Public Class CobrosController
             ''---------------------------------------------------------GENERACION DE FACTURA---------------------------------------------------------''
 
             Dim tipoPago As String
-            Dim formapagoid As Integer
             If (Credito = True) Then
                 tipoPago = "COBRO DE CONCEPTO A CREDITO"
                 db.execSQLQueryWithoutParams($"INSERT INTO ing_Creditos(Matricula, Folio, FolioFiscal, Cantidad, Cantidad_Abonada, NumAbonos, Fecha, Activo) VALUES ('{Matricula}', '{folioPago}', '{folioFiscal}', {montoTotal}, 0, 0, GETDATE(), 1)")
-                formapagoid = 9
             Else
                 tipoPago = "COBRO DE CONCEPTO"
-                formapagoid = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatFormaPago WHERE Forma_Pago = '{formaPago}'")
             End If
 
-            Dim IDXML As Integer = db.insertAndGetIDInserted($"INSERT INTO ing_xmlTimbrados(Matricula_Clave, Folio, FolioFiscal, Certificado, XMLTimbrado, fac_Cadena, fac_Sello, Tipo_Pago, Forma_Pago, Forma_PagoID, Fecha_Pago, Cajero, RegimenFiscal, Subtotal, Descuento, IVA, Total, usoCFDI, CanceladaHoy, CanceladaOtroDia) VALUES ('{Matricula}', '{Serie}{Folio}', '{folioFiscal}', '{NoCertificado}', '{xmlTimbrado}', '{cadena}', '{sello}', '{tipoPago}', '{formaPago}', {formapagoid}, '{Fecha}', '{User.getUsername}', 'GENERAL DE LEY(603)', {SubTotal}, {DescuentoS}, {totalIVA}, {Total}, '{UsoCFDI}', 0, 0)")
+            Dim IDXML As Integer = db.insertAndGetIDInserted($"INSERT INTO ing_xmlTimbrados(Matricula_Clave, Folio, FolioFiscal, Certificado, XMLTimbrado, fac_Cadena, fac_Sello, Tipo_Pago, Forma_Pago, Forma_PagoID, Fecha_Pago, Cajero, RegimenFiscal, Subtotal, Descuento, IVA, Total, usoCFDI, CanceladaHoy, CanceladaOtroDia) VALUES ('{Matricula}', '{Serie}{Folio}', '{folioFiscal}', '{NoCertificado}', '{xmlTimbrado}', '{cadena}', '{sello}', '{tipoPago}', '{formaPago}', {formaPagoID}, '{Fecha}', '{User.getUsername}', 'GENERAL DE LEY(603)', {SubTotal}, {DescuentoS}, {totalIVA}, {Total}, '{usoCFDI}', 0, 0)")
             For Each item As Concepto In listaConceptos
                 Dim IDClave As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatClavesPagos WHERE Clave = '{item.claveConcepto}'")
                 db.execSQLQueryWithoutParams($"INSERT INTO ing_xmlTimbradosConceptos(Clave_Cliente, XMLID, Nombre_Concepto, IDConcepto, Clave_Concepto, ClaveUnidad, PrecioUnitario, IVA, Descuento, Cantidad, Total, Nota) VALUES ('{item.Matricula}', {IDXML}, '{item.NombreConcepto}', {item.IDConcepto}, {IDClave}, '{item.cveUnidad}', {Format(CDec(item.costoUnitario), "#####0.00")}, {Format(CDec(item.costoIVAUnitario), "#####0.00")}, {Format(CDec(item.descuento), "#####0.00")}, {item.Cantidad}, {Format(CDec(((item.costoTotal - item.descuento) + item.costoIVATotal)), "#####0.00")}, 0)")
@@ -229,7 +226,7 @@ Public Class CobrosController
             If (IsNothing(NombreEvento)) Then
                 NombreEvento = "------"
             End If
-            Dim descripcionCFDI As String = db.exectSQLQueryScalar($"select UPPER('(' + clave_usoCFDI + ')' + ' ' + descripcion) As Clave from ing_cat_usoCFDI WHERE clave_usoCFDI = '{UsoCFDI}'")
+            Dim descripcionCFDI As String = db.exectSQLQueryScalar($"select UPPER('(' + clave_usoCFDI + ')' + ' ' + descripcion) As Clave from ing_cat_usoCFDI WHERE clave_usoCFDI = '{usoCFDI}'")
             Dim QR As String = $"?re={EnviromentService.RFCEDC}&rr={RFCCLiente}id={folioFiscal}tt={Total}"
             Me.gernerarQr(QR, $"{Serie}{Folio}")
             rep.AgregarFuente("FacturaEDC.rpt")
@@ -239,6 +236,7 @@ Public Class CobrosController
             rep.AgregarParametros("usoCFDI", descripcionCFDI)
             rep.AgregarParametros("TipoCliente", tipoMatricula)
             rep.AgregarParametros("NombreEvento", NombreEvento)
+            rep.AgregarParametros("RFC", RFCCLiente)
 
 
             ObjectBagService.setItem("CantidadLetra", TotalText)
