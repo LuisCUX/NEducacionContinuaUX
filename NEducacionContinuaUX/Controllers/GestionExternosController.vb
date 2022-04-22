@@ -36,23 +36,23 @@
 
         If (exists = Nothing) Then
             MessageBox.Show("La clave ingresada no existe, favor de ingresar una clave valida")
-            RegistroExternosEDC.matriculaExterna = False
-            RegistroExternosEDC.Reiniciar()
+            RegistroExternosOldEDC.matriculaExterna = False
+            RegistroExternosOldEDC.Reiniciar()
             Exit Sub
         End If
 
         If (sit_esc = "B") Then
             MessageBox.Show("La clave ingresada se encuentra dada de baja, favor de ingresar una clave valida")
-            RegistroExternosEDC.matriculaExterna = False
-            RegistroExternosEDC.Reiniciar()
+            RegistroExternosOldEDC.matriculaExterna = False
+            RegistroExternosOldEDC.Reiniciar()
             Exit Sub
         End If
 
         If (existsEDC > 0) Then
             Dim matriculaEX As String = db.exectSQLQueryScalar($"SELECT MatriculaEX FROM ing_catMatriculasUX WHERE MatriculaUX = '{Matricula}'")
             MessageBox.Show($"La clave ingresada ya esta dada de alta en educacion continua con la clave externa: {matriculaEX}")
-            RegistroExternosEDC.matriculaExterna = False
-            RegistroExternosEDC.Reiniciar()
+            RegistroExternosOldEDC.matriculaExterna = False
+            RegistroExternosOldEDC.Reiniciar()
         End If
 
         Dim tableDatosAlumno As DataTable = db.getDataTableFromSQL($"SELECT nombre, ap_pat, ap_mat, dom, colonia, estado, ciudad, email, cp, tel
@@ -70,7 +70,7 @@
             txtColonia.Enabled = False
             cbEstado.SelectedValue = item("estado")
             cbEstado.Enabled = False
-            RegistroExternosEDC.commitChangeEstado()
+            RegistroExternosOldEDC.commitChangeEstado()
             cbMunicipio.SelectedValue = item("ciudad")
             cbMunicipio.Enabled = False
             txtCorreo.Text = item("email")
@@ -80,12 +80,12 @@
             txtTelefono.Text = item("tel")
             txtTelefono.Enabled = False
         Next
-        RegistroExternosEDC.matriculaExterna = True
+        RegistroExternosOldEDC.matriculaExterna = True
     End Sub
 
     Sub buscarDatosMatriculaExterna(Matricula As String, txtNombre As TextBox, txtAP_Pat As TextBox, txtAP_Mat As TextBox, txtDireccion As TextBox, txtColonia As TextBox, cbEstado As ComboBox, cbMunicipio As ComboBox, txtCorreo As TextBox, txtCP As TextBox, txtTelefono As TextBox,
                                     txtRFC As TextBox, txtNR As TextBox, txtDireccionF As TextBox, txtColoniaF As TextBox, cbEstadoF As ComboBox, cbMunicipioF As ComboBox, txtCiudadF As TextBox, txtCorreoF As TextBox, txtCPF As TextBox, txtTelefonoF As TextBox, chbDatosFiscales As CheckBox,
-                                    panelDatosPersonalesEdit As Panel, panelDatosFiscalesEdit As Panel, btnGuardarEdit As Button, btnSalirEd As Button, btnLimpiar As Button)
+                                    panelDatosPersonalesEdit As Panel, panelDatosFiscalesEdit As Panel, btnGuardarEdit As Button, btnSalirEd As Button, btnLimpiar As Button, cbRFCEd As ComboBox)
 
         Dim MatUX As String = db.exectSQLQueryScalar($"SELECT MatriculaUX FROM ing_catMatriculasUX WHERE MatriculaEX = '{Matricula}'")
 
@@ -95,7 +95,7 @@
                                                                WHERE RE.clave_cliente = '{Matricula}'")
         If (tableDatos.Rows.Count() = 0) Then
             MessageBox.Show("La clave ingresada no existe, ingrese una clave valida")
-            RegistroExternosEDC.Reiniciar()
+            RegistroExternosOldEDC.Reiniciar()
             Return
         End If
         For Each item As DataRow In tableDatos.Rows
@@ -105,7 +105,7 @@
             txtDireccion.Text = item("calle")
             txtColonia.Text = item("colonia")
             cbEstado.SelectedValue = item("id_estado")
-            RegistroExternosEDC.commitChangeEstadoEdit()
+            RegistroExternosOldEDC.commitChangeEstadoEdit()
             cbMunicipio.SelectedValue = item("id_municipio")
             txtCorreo.Text = item("correo")
             txtCP.Text = item("cp")
@@ -140,39 +140,50 @@
         chbDatosFiscales.Visible = True
         btnGuardarEdit.Visible = True
         btnSalirEd.Visible = True
+        btnLimpiar.Visible = True
 
         Dim IDRegistroExterno As Integer = db.exectSQLQueryScalar($"SELECT id_registro FROM portal_registroExterno WHERE clave_cliente = '{Matricula}'")
-        Dim DatosFiscales As Integer = db.exectSQLQueryScalar($"SELECT id_rfc FROM portal_reRFC WHERE id_registro = {IDRegistroExterno}")
-        If (DatosFiscales > 1) Then
-            Dim tableRFCDatos As DataTable = db.getDataTableFromSQL($"SELECT R.rfc, R.razonsocial, R.direccion, R.colonia, M.id_estado, R.id_municipio, R.poblacion, R.correo, R.cp, R.telefono FROM portal_catRFC AS R 
-                                                                      INNER JOIN portal_reRFC AS RER ON RER.id_rfc = R.id_rfc
-                                                                      INNER JOIN portal_registroExterno AS E ON RER.id_registro = E.id_registro
-                                                                      INNER JOIN portal_municipio AS M ON M.id_municipio = R.id_municipio 
-                                                                      WHERE E.clave_cliente = '{Matricula}'")
-            For Each item As DataRow In tableRFCDatos.Rows
-                txtRFC.Text = item("rfc")
-                txtNR.Text = item("razonsocial")
-                txtDireccionF.Text = item("direccion")
-                txtColoniaF.Text = item("colonia")
-                cbEstadoF.SelectedValue = item("id_estado")
-                RegistroExternosEDC.commitChangeEstadoEditF()
-                cbMunicipioF.SelectedValue = item("id_municipio")
-                txtCiudadF.Text = item("poblacion")
-                txtCorreoF.Text = item("correo")
-                txtCPF.Text = item("cp")
-                txtTelefonoF.Text = item("telefono")
-            Next
-            chbDatosFiscales.Checked = True
-            RegistroExternosEDC.commitCheckChanged()
+        Dim DatosFiscales As Integer = db.exectSQLQueryScalar($"SELECT COUNT(id_rfc) FROM portal_reRFC WHERE id_registro = {IDRegistroExterno}")
+        If (DatosFiscales = 1) Then
+            Dim RFCID As String = db.exectSQLQueryScalar($"SELECT id_rfc FROM portal_reRFC WHERE id_registro = {IDRegistroExterno}")
+            If (RFCID = 2) Then
+                cbRFCEd.Items.Add("Nuevo RFC")
+                chbDatosFiscales.Checked = False
+                cbRFCEd.SelectedIndex = 0
+                RegistroExternosOldEDC.commitChangeRFCEd()
+                ''RegistroExternosOldEDC.commitCheckChangedEC()
+                RegistroExternosOldEDC.panelDatosFiscalesEdit.Visible = False
+            Else
+                Dim RFC As String = db.exectSQLQueryScalar($"SELECT rfc FROM portal_catRFC WHERE id_rfc = {RFCID}")
+                cbRFCEd.Items.Add("Nuevo RFC")
+                cbRFCEd.Items.Add(RFC)
+                chbDatosFiscales.Checked = True
+                cbRFCEd.SelectedIndex = 1
+                RegistroExternosOldEDC.commitChangeRFCEd()
+                RegistroExternosOldEDC.panelDatosFiscalesEdit.Visible = True
+                ''RegistroExternosOldEDC.commitCheckChangedEC()
+            End If
         Else
-            chbDatosFiscales.Checked = False
-            RegistroExternosEDC.commitCheckChanged()
+            Dim RFCID As String = db.exectSQLQueryScalar($"SELECT RFC.rfc FROM portal_catRFC AS RFC
+                                                           INNER JOIN portal_reRFC AS RE ON RE.id_rfc = RFC.id_rfc AND RE.activo = 1 AND RE.id_registro = {IDRegistroExterno}")
+            Dim tableRFC As DataTable = db.getDataTableFromSQL($"SELECT RFC.rfc FROM portal_catRFC AS RFC 
+                                                                 INNER JOIN portal_reRFC AS RC ON RC.id_rfc = RFC.id_rfc
+                                                                 WHERE RC.id_registro = {IDRegistroExterno} AND RFC.id_rfc != 2")
+            cbRFCEd.Items.Add("Nuevo RFC")
+            For Each item As DataRow In tableRFC.Rows
+                cbRFCEd.Items.Add(item("rfc"))
+            Next
+            cbRFCEd.Text = RFCID
+            chbDatosFiscales.Checked = True
+            RegistroExternosOldEDC.commitChangeRFCEd()
+            ''RegistroExternosOldEDC.commitCheckChangedEC()
+            RegistroExternosOldEDC.panelDatosFiscalesEdit.Visible = True
         End If
     End Sub
 
     Sub buscarDatosMatriculaEc(Matricula As String, txtNombre As TextBox, txtAP_Pat As TextBox, txtAP_Mat As TextBox, txtDireccion As TextBox, txtColonia As TextBox, cbEstado As ComboBox, cbMunicipio As ComboBox, txtCorreo As TextBox, txtCP As TextBox, txtTelefono As TextBox,
                                     txtRFC As TextBox, txtNR As TextBox, txtDireccionF As TextBox, txtColoniaF As TextBox, cbEstadoF As ComboBox, cbMunicipioF As ComboBox, txtCiudadF As TextBox, txtCorreoF As TextBox, txtCPF As TextBox, txtTelefonoF As TextBox, chbDatosFiscales As CheckBox,
-                                    panelDatosPersonalesEdit As Panel, panelDatosFiscalesEdit As Panel, btnGuardarEdit As Button, btnSalirEd As Button, btnLimpiar As Button)
+                                    panelDatosPersonalesEdit As Panel, panelDatosFiscalesEdit As Panel, btnGuardarEdit As Button, btnSalirEd As Button, btnLimpiar As Button, cbRFCEC As ComboBox)
 
         Dim tableDatos As DataTable = db.getDataTableFromSQL($"SELECT C.nombre, RC.apellido_paterno, RC.apellido_materno, C.calle, C.colonia, E.id_estado, M.id_municipio, C.correo, C.cp, RC.telefono FROM portal_cliente AS C
                                                                INNER JOIN portal_registroCongreso AS RC ON RC.id_cliente = C.id_cliente
@@ -181,7 +192,7 @@
                                                                WHERE RC.clave_cliente = '{Matricula}'")
         If (tableDatos.Rows.Count() = 0) Then
             MessageBox.Show("La clave ingresada no existe, ingrese una clave valida")
-            RegistroExternosEDC.Reiniciar()
+            RegistroExternosOldEDC.Reiniciar()
             Return
         End If
         For Each item As DataRow In tableDatos.Rows
@@ -191,7 +202,7 @@
             txtDireccion.Text = item("calle")
             txtColonia.Text = item("colonia")
             cbEstado.SelectedValue = item("id_estado")
-            RegistroExternosEDC.commitChangeEstadoEC()
+            RegistroExternosOldEDC.commitChangeEstadoEC()
             cbMunicipio.SelectedValue = item("id_municipio")
             txtCorreo.Text = item("correo")
             txtCP.Text = item("cp")
@@ -204,40 +215,46 @@
         btnSalirEd.Visible = True
         btnLimpiar.Visible = True
 
-
         Dim IDRegistroCongreso As Integer = db.exectSQLQueryScalar($"SELECT id_registro FROM portal_registroCongreso WHERE clave_cliente = '{Matricula}'")
-        Dim DatosFiscales As Integer = db.exectSQLQueryScalar($"SELECT id_rfc FROM portal_rcRFC WHERE id_registro = {IDRegistroCongreso}")
-        If (DatosFiscales <> 2) Then
-            Dim tableDatosFiscales As DataTable = db.getDataTableFromSQL($"SELECT RFC.rfc, RC.direccion, RC.colonia, E.id_estado, M.id_municipio, RC.localidad, RC.razonsocial, RC.correo, RC.telefono, RC.cp FROM portal_rcRFC AS RC 
-                                                                           INNER JOIN portal_catRFC AS RFC ON RFC.id_rfc = RC.id_rfc
-                                                                           INNER JOIN portal_municipio AS M ON M.id_municipio = RC.id_municipio
-                                                                           INNER JOIN portal_estado AS E ON E.id_estado = M.id_estado
-                                                                           WHERE RC.id_registro = {IDRegistroCongreso}")
-
-            For Each item As DataRow In tableDatosFiscales.Rows
-                txtRFC.Text = item("rfc")
-                txtNR.Text = item("razonsocial")
-                txtDireccionF.Text = item("direccion")
-                txtColoniaF.Text = item("colonia")
-                cbEstadoF.SelectedValue = item("id_estado")
-                RegistroExternosEDC.commitChangeEstadoFEC()
-                cbMunicipioF.SelectedValue = item("id_municipio")
-                txtCiudadF.Text = item("localidad")
-                txtCorreoF.Text = item("correo")
-                txtCPF.Text = item("cp")
-                txtTelefonoF.Text = item("telefono")
-            Next
-
-            chbDatosFiscales.Checked = True
-            panelDatosFiscalesEdit.Visible = True
+        Dim DatosFiscales As Integer = db.exectSQLQueryScalar($"SELECT COUNT(id_rfc) FROM portal_rcRFC WHERE id_registro = {IDRegistroCongreso}")
+        If (DatosFiscales = 1) Then
+            Dim RFCID As String = db.exectSQLQueryScalar($"SELECT id_rfc FROM portal_rcRFC WHERE id_registro = {IDRegistroCongreso}")
+            If (RFCID = 2) Then
+                cbRFCEC.Items.Add("Nuevo RFC")
+                chbDatosFiscales.Checked = False
+                cbRFCEC.SelectedIndex = 0
+                ''RegistroExternosOldEDC.commitChangeRFCEC()
+                RegistroExternosOldEDC.commitCheckChangedEC()
+            Else
+                Dim RFC As String = db.exectSQLQueryScalar($"SELECT rfc FROM portal_catRFC WHERE id_rfc = {RFCID}")
+                cbRFCEC.Items.Add("Nuevo RFC")
+                cbRFCEC.Items.Add(RFC)
+                chbDatosFiscales.Checked = True
+                cbRFCEC.SelectedIndex = 1
+                RegistroExternosOldEDC.commitChangeRFCEC()
+                RegistroExternosOldEDC.panelDatosFiscalesEC.Visible = True
+                ''RegistroExternosOldEDC.commitCheckChangedEC()
+            End If
         Else
-            chbDatosFiscales.Checked = False
-            panelDatosFiscalesEdit.Visible = False
+            Dim RFCID As String = db.exectSQLQueryScalar($"SELECT RFC.rfc FROM portal_catRFC AS RFC
+                                                           INNER JOIN portal_rcRFC AS RE ON RE.id_rfc = RFC.id_rfc AND RE.activo = 1 AND RE.id_registro = {IDRegistroCongreso}")
+            Dim tableRFC As DataTable = db.getDataTableFromSQL($"SELECT RFC.rfc FROM portal_catRFC AS RFC 
+                                                                 INNER JOIN portal_rcRFC AS RC ON RC.id_rfc = RFC.id_rfc
+                                                                 WHERE RC.id_registro = {IDRegistroCongreso} AND RFC.id_rfc != 2")
+            cbRFCEC.Items.Add("Nuevo RFC")
+            For Each item As DataRow In tableRFC.Rows
+                cbRFCEC.Items.Add(item("rfc"))
+            Next
+            cbRFCEC.Text = RFCID
+            chbDatosFiscales.Checked = True
+            RegistroExternosOldEDC.commitChangeRFCEC()
+            ''RegistroExternosOldEDC.commitCheckChangedFEC()
+            RegistroExternosOldEDC.panelDatosFiscalesEC.Visible = True
         End If
     End Sub
 
     Sub RegistroExterno(Matricula As Boolean, MatriculaUX As String, Correo As String, Nombre As String, Calle As String, Colonia As String, CP As String, IDMunicipio As Integer, tipo_Persona As Integer, telefono As String, IDNacionalidad As Integer, ap_pat As String, ap_mat As String, clave_cliente As String, datosFiscales As Boolean,
-                        RFC As String, DireccionF As String, NumeroF As String, ColoniaF As String, CPF As String, CiudadF As String, TelefonoF As String, CorreoF As String, IDMunicipioF As Integer, RazonSocialF As String)
+                        RFC As String, DireccionF As String, NumeroF As String, ColoniaF As String, CPF As String, CiudadF As String, TelefonoF As String, CorreoF As String, IDMunicipioF As Integer, RazonSocialF As String, idResRegCF As Integer)
         Try
             db.startTransaction()
             Dim idCliente As Integer = db.insertAndGetIDInserted($"INSERT INTO portal_cliente (correo, nombre, calle, colonia, cp, id_municipio, tipo_persona, telefono, id_nacionalidad) VALUES ('{Correo}', '{Nombre}', '{Calle}', '{Colonia}', '{CP}', {IDMunicipio}, {tipo_Persona}, '{telefono}', {IDNacionalidad})")
@@ -245,9 +262,9 @@
 
             If (datosFiscales = True) Then
                 Dim idRFC As Integer = db.insertAndGetIDInserted($"INSERT INTO portal_catRFC (rfc, direccion, numero, colonia, cp, poblacion, localidad, telefono, correo, id_municipio, razonsocial) VALUES ('{RFC}', '{DireccionF}', '', '{ColoniaF}', '{CPF}', '{CiudadF}', '{CiudadF}', '{TelefonoF}', '{CorreoF}', {IDMunicipioF}, '{RazonSocialF}')")
-                db.execSQLQueryWithoutParams($"INSERT INTO portal_reRFC(id_rfc, id_registro) VALUES ({idRFC}, {idRegistroExterno})")
+                db.execSQLQueryWithoutParams($"INSERT INTO portal_reRFC(id_rfc, id_registro, direccion, numero, colonia, cp, poblacion, localidad, telefono, correo, id_municipio, razonsocial, id_res_cfdi_regimen, Activo) VALUES ({idRFC}, {idRegistroExterno}, '{DireccionF}', '', '{ColoniaF}', '{CPF}', '{CiudadF}', '', '{TelefonoF}', '{CorreoF}', {IDMunicipioF}, '{RazonSocialF}', {idResRegCF}, 1)")
             Else
-                db.execSQLQueryWithoutParams($"INSERT INTO portal_reRFC(id_rfc, id_registro) VALUES (2, {idRegistroExterno})")
+                db.execSQLQueryWithoutParams($"INSERT INTO portal_reRFC(id_rfc, id_registro, direccion, numero, colonia, cp, poblacion, localidad, telefono, correo, id_municipio, razonsocial, id_res_cfdi_regimen, Activo) VALUES (2, {idRegistroExterno}, 'XX', '0', 'XX', '0', 'XX', 'XX', '0', 'XX', 0, 'XX', 221, 1)")
             End If
 
             db.execSQLQueryWithoutParams($"INSERT INTO portal_clave(clave_cliente, id_cliente, id_tipo_cliente) VALUES ('{clave_cliente}', {idCliente}, 1)")
@@ -259,7 +276,7 @@
             db.execSQLQueryWithoutParams("UPDATE ing_CatFolios SET Consecutivo = Consecutivo + 1 WHERE Descripcion = 'EXTERNO'")
             db.commitTransaction()
             MessageBox.Show("Externo registrado correctamente")
-            RegistroExternosEDC.Reiniciar()
+            RegistroExternosOldEDC.Reiniciar()
         Catch ex As Exception
             db.rollBackTransaction()
             MessageBox.Show(ex.Message)
@@ -267,23 +284,53 @@
     End Sub
 
     Sub EdicionExterno(Matricula As String, Correo As String, Nombre As String, Calle As String, Colonia As String, CP As String, IDMunicipio As Integer, tipo_Persona As Integer, telefono As String, IDNacionalidad As Integer, ap_pat As String, ap_mat As String, clave_cliente As String, datosFiscales As Boolean,
-                        RFC As String, DireccionF As String, NumeroF As String, ColoniaF As String, CPF As String, CiudadF As String, TelefonoF As String, CorreoF As String, IDMunicipioF As Integer, RazonSocialF As String)
+                        RFC As String, DireccionF As String, NumeroF As String, ColoniaF As String, CPF As String, CiudadF As String, TelefonoF As String, CorreoF As String, IDMunicipioF As Integer, RazonSocialF As String, RegimenFiscal As String, usoCFDI As String)
         Try
             db.startTransaction()
             Dim idcliente As Integer = db.exectSQLQueryScalar($"SELECT id_cliente FROM portal_registroExterno WHERE clave_cliente = '{Matricula}'")
             Dim idregistro As Integer = db.exectSQLQueryScalar($"SELECT id_registro FROM portal_registroExterno WHERE clave_cliente = '{Matricula}'")
-            Dim idRFC As Integer = db.exectSQLQueryScalar($"SELECT id_rfc FROM portal_reRFC WHERE id_registro = {idregistro}")
+            Dim IDResRegCFDI As Integer = db.exectSQLQueryScalar($"SELECT id_res_usoCFDI_regimenFiscal FROM ing_res_usoCFDI_regimenFiscal WHERE clave_usoCFDI = '{usoCFDI}' AND clave_regimeFiscal = '{RegimenFiscal}'")
+
+            Dim numRFC As Integer = db.exectSQLQueryScalar($"SELECT COUNT(id_rfc) FROM portal_reRFC WHERE id_registro = {idregistro}")
+
             db.execSQLQueryWithoutParams($"UPDATE portal_cliente SET correo = '{Correo}', nombre = '{Nombre}', calle = '{Calle}', colonia = '{Colonia}', cp = '{CP}', id_municipio = {IDMunicipio}, telefono = '{telefono}' WHERE id_cliente = '{idcliente}'")
             db.execSQLQueryWithoutParams($"UPDATE portal_registroExterno SET paterno = '{ap_pat}', materno = '{ap_mat}' WHERE id_registro = {idregistro}")
-            If (idRFC > 1) Then
-                db.execSQLQueryWithoutParams($"UPDATE portal_catRFC SET rfc = '{RFC}', direccion = '{DireccionF}', colonia = '{ColoniaF}', cp = '{CPF}', poblacion = '{CiudadF}', localidad = '{CiudadF}', telefono = '{TelefonoF}', correo = '{CorreoF}', id_municipio = '{IDMunicipioF}', razonsocial = '{RazonSocialF}' WHERE id_rfc = {idRFC}")
-            ElseIf (idRFC = 1) Then
-                idRFC = db.insertAndGetIDInserted($"INSERT INTO portal_catRFC (rfc, direccion, numero, colonia, cp, poblacion, localidad, telefono, correo, id_municipio, razonsocial) VALUES ('{RFC}', '{DireccionF}', '', '{ColoniaF}', '{CPF}', '{CiudadF}', '{CiudadF}', '{TelefonoF}', '{CorreoF}', {IDMunicipioF}, '{RazonSocialF}')")
-                db.execSQLQueryWithoutParams($"UPDATE portal_reRFC SET id_rfc = {idRFC} WHERE id_registro = {idregistro}")
+
+            If (datosFiscales = True And numRFC > 1) Then
+                ''EDICION DE DATOS FISCALES
+                Dim IDRFC As Integer = db.exectSQLQueryScalar($"SELECT id_rfc FROM portal_catRFC WHERE rfc = '{RFC}'")
+                If (IDRFC > 2) Then
+                    Dim IDRes As Integer = db.exectSQLQueryScalar($"SELECT id_re_rfc FROM portal_reRFC AS RE
+                                                                INNER JOIN portal_catRFC AS RFC ON RFC.id_rfc = RE.id_rfc
+                                                                WHERE RFC.rfc = '{RFC}'")
+                    db.execSQLQueryWithoutParams($"UPDATE portal_reRFC SET direccion = '{DireccionF}', numero = numero, colonia = '{ColoniaF}', cp = '{CPF}', poblacion = '{CiudadF}', localidad = '{CiudadF}', telefono = '{TelefonoF}', correo = '{CorreoF}', id_municipio = {IDMunicipioF}, razonsocial = '{RazonSocialF}', id_res_cfdi_regimen = '{IDResRegCFDI}' WHERE id_re_rfc = {IDRes}")
+                Else
+                    Dim nuevoRFC As Integer = db.insertAndGetIDInserted($"INSERT INTO portal_catRFC(rfc, direccion, numero, colonia, cp, poblacion, localidad, telefono, correo, id_municipio, razonsocial) VALUES ('{RFC}', '{DireccionF}', 0, '{ColoniaF}', '{CPF}', '{CiudadF}', '{CiudadF}', '{TelefonoF}', '{CorreoF}', {IDMunicipioF}, '{RazonSocialF}')")
+                    db.execSQLQueryWithoutParams($"INSERT INTO portal_reRFC(id_rfc, id_registro, direccion, numero, colonia, cp, poblacion, localidad, telefono, correo, id_municipio, razonsocial, id_res_cfdi_regimen, activo) VALUES({nuevoRFC}, {idregistro}, '{DireccionF}', 0, '{ColoniaF}', '{CPF}', '{CiudadF}', '{CiudadF}', '{TelefonoF}', '{CorreoF}', {IDMunicipioF}, '{RazonSocialF}', {IDResRegCFDI}, 1)")
+                End If
+            ElseIf (datosFiscales = True And numRFC = 1) Then
+                ''NUEVO REGISTRO DE DATOS FISCALES
+                Dim RFCID As Integer = db.exectSQLQueryScalar($"SELECT id_rfc FROM portal_reRFC WHERE id_registro = {idregistro}")
+                If (RFCID = 2) Then ''NUEVO REGISTRO DE DATOS FISCALES
+                    Dim nuevoRFC As Integer = db.insertAndGetIDInserted($"INSERT INTO portal_catRFC(rfc, direccion, numero, colonia, cp, poblacion, localidad, telefono, correo, id_municipio, razonsocial) VALUES ('{RFC}', '{DireccionF}', 0, '{ColoniaF}', '{CPF}', '{CiudadF}', '{CiudadF}', '{TelefonoF}', '{CorreoF}', {IDMunicipioF}, '{RazonSocialF}')")
+                    db.execSQLQueryWithoutParams($"INSERT INTO portal_reRFC(id_rfc, id_registro, direccion, numero, colonia, cp, poblacion, localidad, telefono, correo, id_municipio, razonsocial, id_res_cfdi_regimen, activo) VALUES({nuevoRFC}, {idregistro}, '{DireccionF}', 0, '{ColoniaF}', '{CPF}', '{CiudadF}', '{CiudadF}', '{TelefonoF}', '{CorreoF}', {IDMunicipioF}, '{RazonSocialF}', {IDResRegCFDI}, 1)")
+                Else
+                    Dim RFCRegistrado As String = db.exectSQLQueryScalar($"SELECT rfc FROM portal_catRFC WHERE id_rfc = {RFCID}")
+                    If (RFCRegistrado = RFC) Then ''UPDATE
+                        Dim IDRes As Integer = db.exectSQLQueryScalar($"SELECT id_re_rfc FROM portal_reRFC AS RE
+                                                                INNER JOIN portal_catRFC AS RFC ON RFC.id_rfc = RE.id_rfc
+                                                                WHERE RFC.rfc = '{RFC}'")
+                        db.execSQLQueryWithoutParams($"UPDATE portal_reRFC SET direccion = '{DireccionF}', numero = numero, colonia = '{ColoniaF}', cp = '{CPF}', poblacion = '{CiudadF}', localidad = '{CiudadF}', telefono = '{TelefonoF}', correo = '{CorreoF}', id_municipio = {IDMunicipioF}, razonsocial = '{RazonSocialF}', id_res_cfdi_regimen = '{IDResRegCFDI}' WHERE id_re_rfc = {IDRes}")
+                    Else ''NUEVO REGISTRO    
+                        Dim nuevoRFC As Integer = db.insertAndGetIDInserted($"INSERT INTO portal_catRFC(rfc, direccion, numero, colonia, cp, poblacion, localidad, telefono, correo, id_municipio, razonsocial) VALUES ('{RFC}', '{DireccionF}', 0, '{ColoniaF}', '{CPF}', '{CiudadF}', '{CiudadF}', '{TelefonoF}', '{CorreoF}', {IDMunicipioF}, '{RazonSocialF}')")
+                        db.execSQLQueryWithoutParams($"INSERT INTO portal_reRFC(id_rfc, id_registro, direccion, numero, colonia, cp, poblacion, localidad, telefono, correo, id_municipio, razonsocial, id_res_cfdi_regimen, activo) VALUES({nuevoRFC}, {idregistro}, '{DireccionF}', 0, '{ColoniaF}', '{CPF}', '{CiudadF}', '{CiudadF}', '{TelefonoF}', '{CorreoF}', {IDMunicipioF}, '{RazonSocialF}', {IDResRegCFDI}, 1)")
+                    End If
+                End If
             End If
+
             db.commitTransaction()
             MessageBox.Show("Datos modificados correctamente")
-            RegistroExternosEDC.Reiniciar()
+            RegistroExternosOldEDC.Reiniciar()
         Catch ex As Exception
             db.rollBackTransaction()
             MessageBox.Show(ex.Message)
@@ -291,32 +338,83 @@
     End Sub
 
     Sub EdicionEC(Matricula As String, Correo As String, Nombre As String, Calle As String, Colonia As String, CP As String, IDMunicipio As Integer, tipo_Persona As Integer, telefono As String, IDNacionalidad As Integer, ap_pat As String, ap_mat As String, datosFiscales As Boolean,
-                        RFC As String, DireccionF As String, NumeroF As String, ColoniaF As String, CPF As String, CiudadF As String, TelefonoF As String, CorreoF As String, IDMunicipioF As Integer, RazonSocialF As String)
+                        RFC As String, DireccionF As String, NumeroF As String, ColoniaF As String, CPF As String, CiudadF As String, TelefonoF As String, CorreoF As String, IDMunicipioF As Integer, RazonSocialF As String, RegimenFiscal As String, usoCFDI As String)
         Try
             db.startTransaction()
             Dim idcliente As Integer = db.exectSQLQueryScalar($"SELECT id_cliente FROM portal_registroCongreso WHERE clave_cliente = '{Matricula}'")
             Dim idregistro As Integer = db.exectSQLQueryScalar($"SELECT id_registro FROM portal_registroCongreso WHERE clave_cliente = '{Matricula}'")
-            Dim idRFC As Integer = db.exectSQLQueryScalar($"SELECT id_rfc FROM portal_rcRFC WHERE id_registro = {idregistro}")
+            Dim IDResRegCFDI As Integer = db.exectSQLQueryScalar($"SELECT id_res_usoCFDI_regimenFiscal FROM ing_res_usoCFDI_regimenFiscal WHERE clave_usoCFDI = '{usoCFDI}' AND clave_regimeFiscal = '{RegimenFiscal}'")
+
+            Dim numRFC As Integer = db.exectSQLQueryScalar($"SELECT COUNT(id_rfc) FROM portal_rcRFC WHERE id_registro = {idregistro}")
+
             db.execSQLQueryWithoutParams($"UPDATE portal_cliente SET correo = '{Correo}', nombre = '{Nombre}', calle = '{Calle}', colonia = '{Colonia}', cp = '{CP}', id_municipio = {IDMunicipio}, telefono = '{telefono}' WHERE id_cliente = '{idcliente}'")
             db.execSQLQueryWithoutParams($"UPDATE portal_registroCongreso SET apellido_paterno = '{ap_pat}', apellido_materno = '{ap_mat}' WHERE id_registro = {idregistro}")
 
-
-            If (idRFC > 1) Then
-                db.execSQLQueryWithoutParams($"UPDATE portal_rcRFC SET direccion = '{DireccionF}', colonia = '{ColoniaF}', cp = '{CPF}', poblacion = '{CiudadF}', localidad = '{CiudadF}', telefono = '{TelefonoF}', correo = '{CorreoF}', id_municipio = '{IDMunicipioF}', razonsocial = '{RazonSocialF}' WHERE id_rfc = {idRFC}")
-            ElseIf (idRFC = 1) Then
-                idRFC = db.insertAndGetIDInserted($"INSERT INTO portal_catRFC (rfc, direccion, numero, colonia, cp, poblacion, localidad, telefono, correo, id_municipio, razonsocial) VALUES ('{RFC}', '{DireccionF}', '', '{ColoniaF}', '{CPF}', '{CiudadF}', '{CiudadF}', '{TelefonoF}', '{CorreoF}', {IDMunicipioF}, '{RazonSocialF}')")
-                db.execSQLQueryWithoutParams($"UPDATE portal_reRFC SET id_rfc = {idRFC} WHERE id_registro = {idregistro}")
+            If (datosFiscales = True And numRFC > 1) Then
+                ''EDICION DE DATOS FISCALES
+                Dim IDRFC As Integer = db.exectSQLQueryScalar($"SELECT id_rfc FROM portal_catRFC WHERE rfc = '{RFC}'")
+                If (IDRFC > 2) Then
+                    Dim IDRes As Integer = db.exectSQLQueryScalar($"SELECT id_rc_rfc FROM portal_rcRFC AS RE
+                                                                INNER JOIN portal_catRFC AS RFC ON RFC.id_rfc = RE.id_rfc
+                                                                WHERE RFC.rfc = '{RFC}'")
+                    db.execSQLQueryWithoutParams($"UPDATE portal_rcRFC SET direccion = '{DireccionF}', numero = numero, colonia = '{ColoniaF}', cp = '{CPF}', poblacion = '{CiudadF}', localidad = '{CiudadF}', telefono = '{TelefonoF}', correo = '{CorreoF}', id_municipio = {IDMunicipioF}, razonsocial = '{RazonSocialF}', id_res_cfdi_regimen = '{IDResRegCFDI}' WHERE id_rc_rfc = {IDRes}")
+                Else
+                    Dim nuevoRFC As Integer = db.insertAndGetIDInserted($"INSERT INTO portal_catRFC(rfc, direccion, numero, colonia, cp, poblacion, localidad, telefono, correo, id_municipio, razonsocial) VALUES ('{RFC}', '{DireccionF}', 0, '{ColoniaF}', '{CPF}', '{CiudadF}', '{CiudadF}', '{TelefonoF}', '{CorreoF}', {IDMunicipioF}, '{RazonSocialF}')")
+                    db.execSQLQueryWithoutParams($"INSERT INTO portal_rcRFC(id_rfc, id_registro, direccion, numero, colonia, cp, poblacion, localidad, telefono, correo, id_municipio, razonsocial, id_res_cfdi_regimen, activo) VALUES({nuevoRFC}, {idregistro}, '{DireccionF}', 0, '{ColoniaF}', '{CPF}', '{CiudadF}', '{CiudadF}', '{TelefonoF}', '{CorreoF}', {IDMunicipioF}, '{RazonSocialF}', {IDResRegCFDI}, 1)")
+                End If
+            ElseIf (datosFiscales = True And numRFC = 1) Then
+                ''NUEVO REGISTRO DE DATOS FISCALES
+                Dim RFCID As Integer = db.exectSQLQueryScalar($"SELECT id_rfc FROM portal_rcRFC WHERE id_registro = {idregistro}")
+                If (RFCID = 2) Then ''NUEVO REGISTRO DE DATOS FISCALES
+                    Dim nuevoRFC As Integer = db.insertAndGetIDInserted($"INSERT INTO portal_catRFC(rfc, direccion, numero, colonia, cp, poblacion, localidad, telefono, correo, id_municipio, razonsocial) VALUES ('{RFC}', '{DireccionF}', 0, '{ColoniaF}', '{CPF}', '{CiudadF}', '{CiudadF}', '{TelefonoF}', '{CorreoF}', {IDMunicipioF}, '{RazonSocialF}')")
+                    db.execSQLQueryWithoutParams($"INSERT INTO portal_rcRFC(id_rfc, id_registro, direccion, numero, colonia, cp, poblacion, localidad, telefono, correo, id_municipio, razonsocial, id_res_cfdi_regimen, activo) VALUES({nuevoRFC}, {idregistro}, '{DireccionF}', 0, '{ColoniaF}', '{CPF}', '{CiudadF}', '{CiudadF}', '{TelefonoF}', '{CorreoF}', {IDMunicipioF}, '{RazonSocialF}', {IDResRegCFDI}, 1)")
+                Else
+                    Dim RFCRegistrado As String = db.exectSQLQueryScalar($"SELECT rfc FROM portal_catRFC WHERE id_rfc = {RFCID}")
+                    If (RFCRegistrado = RFC) Then ''UPDATE
+                        Dim IDRes As Integer = db.exectSQLQueryScalar($"SELECT id_rc_rfc FROM portal_rcRFC AS RE
+                                                                INNER JOIN portal_catRFC AS RFC ON RFC.id_rfc = RE.id_rfc
+                                                                WHERE RFC.rfc = '{RFC}'")
+                        db.execSQLQueryWithoutParams($"UPDATE portal_rcRFC SET direccion = '{DireccionF}', numero = numero, colonia = '{ColoniaF}', cp = '{CPF}', poblacion = '{CiudadF}', localidad = '{CiudadF}', telefono = '{TelefonoF}', correo = '{CorreoF}', id_municipio = {IDMunicipioF}, razonsocial = '{RazonSocialF}', id_res_cfdi_regimen = '{IDResRegCFDI}' WHERE id_rc_rfc = {IDRes}")
+                    Else ''NUEVO REGISTRO    
+                        Dim nuevoRFC As Integer = db.insertAndGetIDInserted($"INSERT INTO portal_catRFC(rfc, direccion, numero, colonia, cp, poblacion, localidad, telefono, correo, id_municipio, razonsocial) VALUES ('{RFC}', '{DireccionF}', 0, '{ColoniaF}', '{CPF}', '{CiudadF}', '{CiudadF}', '{TelefonoF}', '{CorreoF}', {IDMunicipioF}, '{RazonSocialF}')")
+                        db.execSQLQueryWithoutParams($"INSERT INTO portal_rcRFC(id_rfc, id_registro, direccion, numero, colonia, cp, poblacion, localidad, telefono, correo, id_municipio, razonsocial, id_res_cfdi_regimen, activo) VALUES({nuevoRFC}, {idregistro}, '{DireccionF}', 0, '{ColoniaF}', '{CPF}', '{CiudadF}', '{CiudadF}', '{TelefonoF}', '{CorreoF}', {IDMunicipioF}, '{RazonSocialF}', {IDResRegCFDI}, 1)")
+                    End If
+                End If
             End If
-
 
             db.commitTransaction()
             MessageBox.Show("Datos modificados correctamente")
-            RegistroExternosEDC.Reiniciar()
+            RegistroExternosOldEDC.Reiniciar()
         Catch ex As Exception
             db.rollBackTransaction()
             MessageBox.Show(ex.Message)
         End Try
     End Sub
+    'Sub EdicionEC(Matricula As String, Correo As String, Nombre As String, Calle As String, Colonia As String, CP As String, IDMunicipio As Integer, tipo_Persona As Integer, telefono As String, IDNacionalidad As Integer, ap_pat As String, ap_mat As String, datosFiscales As Boolean,
+    '                    RFC As String, DireccionF As String, NumeroF As String, ColoniaF As String, CPF As String, CiudadF As String, TelefonoF As String, CorreoF As String, IDMunicipioF As Integer, RazonSocialF As String)
+    '    Try
+    '        db.startTransaction()
+    '        Dim idcliente As Integer = db.exectSQLQueryScalar($"SELECT id_cliente FROM portal_registroCongreso WHERE clave_cliente = '{Matricula}'")
+    '        Dim idregistro As Integer = db.exectSQLQueryScalar($"SELECT id_registro FROM portal_registroCongreso WHERE clave_cliente = '{Matricula}'")
+    '        Dim idRFC As Integer = db.exectSQLQueryScalar($"SELECT id_rfc FROM portal_rcRFC WHERE id_registro = {idregistro}")
+    '        db.execSQLQueryWithoutParams($"UPDATE portal_cliente SET correo = '{Correo}', nombre = '{Nombre}', calle = '{Calle}', colonia = '{Colonia}', cp = '{CP}', id_municipio = {IDMunicipio}, telefono = '{telefono}' WHERE id_cliente = '{idcliente}'")
+    '        db.execSQLQueryWithoutParams($"UPDATE portal_registroCongreso SET apellido_paterno = '{ap_pat}', apellido_materno = '{ap_mat}' WHERE id_registro = {idregistro}")
+
+    '        If (idRFC > 1) Then
+    '            db.execSQLQueryWithoutParams($"UPDATE portal_rcRFC SET direccion = '{DireccionF}', colonia = '{ColoniaF}', cp = '{CPF}', poblacion = '{CiudadF}', localidad = '{CiudadF}', telefono = '{TelefonoF}', correo = '{CorreoF}', id_municipio = '{IDMunicipioF}', razonsocial = '{RazonSocialF}' WHERE id_rfc = {idRFC}")
+    '        ElseIf (idRFC = 1) Then
+    '            idRFC = db.insertAndGetIDInserted($"INSERT INTO portal_catRFC (rfc, direccion, numero, colonia, cp, poblacion, localidad, telefono, correo, id_municipio, razonsocial) VALUES ('{RFC}', '{DireccionF}', '', '{ColoniaF}', '{CPF}', '{CiudadF}', '{CiudadF}', '{TelefonoF}', '{CorreoF}', {IDMunicipioF}, '{RazonSocialF}')")
+    '            db.execSQLQueryWithoutParams($"UPDATE portal_reRFC SET id_rfc = {idRFC} WHERE id_registro = {idregistro}")
+    '        End If
+
+    '        db.commitTransaction()
+    '        MessageBox.Show("Datos modificados correctamente")
+    '        RegistroExternosOldEDC.Reiniciar()
+    '    Catch ex As Exception
+    '        db.rollBackTransaction()
+    '        MessageBox.Show(ex.Message)
+    '    End Try
+    'End Sub
 
     Function validaTextboxDatos(txtNombre As TextBox, txtap_pat As TextBox, txtap_mat As TextBox, txtDireccion As TextBox, txtColonia As TextBox, txtCorreo As TextBox, txtCP As TextBox, txtTelefono As TextBox, cbMunicipio As ComboBox) As Object()
         If (txtNombre.Text = "") Then
@@ -341,7 +439,7 @@
         Return {True, ""}
     End Function
 
-    Function validaTextboxFiscal(txtRFC As TextBox, txtRazon As TextBox, txtDireccion As TextBox, txtColonia As TextBox, txtCiudad As TextBox, txtCorreo As TextBox, txtCP As TextBox, txtTelefono As TextBox, cbMunicipio As ComboBox) As Object
+    Function validaTextboxFiscal(txtRFC As TextBox, txtRazon As TextBox, txtDireccion As TextBox, txtColonia As TextBox, txtCiudad As TextBox, txtCorreo As TextBox, txtCP As TextBox, txtTelefono As TextBox, cbMunicipio As ComboBox, cbRegistroFiscal As ComboBox, cbUsoCFDI As ComboBox) As Object
         If (txtRFC.Text = "") Then
             Return {False, "Ingrese el RFC"}
         ElseIf (txtRazon.Text = "") Then
@@ -360,6 +458,10 @@
             Return {False, "Ingrese un telefono"}
         ElseIf (cbMunicipio.Text = "") Then
             Return {False, "Seleccione un municipio"}
+        ElseIf (cbRegistroFiscal.Text = "") Then
+            Return {False, "Seleccione un regimen fiscal"}
+        ElseIf (cbUsoCFDI.Text = "") Then
+            Return {False, "Seleccione un uso de CFDI"}
         End If
         Return {True, ""}
     End Function

@@ -440,6 +440,8 @@ Public Class CobrosEDC
         Dim listaConceptosPrueba As New List(Of Concepto)
         Dim tipocliente As Integer
         Dim cobrarAbono As Boolean = False
+        Dim creditoband As Boolean = False
+        Dim formaPagoClave As String
         listaConceptos = ch.getListaConceptos()
         listaConceptosPrueba = ch.getListaConceptos()
         Dim listaconceptosFinal As New List(Of Concepto)
@@ -491,71 +493,101 @@ Public Class CobrosEDC
                 Exit Sub
             End If
         ElseIf (cbFormaPago.Text = "CREDITO") Then
+            creditoband = True
+        End If
 
+        If (creditoband = False) Then
+
+            Dim montoTotal As Decimal = CDec(lblTotal.Text)
+            Dim montoIngresado As Decimal = CDec(txtMonto.Text)
+            If (montoTotal <> montoIngresado) Then
+                If (montoIngresado > montoTotal) Then
+                    If (cbFormaPago.Text = "EFECTIVO") Then
+                        MessageBox.Show($"El cambio a entregar es de {Format(CDec(montoIngresado - montoTotal), "##0.00")} pesos.")
+                    Else
+                        MessageBox.Show("No puede ingresar un monto mayor al total a pagar, ingrese un monto valido")
+                        Exit Sub
+                    End If
+                Else
+                    listaconceptosFinal = co.calcularAbonos(listaConceptosPrueba, montoIngresado, montoTotal, Matricula)
+                    cobrarAbono = True
+                    If (IsNothing(listaconceptosFinal)) Then
+                        Exit Sub
+                    End If
+                End If
+            End If
+            listaconceptosFinal = ch.getListaConceptos()
+            For Each concepto As Concepto In listaconceptosFinal
+                Dim IDClavePago As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatClavesPagos WHERE Clave = '{concepto.claveConcepto}'")
+                Dim tieneAbono As Integer = db.exectSQLQueryScalar($"SELECT TOP 1 ID FROM ing_Abonos WHERE ID_ClavePago = {IDClavePago} AND IDPago = {concepto.IDConcepto} ORDER BY ID DESC")
+                If (tieneAbono > 0) Then
+                    Dim montoRestante As Decimal = db.exectSQLQueryScalar($"SELECT Cantidad_Restante FROM ing_Abonos WHERE ID = {tieneAbono}")
+                    If (concepto.costoFinal = montoRestante) Then
+                        If (concepto.absorbeIVA = False And concepto.IVAExento = False And concepto.consideraIVA = True) Then
+                            co.recalcularCostoAbono(concepto, concepto.costoFinal, 2)
+                        End If
+                        Dim first As String = concepto.NombreConcepto.Substring(0, 1)
+                        If (first = "1") Then
+                            Dim x As String = concepto.NombreConcepto.Substring(1, concepto.NombreConcepto.Length() - 1)
+                            concepto.NombreConcepto = $"2{x}"
+                        Else
+                            concepto.NombreConcepto = $"2{concepto.NombreConcepto}"
+                        End If
+
+                    Else
+                        Dim first As String = concepto.NombreConcepto.Substring(0, 1)
+                        If (first <> "1") Then
+                            concepto.NombreConcepto = $"1{concepto.NombreConcepto}"
+                        End If
+                    End If
+                    ''co.recalcularCostoAbono(concepto, concepto.costoFinal, 2)
+                    ''concepto.NombreConcepto = $"2{concepto.NombreConcepto}"
+                End If
+            Next
             If (tipoMatricula = "EX") Then
                 tipocliente = 2
             ElseIf (tipoMatricula = "EC") Then
                 tipocliente = 1
             End If
-            Dim IDXMLC As Integer = co.Cobrar(listaConceptosPrueba, cbFormaPago.SelectedValue, Matricula, lblRFCtxt.Text, lblNombretxt.Text, lblTotal.Text, True, tipocliente, lblCPtxt.Text, lblRegFiscaltxt.Text, lblCFDItxt.Text)
+        End If
+        ''---------------------------------------------------------VALIDA DATOS FISCALES---------------------------------------------------------
+        Dim RFCTimbrar As String
+        If (lblRFCtxt.Text <> "XAXX010101000") Then
+            Dim result As DialogResult = MessageBox.Show("¿Quiere usar datos fiscales?", "", MessageBoxButtons.YesNo)
+            If (result = 6) Then
+                ObjectBagService.setItem("Matricula", Matricula)
+                ModalDatosFiscalesCobrosEDC.ShowDialog()
+                RFCTimbrar = ObjectBagService.getItem("RFCTimbrar")
+            Else
+                RFCTimbrar = "XAXX010101000"
+            End If
+        Else
+            RFCTimbrar = "XAXX010101000"
+        End If
+        If (creditoband = True) Then
+            If (tipoMatricula = "EX") Then
+                tipocliente = 2
+            ElseIf (tipoMatricula = "EC") Then
+                tipocliente = 1
+            End If
+            Dim IDXMLC As Integer = co.Cobrar(listaConceptosPrueba, cbFormaPago.SelectedValue, Matricula, RFCTimbrar, lblNombretxt.Text, lblTotal.Text, True, tipocliente, lblCPtxt.Text, lblRegFiscaltxt.Text, lblCFDItxt.Text)
             If (IDXMLC > 0) Then
                 Me.Reiniciar()
                 Exit Sub
             End If
         End If
 
-        Dim montoTotal As Decimal = CDec(lblTotal.Text)
-        Dim montoIngresado As Decimal = CDec(txtMonto.Text)
-        If (montoTotal <> montoIngresado) Then
-            If (montoIngresado > montoTotal) Then
-                If (cbFormaPago.Text = "EFECTIVO") Then
-                    MessageBox.Show($"El cambio a entregar es de {Format(CDec(montoIngresado - montoTotal), "##0.00")} pesos.")
-                Else
-                    MessageBox.Show("No puede ingresar un monto mayor al total a pagar, ingrese un monto valido")
-                    Exit Sub
-                End If
-            Else
-                listaconceptosFinal = co.calcularAbonos(listaConceptosPrueba, montoIngresado, montoTotal, Matricula)
-                cobrarAbono = True
-                If (IsNothing(listaconceptosFinal)) Then
-                    Exit Sub
-                End If
+        ''---------------------------------------------------------CLAVE DE FORMA DE PAGO---------------------------------------------------------
+        If (cbFormaPago.Text = "DEPOSITO BANCARIO C/COMPROBANTE" Or cbFormaPago.Text = "DEPOSITO BANCARIO EDO CTA") Then
+            If (cbTipoBanco.Text = "EFECTIVO") Then
+                formaPagoClave = "01"
+            ElseIf (cbTipoBanco.Text = "OTRO") Then
+                formaPagoClave = "99"
             End If
+        Else
+            formaPagoClave = cbFormaPago.SelectedValue
         End If
-        listaconceptosFinal = ch.getListaConceptos()
-        For Each concepto As Concepto In listaconceptosFinal
-            Dim IDClavePago As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatClavesPagos WHERE Clave = '{concepto.claveConcepto}'")
-            Dim tieneAbono As Integer = db.exectSQLQueryScalar($"SELECT TOP 1 ID FROM ing_Abonos WHERE ID_ClavePago = {IDClavePago} AND IDPago = {concepto.IDConcepto} ORDER BY ID DESC")
-            If (tieneAbono > 0) Then
-                Dim montoRestante As Decimal = db.exectSQLQueryScalar($"SELECT Cantidad_Restante FROM ing_Abonos WHERE ID = {tieneAbono}")
-                If (concepto.costoFinal = montoRestante) Then
-                    If (concepto.absorbeIVA = False And concepto.IVAExento = False And concepto.consideraIVA = True) Then
-                        co.recalcularCostoAbono(concepto, concepto.costoFinal, 2)
-                    End If
-                    Dim first As String = concepto.NombreConcepto.Substring(0, 1)
-                    If (first = "1") Then
-                        Dim x As String = concepto.NombreConcepto.Substring(1, concepto.NombreConcepto.Length() - 1)
-                        concepto.NombreConcepto = $"2{x}"
-                    Else
-                        concepto.NombreConcepto = $"2{concepto.NombreConcepto}"
-                    End If
-
-                Else
-                    Dim first As String = concepto.NombreConcepto.Substring(0, 1)
-                    If (first <> "1") Then
-                        concepto.NombreConcepto = $"1{concepto.NombreConcepto}"
-                    End If
-                End If
-                    ''co.recalcularCostoAbono(concepto, concepto.costoFinal, 2)
-                    ''concepto.NombreConcepto = $"2{concepto.NombreConcepto}"
-                End If
-        Next
-        If (tipoMatricula = "EX") Then
-            tipocliente = 2
-        ElseIf (tipoMatricula = "EC") Then
-            tipocliente = 1
-        End If
-        Dim IDXML As Integer = co.Cobrar(listaconceptosFinal, cbFormaPago.SelectedValue, Matricula, lblRFCtxt.Text, lblNombretxt.Text, lblTotal.Text, False, tipocliente, lblCPtxt.Text, lblRegFiscaltxt.Text, "S01")
+        Dim IDXML As Integer = co.Cobrar(listaconceptosFinal, formaPagoClave, Matricula, RFCTimbrar, lblNombretxt.Text, lblTotal.Text, False, tipocliente, lblCPtxt.Text, lblRegFiscaltxt.Text, "S01")
 
 
         ''---------------------------------------------------------REGISTRO DE FORMA DE PAGO---------------------------------------------------------

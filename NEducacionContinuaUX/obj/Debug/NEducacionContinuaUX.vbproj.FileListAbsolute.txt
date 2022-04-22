@@ -10,7 +10,6 @@ C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEdu
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.MainRegistroPagosOpcionalesEDC.resources
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.ModalRegistroPagosOpcionalesEDC.resources
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.CobrosEDC.resources
-C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.RegistroExternosEDC.resources
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.MainCobrosDiferidosEDC.resources
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.ModalCobrosDiferidosEDC.resources
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.AutorizacionCondonacionEDC.resources
@@ -119,3 +118,6 @@ C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEdu
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.ObservacionesEDC.resources
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.ModalNotasCreditoEDC.resources
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.RegistroTipoPagosOpcionales.resources
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.RegistroExternos.resources
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.RegistroExternosOldEDC.resources
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.ModalDatosFiscalesCobrosEDC.resources
