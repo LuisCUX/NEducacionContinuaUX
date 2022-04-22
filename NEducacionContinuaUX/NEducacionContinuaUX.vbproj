@@ -28,7 +28,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\192.168.1.241\ti\NEducacionContinua\Instalador\</InstallUrl>
     <TargetCulture>es-MX</TargetCulture>
-    <ApplicationRevision>60</ApplicationRevision>
+    <ApplicationRevision>61</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -337,6 +337,12 @@
     <Compile Include="Views\ModalCobrosDiferidosEDC.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Views\ModalDatosFiscalesCobrosEDC.Designer.vb">
+      <DependentUpon>ModalDatosFiscalesCobrosEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModalDatosFiscalesCobrosEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\ModalDescuento.Designer.vb">
       <DependentUpon>ModalDescuento.vb</DependentUpon>
     </Compile>
@@ -397,10 +403,16 @@
     <Compile Include="Views\ModalRegistroPagosOpcionalesEDC.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\RegistroExternosEDC.Designer.vb">
-      <DependentUpon>RegistroExternosEDC.vb</DependentUpon>
+    <Compile Include="Views\RegistroExternos.Designer.vb">
+      <DependentUpon>RegistroExternos.vb</DependentUpon>
     </Compile>
-    <Compile Include="Views\RegistroExternosEDC.vb">
+    <Compile Include="Views\RegistroExternos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\RegistroExternosOldEDC.Designer.vb">
+      <DependentUpon>RegistroExternosOldEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegistroExternosOldEDC.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\RegistroTipoPagosOpcionales.Designer.vb">
@@ -483,6 +495,9 @@
     <EmbeddedResource Include="Views\ModalCobrosDiferidosEDC.resx">
       <DependentUpon>ModalCobrosDiferidosEDC.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\ModalDatosFiscalesCobrosEDC.resx">
+      <DependentUpon>ModalDatosFiscalesCobrosEDC.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\ModalDescuento.resx">
       <DependentUpon>ModalDescuento.vb</DependentUpon>
     </EmbeddedResource>
@@ -513,8 +528,11 @@
     <EmbeddedResource Include="Views\ModalRegistroPagosOpcionalesEDC.resx">
       <DependentUpon>ModalRegistroPagosOpcionalesEDC.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\RegistroExternosEDC.resx">
-      <DependentUpon>RegistroExternosEDC.vb</DependentUpon>
+    <EmbeddedResource Include="Views\RegistroExternos.resx">
+      <DependentUpon>RegistroExternos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\RegistroExternosOldEDC.resx">
+      <DependentUpon>RegistroExternosOldEDC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\RegistroTipoPagosOpcionales.resx">
       <DependentUpon>RegistroTipoPagosOpcionales.vb</DependentUpon>

@@ -24,8 +24,8 @@
     End Sub
 
     Private Sub AltaYModificaciónDeExternosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AltaYModificaciónDeExternosToolStripMenuItem.Click
-        RegistroExternosEDC.MdiParent = Me
-        RegistroExternosEDC.Show()
+        RegistroExternosOldEDC.MdiParent = Me
+        RegistroExternosOldEDC.Show()
     End Sub
 
     Private Sub AsignaciónDePagosOpcionalesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AsignaciónDePagosOpcionalesToolStripMenuItem.Click
