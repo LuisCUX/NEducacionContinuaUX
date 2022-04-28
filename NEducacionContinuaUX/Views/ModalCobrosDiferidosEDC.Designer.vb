@@ -23,12 +23,12 @@ Partial Class ModalCobrosDiferidosEDC
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Congresos")
-        Dim TreeNode2 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Pagos Opcionales")
-        Dim TreeNode3 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Inscripción a Diplomados")
-        Dim TreeNode4 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Colegiaturas de Diplomados")
-        Dim TreeNode5 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Pago Unico de Diplomados")
-        Dim TreeNode6 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Recargos de Diplomados")
+        Dim TreeNode7 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Congresos")
+        Dim TreeNode8 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Pagos Opcionales")
+        Dim TreeNode9 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Inscripción a Diplomados")
+        Dim TreeNode10 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Colegiaturas de Diplomados")
+        Dim TreeNode11 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Pago Unico de Diplomados")
+        Dim TreeNode12 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Recargos de Diplomados")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ModalCobrosDiferidosEDC))
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.panelDatos = New System.Windows.Forms.Panel()
@@ -55,6 +55,8 @@ Partial Class ModalCobrosDiferidosEDC
         Me.ImageListTree = New System.Windows.Forms.ImageList(Me.components)
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.btnCobrar = New System.Windows.Forms.Button()
+        Me.lblDireccion = New System.Windows.Forms.Label()
+        Me.lblDirecciontxt = New System.Windows.Forms.Label()
         Me.panelDatos.SuspendLayout()
         Me.panelCobros.SuspendLayout()
         Me.SuspendLayout()
@@ -73,6 +75,8 @@ Partial Class ModalCobrosDiferidosEDC
         '
         'panelDatos
         '
+        Me.panelDatos.Controls.Add(Me.lblDireccion)
+        Me.panelDatos.Controls.Add(Me.lblDirecciontxt)
         Me.panelDatos.Controls.Add(Me.lblCFDItxt)
         Me.panelDatos.Controls.Add(Me.lblCFDI)
         Me.panelDatos.Controls.Add(Me.lblRegFiscaltxt)
@@ -91,7 +95,7 @@ Partial Class ModalCobrosDiferidosEDC
         Me.panelDatos.Controls.Add(Me.lblNombre)
         Me.panelDatos.Location = New System.Drawing.Point(15, 72)
         Me.panelDatos.Name = "panelDatos"
-        Me.panelDatos.Size = New System.Drawing.Size(773, 107)
+        Me.panelDatos.Size = New System.Drawing.Size(773, 146)
         Me.panelDatos.TabIndex = 18
         Me.panelDatos.Visible = False
         '
@@ -100,7 +104,7 @@ Partial Class ModalCobrosDiferidosEDC
         Me.lblCFDItxt.AutoSize = True
         Me.lblCFDItxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCFDItxt.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblCFDItxt.Location = New System.Drawing.Point(456, 79)
+        Me.lblCFDItxt.Location = New System.Drawing.Point(448, 80)
         Me.lblCFDItxt.Name = "lblCFDItxt"
         Me.lblCFDItxt.Size = New System.Drawing.Size(0, 15)
         Me.lblCFDItxt.TabIndex = 97
@@ -110,7 +114,7 @@ Partial Class ModalCobrosDiferidosEDC
         Me.lblCFDI.AutoSize = True
         Me.lblCFDI.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCFDI.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblCFDI.Location = New System.Drawing.Point(394, 79)
+        Me.lblCFDI.Location = New System.Drawing.Point(350, 79)
         Me.lblCFDI.Name = "lblCFDI"
         Me.lblCFDI.Size = New System.Drawing.Size(62, 15)
         Me.lblCFDI.TabIndex = 96
@@ -121,7 +125,7 @@ Partial Class ModalCobrosDiferidosEDC
         Me.lblRegFiscaltxt.AutoSize = True
         Me.lblRegFiscaltxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblRegFiscaltxt.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblRegFiscaltxt.Location = New System.Drawing.Point(492, 51)
+        Me.lblRegFiscaltxt.Location = New System.Drawing.Point(448, 51)
         Me.lblRegFiscaltxt.Name = "lblRegFiscaltxt"
         Me.lblRegFiscaltxt.Size = New System.Drawing.Size(0, 15)
         Me.lblRegFiscaltxt.TabIndex = 95
@@ -131,7 +135,7 @@ Partial Class ModalCobrosDiferidosEDC
         Me.lblRegFiscal.AutoSize = True
         Me.lblRegFiscal.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblRegFiscal.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblRegFiscal.Location = New System.Drawing.Point(394, 55)
+        Me.lblRegFiscal.Location = New System.Drawing.Point(350, 55)
         Me.lblRegFiscal.Name = "lblRegFiscal"
         Me.lblRegFiscal.Size = New System.Drawing.Size(92, 15)
         Me.lblRegFiscal.TabIndex = 94
@@ -142,7 +146,7 @@ Partial Class ModalCobrosDiferidosEDC
         Me.lblCPtxt.AutoSize = True
         Me.lblCPtxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCPtxt.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblCPtxt.Location = New System.Drawing.Point(428, 33)
+        Me.lblCPtxt.Location = New System.Drawing.Point(448, 33)
         Me.lblCPtxt.Name = "lblCPtxt"
         Me.lblCPtxt.Size = New System.Drawing.Size(0, 15)
         Me.lblCPtxt.TabIndex = 93
@@ -152,7 +156,7 @@ Partial Class ModalCobrosDiferidosEDC
         Me.lblCP.AutoSize = True
         Me.lblCP.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCP.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblCP.Location = New System.Drawing.Point(394, 33)
+        Me.lblCP.Location = New System.Drawing.Point(350, 33)
         Me.lblCP.Name = "lblCP"
         Me.lblCP.Size = New System.Drawing.Size(26, 15)
         Me.lblCP.TabIndex = 92
@@ -163,7 +167,7 @@ Partial Class ModalCobrosDiferidosEDC
         Me.lblRFCtxt.AutoSize = True
         Me.lblRFCtxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblRFCtxt.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblRFCtxt.Location = New System.Drawing.Point(431, 9)
+        Me.lblRFCtxt.Location = New System.Drawing.Point(448, 9)
         Me.lblRFCtxt.Name = "lblRFCtxt"
         Me.lblRFCtxt.Size = New System.Drawing.Size(0, 15)
         Me.lblRFCtxt.TabIndex = 44
@@ -173,7 +177,7 @@ Partial Class ModalCobrosDiferidosEDC
         Me.lblRFC.AutoSize = True
         Me.lblRFC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblRFC.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblRFC.Location = New System.Drawing.Point(394, 9)
+        Me.lblRFC.Location = New System.Drawing.Point(350, 9)
         Me.lblRFC.Name = "lblRFC"
         Me.lblRFC.Size = New System.Drawing.Size(34, 15)
         Me.lblRFC.TabIndex = 43
@@ -272,9 +276,9 @@ Partial Class ModalCobrosDiferidosEDC
         Me.panelCobros.Controls.Add(Me.lblPeso)
         Me.panelCobros.Controls.Add(Me.lblTotal)
         Me.panelCobros.Controls.Add(Me.Tree)
-        Me.panelCobros.Location = New System.Drawing.Point(4, 185)
+        Me.panelCobros.Location = New System.Drawing.Point(4, 224)
         Me.panelCobros.Name = "panelCobros"
-        Me.panelCobros.Size = New System.Drawing.Size(784, 340)
+        Me.panelCobros.Size = New System.Drawing.Size(784, 367)
         Me.panelCobros.TabIndex = 19
         Me.panelCobros.Visible = False
         '
@@ -283,7 +287,7 @@ Partial Class ModalCobrosDiferidosEDC
         Me.lblPeso.AutoSize = True
         Me.lblPeso.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblPeso.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblPeso.Location = New System.Drawing.Point(517, 302)
+        Me.lblPeso.Location = New System.Drawing.Point(517, 337)
         Me.lblPeso.Name = "lblPeso"
         Me.lblPeso.Size = New System.Drawing.Size(26, 29)
         Me.lblPeso.TabIndex = 26
@@ -294,7 +298,7 @@ Partial Class ModalCobrosDiferidosEDC
         Me.lblTotal.AutoSize = True
         Me.lblTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTotal.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblTotal.Location = New System.Drawing.Point(537, 302)
+        Me.lblTotal.Location = New System.Drawing.Point(537, 337)
         Me.lblTotal.Name = "lblTotal"
         Me.lblTotal.Size = New System.Drawing.Size(0, 29)
         Me.lblTotal.TabIndex = 25
@@ -304,39 +308,39 @@ Partial Class ModalCobrosDiferidosEDC
         Me.Tree.BackColor = System.Drawing.SystemColors.ControlDarkDark
         Me.Tree.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Tree.ForeColor = System.Drawing.SystemColors.Control
-        Me.Tree.Location = New System.Drawing.Point(11, 17)
+        Me.Tree.Location = New System.Drawing.Point(11, 13)
         Me.Tree.Name = "Tree"
-        TreeNode1.Name = "nodeCongresos"
-        TreeNode1.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        TreeNode1.StateImageIndex = 2
-        TreeNode1.Text = "Congresos"
-        TreeNode2.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        TreeNode2.ForeColor = System.Drawing.SystemColors.Control
-        TreeNode2.Name = "nodePagosOpcionales"
-        TreeNode2.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        TreeNode2.SelectedImageIndex = -2
-        TreeNode2.StateImageIndex = 2
-        TreeNode2.Text = "Pagos Opcionales"
-        TreeNode3.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        TreeNode3.ForeColor = System.Drawing.SystemColors.Control
-        TreeNode3.Name = "nodeInscripcionDip"
-        TreeNode3.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        TreeNode3.SelectedImageIndex = -2
-        TreeNode3.StateImageIndex = 2
-        TreeNode3.Text = "Inscripción a Diplomados"
-        TreeNode4.Name = "nodeColegiaturaDip"
-        TreeNode4.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        TreeNode4.StateImageIndex = 2
-        TreeNode4.Text = "Colegiaturas de Diplomados"
-        TreeNode5.Name = "nodePagoUnicoDip"
-        TreeNode5.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        TreeNode5.StateImageIndex = 2
-        TreeNode5.Text = "Pago Unico de Diplomados"
-        TreeNode6.Name = "nodeColegiaturasRec"
-        TreeNode6.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        TreeNode6.StateImageIndex = 2
-        TreeNode6.Text = "Recargos de Diplomados"
-        Me.Tree.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2, TreeNode3, TreeNode4, TreeNode5, TreeNode6})
+        TreeNode7.Name = "nodeCongresos"
+        TreeNode7.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        TreeNode7.StateImageIndex = 2
+        TreeNode7.Text = "Congresos"
+        TreeNode8.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        TreeNode8.ForeColor = System.Drawing.SystemColors.Control
+        TreeNode8.Name = "nodePagosOpcionales"
+        TreeNode8.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        TreeNode8.SelectedImageIndex = -2
+        TreeNode8.StateImageIndex = 2
+        TreeNode8.Text = "Pagos Opcionales"
+        TreeNode9.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        TreeNode9.ForeColor = System.Drawing.SystemColors.Control
+        TreeNode9.Name = "nodeInscripcionDip"
+        TreeNode9.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        TreeNode9.SelectedImageIndex = -2
+        TreeNode9.StateImageIndex = 2
+        TreeNode9.Text = "Inscripción a Diplomados"
+        TreeNode10.Name = "nodeColegiaturaDip"
+        TreeNode10.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        TreeNode10.StateImageIndex = 2
+        TreeNode10.Text = "Colegiaturas de Diplomados"
+        TreeNode11.Name = "nodePagoUnicoDip"
+        TreeNode11.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        TreeNode11.StateImageIndex = 2
+        TreeNode11.Text = "Pago Unico de Diplomados"
+        TreeNode12.Name = "nodeColegiaturasRec"
+        TreeNode12.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        TreeNode12.StateImageIndex = 2
+        TreeNode12.Text = "Recargos de Diplomados"
+        Me.Tree.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode7, TreeNode8, TreeNode9, TreeNode10, TreeNode11, TreeNode12})
         Me.Tree.Size = New System.Drawing.Size(766, 268)
         Me.Tree.StateImageList = Me.ImageListTree
         Me.Tree.TabIndex = 24
@@ -353,7 +357,7 @@ Partial Class ModalCobrosDiferidosEDC
         '
         Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_32px
         Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnSalir.Location = New System.Drawing.Point(189, 541)
+        Me.btnSalir.Location = New System.Drawing.Point(189, 601)
         Me.btnSalir.Name = "btnSalir"
         Me.btnSalir.Size = New System.Drawing.Size(70, 40)
         Me.btnSalir.TabIndex = 20
@@ -363,18 +367,39 @@ Partial Class ModalCobrosDiferidosEDC
         '
         Me.btnCobrar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.plus_32px
         Me.btnCobrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnCobrar.Location = New System.Drawing.Point(526, 541)
+        Me.btnCobrar.Location = New System.Drawing.Point(526, 601)
         Me.btnCobrar.Name = "btnCobrar"
         Me.btnCobrar.Size = New System.Drawing.Size(70, 40)
         Me.btnCobrar.TabIndex = 21
         Me.btnCobrar.UseVisualStyleBackColor = True
+        '
+        'lblDireccion
+        '
+        Me.lblDireccion.AutoSize = True
+        Me.lblDireccion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDireccion.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblDireccion.Location = New System.Drawing.Point(448, 106)
+        Me.lblDireccion.Name = "lblDireccion"
+        Me.lblDireccion.Size = New System.Drawing.Size(0, 15)
+        Me.lblDireccion.TabIndex = 101
+        '
+        'lblDirecciontxt
+        '
+        Me.lblDirecciontxt.AutoSize = True
+        Me.lblDirecciontxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDirecciontxt.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblDirecciontxt.Location = New System.Drawing.Point(350, 106)
+        Me.lblDirecciontxt.Name = "lblDirecciontxt"
+        Me.lblDirecciontxt.Size = New System.Drawing.Size(62, 15)
+        Me.lblDirecciontxt.TabIndex = 100
+        Me.lblDirecciontxt.Text = "Direccion:"
         '
         'ModalCobrosDiferidosEDC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.ClientSize = New System.Drawing.Size(793, 593)
+        Me.ClientSize = New System.Drawing.Size(793, 657)
         Me.Controls.Add(Me.panelCobros)
         Me.Controls.Add(Me.panelDatos)
         Me.Controls.Add(Me.lblNombreVentana)
@@ -417,4 +442,6 @@ Partial Class ModalCobrosDiferidosEDC
     Friend WithEvents lblRegFiscal As Label
     Friend WithEvents lblCFDItxt As Label
     Friend WithEvents lblCFDI As Label
+    Friend WithEvents lblDireccion As Label
+    Friend WithEvents lblDirecciontxt As Label
 End Class

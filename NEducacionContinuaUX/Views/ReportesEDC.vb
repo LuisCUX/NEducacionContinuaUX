@@ -66,7 +66,7 @@
             rep.AgregarFuente("ReporteIngresosDiario.rpt")
             rep.AgregarParametros("Usuario", "")
         End If
-        rep.AgregarParametros("FechaFin", Me.obtenerFechaFormato(dtPickerFin2))
+        ''rep.AgregarParametros("FechaFin", Me.obtenerFechaFormato(dtPickerFin2))
         rep.AgregarParametros("FechaInicio", Me.obtenerFechaFormato(dtPickerInicio2))
         rep.MostrarReporte()
     End Sub

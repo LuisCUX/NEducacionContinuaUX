@@ -38,9 +38,9 @@ Public Class AutorizacionCondonacionEDC
         ElseIf (tipoMatricula = "UX") Then
             va.buscarMatriculaUX(Matricula, panelDatos, panelAutCon, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt)
         ElseIf (tipoMatricula = "EX") Then
-            va.buscarMatriculaEX(Matricula, panelDatos, panelAutCon, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt, lblCP, lblRegFiscal, lblCFDItxt)
+            va.buscarMatriculaEX(Matricula, panelDatos, panelAutCon, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt, lblCP, lblRegFiscal, lblCFDItxt, lblDireccion)
         ElseIf (tipoMatricula = "EC") Then
-            va.buscarMatriculaEC(Matricula, panelDatos, panelAutCon, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt, lblCP, lblRegFiscal, lblCFDItxt)
+            va.buscarMatriculaEC(Matricula, panelDatos, panelAutCon, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt, lblCP, lblRegFiscal, lblCFDItxt, lblDireccion)
         End If
         ac.ActualizarArbolAutorizacionCaja(treeAutorizacionCaja, Matricula, tipoMatricula)
     End Sub
