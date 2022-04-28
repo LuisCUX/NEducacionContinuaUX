@@ -25,6 +25,7 @@ Partial Class MainRegistroPagosOpcionalesEDC
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainRegistroPagosOpcionalesEDC))
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.GridPagosOpcionales = New System.Windows.Forms.DataGridView()
+        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.GridPagosOpcionales, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -49,18 +50,30 @@ Partial Class MainRegistroPagosOpcionalesEDC
         Me.GridPagosOpcionales.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridPagosOpcionales.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.GridPagosOpcionales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.GridPagosOpcionales.Location = New System.Drawing.Point(12, 80)
+        Me.GridPagosOpcionales.Location = New System.Drawing.Point(12, 103)
         Me.GridPagosOpcionales.Name = "GridPagosOpcionales"
         Me.GridPagosOpcionales.ReadOnly = True
-        Me.GridPagosOpcionales.Size = New System.Drawing.Size(776, 477)
+        Me.GridPagosOpcionales.Size = New System.Drawing.Size(776, 426)
         Me.GridPagosOpcionales.TabIndex = 11
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label1.Location = New System.Drawing.Point(9, 77)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(329, 18)
+        Me.Label1.TabIndex = 12
+        Me.Label1.Text = "Para modificar dar click en la clave del concepto:"
         '
         'MainRegistroPagosOpcionalesEDC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.ClientSize = New System.Drawing.Size(800, 569)
+        Me.ClientSize = New System.Drawing.Size(800, 536)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.GridPagosOpcionales)
         Me.Controls.Add(Me.lblNombreVentana)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -69,9 +82,11 @@ Partial Class MainRegistroPagosOpcionalesEDC
         Me.Text = "Pagos Opcionales"
         CType(Me.GridPagosOpcionales, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents lblNombreVentana As Label
     Friend WithEvents GridPagosOpcionales As DataGridView
+    Friend WithEvents Label1 As Label
 End Class

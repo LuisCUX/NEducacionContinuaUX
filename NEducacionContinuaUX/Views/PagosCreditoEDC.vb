@@ -35,9 +35,9 @@ Public Class PagosCreditoEDC
         ElseIf (tipoMatricula = "UX") Then
             va.buscarMatriculaUX(Matricula, panelDatos, panelCobroCredito, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt)
         ElseIf (tipoMatricula = "EX") Then
-            va.buscarMatriculaEX(Matricula, panelDatos, panelCobroCredito, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt, lblCPtxt, lblRegFiscaltxt, lblCFDItxt)
+            va.buscarMatriculaEX(Matricula, panelDatos, panelCobroCredito, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt, lblCPtxt, lblRegFiscaltxt, lblCFDItxt, lblDireccion)
         ElseIf (tipoMatricula = "EC") Then
-            va.buscarMatriculaEC(Matricula, panelDatos, panelCobroCredito, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt, lblCPtxt, lblRegFiscaltxt, lblCFDItxt)
+            va.buscarMatriculaEC(Matricula, panelDatos, panelCobroCredito, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt, lblCPtxt, lblRegFiscaltxt, lblCFDItxt, lblDireccion)
         End If
         Dim tableFacturasCredito As DataTable = db.getDataTableFromSQL($"SELECT ID, UPPER('FOLIO: ' + Folio + ' - FECHA: ' + CAST(Fecha AS VARCHAR(MAX))) As Descripcion FROM ing_Creditos WHERE Matricula = '{Matricula}' AND Activo = 1")
         ComboboxService.llenarCombobox(cbFactura, tableFacturasCredito, "ID", "Descripcion")

@@ -531,7 +531,7 @@ Public Class CobrosController
             listaConceptosRechazados.RemoveAll(Function(x) x.IDConcepto = concepto.IDConcepto And x.NombreConcepto = concepto.NombreConcepto And x.claveConcepto = concepto.claveConcepto)
         Next
 
-        Dim mensaje As String = "Se abonaran los siguientes conceptos: " + vbNewLine
+        Dim mensaje As String = "Se abonarán los siguientes conceptos: " + vbNewLine
         mensaje += vbNewLine
         For Each concepto As Concepto In listaConceptosAbonos
             mensaje += $"{concepto.NombreConcepto} - ABONO: ${CDec(CDec(concepto.costoFinal) + CDec(concepto.costoIVATotal))}" + vbNewLine

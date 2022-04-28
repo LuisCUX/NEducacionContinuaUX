@@ -32,6 +32,7 @@ Public Class CobrosEDC
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         Me.Limpiar()
+
         Matricula = txtMatricula.Text.ToUpper()
         tipoMatricula = va.validarMatricula(Matricula)
         If (tipoMatricula = "False") Then
@@ -41,9 +42,9 @@ Public Class CobrosEDC
         ElseIf (tipoMatricula = "UX") Then
             va.buscarMatriculaUX(Matricula, panelDatos, panelCobros, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt)
         ElseIf (tipoMatricula = "EX") Then
-            va.buscarMatriculaEX(Matricula, panelDatos, panelCobros, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt, lblCPtxt, lblRegFiscaltxt, lblCFDItxt)
+            va.buscarMatriculaEX(Matricula, panelDatos, panelCobros, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt, lblCPtxt, lblRegFiscaltxt, lblCFDItxt, lblDireccion)
         ElseIf (tipoMatricula = "EC") Then
-            va.buscarMatriculaEC(Matricula, panelDatos, panelCobros, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt, lblCPtxt, lblRegFiscaltxt, lblCFDItxt)
+            va.buscarMatriculaEC(Matricula, panelDatos, panelCobros, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt, lblCPtxt, lblRegFiscaltxt, lblCFDItxt, lblDireccion)
         End If
         ca.buscarPagosOpcionales(Tree, Matricula, tipoMatricula, "Cobros")
         ca.buscarCongresos(Tree, Matricula, tipoMatricula, "Cobros")
@@ -593,6 +594,9 @@ Public Class CobrosEDC
                     formaPagoID = 8
                 End If
             End If
+        ElseIf (cbFormaPago.Text = "NOTA DE CREDITO") Then
+            formaPagoClave = "99"
+            formaPagoID = 10
         Else
             formaPagoClave = cbFormaPago.SelectedValue
             formaPagoID = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatFormaPago WHERE Forma_Pago = '{formaPagoClave}'")
@@ -618,6 +622,8 @@ Public Class CobrosEDC
                 db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosDepositos(ID_Factura, ID_Banco, ID_TipoPago, Monto, TipoDeposito, FechaPago) VALUES({IDXML}, {cbBanco.SelectedValue}, {cbTipoBanco.SelectedValue}, {txtMonto.Text}, 'Edo', '{Me.getFechaDTPicker(DTPickerFecha)}')")
             ElseIf (cbFormaPago.Text = "NOTA DE CREDITO") Then
                 db.execSQLQueryWithoutParams($"UPDATE ing_NotasCredito SET Aplicada = 1 WHERE FolioNota = '{txtNotaAplicada.Text}'")
+                Dim IDNota As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_NotasCredito WHERE FolioNota = '{txtNotaAplicada.Text}'")
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_res_NotaCreditoXML(ID_NotaCredito, ID_XmlTimbrado) VALUES ({IDXML}, {IDNota})")
             End If
         End If
 

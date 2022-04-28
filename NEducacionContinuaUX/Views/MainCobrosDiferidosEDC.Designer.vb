@@ -83,6 +83,8 @@ Partial Class MainCobrosDiferidosEDC
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.btnCobrar = New System.Windows.Forms.Button()
         Me.ImageListTree = New System.Windows.Forms.ImageList(Me.components)
+        Me.lblDireccion = New System.Windows.Forms.Label()
+        Me.lblDirecciontxt = New System.Windows.Forms.Label()
         Me.panelBusqueda.SuspendLayout()
         Me.panelDatos.SuspendLayout()
         Me.panelCobros.SuspendLayout()
@@ -163,6 +165,8 @@ Partial Class MainCobrosDiferidosEDC
         '
         'panelDatos
         '
+        Me.panelDatos.Controls.Add(Me.lblDireccion)
+        Me.panelDatos.Controls.Add(Me.lblDirecciontxt)
         Me.panelDatos.Controls.Add(Me.lblCFDItxt)
         Me.panelDatos.Controls.Add(Me.lblCFDI)
         Me.panelDatos.Controls.Add(Me.lblRegFiscaltxt)
@@ -188,7 +192,7 @@ Partial Class MainCobrosDiferidosEDC
         Me.lblCFDItxt.AutoSize = True
         Me.lblCFDItxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCFDItxt.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblCFDItxt.Location = New System.Drawing.Point(455, 36)
+        Me.lblCFDItxt.Location = New System.Drawing.Point(371, 10)
         Me.lblCFDItxt.Name = "lblCFDItxt"
         Me.lblCFDItxt.Size = New System.Drawing.Size(0, 15)
         Me.lblCFDItxt.TabIndex = 97
@@ -198,7 +202,7 @@ Partial Class MainCobrosDiferidosEDC
         Me.lblCFDI.AutoSize = True
         Me.lblCFDI.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCFDI.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblCFDI.Location = New System.Drawing.Point(393, 36)
+        Me.lblCFDI.Location = New System.Drawing.Point(309, 10)
         Me.lblCFDI.Name = "lblCFDI"
         Me.lblCFDI.Size = New System.Drawing.Size(62, 15)
         Me.lblCFDI.TabIndex = 96
@@ -209,7 +213,7 @@ Partial Class MainCobrosDiferidosEDC
         Me.lblRegFiscaltxt.AutoSize = True
         Me.lblRegFiscaltxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblRegFiscaltxt.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblRegFiscaltxt.Location = New System.Drawing.Point(907, 10)
+        Me.lblRegFiscaltxt.Location = New System.Drawing.Point(250, 10)
         Me.lblRegFiscaltxt.Name = "lblRegFiscaltxt"
         Me.lblRegFiscaltxt.Size = New System.Drawing.Size(0, 15)
         Me.lblRegFiscaltxt.TabIndex = 93
@@ -219,7 +223,7 @@ Partial Class MainCobrosDiferidosEDC
         Me.lblRegFiscal.AutoSize = True
         Me.lblRegFiscal.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblRegFiscal.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblRegFiscal.Location = New System.Drawing.Point(790, 10)
+        Me.lblRegFiscal.Location = New System.Drawing.Point(133, 10)
         Me.lblRegFiscal.Name = "lblRegFiscal"
         Me.lblRegFiscal.Size = New System.Drawing.Size(92, 15)
         Me.lblRegFiscal.TabIndex = 92
@@ -230,7 +234,7 @@ Partial Class MainCobrosDiferidosEDC
         Me.lblCPtxt.AutoSize = True
         Me.lblCPtxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCPtxt.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblCPtxt.Location = New System.Drawing.Point(691, 10)
+        Me.lblCPtxt.Location = New System.Drawing.Point(833, 10)
         Me.lblCPtxt.Name = "lblCPtxt"
         Me.lblCPtxt.Size = New System.Drawing.Size(0, 15)
         Me.lblCPtxt.TabIndex = 91
@@ -240,7 +244,7 @@ Partial Class MainCobrosDiferidosEDC
         Me.lblCP.AutoSize = True
         Me.lblCP.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCP.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblCP.Location = New System.Drawing.Point(657, 10)
+        Me.lblCP.Location = New System.Drawing.Point(799, 10)
         Me.lblCP.Name = "lblCP"
         Me.lblCP.Size = New System.Drawing.Size(26, 15)
         Me.lblCP.TabIndex = 90
@@ -273,7 +277,7 @@ Partial Class MainCobrosDiferidosEDC
         Me.lblRFCtxt.AutoSize = True
         Me.lblRFCtxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblRFCtxt.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblRFCtxt.Location = New System.Drawing.Point(430, 10)
+        Me.lblRFCtxt.Location = New System.Drawing.Point(46, 10)
         Me.lblRFCtxt.Name = "lblRFCtxt"
         Me.lblRFCtxt.Size = New System.Drawing.Size(0, 15)
         Me.lblRFCtxt.TabIndex = 38
@@ -283,7 +287,7 @@ Partial Class MainCobrosDiferidosEDC
         Me.lblRFC.AutoSize = True
         Me.lblRFC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblRFC.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblRFC.Location = New System.Drawing.Point(393, 10)
+        Me.lblRFC.Location = New System.Drawing.Point(9, 10)
         Me.lblRFC.Name = "lblRFC"
         Me.lblRFC.Size = New System.Drawing.Size(34, 15)
         Me.lblRFC.TabIndex = 37
@@ -294,7 +298,7 @@ Partial Class MainCobrosDiferidosEDC
         Me.lblEmailtxt.AutoSize = True
         Me.lblEmailtxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEmailtxt.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblEmailtxt.Location = New System.Drawing.Point(68, 36)
+        Me.lblEmailtxt.Location = New System.Drawing.Point(370, 35)
         Me.lblEmailtxt.Name = "lblEmailtxt"
         Me.lblEmailtxt.Size = New System.Drawing.Size(0, 15)
         Me.lblEmailtxt.TabIndex = 36
@@ -304,7 +308,7 @@ Partial Class MainCobrosDiferidosEDC
         Me.lblEmail.AutoSize = True
         Me.lblEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEmail.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblEmail.Location = New System.Drawing.Point(9, 36)
+        Me.lblEmail.Location = New System.Drawing.Point(311, 35)
         Me.lblEmail.Name = "lblEmail"
         Me.lblEmail.Size = New System.Drawing.Size(42, 15)
         Me.lblEmail.TabIndex = 35
@@ -315,7 +319,7 @@ Partial Class MainCobrosDiferidosEDC
         Me.lblNombretxt.AutoSize = True
         Me.lblNombretxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblNombretxt.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblNombretxt.Location = New System.Drawing.Point(68, 10)
+        Me.lblNombretxt.Location = New System.Drawing.Point(68, 35)
         Me.lblNombretxt.Name = "lblNombretxt"
         Me.lblNombretxt.Size = New System.Drawing.Size(0, 15)
         Me.lblNombretxt.TabIndex = 34
@@ -325,7 +329,7 @@ Partial Class MainCobrosDiferidosEDC
         Me.lblNombre.AutoSize = True
         Me.lblNombre.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblNombre.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblNombre.Location = New System.Drawing.Point(9, 10)
+        Me.lblNombre.Location = New System.Drawing.Point(9, 35)
         Me.lblNombre.Name = "lblNombre"
         Me.lblNombre.Size = New System.Drawing.Size(58, 15)
         Me.lblNombre.TabIndex = 33
@@ -729,6 +733,27 @@ Partial Class MainCobrosDiferidosEDC
         Me.ImageListTree.Images.SetKeyName(1, "checked_checkbox_40px.png")
         Me.ImageListTree.Images.SetKeyName(2, "folder_40px.png")
         '
+        'lblDireccion
+        '
+        Me.lblDireccion.AutoSize = True
+        Me.lblDireccion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDireccion.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblDireccion.Location = New System.Drawing.Point(512, 10)
+        Me.lblDireccion.Name = "lblDireccion"
+        Me.lblDireccion.Size = New System.Drawing.Size(0, 15)
+        Me.lblDireccion.TabIndex = 101
+        '
+        'lblDirecciontxt
+        '
+        Me.lblDirecciontxt.AutoSize = True
+        Me.lblDirecciontxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDirecciontxt.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblDirecciontxt.Location = New System.Drawing.Point(429, 10)
+        Me.lblDirecciontxt.Name = "lblDirecciontxt"
+        Me.lblDirecciontxt.Size = New System.Drawing.Size(62, 15)
+        Me.lblDirecciontxt.TabIndex = 100
+        Me.lblDirecciontxt.Text = "Direccion:"
+        '
         'MainCobrosDiferidosEDC
         '
         Me.AcceptButton = Me.btnBuscar
@@ -814,4 +839,6 @@ Partial Class MainCobrosDiferidosEDC
     Friend WithEvents lblCP As Label
     Friend WithEvents lblCFDItxt As Label
     Friend WithEvents lblCFDI As Label
+    Friend WithEvents lblDireccion As Label
+    Friend WithEvents lblDirecciontxt As Label
 End Class
