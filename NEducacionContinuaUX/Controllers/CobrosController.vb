@@ -157,7 +157,7 @@ Public Class CobrosController
 
 
             ''---------------------------------------------------------TIMBRADO---------------------------------------------------------
-            Dim cadena = xml.cadenaPrueba(Serie, Folio, Fecha, formaPago, NoCertificado, SubTotal, DescuentoS, Total, listaConceptos, totalIVA, RFCCLiente, NombreCLiente, Credito, Cp, RegFiscal, totalBase)
+            Dim cadena = xml.cadenaPrueba(Serie, Folio, Fecha, formaPago, NoCertificado, SubTotal, DescuentoS, Total, listaConceptos, totalIVA, RFCCLiente, NombreCLiente, Credito, Cp, RegFiscal, totalBase, usoCFDI)
             ''Dim sello As String = st.Sellado("C:\Users\darkz\Desktop\pfx\uxa_pfx33.pfx", "12345678a", cadena)
             Dim sello As String = st.Sellado("\\192.168.1.241\ti\NEducacionContinua\Timbrado\pfx\uxa_pfx33.pfx", "12345678a", cadena)
             Dim xmlString As String = xml.xmlPrueba(Total, SubTotal, DescuentoS, totalIVA, Fecha, sello, Certificado, NoCertificado, formaPago, Folio, Serie, usoCFDI, listaConceptos, RFCCLiente, NombreCLiente, Credito, Cp, RegFiscal, totalBase)
