@@ -236,7 +236,7 @@
             concepto.costoIVAUnitario = (unitariodescuento * 0.16)
             concepto.costoIVATotal = (CDec(concepto.costoIVAUnitario) * CDec(concepto.Cantidad))
             concepto.costoTotal = unitariosiniva * CDec(concepto.Cantidad)
-            concepto.CostoIvaBase = concepto.costoTotal
+            concepto.CostoIvaBase = unitariodescuento
             ''concepto.costoFinal = (CDec(concepto.costoBase)) + (CDec(concepto.costoIVATotal)) - CDec(concepto.Abono)
             concepto.descuento = (CDec(concepto.descuento) * CDec(concepto.Cantidad))
             concepto = formatoPrecios(concepto)

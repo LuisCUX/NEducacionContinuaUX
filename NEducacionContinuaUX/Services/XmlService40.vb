@@ -10,7 +10,7 @@ Public Class XmlService40
     ''------------------------------------------------------------------------------------------------------------------------------''
     ''------------------------------------------CADENA PAGO NORMAL------------------------------------------''
     ''------------------------------------------------------------------------------------------------------------------------------''
-    Function cadenaPrueba(Serie As String, Folio As String, Fecha As String, FormaPago As String, NoCertificado As String, SubTotal As String, Descuento As String, Total As String, listaConceptos As List(Of Concepto), totalIVA As String, RFC As String, NombreCompleto As String, Credito As Boolean, CP As String, RegFiscal As String, CostoBaseTotal As String) As String
+    Function cadenaPrueba(Serie As String, Folio As String, Fecha As String, FormaPago As String, NoCertificado As String, SubTotal As String, Descuento As String, Total As String, listaConceptos As List(Of Concepto), totalIVA As String, RFC As String, NombreCompleto As String, Credito As Boolean, CP As String, RegFiscal As String, CostoBaseTotal As String, usoCFDI As String) As String
         Dim metodoPago As String
         If (Credito = True) Then
             metodoPago = "PPD"
@@ -50,13 +50,12 @@ Public Class XmlService40
         End If
 
         Dim bandIVA As Boolean = False
-        Dim cadena As String = "||4.0|" & Serie & "|" & Folio & "|" & Fecha & "|" & FormaPago & "|" & NoCertificado & "|" & SubTotal.ToString() & "" & Descuentotxt & "MXN|" & Total & "|I|01|" & metodoPago & "|" & cpemisor & "|TES030201001|" & nombreEmisor & "|601|" & RFC & "|" & NombreCompleto & "|" & cpreceptor & "|" & RegFiscal & "|S01"
+        Dim cadena As String = "||4.0|" & Serie & "|" & Folio & "|" & Fecha & "|" & FormaPago & "|" & NoCertificado & "|" & SubTotal.ToString() & "" & Descuentotxt & "MXN|" & Total & "|I|01|" & metodoPago & "|" & cpemisor & "|TES030201001|" & nombreEmisor & "|601|" & RFC & "|" & NombreCompleto & "|" & cpreceptor & "|" & RegFiscal & "|" & usoCFDI & ""
         For Each concepto As Concepto In listaConceptos
-            Dim descuentoconcepto As String
             If (concepto.descuento <> 0) Then
-                Descuentotxt = $"|{Descuento.ToString()}|"
+                Descuentotxt = $"|{Descuento.ToString()}"
             Else
-                Descuentotxt = "||"
+                Descuentotxt = "|"
             End If
 
             Dim objetoimp As String
@@ -66,7 +65,7 @@ Public Class XmlService40
                 objetoimp = "02"
             End If
 
-            cadena = "" & cadena & "|" & concepto.cveClase & "|" & concepto.Cantidad & "|" & concepto.cveUnidad & "|Pieza|" & concepto.NombreConcepto & "|" & concepto.costoUnitario & "|" & concepto.costoTotal & "" & descuentoconcepto & "|" & objetoimp & ""
+            cadena = "" & cadena & "|" & concepto.cveClase & "|" & concepto.Cantidad & "|" & concepto.cveUnidad & "|Pieza|" & concepto.NombreConcepto & "|" & concepto.costoUnitario & "|" & concepto.costoTotal & "" & Descuentotxt & "|" & objetoimp & ""
             If (concepto.absorbeIVA = True Or concepto.consideraIVA = True) Then
                 bandIVA = True
                 cadena = "" & cadena & "|" & CDec(concepto.costoBase) & "|002|Tasa|0.160000|" & concepto.costoIVATotal & ""
