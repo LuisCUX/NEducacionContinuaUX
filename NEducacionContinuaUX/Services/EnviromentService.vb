@@ -12,6 +12,9 @@ Public Class EnviromentService
     Public Shared Property ClientID As String
     Public Shared Property ClientSecret As String
     Public Shared Property UXServiceEmail As String
+    Public Shared Property NombreEmpresa As String
+    Public Shared Property CP As String
+    Public Shared Property RegimenFiscal As String
 
     Public Shared Sub setEnviroment()
         If (System.Diagnostics.Debugger.IsAttached) Then
@@ -22,6 +25,9 @@ Public Class EnviromentService
             connectionString = $"Data Source={serverIP}; Initial Catalog={dbName}; User ID='{dbUsername}'; Password='{dbPassword}';"
             reportesPath = ConfigurationSettings.AppSettings.Get("PathReportesPrueba").ToString()
             RFCEDC = ConfigurationSettings.AppSettings.Get("RFCReal").ToString()
+            NombreEmpresa = ConfigurationSettings.AppSettings.Get("NombreEmpresa").ToString()
+            CP = ConfigurationSettings.AppSettings.Get("CP").ToString()
+            RegimenFiscal = ConfigurationSettings.AppSettings.Get("RegimenFiscal").ToString()
             ClientID = ConfigurationSettings.AppSettings.Get("ClientID").ToString()
             ClientSecret = ConfigurationSettings.AppSettings.Get("ClientSecret").ToString()
         Else
@@ -31,6 +37,9 @@ Public Class EnviromentService
             dbPassword = ConfigurationSettings.AppSettings.Get("productionpassword")
             connectionString = $"Data Source={serverIP}; Initial Catalog={dbName}; User ID='{dbUsername}'; Password='{dbPassword}';"
             reportesPath = ConfigurationSettings.AppSettings.Get("PathReportesProduccion").ToString()
+            NombreEmpresa = ConfigurationSettings.AppSettings.Get("NombreEmpresaReal").ToString()
+            CP = ConfigurationSettings.AppSettings.Get("CPReal").ToString()
+            RegimenFiscal = ConfigurationSettings.AppSettings.Get("RegimenFiscalReal").ToString()
             RFCEDC = ConfigurationSettings.AppSettings.Get("RFC").ToString()
             ClientID = ConfigurationSettings.AppSettings.Get("ClientID").ToString()
             ClientSecret = ConfigurationSettings.AppSettings.Get("ClientSecret").ToString()

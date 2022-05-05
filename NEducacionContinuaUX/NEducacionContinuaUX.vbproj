@@ -190,6 +190,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\TimbradoUXReal\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AsignacionPagosOpcionalesController.vb" />
     <Compile Include="Controllers\AsignacionPlanesController.vb" />
     <Compile Include="Controllers\AutorizacionCondonacionController.vb" />
@@ -591,6 +596,49 @@
     <None Include="Connected Services\TimbradoUXPruebas\WSCFDI333.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\TimbradoUXReal\NEducacionContinuaUX.TimbradoUXReal.RespuestaAceptacionRechazo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TimbradoUXReal\NEducacionContinuaUX.TimbradoUXReal.RespuestaCancelacion.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TimbradoUXReal\NEducacionContinuaUX.TimbradoUXReal.RespuestaCancelacionAsincrona.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TimbradoUXReal\NEducacionContinuaUX.TimbradoUXReal.RespuestaCreditos.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TimbradoUXReal\NEducacionContinuaUX.TimbradoUXReal.RespuestaEstatusCancelacionAsincrona.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TimbradoUXReal\NEducacionContinuaUX.TimbradoUXReal.RespuestaPeticionesPendientes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TimbradoUXReal\NEducacionContinuaUX.TimbradoUXReal.RespuestaRelacionados.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TimbradoUXReal\NEducacionContinuaUX.TimbradoUXReal.RespuestaReporte.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TimbradoUXReal\NEducacionContinuaUX.TimbradoUXReal.RespuestaTFD33.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TimbradoUXReal\NEducacionContinuaUX.TimbradoUXReal.RespuestaValidacionRFC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TimbradoUXReal\WSCFDI33.wsdl" />
+    <None Include="Connected Services\TimbradoUXReal\WSCFDI33.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\TimbradoUXReal\WSCFDI331.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\TimbradoUXReal\WSCFDI332.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\TimbradoUXReal\WSCFDI333.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -610,6 +658,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\TimbradoUXPruebas\" />
+    <WCFMetadataStorage Include="Connected Services\TimbradoUXReal\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\TimbradoUXPruebas\configuration91.svcinfo" />
@@ -624,6 +673,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Connected Services\TimbradoUXReal\configuration91.svcinfo" />
+    <None Include="Connected Services\TimbradoUXReal\configuration.svcinfo" />
+    <None Include="Connected Services\TimbradoUXReal\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </None>
     <Content Include="ec-logo.ico" />
     <Content Include="EDCLogo.ico" />
     <Content Include="logo %281%29.ico" />
