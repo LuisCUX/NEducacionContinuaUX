@@ -23,7 +23,10 @@ Public Class SelladoTimbradoService
         End Try
     End Function
 
-    Function Timbrado(xml As String, Folio As String) As String
+    Function TimbradoPruebas(xml As String, Folio As String) As String
+        If (System.Diagnostics.Debugger.IsAttached) Then
+
+        End If
         Dim timbre As New TimbradoUXPruebas.WSCFDI33Client
         Dim respuesta As New TimbradoUXPruebas.RespuestaTFD33
         Dim xmlResult As String
@@ -40,9 +43,36 @@ Public Class SelladoTimbradoService
         End If
     End Function
 
+    Function Timbrado(xml As String, Folio As String) As String
+        Dim timbre As New TimbradoUXReal.WSCFDI33Client
+        Dim respuesta As New TimbradoUXReal.RespuestaTFD33
+        Dim xmlResult As String
+        Dim web As String = xml
+
+
+        respuesta = timbre.TimbrarCFDI("ECU150924HR4", "JCXM5@uUgr+", web, Folio)
+        If (respuesta.OperacionExitosa = True) Then
+            xmlResult = respuesta.XMLResultado
+            Return xmlResult
+        Else
+            Throw New Exception($"Error al timbrar {respuesta.MensajeError}")
+            Return "Error"
+        End If
+    End Function
+
     Function TimbreCancelacionFacturasPrueba(ListaUUID As List(Of TimbradoUXPruebas.DetalleCFDICancelacion)) As String
         Dim timbre As New TimbradoUXPruebas.WSCFDI33Client
         Dim respuesta As New TimbradoUXPruebas.RespuestaCancelacion
+        Dim base64PFX As String = db.exectSQLQueryScalar($"SELECT Contenido FROM ing_catCertificados WHERE Activo = 1")
+        Dim passwordPFX As String = db.exectSQLQueryScalar($"SELECT Password FROM ing_catCertificados WHERE Activo = 1")
+
+        respuesta = timbre.CancelarCFDI("ECU150924D33", "contRa$3na", EnviromentService.RFCEDC, ListaUUID.ToArray(), base64PFX, passwordPFX)
+        Return respuesta.MensajeErrorDetallado
+    End Function
+
+    Function TimbreCancelacionFacturas(ListaUUID As List(Of TimbradoUXReal.DetalleCFDICancelacion)) As String
+        Dim timbre As New TimbradoUXReal.WSCFDI33Client
+        Dim respuesta As New TimbradoUXReal.RespuestaCancelacion
         Dim base64PFX As String = db.exectSQLQueryScalar($"SELECT Contenido FROM ing_catCertificados WHERE Activo = 1")
         Dim passwordPFX As String = db.exectSQLQueryScalar($"SELECT Password FROM ing_catCertificados WHERE Activo = 1")
 

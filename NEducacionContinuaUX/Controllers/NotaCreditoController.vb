@@ -31,14 +31,31 @@ Public Class NotaCreditoController
             Dim FolioNota As String = Me.obtenerFolio()
             Dim Serie As String = FolioNota.Substring(0, 4)
             Dim Folio As String = FolioNota.Substring(4, 6)
-            Dim NoCertificado As String = ConfigurationSettings.AppSettings.Get("developmentCertificado").ToString()
-            Dim Certificado As String = ConfigurationSettings.AppSettings.Get("developmentCertificadoContent").ToString()
+            Dim Certificado As String
+            Dim NoCertificado As String
+            If (System.Diagnostics.Debugger.IsAttached) Then
+                Certificado = ConfigurationSettings.AppSettings.Get("developmentCertificadoContent").ToString()
+                NoCertificado = ConfigurationSettings.AppSettings.Get("developmentCertificado").ToString()
+            Else
+                Certificado = ConfigurationSettings.AppSettings.Get("developmentCertificadoContent").ToString()
+                NoCertificado = ConfigurationSettings.AppSettings.Get("developmentCertificado").ToString()
+            End If
             Dim Fecha As String = db.exectSQLQueryScalar("select STUFF(CONVERT(VARCHAR(50),GETDATE(), 127) ,20,4,'') as fecha")
             Dim cadena As String = xml.cadenaNotaCredito(listaConceptos, listaUUID, montoTotal, subtotal, descuento, Fecha, Folio, Serie, NoCertificado, RFC, NombreCompleto, usoCFDI, Cp, RegFiscal)
-            Dim sello As String = st.Sellado("\\192.168.1.241\ti\NEducacionContinua\Timbrado\pfx\uxa_pfx33.pfx", "12345678a", cadena)
+            Dim sello As String
+            If (System.Diagnostics.Debugger.IsAttached) Then
+                sello = st.Sellado("\\192.168.1.241\ti\NEducacionContinua\Timbrado\pfx\uxa_pfx33.pfx", "12345678a", cadena) ''PRUEBAS
+            Else
+                sello = st.Sellado("\\192.168.1.241\ti\NEducacionContinua\Timbrado\pfx\EDC.pfx", "EDC12345a", cadena) ''REAL
+            End If
             Dim xmlString As String = xml.xmlNotaCredito(montoTotal, subtotal, descuento, Fecha, sello, Certificado, Folio, Serie, NoCertificado, RFC, NombreCompleto, usoCFDI, listaConceptos, listaUUID, RegFiscal, Cp)
             xmlString = xmlString.Replace("utf-16", "UTF-8")
-            Dim xmlTimbrado As String = st.Timbrado(xmlString, Folio)
+            Dim xmlTimbrado As String
+            If (System.Diagnostics.Debugger.IsAttached) Then
+                xmlTimbrado = st.TimbradoPruebas(xmlString, Folio)
+            Else
+                xmlTimbrado = st.Timbrado(xmlString, Folio)
+            End If
 
             Dim FolioFiscalpre As String = Me.Extrae_Cadena(xmlTimbrado, "<tfd:TimbreFiscalDigital", "</cfdi:Complemento>")
             Dim folioFiscal As String = Me.Extrae_Cadena(FolioFiscalpre, "UUID=", " FechaTimbrado")

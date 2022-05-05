@@ -123,11 +123,20 @@
                 DatosUUID.Total = Total
                 DatosUUID.Motivo = cbMotivoSAT.SelectedValue
 
-
+                
                 ListaUUID.Add(DatosUUID)
                 st.TimbreCancelacionFacturasPrueba(ListaUUID)
             Else
+                Dim ListaUUID As New List(Of TimbradoUXReal.DetalleCFDICancelacion)
+                Dim DatosUUID As New TimbradoUXReal.DetalleCFDICancelacion
+                DatosUUID.UUID = UUID
+                DatosUUID.RFCReceptor = RFCReceptor
+                DatosUUID.Total = Total
+                DatosUUID.Motivo = cbMotivoSAT.SelectedValue
 
+
+                ListaUUID.Add(DatosUUID)
+                st.TimbreCancelacionFacturas(ListaUUID)
             End If
 
             db.startTransaction()

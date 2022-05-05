@@ -23,8 +23,15 @@ Public Class CobrosDiferidosController
         Try
             db.startTransaction()
             ''---------------------------------------------------------CALCULO DE TOTALES---------------------------------------------------------
-            Dim Certificado As String = ConfigurationSettings.AppSettings.Get("developmentCertificadoContent").ToString()
-            Dim NoCertificado As String = ConfigurationSettings.AppSettings.Get("developmentCertificado").ToString()
+            Dim Certificado As String
+            Dim NoCertificado As String
+            If (System.Diagnostics.Debugger.IsAttached) Then
+                Certificado = ConfigurationSettings.AppSettings.Get("developmentCertificadoContent").ToString()
+                NoCertificado = ConfigurationSettings.AppSettings.Get("developmentCertificado").ToString()
+            Else
+                Certificado = ConfigurationSettings.AppSettings.Get("developmentCertificadoContent").ToString()
+                NoCertificado = ConfigurationSettings.AppSettings.Get("developmentCertificado").ToString()
+            End If
 
             Dim subtotalSuma As Decimal
             For Each concepto As Concepto In listaConceptos
@@ -92,15 +99,24 @@ Public Class CobrosDiferidosController
             ''---------------------------------------------------------TIMBRADO---------------------------------------------------------
             Dim cadena = xml.cadenaPrueba(Serie, Folio, Fecha, formaPago, NoCertificado, SubTotal, DescuentoS, Total, listaConceptos, totalIVA, RFCCLiente, NombreCLiente, Credito)
             ''Dim sello As String = st.Sellado("C:\Users\darkz\Desktop\pfx\uxa_pfx33.pfx", "12345678a", cadena)
-            Dim sello As String = st.Sellado("\\192.168.1.241\ti\NEducacionContinua\Timbrado\pfx\uxa_pfx33.pfx", "12345678a", cadena)
+            Dim sello As String
+            If (System.Diagnostics.Debugger.IsAttached) Then
+                sello = st.Sellado("\\192.168.1.241\ti\NEducacionContinua\Timbrado\pfx\uxa_pfx33.pfx", "12345678a", cadena)
+            Else
+                sello = st.Sellado("\\192.168.1.241\ti\NEducacionContinua\Timbrado\pfx\EDC.pfx", "EDC12345a", cadena) ''REAL
+            End If
             Dim xmlString As String = xml.xmlPrueba(Total, SubTotal, DescuentoS, totalIVA, Fecha, sello, Certificado, NoCertificado, formaPago, Folio, Serie, UsoCFDI, listaConceptos, RFCCLiente, NombreCLiente, Credito)
             xmlString = xmlString.Replace("utf-16", "UTF-8")
-            Dim xmlTimbrado As String = st.Timbrado(xmlString, Folio)
+            Dim xmlTimbrado As String
+            If (System.Diagnostics.Debugger.IsAttached) Then
+                xmlTimbrado = st.TimbradoPruebas(xmlString, Folio)
+            Else
+                xmlTimbrado = st.Timbrado(xmlString, Folio)
+            End If
+
             Dim folioFiscal As String = co.Extrae_Cadena(xmlTimbrado, "UUID=", " FechaTimbrado")
             folioFiscal = co.Extrae_Cadena(folioFiscal, "=", "")
             folioFiscal = folioFiscal.Substring(1, folioFiscal.Length() - 1)
-            File.WriteAllText("C:\Users\Luis\Desktop\wea.xml", xmlTimbrado)
-            ''File.WriteAllText("C:\Users\darkz\Desktop\wea.xml", xmlTimbrado)
 
             ''---------------------------------------------------------GENERACION DE FACTURA---------------------------------------------------------
             Dim formapagoid As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatFormaPago WHERE Forma_Pago = '{formaPago}'")
