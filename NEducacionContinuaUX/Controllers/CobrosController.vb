@@ -418,7 +418,7 @@ Public Class CobrosController
         Try
             Dim img As New Bitmap(QR_Generator.Encode(QR.ToString), New Size(220, 220))
             ''img.Save($"\\{EnviromentService.serverIP}\ti\NEducacionContinua\QR\{Nombre}.png", Imaging.ImageFormat.Png)
-            img.Save($"\\192.168.1.250\Reportes\NEDC\QR\{Nombre}.png", Imaging.ImageFormat.Png)
+            img.Save($"\\{EnviromentService.serverIP}\Reportes\NEDC\QR\{Nombre}.png", Imaging.ImageFormat.Png)
             Thread.Sleep(1500)
         Catch ex As Exception
             MsgBox(ex.Message)
