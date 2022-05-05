@@ -3,7 +3,7 @@ Imports System.Security.Cryptography.X509Certificates
 
 Public Class SelladoTimbradoService
     Dim UUID As String
-
+    Dim db As DataBaseService = New DataBaseService
     Function Sellado(rutaCert As String, passCert As String, cadenaXML As String) As String
         Dim sello As String
         Dim verify As Boolean
@@ -29,6 +29,7 @@ Public Class SelladoTimbradoService
         Dim xmlResult As String
         Dim web As String = xml
 
+
         respuesta = timbre.TimbrarCFDI("ECU150924D33", "contRa$3na", web, Folio)
         If (respuesta.OperacionExitosa = True) Then
             xmlResult = respuesta.XMLResultado
@@ -37,5 +38,15 @@ Public Class SelladoTimbradoService
             Throw New Exception($"Error al timbrar {respuesta.MensajeError}")
             Return "Error"
         End If
+    End Function
+
+    Function TimbreCancelacionFacturasPrueba(ListaUUID As List(Of TimbradoUXPruebas.DetalleCFDICancelacion)) As String
+        Dim timbre As New TimbradoUXPruebas.WSCFDI33Client
+        Dim respuesta As New TimbradoUXPruebas.RespuestaCancelacion
+        Dim base64PFX As String = db.exectSQLQueryScalar($"SELECT Contenido FROM ing_catCertificados WHERE Activo = 1")
+        Dim passwordPFX As String = db.exectSQLQueryScalar($"SELECT Password FROM ing_catCertificados WHERE Activo = 1")
+
+        respuesta = timbre.CancelarCFDI("ECU150924D33", "contRa$3na", EnviromentService.RFCEDC, ListaUUID.ToArray(), base64PFX, passwordPFX)
+        Return respuesta.MensajeErrorDetallado
     End Function
 End Class

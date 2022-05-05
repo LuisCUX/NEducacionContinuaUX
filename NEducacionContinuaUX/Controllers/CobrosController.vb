@@ -623,6 +623,8 @@ Public Class CobrosController
     End Function
 
     Function quitaTildesEspecial(limpia As String) As String
+        Dim wea As String = """"
+        wea = wea.Substring(0, 1)
         If Not IsNothing(limpia) Then
             limpia = Replace(limpia, "¡", "", 1, Len(limpia), 1)
             limpia = Replace(limpia, "¿", "", 1, Len(limpia), 1)
@@ -687,7 +689,7 @@ Public Class CobrosController
             limpia = Replace(limpia, "°", "", 1, Len(limpia), 1)
             limpia = Replace(limpia, "´", "", 1, Len(limpia), 1)
             limpia = Replace(limpia, "#", "", 1, Len(limpia), 1)
-            'limpia = Replace(limpia, "", "", 1, Len(limpia), 1)
+            limpia = Replace(limpia, wea, "", 1, Len(limpia), 1)
         Else
             limpia = ""
         End If
