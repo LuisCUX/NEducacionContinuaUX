@@ -6,12 +6,16 @@
     Dim FechaFacturaStr As String
     Dim FechaHoy As String
     Dim Tipo_Pago As String
+    Dim c As CobrosController = New CobrosController
     Dim cf As CancelacionFacturasController = New CancelacionFacturasController
     Private Sub CancelacionFacturasEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         cbTipoCancelacion.Items.Add("Cancelación del día")
         cbTipoCancelacion.Items.Add("Cancelación de otro día")
         Dim tableObservacion As DataTable = db.getDataTableFromSQL($"SELECT ID, Observacion FROM ing_CatObservacionesCancelacion WHERE Activo = 1 AND ID_TipoOtraObservacion = 1")
         ComboboxService.llenarCombobox(cbObservacionCancelaciones, tableObservacion, "iD", "Observacion")
+
+        Dim tableObservacionSAT As DataTable = db.getDataTableFromSQL($"SELECT clave, descripcion FROM ing_cat_motivo_cancelacion_sat WHERE activo = 1")
+        ComboboxService.llenarCombobox(cbMotivoSAT, tableObservacionSAT, "clave", "descripcion")
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
@@ -102,6 +106,30 @@
             Exit Sub
         End If
         Try
+            Dim st As SelladoTimbradoService = New SelladoTimbradoService()
+            Dim UUID As String = db.exectSQLQueryScalar($"SELECT FolioFiscal FROM ing_xmlTimbrados WHERE ID = {IDFolio}")
+            Dim RFCReceptor As String = db.exectSQLQueryScalar($"SELECT XMLTimbrado FROM ing_xmlTimbrados WHERE ID = {IDFolio}")
+            RFCReceptor = c.Extrae_Cadena(RFCReceptor, "<cfdi:Receptor", " Nombre=")
+            RFCReceptor = c.Extrae_Cadena(RFCReceptor, "Rfc=", "")
+            RFCReceptor = c.Extrae_Cadena(RFCReceptor, "=", "")
+            RFCReceptor = c.quitaTildesEspecial(RFCReceptor)
+            Dim Total As String = db.exectSQLQueryScalar($"SELECT Total FROM ing_xmlTimbrados WHERE ID = {IDFolio}")
+
+            If (System.Diagnostics.Debugger.IsAttached) Then
+                Dim ListaUUID As New List(Of TimbradoUXPruebas.DetalleCFDICancelacion)
+                Dim DatosUUID As New TimbradoUXPruebas.DetalleCFDICancelacion
+                DatosUUID.UUID = "6E2B9B01-7E57-7E57-7E57-26818FAED065"
+                DatosUUID.RFCReceptor = RFCReceptor
+                DatosUUID.Total = Total
+                DatosUUID.Motivo = cbMotivoSAT.SelectedValue
+
+
+                ListaUUID.Add(DatosUUID)
+                st.TimbreCancelacionFacturasPrueba(ListaUUID)
+            Else
+
+            End If
+
             db.startTransaction()
             Dim tableConceptos As DataTable = db.getDataTableFromSQL($"SELECT ID, Clave_Concepto, IDConcepto FROM ing_xmlTimbradosConceptos WHERE XMLID = {IDFolio}")
             db.execSQLQueryWithoutParams($"INSERT INTO Ing_Cancelaciones(Folio, Matricula, TipoFactura, IDObservacion, FechaCancelacion, TipoCancelacion, Usuario, Activo) VALUES ('{Folio}', '{Matricula}', '{Tipo_Pago}', {cbObservacionCancelaciones.SelectedValue}, GETDATE(), {cbTipoCancelacion.SelectedIndex}, '{User.getUsername}', 1)")

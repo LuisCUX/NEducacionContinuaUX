@@ -48,6 +48,10 @@ Partial Class ModalDatosFiscalesCobrosEDC
         Me.lblCorreo = New System.Windows.Forms.Label()
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.btnGuardar = New System.Windows.Forms.Button()
+        Me.lblRegimen = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.lblUsoCFDI = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblNombre
@@ -143,7 +147,7 @@ Partial Class ModalDatosFiscalesCobrosEDC
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label8.Location = New System.Drawing.Point(14, 334)
+        Me.Label8.Location = New System.Drawing.Point(12, 334)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(52, 16)
         Me.Label8.TabIndex = 8
@@ -317,7 +321,7 @@ Partial Class ModalDatosFiscalesCobrosEDC
         Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
         Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnSalir.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnSalir.Location = New System.Drawing.Point(303, 363)
+        Me.btnSalir.Location = New System.Drawing.Point(303, 431)
         Me.btnSalir.Name = "btnSalir"
         Me.btnSalir.Size = New System.Drawing.Size(75, 66)
         Me.btnSalir.TabIndex = 24
@@ -330,7 +334,7 @@ Partial Class ModalDatosFiscalesCobrosEDC
         Me.btnGuardar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
         Me.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnGuardar.Location = New System.Drawing.Point(122, 363)
+        Me.btnGuardar.Location = New System.Drawing.Point(122, 431)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(75, 66)
         Me.btnGuardar.TabIndex = 25
@@ -338,13 +342,61 @@ Partial Class ModalDatosFiscalesCobrosEDC
         Me.btnGuardar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnGuardar.UseVisualStyleBackColor = True
         '
+        'lblRegimen
+        '
+        Me.lblRegimen.AutoSize = True
+        Me.lblRegimen.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRegimen.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblRegimen.Location = New System.Drawing.Point(168, 362)
+        Me.lblRegimen.Name = "lblRegimen"
+        Me.lblRegimen.Size = New System.Drawing.Size(88, 16)
+        Me.lblRegimen.TabIndex = 27
+        Me.lblRegimen.Text = "--------------------"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label13.Location = New System.Drawing.Point(12, 362)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(100, 16)
+        Me.Label13.TabIndex = 26
+        Me.Label13.Text = "Regimen fiscal:"
+        '
+        'lblUsoCFDI
+        '
+        Me.lblUsoCFDI.AutoSize = True
+        Me.lblUsoCFDI.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblUsoCFDI.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblUsoCFDI.Location = New System.Drawing.Point(168, 391)
+        Me.lblUsoCFDI.Name = "lblUsoCFDI"
+        Me.lblUsoCFDI.Size = New System.Drawing.Size(88, 16)
+        Me.lblUsoCFDI.TabIndex = 29
+        Me.lblUsoCFDI.Text = "--------------------"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label15.Location = New System.Drawing.Point(12, 391)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(69, 16)
+        Me.Label15.TabIndex = 28
+        Me.Label15.Text = "Uso CFDI:"
+        '
         'ModalDatosFiscalesCobrosEDC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.ClientSize = New System.Drawing.Size(514, 441)
+        Me.ClientSize = New System.Drawing.Size(514, 504)
         Me.ControlBox = False
+        Me.Controls.Add(Me.lblUsoCFDI)
+        Me.Controls.Add(Me.Label15)
+        Me.Controls.Add(Me.lblRegimen)
+        Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.btnSalir)
         Me.Controls.Add(Me.lblCorreo)
@@ -406,4 +458,8 @@ Partial Class ModalDatosFiscalesCobrosEDC
     Friend WithEvents lblCorreo As Label
     Friend WithEvents btnSalir As Button
     Friend WithEvents btnGuardar As Button
+    Friend WithEvents lblRegimen As Label
+    Friend WithEvents Label13 As Label
+    Friend WithEvents lblUsoCFDI As Label
+    Friend WithEvents Label15 As Label
 End Class

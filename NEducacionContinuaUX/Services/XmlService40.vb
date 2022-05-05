@@ -55,7 +55,7 @@ Public Class XmlService40
             If (concepto.descuento <> 0) Then
                 Descuentotxt = $"|{Descuento.ToString()}"
             Else
-                Descuentotxt = "|"
+                Descuentotxt = ""
             End If
 
             Dim objetoimp As String

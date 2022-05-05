@@ -40,6 +40,8 @@ Partial Class CancelacionFacturasEDC
         Me.lblMatriculatxt = New System.Windows.Forms.Label()
         Me.lblFechaFacturaciontxt = New System.Windows.Forms.Label()
         Me.lblRFCtxt = New System.Windows.Forms.Label()
+        Me.cbMotivoSAT = New System.Windows.Forms.ComboBox()
+        Me.Label2 = New System.Windows.Forms.Label()
         CType(Me.GridConceptos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -91,11 +93,11 @@ Partial Class CancelacionFacturasEDC
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label1.Location = New System.Drawing.Point(26, 575)
+        Me.Label1.Location = New System.Drawing.Point(26, 629)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(146, 16)
+        Me.Label1.Size = New System.Drawing.Size(189, 16)
         Me.Label1.TabIndex = 44
-        Me.Label1.Text = "Motivo de cancelación:"
+        Me.Label1.Text = "Motivo de cancelación interno:"
         '
         'GridConceptos
         '
@@ -117,7 +119,7 @@ Partial Class CancelacionFacturasEDC
         Me.cbObservacionCancelaciones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbObservacionCancelaciones.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbObservacionCancelaciones.FormattingEnabled = True
-        Me.cbObservacionCancelaciones.Location = New System.Drawing.Point(29, 594)
+        Me.cbObservacionCancelaciones.Location = New System.Drawing.Point(29, 648)
         Me.cbObservacionCancelaciones.Name = "cbObservacionCancelaciones"
         Me.cbObservacionCancelaciones.Size = New System.Drawing.Size(551, 24)
         Me.cbObservacionCancelaciones.TabIndex = 46
@@ -235,6 +237,27 @@ Partial Class CancelacionFacturasEDC
         Me.lblRFCtxt.Size = New System.Drawing.Size(0, 20)
         Me.lblRFCtxt.TabIndex = 57
         '
+        'cbMotivoSAT
+        '
+        Me.cbMotivoSAT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbMotivoSAT.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbMotivoSAT.FormattingEnabled = True
+        Me.cbMotivoSAT.Location = New System.Drawing.Point(29, 595)
+        Me.cbMotivoSAT.Name = "cbMotivoSAT"
+        Me.cbMotivoSAT.Size = New System.Drawing.Size(551, 24)
+        Me.cbMotivoSAT.TabIndex = 59
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label2.Location = New System.Drawing.Point(26, 576)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(176, 16)
+        Me.Label2.TabIndex = 58
+        Me.Label2.Text = "Motivo de cancelación SAT:"
+        '
         'CancelacionFacturasEDC
         '
         Me.AcceptButton = Me.btnBuscar
@@ -242,6 +265,8 @@ Partial Class CancelacionFacturasEDC
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
         Me.ClientSize = New System.Drawing.Size(1045, 694)
+        Me.Controls.Add(Me.cbMotivoSAT)
+        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.lblRFCtxt)
         Me.Controls.Add(Me.lblFechaFacturaciontxt)
         Me.Controls.Add(Me.lblMatriculatxt)
@@ -287,4 +312,6 @@ Partial Class CancelacionFacturasEDC
     Friend WithEvents lblMatriculatxt As Label
     Friend WithEvents lblFechaFacturaciontxt As Label
     Friend WithEvents lblRFCtxt As Label
+    Friend WithEvents cbMotivoSAT As ComboBox
+    Friend WithEvents Label2 As Label
 End Class

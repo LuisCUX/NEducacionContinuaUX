@@ -552,17 +552,25 @@ Public Class CobrosEDC
         End If
         ''---------------------------------------------------------VALIDA DATOS FISCALES---------------------------------------------------------
         Dim RFCTimbrar As String
+        Dim RegFiscalTimbrar As String
+        Dim UsoCFDITimbrar As String
         If (lblRFCtxt.Text <> "XAXX010101000") Then
             Dim result As DialogResult = MessageBox.Show("¿Quiere usar datos fiscales?", "", MessageBoxButtons.YesNo)
             If (result = 6) Then
                 ObjectBagService.setItem("Matricula", Matricula)
                 ModalDatosFiscalesCobrosEDC.ShowDialog()
                 RFCTimbrar = ObjectBagService.getItem("RFCTimbrar")
+                RegFiscalTimbrar = ObjectBagService.getItem("RegFiscalTimbrar")
+                UsoCFDITimbrar = ObjectBagService.getItem("UsoCFDITimbrar")
             Else
                 RFCTimbrar = "XAXX010101000"
+                RegFiscalTimbrar = "616"
+                UsoCFDITimbrar = "S01"
             End If
         Else
             RFCTimbrar = "XAXX010101000"
+            RegFiscalTimbrar = "616"
+            UsoCFDITimbrar = "S01"
         End If
         If (creditoband = True) Then
             If (tipoMatricula = "EX") Then
@@ -570,7 +578,7 @@ Public Class CobrosEDC
             ElseIf (tipoMatricula = "EC") Then
                 tipocliente = 1
             End If
-            Dim IDXMLC As Integer = co.Cobrar(listaConceptosPrueba, cbFormaPago.SelectedValue, 9, Matricula, RFCTimbrar, lblNombretxt.Text, lblTotal.Text, True, tipocliente, lblCPtxt.Text, lblRegFiscaltxt.Text, lblCFDItxt.Text)
+            Dim IDXMLC As Integer = co.Cobrar(listaConceptosPrueba, cbFormaPago.SelectedValue, 9, Matricula, RFCTimbrar, lblNombretxt.Text, lblTotal.Text, True, tipocliente, lblCPtxt.Text, RegFiscalTimbrar, UsoCFDITimbrar)
             If (IDXMLC > 0) Then
                 Me.Reiniciar()
                 Exit Sub
@@ -601,7 +609,7 @@ Public Class CobrosEDC
             formaPagoClave = cbFormaPago.SelectedValue
             formaPagoID = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatFormaPago WHERE Forma_Pago = '{formaPagoClave}'")
         End If
-        Dim IDXML As Integer = co.Cobrar(listaconceptosFinal, formaPagoClave, formaPagoID, Matricula, RFCTimbrar, lblNombretxt.Text, lblTotal.Text, False, tipocliente, lblCPtxt.Text, lblRegFiscaltxt.Text, "S01")
+        Dim IDXML As Integer = co.Cobrar(listaconceptosFinal, formaPagoClave, formaPagoID, Matricula, RFCTimbrar, lblNombretxt.Text, lblTotal.Text, False, tipocliente, lblCPtxt.Text, RegFiscalTimbrar, UsoCFDITimbrar)
 
 
         ''---------------------------------------------------------REGISTRO DE FORMA DE PAGO---------------------------------------------------------
