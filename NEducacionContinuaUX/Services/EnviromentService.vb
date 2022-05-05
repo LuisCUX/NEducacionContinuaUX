@@ -20,7 +20,7 @@ Public Class EnviromentService
             dbUsername = ConfigurationSettings.AppSettings.Get("user")
             dbPassword = ConfigurationSettings.AppSettings.Get("password")
             connectionString = $"Data Source={serverIP}; Initial Catalog={dbName}; User ID='{dbUsername}'; Password='{dbPassword}';"
-            reportesPath = ConfigurationSettings.AppSettings.Get("PathReportesProduccion").ToString()
+            reportesPath = ConfigurationSettings.AppSettings.Get("PathReportesPrueba").ToString()
             RFCEDC = ConfigurationSettings.AppSettings.Get("RFCReal").ToString()
             ClientID = ConfigurationSettings.AppSettings.Get("ClientID").ToString()
             ClientSecret = ConfigurationSettings.AppSettings.Get("ClientSecret").ToString()

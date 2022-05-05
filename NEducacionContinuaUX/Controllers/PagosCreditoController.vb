@@ -20,20 +20,36 @@ Public Class PagosCreditoController
             Dim FolioPago As String = co.obtenerFolio("Pago")
             Dim Folio As String = FolioPago.Substring(1, 6)
             Dim Serie As String = FolioPago.Substring(0, 1)
-            Dim UsoCFDI As String = "CP01"
+            Dim UsoCFDI As String = "S01"
             Dim Fecha As String = db.exectSQLQueryScalar("select STUFF(CONVERT(VARCHAR(50),GETDATE(), 127) ,20,4,'') as fecha")
-            Dim Certificado As String = ConfigurationSettings.AppSettings.Get("developmentCertificadoContent").ToString()
-            Dim NoCertificado As String = ConfigurationSettings.AppSettings.Get("developmentCertificado").ToString()
+            Dim Certificado As String
+            Dim NoCertificado As String
+            If (System.Diagnostics.Debugger.IsAttached) Then
+                Certificado = ConfigurationSettings.AppSettings.Get("developmentCertificadoContent").ToString()
+                NoCertificado = ConfigurationSettings.AppSettings.Get("developmentCertificado").ToString()
+            Else
+                Certificado = ConfigurationSettings.AppSettings.Get("developmentCertificadoContent").ToString()
+                NoCertificado = ConfigurationSettings.AppSettings.Get("developmentCertificado").ToString()
+            End If
             Dim serieOriginal As String = db.exectSQLQueryScalar($"select SUBSTRING(Folio, 1, 1) from ing_Creditos where ID = {IDCredito}")
             Dim folioOriginal As String = db.exectSQLQueryScalar($"select SUBSTRING(Folio, 2, DATALENGTH(Folio)) from ing_Creditos where ID = {IDCredito}")
             Dim FechaOriginal As String = db.exectSQLQueryScalar($"select STUFF(CONVERT(VARCHAR(50),Fecha, 127) ,20,4,'') as fecha from ing_Creditos where ID = {IDCredito}")
 
             Dim Cadena As String = xml.cadenaCredito(Serie, Folio, Fecha, NoCertificado, Certificado, RFC, NombreCompleto, UsoCFDI, FolioFiscal, serieOriginal, folioOriginal, NoParcialidad, MontoAnterior, CantidadAbonada, MontoNuevo, FechaOriginal, FormaPago, CP, RegFiscal)
-            'Dim Sello As String = st.Sellado("C:\Users\Luis\Desktop\pfx\uxa_pfx33.pfx", "12345678a", Cadena)
-            Dim sello As String = st.Sellado("\\192.168.1.241\ti\NEducacionContinua\Timbrado\pfx\uxa_pfx33.pfx", "12345678a", Cadena)
+            Dim sello As String
+            If (System.Diagnostics.Debugger.IsAttached) Then
+                sello = st.Sellado("\\192.168.1.241\ti\NEducacionContinua\Timbrado\pfx\uxa_pfx33.pfx", "12345678a", Cadena) ''PRUEBAS
+            Else
+                sello = st.Sellado("\\192.168.1.241\ti\NEducacionContinua\Timbrado\pfx\EDC.pfx", "EDC12345a", Cadena) ''REAL
+            End If
             Dim xmlString As String = xml.xmlCredito(Serie, Folio, Fecha, NoCertificado, sello, Certificado, RFC, NombreCompleto, UsoCFDI, FolioFiscal, serieOriginal, folioOriginal, NoParcialidad, MontoAnterior, CantidadAbonada, MontoNuevo, FechaOriginal, FormaPago, RegFiscal, CP)
             xmlString = xmlString.Replace("utf-16", "UTF-8")
-            Dim xmlTimbrado As String = st.Timbrado(xmlString, Folio)
+            Dim xmlTimbrado As String
+            If (System.Diagnostics.Debugger.IsAttached) Then
+                xmlTimbrado = st.TimbradoPruebas(xmlString, Folio)
+            Else
+                xmlTimbrado = st.Timbrado(xmlString, Folio)
+            End If
             Dim folioFiscalNuevo As String = Me.Extrae_Cadena(xmlTimbrado, "UUID=", " FechaTimbrado")
             FolioFiscal = Me.Extrae_Cadena(FolioFiscal, "=", "")
             FolioFiscal = FolioFiscal.Substring(1, FolioFiscal.Length() - 1)
