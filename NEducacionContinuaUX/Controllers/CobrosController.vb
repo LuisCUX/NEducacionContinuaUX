@@ -95,8 +95,8 @@ Public Class CobrosController
                 Certificado = ConfigurationSettings.AppSettings.Get("developmentCertificadoContent").ToString()
                 NoCertificado = ConfigurationSettings.AppSettings.Get("developmentCertificado").ToString()
             Else
-                Certificado = ConfigurationSettings.AppSettings.Get("developmentCertificadoContent").ToString()
-                NoCertificado = ConfigurationSettings.AppSettings.Get("developmentCertificado").ToString()
+                Certificado = ConfigurationSettings.AppSettings.Get("prodCertificadoContent").ToString()
+                NoCertificado = ConfigurationSettings.AppSettings.Get("prodCertificado").ToString()
             End If
 
             ''-----CALCULA SUBTOTAL-----''

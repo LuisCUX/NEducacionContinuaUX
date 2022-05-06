@@ -104,7 +104,11 @@ Public Class ValidacionesController
             txtNombre.Text = nombre
             txtEmail.Text = item("correo")
             txtRFC.Text = item("rfc")
-            lblCP.Text = item("cp")
+            If (item("rfc") = "XAXX010101000") Then
+                lblCP.Text = EnviromentService.CP
+            Else
+                lblCP.Text = item("cp")
+            End If
             lblRegFiscal.Text = item("ID_Contador")
             lblUsoCFDI.Text = item("clave_usoCFDI")
         Next
@@ -118,6 +122,9 @@ Public Class ValidacionesController
                                                            WHERE RE.id_registro = {idRegistro} AND RE.activo = 1")
         lblDireccion.Text = direccion
 
+        If (txtRFC.Text = "XAXX010101000") Then
+            lblCP.Text = EnviromentService.CP
+        End If
         panelDatos.Visible = True
         panelCobros.Visible = True
     End Sub
@@ -157,7 +164,11 @@ Public Class ValidacionesController
             txtNombre.Text = nombre
             txtEmail.Text = item("correo")
             txtRFC.Text = item("rfc")
-            lblCP.Text = item("cp")
+            If (item("rfc") = "XAXX010101000") Then
+                lblCP.Text = EnviromentService.CP
+            Else
+                lblCP.Text = item("cp")
+            End If
             lblRegFiscal.Text = item("ID_Contador")
             lblUsoCFDI.Text = item("clave_usoCFDI")
         Next

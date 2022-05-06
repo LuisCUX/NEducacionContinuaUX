@@ -78,7 +78,5 @@ Public Class ConsultaTimbresService
                 MsgBox(ex.ToString)
             End Try
         End If
-
-
     End Sub
 End Class
