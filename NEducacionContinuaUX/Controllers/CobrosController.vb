@@ -99,7 +99,6 @@ Public Class CobrosController
                 NoCertificado = ConfigurationSettings.AppSettings.Get("developmentCertificado").ToString()
             End If
 
-
             ''-----CALCULA SUBTOTAL-----''
             Dim subtotalSuma As Decimal
             For Each concepto As Concepto In listaConceptos

@@ -24,7 +24,7 @@ Public Class EnviromentService
             dbPassword = ConfigurationSettings.AppSettings.Get("password")
             connectionString = $"Data Source={serverIP}; Initial Catalog={dbName}; User ID='{dbUsername}'; Password='{dbPassword}';"
             reportesPath = ConfigurationSettings.AppSettings.Get("PathReportesPrueba").ToString()
-            RFCEDC = ConfigurationSettings.AppSettings.Get("RFCReal").ToString()
+            RFCEDC = ConfigurationSettings.AppSettings.Get("RFC").ToString()
             NombreEmpresa = ConfigurationSettings.AppSettings.Get("NombreEmpresa").ToString()
             CP = ConfigurationSettings.AppSettings.Get("CP").ToString()
             RegimenFiscal = ConfigurationSettings.AppSettings.Get("RegimenFiscal").ToString()
@@ -40,10 +40,38 @@ Public Class EnviromentService
             NombreEmpresa = ConfigurationSettings.AppSettings.Get("NombreEmpresaReal").ToString()
             CP = ConfigurationSettings.AppSettings.Get("CPReal").ToString()
             RegimenFiscal = ConfigurationSettings.AppSettings.Get("RegimenFiscalReal").ToString()
-            RFCEDC = ConfigurationSettings.AppSettings.Get("RFC").ToString()
+            RFCEDC = ConfigurationSettings.AppSettings.Get("RFCReal").ToString()
             ClientID = ConfigurationSettings.AppSettings.Get("ClientID").ToString()
             ClientSecret = ConfigurationSettings.AppSettings.Get("ClientSecret").ToString()
         End If
+
+        'If (System.Diagnostics.Debugger.IsAttached) Then
+        '    serverIP = ConfigurationSettings.AppSettings.Get("productionServerIP")
+        '    dbName = ConfigurationSettings.AppSettings.Get("productiondb")
+        '    dbUsername = ConfigurationSettings.AppSettings.Get("productionuser")
+        '    dbPassword = ConfigurationSettings.AppSettings.Get("productionpassword")
+        '    connectionString = $"Data Source={serverIP}; Initial Catalog={dbName}; User ID='{dbUsername}'; Password='{dbPassword}';"
+        '    reportesPath = ConfigurationSettings.AppSettings.Get("PathReportesProduccion").ToString()
+        '    NombreEmpresa = ConfigurationSettings.AppSettings.Get("NombreEmpresaReal").ToString()
+        '    CP = ConfigurationSettings.AppSettings.Get("CPReal").ToString()
+        '    RegimenFiscal = ConfigurationSettings.AppSettings.Get("RegimenFiscalReal").ToString()
+        '    RFCEDC = ConfigurationSettings.AppSettings.Get("RFCReal").ToString()
+        '    ClientID = ConfigurationSettings.AppSettings.Get("ClientID").ToString()
+        '    ClientSecret = ConfigurationSettings.AppSettings.Get("ClientSecret").ToString()
+        'Else
+        '    serverIP = ConfigurationSettings.AppSettings.Get("productionServerIP")
+        '    dbName = ConfigurationSettings.AppSettings.Get("productiondb")
+        '    dbUsername = ConfigurationSettings.AppSettings.Get("productionuser")
+        '    dbPassword = ConfigurationSettings.AppSettings.Get("productionpassword")
+        '    connectionString = $"Data Source={serverIP}; Initial Catalog={dbName}; User ID='{dbUsername}'; Password='{dbPassword}';"
+        '    reportesPath = ConfigurationSettings.AppSettings.Get("PathReportesProduccion").ToString()
+        '    NombreEmpresa = ConfigurationSettings.AppSettings.Get("NombreEmpresaReal").ToString()
+        '    CP = ConfigurationSettings.AppSettings.Get("CPReal").ToString()
+        '    RegimenFiscal = ConfigurationSettings.AppSettings.Get("RegimenFiscalReal").ToString()
+        '    RFCEDC = ConfigurationSettings.AppSettings.Get("RFCReal").ToString()
+        '    ClientID = ConfigurationSettings.AppSettings.Get("ClientID").ToString()
+        '    ClientSecret = ConfigurationSettings.AppSettings.Get("ClientSecret").ToString()
+        'End If
 
         'If (System.Diagnostics.Debugger.IsAttached) Then
         '    serverIP = ConfigurationSettings.AppSettings.Get("developmentServerIP")
