@@ -109,6 +109,8 @@
             Dim st As SelladoTimbradoService = New SelladoTimbradoService()
             Dim UUID As String = db.exectSQLQueryScalar($"SELECT FolioFiscal FROM ing_xmlTimbrados WHERE ID = {IDFolio}")
             Dim RFCReceptor As String = db.exectSQLQueryScalar($"SELECT XMLTimbrado FROM ing_xmlTimbrados WHERE ID = {IDFolio}")
+            Dim xmlAcuse As String
+            Dim mensajeCancelacion As String
             RFCReceptor = c.Extrae_Cadena(RFCReceptor, "<cfdi:Receptor", " Nombre=")
             RFCReceptor = c.Extrae_Cadena(RFCReceptor, "Rfc=", "")
             RFCReceptor = c.Extrae_Cadena(RFCReceptor, "=", "")
@@ -123,9 +125,19 @@
                 DatosUUID.Total = Total
                 DatosUUID.Motivo = cbMotivoSAT.SelectedValue
 
-                
+
                 ListaUUID.Add(DatosUUID)
-                st.TimbreCancelacionFacturasPrueba(ListaUUID)
+                Dim resultado As String()
+
+                resultado = st.TimbreCancelacionFacturasPrueba(ListaUUID)
+                If (resultado(0) = "False") Then
+                    BitacoraService.BitacoraCancelacionError(Matricula, Folio, cbMotivoSAT.SelectedValue, resultado(1), resultado(2))
+                    MessageBox.Show(resultado(1))
+                    Exit Sub
+                Else
+                    xmlAcuse = resultado(1)
+                    mensajeCancelacion = resultado(2)
+                End If
             Else
                 Dim ListaUUID As New List(Of TimbradoUXReal.DetalleCFDICancelacion)
                 Dim DatosUUID As New TimbradoUXReal.DetalleCFDICancelacion
@@ -136,13 +148,21 @@
 
 
                 ListaUUID.Add(DatosUUID)
-                st.TimbreCancelacionFacturas(ListaUUID)
+                Dim resultado As String()
+                resultado = st.TimbreCancelacionFacturas(ListaUUID)
+                If (resultado(0) = "False") Then
+                    BitacoraService.BitacoraCancelacionError(Matricula, Folio, cbMotivoSAT.SelectedValue, resultado(1), resultado(2))
+                    MessageBox.Show(resultado(1))
+                    Exit Sub
+                Else
+                    xmlAcuse = resultado(1)
+                    mensajeCancelacion = resultado(2)
+                End If
             End If
 
             db.startTransaction()
             Dim tableConceptos As DataTable = db.getDataTableFromSQL($"SELECT ID, Clave_Concepto, IDConcepto FROM ing_xmlTimbradosConceptos WHERE XMLID = {IDFolio}")
-            db.execSQLQueryWithoutParams($"INSERT INTO Ing_Cancelaciones(Folio, Matricula, TipoFactura, IDObservacion, FechaCancelacion, TipoCancelacion, Usuario, Activo) VALUES ('{Folio}', '{Matricula}', '{Tipo_Pago}', {cbObservacionCancelaciones.SelectedValue}, GETDATE(), {cbTipoCancelacion.SelectedIndex}, '{User.getUsername}', 1)")
-
+            db.execSQLQueryWithoutParams($"INSERT INTO Ing_Cancelaciones(Folio, Matricula, TipoFactura, IDObservacion, FechaCancelacion, TipoCancelacion, xmlAcuse, mensajeCancelacion, Usuario, Activo) VALUES ('{Folio}', '{Matricula}', '{Tipo_Pago}', {cbObservacionCancelaciones.SelectedValue}, GETDATE(), {cbTipoCancelacion.SelectedIndex}, '{xmlAcuse}', '{mensajeCancelacion}', '{User.getUsername}', 1)")
             Dim query As String
             If (cbTipoCancelacion.SelectedIndex = 0) Then
                 query = "CanceladaHoy = 1, CanceladaOtroDia = 0"
