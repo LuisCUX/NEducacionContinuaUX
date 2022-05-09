@@ -27,15 +27,15 @@
 
     End Sub
 
-    Private Sub login_back_door(sender As Object, e As KeyEventArgs) Handles txtUsuario.KeyDown, txtContraseña.KeyDown, Me.KeyDown
-        If e.KeyData = Keys.A Then
-            If (System.Diagnostics.Debugger.IsAttached) Then
-                User.setModel("Shupi", "UX99979961", "Luis Alberto Carmona Ronzon", "Administrador")
-                PrincipalView.Show()
-                Me.Close()
-            End If
-        End If
-    End Sub
+    'Private Sub login_back_door(sender As Object, e As KeyEventArgs) Handles txtUsuario.KeyDown, txtContraseña.KeyDown, Me.KeyDown
+    '    If e.KeyData = Keys.A Then
+    '        If (System.Diagnostics.Debugger.IsAttached) Then
+    '            User.setModel("Shupi", "UX99979961", "Luis Alberto Carmona Ronzon", "Administrador")
+    '            PrincipalView.Show()
+    '            Me.Close()
+    '        End If
+    '    End If
+    'End Sub
 
     Private Sub txtContraseña_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtContraseña.KeyPress
         If Asc(e.KeyChar) = 39 Or Asc(e.KeyChar) = 44 Then

@@ -108,13 +108,9 @@
         Try
             Dim st As SelladoTimbradoService = New SelladoTimbradoService()
             Dim UUID As String = db.exectSQLQueryScalar($"SELECT FolioFiscal FROM ing_xmlTimbrados WHERE ID = {IDFolio}")
-            Dim RFCReceptor As String = db.exectSQLQueryScalar($"SELECT XMLTimbrado FROM ing_xmlTimbrados WHERE ID = {IDFolio}")
+            Dim RFCReceptor As String = db.exectSQLQueryScalar($"SELECT RFCTimbrado FROM ing_xmlTimbrados WHERE ID = {IDFolio}")
             Dim xmlAcuse As String
             Dim mensajeCancelacion As String
-            RFCReceptor = c.Extrae_Cadena(RFCReceptor, "<cfdi:Receptor", " Nombre=")
-            RFCReceptor = c.Extrae_Cadena(RFCReceptor, "Rfc=", "")
-            RFCReceptor = c.Extrae_Cadena(RFCReceptor, "=", "")
-            RFCReceptor = c.quitaTildesEspecial(RFCReceptor)
             Dim Total As String = db.exectSQLQueryScalar($"SELECT Total FROM ing_xmlTimbrados WHERE ID = {IDFolio}")
 
             If (System.Diagnostics.Debugger.IsAttached) Then
@@ -146,7 +142,6 @@
                 DatosUUID.Total = Total
                 DatosUUID.Motivo = cbMotivoSAT.SelectedValue
 
-
                 ListaUUID.Add(DatosUUID)
                 Dim resultado As String()
                 resultado = st.TimbreCancelacionFacturas(ListaUUID)
@@ -156,6 +151,7 @@
                     Exit Sub
                 Else
                     xmlAcuse = resultado(1)
+                    xmlAcuse = xmlAcuse.Replace("'", "''")
                     mensajeCancelacion = resultado(2)
                 End If
             End If
