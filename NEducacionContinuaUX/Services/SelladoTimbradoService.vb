@@ -60,23 +60,48 @@ Public Class SelladoTimbradoService
         End If
     End Function
 
-    Function TimbreCancelacionFacturasPrueba(ListaUUID As List(Of TimbradoUXPruebas.DetalleCFDICancelacion)) As String
+    Function TimbreCancelacionFacturasPrueba(ListaUUID As List(Of TimbradoUXPruebas.DetalleCFDICancelacion)) As String()
         Dim timbre As New TimbradoUXPruebas.WSCFDI33Client
         Dim respuesta As New TimbradoUXPruebas.RespuestaCancelacion
         Dim base64PFX As String = db.exectSQLQueryScalar($"SELECT Contenido FROM ing_catCertificados WHERE Activo = 1")
         Dim passwordPFX As String = db.exectSQLQueryScalar($"SELECT Password FROM ing_catCertificados WHERE Activo = 1")
 
         respuesta = timbre.CancelarCFDI("ECU150924D33", "contRa$3na", EnviromentService.RFCEDC, ListaUUID.ToArray(), base64PFX, passwordPFX)
-        Return respuesta.MensajeErrorDetallado
+        If (respuesta.OperacionExitosa = True) Then
+            Dim RespuestaCancelacionDetallada = respuesta.DetallesCancelacion.ToList()
+            Dim mensajeCancelacion As String
+            For Each UUID As TimbradoUXPruebas.DetalleCancelacion In RespuestaCancelacionDetallada
+
+                mensajeCancelacion += UUID.CodigoResultado + " " + vbNewLine
+                mensajeCancelacion += UUID.MensajeResultado + " " + vbNewLine
+                mensajeCancelacion += UUID.UUID + vbNewLine
+                mensajeCancelacion += UUID.EsCancelable
+            Next
+            Return {"True", respuesta.XMLAcuse, mensajeCancelacion}
+        Else
+            Return {"False", respuesta.MensajeError, respuesta.MensajeErrorDetallado}
+        End If
     End Function
 
-    Function TimbreCancelacionFacturas(ListaUUID As List(Of TimbradoUXReal.DetalleCFDICancelacion)) As String
+    Function TimbreCancelacionFacturas(ListaUUID As List(Of TimbradoUXReal.DetalleCFDICancelacion)) As String()
         Dim timbre As New TimbradoUXReal.WSCFDI33Client
         Dim respuesta As New TimbradoUXReal.RespuestaCancelacion
         Dim base64PFX As String = db.exectSQLQueryScalar($"SELECT Contenido FROM ing_catCertificados WHERE Activo = 1")
         Dim passwordPFX As String = db.exectSQLQueryScalar($"SELECT Password FROM ing_catCertificados WHERE Activo = 1")
 
         respuesta = timbre.CancelarCFDI("ECU150924D33", "contRa$3na", EnviromentService.RFCEDC, ListaUUID.ToArray(), base64PFX, passwordPFX)
-        Return respuesta.MensajeErrorDetallado
+        If (respuesta.OperacionExitosa = True) Then
+            Dim RespuestaCancelacionDetallada = respuesta.DetallesCancelacion.ToList()
+            Dim mensajeCancelacion As String
+            For Each UUID As TimbradoUXReal.DetalleCancelacion In RespuestaCancelacionDetallada
+                mensajeCancelacion += UUID.CodigoResultado + " " + vbNewLine
+                mensajeCancelacion += UUID.MensajeResultado + " " + vbNewLine
+                mensajeCancelacion += UUID.UUID + vbNewLine
+                mensajeCancelacion += UUID.EsCancelable
+            Next
+            Return {"True", respuesta.XMLAcuse, mensajeCancelacion}
+        Else
+            Return {"False", $"{respuesta.MensajeError} / {respuesta.MensajeErrorDetallado}"}
+        End If
     End Function
 End Class
