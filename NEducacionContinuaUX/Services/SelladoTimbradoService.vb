@@ -89,7 +89,7 @@ Public Class SelladoTimbradoService
         Dim base64PFX As String = db.exectSQLQueryScalar($"SELECT Contenido FROM ing_catCertificados WHERE Activo = 1")
         Dim passwordPFX As String = db.exectSQLQueryScalar($"SELECT Password FROM ing_catCertificados WHERE Activo = 1")
 
-        respuesta = timbre.CancelarCFDI("ECU150924D33", "contRa$3na", EnviromentService.RFCEDC, ListaUUID.ToArray(), base64PFX, passwordPFX)
+        respuesta = timbre.CancelarCFDI("ECU150924HR4", "JCXM5@uUgr+", EnviromentService.RFCEDC, ListaUUID.ToArray(), base64PFX, passwordPFX)
         If (respuesta.OperacionExitosa = True) Then
             Dim RespuestaCancelacionDetallada = respuesta.DetallesCancelacion.ToList()
             Dim mensajeCancelacion As String
