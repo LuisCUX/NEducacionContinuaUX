@@ -14,6 +14,7 @@ Public Class ReimpresionFacturasEDC
     Dim repEmail As ImpresionReportesService = New ImpresionReportesService()
     Dim va As ValidacionesController = New ValidacionesController()
     Dim es As EmailService = New EmailService()
+    Dim c As CobrosController = New CobrosController
     Dim tipoMatricula As String
     Private Sub ReimpresionFacturasEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim tableEDC As DataTable = db.getDataTableFromSQL("SELECT RC.clave_cliente, UPPER(C.nombre + ' ' + RC.apellido_paterno + ' ' + RC.apellido_materno + ' (' + RC.clave_cliente + ')') AS NombreCliente FROM portal_registroCongreso AS RC
@@ -115,7 +116,11 @@ Public Class ReimpresionFacturasEDC
             tipoCliente = 1
         End If
 
-        Dim RFCCLiente As String = va.obtenerRFC(Matricula, tipoMatricula)
+        Dim RFCCLiente As String = db.exectSQLQueryScalar($"SELECT XMLTimbrado FROM ing_xmlTimbrados WHERE ID = {IDXML}")
+        RFCCLiente = c.Extrae_Cadena(RFCCLiente, "<cfdi:Receptor", " Nombre=")
+        RFCCLiente = c.Extrae_Cadena(RFCCLiente, "Rfc=", "")
+        RFCCLiente = c.Extrae_Cadena(RFCCLiente, "=", "")
+        RFCCLiente = c.quitaTildesEspecial(RFCCLiente)
 
         Dim tableIDConceptos As DataTable = db.getDataTableFromSQL($"SELECT DISTINCT Clave_Concepto FROM ing_xmlTimbradosConceptos WHERE XMLID = {IDXML}")
         For Each item As DataRow In tableIDConceptos.Rows
@@ -142,8 +147,9 @@ Public Class ReimpresionFacturasEDC
         rep.AgregarParametros("usoCFDI", usoCFDI)
         rep.AgregarParametros("TipoCliente", tipoCliente)
         rep.AgregarParametros("NombreEvento", NombreEvento)
+        rep.AgregarParametros("RFC", RFCCLiente)
 
-        rep.guardarReporte(folioEDC)
+        ''rep.guardarReporte(folioEDC)
 
         rep.MostrarReporte()
     End Sub

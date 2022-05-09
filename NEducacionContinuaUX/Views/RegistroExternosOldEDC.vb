@@ -506,9 +506,9 @@
 
     Private Sub txtRFC_TextChanged(sender As Object, e As EventArgs) Handles txtRFC.TextChanged
         Dim query As String
-        If (txtRFC.Text.Length() = 12) Then ''FISICA
+        If (txtRFC.Text.Length() = 13) Then ''FISICA
             query = $"SELECT ID_Contador, RegimenFiscal FROM ing_Cat_RegFis WHERE Fisica = 1"
-        ElseIf (txtRFC.Text.Length() = 13) Then ''MORAL
+        ElseIf (txtRFC.Text.Length() = 12) Then ''MORAL
             query = $"SELECT ID_Contador, RegimenFiscal FROM ing_Cat_RegFis WHERE Moral = 1"
         Else
             cbRegimenFiscal.DataSource = Nothing
@@ -523,7 +523,7 @@
     Private Sub txtRFCEd_TextChanged(sender As Object, e As EventArgs) Handles txtRFCEd.TextChanged
         Dim query As String
         If (txtRFCEd.Text.Length() = 12 Or txtRFCEd.Text.Length() = 13) Then ''FISICA
-            If (txtRFCEd.Text.Length() = 12) Then
+            If (txtRFCEd.Text.Length() = 13) Then
                 query = $"SELECT ID_Contador, RegimenFiscal FROM ing_Cat_RegFis WHERE Fisica = 1"
             Else
                 query = $"SELECT ID_Contador, RegimenFiscal FROM ing_Cat_RegFis WHERE Moral = 1"
@@ -561,9 +561,9 @@
 
     Private Sub txtRFCFEC_TextChanged(sender As Object, e As EventArgs) Handles txtRFCFEC.TextChanged
         Dim query As String
-        If (txtRFCFEC.Text.Length() = 12) Then ''FISICA
+        If (txtRFCFEC.Text.Length() = 13) Then ''FISICA
             query = $"SELECT ID_Contador, RegimenFiscal FROM ing_Cat_RegFis WHERE Fisica = 1"
-        ElseIf (txtRFCFEC.Text.Length() = 13) Then ''MORAL
+        ElseIf (txtRFCFEC.Text.Length() = 12) Then ''MORAL
             query = $"SELECT ID_Contador, RegimenFiscal FROM ing_Cat_RegFis WHERE Moral = 1"
         Else
             cbRegimenFiscalEC.DataSource = Nothing
