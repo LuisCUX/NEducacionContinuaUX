@@ -111,4 +111,9 @@
         RegistroTipoPagosOpcionales.MdiParent = Me
         RegistroTipoPagosOpcionales.Show()
     End Sub
+
+    Private Sub AToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AToolStripMenuItem.Click
+        Form1.MdiParent = Me
+        Form1.Show()
+    End Sub
 End Class

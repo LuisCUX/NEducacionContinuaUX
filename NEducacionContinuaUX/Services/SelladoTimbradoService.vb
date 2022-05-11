@@ -64,11 +64,13 @@ Public Class SelladoTimbradoService
         Dim timbre As New TimbradoUXPruebas.WSCFDI33Client
         Dim respuesta As New TimbradoUXPruebas.RespuestaCancelacion
         Dim base64PFX As String = db.exectSQLQueryScalar($"SELECT Contenido FROM ing_catCertificados WHERE Activo = 1")
+        base64PFX = base64PFX.Replace("  ", "")
         Dim passwordPFX As String = db.exectSQLQueryScalar($"SELECT Password FROM ing_catCertificados WHERE Activo = 1")
 
         respuesta = timbre.CancelarCFDI("ECU150924D33", "contRa$3na", EnviromentService.RFCEDC, ListaUUID.ToArray(), base64PFX, passwordPFX)
+        Dim RespuestaCancelacionDetallada = respuesta.DetallesCancelacion.ToList()
         If (respuesta.OperacionExitosa = True) Then
-            Dim RespuestaCancelacionDetallada = respuesta.DetallesCancelacion.ToList()
+            ''Dim RespuestaCancelacionDetallada = respuesta.DetallesCancelacion.ToList()
             Dim mensajeCancelacion As String
             For Each UUID As TimbradoUXPruebas.DetalleCancelacion In RespuestaCancelacionDetallada
 
@@ -87,11 +89,13 @@ Public Class SelladoTimbradoService
         Dim timbre As New TimbradoUXReal.WSCFDI33Client
         Dim respuesta As New TimbradoUXReal.RespuestaCancelacion
         Dim base64PFX As String = db.exectSQLQueryScalar($"SELECT Contenido FROM ing_catCertificados WHERE Activo = 1")
+        base64PFX = base64PFX.Replace("  ", "")
         Dim passwordPFX As String = db.exectSQLQueryScalar($"SELECT Password FROM ing_catCertificados WHERE Activo = 1")
 
         respuesta = timbre.CancelarCFDI("ECU150924HR4", "JCXM5@uUgr+", EnviromentService.RFCEDC, ListaUUID.ToArray(), base64PFX, passwordPFX)
+        Dim RespuestaCancelacionDetallada = respuesta.DetallesCancelacion.ToList()
         If (respuesta.OperacionExitosa = True) Then
-            Dim RespuestaCancelacionDetallada = respuesta.DetallesCancelacion.ToList()
+            ''Dim RespuestaCancelacionDetallada = respuesta.DetallesCancelacion.ToList()
             Dim mensajeCancelacion As String
             For Each UUID As TimbradoUXReal.DetalleCancelacion In RespuestaCancelacionDetallada
                 mensajeCancelacion += UUID.CodigoResultado + " " + vbNewLine
@@ -101,7 +105,7 @@ Public Class SelladoTimbradoService
             Next
             Return {"True", respuesta.XMLAcuse, mensajeCancelacion}
         Else
-            Return {"False", $"{respuesta.MensajeError} / {respuesta.MensajeErrorDetallado}"}
+            Return {"False", respuesta.MensajeError, respuesta.MensajeErrorDetallado}
         End If
     End Function
 End Class
