@@ -683,6 +683,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\cancel_subscription_40px.png" />
     <None Include="Connected Services\TimbradoUXReal\configuration91.svcinfo" />
     <None Include="Connected Services\TimbradoUXReal\configuration.svcinfo" />
     <None Include="Connected Services\TimbradoUXReal\Reference.svcmap">
