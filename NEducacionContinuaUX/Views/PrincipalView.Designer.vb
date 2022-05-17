@@ -55,7 +55,6 @@ Partial Class PrincipalView
         Me.CancelaciónDeFacturasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CambioDeFormaDePagoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReportesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip.SuspendLayout()
         Me.MenuStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -231,7 +230,7 @@ Partial Class PrincipalView
         '
         'HerramientasToolStripMenuItem
         '
-        Me.HerramientasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReimpresiónDeFacturasToolStripMenuItem, Me.TimbresUtilizadosToolStripMenuItem, Me.CancelaciónDeFacturasToolStripMenuItem, Me.CambioDeFormaDePagoToolStripMenuItem, Me.AToolStripMenuItem})
+        Me.HerramientasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReimpresiónDeFacturasToolStripMenuItem, Me.TimbresUtilizadosToolStripMenuItem, Me.CancelaciónDeFacturasToolStripMenuItem, Me.CambioDeFormaDePagoToolStripMenuItem})
         Me.HerramientasToolStripMenuItem.Name = "HerramientasToolStripMenuItem"
         Me.HerramientasToolStripMenuItem.Size = New System.Drawing.Size(90, 20)
         Me.HerramientasToolStripMenuItem.Text = "Herramientas"
@@ -265,12 +264,6 @@ Partial Class PrincipalView
         Me.ReportesToolStripMenuItem.Name = "ReportesToolStripMenuItem"
         Me.ReportesToolStripMenuItem.Size = New System.Drawing.Size(65, 20)
         Me.ReportesToolStripMenuItem.Text = "Reportes"
-        '
-        'AToolStripMenuItem
-        '
-        Me.AToolStripMenuItem.Name = "AToolStripMenuItem"
-        Me.AToolStripMenuItem.Size = New System.Drawing.Size(213, 22)
-        Me.AToolStripMenuItem.Text = "a"
         '
         'PrincipalView
         '
@@ -333,5 +326,4 @@ Partial Class PrincipalView
     Friend WithEvents AltaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ModificaciónToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CatalogoToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents AToolStripMenuItem As ToolStripMenuItem
 End Class
