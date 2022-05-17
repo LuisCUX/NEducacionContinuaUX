@@ -69,6 +69,7 @@ Public Class SelladoTimbradoService
 
         respuesta = timbre.CancelarCFDI("ECU150924D33", "contRa$3na", EnviromentService.RFCEDC, ListaUUID.ToArray(), base64PFX, passwordPFX)
         Dim RespuestaCancelacionDetallada = respuesta.DetallesCancelacion.ToList()
+        Dim estatus As String
         If (respuesta.OperacionExitosa = True) Then
             ''Dim RespuestaCancelacionDetallada = respuesta.DetallesCancelacion.ToList()
             Dim mensajeCancelacion As String
@@ -77,9 +78,10 @@ Public Class SelladoTimbradoService
                 mensajeCancelacion += UUID.CodigoResultado + " " + vbNewLine
                 mensajeCancelacion += UUID.MensajeResultado + " " + vbNewLine
                 mensajeCancelacion += UUID.UUID + vbNewLine
-                mensajeCancelacion += UUID.EsCancelable
+                mensajeCancelacion += UUID.EsCancelable + "."
+                estatus = mensajeCancelacion
             Next
-            Return {"True", respuesta.XMLAcuse, mensajeCancelacion}
+            Return {"True", respuesta.XMLAcuse, mensajeCancelacion, estatus}
         Else
             Return {"False", respuesta.MensajeError, respuesta.MensajeErrorDetallado}
         End If
@@ -97,15 +99,17 @@ Public Class SelladoTimbradoService
         If (respuesta.OperacionExitosa = True) Then
             ''Dim RespuestaCancelacionDetallada = respuesta.DetallesCancelacion.ToList()
             Dim mensajeCancelacion As String
+            Dim estatus As String
             For Each UUID As TimbradoUXReal.DetalleCancelacion In RespuestaCancelacionDetallada
                 mensajeCancelacion += UUID.CodigoResultado + " " + vbNewLine
                 mensajeCancelacion += UUID.MensajeResultado + " " + vbNewLine
                 mensajeCancelacion += UUID.UUID + vbNewLine
-                mensajeCancelacion += UUID.EsCancelable
+                mensajeCancelacion += UUID.EsCancelable + "."
+                estatus = mensajeCancelacion
             Next
-            Return {"True", respuesta.XMLAcuse, mensajeCancelacion}
+            Return {"True", respuesta.XMLAcuse, mensajeCancelacion, estatus}
         Else
-            Return {"False", respuesta.MensajeError, respuesta.MensajeErrorDetallado}
+            Return {"False", respuesta.MensajeError, respuesta.MensajeErrorDetallado, ""}
         End If
     End Function
 End Class

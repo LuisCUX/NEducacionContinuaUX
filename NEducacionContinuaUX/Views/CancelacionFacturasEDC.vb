@@ -27,6 +27,15 @@
         Folio = txtFolio.Text
 
         IDFolio = db.exectSQLQueryScalar($"SELECT ID FROM ing_xmlTimbrados WHERE Folio = '{Folio}' AND CanceladaHoy = 0 AND CanceladaOtroDia = 0")
+        Dim idCancelacion As Integer = db.exectSQLQueryScalar($"SELECT ID FROM Ing_Cancelaciones WHERE Folio = '{Folio}' AND Activo = 1")
+        If (idCancelacion > 0) Then
+            Dim Res As Integer = MsgBox("El folio ingresado ya fue cancelado ¿Desea reimprimir el acuse de cancelación?", MsgBoxStyle.YesNo)
+            If Res = 6 Then
+                cf.obtenerxmlAcuse(txtFolio.Text)
+                Exit Sub
+            End If
+        End If
+
         If (IDFolio < 1) Then
             MessageBox.Show("El folio ingresado no existe o ya esta cancelado, ingrese un folio válido")
             Me.Reiniciar()
@@ -111,6 +120,7 @@
             Dim RFCReceptor As String = db.exectSQLQueryScalar($"SELECT RFCTimbrado FROM ing_xmlTimbrados WHERE ID = {IDFolio}")
             Dim xmlAcuse As String
             Dim mensajeCancelacion As String
+            Dim estatusCancelacion As String
             Dim Total As String = db.exectSQLQueryScalar($"SELECT Total FROM ing_xmlTimbrados WHERE ID = {IDFolio}")
 
             If (System.Diagnostics.Debugger.IsAttached) Then
@@ -125,7 +135,9 @@
                 ListaUUID.Add(DatosUUID)
                 Dim resultado As String()
 
-                resultado = st.TimbreCancelacionFacturasPrueba(ListaUUID)
+                ''resultado = st.TimbreCancelacionFacturasPrueba(ListaUUID)
+                resultado = {"True", "AAAAAAAAAAA", "201   UUID Cancelado.   25F5CD94-8D50-4DE1-9742-C5B1FA2861E7   Cancelable sin aceptación", "Cancelable sin aceptación"}
+
                 If (resultado(0) = "False") Then
                     BitacoraService.BitacoraCancelacionError(Matricula, Folio, cbMotivoSAT.SelectedValue, resultado(1), resultado(2))
                     MessageBox.Show(resultado(1))
@@ -133,6 +145,7 @@
                 Else
                     xmlAcuse = resultado(1)
                     mensajeCancelacion = resultado(2)
+                    estatusCancelacion = resultado(3)
                 End If
             Else
                 Dim ListaUUID As New List(Of TimbradoUXReal.DetalleCFDICancelacion)
@@ -153,12 +166,13 @@
                     xmlAcuse = resultado(1)
                     xmlAcuse = xmlAcuse.Replace("'", "''")
                     mensajeCancelacion = resultado(2)
+                    estatusCancelacion = resultado(3)
                 End If
             End If
 
             db.startTransaction()
             Dim tableConceptos As DataTable = db.getDataTableFromSQL($"SELECT ID, Clave_Concepto, IDConcepto FROM ing_xmlTimbradosConceptos WHERE XMLID = {IDFolio}")
-            db.execSQLQueryWithoutParams($"INSERT INTO Ing_Cancelaciones(Folio, Matricula, TipoFactura, IDObservacion, FechaCancelacion, TipoCancelacion, xmlAcuse, mensajeCancelacion, Usuario, Activo) VALUES ('{Folio}', '{Matricula}', '{Tipo_Pago}', {cbObservacionCancelaciones.SelectedValue}, GETDATE(), {cbTipoCancelacion.SelectedIndex}, '{xmlAcuse}', '{mensajeCancelacion}', '{User.getUsername}', 1)")
+            db.execSQLQueryWithoutParams($"INSERT INTO Ing_Cancelaciones(Folio, Matricula, TipoFactura, IDObservacion, FechaCancelacion, TipoCancelacion, xmlAcuse, mensajeCancelacion, estatusCancelacion, CanceladoSAT, Usuario, Activo) VALUES ('{Folio}', '{Matricula}', '{Tipo_Pago}', {cbObservacionCancelaciones.SelectedValue}, GETDATE(), {cbTipoCancelacion.SelectedIndex}, '{xmlAcuse}', '{mensajeCancelacion}', '{estatusCancelacion}', 1, '{User.getUsername}', 1)")
             Dim query As String
             If (cbTipoCancelacion.SelectedIndex = 0) Then
                 query = "CanceladaHoy = 1, CanceladaOtroDia = 0"
@@ -177,6 +191,23 @@
         End Try
     End Sub
 
+    Private Sub btnGuardarInterno_Click(sender As Object, e As EventArgs) Handles btnGuardarInterno.Click
+        Try
+            Dim tableConceptos As DataTable = db.getDataTableFromSQL($"SELECT ID, Clave_Concepto, IDConcepto FROM ing_xmlTimbradosConceptos WHERE XMLID = {IDFolio}")
+            db.execSQLQueryWithoutParams($"INSERT INTO Ing_Cancelaciones(Folio, Matricula, TipoFactura, IDObservacion, FechaCancelacion, TipoCancelacion, xmlAcuse, mensajeCancelacion, estatusCancelacion, CanceladoSAT, Usuario, Activo) VALUES ('{Folio}', '{Matricula}', '{Tipo_Pago}', {cbObservacionCancelaciones.SelectedValue}, GETDATE(), {cbTipoCancelacion.SelectedIndex}, 'NULL', 'NULL', 'NULL', 0, '{User.getUsername}', 1)")
+            Dim query As String
+            If (cbTipoCancelacion.SelectedIndex = 0) Then
+                query = "CanceladaHoy = 1, CanceladaOtroDia = 0"
+            ElseIf (cbTipoCancelacion.SelectedIndex = 1) Then
+                query = "CanceladaHoy = 0, CanceladaOtroDia = 1"
+            End If
+
+            db.execSQLQueryWithoutParams($"UPDATE ing_xmlTimbrados SET {query} WHERE ID = {IDFolio}")
+            cf.CancelarPagos(Matricula, IDFolio, Folio, tableConceptos)
+        Catch ex As Exception
+
+        End Try
+    End Sub
 
     Function getFechaDTPicker(dtpicker As DateTimePicker) As String
         Dim Fecha

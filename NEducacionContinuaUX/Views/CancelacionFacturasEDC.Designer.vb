@@ -23,9 +23,6 @@ Partial Class CancelacionFacturasEDC
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.lblNombreVentana = New System.Windows.Forms.Label()
-        Me.btnSalir = New System.Windows.Forms.Button()
-        Me.btnLimpiar = New System.Windows.Forms.Button()
-        Me.btnGuardarCancelacion = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GridConceptos = New System.Windows.Forms.DataGridView()
         Me.cbObservacionCancelaciones = New System.Windows.Forms.ComboBox()
@@ -33,7 +30,6 @@ Partial Class CancelacionFacturasEDC
         Me.cbTipoCancelacion = New System.Windows.Forms.ComboBox()
         Me.lblFolio = New System.Windows.Forms.Label()
         Me.txtFolio = New System.Windows.Forms.TextBox()
-        Me.btnBuscar = New System.Windows.Forms.Button()
         Me.lblMatricula = New System.Windows.Forms.Label()
         Me.lblFechaFacturacion = New System.Windows.Forms.Label()
         Me.lblRFC = New System.Windows.Forms.Label()
@@ -42,6 +38,11 @@ Partial Class CancelacionFacturasEDC
         Me.lblRFCtxt = New System.Windows.Forms.Label()
         Me.cbMotivoSAT = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.btnBuscar = New System.Windows.Forms.Button()
+        Me.btnGuardarInterno = New System.Windows.Forms.Button()
+        Me.btnSalir = New System.Windows.Forms.Button()
+        Me.btnLimpiar = New System.Windows.Forms.Button()
+        Me.btnGuardarCancelacion = New System.Windows.Forms.Button()
         CType(Me.GridConceptos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -56,37 +57,6 @@ Partial Class CancelacionFacturasEDC
         Me.lblNombreVentana.TabIndex = 13
         Me.lblNombreVentana.Text = "Cancelación de facturas"
         Me.lblNombreVentana.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'btnSalir
-        '
-        Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
-        Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnSalir.Location = New System.Drawing.Point(961, 629)
-        Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New System.Drawing.Size(72, 53)
-        Me.btnSalir.TabIndex = 43
-        Me.btnSalir.UseVisualStyleBackColor = True
-        '
-        'btnLimpiar
-        '
-        Me.btnLimpiar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
-        Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnLimpiar.Location = New System.Drawing.Point(767, 629)
-        Me.btnLimpiar.Name = "btnLimpiar"
-        Me.btnLimpiar.Size = New System.Drawing.Size(72, 53)
-        Me.btnLimpiar.TabIndex = 42
-        Me.btnLimpiar.UseVisualStyleBackColor = True
-        '
-        'btnGuardarCancelacion
-        '
-        Me.btnGuardarCancelacion.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
-        Me.btnGuardarCancelacion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnGuardarCancelacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGuardarCancelacion.Location = New System.Drawing.Point(866, 629)
-        Me.btnGuardarCancelacion.Name = "btnGuardarCancelacion"
-        Me.btnGuardarCancelacion.Size = New System.Drawing.Size(72, 53)
-        Me.btnGuardarCancelacion.TabIndex = 41
-        Me.btnGuardarCancelacion.UseVisualStyleBackColor = True
         '
         'Label1
         '
@@ -164,15 +134,6 @@ Partial Class CancelacionFacturasEDC
         Me.txtFolio.Name = "txtFolio"
         Me.txtFolio.Size = New System.Drawing.Size(100, 22)
         Me.txtFolio.TabIndex = 50
-        '
-        'btnBuscar
-        '
-        Me.btnBuscar.Image = Global.NEducacionContinuaUX.My.Resources.Resources.search_30px
-        Me.btnBuscar.Location = New System.Drawing.Point(178, 119)
-        Me.btnBuscar.Name = "btnBuscar"
-        Me.btnBuscar.Size = New System.Drawing.Size(50, 35)
-        Me.btnBuscar.TabIndex = 51
-        Me.btnBuscar.UseVisualStyleBackColor = True
         '
         'lblMatricula
         '
@@ -258,6 +219,67 @@ Partial Class CancelacionFacturasEDC
         Me.Label2.TabIndex = 58
         Me.Label2.Text = "Motivo de cancelación SAT:"
         '
+        'btnBuscar
+        '
+        Me.btnBuscar.Image = Global.NEducacionContinuaUX.My.Resources.Resources.search_30px
+        Me.btnBuscar.Location = New System.Drawing.Point(178, 119)
+        Me.btnBuscar.Name = "btnBuscar"
+        Me.btnBuscar.Size = New System.Drawing.Size(50, 35)
+        Me.btnBuscar.TabIndex = 51
+        Me.btnBuscar.UseVisualStyleBackColor = True
+        '
+        'btnGuardarInterno
+        '
+        Me.btnGuardarInterno.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnGuardarInterno.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnGuardarInterno.Image = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
+        Me.btnGuardarInterno.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnGuardarInterno.Location = New System.Drawing.Point(624, 595)
+        Me.btnGuardarInterno.Name = "btnGuardarInterno"
+        Me.btnGuardarInterno.Size = New System.Drawing.Size(85, 75)
+        Me.btnGuardarInterno.TabIndex = 60
+        Me.btnGuardarInterno.Text = "Cancelacion interna"
+        Me.btnGuardarInterno.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnGuardarInterno.UseVisualStyleBackColor = True
+        '
+        'btnSalir
+        '
+        Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
+        Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnSalir.Location = New System.Drawing.Point(948, 593)
+        Me.btnSalir.Name = "btnSalir"
+        Me.btnSalir.Size = New System.Drawing.Size(85, 77)
+        Me.btnSalir.TabIndex = 43
+        Me.btnSalir.Text = "Salir"
+        Me.btnSalir.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnSalir.UseVisualStyleBackColor = True
+        '
+        'btnLimpiar
+        '
+        Me.btnLimpiar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
+        Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnLimpiar.Location = New System.Drawing.Point(737, 595)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(85, 77)
+        Me.btnLimpiar.TabIndex = 42
+        Me.btnLimpiar.Text = "Limpiar"
+        Me.btnLimpiar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnLimpiar.UseVisualStyleBackColor = True
+        '
+        'btnGuardarCancelacion
+        '
+        Me.btnGuardarCancelacion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnGuardarCancelacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnGuardarCancelacion.Image = Global.NEducacionContinuaUX.My.Resources.Resources.cancel_subscription_40px
+        Me.btnGuardarCancelacion.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnGuardarCancelacion.Location = New System.Drawing.Point(846, 595)
+        Me.btnGuardarCancelacion.Name = "btnGuardarCancelacion"
+        Me.btnGuardarCancelacion.Size = New System.Drawing.Size(85, 75)
+        Me.btnGuardarCancelacion.TabIndex = 41
+        Me.btnGuardarCancelacion.Text = "Cancelacion en SAT"
+        Me.btnGuardarCancelacion.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnGuardarCancelacion.UseVisualStyleBackColor = True
+        '
         'CancelacionFacturasEDC
         '
         Me.AcceptButton = Me.btnBuscar
@@ -265,6 +287,7 @@ Partial Class CancelacionFacturasEDC
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
         Me.ClientSize = New System.Drawing.Size(1045, 694)
+        Me.Controls.Add(Me.btnGuardarInterno)
         Me.Controls.Add(Me.cbMotivoSAT)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.lblRFCtxt)
@@ -314,4 +337,5 @@ Partial Class CancelacionFacturasEDC
     Friend WithEvents lblRFCtxt As Label
     Friend WithEvents cbMotivoSAT As ComboBox
     Friend WithEvents Label2 As Label
+    Friend WithEvents btnGuardarInterno As Button
 End Class
