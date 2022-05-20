@@ -204,6 +204,9 @@
 
             db.execSQLQueryWithoutParams($"UPDATE ing_xmlTimbrados SET {query} WHERE ID = {IDFolio}")
             cf.CancelarPagos(Matricula, IDFolio, Folio, tableConceptos)
+            MessageBox.Show("Factura cancelada correctamente")
+            Me.Reiniciar()
+            Exit Sub
         Catch ex As Exception
 
         End Try
@@ -219,5 +222,15 @@
 
     Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
         Me.Reiniciar()
+    End Sub
+
+    Private Sub btnReimprimir_Click(sender As Object, e As EventArgs) Handles btnReimprimir.Click
+        Dim idCancelacion As Integer = db.exectSQLQueryScalar($"SELECT ID FROM Ing_Cancelaciones WHERE Folio = '{txtFolioReimpresion.Text}' AND Activo = 1")
+        If (idCancelacion > 0) Then
+            cf.obtenerxmlAcuse(txtFolioReimpresion.Text)
+        Else
+            MessageBox.Show("La factura ingresada no ha sido cancelada, ingrese un folio válido.")
+            Exit Sub
+        End If
     End Sub
 End Class

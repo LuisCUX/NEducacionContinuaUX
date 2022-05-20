@@ -37,14 +37,14 @@ Partial Class ReportesEDC
         Me.lblTipoReporte = New System.Windows.Forms.Label()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.btnGenerar2 = New System.Windows.Forms.Button()
+        Me.dtPickerFin2 = New System.Windows.Forms.DateTimePicker()
         Me.dtPickerInicio2 = New System.Windows.Forms.DateTimePicker()
         Me.lblFechaInicio2 = New System.Windows.Forms.Label()
+        Me.lblFechaFin2 = New System.Windows.Forms.Label()
         Me.cbCajero2 = New System.Windows.Forms.ComboBox()
         Me.lblCajero2 = New System.Windows.Forms.Label()
         Me.cbTipoReporte2 = New System.Windows.Forms.ComboBox()
         Me.lbltipoReporte2 = New System.Windows.Forms.Label()
-        Me.lblFechaFin2 = New System.Windows.Forms.Label()
-        Me.dtPickerFin2 = New System.Windows.Forms.DateTimePicker()
         Me.TabControl1.SuspendLayout()
         Me.pageReporteIngresos.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -210,6 +210,14 @@ Partial Class ReportesEDC
         Me.btnGenerar2.Text = "Generar reporte"
         Me.btnGenerar2.UseVisualStyleBackColor = True
         '
+        'dtPickerFin2
+        '
+        Me.dtPickerFin2.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtPickerFin2.Location = New System.Drawing.Point(152, 142)
+        Me.dtPickerFin2.Name = "dtPickerFin2"
+        Me.dtPickerFin2.Size = New System.Drawing.Size(82, 20)
+        Me.dtPickerFin2.TabIndex = 144
+        '
         'dtPickerInicio2
         '
         Me.dtPickerInicio2.CalendarFont = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -229,6 +237,17 @@ Partial Class ReportesEDC
         Me.lblFechaInicio2.Size = New System.Drawing.Size(83, 16)
         Me.lblFechaInicio2.TabIndex = 142
         Me.lblFechaInicio2.Text = "Fecha inicio:"
+        '
+        'lblFechaFin2
+        '
+        Me.lblFechaFin2.AutoSize = True
+        Me.lblFechaFin2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFechaFin2.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblFechaFin2.Location = New System.Drawing.Point(29, 146)
+        Me.lblFechaFin2.Name = "lblFechaFin2"
+        Me.lblFechaFin2.Size = New System.Drawing.Size(65, 16)
+        Me.lblFechaFin2.TabIndex = 141
+        Me.lblFechaFin2.Text = "Fecha fin:"
         '
         'cbCajero2
         '
@@ -270,27 +289,6 @@ Partial Class ReportesEDC
         Me.lbltipoReporte2.Size = New System.Drawing.Size(104, 16)
         Me.lbltipoReporte2.TabIndex = 137
         Me.lbltipoReporte2.Text = "Tipo de reporte:"
-        '
-        'lblFechaFin2
-        '
-        Me.lblFechaFin2.AutoSize = True
-        Me.lblFechaFin2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFechaFin2.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblFechaFin2.Location = New System.Drawing.Point(29, 146)
-        Me.lblFechaFin2.Name = "lblFechaFin2"
-        Me.lblFechaFin2.Size = New System.Drawing.Size(65, 16)
-        Me.lblFechaFin2.TabIndex = 141
-        Me.lblFechaFin2.Text = "Fecha fin:"
-        Me.lblFechaFin2.Visible = False
-        '
-        'dtPickerFin2
-        '
-        Me.dtPickerFin2.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtPickerFin2.Location = New System.Drawing.Point(152, 142)
-        Me.dtPickerFin2.Name = "dtPickerFin2"
-        Me.dtPickerFin2.Size = New System.Drawing.Size(82, 20)
-        Me.dtPickerFin2.TabIndex = 144
-        Me.dtPickerFin2.Visible = False
         '
         'ReportesEDC
         '
