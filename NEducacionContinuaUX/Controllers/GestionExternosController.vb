@@ -257,7 +257,7 @@
                         RFC As String, DireccionF As String, NumeroF As String, ColoniaF As String, CPF As String, CiudadF As String, TelefonoF As String, CorreoF As String, IDMunicipioF As Integer, RazonSocialF As String, idResRegCF As Integer)
         Try
             db.startTransaction()
-            Dim idCliente As Integer = db.insertAndGetIDInserted($"INSERT INTO portal_cliente (correo, nombre, calle, colonia, cp, id_municipio, tipo_persona, telefono, id_nacionalidad) VALUES ('{Correo}', '{Nombre}', '{Calle}', '{Colonia}', '{CP}', {IDMunicipio}, {tipo_Persona}, '{telefono}', {IDNacionalidad})")
+            Dim idCliente As Integer = db.insertAndGetIDInserted($"INSERT INTO portal_cliente (correo, nombre, calle, colonia, cp, id_municipio, tipo_persona, telefono, id_nacionalidad) VALUES ('{Correo}', '{Nombre}', '{Calle}', '{Colonia}', '{CP}', {IDMunicipio}, 1, '{telefono}', {IDNacionalidad})")
             Dim idRegistroExterno As Integer = db.insertAndGetIDInserted($"INSERT INTO portal_registroExterno (paterno, materno, id_cliente, clave_cliente) VALUES ('{ap_pat}', '{ap_mat}', {idCliente}, '{clave_cliente}')")
 
             If (datosFiscales = True) Then

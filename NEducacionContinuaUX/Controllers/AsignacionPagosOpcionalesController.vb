@@ -11,7 +11,7 @@
         Else
             Dim MatriculaUX As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_catMatriculasUX WHERE MatriculaEX = '{Matricula}'")
             If (MatriculaUX > 0) Then
-                Return "UX"
+                Return "EC"
             Else
                 Return "EC"
             End If

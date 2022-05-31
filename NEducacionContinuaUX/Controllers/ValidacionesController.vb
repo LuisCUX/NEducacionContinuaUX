@@ -13,7 +13,7 @@ Public Class ValidacionesController
         Else
             Dim MatriculaUX As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_catMatriculasUX WHERE MatriculaEX = '{Matricula}'")
             If (MatriculaUX > 0) Then
-                Return "UX"
+                Return "EX"
             ElseIf (Matricula.Substring(0, 2) = "EX") Then
                 Return "EX"
             ElseIf (Matricula.Substring(0, 2) = "EC") Then
@@ -73,7 +73,7 @@ Public Class ValidacionesController
     ''-------------------------------------------------------BUSCA MATRICULA EXTERNA----------------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
     Sub buscarMatriculaEX(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As Label, txtEmail As Label, txtCarrera As Label, txtTurno As Label, txtRFC As Label, lblCP As Label, lblRegFiscal As Label, lblUsoCFDI As Label, lblDireccion As Label)
-        Dim exists As Integer = db.exectSQLQueryScalar($"SELECT id_clave FROM portal_clave WHERE clave_cliente = '{Matricula}'")
+        Dim exists As Integer = db.exectSQLQueryScalar($"SELECT id_registro FROM portal_registroExterno WHERE clave_cliente = '{Matricula}'")
 
         If (exists < 1) Then
             MessageBox.Show("La clave ingresada no existe, favor de ingresar una clave valida")
@@ -94,8 +94,8 @@ Public Class ValidacionesController
                                                                INNER JOIN portal_registroExterno AS E ON E.id_registro = RE.id_registro
                                                                INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
                                                                INNER JOIN ing_res_usoCFDI_regimenFiscal AS RF ON RF.id_res_usoCFDI_regimenFiscal = RE.id_res_cfdi_regimen
-                                                               INNER JOIN ing_cat_usoCFDI AS CF ON CF.clave_usoCFDI = RF.clave_usoCFDI
-                                                               INNER JOIN ing_Cat_RegFis AS REG ON REG.ID_Contador = RF.clave_regimeFiscal
+                                                               LEFT JOIN ing_cat_usoCFDI AS CF ON CF.clave_usoCFDI = RF.clave_usoCFDI
+                                                               LEFT JOIN ing_Cat_RegFis AS REG ON REG.ID_Contador = RF.clave_regimeFiscal
                                                                INNER JOIN portal_catRFC AS RFC ON RFC.id_rfc = RE.id_rfc AND RE.Activo = 1
                                                                WHERE E.clave_cliente = '{Matricula}'")
         For Each item As DataRow In tableDatos.Rows
@@ -109,8 +109,14 @@ Public Class ValidacionesController
             Else
                 lblCP.Text = item("cp")
             End If
-            lblRegFiscal.Text = item("ID_Contador")
-            lblUsoCFDI.Text = item("clave_usoCFDI")
+            Try
+                lblRegFiscal.Text = item("ID_Contador")
+                lblUsoCFDI.Text = item("clave_usoCFDI")
+            Catch ex As Exception
+                lblRegFiscal.Text = ""
+                lblUsoCFDI.Text = ""
+            End Try
+
         Next
         txtCarrera.Text = ""
         txtTurno.Text = ""
@@ -133,7 +139,7 @@ Public Class ValidacionesController
     ''-------------------------------------------------BUSCA MATRICULA MATRICULA CONGRESO-----------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
     Sub buscarMatriculaEC(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As Label, txtEmail As Label, txtCarrera As Label, txtTurno As Label, txtRFC As Label, lblCP As Label, lblRegFiscal As Label, lblUsoCFDI As Label, lblDireccion As Label)
-        Dim exists As Integer = db.exectSQLQueryScalar($"SELECT id_clave FROM portal_clave WHERE clave_cliente = '{Matricula}'")
+        Dim exists As Integer = db.exectSQLQueryScalar($"SELECT id_registro FROM portal_registroCongreso WHERE clave_cliente = '{Matricula}'")
 
         If (exists < 1) Then
             MessageBox.Show("La clave ingresada no existe, favor de ingresar una clave valida")
@@ -154,8 +160,8 @@ Public Class ValidacionesController
                                                                INNER JOIN portal_registroCongreso AS E ON E.id_registro = RE.id_registro
                                                                INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
                                                                INNER JOIN ing_res_usoCFDI_regimenFiscal AS RF ON RF.id_res_usoCFDI_regimenFiscal = RE.id_res_cfdi_regimen
-                                                               INNER JOIN ing_cat_usoCFDI AS CF ON CF.clave_usoCFDI = RF.clave_usoCFDI
-                                                               INNER JOIN ing_Cat_RegFis AS REG ON REG.ID_Contador = RF.clave_regimeFiscal
+                                                               LEFT JOIN ing_cat_usoCFDI AS CF ON CF.clave_usoCFDI = RF.clave_usoCFDI
+                                                               LEFT JOIN ing_Cat_RegFis AS REG ON REG.ID_Contador = RF.clave_regimeFiscal
                                                                INNER JOIN portal_catRFC AS RFC ON RFC.id_rfc = RE.id_rfc AND RE.Activo = 1
                                                                WHERE E.clave_cliente = '{Matricula}'")
         For Each item As DataRow In tableDatos.Rows
@@ -169,8 +175,13 @@ Public Class ValidacionesController
             Else
                 lblCP.Text = item("cp")
             End If
-            lblRegFiscal.Text = item("ID_Contador")
-            lblUsoCFDI.Text = item("clave_usoCFDI")
+            Try
+                lblRegFiscal.Text = item("ID_Contador")
+                lblUsoCFDI.Text = item("clave_usoCFDI")
+            Catch ex As Exception
+                lblRegFiscal.Text = ""
+                lblUsoCFDI.Text = ""
+            End Try
         Next
         txtCarrera.Text = ""
         txtTurno.Text = ""

@@ -33,13 +33,16 @@ Partial Class RegistroTipoPagosOpcionales
         Me.lblClave = New System.Windows.Forms.Label()
         Me.txtDescripcion = New System.Windows.Forms.TextBox()
         Me.lblDescripcion = New System.Windows.Forms.Label()
+        Me.btnLimpiar = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.cbAreas = New System.Windows.Forms.ComboBox()
         Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Clave = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ID_AreaAsignada = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Activo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Editar = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.btnLimpiar = New System.Windows.Forms.Button()
         CType(Me.GridTipoPago, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -59,7 +62,7 @@ Partial Class RegistroTipoPagosOpcionales
         '
         Me.btnSalirB.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
         Me.btnSalirB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnSalirB.Location = New System.Drawing.Point(532, 420)
+        Me.btnSalirB.Location = New System.Drawing.Point(532, 438)
         Me.btnSalirB.Name = "btnSalirB"
         Me.btnSalirB.Size = New System.Drawing.Size(75, 51)
         Me.btnSalirB.TabIndex = 100
@@ -69,7 +72,7 @@ Partial Class RegistroTipoPagosOpcionales
         '
         Me.btnGuardarB.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
         Me.btnGuardarB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnGuardarB.Location = New System.Drawing.Point(397, 420)
+        Me.btnGuardarB.Location = New System.Drawing.Point(397, 438)
         Me.btnGuardarB.Name = "btnGuardarB"
         Me.btnGuardarB.Size = New System.Drawing.Size(75, 51)
         Me.btnGuardarB.TabIndex = 99
@@ -80,7 +83,7 @@ Partial Class RegistroTipoPagosOpcionales
         Me.chbActivo.AutoSize = True
         Me.chbActivo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chbActivo.ForeColor = System.Drawing.SystemColors.Control
-        Me.chbActivo.Location = New System.Drawing.Point(15, 294)
+        Me.chbActivo.Location = New System.Drawing.Point(15, 323)
         Me.chbActivo.Name = "chbActivo"
         Me.chbActivo.Size = New System.Drawing.Size(64, 20)
         Me.chbActivo.TabIndex = 92
@@ -89,7 +92,7 @@ Partial Class RegistroTipoPagosOpcionales
         '
         'txtNombre
         '
-        Me.txtNombre.Location = New System.Drawing.Point(15, 175)
+        Me.txtNombre.Location = New System.Drawing.Point(15, 145)
         Me.txtNombre.Multiline = True
         Me.txtNombre.Name = "txtNombre"
         Me.txtNombre.Size = New System.Drawing.Size(376, 63)
@@ -100,7 +103,7 @@ Partial Class RegistroTipoPagosOpcionales
         Me.lblNombre.AutoSize = True
         Me.lblNombre.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblNombre.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblNombre.Location = New System.Drawing.Point(12, 156)
+        Me.lblNombre.Location = New System.Drawing.Point(12, 126)
         Me.lblNombre.Name = "lblNombre"
         Me.lblNombre.Size = New System.Drawing.Size(60, 16)
         Me.lblNombre.TabIndex = 89
@@ -115,7 +118,7 @@ Partial Class RegistroTipoPagosOpcionales
         Me.GridTipoPago.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridTipoPago.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.GridTipoPago.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.GridTipoPago.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Clave, Me.Descripcion, Me.Nombre, Me.Activo, Me.Editar})
+        Me.GridTipoPago.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Clave, Me.Descripcion, Me.Nombre, Me.ID_AreaAsignada, Me.Activo, Me.Editar})
         Me.GridTipoPago.Location = New System.Drawing.Point(397, 78)
         Me.GridTipoPago.Name = "GridTipoPago"
         Me.GridTipoPago.ShowCellToolTips = False
@@ -125,7 +128,7 @@ Partial Class RegistroTipoPagosOpcionales
         '
         'txtClave
         '
-        Me.txtClave.Location = New System.Drawing.Point(15, 127)
+        Me.txtClave.Location = New System.Drawing.Point(15, 97)
         Me.txtClave.Name = "txtClave"
         Me.txtClave.Size = New System.Drawing.Size(93, 20)
         Me.txtClave.TabIndex = 102
@@ -135,7 +138,7 @@ Partial Class RegistroTipoPagosOpcionales
         Me.lblClave.AutoSize = True
         Me.lblClave.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblClave.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblClave.Location = New System.Drawing.Point(12, 108)
+        Me.lblClave.Location = New System.Drawing.Point(12, 78)
         Me.lblClave.Name = "lblClave"
         Me.lblClave.Size = New System.Drawing.Size(46, 16)
         Me.lblClave.TabIndex = 101
@@ -143,7 +146,7 @@ Partial Class RegistroTipoPagosOpcionales
         '
         'txtDescripcion
         '
-        Me.txtDescripcion.Location = New System.Drawing.Point(15, 260)
+        Me.txtDescripcion.Location = New System.Drawing.Point(15, 230)
         Me.txtDescripcion.Name = "txtDescripcion"
         Me.txtDescripcion.Size = New System.Drawing.Size(376, 20)
         Me.txtDescripcion.TabIndex = 104
@@ -153,11 +156,42 @@ Partial Class RegistroTipoPagosOpcionales
         Me.lblDescripcion.AutoSize = True
         Me.lblDescripcion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDescripcion.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblDescripcion.Location = New System.Drawing.Point(12, 241)
+        Me.lblDescripcion.Location = New System.Drawing.Point(12, 211)
         Me.lblDescripcion.Name = "lblDescripcion"
         Me.lblDescripcion.Size = New System.Drawing.Size(83, 16)
         Me.lblDescripcion.TabIndex = 103
         Me.lblDescripcion.Text = "Descripcion:"
+        '
+        'btnLimpiar
+        '
+        Me.btnLimpiar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
+        Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnLimpiar.Location = New System.Drawing.Point(262, 438)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(75, 51)
+        Me.btnLimpiar.TabIndex = 105
+        Me.btnLimpiar.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label1.Location = New System.Drawing.Point(12, 263)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(109, 16)
+        Me.Label1.TabIndex = 106
+        Me.Label1.Text = "Depto. Asignado"
+        '
+        'cbAreas
+        '
+        Me.cbAreas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbAreas.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbAreas.FormattingEnabled = True
+        Me.cbAreas.Location = New System.Drawing.Point(15, 282)
+        Me.cbAreas.Name = "cbAreas"
+        Me.cbAreas.Size = New System.Drawing.Size(376, 23)
+        Me.cbAreas.TabIndex = 107
         '
         'ID
         '
@@ -183,6 +217,11 @@ Partial Class RegistroTipoPagosOpcionales
         Me.Nombre.HeaderText = "Nombre"
         Me.Nombre.Name = "Nombre"
         '
+        'ID_AreaAsignada
+        '
+        Me.ID_AreaAsignada.HeaderText = "Area"
+        Me.ID_AreaAsignada.Name = "ID_AreaAsignada"
+        '
         'Activo
         '
         Me.Activo.FillWeight = 45.68528!
@@ -195,22 +234,14 @@ Partial Class RegistroTipoPagosOpcionales
         Me.Editar.HeaderText = "Editar"
         Me.Editar.Name = "Editar"
         '
-        'btnLimpiar
-        '
-        Me.btnLimpiar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
-        Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnLimpiar.Location = New System.Drawing.Point(262, 420)
-        Me.btnLimpiar.Name = "btnLimpiar"
-        Me.btnLimpiar.Size = New System.Drawing.Size(75, 51)
-        Me.btnLimpiar.TabIndex = 105
-        Me.btnLimpiar.UseVisualStyleBackColor = True
-        '
         'RegistroTipoPagosOpcionales
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.ClientSize = New System.Drawing.Size(843, 486)
+        Me.ClientSize = New System.Drawing.Size(843, 502)
+        Me.Controls.Add(Me.cbAreas)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.txtDescripcion)
         Me.Controls.Add(Me.lblDescripcion)
@@ -243,11 +274,14 @@ Partial Class RegistroTipoPagosOpcionales
     Friend WithEvents lblClave As Label
     Friend WithEvents txtDescripcion As TextBox
     Friend WithEvents lblDescripcion As Label
+    Friend WithEvents btnLimpiar As Button
+    Friend WithEvents Label1 As Label
+    Friend WithEvents cbAreas As ComboBox
     Friend WithEvents ID As DataGridViewTextBoxColumn
     Friend WithEvents Clave As DataGridViewTextBoxColumn
     Friend WithEvents Descripcion As DataGridViewTextBoxColumn
     Friend WithEvents Nombre As DataGridViewTextBoxColumn
+    Friend WithEvents ID_AreaAsignada As DataGridViewTextBoxColumn
     Friend WithEvents Activo As DataGridViewTextBoxColumn
     Friend WithEvents Editar As DataGridViewCheckBoxColumn
-    Friend WithEvents btnLimpiar As Button
 End Class

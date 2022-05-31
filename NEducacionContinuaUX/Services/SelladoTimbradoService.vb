@@ -105,7 +105,7 @@ Public Class SelladoTimbradoService
                 mensajeCancelacion += UUID.MensajeResultado + " " + vbNewLine
                 mensajeCancelacion += UUID.UUID + vbNewLine
                 mensajeCancelacion += UUID.EsCancelable + "."
-                estatus = mensajeCancelacion
+                estatus = UUID.EsCancelable
             Next
             Return {"True", respuesta.XMLAcuse, mensajeCancelacion, estatus}
         Else

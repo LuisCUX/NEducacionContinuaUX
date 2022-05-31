@@ -24,7 +24,7 @@
         Dim meshoy
         Dim diahoy
         Dim year As String
-        Folio = txtFolio.Text
+        Folio = txtFolio.Text.ToUpper()
 
         IDFolio = db.exectSQLQueryScalar($"SELECT ID FROM ing_xmlTimbrados WHERE Folio = '{Folio}' AND CanceladaHoy = 0 AND CanceladaOtroDia = 0")
         Dim idCancelacion As Integer = db.exectSQLQueryScalar($"SELECT ID FROM Ing_Cancelaciones WHERE Folio = '{Folio}' AND Activo = 1")
@@ -185,6 +185,7 @@
 
             db.commitTransaction()
             MessageBox.Show("Factura cancelada exitosamente")
+            cf.obtenerxmlAcuse(txtFolio.Text.ToUpper())
             Me.Reiniciar()
         Catch ex As Exception
             db.rollBackTransaction()
@@ -229,7 +230,7 @@
         If (idCancelacion > 0) Then
             cf.obtenerxmlAcuse(txtFolioReimpresion.Text)
         Else
-            MessageBox.Show("La factura ingresada no ha sido cancelada, ingrese un folio válido.")
+            MessageBox.Show("La factura ingresada no ha sido cancelada o no existe, ingrese un folio válido.")
             Exit Sub
         End If
     End Sub

@@ -435,9 +435,14 @@
             Next
             Dim RegFiscal = db.exectSQLQueryScalar($"SELECT clave_regimeFiscal FROM ing_res_usoCFDI_regimenFiscal WHERE id_res_usoCFDI_regimenFiscal = {IDResCFDIReg}")
             Dim UsoCFDI = db.exectSQLQueryScalar($"SELECT clave_usoCFDI FROM ing_res_usoCFDI_regimenFiscal WHERE id_res_usoCFDI_regimenFiscal = {IDResCFDIReg}")
-            cbRegimenFiscalEd.SelectedValue = RegFiscal
-            Me.cbRegimenFiscalEd_SelectionChangeCommitted(Nothing, Nothing)
-            cbUsoCFDIEd.SelectedValue = UsoCFDI
+            Try
+                cbRegimenFiscalEd.SelectedValue = RegFiscal
+                Me.cbRegimenFiscalEd_SelectionChangeCommitted(Nothing, Nothing)
+                cbUsoCFDIEd.SelectedValue = UsoCFDI
+            Catch ex As Exception
+                cbUsoCFDIEd.SelectedIndex = -1
+                cbRegimenFiscalEd.SelectedIndex = -1
+            End Try
         Else
             txtRFCEd.Clear()
             txtRFCEd.Enabled = True

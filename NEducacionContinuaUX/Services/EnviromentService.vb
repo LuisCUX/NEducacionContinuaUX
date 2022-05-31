@@ -30,6 +30,7 @@ Public Class EnviromentService
             RegimenFiscal = ConfigurationSettings.AppSettings.Get("RegimenFiscal").ToString()
             ClientID = ConfigurationSettings.AppSettings.Get("ClientID").ToString()
             ClientSecret = ConfigurationSettings.AppSettings.Get("ClientSecret").ToString()
+            UXServiceEmail = ConfigurationSettings.AppSettings.Get("ux_email_base_route").ToString()
         Else
             serverIP = ConfigurationSettings.AppSettings.Get("productionServerIP")
             dbName = ConfigurationSettings.AppSettings.Get("productiondb")
@@ -43,6 +44,7 @@ Public Class EnviromentService
             RFCEDC = ConfigurationSettings.AppSettings.Get("RFCReal").ToString()
             ClientID = ConfigurationSettings.AppSettings.Get("ClientID").ToString()
             ClientSecret = ConfigurationSettings.AppSettings.Get("ClientSecret").ToString()
+            UXServiceEmail = ConfigurationSettings.AppSettings.Get("ux_email_base_route").ToString()
         End If
 
         'If (System.Diagnostics.Debugger.IsAttached) Then

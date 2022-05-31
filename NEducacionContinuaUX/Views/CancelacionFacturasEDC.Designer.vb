@@ -326,7 +326,7 @@ Partial Class CancelacionFacturasEDC
         Me.btnReimprimir.Name = "btnReimprimir"
         Me.btnReimprimir.Size = New System.Drawing.Size(126, 71)
         Me.btnReimprimir.TabIndex = 61
-        Me.btnReimprimir.Text = "Reimprimir factura"
+        Me.btnReimprimir.Text = "Reimprimir acuse de cancelación"
         Me.btnReimprimir.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnReimprimir.UseVisualStyleBackColor = True
         '

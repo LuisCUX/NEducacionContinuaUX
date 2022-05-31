@@ -116,11 +116,7 @@ Public Class ReimpresionFacturasEDC
             tipoCliente = 1
         End If
 
-        Dim RFCCLiente As String = db.exectSQLQueryScalar($"SELECT XMLTimbrado FROM ing_xmlTimbrados WHERE ID = {IDXML}")
-        RFCCLiente = c.Extrae_Cadena(RFCCLiente, "<cfdi:Receptor", " Nombre=")
-        RFCCLiente = c.Extrae_Cadena(RFCCLiente, "Rfc=", "")
-        RFCCLiente = c.Extrae_Cadena(RFCCLiente, "=", "")
-        RFCCLiente = c.quitaTildesEspecial(RFCCLiente)
+        Dim RFCCLiente As String = db.exectSQLQueryScalar($"SELECT RFCTimbrado FROM ing_xmlTimbrados WHERE ID = {IDXML}")
 
         Dim tableIDConceptos As DataTable = db.getDataTableFromSQL($"SELECT DISTINCT Clave_Concepto FROM ing_xmlTimbradosConceptos WHERE XMLID = {IDXML}")
         For Each item As DataRow In tableIDConceptos.Rows
@@ -159,6 +155,8 @@ Public Class ReimpresionFacturasEDC
         Dim folioEDC As String = db.exectSQLQueryScalar($"SELECT Folio FROM ing_xmlTimbrados WHERE ID = {IDXML}")
         Dim cantidadInt As Decimal = db.exectSQLQueryScalar($"SELECT Total FROM ing_xmlTimbrados WHERE ID = {IDXML}")
         Dim cantidadString As String
+        Dim esEvento As Boolean = False
+        Dim NombreEvento As String
         Dim valores As String()
         If (InStr(cantidadInt, ".")) Then
             valores = Split(cantidadInt, ".")
@@ -177,7 +175,23 @@ Public Class ReimpresionFacturasEDC
             tipoCliente = 1
         End If
 
-        Dim RFCCLiente As String = va.obtenerRFC(Matricula, tipoMatricula)
+        Dim RFCCLiente As String = db.exectSQLQueryScalar($"SELECT RFCTimbrado FROM ing_xmlTimbrados WHERE ID = {IDXML}")
+
+        Dim tableIDConceptos As DataTable = db.getDataTableFromSQL($"SELECT DISTINCT Clave_Concepto FROM ing_xmlTimbradosConceptos WHERE XMLID = {IDXML}")
+        For Each item As DataRow In tableIDConceptos.Rows
+            If (item("Clave_Concepto") <> 1 And item("Clave_Concepto") <> 2) Then
+                esEvento = True
+            End If
+        Next
+
+        If (esEvento = False) Then
+            NombreEvento = "   "
+        Else
+            NombreEvento = db.exectSQLQueryScalar($"SELECT C.nombre FROM portal_registroCongreso AS RC
+                                                        INNER JOIN portal_tipoAsistente AS TA ON TA.id_tipo_asistente = RC.id_tipo_asistente
+                                                        INNER JOIN portal_congreso AS C ON C.id_congreso = TA.id_congreso
+                                                        WHERE RC.clave_cliente = '{Matricula}'")
+        End If
 
         Dim QR As String = $"?re={EnviromentService.RFCEDC}&rr={RFCCLiente}id={folioFiscal}tt={cantidadInt}"
         Me.gernerarQr(QR, $"{folioEDC.Substring(0, 1)}{folioEDC.Substring(1, folioEDC.Length() - 1)}")
@@ -187,6 +201,8 @@ Public Class ReimpresionFacturasEDC
         rep.AgregarParametros("ClaveCliente", ClaveCliente)
         rep.AgregarParametros("usoCFDI", usoCFDI)
         rep.AgregarParametros("TipoCliente", tipoCliente)
+        rep.AgregarParametros("NombreEvento", NombreEvento)
+        rep.AgregarParametros("RFC", RFCCLiente)
 
         Dim mail As New Mail
         Dim archivo_pdf As Byte() = Nothing

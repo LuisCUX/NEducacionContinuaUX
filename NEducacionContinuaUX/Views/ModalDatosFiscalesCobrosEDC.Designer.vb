@@ -189,6 +189,7 @@ Partial Class ModalDatosFiscalesCobrosEDC
         'cbRFC
         '
         Me.cbRFC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbRFC.Enabled = False
         Me.cbRFC.FormattingEnabled = True
         Me.cbRFC.Location = New System.Drawing.Point(58, 21)
         Me.cbRFC.Name = "cbRFC"
