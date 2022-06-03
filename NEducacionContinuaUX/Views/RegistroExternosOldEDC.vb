@@ -1,11 +1,14 @@
-﻿Public Class RegistroExternosOldEDC
+﻿Imports System.Text.RegularExpressions
+
+Public Class RegistroExternosOldEDC
     Dim re As GestionExternosController = New GestionExternosController()
     Dim db As DataBaseService = New DataBaseService()
     Dim Matricula As String
     Public Shared matriculaExterna As Boolean
+    Dim combo_filtro As String
 
     Private Sub RegistroExternosEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        re.loadComboboxExternos(cbEstado, cbEstadoF, cbEstadoEd, cbEstadoFEd, cbExterno, cbUX, cbEstadoEC, cbEstadoFEC)
+        re.loadComboboxExternos(cbEstado, cbEstadoF, cbEstadoEd, cbEstadoFEd, cbExterno, cbEstadoEC, cbEstadoFEC)
         lblMatriculaEXString.Text = re.obtenerNuevaMatricula()
         matriculaExterna = False
     End Sub
@@ -216,10 +219,66 @@
         End Try
     End Sub
 
-    Private Sub cbUX_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbUX.SelectedIndexChanged
+    Private Sub cbUX_KeyUp(sender As Object, e As KeyEventArgs) Handles cbUX.KeyUp
+        If e.KeyCode = Keys.Back Or e.KeyCode = Keys.Delete Then
+            combo_filtro = cbUX.Text
+        End If
+    End Sub
+
+    Private Sub cbUX_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbUX.KeyPress
+        Me.keypress_textos_cmb(cbUX, e)
+        Dim kc As KeysConverter = New KeysConverter()
+        Dim encontrar As String = cbUX.Text
+
+        Dim re As New Regex("[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s\´]", RegexOptions.IgnoreCase)
+        Dim KeyAscii As Short = Asc(e.KeyChar)
+
+        If re.IsMatch(e.KeyChar) = False Then
+
+            combo_filtro += kc.ConvertToString(e.KeyChar)
+            Dim filtro As String = cbUX.Text
+            Dim tableFiltro As DataTable = db.getDataTableFromSQL($"SELECT H.matricula, UPPER(A.nombre + ' ' + A.ap_pat + ' ' + A.ap_mat) AS NombreAlumno FROM ux.dbo.dae_historia AS H 
+                                                           INNER JOIN ux.dbo.dae_catAlumnos AS A ON A.matricula = H.matricula AND A.sit_esc != 'B'
+                                                           INNER JOIN ux.dbo.dae_catPeriodos AS P ON P.activo = 1 AND P.actual = 1
+                                                           INNER JOIN ux.dbo.dae_catCarreras AS C ON C.clave = H.carrera AND P.nivel = C.nivel AND P.turno = C.turno
+                                                           WHERE H.fechaDeInscripcion IS NOT NULL AND H.periodo = P.periodo AND (A.nombre + ' ' + A.ap_pat + ' ' + A.ap_mat) LIKE '%{filtro}%'
+                                                           ORDER BY A.nombre")
+            ComboboxService.llenarCombobox(cbUX, tableFiltro, "matricula", "NombreAlumno")
+            cbUX.SelectedValue = -1
+            cbUX.Text = combo_filtro
+            cbUX.DroppedDown = True
+            cbUX.SelectionStart = encontrar.Length
+            cbUX.SelectionLength = cbUX.Text.Length - cbUX.SelectionStart
+        Else
+            If Asc(e.KeyChar) = Keys.Space Then
+                combo_filtro += " "
+            End If
+        End If
+    End Sub
+
+    Public Sub keypress_textos_cmb(ByVal TXT As ComboBox, ByVal e As KeyPressEventArgs)
         Try
-            Matricula = txtMatricula.Text
-            re.buscaDatosMatriculaUX(cbUX.SelectedValue, txtNombre, txtAp_Pat, txtAp_Mat, txtDireccion, txtColonia, cbEstado, cbMunicipio, txtCorreo, txtCP, txtTelefono)
+
+            Dim re As New Regex("[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s\:\´]", RegexOptions.IgnoreCase)
+            Dim KeyAscii As Short = Asc(e.KeyChar)
+
+            If KeyAscii <> 8 Then
+                e.Handled = re.IsMatch(e.KeyChar)
+            End If
+
+        Catch ex As Exception
+            MsgBox("Error: en la validación de este campo, por favor verifique o comuniquese con sistemas", MsgBoxStyle.Exclamation, "Error en datos")
+        End Try
+
+    End Sub
+
+    Private Sub cbUX_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbUX.SelectionChangeCommitted
+        Try
+            If (cbUX.SelectedIndex <> -1) Then
+                Matricula = txtMatricula.Text
+                re.buscaDatosMatriculaUX(cbUX.SelectedValue, txtNombre, txtAp_Pat, txtAp_Mat, txtDireccion, txtColonia, cbEstado, cbMunicipio, txtCorreo, txtCP, txtTelefono)
+            End If
+
         Catch ex As Exception
 
         End Try
@@ -583,7 +642,7 @@
     Private Sub cbRegimenFiscal_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbRegimenFiscal.SelectionChangeCommitted
         Dim tableCFDI As DataTable = db.getDataTableFromSQL($"SELECT CF.clave_usoCFDI, CF.descripcion FROM ing_res_usoCFDI_regimenFiscal AS REG 
                                                               INNER JOIN ing_cat_usoCFDI AS CF ON CF.clave_usoCFDI = REG.clave_usoCFDI
-                                                              WHERE REG.clave_regimeFiscal = {cbRegimenFiscal.SelectedValue}")
+                                                              WHERE REG.clave_regimeFiscal = '{cbRegimenFiscal.SelectedValue}'")
         ComboboxService.llenarCombobox(cbUsoCFDI, tableCFDI, "clave_usoCFDI", "descripcion")
     End Sub
 
@@ -599,5 +658,37 @@
                                                               INNER JOIN ing_cat_usoCFDI AS CF ON CF.clave_usoCFDI = REG.clave_usoCFDI
                                                               WHERE REG.clave_regimeFiscal = '{cbRegimenFiscalEd.SelectedValue}'")
         ComboboxService.llenarCombobox(cbUsoCFDIEd, tableCFDI, "clave_usoCFDI", "descripcion")
+    End Sub
+
+    Private Sub btnActualizarDatosFiscales_Click(sender As Object, e As EventArgs) Handles btnActualizarDatosFiscales.Click
+        Dim MatriculaUX As String = db.exectSQLQueryScalar($"SELECT MatriculaUX FROM ing_catMatriculasUX WHERE MatriculaEX = '{txtMatriculaEd.Text}'")
+        If (MatriculaUX Is Nothing) Then
+            MessageBox.Show("La matricula ingresada no fue migrada desde la UX, ingrese una matricula válida")
+            Exit Sub
+        Else
+            Dim tableDatosFiscales As DataTable = db.getDataTableFromSQL($"SELECT RFC.rfc, RES.direccion, RES.colonia, RES.estado, RES.municipio, RES.poblacion, RES.nombre, RES.correo, RES.cp, RES.tel, RES.clave_RegimenFiscal, RES.clave_USOCFDI FROM ux.dbo.ing_res_rfc_matricula AS RES
+                                                                           INNER JOIN ux.dbo.ing_CatRFC AS RFC ON RFC.id_rfc = RES.id_rfc
+                                                                           WHERE RES.matricula = '{MatriculaUX}' AND RES.activo = 1 AND RES.timbrar = 1")
+            If (tableDatosFiscales.Rows.Count < 1) Then
+                MessageBox.Show("No se encontraron datos fiscales de esta matricula")
+                Exit Sub
+            End If
+
+            For Each item As DataRow In tableDatosFiscales.Rows
+                txtRFCEd.Text = item("rfc")
+                Me.commitChangeRFCEd()
+                txtDireccionFEd.Text = item("direccion")
+                txtColoniaFEd.Text = item("colonia")
+                cbEstadoFEd.SelectedValue = item("estado")
+                cbMunicipioFEd.SelectedValue = item("municipio")
+                txtCiudadFEd.Text = item("poblacion")
+                txtNREd.Text = item("nombre")
+                txtCorreoFEd.Text = item("correo")
+                txtCPFEd.Text = item("cp")
+                txtTelefonoFEd.Text = item("tel")
+                cbRegimenFiscalEd.SelectedValue = item("clave_RegimenFiscal")
+                cbUsoCFDIEd.SelectedValue = item("clave_USOCFDI")
+            Next
+        End If
     End Sub
 End Class

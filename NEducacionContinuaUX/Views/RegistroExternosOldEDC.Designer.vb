@@ -95,6 +95,8 @@ Partial Class RegistroExternosOldEDC
         Me.txtMatriculaEd = New System.Windows.Forms.TextBox()
         Me.lblMatriculaEd = New System.Windows.Forms.Label()
         Me.panelDatosFiscalesEdit = New System.Windows.Forms.Panel()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnActualizarDatosFiscales = New System.Windows.Forms.Button()
         Me.cbRFCEd = New System.Windows.Forms.ComboBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.cbRegimenFiscalEd = New System.Windows.Forms.ComboBox()
@@ -638,12 +640,11 @@ Partial Class RegistroExternosOldEDC
         '
         'cbUX
         '
-        Me.cbUX.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbUX.FormattingEnabled = True
         Me.cbUX.Location = New System.Drawing.Point(594, 41)
         Me.cbUX.Name = "cbUX"
         Me.cbUX.Size = New System.Drawing.Size(361, 21)
-        Me.cbUX.TabIndex = 70
+        Me.cbUX.TabIndex = 74
         '
         'lblMatriculaEXString
         '
@@ -1008,6 +1009,8 @@ Partial Class RegistroExternosOldEDC
         '
         'panelDatosFiscalesEdit
         '
+        Me.panelDatosFiscalesEdit.Controls.Add(Me.Button2)
+        Me.panelDatosFiscalesEdit.Controls.Add(Me.btnActualizarDatosFiscales)
         Me.panelDatosFiscalesEdit.Controls.Add(Me.cbRFCEd)
         Me.panelDatosFiscalesEdit.Controls.Add(Me.Label11)
         Me.panelDatosFiscalesEdit.Controls.Add(Me.cbRegimenFiscalEd)
@@ -1042,6 +1045,30 @@ Partial Class RegistroExternosOldEDC
         Me.panelDatosFiscalesEdit.TabIndex = 2
         Me.panelDatosFiscalesEdit.Visible = False
         '
+        'Button2
+        '
+        Me.Button2.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
+        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.Button2.Location = New System.Drawing.Point(919, 199)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 55)
+        Me.Button2.TabIndex = 75
+        Me.Button2.UseVisualStyleBackColor = True
+        Me.Button2.Visible = False
+        '
+        'btnActualizarDatosFiscales
+        '
+        Me.btnActualizarDatosFiscales.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnActualizarDatosFiscales.Image = Global.NEducacionContinuaUX.My.Resources.Resources.refresh_30px
+        Me.btnActualizarDatosFiscales.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnActualizarDatosFiscales.Location = New System.Drawing.Point(581, 199)
+        Me.btnActualizarDatosFiscales.Name = "btnActualizarDatosFiscales"
+        Me.btnActualizarDatosFiscales.Size = New System.Drawing.Size(93, 55)
+        Me.btnActualizarDatosFiscales.TabIndex = 74
+        Me.btnActualizarDatosFiscales.Text = "Actualizar datos"
+        Me.btnActualizarDatosFiscales.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnActualizarDatosFiscales.UseVisualStyleBackColor = True
+        '
         'cbRFCEd
         '
         Me.cbRFCEd.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -1068,7 +1095,7 @@ Partial Class RegistroExternosOldEDC
         Me.cbRegimenFiscalEd.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbRegimenFiscalEd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbRegimenFiscalEd.FormattingEnabled = True
-        Me.cbRegimenFiscalEd.Location = New System.Drawing.Point(584, 155)
+        Me.cbRegimenFiscalEd.Location = New System.Drawing.Point(581, 131)
         Me.cbRegimenFiscalEd.Name = "cbRegimenFiscalEd"
         Me.cbRegimenFiscalEd.Size = New System.Drawing.Size(413, 24)
         Me.cbRegimenFiscalEd.TabIndex = 69
@@ -1078,7 +1105,7 @@ Partial Class RegistroExternosOldEDC
         Me.cbUsoCFDIEd.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbUsoCFDIEd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbUsoCFDIEd.FormattingEnabled = True
-        Me.cbUsoCFDIEd.Location = New System.Drawing.Point(584, 185)
+        Me.cbUsoCFDIEd.Location = New System.Drawing.Point(581, 161)
         Me.cbUsoCFDIEd.Name = "cbUsoCFDIEd"
         Me.cbUsoCFDIEd.Size = New System.Drawing.Size(413, 24)
         Me.cbUsoCFDIEd.TabIndex = 68
@@ -1088,7 +1115,7 @@ Partial Class RegistroExternosOldEDC
         Me.lblRegimenFiscalEd.AutoSize = True
         Me.lblRegimenFiscalEd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblRegimenFiscalEd.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblRegimenFiscalEd.Location = New System.Drawing.Point(482, 158)
+        Me.lblRegimenFiscalEd.Location = New System.Drawing.Point(479, 134)
         Me.lblRegimenFiscalEd.Name = "lblRegimenFiscalEd"
         Me.lblRegimenFiscalEd.Size = New System.Drawing.Size(100, 16)
         Me.lblRegimenFiscalEd.TabIndex = 71
@@ -1099,7 +1126,7 @@ Partial Class RegistroExternosOldEDC
         Me.lblUsoCFDIEd.AutoSize = True
         Me.lblUsoCFDIEd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblUsoCFDIEd.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblUsoCFDIEd.Location = New System.Drawing.Point(483, 188)
+        Me.lblUsoCFDIEd.Location = New System.Drawing.Point(480, 164)
         Me.lblUsoCFDIEd.Name = "lblUsoCFDIEd"
         Me.lblUsoCFDIEd.Size = New System.Drawing.Size(88, 16)
         Me.lblUsoCFDIEd.TabIndex = 70
@@ -1108,7 +1135,7 @@ Partial Class RegistroExternosOldEDC
         'txtTelefonoFEd
         '
         Me.txtTelefonoFEd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTelefonoFEd.Location = New System.Drawing.Point(805, 127)
+        Me.txtTelefonoFEd.Location = New System.Drawing.Point(802, 103)
         Me.txtTelefonoFEd.MaxLength = 16
         Me.txtTelefonoFEd.Name = "txtTelefonoFEd"
         Me.txtTelefonoFEd.Size = New System.Drawing.Size(192, 22)
@@ -1125,7 +1152,7 @@ Partial Class RegistroExternosOldEDC
         'txtCPFEd
         '
         Me.txtCPFEd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCPFEd.Location = New System.Drawing.Point(584, 127)
+        Me.txtCPFEd.Location = New System.Drawing.Point(581, 103)
         Me.txtCPFEd.MaxLength = 5
         Me.txtCPFEd.Name = "txtCPFEd"
         Me.txtCPFEd.Size = New System.Drawing.Size(125, 22)
@@ -1145,7 +1172,7 @@ Partial Class RegistroExternosOldEDC
         'txtCorreoFEd
         '
         Me.txtCorreoFEd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCorreoFEd.Location = New System.Drawing.Point(584, 101)
+        Me.txtCorreoFEd.Location = New System.Drawing.Point(581, 77)
         Me.txtCorreoFEd.Name = "txtCorreoFEd"
         Me.txtCorreoFEd.Size = New System.Drawing.Size(413, 22)
         Me.txtCorreoFEd.TabIndex = 42
@@ -1165,7 +1192,7 @@ Partial Class RegistroExternosOldEDC
         Me.lblTelefonoFEd.AutoSize = True
         Me.lblTelefonoFEd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTelefonoFEd.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblTelefonoFEd.Location = New System.Drawing.Point(735, 130)
+        Me.lblTelefonoFEd.Location = New System.Drawing.Point(732, 106)
         Me.lblTelefonoFEd.Name = "lblTelefonoFEd"
         Me.lblTelefonoFEd.Size = New System.Drawing.Size(65, 16)
         Me.lblTelefonoFEd.TabIndex = 57
@@ -1176,7 +1203,7 @@ Partial Class RegistroExternosOldEDC
         Me.Label22.AutoSize = True
         Me.Label22.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label22.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label22.Location = New System.Drawing.Point(482, 87)
+        Me.Label22.Location = New System.Drawing.Point(479, 63)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(86, 16)
         Me.Label22.TabIndex = 49
@@ -1187,7 +1214,7 @@ Partial Class RegistroExternosOldEDC
         Me.lblCPFEd.AutoSize = True
         Me.lblCPFEd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCPFEd.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblCPFEd.Location = New System.Drawing.Point(482, 130)
+        Me.lblCPFEd.Location = New System.Drawing.Point(479, 106)
         Me.lblCPFEd.Name = "lblCPFEd"
         Me.lblCPFEd.Size = New System.Drawing.Size(95, 16)
         Me.lblCPFEd.TabIndex = 56
@@ -1208,7 +1235,7 @@ Partial Class RegistroExternosOldEDC
         Me.lblCorreoFEd.AutoSize = True
         Me.lblCorreoFEd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCorreoFEd.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblCorreoFEd.Location = New System.Drawing.Point(482, 104)
+        Me.lblCorreoFEd.Location = New System.Drawing.Point(479, 80)
         Me.lblCorreoFEd.Name = "lblCorreoFEd"
         Me.lblCorreoFEd.Size = New System.Drawing.Size(52, 16)
         Me.lblCorreoFEd.TabIndex = 55
@@ -1217,7 +1244,7 @@ Partial Class RegistroExternosOldEDC
         'txtNREd
         '
         Me.txtNREd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtNREd.Location = New System.Drawing.Point(584, 75)
+        Me.txtNREd.Location = New System.Drawing.Point(581, 51)
         Me.txtNREd.Name = "txtNREd"
         Me.txtNREd.Size = New System.Drawing.Size(413, 22)
         Me.txtNREd.TabIndex = 36
@@ -1235,7 +1262,7 @@ Partial Class RegistroExternosOldEDC
         Me.Label25.AutoSize = True
         Me.Label25.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label25.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label25.Location = New System.Drawing.Point(482, 70)
+        Me.Label25.Location = New System.Drawing.Point(479, 46)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(64, 16)
         Me.Label25.TabIndex = 47
@@ -2434,7 +2461,6 @@ Partial Class RegistroExternosOldEDC
     Friend WithEvents btnSalirEd As Button
     Friend WithEvents cbExterno As ComboBox
     Friend WithEvents Label9 As Label
-    Friend WithEvents cbUX As ComboBox
     Friend WithEvents lblMatriculaEXEdString As Label
     Friend WithEvents lblMatriculaEXEd As Label
     Friend WithEvents btnLimpiar As Button
@@ -2510,4 +2536,7 @@ Partial Class RegistroExternosOldEDC
     Friend WithEvents Label11 As Label
     Friend WithEvents cbRFCEC As ComboBox
     Friend WithEvents Label12 As Label
+    Friend WithEvents cbUX As ComboBox
+    Friend WithEvents Button2 As Button
+    Friend WithEvents btnActualizarDatosFiscales As Button
 End Class

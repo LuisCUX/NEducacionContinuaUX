@@ -428,7 +428,6 @@ Public Class CobrosEDC
                 cbExterno.Text = ""
                 combo_filtro = ""
             End If
-
         Catch ex As Exception
 
         End Try

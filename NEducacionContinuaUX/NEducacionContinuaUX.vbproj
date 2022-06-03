@@ -28,7 +28,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\192.168.1.241\ti\NEducacionContinua\Instalador\</InstallUrl>
     <TargetCulture>es-MX</TargetCulture>
-    <ApplicationRevision>14</ApplicationRevision>
+    <ApplicationRevision>15</ApplicationRevision>
     <ApplicationVersion>1.1.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -683,6 +683,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\refresh_30px.png" />
     <None Include="Resources\cancel_subscription_40px.png" />
     <None Include="Connected Services\TimbradoUXReal\configuration91.svcinfo" />
     <None Include="Connected Services\TimbradoUXReal\configuration.svcinfo" />

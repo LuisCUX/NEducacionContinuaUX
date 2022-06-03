@@ -1,7 +1,7 @@
 ﻿Public Class GestionExternosController
     Dim db As DataBaseService = New DataBaseService()
 
-    Sub loadComboboxExternos(cbEstadoInfo As ComboBox, cbEstadoFiscal As ComboBox, cbEstadoEdit As ComboBox, cbEstadoFiscalEdit As ComboBox, cbExternos As ComboBox, cbUX As ComboBox, cbEstadoEC As ComboBox, cbEstadoFiscalEC As ComboBox)
+    Sub loadComboboxExternos(cbEstadoInfo As ComboBox, cbEstadoFiscal As ComboBox, cbEstadoEdit As ComboBox, cbEstadoFiscalEdit As ComboBox, cbExternos As ComboBox, cbEstadoEC As ComboBox, cbEstadoFiscalEC As ComboBox)
         Dim tableEstadosI As DataTable = db.getDataTableFromSQL("SELECT id_estado, nombre FROM portal_estado")
         Dim tableEstadosF As DataTable = db.getDataTableFromSQL("SELECT id_estado, nombre FROM portal_estado")
         Dim tableEstadosED As DataTable = db.getDataTableFromSQL("SELECT id_estado, nombre FROM portal_estado")
@@ -12,12 +12,6 @@
                                                                  INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
                                                                  INNER JOIN portal_clave AS CL ON CL.id_cliente = C.id_cliente
                                                                  ORDER BY C.nombre")
-        Dim tableUX As DataTable = db.getDataTableFromSQL("SELECT H.matricula, UPPER(A.nombre + ' ' + A.ap_pat + ' ' + A.ap_mat) AS NombreAlumno FROM ux.dbo.dae_historia AS H 
-                                                           INNER JOIN ux.dbo.dae_catAlumnos AS A ON A.matricula = H.matricula AND A.sit_esc != 'B'
-                                                           INNER JOIN ux.dbo.dae_catPeriodos AS P ON P.activo = 1 AND P.actual = 1
-                                                           INNER JOIN ux.dbo.dae_catCarreras AS C ON C.clave = H.carrera AND P.nivel = C.nivel AND P.turno = C.turno
-                                                           WHERE H.fechaDeInscripcion IS NOT NULL AND H.periodo = P.periodo 
-                                                           ORDER BY A.nombre")
 
         ComboboxService.llenarCombobox(cbEstadoInfo, tableEstadosI, "id_estado", "nombre")
         ComboboxService.llenarCombobox(cbEstadoFiscal, tableEstadosF, "id_estado", "nombre")
@@ -26,7 +20,6 @@
         ComboboxService.llenarCombobox(cbEstadoEC, tableEstadosEC, "id_estado", "nombre")
         ComboboxService.llenarCombobox(cbEstadoFiscalEC, tableEstadosFEC, "id_estado", "nombre")
         ComboboxService.llenarCombobox(cbExternos, tableExternos, "clave_cliente", "NombreExterno")
-        ComboboxService.llenarCombobox(cbUX, tableUX, "Matricula", "NombreAlumno")
     End Sub
 
     Sub buscaDatosMatriculaUX(Matricula As String, txtNombre As TextBox, txtAp_Pat As TextBox, txtAp_Mat As TextBox, txtdireccion As TextBox, txtColonia As TextBox, cbEstado As ComboBox, cbMunicipio As ComboBox, txtCorreo As TextBox, txtCP As TextBox, txtTelefono As TextBox)

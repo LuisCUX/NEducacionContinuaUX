@@ -137,6 +137,11 @@ Educacion Continua
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="P:NEducacionContinuaUX.My.Resources.Resources.refresh_30px">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.refresh_32px">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
