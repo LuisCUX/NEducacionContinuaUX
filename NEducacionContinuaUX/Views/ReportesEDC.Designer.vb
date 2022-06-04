@@ -104,7 +104,7 @@ Partial Class ReportesEDC
         'dtPickerFin
         '
         Me.dtPickerFin.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtPickerFin.Location = New System.Drawing.Point(159, 153)
+        Me.dtPickerFin.Location = New System.Drawing.Point(478, 34)
         Me.dtPickerFin.Name = "dtPickerFin"
         Me.dtPickerFin.Size = New System.Drawing.Size(82, 20)
         Me.dtPickerFin.TabIndex = 135
@@ -113,7 +113,7 @@ Partial Class ReportesEDC
         '
         Me.dtPickerInicio.CalendarFont = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtPickerInicio.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtPickerInicio.Location = New System.Drawing.Point(159, 120)
+        Me.dtPickerInicio.Location = New System.Drawing.Point(201, 34)
         Me.dtPickerInicio.Name = "dtPickerInicio"
         Me.dtPickerInicio.Size = New System.Drawing.Size(82, 20)
         Me.dtPickerInicio.TabIndex = 134
@@ -123,7 +123,7 @@ Partial Class ReportesEDC
         Me.lblFechaInicio.AutoSize = True
         Me.lblFechaInicio.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblFechaInicio.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblFechaInicio.Location = New System.Drawing.Point(36, 124)
+        Me.lblFechaInicio.Location = New System.Drawing.Point(78, 38)
         Me.lblFechaInicio.Name = "lblFechaInicio"
         Me.lblFechaInicio.Size = New System.Drawing.Size(83, 16)
         Me.lblFechaInicio.TabIndex = 98
@@ -134,7 +134,7 @@ Partial Class ReportesEDC
         Me.lblFechaFin.AutoSize = True
         Me.lblFechaFin.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblFechaFin.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblFechaFin.Location = New System.Drawing.Point(36, 157)
+        Me.lblFechaFin.Location = New System.Drawing.Point(355, 38)
         Me.lblFechaFin.Name = "lblFechaFin"
         Me.lblFechaFin.Size = New System.Drawing.Size(65, 16)
         Me.lblFechaFin.TabIndex = 97
@@ -145,7 +145,7 @@ Partial Class ReportesEDC
         Me.cbCajero.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbCajero.Enabled = False
         Me.cbCajero.FormattingEnabled = True
-        Me.cbCajero.Location = New System.Drawing.Point(159, 69)
+        Me.cbCajero.Location = New System.Drawing.Point(201, 107)
         Me.cbCajero.Name = "cbCajero"
         Me.cbCajero.Size = New System.Drawing.Size(226, 21)
         Me.cbCajero.TabIndex = 96
@@ -155,7 +155,7 @@ Partial Class ReportesEDC
         Me.lblCajero.AutoSize = True
         Me.lblCajero.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCajero.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblCajero.Location = New System.Drawing.Point(36, 69)
+        Me.lblCajero.Location = New System.Drawing.Point(78, 107)
         Me.lblCajero.Name = "lblCajero"
         Me.lblCajero.Size = New System.Drawing.Size(51, 16)
         Me.lblCajero.TabIndex = 95
@@ -165,7 +165,7 @@ Partial Class ReportesEDC
         '
         Me.cbTIpoReporte.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbTIpoReporte.FormattingEnabled = True
-        Me.cbTIpoReporte.Location = New System.Drawing.Point(159, 40)
+        Me.cbTIpoReporte.Location = New System.Drawing.Point(201, 78)
         Me.cbTIpoReporte.Name = "cbTIpoReporte"
         Me.cbTIpoReporte.Size = New System.Drawing.Size(226, 21)
         Me.cbTIpoReporte.TabIndex = 94
@@ -175,7 +175,7 @@ Partial Class ReportesEDC
         Me.lblTipoReporte.AutoSize = True
         Me.lblTipoReporte.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTipoReporte.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblTipoReporte.Location = New System.Drawing.Point(36, 41)
+        Me.lblTipoReporte.Location = New System.Drawing.Point(78, 79)
         Me.lblTipoReporte.Name = "lblTipoReporte"
         Me.lblTipoReporte.Size = New System.Drawing.Size(104, 16)
         Me.lblTipoReporte.TabIndex = 93
@@ -203,7 +203,7 @@ Partial Class ReportesEDC
         'btnGenerar2
         '
         Me.btnGenerar2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGenerar2.Location = New System.Drawing.Point(680, 430)
+        Me.btnGenerar2.Location = New System.Drawing.Point(687, 441)
         Me.btnGenerar2.Name = "btnGenerar2"
         Me.btnGenerar2.Size = New System.Drawing.Size(118, 39)
         Me.btnGenerar2.TabIndex = 145
@@ -213,7 +213,7 @@ Partial Class ReportesEDC
         'dtPickerFin2
         '
         Me.dtPickerFin2.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtPickerFin2.Location = New System.Drawing.Point(152, 142)
+        Me.dtPickerFin2.Location = New System.Drawing.Point(478, 34)
         Me.dtPickerFin2.Name = "dtPickerFin2"
         Me.dtPickerFin2.Size = New System.Drawing.Size(82, 20)
         Me.dtPickerFin2.TabIndex = 144
@@ -222,7 +222,7 @@ Partial Class ReportesEDC
         '
         Me.dtPickerInicio2.CalendarFont = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtPickerInicio2.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtPickerInicio2.Location = New System.Drawing.Point(152, 109)
+        Me.dtPickerInicio2.Location = New System.Drawing.Point(201, 34)
         Me.dtPickerInicio2.Name = "dtPickerInicio2"
         Me.dtPickerInicio2.Size = New System.Drawing.Size(82, 20)
         Me.dtPickerInicio2.TabIndex = 143
@@ -232,7 +232,7 @@ Partial Class ReportesEDC
         Me.lblFechaInicio2.AutoSize = True
         Me.lblFechaInicio2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblFechaInicio2.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblFechaInicio2.Location = New System.Drawing.Point(29, 113)
+        Me.lblFechaInicio2.Location = New System.Drawing.Point(78, 38)
         Me.lblFechaInicio2.Name = "lblFechaInicio2"
         Me.lblFechaInicio2.Size = New System.Drawing.Size(83, 16)
         Me.lblFechaInicio2.TabIndex = 142
@@ -243,7 +243,7 @@ Partial Class ReportesEDC
         Me.lblFechaFin2.AutoSize = True
         Me.lblFechaFin2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblFechaFin2.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblFechaFin2.Location = New System.Drawing.Point(29, 146)
+        Me.lblFechaFin2.Location = New System.Drawing.Point(355, 38)
         Me.lblFechaFin2.Name = "lblFechaFin2"
         Me.lblFechaFin2.Size = New System.Drawing.Size(65, 16)
         Me.lblFechaFin2.TabIndex = 141
@@ -254,7 +254,7 @@ Partial Class ReportesEDC
         Me.cbCajero2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbCajero2.Enabled = False
         Me.cbCajero2.FormattingEnabled = True
-        Me.cbCajero2.Location = New System.Drawing.Point(152, 58)
+        Me.cbCajero2.Location = New System.Drawing.Point(201, 107)
         Me.cbCajero2.Name = "cbCajero2"
         Me.cbCajero2.Size = New System.Drawing.Size(226, 21)
         Me.cbCajero2.TabIndex = 140
@@ -264,7 +264,7 @@ Partial Class ReportesEDC
         Me.lblCajero2.AutoSize = True
         Me.lblCajero2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCajero2.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblCajero2.Location = New System.Drawing.Point(29, 58)
+        Me.lblCajero2.Location = New System.Drawing.Point(78, 107)
         Me.lblCajero2.Name = "lblCajero2"
         Me.lblCajero2.Size = New System.Drawing.Size(51, 16)
         Me.lblCajero2.TabIndex = 139
@@ -274,7 +274,7 @@ Partial Class ReportesEDC
         '
         Me.cbTipoReporte2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbTipoReporte2.FormattingEnabled = True
-        Me.cbTipoReporte2.Location = New System.Drawing.Point(152, 29)
+        Me.cbTipoReporte2.Location = New System.Drawing.Point(201, 78)
         Me.cbTipoReporte2.Name = "cbTipoReporte2"
         Me.cbTipoReporte2.Size = New System.Drawing.Size(226, 21)
         Me.cbTipoReporte2.TabIndex = 138
@@ -284,7 +284,7 @@ Partial Class ReportesEDC
         Me.lbltipoReporte2.AutoSize = True
         Me.lbltipoReporte2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbltipoReporte2.ForeColor = System.Drawing.SystemColors.Control
-        Me.lbltipoReporte2.Location = New System.Drawing.Point(29, 30)
+        Me.lbltipoReporte2.Location = New System.Drawing.Point(78, 79)
         Me.lbltipoReporte2.Name = "lbltipoReporte2"
         Me.lbltipoReporte2.Size = New System.Drawing.Size(104, 16)
         Me.lbltipoReporte2.TabIndex = 137
