@@ -1,6 +1,7 @@
 ﻿Imports System.Security.Cryptography
 Imports System.Security.Cryptography.X509Certificates
 Imports System.Text
+Imports System.Text.RegularExpressions
 Imports System.Threading
 
 Public Class ReimpresionFacturasEDC
@@ -16,27 +17,9 @@ Public Class ReimpresionFacturasEDC
     Dim es As EmailService = New EmailService()
     Dim c As CobrosController = New CobrosController
     Dim tipoMatricula As String
+    Dim combo_filtro As String
     Private Sub ReimpresionFacturasEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim tableEDC As DataTable = db.getDataTableFromSQL("SELECT RC.clave_cliente, UPPER(C.nombre + ' ' + RC.apellido_paterno + ' ' + RC.apellido_materno + ' (' + RC.clave_cliente + ')') AS NombreCliente FROM portal_registroCongreso AS RC
-                                                            INNER JOIN portal_cliente AS C ON RC.id_cliente = C.id_cliente
-                                                            ORDER BY NombreCliente")
-        Dim tableExternos As DataTable = db.getDataTableFromSQL("SELECT CL.clave_cliente, UPPER(C.nombre + ' ' + E.paterno + ' ' + E.materno + ' (' + CL.clave_cliente + ')') As NombreCliente FROM portal_registroExterno AS E
-                                                                 INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
-                                                                 INNER JOIN portal_clave AS CL ON CL.id_cliente = C.id_cliente
-                                                                 ORDER BY C.nombre")
 
-        tableExternos.Merge(tableEDC)
-        ComboboxService.llenarCombobox(cbExterno, tableExternos, "clave_cliente", "NombreCliente")
-    End Sub
-
-    Private Sub cbExterno_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbExterno.SelectedIndexChanged
-        Try
-            txtMatricula.Text = cbExterno.SelectedValue
-            btnBuscarMatricula.PerformClick()
-            txtMatricula.Clear()
-        Catch ex As Exception
-
-        End Try
     End Sub
 
     Private Sub cbFactura_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbFactura.SelectionChangeCommitted
@@ -327,5 +310,70 @@ Public Class ReimpresionFacturasEDC
         If Asc(e.KeyChar) = 39 Or Asc(e.KeyChar) = 44 Then
             e.Handled = True
         End If
+    End Sub
+
+    Private Sub cbExterno_KeyUp(sender As Object, e As KeyEventArgs) Handles cbExterno.KeyUp
+        If e.KeyCode = Keys.Back Or e.KeyCode = Keys.Delete Then
+            combo_filtro = cbExterno.Text
+        End If
+    End Sub
+
+    Private Sub cbExterno_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbExterno.KeyPress
+        Me.keypress_textos_cmb(cbExterno, e)
+        Dim kc As KeysConverter = New KeysConverter()
+        Dim encontrar As String = cbExterno.Text
+
+        Dim re As New Regex("[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s\´]", RegexOptions.IgnoreCase)
+        Dim KeyAscii As Short = Asc(e.KeyChar)
+
+        If re.IsMatch(e.KeyChar) = False Then
+
+            combo_filtro += kc.ConvertToString(e.KeyChar)
+            Dim filtro As String = cbExterno.Text
+            Dim tableFiltro As DataTable = db.getDataTableFromSQL($"SELECT clave_cliente, NombreCliente FROM
+                                                                    ((SELECT CL.clave_cliente, UPPER(C.nombre + ' ' + E.paterno + ' ' + E.materno + ' (' + CL.clave_cliente + ')') As NombreCliente FROM portal_registroExterno AS E
+                                                                    INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
+                                                                    INNER JOIN portal_clave AS CL ON CL.id_cliente = C.id_cliente)
+																    UNION
+
+                                                                    (SELECT RC.clave_cliente, UPPER(C.nombre + ' ' + RC.apellido_paterno + ' ' + RC.apellido_materno + ' (' + RC.clave_cliente + ')') AS NombreCliente FROM portal_registroCongreso AS RC
+                                                                    INNER JOIN portal_cliente AS C ON RC.id_cliente = C.id_cliente)) AS ALUMNOS WHERE NombreCliente LIKE '%{filtro}%'")
+            ComboboxService.llenarCombobox(cbExterno, tableFiltro, "clave_cliente", "NombreCliente")
+            cbExterno.SelectedValue = -1
+            cbExterno.Text = combo_filtro
+            cbExterno.DroppedDown = True
+            cbExterno.SelectionStart = encontrar.Length
+            cbExterno.SelectionLength = cbExterno.Text.Length - cbExterno.SelectionStart
+        Else
+            If Asc(e.KeyChar) = Keys.Space Then
+                combo_filtro += " "
+            End If
+        End If
+    End Sub
+
+    Public Sub keypress_textos_cmb(ByVal TXT As ComboBox, ByVal e As KeyPressEventArgs)
+        Try
+
+            Dim re As New Regex("[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s\:\´]", RegexOptions.IgnoreCase)
+            Dim KeyAscii As Short = Asc(e.KeyChar)
+
+            If KeyAscii <> 8 Then
+                e.Handled = re.IsMatch(e.KeyChar)
+            End If
+
+        Catch ex As Exception
+            MsgBox("Error: en la validación de este campo, por favor verifique o comuniquese con sistemas", MsgBoxStyle.Exclamation, "Error en datos")
+        End Try
+
+    End Sub
+
+    Private Sub cbExterno_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbExterno.SelectionChangeCommitted
+        Try
+            txtMatricula.Text = cbExterno.SelectedValue
+            btnBuscarMatricula.PerformClick()
+            txtMatricula.Clear()
+        Catch ex As Exception
+
+        End Try
     End Sub
 End Class
