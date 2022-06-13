@@ -193,6 +193,11 @@
     End Sub
 
     Private Sub btnGuardarInterno_Click(sender As Object, e As EventArgs) Handles btnGuardarInterno.Click
+        If (GridConceptos.Rows.Count() < 1) Then
+            MessageBox.Show("No hay conceptos que cancelar, ingrese el folio de una factura para poder cancelarla")
+            Me.Reiniciar()
+            Exit Sub
+        End If
         Try
             Dim tableConceptos As DataTable = db.getDataTableFromSQL($"SELECT ID, Clave_Concepto, IDConcepto FROM ing_xmlTimbradosConceptos WHERE XMLID = {IDFolio}")
             db.execSQLQueryWithoutParams($"INSERT INTO Ing_Cancelaciones(Folio, Matricula, TipoFactura, IDObservacion, FechaCancelacion, TipoCancelacion, xmlAcuse, mensajeCancelacion, estatusCancelacion, CanceladoSAT, Usuario, Activo) VALUES ('{Folio}', '{Matricula}', '{Tipo_Pago}', {cbObservacionCancelaciones.SelectedValue}, GETDATE(), {cbTipoCancelacion.SelectedIndex}, 'NULL', 'NULL', 'NULL', 0, '{User.getUsername}', 1)")
