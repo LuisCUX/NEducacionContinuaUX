@@ -292,7 +292,9 @@ Public Class ReimpresionFacturasEDC
 
         Try
             Dim img As New Bitmap(QR_Generator.Encode(QR.ToString), New Size(220, 220))
-            img.Save($"\\{EnviromentService.serverIP}\ti\NEducacionContinua\QR\{Nombre}.png", Imaging.ImageFormat.Png)
+            ''img.Save($"\\{EnviromentService.serverIP}\ti\NEducacionContinua\QR\{Nombre}.png", Imaging.ImageFormat.Png)
+            'img.Save($"\\{EnviromentService.serverIP}\Sistemas\Reportes\EducacionContinua\QR{Nombre}.png", Imaging.ImageFormat.Png)
+            img.Save($"{EnviromentService.reportesPath}\QR\{Nombre}.png", Imaging.ImageFormat.Png)
             Thread.Sleep(1500)
         Catch ex As Exception
             MsgBox(ex.Message)

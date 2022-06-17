@@ -31,6 +31,7 @@ Partial Class RegistroExternosOldEDC
         Me.btnGuardarN = New System.Windows.Forms.Button()
         Me.chbDatosFiscales = New System.Windows.Forms.CheckBox()
         Me.panelDatosFiscales = New System.Windows.Forms.Panel()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.cbRegimenFiscal = New System.Windows.Forms.ComboBox()
         Me.cbUsoCFDI = New System.Windows.Forms.ComboBox()
         Me.lblRegimenFiscal = New System.Windows.Forms.Label()
@@ -308,6 +309,7 @@ Partial Class RegistroExternosOldEDC
         '
         'panelDatosFiscales
         '
+        Me.panelDatosFiscales.Controls.Add(Me.Button1)
         Me.panelDatosFiscales.Controls.Add(Me.cbRegimenFiscal)
         Me.panelDatosFiscales.Controls.Add(Me.cbUsoCFDI)
         Me.panelDatosFiscales.Controls.Add(Me.lblRegimenFiscal)
@@ -336,9 +338,19 @@ Partial Class RegistroExternosOldEDC
         Me.panelDatosFiscales.Controls.Add(Me.Label4)
         Me.panelDatosFiscales.Location = New System.Drawing.Point(6, 264)
         Me.panelDatosFiscales.Name = "panelDatosFiscales"
-        Me.panelDatosFiscales.Size = New System.Drawing.Size(1010, 211)
+        Me.panelDatosFiscales.Size = New System.Drawing.Size(1010, 265)
         Me.panelDatosFiscales.TabIndex = 1
         Me.panelDatosFiscales.Visible = False
+        '
+        'Button1
+        '
+        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.Button1.Location = New System.Drawing.Point(614, 194)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 55)
+        Me.Button1.TabIndex = 69
+        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.Visible = False
         '
         'cbRegimenFiscal
         '
@@ -2539,4 +2551,5 @@ Partial Class RegistroExternosOldEDC
     Friend WithEvents cbUX As ComboBox
     Friend WithEvents Button2 As Button
     Friend WithEvents btnActualizarDatosFiscales As Button
+    Friend WithEvents Button1 As Button
 End Class

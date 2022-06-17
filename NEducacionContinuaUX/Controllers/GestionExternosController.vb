@@ -492,4 +492,38 @@
 
         Return $"EX{Año}NA{ConsecutivoStr}"
     End Function
+
+    Sub abrirConstancia(RFC As String)
+
+        If (Not System.IO.Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal")) Then
+            System.IO.Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal")
+        End If
+
+        Try
+            My.Computer.FileSystem.CopyFile($"{EnviromentService.documentosIP}\Documentos\ConstanciaFiscal\{RFC}.pdf",
+            Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal\" & RFC & ".pdf",
+            FileIO.UIOption.AllDialogs,
+            FileIO.UICancelOption.ThrowException)
+            Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal\" & RFC & ".pdf")
+
+        Catch ex As Exception
+            MsgBox(ex.ToString, MsgBoxStyle.Critical, "Error")
+        End Try
+    End Sub
+
+    Sub subirConstancia(RFC As String, fileDialog As OpenFileDialog)
+        If fileDialog.ShowDialog = DialogResult.OK Then
+            Try
+                My.Computer.FileSystem.CopyFile(fileDialog.FileName,
+                $"\\{EnviromentService.documentosIP}\Documentos\ConstanciaFiscal\" & RFC & ".pdf",
+                FileIO.UIOption.AllDialogs,
+                FileIO.UICancelOption.ThrowException)
+                MessageBox.Show("Constancia registrada correctamente")
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            End Try
+
+
+        End If
+    End Sub
 End Class
