@@ -34,6 +34,14 @@ Public Class CobrosController
         db.execSQLQueryWithoutParams($"UPDATE ing_resPagoOpcionalAsignacion SET Activo = 0 WHERE ID = {ID_ResAsignacion}")
     End Sub
 
+    ''----------------------------------------------------------------------------------------------------------------------------------------
+    ''-----------------------------------------------------COBRA PAGO OPCIONAL DE CONGRESO----------------------------------------------------
+    ''----------------------------------------------------------------------------------------------------------------------------------------
+    Sub cobrarPagoOpcionalCongreso(concepto As Concepto, Matricula As String, Folio As String)
+        Dim ID_ResAsignacion As Integer = db.exectSQLQueryScalar($"SELECT ID_resPagoOpcionalAsignacion FROM ing_AsignacionPagoOpcionalCongreso WHERE ID = {concepto.IDConcepto}")
+        db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionPagoOpcionalCongreso SET folioPago = '{Folio}', Activo = 0 WHERE ID = {concepto.IDConcepto}")
+        db.execSQLQueryWithoutParams($"UPDATE ing_resPagoOpcionalAsignacion SET Activo = 0 WHERE ID = {ID_ResAsignacion}")
+    End Sub
 
     ''----------------------------------------------------------------------------------------------------------------------------------------
     ''-------------------------------------------------------------COBRA CONGRESO-------------------------------------------------------------
@@ -142,7 +150,7 @@ Public Class CobrosController
             Total = ((CDec(SubTotal) - CDec(Descuento)) + CDec(totalIVA))
 
             For Each concepto As Concepto In listaConceptos
-                If (concepto.claveConcepto <> "POA" And concepto.claveConcepto <> "POE") Then
+                If (concepto.claveConcepto <> "POA" And concepto.claveConcepto <> "POE" And concepto.claveConcepto <> "POC") Then
                     esEvento = True
                 End If
             Next
@@ -194,6 +202,8 @@ Public Class CobrosController
                         Me.cobrarPagoOpcionalAlumno(concepto, Matricula, folioPago)
                     ElseIf (concepto.claveConcepto = "POE") Then
                         Me.cobrarPagoOpcionalExterno(concepto, Matricula, folioPago)
+                    ElseIf (concepto.claveConcepto = "POC") Then
+                        Me.cobrarPagoOpcionalCongreso(concepto, Matricula, folioPago)
                     ElseIf (concepto.claveConcepto = "CON") Then
                         Me.cobrarCongreso(concepto, Matricula, folioPago, formaPago)
                     ElseIf (concepto.claveConcepto = "DCO") Then
@@ -589,7 +599,7 @@ Public Class CobrosController
 
         ''--------------DIVIDE LISTA PRINCIPAL EN DIFERENTES LISTAS SEGUN EL CONCEPTO
         For Each concepto As Concepto In listaConceptos
-            If (concepto.claveConcepto = "POA" Or concepto.claveConcepto = "POE") Then
+            If (concepto.claveConcepto = "POA" Or concepto.claveConcepto = "POE" Or concepto.claveConcepto = "POC") Then
                 listaPagosOpcionales.Add(concepto)
             ElseIf (concepto.claveConcepto = "CON") Then
                 listaCongresos.Add(concepto)
