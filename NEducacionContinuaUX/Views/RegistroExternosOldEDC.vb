@@ -691,4 +691,90 @@ Public Class RegistroExternosOldEDC
             Next
         End If
     End Sub
+
+    ''
+
+    'Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    '    If (Not System.IO.Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal")) Then
+    '        System.IO.Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal")
+    '    End If
+
+    '    Try
+
+    '        If (System.IO.File.Exists(config(3) & "\Documentos\ConstanciaFiscal\" & txtRFC.Text & ".pdf")) Then
+
+    '            My.Computer.FileSystem.CopyFile(config(3) & "\Documentos\ConstanciaFiscal\" & txtRFC.Text & ".pdf",
+    '            Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal\" & txtRFC.Text & ".pdf",
+    '            FileIO.UIOption.AllDialogs,
+    '            FileIO.UICancelOption.ThrowException)
+
+    '            ' Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal\" & txtrfc.Text & ".pdf")
+
+
+    '            Dim doc As PdfDocument = New PdfDocument
+    '            doc.LoadFromFile(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal\" & txtRFC.Text & ".pdf")
+
+    '            'Dim bmp As Image = doc.SaveAsImage(0)
+    '            'Dim emf As Image = doc.SaveAsImage(0, Spire.Pdf.Graphics.PdfImageType.Metafile)
+
+
+    '            Dim reader = New BarcodeReader()
+    '            Dim barcodeBitmap As New Bitmap(doc.SaveAsImage(0))
+
+
+    '            Dim Result = reader.Decode(barcodeBitmap)
+
+    '            If Result IsNot Nothing Then
+
+    '                Process.Start(Result.Text.ToString())
+    '                Dim urlQR = Result.Text.ToString()
+
+    '                ''    '----------------- scrapy quiza en un futuro
+
+    '                'Try
+    '                '    Dim listaTD As New List(Of String)
+    '                '    Dim listaRFC As New List(Of String)
+    '                '    Dim html As New HtmlDocument
+
+    '                '    Dim Mirequest As HttpWebRequest = TryCast(WebRequest.Create(urlQR), HttpWebRequest)
+
+    '                '    Dim Miresponse As HttpWebResponse = TryCast(Mirequest.GetResponse(), HttpWebResponse)
+    '                '    Dim dtStream As Stream = Miresponse.GetResponseStream()
+    '                '    Dim stReader As New StreamReader(dtStream, Encoding.UTF8) 'utf-8
+    '                '    Dim responseFinal As String = stReader.ReadToEnd()
+
+    '                '    Miresponse.Close()
+    '                '    stReader.Close()
+
+    '                '    html.LoadHtml(responseFinal)
+
+    '                '    For Each node As HtmlNode In html.DocumentNode.SelectNodes("//tbody//tr//td")
+    '                '        If (node.Attributes.Count = 2) Then
+    '                '            If node.Attributes(1).Value.Equals("text-align:left;") Then
+    '                '                listaTD.Add(node.InnerHtml)
+    '                '            End If
+    '                '        End If
+    '                '    Next
+    '                '    For Each node As HtmlNode In html.DocumentNode.SelectNodes("//ul//li")
+    '                '        If (node.InnerText.Contains("RFC")) Then
+    '                '            listaRFC.Add(node.InnerHtml)
+    '                '        End If
+    '                '    Next
+
+    '                '    MsgBox("")
+    '                'Catch ex As Exception
+
+    '                'End Try
+
+    '                ''-----------------
+
+    '            End If
+
+    '        End If
+
+    '    Catch ex As Exception
+    '        MsgBox(ex.ToString, MsgBoxStyle.Critical, "Error")
+    '    End Try
+    'End Sub
+
 End Class

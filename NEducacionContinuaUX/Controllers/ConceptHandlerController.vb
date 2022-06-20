@@ -19,7 +19,7 @@
         Dim concep As Concepto = New Concepto()
         Dim claveConceptoint As Integer
         ''--------------------PAGOS OPCIONALES--------------------''
-        If (claveConcepto = "POA" Or claveConcepto = "POE") Then
+        If (claveConcepto = "POA" Or claveConcepto = "POE" Or claveConcepto = "POC") Then
             Dim nombreTabla As String
             If (claveConcepto = "POA") Then
                 nombreTabla = "ing_AsignacionPagoOpcionalAlumno"
@@ -27,6 +27,9 @@
             ElseIf (claveConcepto = "POE") Then
                 nombreTabla = "ing_AsignacionPagoOpcionalExterno"
                 claveConceptoint = 2
+            ElseIf (claveConcepto = "POC") Then
+                nombreTabla = "ing_AsignacionPagoOpcionalCongreso"
+                claveConceptoint = 8
             End If
             Dim tableConcepto As DataTable = db.getDataTableFromSQL($"SELECT P.Nombre, P.claveProductoServicio, P.claveUnidad, A.costoUnitario, 0.00 As Descuento, P.considerarIVA, P.AgregaIVA, P.ExentaIVA, A.Cantidad FROM {nombreTabla} AS A
                                                                      INNER JOIN ing_resPagoOpcionalAsignacion AS R ON R.ID = A.ID_resPagoOpcionalAsignacion

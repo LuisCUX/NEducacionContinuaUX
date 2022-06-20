@@ -264,14 +264,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Educacion Continua.exe" size="10726912">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Educacion Continua.exe" size="10729984">
       <assemblyIdentity name="Educacion Continua" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>0Z7OENWx86vu5Y6kCYC0682HB47IeCbV2U8yihmIpwQ=</dsig:DigestValue>
+        <dsig:DigestValue>Zwnw2PddQ9nSumdnP3EP2WxpsRP8P5DdlIqorZVXhVc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -461,13 +461,13 @@
       <dsig:DigestValue>jUsAzMTaf1NC7K/akiH2dSANlTctWIQoh7vqHM732uE=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Educacion Continua.exe.config" size="7619">
+  <file name="Educacion Continua.exe.config" size="7741">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>NIUZjhFBispNHo/6OerdXnetUf5qKcl5BloCcwKHnkE=</dsig:DigestValue>
+      <dsig:DigestValue>qXjRJipUr4yhzTpxQ2YoyWj3QJIKZryQmlID02+3te4=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Images\ec-logo.ico" size="58387">

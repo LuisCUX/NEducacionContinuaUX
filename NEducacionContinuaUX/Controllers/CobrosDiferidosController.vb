@@ -83,6 +83,8 @@ Public Class CobrosDiferidosController
                     co.cobrarPagoOpcionalAlumno(concepto, concepto.Matricula, folioPago)
                 ElseIf (concepto.claveConcepto = "POE") Then
                     co.cobrarPagoOpcionalExterno(concepto, concepto.Matricula, folioPago)
+                ElseIf (concepto.claveConcepto = "POC") Then
+                    co.cobrarPagoOpcionalCongreso(concepto, concepto.Matricula, folioPago)
                 ElseIf (concepto.claveConcepto = "CON") Then
                     co.cobrarCongreso(concepto, concepto.Matricula, folioPago, formaPago)
                 ElseIf (concepto.claveConcepto = "DCO") Then

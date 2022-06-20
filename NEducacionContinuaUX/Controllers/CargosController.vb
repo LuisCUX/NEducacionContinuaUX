@@ -20,7 +20,10 @@
             MatriculaName = "MatriculaExterna"
             claveString = "POE"
         ElseIf (TipoMatricula = "EC") Then
-            Return
+            tabla = "ing_AsignacionPagoOpcionalCongreso"
+            claveTipoPago = 8
+            MatriculaName = "MatriculaExterna"
+            claveString = "POC"
         End If
         Dim tablePagosOpcionales As DataTable = db.getDataTableFromSQL($"SELECT A.ID, C.Clave, P.Descripcion, A.costoUnitario, A.Cantidad, P.considerarIVA, P.AgregaIVA, P.ExentaIVA FROM {tabla} AS A
                                                                         INNER JOIN ing_resPagoOpcionalAsignacion AS R ON R.ID = A.ID_resPagoOpcionalAsignacion

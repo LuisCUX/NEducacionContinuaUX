@@ -15,6 +15,7 @@ Public Class EnviromentService
     Public Shared Property NombreEmpresa As String
     Public Shared Property CP As String
     Public Shared Property RegimenFiscal As String
+    Public Shared Property documentosIP As String
 
     Public Shared Sub setEnviroment()
         'If (System.Diagnostics.Debugger.IsAttached) Then
@@ -53,11 +54,12 @@ Public Class EnviromentService
             dbUsername = ConfigurationSettings.AppSettings.Get("productionuser")
             dbPassword = ConfigurationSettings.AppSettings.Get("productionpassword")
             connectionString = $"Data Source={serverIP}; Initial Catalog={dbName}; User ID='{dbUsername}'; Password='{dbPassword}';"
-            reportesPath = ConfigurationSettings.AppSettings.Get("PathReportesProduccion").ToString()
-            NombreEmpresa = ConfigurationSettings.AppSettings.Get("NombreEmpresaReal").ToString()
-            CP = ConfigurationSettings.AppSettings.Get("CPReal").ToString()
-            RegimenFiscal = ConfigurationSettings.AppSettings.Get("RegimenFiscalReal").ToString()
-            RFCEDC = ConfigurationSettings.AppSettings.Get("RFCReal").ToString()
+            reportesPath = ConfigurationSettings.AppSettings.Get("PathReportesPrueba").ToString()
+            documentosIP = ConfigurationSettings.AppSettings.Get("IPDocumentosPrueba").ToString()
+            RFCEDC = ConfigurationSettings.AppSettings.Get("RFC").ToString()
+            NombreEmpresa = ConfigurationSettings.AppSettings.Get("NombreEmpresa").ToString()
+            CP = ConfigurationSettings.AppSettings.Get("CP").ToString()
+            RegimenFiscal = ConfigurationSettings.AppSettings.Get("RegimenFiscal").ToString()
             ClientID = ConfigurationSettings.AppSettings.Get("ClientID").ToString()
             ClientSecret = ConfigurationSettings.AppSettings.Get("ClientSecret").ToString()
         Else
@@ -67,6 +69,7 @@ Public Class EnviromentService
             dbPassword = ConfigurationSettings.AppSettings.Get("productionpassword")
             connectionString = $"Data Source={serverIP}; Initial Catalog={dbName}; User ID='{dbUsername}'; Password='{dbPassword}';"
             reportesPath = ConfigurationSettings.AppSettings.Get("PathReportesProduccion").ToString()
+            documentosIP = ConfigurationSettings.AppSettings.Get("IPDocumentosProduccion").ToString()
             NombreEmpresa = ConfigurationSettings.AppSettings.Get("NombreEmpresaReal").ToString()
             CP = ConfigurationSettings.AppSettings.Get("CPReal").ToString()
             RegimenFiscal = ConfigurationSettings.AppSettings.Get("RegimenFiscalReal").ToString()
