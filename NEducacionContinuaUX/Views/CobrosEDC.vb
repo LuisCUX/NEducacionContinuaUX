@@ -291,8 +291,10 @@ Public Class CobrosEDC
             Dim tipoConcepto As String
             If (tipoMatricula = "UX") Then
                 tipoConcepto = "POA"
-            Else
+            ElseIf (tipoMatricula = "EX") Then
                 tipoConcepto = "POE"
+            ElseIf (tipoMatricula = "EC") Then
+                tipoConcepto = "POC"
             End If
             Dim index As Integer = Tree.SelectedNode.Index
             If (Tree.SelectedNode.Checked = False) Then
