@@ -500,7 +500,7 @@
         End If
 
         Try
-            My.Computer.FileSystem.CopyFile($"{EnviromentService.documentosIP}\Documentos\ConstanciaFiscal\{RFC}.pdf",
+            My.Computer.FileSystem.CopyFile($"\\{EnviromentService.documentosIP}\Documentos\ConstanciaFiscal\{RFC}.pdf",
             Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal\" & RFC & ".pdf",
             FileIO.UIOption.AllDialogs,
             FileIO.UICancelOption.ThrowException)
@@ -522,8 +522,43 @@
             Catch ex As Exception
                 MessageBox.Show(ex.Message)
             End Try
-
-
         End If
     End Sub
+
+    'Sub leerQR(RFC As String)
+    '    If (Not System.IO.Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal")) Then
+    '        System.IO.Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal")
+    '    End If
+
+    '    Try
+    '        If ($"\\{EnviromentService.documentosIP}\Documentos\ConstanciaFiscal\{RFC}.pdf") Then
+
+    '            My.Computer.FileSystem.CopyFile($"\\{EnviromentService.documentosIP}\Documentos\ConstanciaFiscal\{RFC}.pdf",
+    '            Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal\" & RFC & ".pdf",
+    '            FileIO.UIOption.AllDialogs,
+    '            FileIO.UICancelOption.ThrowException)
+
+    '            Dim doc As PdfDocument = New PdfDocument
+    '            doc.LoadFromFile(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal\" & RFC & ".pdf")
+
+
+    '            Dim reader = New BarcodeReader()
+    '            Dim barcodeBitmap As New Bitmap(doc.SaveAsImage(0))
+
+
+    '            Dim Result = reader.Decode(barcodeBitmap)
+
+    '            If Result IsNot Nothing Then
+
+    '                Process.Start(Result.Text.ToString())
+    '                Dim urlQR = Result.Text.ToString()
+
+    '            End If
+
+    '        End If
+
+    '    Catch ex As Exception
+    '        MsgBox(ex.ToString, MsgBoxStyle.Critical, "Error")
+    '    End Try
+    'End Sub
 End Class

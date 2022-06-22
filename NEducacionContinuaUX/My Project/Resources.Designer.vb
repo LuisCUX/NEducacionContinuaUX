@@ -243,6 +243,26 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property icons8_add_file_40() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("icons8-add-file-40", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property icons8_analyze_40() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("icons8-analyze-40", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property login_rounded_up_26px() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("login_rounded_up_26px", resourceCulture)
@@ -356,6 +376,26 @@ Namespace My.Resources
         Friend ReadOnly Property search_40px() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("search_40px", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property search_doc() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("search_doc", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property search_doc1() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("search_doc1", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
