@@ -692,89 +692,51 @@ Public Class RegistroExternosOldEDC
         End If
     End Sub
 
-    ''
+    Private Sub btnSubirConstanciaED_Click(sender As Object, e As EventArgs) Handles btnSubirConstanciaED.Click
+        If (txtRFCEd.Text = "") Then
+            MessageBox.Show("Ingrese un RFC")
+            Exit Sub
+        End If
+        re.subirConstancia(txtRFCEd.Text, OpenFileDialog1)
+    End Sub
 
-    'Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-    '    If (Not System.IO.Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal")) Then
-    '        System.IO.Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal")
-    '    End If
+    Private Sub btnSubirConstancia_Click(sender As Object, e As EventArgs) Handles btnSubirConstancia.Click
+        If (txtRFC.Text = "") Then
+            MessageBox.Show("Ingrese un RFC")
+            Exit Sub
+        End If
+        re.subirConstancia(txtRFC.Text, OpenFileDialog1)
+    End Sub
 
-    '    Try
+    Private Sub btnSubirConstanciaEC_Click(sender As Object, e As EventArgs) Handles btnSubirConstanciaEC.Click
+        If (txtRFCFEC.Text = "") Then
+            MessageBox.Show("Ingrese un RFC")
+            Exit Sub
+        End If
+        re.subirConstancia(txtRFCFEC.Text, OpenFileDialog1)
+    End Sub
 
-    '        If (System.IO.File.Exists(config(3) & "\Documentos\ConstanciaFiscal\" & txtRFC.Text & ".pdf")) Then
+    Private Sub btnVerConstanciaED_Click(sender As Object, e As EventArgs) Handles btnVerConstanciaED.Click
+        If (txtRFCEd.Text = "") Then
+            MessageBox.Show("Ingrese un RFC")
+            Exit Sub
+        End If
+        re.abrirConstancia(txtRFCEd.Text)
+    End Sub
 
-    '            My.Computer.FileSystem.CopyFile(config(3) & "\Documentos\ConstanciaFiscal\" & txtRFC.Text & ".pdf",
-    '            Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal\" & txtRFC.Text & ".pdf",
-    '            FileIO.UIOption.AllDialogs,
-    '            FileIO.UICancelOption.ThrowException)
+    Private Sub btnVerConstanciaa_Click(sender As Object, e As EventArgs) Handles btnVerConstanciaa.Click
+        If (txtRFC.Text = "") Then
+            MessageBox.Show("Ingrese un RFC")
+            Exit Sub
+        End If
+        re.abrirConstancia(txtRFC.Text)
+    End Sub
 
-    '            ' Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal\" & txtrfc.Text & ".pdf")
-
-
-    '            Dim doc As PdfDocument = New PdfDocument
-    '            doc.LoadFromFile(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal\" & txtRFC.Text & ".pdf")
-
-    '            'Dim bmp As Image = doc.SaveAsImage(0)
-    '            'Dim emf As Image = doc.SaveAsImage(0, Spire.Pdf.Graphics.PdfImageType.Metafile)
-
-
-    '            Dim reader = New BarcodeReader()
-    '            Dim barcodeBitmap As New Bitmap(doc.SaveAsImage(0))
-
-
-    '            Dim Result = reader.Decode(barcodeBitmap)
-
-    '            If Result IsNot Nothing Then
-
-    '                Process.Start(Result.Text.ToString())
-    '                Dim urlQR = Result.Text.ToString()
-
-    '                ''    '----------------- scrapy quiza en un futuro
-
-    '                'Try
-    '                '    Dim listaTD As New List(Of String)
-    '                '    Dim listaRFC As New List(Of String)
-    '                '    Dim html As New HtmlDocument
-
-    '                '    Dim Mirequest As HttpWebRequest = TryCast(WebRequest.Create(urlQR), HttpWebRequest)
-
-    '                '    Dim Miresponse As HttpWebResponse = TryCast(Mirequest.GetResponse(), HttpWebResponse)
-    '                '    Dim dtStream As Stream = Miresponse.GetResponseStream()
-    '                '    Dim stReader As New StreamReader(dtStream, Encoding.UTF8) 'utf-8
-    '                '    Dim responseFinal As String = stReader.ReadToEnd()
-
-    '                '    Miresponse.Close()
-    '                '    stReader.Close()
-
-    '                '    html.LoadHtml(responseFinal)
-
-    '                '    For Each node As HtmlNode In html.DocumentNode.SelectNodes("//tbody//tr//td")
-    '                '        If (node.Attributes.Count = 2) Then
-    '                '            If node.Attributes(1).Value.Equals("text-align:left;") Then
-    '                '                listaTD.Add(node.InnerHtml)
-    '                '            End If
-    '                '        End If
-    '                '    Next
-    '                '    For Each node As HtmlNode In html.DocumentNode.SelectNodes("//ul//li")
-    '                '        If (node.InnerText.Contains("RFC")) Then
-    '                '            listaRFC.Add(node.InnerHtml)
-    '                '        End If
-    '                '    Next
-
-    '                '    MsgBox("")
-    '                'Catch ex As Exception
-
-    '                'End Try
-
-    '                ''-----------------
-
-    '            End If
-
-    '        End If
-
-    '    Catch ex As Exception
-    '        MsgBox(ex.ToString, MsgBoxStyle.Critical, "Error")
-    '    End Try
-    'End Sub
-
+    Private Sub btnVerConstanciaEC_Click(sender As Object, e As EventArgs) Handles btnVerConstanciaEC.Click
+        If (txtRFCFEC.Text = "") Then
+            MessageBox.Show("Ingrese un RFC")
+            Exit Sub
+        End If
+        re.abrirConstancia(txtRFCFEC.Text)
+    End Sub
 End Class

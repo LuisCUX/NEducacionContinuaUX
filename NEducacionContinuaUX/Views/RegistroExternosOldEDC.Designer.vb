@@ -31,7 +31,8 @@ Partial Class RegistroExternosOldEDC
         Me.btnGuardarN = New System.Windows.Forms.Button()
         Me.chbDatosFiscales = New System.Windows.Forms.CheckBox()
         Me.panelDatosFiscales = New System.Windows.Forms.Panel()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnVerConstanciaa = New System.Windows.Forms.Button()
+        Me.btnSubirConstancia = New System.Windows.Forms.Button()
         Me.cbRegimenFiscal = New System.Windows.Forms.ComboBox()
         Me.cbUsoCFDI = New System.Windows.Forms.ComboBox()
         Me.lblRegimenFiscal = New System.Windows.Forms.Label()
@@ -96,7 +97,9 @@ Partial Class RegistroExternosOldEDC
         Me.txtMatriculaEd = New System.Windows.Forms.TextBox()
         Me.lblMatriculaEd = New System.Windows.Forms.Label()
         Me.panelDatosFiscalesEdit = New System.Windows.Forms.Panel()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.btnVerConstanciaED = New System.Windows.Forms.Button()
+        Me.btnSubirConstanciaED = New System.Windows.Forms.Button()
         Me.btnActualizarDatosFiscales = New System.Windows.Forms.Button()
         Me.cbRFCEd = New System.Windows.Forms.ComboBox()
         Me.Label11 = New System.Windows.Forms.Label()
@@ -163,6 +166,8 @@ Partial Class RegistroExternosOldEDC
         Me.txtClaveEC = New System.Windows.Forms.TextBox()
         Me.lblClaveEC = New System.Windows.Forms.Label()
         Me.panelDatosFiscalesEC = New System.Windows.Forms.Panel()
+        Me.btnVerConstanciaEC = New System.Windows.Forms.Button()
+        Me.btnSubirConstanciaEC = New System.Windows.Forms.Button()
         Me.cbRFCEC = New System.Windows.Forms.ComboBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.cbRegimenFiscalEC = New System.Windows.Forms.ComboBox()
@@ -214,6 +219,7 @@ Partial Class RegistroExternosOldEDC
         Me.Label39 = New System.Windows.Forms.Label()
         Me.Label40 = New System.Windows.Forms.Label()
         Me.btnBuscarEC = New System.Windows.Forms.Button()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.tabExternos.SuspendLayout()
         Me.tabRegistroExternos.SuspendLayout()
         Me.panelDatosFiscales.SuspendLayout()
@@ -309,7 +315,8 @@ Partial Class RegistroExternosOldEDC
         '
         'panelDatosFiscales
         '
-        Me.panelDatosFiscales.Controls.Add(Me.Button1)
+        Me.panelDatosFiscales.Controls.Add(Me.btnVerConstanciaa)
+        Me.panelDatosFiscales.Controls.Add(Me.btnSubirConstancia)
         Me.panelDatosFiscales.Controls.Add(Me.cbRegimenFiscal)
         Me.panelDatosFiscales.Controls.Add(Me.cbUsoCFDI)
         Me.panelDatosFiscales.Controls.Add(Me.lblRegimenFiscal)
@@ -342,15 +349,31 @@ Partial Class RegistroExternosOldEDC
         Me.panelDatosFiscales.TabIndex = 1
         Me.panelDatosFiscales.Visible = False
         '
-        'Button1
+        'btnVerConstanciaa
         '
-        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button1.Location = New System.Drawing.Point(614, 194)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 55)
-        Me.Button1.TabIndex = 69
-        Me.Button1.UseVisualStyleBackColor = True
-        Me.Button1.Visible = False
+        Me.btnVerConstanciaa.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnVerConstanciaa.Image = Global.NEducacionContinuaUX.My.Resources.Resources.icons8_analyze_40
+        Me.btnVerConstanciaa.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnVerConstanciaa.Location = New System.Drawing.Point(724, 191)
+        Me.btnVerConstanciaa.Name = "btnVerConstanciaa"
+        Me.btnVerConstanciaa.Size = New System.Drawing.Size(101, 55)
+        Me.btnVerConstanciaa.TabIndex = 78
+        Me.btnVerConstanciaa.Text = "Ver constancia"
+        Me.btnVerConstanciaa.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnVerConstanciaa.UseVisualStyleBackColor = True
+        '
+        'btnSubirConstancia
+        '
+        Me.btnSubirConstancia.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnSubirConstancia.Image = Global.NEducacionContinuaUX.My.Resources.Resources.icons8_add_file_40
+        Me.btnSubirConstancia.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnSubirConstancia.Location = New System.Drawing.Point(614, 191)
+        Me.btnSubirConstancia.Name = "btnSubirConstancia"
+        Me.btnSubirConstancia.Size = New System.Drawing.Size(101, 55)
+        Me.btnSubirConstancia.TabIndex = 77
+        Me.btnSubirConstancia.Text = "Subir constancia"
+        Me.btnSubirConstancia.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnSubirConstancia.UseVisualStyleBackColor = True
         '
         'cbRegimenFiscal
         '
@@ -1021,7 +1044,9 @@ Partial Class RegistroExternosOldEDC
         '
         'panelDatosFiscalesEdit
         '
-        Me.panelDatosFiscalesEdit.Controls.Add(Me.Button2)
+        Me.panelDatosFiscalesEdit.Controls.Add(Me.Button3)
+        Me.panelDatosFiscalesEdit.Controls.Add(Me.btnVerConstanciaED)
+        Me.panelDatosFiscalesEdit.Controls.Add(Me.btnSubirConstanciaED)
         Me.panelDatosFiscalesEdit.Controls.Add(Me.btnActualizarDatosFiscales)
         Me.panelDatosFiscalesEdit.Controls.Add(Me.cbRFCEd)
         Me.panelDatosFiscalesEdit.Controls.Add(Me.Label11)
@@ -1057,16 +1082,41 @@ Partial Class RegistroExternosOldEDC
         Me.panelDatosFiscalesEdit.TabIndex = 2
         Me.panelDatosFiscalesEdit.Visible = False
         '
-        'Button2
+        'Button3
         '
-        Me.Button2.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
-        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button2.Location = New System.Drawing.Point(919, 199)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 55)
-        Me.Button2.TabIndex = 75
-        Me.Button2.UseVisualStyleBackColor = True
-        Me.Button2.Visible = False
+        Me.Button3.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
+        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.Button3.Location = New System.Drawing.Point(904, 199)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(93, 55)
+        Me.Button3.TabIndex = 77
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'btnVerConstanciaED
+        '
+        Me.btnVerConstanciaED.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnVerConstanciaED.Image = Global.NEducacionContinuaUX.My.Resources.Resources.icons8_analyze_40
+        Me.btnVerConstanciaED.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnVerConstanciaED.Location = New System.Drawing.Point(795, 199)
+        Me.btnVerConstanciaED.Name = "btnVerConstanciaED"
+        Me.btnVerConstanciaED.Size = New System.Drawing.Size(101, 55)
+        Me.btnVerConstanciaED.TabIndex = 76
+        Me.btnVerConstanciaED.Text = "Ver constancia"
+        Me.btnVerConstanciaED.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnVerConstanciaED.UseVisualStyleBackColor = True
+        '
+        'btnSubirConstanciaED
+        '
+        Me.btnSubirConstanciaED.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnSubirConstanciaED.Image = Global.NEducacionContinuaUX.My.Resources.Resources.icons8_add_file_40
+        Me.btnSubirConstanciaED.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnSubirConstanciaED.Location = New System.Drawing.Point(685, 199)
+        Me.btnSubirConstanciaED.Name = "btnSubirConstanciaED"
+        Me.btnSubirConstanciaED.Size = New System.Drawing.Size(101, 55)
+        Me.btnSubirConstanciaED.TabIndex = 75
+        Me.btnSubirConstanciaED.Text = "Subir constancia"
+        Me.btnSubirConstanciaED.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnSubirConstanciaED.UseVisualStyleBackColor = True
         '
         'btnActualizarDatosFiscales
         '
@@ -1762,6 +1812,8 @@ Partial Class RegistroExternosOldEDC
         '
         'panelDatosFiscalesEC
         '
+        Me.panelDatosFiscalesEC.Controls.Add(Me.btnVerConstanciaEC)
+        Me.panelDatosFiscalesEC.Controls.Add(Me.btnSubirConstanciaEC)
         Me.panelDatosFiscalesEC.Controls.Add(Me.cbRFCEC)
         Me.panelDatosFiscalesEC.Controls.Add(Me.Label12)
         Me.panelDatosFiscalesEC.Controls.Add(Me.cbRegimenFiscalEC)
@@ -1796,6 +1848,32 @@ Partial Class RegistroExternosOldEDC
         Me.panelDatosFiscalesEC.TabIndex = 74
         Me.panelDatosFiscalesEC.Visible = False
         '
+        'btnVerConstanciaEC
+        '
+        Me.btnVerConstanciaEC.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnVerConstanciaEC.Image = Global.NEducacionContinuaUX.My.Resources.Resources.icons8_analyze_40
+        Me.btnVerConstanciaEC.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnVerConstanciaEC.Location = New System.Drawing.Point(698, 198)
+        Me.btnVerConstanciaEC.Name = "btnVerConstanciaEC"
+        Me.btnVerConstanciaEC.Size = New System.Drawing.Size(101, 55)
+        Me.btnVerConstanciaEC.TabIndex = 79
+        Me.btnVerConstanciaEC.Text = "Ver constancia"
+        Me.btnVerConstanciaEC.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnVerConstanciaEC.UseVisualStyleBackColor = True
+        '
+        'btnSubirConstanciaEC
+        '
+        Me.btnSubirConstanciaEC.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnSubirConstanciaEC.Image = Global.NEducacionContinuaUX.My.Resources.Resources.icons8_add_file_40
+        Me.btnSubirConstanciaEC.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnSubirConstanciaEC.Location = New System.Drawing.Point(588, 198)
+        Me.btnSubirConstanciaEC.Name = "btnSubirConstanciaEC"
+        Me.btnSubirConstanciaEC.Size = New System.Drawing.Size(101, 55)
+        Me.btnSubirConstanciaEC.TabIndex = 78
+        Me.btnSubirConstanciaEC.Text = "Subir constancia"
+        Me.btnSubirConstanciaEC.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnSubirConstanciaEC.UseVisualStyleBackColor = True
+        '
         'cbRFCEC
         '
         Me.cbRFCEC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -1822,7 +1900,7 @@ Partial Class RegistroExternosOldEDC
         Me.cbRegimenFiscalEC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbRegimenFiscalEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbRegimenFiscalEC.FormattingEnabled = True
-        Me.cbRegimenFiscalEC.Location = New System.Drawing.Point(588, 156)
+        Me.cbRegimenFiscalEC.Location = New System.Drawing.Point(589, 132)
         Me.cbRegimenFiscalEC.Name = "cbRegimenFiscalEC"
         Me.cbRegimenFiscalEC.Size = New System.Drawing.Size(409, 24)
         Me.cbRegimenFiscalEC.TabIndex = 73
@@ -1832,7 +1910,7 @@ Partial Class RegistroExternosOldEDC
         Me.cbUsoCFDIFEC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbUsoCFDIFEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbUsoCFDIFEC.FormattingEnabled = True
-        Me.cbUsoCFDIFEC.Location = New System.Drawing.Point(588, 186)
+        Me.cbUsoCFDIFEC.Location = New System.Drawing.Point(589, 162)
         Me.cbUsoCFDIFEC.Name = "cbUsoCFDIFEC"
         Me.cbUsoCFDIFEC.Size = New System.Drawing.Size(409, 24)
         Me.cbUsoCFDIFEC.TabIndex = 72
@@ -1842,7 +1920,7 @@ Partial Class RegistroExternosOldEDC
         Me.lblRegimenFiscalEC.AutoSize = True
         Me.lblRegimenFiscalEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblRegimenFiscalEC.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblRegimenFiscalEC.Location = New System.Drawing.Point(483, 159)
+        Me.lblRegimenFiscalEC.Location = New System.Drawing.Point(484, 135)
         Me.lblRegimenFiscalEC.Name = "lblRegimenFiscalEC"
         Me.lblRegimenFiscalEC.Size = New System.Drawing.Size(100, 16)
         Me.lblRegimenFiscalEC.TabIndex = 75
@@ -1853,7 +1931,7 @@ Partial Class RegistroExternosOldEDC
         Me.lblUsoCFDIEC.AutoSize = True
         Me.lblUsoCFDIEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblUsoCFDIEC.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblUsoCFDIEC.Location = New System.Drawing.Point(483, 189)
+        Me.lblUsoCFDIEC.Location = New System.Drawing.Point(484, 165)
         Me.lblUsoCFDIEC.Name = "lblUsoCFDIEC"
         Me.lblUsoCFDIEC.Size = New System.Drawing.Size(88, 16)
         Me.lblUsoCFDIEC.TabIndex = 74
@@ -1862,7 +1940,7 @@ Partial Class RegistroExternosOldEDC
         'txtTelefonoFEC
         '
         Me.txtTelefonoFEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTelefonoFEC.Location = New System.Drawing.Point(805, 128)
+        Me.txtTelefonoFEC.Location = New System.Drawing.Point(806, 104)
         Me.txtTelefonoFEC.MaxLength = 16
         Me.txtTelefonoFEC.Name = "txtTelefonoFEC"
         Me.txtTelefonoFEC.Size = New System.Drawing.Size(192, 22)
@@ -1879,7 +1957,7 @@ Partial Class RegistroExternosOldEDC
         'txtCPFEC
         '
         Me.txtCPFEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCPFEC.Location = New System.Drawing.Point(588, 128)
+        Me.txtCPFEC.Location = New System.Drawing.Point(589, 104)
         Me.txtCPFEC.MaxLength = 5
         Me.txtCPFEC.Name = "txtCPFEC"
         Me.txtCPFEC.Size = New System.Drawing.Size(125, 22)
@@ -1899,7 +1977,7 @@ Partial Class RegistroExternosOldEDC
         'txtCorreoFEC
         '
         Me.txtCorreoFEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCorreoFEC.Location = New System.Drawing.Point(588, 102)
+        Me.txtCorreoFEC.Location = New System.Drawing.Point(589, 78)
         Me.txtCorreoFEC.Name = "txtCorreoFEC"
         Me.txtCorreoFEC.Size = New System.Drawing.Size(409, 22)
         Me.txtCorreoFEC.TabIndex = 42
@@ -1919,7 +1997,7 @@ Partial Class RegistroExternosOldEDC
         Me.lblTelefonoFEC.AutoSize = True
         Me.lblTelefonoFEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTelefonoFEC.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblTelefonoFEC.Location = New System.Drawing.Point(735, 131)
+        Me.lblTelefonoFEC.Location = New System.Drawing.Point(736, 107)
         Me.lblTelefonoFEC.Name = "lblTelefonoFEC"
         Me.lblTelefonoFEC.Size = New System.Drawing.Size(65, 16)
         Me.lblTelefonoFEC.TabIndex = 57
@@ -1930,7 +2008,7 @@ Partial Class RegistroExternosOldEDC
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label14.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label14.Location = New System.Drawing.Point(482, 88)
+        Me.Label14.Location = New System.Drawing.Point(483, 64)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(86, 16)
         Me.Label14.TabIndex = 49
@@ -1941,7 +2019,7 @@ Partial Class RegistroExternosOldEDC
         Me.lblCPFEC.AutoSize = True
         Me.lblCPFEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCPFEC.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblCPFEC.Location = New System.Drawing.Point(482, 131)
+        Me.lblCPFEC.Location = New System.Drawing.Point(483, 107)
         Me.lblCPFEC.Name = "lblCPFEC"
         Me.lblCPFEC.Size = New System.Drawing.Size(95, 16)
         Me.lblCPFEC.TabIndex = 56
@@ -1962,7 +2040,7 @@ Partial Class RegistroExternosOldEDC
         Me.lblCorreoFEC.AutoSize = True
         Me.lblCorreoFEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCorreoFEC.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblCorreoFEC.Location = New System.Drawing.Point(482, 105)
+        Me.lblCorreoFEC.Location = New System.Drawing.Point(483, 81)
         Me.lblCorreoFEC.Name = "lblCorreoFEC"
         Me.lblCorreoFEC.Size = New System.Drawing.Size(52, 16)
         Me.lblCorreoFEC.TabIndex = 55
@@ -1971,7 +2049,7 @@ Partial Class RegistroExternosOldEDC
         'txtRazonSocialFEC
         '
         Me.txtRazonSocialFEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRazonSocialFEC.Location = New System.Drawing.Point(588, 76)
+        Me.txtRazonSocialFEC.Location = New System.Drawing.Point(589, 52)
         Me.txtRazonSocialFEC.Name = "txtRazonSocialFEC"
         Me.txtRazonSocialFEC.Size = New System.Drawing.Size(409, 22)
         Me.txtRazonSocialFEC.TabIndex = 36
@@ -1989,7 +2067,7 @@ Partial Class RegistroExternosOldEDC
         Me.Label17.AutoSize = True
         Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label17.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label17.Location = New System.Drawing.Point(482, 71)
+        Me.Label17.Location = New System.Drawing.Point(483, 47)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(64, 16)
         Me.Label17.TabIndex = 47
@@ -2325,6 +2403,10 @@ Partial Class RegistroExternosOldEDC
         Me.btnBuscarEC.TabIndex = 76
         Me.btnBuscarEC.UseVisualStyleBackColor = True
         '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        '
         'RegistroExternosOldEDC
         '
         Me.AcceptButton = Me.btnBuscarUX
@@ -2549,7 +2631,14 @@ Partial Class RegistroExternosOldEDC
     Friend WithEvents cbRFCEC As ComboBox
     Friend WithEvents Label12 As Label
     Friend WithEvents cbUX As ComboBox
-    Friend WithEvents Button2 As Button
+    Friend WithEvents btnSubirConstanciaED As Button
     Friend WithEvents btnActualizarDatosFiscales As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnVerConstancia As Button
+    Friend WithEvents Button3 As Button
+    Friend WithEvents btnVerConstanciaED As Button
+    Friend WithEvents OpenFileDialog1 As OpenFileDialog
+    Friend WithEvents btnVerConstanciaa As Button
+    Friend WithEvents btnSubirConstancia As Button
+    Friend WithEvents btnVerConstanciaEC As Button
+    Friend WithEvents btnSubirConstanciaEC As Button
 End Class

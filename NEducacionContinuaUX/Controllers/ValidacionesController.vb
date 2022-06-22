@@ -90,7 +90,7 @@ Public Class ValidacionesController
     ''-----------------------------------------------------LLENA PANEL DE DATOS EXTERNA-------------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
     Sub llenarPanelDatosEX(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As Label, txtEmail As Label, txtCarrera As Label, txtTurno As Label, txtRFC As Label, lblCP As Label, lblRegFiscal As Label, lblUsoCFDI As Label, lblDireccion As Label)
-        Dim tableDatos As DataTable = db.getDataTableFromSQL($"SELECT UPPER(C.nombre + ' ' + E.paterno + ' ' + E.materno)As Nombre, RE.correo, RFC.rfc, REG.ID_Contador, CF.clave_usoCFDI, RE.cp FROM portal_reRFC AS RE
+        Dim tableDatos As DataTable = db.getDataTableFromSQL($"SELECT UPPER(C.nombre + ' ' + E.paterno + ' ' + E.materno)As Nombre, c.correo, RFC.rfc, REG.ID_Contador, CF.clave_usoCFDI, RE.cp FROM portal_reRFC AS RE
                                                                INNER JOIN portal_registroExterno AS E ON E.id_registro = RE.id_registro
                                                                INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
                                                                INNER JOIN ing_res_usoCFDI_regimenFiscal AS RF ON RF.id_res_usoCFDI_regimenFiscal = RE.id_res_cfdi_regimen
@@ -122,10 +122,11 @@ Public Class ValidacionesController
         txtTurno.Text = ""
 
         Dim idRegistro As Integer = db.exectSQLQueryScalar($"SELECT id_registro FROM portal_registroExterno WHERE clave_cliente = '{Matricula}'")
-        Dim direccion As String = db.exectSQLQueryScalar($"SELECT UPPER(direccion + ' Col. ' + colonia + ' ' + M.nombre + ', ' + E.nombre) FROM portal_reRFC AS RE
-                                                           INNER JOIN portal_municipio AS M ON M.id_municipio = RE.id_municipio
+        Dim direccion As String = db.exectSQLQueryScalar($"SELECT UPPER(c.calle + ' Col. ' + c.colonia + ' ' + M.nombre + ', ' + E.nombre) FROM portal_cliente AS C
+													       INNER JOIN portal_registroExterno AS RC ON RC.id_cliente = C.id_cliente
+												           INNER JOIN portal_municipio AS M ON M.id_municipio = C.id_municipio
                                                            INNER JOIN portal_estado AS E ON E.id_estado = M.id_estado
-                                                           WHERE RE.id_registro = {idRegistro} AND RE.activo = 1")
+                                                           WHERE RC.id_registro = {idRegistro} ")
         lblDireccion.Text = direccion
 
         If (txtRFC.Text = "XAXX010101000") Then
@@ -156,7 +157,7 @@ Public Class ValidacionesController
     ''-----------------------------------------------------LLENA PANEL DE DATOS CONGRESO------------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
     Sub llenarPanelDatosEC(Matricula As String, panelDatos As Panel, panelCobros As Panel, txtNombre As Label, txtEmail As Label, txtCarrera As Label, txtTurno As Label, txtRFC As Label, lblCP As Label, lblRegFiscal As Label, lblUsoCFDI As Label, lblDireccion As Label)
-        Dim tableDatos As DataTable = db.getDataTableFromSQL($"SELECT UPPER(C.nombre + ' ' + E.apellido_paterno + ' ' + E.apellido_materno)As Nombre, RE.correo, RFC.rfc, REG.ID_Contador, CF.clave_usoCFDI, RE.cp FROM portal_rcRFC AS RE
+        Dim tableDatos As DataTable = db.getDataTableFromSQL($"SELECT UPPER(C.nombre + ' ' + E.apellido_paterno + ' ' + E.apellido_materno)As Nombre, c.correo, RFC.rfc, REG.ID_Contador, CF.clave_usoCFDI, c.cp FROM portal_rcRFC AS RE
                                                                INNER JOIN portal_registroCongreso AS E ON E.id_registro = RE.id_registro
                                                                INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
                                                                INNER JOIN ing_res_usoCFDI_regimenFiscal AS RF ON RF.id_res_usoCFDI_regimenFiscal = RE.id_res_cfdi_regimen
@@ -187,10 +188,11 @@ Public Class ValidacionesController
         txtTurno.Text = ""
 
         Dim idRegistro As Integer = db.exectSQLQueryScalar($"SELECT id_registro FROM portal_registroCongreso WHERE clave_cliente = '{Matricula}'")
-        Dim direccion As String = db.exectSQLQueryScalar($"SELECT UPPER(direccion + ' Col. ' + colonia + ' ' + M.nombre + ', ' + E.nombre) FROM portal_rcRFC AS RE
-                                                           INNER JOIN portal_municipio AS M ON M.id_municipio = RE.id_municipio
-                                                           INNER JOIN portal_estado AS E ON E.id_estado = M.id_estado
-                                                           WHERE RE.id_registro = {idRegistro} AND RE.activo = 1")
+        Dim direccion As String = db.exectSQLQueryScalar($"SELECT UPPER(c.calle + ' Col. ' + c.colonia + ' ' + M.nombre + ', ' + E.nombre) FROM portal_cliente AS C
+													INNER JOIN portal_registroCongreso AS RC ON RC.id_cliente = C.id_cliente
+													INNER JOIN portal_municipio AS M ON M.id_municipio = C.id_municipio
+                                                    INNER JOIN portal_estado AS E ON E.id_estado = M.id_estado
+                                                    WHERE RC.id_registro = {idRegistro} AND RC.activo = 1")
         lblDireccion.Text = direccion
 
         panelDatos.Visible = True

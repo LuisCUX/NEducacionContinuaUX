@@ -112,6 +112,16 @@ Educacion Continua
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="P:NEducacionContinuaUX.My.Resources.Resources.icons8_add_file_40">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:NEducacionContinuaUX.My.Resources.Resources.icons8_analyze_40">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.login_rounded_up_26px">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
@@ -168,6 +178,16 @@ Educacion Continua
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.search_40px">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:NEducacionContinuaUX.My.Resources.Resources.search_doc">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:NEducacionContinuaUX.My.Resources.Resources.search_doc1">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
