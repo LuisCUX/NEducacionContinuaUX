@@ -8,7 +8,10 @@
         cbTipoReporte2.Items.Add("Global")
         If (User.getPerfil = "Cajero") Then
             cbTIpoReporte.Enabled = False
+            cbTIpoReporte.Text = "Individual"
+            cbTIpoReporte_SelectionChangeCommitted(Nothing, Nothing)
             cbCajero.Enabled = False
+            cbCajero.Text = User.getUsername
         Else
             cbTIpoReporte.Enabled = True
             cbCajero.Enabled = True
@@ -16,7 +19,10 @@
 
         If (User.getPerfil = "Cajero") Then
             cbTipoReporte2.Enabled = False
+            cbTipoReporte2.Text = "Individual"
+            cbTipoReporte2_SelectionChangeCommitted(Nothing, Nothing)
             cbCajero2.Enabled = False
+            cbCajero2.Text = User.getUsername
         Else
             cbTipoReporte2.Enabled = True
             cbCajero2.Enabled = True
