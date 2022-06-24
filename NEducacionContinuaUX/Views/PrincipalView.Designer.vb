@@ -55,6 +55,10 @@ Partial Class PrincipalView
         Me.CancelaciónDeFacturasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CambioDeFormaDePagoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReportesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DEVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CambiarConexiónToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DesarrolloToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ProduccionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip.SuspendLayout()
         Me.MenuStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -76,7 +80,7 @@ Partial Class PrincipalView
         '
         'MenuStrip
         '
-        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CobrosToolStripMenuItem, Me.CatálogosToolStripMenuItem, Me.ExternosToolStripMenuItem, Me.ExternosConPlanToolStripMenuItem, Me.HerramientasToolStripMenuItem, Me.ReportesToolStripMenuItem})
+        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CobrosToolStripMenuItem, Me.CatálogosToolStripMenuItem, Me.ExternosToolStripMenuItem, Me.ExternosConPlanToolStripMenuItem, Me.HerramientasToolStripMenuItem, Me.ReportesToolStripMenuItem, Me.DEVToolStripMenuItem})
         Me.MenuStrip.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip.Name = "MenuStrip"
         Me.MenuStrip.Size = New System.Drawing.Size(1423, 24)
@@ -265,6 +269,33 @@ Partial Class PrincipalView
         Me.ReportesToolStripMenuItem.Size = New System.Drawing.Size(65, 20)
         Me.ReportesToolStripMenuItem.Text = "Reportes"
         '
+        'DEVToolStripMenuItem
+        '
+        Me.DEVToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CambiarConexiónToolStripMenuItem})
+        Me.DEVToolStripMenuItem.Name = "DEVToolStripMenuItem"
+        Me.DEVToolStripMenuItem.Size = New System.Drawing.Size(40, 20)
+        Me.DEVToolStripMenuItem.Text = "DEV"
+        Me.DEVToolStripMenuItem.Visible = False
+        '
+        'CambiarConexiónToolStripMenuItem
+        '
+        Me.CambiarConexiónToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DesarrolloToolStripMenuItem, Me.ProduccionToolStripMenuItem})
+        Me.CambiarConexiónToolStripMenuItem.Name = "CambiarConexiónToolStripMenuItem"
+        Me.CambiarConexiónToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.CambiarConexiónToolStripMenuItem.Text = "Cambiar conexión"
+        '
+        'DesarrolloToolStripMenuItem
+        '
+        Me.DesarrolloToolStripMenuItem.Name = "DesarrolloToolStripMenuItem"
+        Me.DesarrolloToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
+        Me.DesarrolloToolStripMenuItem.Text = "Desarrollo"
+        '
+        'ProduccionToolStripMenuItem
+        '
+        Me.ProduccionToolStripMenuItem.Name = "ProduccionToolStripMenuItem"
+        Me.ProduccionToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
+        Me.ProduccionToolStripMenuItem.Text = "Produccion"
+        '
         'PrincipalView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -326,4 +357,8 @@ Partial Class PrincipalView
     Friend WithEvents AltaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ModificaciónToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CatalogoToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DEVToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CambiarConexiónToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DesarrolloToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ProduccionToolStripMenuItem As ToolStripMenuItem
 End Class
