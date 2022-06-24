@@ -161,7 +161,7 @@ Partial Class RegistroExternosOldEDC
         Me.btnLimpiarEC = New System.Windows.Forms.Button()
         Me.btnSalirEC = New System.Windows.Forms.Button()
         Me.btnGuardarEC = New System.Windows.Forms.Button()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.cbCongresos = New System.Windows.Forms.ComboBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.chbDatosFiscalesEC = New System.Windows.Forms.CheckBox()
         Me.txtClaveEC = New System.Windows.Forms.TextBox()
@@ -1731,7 +1731,7 @@ Partial Class RegistroExternosOldEDC
         Me.tabModDCC.Controls.Add(Me.btnLimpiarEC)
         Me.tabModDCC.Controls.Add(Me.btnSalirEC)
         Me.tabModDCC.Controls.Add(Me.btnGuardarEC)
-        Me.tabModDCC.Controls.Add(Me.ComboBox1)
+        Me.tabModDCC.Controls.Add(Me.cbCongresos)
         Me.tabModDCC.Controls.Add(Me.Label10)
         Me.tabModDCC.Controls.Add(Me.chbDatosFiscalesEC)
         Me.tabModDCC.Controls.Add(Me.txtClaveEC)
@@ -1778,13 +1778,13 @@ Partial Class RegistroExternosOldEDC
         Me.btnGuardarEC.UseVisualStyleBackColor = True
         Me.btnGuardarEC.Visible = False
         '
-        'ComboBox1
+        'cbCongresos
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(459, 18)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(557, 21)
-        Me.ComboBox1.TabIndex = 82
+        Me.cbCongresos.FormattingEnabled = True
+        Me.cbCongresos.Location = New System.Drawing.Point(459, 18)
+        Me.cbCongresos.Name = "cbCongresos"
+        Me.cbCongresos.Size = New System.Drawing.Size(557, 21)
+        Me.cbCongresos.TabIndex = 82
         '
         'Label10
         '
@@ -2592,7 +2592,7 @@ Partial Class RegistroExternosOldEDC
     Friend WithEvents lblMatriculaEXEd As Label
     Friend WithEvents btnLimpiar As Button
     Friend WithEvents tabModDCC As TabPage
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents cbCongresos As ComboBox
     Friend WithEvents Label10 As Label
     Friend WithEvents chbDatosFiscalesEC As CheckBox
     Friend WithEvents txtClaveEC As TextBox

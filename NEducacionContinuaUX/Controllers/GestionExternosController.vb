@@ -5,17 +5,17 @@ Imports BarcodeReader = ZXing.BarcodeReader
 Public Class GestionExternosController
     Dim db As DataBaseService = New DataBaseService()
 
-    Sub loadComboboxExternos(cbEstadoInfo As ComboBox, cbEstadoFiscal As ComboBox, cbEstadoEdit As ComboBox, cbEstadoFiscalEdit As ComboBox, cbExternos As ComboBox, cbEstadoEC As ComboBox, cbEstadoFiscalEC As ComboBox)
+    Sub loadComboboxExternos(cbEstadoInfo As ComboBox, cbEstadoFiscal As ComboBox, cbEstadoEdit As ComboBox, cbEstadoFiscalEdit As ComboBox, cbEstadoEC As ComboBox, cbEstadoFiscalEC As ComboBox)
         Dim tableEstadosI As DataTable = db.getDataTableFromSQL("SELECT id_estado, nombre FROM portal_estado")
         Dim tableEstadosF As DataTable = db.getDataTableFromSQL("SELECT id_estado, nombre FROM portal_estado")
         Dim tableEstadosED As DataTable = db.getDataTableFromSQL("SELECT id_estado, nombre FROM portal_estado")
         Dim tableEstadosFED As DataTable = db.getDataTableFromSQL("SELECT id_estado, nombre FROM portal_estado")
         Dim tableEstadosEC As DataTable = db.getDataTableFromSQL("SELECT id_estado, nombre FROM portal_estado")
         Dim tableEstadosFEC As DataTable = db.getDataTableFromSQL("SELECT id_estado, nombre FROM portal_estado")
-        Dim tableExternos As DataTable = db.getDataTableFromSQL("SELECT CL.clave_cliente, UPPER(C.nombre + ' ' + E.paterno + ' ' + E.materno) As NombreExterno FROM portal_registroExterno AS E
-                                                                 INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
-                                                                 INNER JOIN portal_clave AS CL ON CL.id_cliente = C.id_cliente
-                                                                 ORDER BY C.nombre")
+        'Dim tableExternos As DataTable = db.getDataTableFromSQL("SELECT CL.clave_cliente, UPPER(C.nombre + ' ' + E.paterno + ' ' + E.materno) As NombreExterno FROM portal_registroExterno AS E
+        '                                                         INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
+        '                                                         INNER JOIN portal_clave AS CL ON CL.id_cliente = C.id_cliente
+        '                                                         ORDER BY C.nombre")
 
         ComboboxService.llenarCombobox(cbEstadoInfo, tableEstadosI, "id_estado", "nombre")
         ComboboxService.llenarCombobox(cbEstadoFiscal, tableEstadosF, "id_estado", "nombre")
@@ -23,7 +23,7 @@ Public Class GestionExternosController
         ComboboxService.llenarCombobox(cbEstadoFiscalEdit, tableEstadosFED, "id_estado", "nombre")
         ComboboxService.llenarCombobox(cbEstadoEC, tableEstadosEC, "id_estado", "nombre")
         ComboboxService.llenarCombobox(cbEstadoFiscalEC, tableEstadosFEC, "id_estado", "nombre")
-        ComboboxService.llenarCombobox(cbExternos, tableExternos, "clave_cliente", "NombreExterno")
+        'ComboboxService.llenarCombobox(cbExternos, tableExternos, "clave_cliente", "NombreExterno")
     End Sub
 
     Sub buscaDatosMatriculaUX(Matricula As String, txtNombre As TextBox, txtAp_Pat As TextBox, txtAp_Mat As TextBox, txtdireccion As TextBox, txtColonia As TextBox, cbEstado As ComboBox, cbMunicipio As ComboBox, txtCorreo As TextBox, txtCP As TextBox, txtTelefono As TextBox)

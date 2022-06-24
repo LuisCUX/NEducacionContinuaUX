@@ -8,7 +8,7 @@ Public Class RegistroExternosOldEDC
     Dim combo_filtro As String
 
     Private Sub RegistroExternosEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        re.loadComboboxExternos(cbEstado, cbEstadoF, cbEstadoEd, cbEstadoFEd, cbExterno, cbEstadoEC, cbEstadoFEC)
+        re.loadComboboxExternos(cbEstado, cbEstadoF, cbEstadoEd, cbEstadoFEd, cbEstadoEC, cbEstadoFEC)
         lblMatriculaEXString.Text = re.obtenerNuevaMatricula()
         matriculaExterna = False
     End Sub
@@ -208,16 +208,7 @@ Public Class RegistroExternosOldEDC
         ComboboxService.llenarCombobox(cbMunicipioFEC, tableMunicipiosFEC, "id_municipio", "nombre")
     End Sub
 
-    Private Sub cbExterno_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbExterno.SelectedIndexChanged
-        Try
-            Matricula = cbExterno.SelectedValue
-            re.buscarDatosMatriculaExterna(cbExterno.SelectedValue, txtNombreEd, txtAp_PatEd, txtAp_MatEd, txtDireccionEd, txtColoniaEd, cbEstadoEd, cbMunicipioEd, txtCorreoEd, txtCPEd, txtTelefonoEd,
-                                       txtRFCEd, txtNREd, txtDireccionFEd, txtColoniaFEd, cbEstadoFEd, cbMunicipioFEd, txtCiudadFEd, txtCorreoFEd, txtCPFEd, txtTelefonoFEd, chbDatosFiscalesEdit, panelDatosPersonalesEdit, panelDatosFiscalesEdit, btnGuardarEdit, btnSalirEd, btnLimpiarEd, cbRFCEd)
-            lblMatriculaEXEdString.Text = Matricula
-        Catch ex As Exception
-
-        End Try
-    End Sub
+    ''COMBOBOX ALTA DE EXTERNOS 
 
     Private Sub cbUX_KeyUp(sender As Object, e As KeyEventArgs) Handles cbUX.KeyUp
         If e.KeyCode = Keys.Back Or e.KeyCode = Keys.Delete Then
@@ -279,6 +270,98 @@ Public Class RegistroExternosOldEDC
                 re.buscaDatosMatriculaUX(cbUX.SelectedValue, txtNombre, txtAp_Pat, txtAp_Mat, txtDireccion, txtColonia, cbEstado, cbMunicipio, txtCorreo, txtCP, txtTelefono)
             End If
 
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    ''COMBOBOX EDICION DE EXTERNOS
+    Private Sub cbExterno_KeyUp(sender As Object, e As KeyEventArgs) Handles cbExterno.KeyUp
+        If e.KeyCode = Keys.Back Or e.KeyCode = Keys.Delete Then
+            combo_filtro = cbExterno.Text
+        End If
+    End Sub
+
+    Private Sub cbExterno_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbExterno.KeyPress
+        Me.keypress_textos_cmb(cbExterno, e)
+        Dim kc As KeysConverter = New KeysConverter()
+        Dim encontrar As String = cbExterno.Text
+
+        Dim re As New Regex("[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s\´]", RegexOptions.IgnoreCase)
+        Dim KeyAscii As Short = Asc(e.KeyChar)
+
+        If re.IsMatch(e.KeyChar) = False Then
+
+            combo_filtro += kc.ConvertToString(e.KeyChar)
+            Dim filtro As String = cbExterno.Text
+            Dim tableFiltro As DataTable = db.getDataTableFromSQL($"SELECT CL.clave_cliente, UPPER(C.nombre + ' ' + E.paterno + ' ' + E.materno) As NombreExterno FROM portal_registroExterno AS E
+                                                                 INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
+                                                                 INNER JOIN portal_clave AS CL ON CL.id_cliente = C.id_cliente
+                                                                 WHERE (C.nombre + ' ' + E.paterno + ' ' + E.materno) like '%{filtro}%'")
+            ComboboxService.llenarCombobox(cbExterno, tableFiltro, "clave_cliente", "NombreExterno")
+            cbExterno.SelectedValue = -1
+            cbExterno.Text = combo_filtro
+            cbExterno.DroppedDown = True
+            cbExterno.SelectionStart = encontrar.Length
+            cbExterno.SelectionLength = cbExterno.Text.Length - cbExterno.SelectionStart
+        Else
+            If Asc(e.KeyChar) = Keys.Space Then
+                combo_filtro += " "
+            End If
+        End If
+    End Sub
+
+    Private Sub cbExterno_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbExterno.SelectionChangeCommitted
+        Try
+            Matricula = cbExterno.SelectedValue
+            re.buscarDatosMatriculaExterna(cbExterno.SelectedValue, txtNombreEd, txtAp_PatEd, txtAp_MatEd, txtDireccionEd, txtColoniaEd, cbEstadoEd, cbMunicipioEd, txtCorreoEd, txtCPEd, txtTelefonoEd,
+                                       txtRFCEd, txtNREd, txtDireccionFEd, txtColoniaFEd, cbEstadoFEd, cbMunicipioFEd, txtCiudadFEd, txtCorreoFEd, txtCPFEd, txtTelefonoFEd, chbDatosFiscalesEdit, panelDatosPersonalesEdit, panelDatosFiscalesEdit, btnGuardarEdit, btnSalirEd, btnLimpiarEd, cbRFCEd)
+            lblMatriculaEXEdString.Text = Matricula
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    ''COMBOBOX EDICION DE CONGRESOS
+    Private Sub cbCongresos_KeyUp(sender As Object, e As KeyEventArgs) Handles cbCongresos.KeyUp
+        If e.KeyCode = Keys.Back Or e.KeyCode = Keys.Delete Then
+            combo_filtro = cbCongresos.Text
+        End If
+    End Sub
+
+    Private Sub cbCongresos_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbCongresos.KeyPress
+        Me.keypress_textos_cmb(cbCongresos, e)
+        Dim kc As KeysConverter = New KeysConverter()
+        Dim encontrar As String = cbCongresos.Text
+
+        Dim re As New Regex("[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s\´]", RegexOptions.IgnoreCase)
+        Dim KeyAscii As Short = Asc(e.KeyChar)
+
+        If re.IsMatch(e.KeyChar) = False Then
+
+            combo_filtro += kc.ConvertToString(e.KeyChar)
+            Dim filtro As String = cbCongresos.Text
+            Dim tableFiltro As DataTable = db.getDataTableFromSQL($"SELECT CL.clave_cliente, UPPER(C.nombre + ' ' + E.apellido_paterno + ' ' + E.apellido_materno) As NombreExterno FROM portal_registroCongreso AS E
+                                                                 INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
+                                                                 INNER JOIN portal_clave AS CL ON CL.id_cliente = C.id_cliente
+                                                                 WHERE (C.nombre + ' ' + E.apellido_paterno + ' ' + E.apellido_materno) like '%{filtro}%'")
+            ComboboxService.llenarCombobox(cbCongresos, tableFiltro, "clave_cliente", "NombreExterno")
+            cbCongresos.SelectedValue = -1
+            cbCongresos.Text = combo_filtro
+            cbCongresos.DroppedDown = True
+            cbCongresos.SelectionStart = encontrar.Length
+            cbCongresos.SelectionLength = cbCongresos.Text.Length - cbCongresos.SelectionStart
+        Else
+            If Asc(e.KeyChar) = Keys.Space Then
+                combo_filtro += " "
+            End If
+        End If
+    End Sub
+
+    Private Sub cbCongresos_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbCongresos.SelectionChangeCommitted
+        Try
+            Matricula = cbCongresos.SelectedValue
+            re.buscarDatosMatriculaEc(Matricula, txtNombreEC, txtApPaternoEC, txtApMaternoEC, txtDireccionEC, txtColoniaEC, cbEstadoEC, cbMunicipioEC, txtCorreoEC, txtCPEC, txtTelefonoEC,
+                                  txtRFCFEC, txtRazonSocialFEC, txtDireccionFEC, txtColoniaFEC, cbEstadoFEC, cbMunicipioFEC, txtCiudadFEC, txtCorreoFEC, txtCPFEC, txtTelefonoFEC, chbDatosFiscalesEC, panelDatosPersonalesEC, panelDatosFiscalesEC, btnGuardarEC, btnSalirEC, btnLimpiarEC, cbRFCEC)
         Catch ex As Exception
 
         End Try
