@@ -1,4 +1,8 @@
-﻿Public Class GestionExternosController
+﻿Imports Spire.Pdf
+Imports ZXing
+Imports ZXing.Presentation
+Imports BarcodeReader = ZXing.BarcodeReader
+Public Class GestionExternosController
     Dim db As DataBaseService = New DataBaseService()
 
     Sub loadComboboxExternos(cbEstadoInfo As ComboBox, cbEstadoFiscal As ComboBox, cbEstadoEdit As ComboBox, cbEstadoFiscalEdit As ComboBox, cbExternos As ComboBox, cbEstadoEC As ComboBox, cbEstadoFiscalEC As ComboBox)
@@ -525,40 +529,34 @@
         End If
     End Sub
 
-    'Sub leerQR(RFC As String)
-    '    If (Not System.IO.Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal")) Then
-    '        System.IO.Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal")
-    '    End If
+    Sub leerQR(RFC As String)
+        If (Not System.IO.Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal")) Then
+            System.IO.Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal")
+        End If
 
-    '    Try
-    '        If ($"\\{EnviromentService.documentosIP}\Documentos\ConstanciaFiscal\{RFC}.pdf") Then
+        Try
+            My.Computer.FileSystem.CopyFile($"\\{EnviromentService.documentosIP}\Documentos\ConstanciaFiscal\{RFC}.pdf",
+            Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal\" & RFC & ".pdf",
+            FileIO.UIOption.AllDialogs,
+            FileIO.UICancelOption.ThrowException)
 
-    '            My.Computer.FileSystem.CopyFile($"\\{EnviromentService.documentosIP}\Documentos\ConstanciaFiscal\{RFC}.pdf",
-    '            Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal\" & RFC & ".pdf",
-    '            FileIO.UIOption.AllDialogs,
-    '            FileIO.UICancelOption.ThrowException)
-
-    '            Dim doc As PdfDocument = New PdfDocument
-    '            doc.LoadFromFile(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal\" & RFC & ".pdf")
+            Dim doc As PdfDocument = New PdfDocument
+            doc.LoadFromFile(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal\" & RFC & ".pdf")
 
 
-    '            Dim reader = New BarcodeReader()
-    '            Dim barcodeBitmap As New Bitmap(doc.SaveAsImage(0))
+            Dim reader = New BarcodeReader()
+            Dim barcodeBitmap As New Bitmap(doc.SaveAsImage(0))
 
 
-    '            Dim Result = reader.Decode(barcodeBitmap)
+            Dim Result = reader.Decode(barcodeBitmap)
 
-    '            If Result IsNot Nothing Then
+            If Result IsNot Nothing Then
+                Process.Start(Result.Text.ToString())
+                Dim urlQR = Result.Text.ToString()
+            End If
 
-    '                Process.Start(Result.Text.ToString())
-    '                Dim urlQR = Result.Text.ToString()
-
-    '            End If
-
-    '        End If
-
-    '    Catch ex As Exception
-    '        MsgBox(ex.ToString, MsgBoxStyle.Critical, "Error")
-    '    End Try
-    'End Sub
+        Catch ex As Exception
+            MsgBox(ex.ToString, MsgBoxStyle.Critical, "Error")
+        End Try
+    End Sub
 End Class

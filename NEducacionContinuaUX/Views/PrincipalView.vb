@@ -111,4 +111,14 @@
         RegistroTipoPagosOpcionales.MdiParent = Me
         RegistroTipoPagosOpcionales.Show()
     End Sub
+
+    Private Sub DesarrolloToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DesarrolloToolStripMenuItem.Click
+        EnviromentService.getEnviroment("dev")
+        MessageBox.Show("Ambiente cambiado a desarrollo")
+    End Sub
+
+    Private Sub ProduccionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProduccionToolStripMenuItem.Click
+        EnviromentService.getEnviroment("prod")
+        MessageBox.Show("Ambiente cambiado a producción")
+    End Sub
 End Class

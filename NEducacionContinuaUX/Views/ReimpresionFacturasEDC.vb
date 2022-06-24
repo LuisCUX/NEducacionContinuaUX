@@ -49,12 +49,14 @@ Public Class ReimpresionFacturasEDC
 
     Private Sub btnBuscarFolio_Click(sender As Object, e As EventArgs) Handles btnBuscarFolio.Click
         Folio = txtFolio.Text
-        IDXML = db.exectSQLQueryScalar($"SELECT * FROM ing_xmlTimbrados WHERE Folio = '{Folio}'")
+        IDXML = db.exectSQLQueryScalar($"SELECT ID FROM ing_xmlTimbrados WHERE Folio = '{Folio}'")
         If (IDXML <= 0) Then
             MessageBox.Show("El folio ingresado no existe, ingrese un folio valido")
         Else
             Dim tableConceptos As DataTable = db.getDataTableFromSQL($"SELECT Nombre_Concepto, Cantidad, PrecioUnitario, IVA, Descuento, Total FROM ing_xmlTimbradosConceptos WHERE XMLID = {IDXML}")
-            GridConceptos.DataSource = tableConceptos
+            For Each item As DataRow In tableConceptos.Rows
+                GridConceptos.Rows.Add(item("Nombre_Concepto"), item("Cantidad"), Format(item("PrecioUnitario"), "#####0.00"), Format(item("IVA"), "#####0.00"), Format(item("Descuento"), "#####0.00"), Format(item("Total"), "#####0.00"))
+            Next
             panelFactura.Visible = True
         End If
     End Sub
@@ -103,7 +105,7 @@ Public Class ReimpresionFacturasEDC
 
         Dim tableIDConceptos As DataTable = db.getDataTableFromSQL($"SELECT DISTINCT Clave_Concepto FROM ing_xmlTimbradosConceptos WHERE XMLID = {IDXML}")
         For Each item As DataRow In tableIDConceptos.Rows
-            If (item("Clave_Concepto") <> 1 And item("Clave_Concepto") <> 2) Then
+            If (item("Clave_Concepto") = 1 Or item("Clave_Concepto") = 2) Then
                 esEvento = True
             End If
         Next

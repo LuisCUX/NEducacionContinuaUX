@@ -739,4 +739,8 @@ Public Class RegistroExternosOldEDC
         End If
         re.abrirConstancia(txtRFCFEC.Text)
     End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        re.leerQR(txtRFCEd.Text)
+    End Sub
 End Class
