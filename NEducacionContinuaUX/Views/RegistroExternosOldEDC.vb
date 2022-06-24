@@ -740,7 +740,15 @@ Public Class RegistroExternosOldEDC
         re.abrirConstancia(txtRFCFEC.Text)
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Sub btnLeerQREd_Click(sender As Object, e As EventArgs) Handles btnLeerQREd.Click
         re.leerQR(txtRFCEd.Text)
+    End Sub
+
+    Private Sub btnLeerQR_Click(sender As Object, e As EventArgs) Handles btnLeerQR.Click
+        re.leerQR(txtRFC.Text)
+    End Sub
+
+    Private Sub btnLeerQREC_Click(sender As Object, e As EventArgs) Handles btnLeerQREC.Click
+        re.leerQR(txtRFCFEC.Text)
     End Sub
 End Class

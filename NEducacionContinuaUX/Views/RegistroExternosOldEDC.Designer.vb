@@ -31,6 +31,7 @@ Partial Class RegistroExternosOldEDC
         Me.btnGuardarN = New System.Windows.Forms.Button()
         Me.chbDatosFiscales = New System.Windows.Forms.CheckBox()
         Me.panelDatosFiscales = New System.Windows.Forms.Panel()
+        Me.btnLeerQR = New System.Windows.Forms.Button()
         Me.btnVerConstanciaa = New System.Windows.Forms.Button()
         Me.btnSubirConstancia = New System.Windows.Forms.Button()
         Me.cbRegimenFiscal = New System.Windows.Forms.ComboBox()
@@ -97,7 +98,7 @@ Partial Class RegistroExternosOldEDC
         Me.txtMatriculaEd = New System.Windows.Forms.TextBox()
         Me.lblMatriculaEd = New System.Windows.Forms.Label()
         Me.panelDatosFiscalesEdit = New System.Windows.Forms.Panel()
-        Me.Button3 = New System.Windows.Forms.Button()
+        Me.btnLeerQREd = New System.Windows.Forms.Button()
         Me.btnVerConstanciaED = New System.Windows.Forms.Button()
         Me.btnSubirConstanciaED = New System.Windows.Forms.Button()
         Me.btnActualizarDatosFiscales = New System.Windows.Forms.Button()
@@ -166,6 +167,7 @@ Partial Class RegistroExternosOldEDC
         Me.txtClaveEC = New System.Windows.Forms.TextBox()
         Me.lblClaveEC = New System.Windows.Forms.Label()
         Me.panelDatosFiscalesEC = New System.Windows.Forms.Panel()
+        Me.btnLeerQREC = New System.Windows.Forms.Button()
         Me.btnVerConstanciaEC = New System.Windows.Forms.Button()
         Me.btnSubirConstanciaEC = New System.Windows.Forms.Button()
         Me.cbRFCEC = New System.Windows.Forms.ComboBox()
@@ -315,6 +317,7 @@ Partial Class RegistroExternosOldEDC
         '
         'panelDatosFiscales
         '
+        Me.panelDatosFiscales.Controls.Add(Me.btnLeerQR)
         Me.panelDatosFiscales.Controls.Add(Me.btnVerConstanciaa)
         Me.panelDatosFiscales.Controls.Add(Me.btnSubirConstancia)
         Me.panelDatosFiscales.Controls.Add(Me.cbRegimenFiscal)
@@ -349,6 +352,19 @@ Partial Class RegistroExternosOldEDC
         Me.panelDatosFiscales.TabIndex = 1
         Me.panelDatosFiscales.Visible = False
         '
+        'btnLeerQR
+        '
+        Me.btnLeerQR.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnLeerQR.Image = Global.NEducacionContinuaUX.My.Resources.Resources.icons8_qr_code_40
+        Me.btnLeerQR.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnLeerQR.Location = New System.Drawing.Point(831, 191)
+        Me.btnLeerQR.Name = "btnLeerQR"
+        Me.btnLeerQR.Size = New System.Drawing.Size(104, 71)
+        Me.btnLeerQR.TabIndex = 79
+        Me.btnLeerQR.Text = "Datos de constancia"
+        Me.btnLeerQR.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnLeerQR.UseVisualStyleBackColor = True
+        '
         'btnVerConstanciaa
         '
         Me.btnVerConstanciaa.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
@@ -356,7 +372,7 @@ Partial Class RegistroExternosOldEDC
         Me.btnVerConstanciaa.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btnVerConstanciaa.Location = New System.Drawing.Point(724, 191)
         Me.btnVerConstanciaa.Name = "btnVerConstanciaa"
-        Me.btnVerConstanciaa.Size = New System.Drawing.Size(101, 55)
+        Me.btnVerConstanciaa.Size = New System.Drawing.Size(101, 71)
         Me.btnVerConstanciaa.TabIndex = 78
         Me.btnVerConstanciaa.Text = "Ver constancia"
         Me.btnVerConstanciaa.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -369,7 +385,7 @@ Partial Class RegistroExternosOldEDC
         Me.btnSubirConstancia.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btnSubirConstancia.Location = New System.Drawing.Point(614, 191)
         Me.btnSubirConstancia.Name = "btnSubirConstancia"
-        Me.btnSubirConstancia.Size = New System.Drawing.Size(101, 55)
+        Me.btnSubirConstancia.Size = New System.Drawing.Size(101, 71)
         Me.btnSubirConstancia.TabIndex = 77
         Me.btnSubirConstancia.Text = "Subir constancia"
         Me.btnSubirConstancia.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -1044,7 +1060,7 @@ Partial Class RegistroExternosOldEDC
         '
         'panelDatosFiscalesEdit
         '
-        Me.panelDatosFiscalesEdit.Controls.Add(Me.Button3)
+        Me.panelDatosFiscalesEdit.Controls.Add(Me.btnLeerQREd)
         Me.panelDatosFiscalesEdit.Controls.Add(Me.btnVerConstanciaED)
         Me.panelDatosFiscalesEdit.Controls.Add(Me.btnSubirConstanciaED)
         Me.panelDatosFiscalesEdit.Controls.Add(Me.btnActualizarDatosFiscales)
@@ -1082,24 +1098,27 @@ Partial Class RegistroExternosOldEDC
         Me.panelDatosFiscalesEdit.TabIndex = 2
         Me.panelDatosFiscalesEdit.Visible = False
         '
-        'Button3
+        'btnLeerQREd
         '
-        Me.Button3.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
-        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button3.Location = New System.Drawing.Point(904, 199)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(93, 55)
-        Me.Button3.TabIndex = 77
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.btnLeerQREd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnLeerQREd.Image = Global.NEducacionContinuaUX.My.Resources.Resources.icons8_qr_code_40
+        Me.btnLeerQREd.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnLeerQREd.Location = New System.Drawing.Point(904, 191)
+        Me.btnLeerQREd.Name = "btnLeerQREd"
+        Me.btnLeerQREd.Size = New System.Drawing.Size(93, 74)
+        Me.btnLeerQREd.TabIndex = 77
+        Me.btnLeerQREd.Text = "Datos de constancia"
+        Me.btnLeerQREd.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnLeerQREd.UseVisualStyleBackColor = True
         '
         'btnVerConstanciaED
         '
         Me.btnVerConstanciaED.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnVerConstanciaED.Image = Global.NEducacionContinuaUX.My.Resources.Resources.icons8_analyze_40
         Me.btnVerConstanciaED.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnVerConstanciaED.Location = New System.Drawing.Point(795, 199)
+        Me.btnVerConstanciaED.Location = New System.Drawing.Point(797, 191)
         Me.btnVerConstanciaED.Name = "btnVerConstanciaED"
-        Me.btnVerConstanciaED.Size = New System.Drawing.Size(101, 55)
+        Me.btnVerConstanciaED.Size = New System.Drawing.Size(101, 74)
         Me.btnVerConstanciaED.TabIndex = 76
         Me.btnVerConstanciaED.Text = "Ver constancia"
         Me.btnVerConstanciaED.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -1110,9 +1129,9 @@ Partial Class RegistroExternosOldEDC
         Me.btnSubirConstanciaED.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnSubirConstanciaED.Image = Global.NEducacionContinuaUX.My.Resources.Resources.icons8_add_file_40
         Me.btnSubirConstanciaED.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnSubirConstanciaED.Location = New System.Drawing.Point(685, 199)
+        Me.btnSubirConstanciaED.Location = New System.Drawing.Point(685, 191)
         Me.btnSubirConstanciaED.Name = "btnSubirConstanciaED"
-        Me.btnSubirConstanciaED.Size = New System.Drawing.Size(101, 55)
+        Me.btnSubirConstanciaED.Size = New System.Drawing.Size(101, 74)
         Me.btnSubirConstanciaED.TabIndex = 75
         Me.btnSubirConstanciaED.Text = "Subir constancia"
         Me.btnSubirConstanciaED.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -1123,9 +1142,9 @@ Partial Class RegistroExternosOldEDC
         Me.btnActualizarDatosFiscales.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnActualizarDatosFiscales.Image = Global.NEducacionContinuaUX.My.Resources.Resources.refresh_30px
         Me.btnActualizarDatosFiscales.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnActualizarDatosFiscales.Location = New System.Drawing.Point(581, 199)
+        Me.btnActualizarDatosFiscales.Location = New System.Drawing.Point(581, 191)
         Me.btnActualizarDatosFiscales.Name = "btnActualizarDatosFiscales"
-        Me.btnActualizarDatosFiscales.Size = New System.Drawing.Size(93, 55)
+        Me.btnActualizarDatosFiscales.Size = New System.Drawing.Size(93, 74)
         Me.btnActualizarDatosFiscales.TabIndex = 74
         Me.btnActualizarDatosFiscales.Text = "Actualizar datos"
         Me.btnActualizarDatosFiscales.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -1812,6 +1831,7 @@ Partial Class RegistroExternosOldEDC
         '
         'panelDatosFiscalesEC
         '
+        Me.panelDatosFiscalesEC.Controls.Add(Me.btnLeerQREC)
         Me.panelDatosFiscalesEC.Controls.Add(Me.btnVerConstanciaEC)
         Me.panelDatosFiscalesEC.Controls.Add(Me.btnSubirConstanciaEC)
         Me.panelDatosFiscalesEC.Controls.Add(Me.cbRFCEC)
@@ -1848,14 +1868,27 @@ Partial Class RegistroExternosOldEDC
         Me.panelDatosFiscalesEC.TabIndex = 74
         Me.panelDatosFiscalesEC.Visible = False
         '
+        'btnLeerQREC
+        '
+        Me.btnLeerQREC.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnLeerQREC.Image = Global.NEducacionContinuaUX.My.Resources.Resources.icons8_qr_code_40
+        Me.btnLeerQREC.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnLeerQREC.Location = New System.Drawing.Point(806, 192)
+        Me.btnLeerQREC.Name = "btnLeerQREC"
+        Me.btnLeerQREC.Size = New System.Drawing.Size(104, 71)
+        Me.btnLeerQREC.TabIndex = 80
+        Me.btnLeerQREC.Text = "Datos de constancia"
+        Me.btnLeerQREC.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnLeerQREC.UseVisualStyleBackColor = True
+        '
         'btnVerConstanciaEC
         '
         Me.btnVerConstanciaEC.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnVerConstanciaEC.Image = Global.NEducacionContinuaUX.My.Resources.Resources.icons8_analyze_40
         Me.btnVerConstanciaEC.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnVerConstanciaEC.Location = New System.Drawing.Point(698, 198)
+        Me.btnVerConstanciaEC.Location = New System.Drawing.Point(698, 192)
         Me.btnVerConstanciaEC.Name = "btnVerConstanciaEC"
-        Me.btnVerConstanciaEC.Size = New System.Drawing.Size(101, 55)
+        Me.btnVerConstanciaEC.Size = New System.Drawing.Size(101, 71)
         Me.btnVerConstanciaEC.TabIndex = 79
         Me.btnVerConstanciaEC.Text = "Ver constancia"
         Me.btnVerConstanciaEC.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -1866,9 +1899,9 @@ Partial Class RegistroExternosOldEDC
         Me.btnSubirConstanciaEC.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnSubirConstanciaEC.Image = Global.NEducacionContinuaUX.My.Resources.Resources.icons8_add_file_40
         Me.btnSubirConstanciaEC.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnSubirConstanciaEC.Location = New System.Drawing.Point(588, 198)
+        Me.btnSubirConstanciaEC.Location = New System.Drawing.Point(588, 192)
         Me.btnSubirConstanciaEC.Name = "btnSubirConstanciaEC"
-        Me.btnSubirConstanciaEC.Size = New System.Drawing.Size(101, 55)
+        Me.btnSubirConstanciaEC.Size = New System.Drawing.Size(101, 71)
         Me.btnSubirConstanciaEC.TabIndex = 78
         Me.btnSubirConstanciaEC.Text = "Subir constancia"
         Me.btnSubirConstanciaEC.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -2634,11 +2667,13 @@ Partial Class RegistroExternosOldEDC
     Friend WithEvents btnSubirConstanciaED As Button
     Friend WithEvents btnActualizarDatosFiscales As Button
     Friend WithEvents btnVerConstancia As Button
-    Friend WithEvents Button3 As Button
+    Friend WithEvents btnLeerQREd As Button
     Friend WithEvents btnVerConstanciaED As Button
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
     Friend WithEvents btnVerConstanciaa As Button
     Friend WithEvents btnSubirConstancia As Button
     Friend WithEvents btnVerConstanciaEC As Button
     Friend WithEvents btnSubirConstanciaEC As Button
+    Friend WithEvents btnLeerQR As Button
+    Friend WithEvents btnLeerQREC As Button
 End Class
