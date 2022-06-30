@@ -117,8 +117,9 @@ Public Class XmlService40
     ''------------------------------------------CADENA NOTA DE CREDITO------------------------------------------''
     ''------------------------------------------------------------------------------------------------------------------------------''
 
-    Function cadenaNotaCredito(listaConceptos As List(Of Concepto), listaUUID As List(Of String), montoTotal As String, subtotal As String, descuento As String, fecha As String, folio As String, serie As String, noCertificado As String, RFC As String, NombreCompleto As String, usoCFDI As String, CP As String, RegFiscal As String)
+    Function cadenaNotaCredito(listaConceptos As List(Of Concepto), listaUUID As List(Of String), montoTotal As String, subtotal As String, descuento As String, fecha As String, folio As String, serie As String, noCertificado As String, RFC As String, NombreCompleto As String, usoCFDI As String, CP As String, RegFiscal As String, TotalIVA As String)
         Dim Descuentotxt As String
+        Dim bandIVA = False
         If (descuento <> 0) Then
             Descuentotxt = $"|{descuento.ToString()}|"
         Else
@@ -127,7 +128,7 @@ Public Class XmlService40
 
         Dim cpemisor As String
         If (System.Diagnostics.Debugger.IsAttached) Then
-            cpemisor = EnviromentService.CP
+            cpemisor = "72000"
         Else
             cpemisor = EnviromentService.CP
         End If
@@ -147,17 +148,32 @@ Public Class XmlService40
         End If
 
 
-        Dim cadena As String = $"||4.0|{serie}|{folio}|{fecha}|99|{noCertificado}|{CDec(montoTotal)}|{CDec(descuento)}|MXN|{CDec(subtotal)}|E|01|PUE|{cpemisor}|01"
+        Dim cadena As String = $"||4.0|{serie}|{folio}|{fecha}|99|{noCertificado}|{Format(CDec(subtotal), "#####0.00")}|MXN|{Format(CDec(montoTotal), "#####0.00")}|E|01|PUE|{cpemisor}|01"
         For Each item As String In listaUUID
             cadena = $"{cadena}|{item}"
         Next
         cadena = $"{cadena}|{EnviromentService.RFCEDC}|{nombreEmisor}|{EnviromentService.RegimenFiscal}|{RFC}|{NombreCompleto}|{cpreceptor}|{RegFiscal}|{usoCFDI}"
 
         For Each concepto As Concepto In listaConceptos
-            cadena = $"{cadena}|{concepto.cveClase}|{concepto.Cantidad}|ACT|actividad|{concepto.NombreConcepto}|{concepto.costoUnitario}|{concepto.costoTotal}|{concepto.descuento}|01"
+            Dim objetoimp As String
+            If ((concepto.absorbeIVA = False And concepto.IVAExento = False And concepto.consideraIVA = False)) Then
+                objetoimp = "01"
+            ElseIf (concepto.absorbeIVA = True Or concepto.consideraIVA = True Or concepto.IVAExento = True) Then
+                objetoimp = "02"
+            End If
+            cadena = $"{cadena}|{concepto.cveClase}|{concepto.Cantidad}|ACT|actividad|{concepto.NombreConcepto}|{concepto.costoUnitario}|{concepto.costoTotal}|{objetoimp}"
+            If (concepto.absorbeIVA = True Or concepto.consideraIVA = True) Then
+                bandIVA = True
+                cadena = "" & cadena & "|" & CDec(concepto.costoBase) & "|002|Tasa|0.160000|" & concepto.costoIVATotal & ""
+            ElseIf (concepto.IVAExento = True) Then
+                cadena = "" & cadena & "|" & (CDec(concepto.costoTotal) + CDec(concepto.costoIVATotal)) & "|002|Exento"
+            End If
         Next
-
-        cadena = $"{cadena}||"
+        If (bandIVA = True) Then
+            cadena = "" & cadena & "|" & subtotal & "|002|Tasa|0.160000|" & TotalIVA.ToString() & "|" & TotalIVA.ToString() & "||"
+        Else
+            cadena = "" & cadena & "||"
+        End If
         Return cadena
     End Function
 
@@ -421,12 +437,13 @@ Public Class XmlService40
     ''------------------------------------------------------------------------------------------------------------------------------''
 
     Function xmlNotaCredito(Total As String, SubTotal As String, Descuento As String, Fecha As String, Sello As String, Certificado As String, Folio As String, Serie As String, NoCertificado As String,
-                            RFC As String, NombreCompleto As String, UsoCFDI As String, listaConceptos As List(Of Concepto), listaUUID As List(Of String), RegFiscal As String, Cp As String) As String
+                            RFC As String, NombreCompleto As String, UsoCFDI As String, listaConceptos As List(Of Concepto), listaUUID As List(Of String), RegFiscal As String, Cp As String, TotalIVA As String) As String
         Dim xml As String
         Dim config As New XmlWriterSettings
         config.Indent = True
         config.Encoding = Encoding.UTF8
         config.Async = True
+        Dim IVABand As Boolean = False
         Dim archivo_xml As String = "C:\Users\Luis\Desktop\wea.xml"
         Using sw As New StringWriter()
             Using wr As XmlWriter = XmlWriter.Create(sw, config)
@@ -440,15 +457,13 @@ Public Class XmlService40
                 wr.WriteAttributeString("Exportacion", Nothing, "01")
                 wr.WriteAttributeString("Total", Nothing, Format(CDec(Total), "#####0.00"))
                 wr.WriteAttributeString("SubTotal", Nothing, Format(CDec(SubTotal), "#####0.00"))
-                wr.WriteAttributeString("Descuento", Nothing, Format(CDec(Descuento), "#####0.00"))
                 wr.WriteAttributeString("Fecha", Nothing, Fecha)
                 wr.WriteAttributeString("Sello", Nothing, Sello)
                 wr.WriteAttributeString("Certificado", Nothing, Certificado)
                 If (System.Diagnostics.Debugger.IsAttached) Then
                     wr.WriteAttributeString("LugarExpedicion", Nothing, "72000")
                 Else
-                    wr.WriteAttributeString("LugarExpedicion", Nothing, "72000")
-                    ''wr.WriteAttributeString("LugarExpedicion", Nothing, ConfigurationSettings.AppSettings.Get("CP").ToString())
+                    wr.WriteAttributeString("LugarExpedicion", Nothing, EnviromentService.CP)
                 End If
                 wr.WriteAttributeString("MetodoPago", Nothing, "PUE")
                 wr.WriteAttributeString("FormaPago", Nothing, "99")
@@ -500,11 +515,48 @@ Public Class XmlService40
                     wr.WriteAttributeString("Descripcion", Nothing, concepto.NombreConcepto)
                     wr.WriteAttributeString("ValorUnitario", Nothing, concepto.costoUnitario)
                     wr.WriteAttributeString("Importe", Nothing, concepto.costoTotal)
-                    wr.WriteAttributeString("Descuento", Nothing, concepto.descuento)
-                    wr.WriteAttributeString("ObjetoImp", Nothing, "01")
+                    'wr.WriteAttributeString("Descuento", Nothing, concepto.descuento)
+                    If ((concepto.absorbeIVA = False And concepto.IVAExento = False And concepto.consideraIVA = False)) Then
+                        wr.WriteAttributeString("ObjetoImp", Nothing, "01")
+                    Else
+                        wr.WriteAttributeString("ObjetoImp", Nothing, "02")
+                    End If
+                    If (concepto.absorbeIVA = True Or concepto.IVAExento = True Or concepto.consideraIVA = True) Then
+                        wr.WriteStartElement("cfdi", "Impuestos", Nothing) ''NODO IMPUESTOS START
+                        wr.WriteStartElement("cfdi", "Traslados", Nothing) ''NODO TRASLADOS START
+                        wr.WriteStartElement("cfdi", "Traslado", Nothing) ''NODO TRASLADO START
+                        wr.WriteAttributeString("Base", Nothing, (CDec(concepto.costoBase)).ToString())
+                        wr.WriteAttributeString("Impuesto", Nothing, "002")
+                        If (concepto.IVAExento = True And concepto.absorbeIVA = False And concepto.consideraIVA = False) Then
+                            wr.WriteAttributeString("TipoFactor", Nothing, "Exento")
+                        ElseIf (concepto.IVAExento = False And (concepto.absorbeIVA = True Or concepto.consideraIVA = True)) Then
+                            IVABand = True
+                            wr.WriteAttributeString("TipoFactor", Nothing, "Tasa")
+                            wr.WriteAttributeString("TasaOCuota", Nothing, "0.160000")
+                            wr.WriteAttributeString("Importe", Nothing, concepto.costoIVATotal)
+                        End If
+
+                        wr.WriteEndElement() ''NODO TRASLADO END
+                        wr.WriteEndElement() ''NODO TRASLADOS END
+                        wr.WriteEndElement() ''NODO IMPUESTOS END
+                    End If
                     wr.WriteEndElement()
                 Next
                 wr.WriteEndElement()
+                If (IVABand = True) Then
+                    wr.WriteStartElement("cfdi", "Impuestos", Nothing) ''NODO IMPUESTOS START
+                    wr.WriteAttributeString("TotalImpuestosTrasladados", Nothing, TotalIVA)
+                    wr.WriteStartElement("cfdi", "Traslados", Nothing) ''NODO TRASLADOS START
+                    wr.WriteStartElement("cfdi", "Traslado", Nothing) ''NODO TRASLADO START
+                    wr.WriteAttributeString("Impuesto", Nothing, "002")
+                    wr.WriteAttributeString("TipoFactor", Nothing, "Tasa")
+                    wr.WriteAttributeString("TasaOCuota", Nothing, "0.160000")
+                    wr.WriteAttributeString("Base", Nothing, SubTotal)
+                    wr.WriteAttributeString("Importe", Nothing, TotalIVA)
+                    wr.WriteEndElement() ''NODO TRASLADO END
+                    wr.WriteEndElement() ''NODO TRASLADOS END
+                    wr.WriteEndElement() ''NODO IMPUESTOS END
+                End If
             End Using
             xml = sw.ToString()
         End Using

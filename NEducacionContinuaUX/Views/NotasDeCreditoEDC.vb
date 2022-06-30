@@ -38,10 +38,18 @@ Public Class NotasDeCreditoEDC
                 Exit Sub
             End If
         Next
-
+        Dim IVA As Decimal = db.exectSQLQueryScalar($"select IVA from ing_xmlTimbradosConceptos WHERE ID = {ID}")
         Dim Descripcion As String
-        Dim Total As Decimal = CDec(txtMonto.Text)
-        Dim IVA As Decimal = 0.00
+        Dim Total As Decimal
+        Dim IVAFinal As Decimal
+        Dim SinIVA As Decimal
+        If (IVA > 0) Then
+            Total = Format(CDec(txtMonto.Text) / 1.16, "#####0.00")
+            IVAFinal = Format(CDec(txtMonto.Text) - Total, "#####0.00")
+        Else
+            Total = Format(CDec(txtMonto.Text), "#####0.00")
+            IVAFinal = 0.00
+        End If
         Dim TipoNota As String = db.exectSQLQueryScalar($"SELECT ClaveNota FROM ing_CatTipoNotaCredito WHERE ID = {cbTipoNota.SelectedValue}")
         Dim FolioFactura As String = cbConcepto.Text.Substring(7, 7)
         If (TipoNota = "NDCRC") Then
@@ -50,7 +58,7 @@ Public Class NotasDeCreditoEDC
             Descripcion = $"BONIFICACION DE {db.exectSQLQueryScalar($"SELECT Nombre_Concepto FROM ing_xmlTimbradosConceptos WHERE ID = {ID}")}"
         End If
 
-        GridNota.Rows.Add(ID, Descripcion, Total, IVA, TipoNota, FolioFactura, NUPorcentaje.Value, lblTotal.Text)
+        GridNota.Rows.Add(ID, Descripcion, Total, IVAFinal, (Total + IVAFinal), TipoNota, FolioFactura, NUPorcentaje.Value, lblTotal.Text)
         Me.actualizarTotal()
     End Sub
 
@@ -171,40 +179,29 @@ Public Class NotasDeCreditoEDC
         Dim listaUUIDDistinct As New List(Of String)
         Dim listaPorcentajes As New List(Of String)
         Dim listaCostoOrignial As New List(Of String)
+        Dim claveConcepto As String
         For x = 0 To GridNota.Rows.Count - 1
-            If (GridNota.Rows(x).Cells(4).Value = "NDCRC") Then
-                Dim concepto As New Concepto
+            Dim concepto As New Concepto
+            If (GridNota.Rows(x).Cells(5).Value = "NDCRC") Then
+                claveConcepto = "REC"
                 concepto = ch.crearConcepto(GridNota.Rows(x).Cells(0).Value, "REC", Matricula)
-                concepto.NombreConcepto = GridNota.Rows(x).Cells(1).Value
-                concepto.costoTotal = Format(CDec(GridNota.Rows(x).Cells(2).Value), "#####0.00")
-                concepto.costoFinal = Format(CDec(GridNota.Rows(x).Cells(2).Value), "#####0.00")
-                concepto.costoUnitario = Format(CDec(GridNota.Rows(x).Cells(2).Value), "#####0.00")
-                concepto.costoBase = Format(CDec(GridNota.Rows(x).Cells(2).Value), "#####0.00")
-                listaConceptos.Add(concepto)
-                listaUUID.Add(GridNota.Rows(x).Cells(5).Value)
-                listaPorcentajes.Add(GridNota.Rows(x).Cells(6).Value)
-                listaCostoOrignial.Add(GridNota.Rows(x).Cells(7).Value)
-            ElseIf (GridNota.Rows(x).Cells(4).Value = "NDCDE") Then
-                Dim concepto As New Concepto
+            ElseIf (GridNota.Rows(x).Cells(5).Value = "NDCDE") Then
                 Dim IDConcepto As Integer = db.exectSQLQueryScalar($"SELECT IDConcepto FROM ing_xmlTimbradosConceptos WHERE ID = {GridNota.Rows(x).Cells(0).Value}")
                 Dim tipoConcepto As String = db.exectSQLQueryScalar($"SELECT C.Clave FROM ing_xmlTimbradosConceptos AS T
                                                                       INNER JOIN ing_CatClavesPagos AS C ON C.ID = T.Clave_Concepto
                                                                       WHERE T.ID = {GridNota.Rows(x).Cells(0).Value}")
                 concepto = ch.crearConcepto(IDConcepto, tipoConcepto, Matricula)
-                concepto.NombreConcepto = GridNota.Rows(x).Cells(1).Value
-                concepto.costoTotal = Format(CDec(GridNota.Rows(x).Cells(2).Value), "#####0.00")
-                concepto.costoFinal = Format(CDec(GridNota.Rows(x).Cells(2).Value), "#####0.00")
-                concepto.costoUnitario = Format(CDec(GridNota.Rows(x).Cells(2).Value), "#####0.00")
-                concepto.costoBase = Format(CDec(GridNota.Rows(x).Cells(2).Value), "#####0.00")
-                concepto.CostoIvaBase = "0.00000000"
-                If ((concepto.absorbeIVA = True) Or (concepto.consideraIVA = True)) Then
-                    Me.obtenerIVAConcepto(concepto, Format(CDec(GridNota.Rows(x).Cells(2).Value), "#####0.00"))
-                End If
-                listaConceptos.Add(concepto)
-                listaUUID.Add(GridNota.Rows(x).Cells(5).Value)
-                listaPorcentajes.Add(GridNota.Rows(x).Cells(6).Value)
-                listaCostoOrignial.Add(GridNota.Rows(x).Cells(7).Value)
             End If
+            concepto.NombreConcepto = GridNota.Rows(x).Cells(1).Value
+            concepto.costoTotal = Format(CDec(GridNota.Rows(x).Cells(2).Value), "#####0.00")
+            concepto.costoFinal = Format(CDec(GridNota.Rows(x).Cells(4).Value), "#####0.00")
+            concepto.costoUnitario = Format(CDec(GridNota.Rows(x).Cells(2).Value), "#####0.00")
+            concepto.costoBase = Format(CDec(GridNota.Rows(x).Cells(2).Value), "#####0.00")
+            concepto.costoIVATotal = Format(CDec(GridNota.Rows(x).Cells(3).Value), "#####0.00") * concepto.Cantidad
+            listaConceptos.Add(concepto)
+            listaUUID.Add(GridNota.Rows(x).Cells(6).Value)
+            listaPorcentajes.Add(GridNota.Rows(x).Cells(7).Value)
+            listaCostoOrignial.Add(GridNota.Rows(x).Cells(8).Value)
         Next
         listaUUID2 = listaUUID
         listaUUID2 = listaUUID2.Distinct().ToList()
@@ -219,7 +216,7 @@ Public Class NotasDeCreditoEDC
     Sub actualizarTotal()
         Dim total As Decimal
         For x = 0 To GridNota.Rows.Count() - 1
-            total = total + CDec(GridNota.Rows(x).Cells(2).Value)
+            total = total + CDec(GridNota.Rows(x).Cells(4).Value)
         Next
         lblTotalNota.Text = total
     End Sub

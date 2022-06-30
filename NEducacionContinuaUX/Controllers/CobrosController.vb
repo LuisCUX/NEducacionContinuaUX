@@ -175,9 +175,9 @@ Public Class CobrosController
             Dim cadena = xml.cadenaPrueba(Serie, Folio, Fecha, formaPago, NoCertificado, SubTotal, DescuentoS, Total, listaConceptos, totalIVA, RFCCLiente, NombreCLiente, Credito, Cp, RegFiscal, totalBase, usoCFDI)
             Dim sello As String
             If (System.Diagnostics.Debugger.IsAttached) Then
-                sello = st.Sellado("\\192.168.1.241\ti\NEducacionContinua\Timbrado\pfx\uxa_pfx33.pfx", "12345678a", cadena) ''PRUEBAS
+                sello = st.Sellado("\\192.168.1.252\Sistemas\Reportes\EducacionContinua\Timbrado\pfx\uxa_pfx33.pfx", "12345678a", cadena) ''PRUEBAS
             Else
-                sello = st.Sellado("\\192.168.1.241\ti\NEducacionContinua\Timbrado\pfx\EDC.pfx", "EDC12345a", cadena) ''REAL
+                sello = st.Sellado("\\192.168.1.252\Sistemas\Reportes\EducacionContinua\Timbrado\pfx\EDC.pfx", "EDC12345a", cadena) ''REAL
             End If
 
             Dim xmlString As String = xml.xmlPrueba(Total, SubTotal, DescuentoS, totalIVA, Fecha, sello, Certificado, NoCertificado, formaPago, Folio, Serie, usoCFDI, listaConceptos, RFCCLiente, NombreCLiente, Credito, Cp, RegFiscal, totalBase)

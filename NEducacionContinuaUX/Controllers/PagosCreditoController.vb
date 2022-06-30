@@ -38,9 +38,9 @@ Public Class PagosCreditoController
             Dim Cadena As String = xml.cadenaCredito(Serie, Folio, Fecha, NoCertificado, Certificado, RFC, NombreCompleto, UsoCFDI, FolioFiscal, serieOriginal, folioOriginal, NoParcialidad, MontoAnterior, CantidadAbonada, MontoNuevo, FechaOriginal, FormaPago, CP, RegFiscal)
             Dim sello As String
             If (System.Diagnostics.Debugger.IsAttached) Then
-                sello = st.Sellado("\\192.168.1.241\ti\NEducacionContinua\Timbrado\pfx\uxa_pfx33.pfx", "12345678a", Cadena) ''PRUEBAS
+                sello = st.Sellado("\\192.168.1.252\Sistemas\Reportes\EducacionContinua\Timbrado\pfx\uxa_pfx33.pfx", "12345678a", Cadena) ''PRUEBAS
             Else
-                sello = st.Sellado("\\192.168.1.241\ti\NEducacionContinua\Timbrado\pfx\EDC.pfx", "EDC12345a", Cadena) ''REAL
+                sello = st.Sellado("\\192.168.1.252\Sistemas\Reportes\EducacionContinua\Timbrado\pfx\EDC.pfx", "EDC12345a", Cadena) ''REAL
             End If
             Dim xmlString As String = xml.xmlCredito(Serie, Folio, Fecha, NoCertificado, sello, Certificado, RFC, NombreCompleto, UsoCFDI, FolioFiscal, serieOriginal, folioOriginal, NoParcialidad, MontoAnterior, CantidadAbonada, MontoNuevo, FechaOriginal, FormaPago, RegFiscal, CP)
             xmlString = xmlString.Replace("utf-16", "UTF-8")

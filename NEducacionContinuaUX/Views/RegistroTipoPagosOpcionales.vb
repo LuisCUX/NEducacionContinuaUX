@@ -1,10 +1,11 @@
 ﻿Public Class RegistroTipoPagosOpcionales
     Dim db As DataBaseService = New DataBaseService()
-    Dim edit As Boolean
+    Dim edit As Boolean = False
     Private Sub RegistroTipoPagosOpcionales_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim tablePagosOpcionales As DataTable = db.getDataTableFromSQL($"SELECT P.ID, P.Clave, P.Nombre, P.Descripcion, A.Nombre As NombreArea, P.Activo FROM ing_CatTipoPagoOpcional AS P
                                                                          INNER JOIN ing_catAreas AS A ON A.ID = P.ID_AreaAsignada")
         Dim Activotxt As String
+        edit = False
         For Each pago As DataRow In tablePagosOpcionales.Rows
             If (pago("Activo") = True) Then
                 Activotxt = "Si"
