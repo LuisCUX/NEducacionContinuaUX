@@ -11,22 +11,28 @@ Public Class NotaCreditoController
     Dim db As DataBaseService = New DataBaseService()
     Dim st As SelladoTimbradoService = New SelladoTimbradoService()
     Dim rep As ImpresionReportesService = New ImpresionReportesService()
+    Dim va As ValidacionesController = New ValidacionesController()
     Public QR_Generator As New MessagingToolkit.QRCode.Codec.QRCodeEncoder
     Sub GenerarNotaCredito(listaConceptos As List(Of Concepto), listaUUID As List(Of String), listaUUIDOriginal As List(Of String), ListaPorcentajes As List(Of String), ListaCostoOriginal As List(Of String), RFC As String, NombreCompleto As String, usoCFDI As String,
                            Matricula As String, ClaveNota As String, RegFiscal As String, Cp As String)
         Try
             db.startTransaction()
+            Dim tipoCliente As Integer
+            If (va.validarMatricula(Matricula) = "EX") Then
+                tipoCliente = 2
+            ElseIf (va.validarMatricula(Matricula) = "EC") Then
+                tipoCliente = 1
+            End If
             Dim montototal As Decimal
             Dim subtotal As Decimal
             Dim descuento As Decimal
             Dim totalIVa As Decimal
 
             For Each concepto As Concepto In listaConceptos
-                montototal = montototal + concepto.costoTotal
-                subtotal = subtotal + concepto.CostoIvaBase
+                montototal = montototal + concepto.costoFinal
+                subtotal = subtotal + concepto.costoTotal
                 totalIVa = totalIVa + concepto.costoIVATotal
             Next
-
 
             Dim FolioNota As String = Me.obtenerFolio()
             Dim Serie As String = FolioNota.Substring(0, 4)
@@ -41,14 +47,14 @@ Public Class NotaCreditoController
                 NoCertificado = ConfigurationSettings.AppSettings.Get("developmentCertificado").ToString()
             End If
             Dim Fecha As String = db.exectSQLQueryScalar("select STUFF(CONVERT(VARCHAR(50),GETDATE(), 127) ,20,4,'') as fecha")
-            Dim cadena As String = xml.cadenaNotaCredito(listaConceptos, listaUUID, montoTotal, subtotal, descuento, Fecha, Folio, Serie, NoCertificado, RFC, NombreCompleto, usoCFDI, Cp, RegFiscal)
+            Dim cadena As String = xml.cadenaNotaCredito(listaConceptos, listaUUID, montototal, subtotal, descuento, Fecha, Folio, Serie, NoCertificado, RFC, NombreCompleto, usoCFDI, Cp, RegFiscal, totalIVa)
             Dim sello As String
             If (System.Diagnostics.Debugger.IsAttached) Then
-                sello = st.Sellado("\\192.168.1.241\ti\NEducacionContinua\Timbrado\pfx\uxa_pfx33.pfx", "12345678a", cadena) ''PRUEBAS
+                sello = st.Sellado("\\192.168.1.252\Sistemas\Reportes\EducacionContinua\Timbrado\pfx\uxa_pfx33.pfx", "12345678a", cadena) ''PRUEBAS
             Else
-                sello = st.Sellado("\\192.168.1.241\ti\NEducacionContinua\Timbrado\pfx\EDC.pfx", "EDC12345a", cadena) ''REAL
+                sello = st.Sellado("\\192.168.1.252\Sistemas\Reportes\EducacionContinua\Timbrado\pfx\EDC.pfx", "EDC12345a", cadena) ''REAL
             End If
-            Dim xmlString As String = xml.xmlNotaCredito(montoTotal, subtotal, descuento, Fecha, sello, Certificado, Folio, Serie, NoCertificado, RFC, NombreCompleto, usoCFDI, listaConceptos, listaUUID, RegFiscal, Cp)
+            Dim xmlString As String = xml.xmlNotaCredito(montototal, subtotal, descuento, Fecha, sello, Certificado, Folio, Serie, NoCertificado, RFC, NombreCompleto, usoCFDI, listaConceptos, listaUUID, RegFiscal, Cp, totalIVa)
             xmlString = xmlString.Replace("utf-16", "UTF-8")
             Dim xmlTimbrado As String
             If (System.Diagnostics.Debugger.IsAttached) Then
@@ -110,6 +116,8 @@ Public Class NotaCreditoController
             rep.AgregarParametros("ClaveCliente", Matricula)
             rep.AgregarParametros("CantidadLetra", TotalText)
             rep.AgregarParametros("usoCFDI", descripcionCFDI)
+            rep.AgregarParametros("RFC", RFC)
+            rep.AgregarParametros("TipoCliente", tipoCliente)
             rep.MostrarReporte()
             db.commitTransaction()
             MessageBox.Show("Nota de credito generada correctamente")
@@ -235,7 +243,8 @@ Public Class NotaCreditoController
         Try
             Dim img As New Bitmap(QR_Generator.Encode(QR.ToString), New Size(220, 220))
             ''img.Save($"\\{EnviromentService.serverIP}\ti\NEducacionContinua\QR\{Nombre}.png", Imaging.ImageFormat.Png)
-            img.Save($"\\192.168.1.250\Reportes\NEDC\QR\{Nombre}.png", Imaging.ImageFormat.Png)
+            ''img.Save($"\\192.168.1.250\Reportes\NEDC\QR\{Nombre}.png", Imaging.ImageFormat.Png)
+            img.Save($"{EnviromentService.reportesPath}\QR\{Nombre}.png", Imaging.ImageFormat.Png)
             Thread.Sleep(1500)
         Catch ex As Exception
             MsgBox(ex.Message)

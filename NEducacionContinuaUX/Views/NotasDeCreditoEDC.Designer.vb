@@ -31,6 +31,8 @@ Partial Class NotasDeCreditoEDC
         Me.txtMatricula = New System.Windows.Forms.TextBox()
         Me.lblMatricula = New System.Windows.Forms.Label()
         Me.panelDatos = New System.Windows.Forms.Panel()
+        Me.lblDireccion = New System.Windows.Forms.Label()
+        Me.lblDirecciontxt = New System.Windows.Forms.Label()
         Me.lblCFDItxt = New System.Windows.Forms.Label()
         Me.lblCFDI = New System.Windows.Forms.Label()
         Me.lblRegFiscaltxt = New System.Windows.Forms.Label()
@@ -75,12 +77,11 @@ Partial Class NotasDeCreditoEDC
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IVA = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Total = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TipoNota = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FolioFactura = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Porcentaje = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CostoOriginal = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.lblDireccion = New System.Windows.Forms.Label()
-        Me.lblDirecciontxt = New System.Windows.Forms.Label()
         Me.panelBusqueda.SuspendLayout()
         Me.panelDatos.SuspendLayout()
         Me.panelGridNota.SuspendLayout()
@@ -188,6 +189,27 @@ Partial Class NotasDeCreditoEDC
         Me.panelDatos.Size = New System.Drawing.Size(1103, 53)
         Me.panelDatos.TabIndex = 16
         Me.panelDatos.Visible = False
+        '
+        'lblDireccion
+        '
+        Me.lblDireccion.AutoSize = True
+        Me.lblDireccion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDireccion.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblDireccion.Location = New System.Drawing.Point(238, 31)
+        Me.lblDireccion.Name = "lblDireccion"
+        Me.lblDireccion.Size = New System.Drawing.Size(0, 15)
+        Me.lblDireccion.TabIndex = 101
+        '
+        'lblDirecciontxt
+        '
+        Me.lblDirecciontxt.AutoSize = True
+        Me.lblDirecciontxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDirecciontxt.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblDirecciontxt.Location = New System.Drawing.Point(155, 31)
+        Me.lblDirecciontxt.Name = "lblDirecciontxt"
+        Me.lblDirecciontxt.Size = New System.Drawing.Size(62, 15)
+        Me.lblDirecciontxt.TabIndex = 100
+        Me.lblDirecciontxt.Text = "Direccion:"
         '
         'lblCFDItxt
         '
@@ -622,7 +644,7 @@ Partial Class NotasDeCreditoEDC
         Me.GridNota.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridNota.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.GridNota.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.GridNota.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Descripcion, Me.Importe, Me.IVA, Me.TipoNota, Me.FolioFactura, Me.Porcentaje, Me.CostoOriginal})
+        Me.GridNota.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Descripcion, Me.Importe, Me.IVA, Me.Total, Me.TipoNota, Me.FolioFactura, Me.Porcentaje, Me.CostoOriginal})
         Me.GridNota.Location = New System.Drawing.Point(508, 11)
         Me.GridNota.Name = "GridNota"
         Me.GridNota.Size = New System.Drawing.Size(586, 263)
@@ -636,25 +658,31 @@ Partial Class NotasDeCreditoEDC
         '
         'Descripcion
         '
-        Me.Descripcion.FillWeight = 99.49239!
+        Me.Descripcion.FillWeight = 113.9813!
         Me.Descripcion.HeaderText = "Descripción"
         Me.Descripcion.Name = "Descripcion"
         '
         'Importe
         '
-        Me.Importe.FillWeight = 40.0!
+        Me.Importe.FillWeight = 33.64613!
         Me.Importe.HeaderText = "Importe"
         Me.Importe.Name = "Importe"
         '
         'IVA
         '
-        Me.IVA.FillWeight = 40.0!
+        Me.IVA.FillWeight = 30.27813!
         Me.IVA.HeaderText = "IVA"
         Me.IVA.Name = "IVA"
         '
+        'Total
+        '
+        Me.Total.FillWeight = 25.25404!
+        Me.Total.HeaderText = "Total"
+        Me.Total.Name = "Total"
+        '
         'TipoNota
         '
-        Me.TipoNota.FillWeight = 30.0!
+        Me.TipoNota.FillWeight = 46.3328!
         Me.TipoNota.HeaderText = "Tipo de nota"
         Me.TipoNota.Name = "TipoNota"
         '
@@ -675,27 +703,6 @@ Partial Class NotasDeCreditoEDC
         Me.CostoOriginal.HeaderText = "CostoOriginal"
         Me.CostoOriginal.Name = "CostoOriginal"
         Me.CostoOriginal.Visible = False
-        '
-        'lblDireccion
-        '
-        Me.lblDireccion.AutoSize = True
-        Me.lblDireccion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDireccion.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblDireccion.Location = New System.Drawing.Point(238, 31)
-        Me.lblDireccion.Name = "lblDireccion"
-        Me.lblDireccion.Size = New System.Drawing.Size(0, 15)
-        Me.lblDireccion.TabIndex = 101
-        '
-        'lblDirecciontxt
-        '
-        Me.lblDirecciontxt.AutoSize = True
-        Me.lblDirecciontxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDirecciontxt.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblDirecciontxt.Location = New System.Drawing.Point(155, 31)
-        Me.lblDirecciontxt.Name = "lblDirecciontxt"
-        Me.lblDirecciontxt.Size = New System.Drawing.Size(62, 15)
-        Me.lblDirecciontxt.TabIndex = 100
-        Me.lblDirecciontxt.Text = "Direccion:"
         '
         'NotasDeCreditoEDC
         '
@@ -768,14 +775,6 @@ Partial Class NotasDeCreditoEDC
     Friend WithEvents lblNombre As Label
     Friend WithEvents btnEliminar As Button
     Friend WithEvents chb100 As CheckBox
-    Friend WithEvents ID As DataGridViewTextBoxColumn
-    Friend WithEvents Descripcion As DataGridViewTextBoxColumn
-    Friend WithEvents Importe As DataGridViewTextBoxColumn
-    Friend WithEvents IVA As DataGridViewTextBoxColumn
-    Friend WithEvents TipoNota As DataGridViewTextBoxColumn
-    Friend WithEvents FolioFactura As DataGridViewTextBoxColumn
-    Friend WithEvents Porcentaje As DataGridViewTextBoxColumn
-    Friend WithEvents CostoOriginal As DataGridViewTextBoxColumn
     Friend WithEvents lblRegFiscaltxt As Label
     Friend WithEvents lblRegFiscal As Label
     Friend WithEvents lblCPtxt As Label
@@ -784,4 +783,13 @@ Partial Class NotasDeCreditoEDC
     Friend WithEvents lblCFDI As Label
     Friend WithEvents lblDireccion As Label
     Friend WithEvents lblDirecciontxt As Label
+    Friend WithEvents ID As DataGridViewTextBoxColumn
+    Friend WithEvents Descripcion As DataGridViewTextBoxColumn
+    Friend WithEvents Importe As DataGridViewTextBoxColumn
+    Friend WithEvents IVA As DataGridViewTextBoxColumn
+    Friend WithEvents Total As DataGridViewTextBoxColumn
+    Friend WithEvents TipoNota As DataGridViewTextBoxColumn
+    Friend WithEvents FolioFactura As DataGridViewTextBoxColumn
+    Friend WithEvents Porcentaje As DataGridViewTextBoxColumn
+    Friend WithEvents CostoOriginal As DataGridViewTextBoxColumn
 End Class
