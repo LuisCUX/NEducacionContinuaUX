@@ -126,8 +126,8 @@
         cbProdServ.Enabled = True
         cbUnidad.Enabled = True
         btnGuardar.Enabled = True
-        cbTipoConcepto.SelectedIndex = 1
-        cbTipoConcepto_SelectionChangeCommitted(Nothing, Nothing)
+        ''cbTipoConcepto.SelectedIndex = 1
+        ''cbTipoConcepto_SelectionChangeCommitted(Nothing, Nothing)
     End Sub
 
     Private Sub cbTipoConcepto_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbTipoConcepto.SelectionChangeCommitted

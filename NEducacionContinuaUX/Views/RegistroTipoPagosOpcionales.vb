@@ -69,30 +69,40 @@
     End Sub
 
     Private Sub GridTipoPago_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles GridTipoPago.CellContentClick
-        If (e.ColumnIndex = 6) Then
-            GridTipoPago.EndEdit()
-            If (GridTipoPago.Rows(e.RowIndex).Cells(6).Value = True) Then
-                Dim IDTipoPago As Integer = GridTipoPago.Rows(e.RowIndex).Cells(0).Value
-                ObjectBagService.setItem("IDTipoPago", IDTipoPago)
-                txtClave.Text = GridTipoPago.Rows(e.RowIndex).Cells(1).Value
-                txtNombre.Text = GridTipoPago.Rows(e.RowIndex).Cells(3).Value
-                cbAreas.Text = GridTipoPago.Rows(e.RowIndex).Cells(4).Value
-                txtDescripcion.Text = GridTipoPago.Rows(e.RowIndex).Cells(2).Value
-                If (GridTipoPago.Rows(e.RowIndex).Cells(5).Value = "Si") Then
-                    chbActivo.Checked = True
+        Try
+            If (e.ColumnIndex = 6) Then
+                For x = 0 To GridTipoPago.Rows.Count - 1
+                    If (e.RowIndex <> x) Then
+                        GridTipoPago.Rows(x).Cells(6).Value = False
+                    End If
+                Next
+                GridTipoPago.EndEdit()
+                If (GridTipoPago.Rows(e.RowIndex).Cells(6).Value = True) Then
+                    Dim IDTipoPago As Integer = GridTipoPago.Rows(e.RowIndex).Cells(0).Value
+                    ObjectBagService.setItem("IDTipoPago", IDTipoPago)
+                    txtClave.Text = GridTipoPago.Rows(e.RowIndex).Cells(1).Value
+                    txtNombre.Text = GridTipoPago.Rows(e.RowIndex).Cells(3).Value
+                    cbAreas.Text = GridTipoPago.Rows(e.RowIndex).Cells(4).Value
+                    txtDescripcion.Text = GridTipoPago.Rows(e.RowIndex).Cells(2).Value
+                    If (GridTipoPago.Rows(e.RowIndex).Cells(5).Value = "Si") Then
+                        chbActivo.Checked = True
+                    Else
+                        chbActivo.Checked = False
+                    End If
+                    edit = True
                 Else
+                    txtClave.Clear()
+                    txtNombre.Clear()
+                    txtDescripcion.Clear()
                     chbActivo.Checked = False
+                    edit = False
+                    cbAreas.SelectedIndex = -1
                 End If
-                edit = True
-            Else
-                txtClave.Clear()
-                txtNombre.Clear()
-                txtDescripcion.Clear()
-                chbActivo.Checked = False
-                edit = False
-                cbAreas.SelectedIndex = -1
             End If
-        End If
+        Catch ex As Exception
+
+        End Try
+
     End Sub
 
     Sub Reiniciar()

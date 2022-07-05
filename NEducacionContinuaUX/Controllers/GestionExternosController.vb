@@ -416,10 +416,6 @@ Public Class GestionExternosController
     Function validaTextboxDatos(txtNombre As TextBox, txtap_pat As TextBox, txtap_mat As TextBox, txtDireccion As TextBox, txtColonia As TextBox, txtCorreo As TextBox, txtCP As TextBox, txtTelefono As TextBox, cbMunicipio As ComboBox) As Object()
         If (txtNombre.Text = "") Then
             Return {False, "Ingrese un nombre"}
-        ElseIf (txtap_pat.Text = "") Then
-            Return {False, "Ingrese apellido paterno"}
-        ElseIf (txtap_mat.Text = "") Then
-            Return {False, "Ingrese apellido materno"}
         ElseIf (txtDireccion.Text = "") Then
             Return {False, "Ingrese una direccion"}
         ElseIf (txtColonia.Text = "") Then

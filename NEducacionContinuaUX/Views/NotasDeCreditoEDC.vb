@@ -112,10 +112,10 @@ Public Class NotasDeCreditoEDC
 
 
             txtMonto.Visible = True
-                NUPorcentaje.Visible = True
-                txtMonto.Clear()
-                NUPorcentaje.Value = 0
-            End If
+            NUPorcentaje.Visible = True
+            txtMonto.Clear()
+            NUPorcentaje.Value = 0
+        End If
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click

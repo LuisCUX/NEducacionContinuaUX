@@ -28,7 +28,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\192.168.1.252\Sistemas\Ejecutables\EducacionContinua\</InstallUrl>
     <TargetCulture>es-MX</TargetCulture>
-    <ApplicationRevision>25</ApplicationRevision>
+    <ApplicationRevision>32</ApplicationRevision>
     <ApplicationVersion>1.1.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -698,6 +698,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="logoprueba.ico" />
     <None Include="Resources\icons8-add-file-40.png" />
     <None Include="Resources\icons8-analyze-40.png" />
     <None Include="Resources\search_doc1.png" />

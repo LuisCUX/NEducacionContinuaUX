@@ -23,6 +23,12 @@ Public Class EnviromentService
         Else
             getEnviroment("prod")
         End If
+
+        'If (System.Diagnostics.Debugger.IsAttached) Then
+        '    getEnviroment("dev")
+        'Else
+        '    getEnviroment("dev")
+        'End If
     End Sub
 
     Public Shared Sub getEnviroment(tipo As String)
