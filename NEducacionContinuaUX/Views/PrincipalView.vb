@@ -1,6 +1,11 @@
 ﻿Public Class PrincipalView
     Private Sub PrincipalView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         statusLabel.Text = User.getPerfil
+        If (User.getPerfil = "DEV") Then
+            DEVToolStripMenuItem.Visible = True
+        Else
+            DEVToolStripMenuItem.Visible = False
+        End If
     End Sub
 
     Private Sub CobrosToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles CobrosToolStripMenuItem1.Click
@@ -120,5 +125,10 @@
     Private Sub ProduccionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProduccionToolStripMenuItem.Click
         EnviromentService.getEnviroment("prod")
         MessageBox.Show("Ambiente cambiado a producción")
+    End Sub
+
+    Private Sub Form1ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Form1ToolStripMenuItem.Click
+        Form1.MdiParent = Me
+        Form1.Show()
     End Sub
 End Class

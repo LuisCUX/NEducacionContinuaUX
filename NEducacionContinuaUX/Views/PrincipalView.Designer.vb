@@ -59,6 +59,7 @@ Partial Class PrincipalView
         Me.CambiarConexiónToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DesarrolloToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProduccionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Form1ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip.SuspendLayout()
         Me.MenuStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -271,11 +272,10 @@ Partial Class PrincipalView
         '
         'DEVToolStripMenuItem
         '
-        Me.DEVToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CambiarConexiónToolStripMenuItem})
+        Me.DEVToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CambiarConexiónToolStripMenuItem, Me.Form1ToolStripMenuItem})
         Me.DEVToolStripMenuItem.Name = "DEVToolStripMenuItem"
         Me.DEVToolStripMenuItem.Size = New System.Drawing.Size(40, 20)
         Me.DEVToolStripMenuItem.Text = "DEV"
-        Me.DEVToolStripMenuItem.Visible = False
         '
         'CambiarConexiónToolStripMenuItem
         '
@@ -295,6 +295,12 @@ Partial Class PrincipalView
         Me.ProduccionToolStripMenuItem.Name = "ProduccionToolStripMenuItem"
         Me.ProduccionToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
         Me.ProduccionToolStripMenuItem.Text = "Produccion"
+        '
+        'Form1ToolStripMenuItem
+        '
+        Me.Form1ToolStripMenuItem.Name = "Form1ToolStripMenuItem"
+        Me.Form1ToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.Form1ToolStripMenuItem.Text = "form1"
         '
         'PrincipalView
         '
@@ -357,8 +363,9 @@ Partial Class PrincipalView
     Friend WithEvents AltaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ModificaciónToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CatalogoToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents DEVToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CambiarConexiónToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DesarrolloToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ProduccionToolStripMenuItem As ToolStripMenuItem
+    Private WithEvents DEVToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Form1ToolStripMenuItem As ToolStripMenuItem
 End Class

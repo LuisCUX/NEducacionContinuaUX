@@ -19,10 +19,7 @@
             MessageBox.Show("La clave ingresada no existe, favor de ingresar una clave valida")
             Return "False"
         Else
-            Dim MatriculaUX As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_catMatriculasUX WHERE MatriculaEX = '{Matricula}'")
-            If (MatriculaUX > 0) Then
-                Return "UX"
-            ElseIf (Matricula.Substring(0, 2) = "EX") Then
+            If (Matricula.Substring(0, 2) = "EX") Then
                 Return "EX"
             ElseIf (Matricula.Substring(0, 2) = "EC") Then
                 Return "EC"

@@ -443,6 +443,7 @@ Public Class CobrosEDC
         Dim creditoband As Boolean = False
         Dim formaPagoClave As String
         Dim formaPagoID As Integer
+        Dim NombreTimbrar As String
         listaConceptos = ch.getListaConceptos()
         listaConceptosPrueba = ch.getListaConceptos()
         Dim listaconceptosFinal As New List(Of Concepto)
@@ -581,15 +582,18 @@ Public Class CobrosEDC
                 RFCTimbrar = ObjectBagService.getItem("RFCTimbrar")
                 RegFiscalTimbrar = ObjectBagService.getItem("RegFiscalTimbrar")
                 UsoCFDITimbrar = ObjectBagService.getItem("UsoCFDITimbrar")
+                NombreTimbrar = ObjectBagService.getItem("NombreTimbrar")
             Else
                 RFCTimbrar = "XAXX010101000"
                 RegFiscalTimbrar = "616"
                 UsoCFDITimbrar = "S01"
+                NombreTimbrar = lblNombretxt.Text
             End If
         Else
             RFCTimbrar = "XAXX010101000"
             RegFiscalTimbrar = "616"
             UsoCFDITimbrar = "S01"
+            NombreTimbrar = lblNombretxt.Text
         End If
         If (creditoband = True) Then
             If (tipoMatricula = "EX") Then
@@ -597,7 +601,7 @@ Public Class CobrosEDC
             ElseIf (tipoMatricula = "EC") Then
                 tipocliente = 1
             End If
-            Dim IDXMLC As Integer = co.Cobrar(listaConceptosPrueba, cbFormaPago.SelectedValue, 9, Matricula, RFCTimbrar, lblNombretxt.Text, lblTotal.Text, True, tipocliente, lblCPtxt.Text, RegFiscalTimbrar, UsoCFDITimbrar)
+            Dim IDXMLC As Integer = co.Cobrar(listaConceptosPrueba, cbFormaPago.SelectedValue, 9, Matricula, RFCTimbrar, NombreTimbrar, lblTotal.Text, True, tipocliente, lblCPtxt.Text, RegFiscalTimbrar, UsoCFDITimbrar)
             If (IDXMLC > 0) Then
                 Me.Reiniciar()
                 Exit Sub
@@ -628,7 +632,7 @@ Public Class CobrosEDC
             formaPagoClave = cbFormaPago.SelectedValue
             formaPagoID = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatFormaPago WHERE Forma_Pago = '{formaPagoClave}'")
         End If
-        Dim IDXML As Integer = co.Cobrar(listaconceptosFinal, formaPagoClave, formaPagoID, Matricula, RFCTimbrar, lblNombretxt.Text, lblTotal.Text, False, tipocliente, lblCPtxt.Text, RegFiscalTimbrar, UsoCFDITimbrar)
+        Dim IDXML As Integer = co.Cobrar(listaconceptosFinal, formaPagoClave, formaPagoID, Matricula, RFCTimbrar, NombreTimbrar, lblTotal.Text, False, tipocliente, lblCPtxt.Text, RegFiscalTimbrar, UsoCFDITimbrar)
 
 
         ''---------------------------------------------------------REGISTRO DE FORMA DE PAGO---------------------------------------------------------
