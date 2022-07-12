@@ -75,6 +75,26 @@ Public Class ReimpresionFacturasEDC
     End Sub
 
     Private Sub btnReimprimir_Click(sender As Object, e As EventArgs) Handles btnReimprimir.Click
+        If MsgBox("¿Desea generar el archivo .XML de esta factura?", MsgBoxStyle.YesNo, "Generar XML ") = vbYes Then
+            Try
+                Dim xml As String = db.exectSQLQueryScalar($"SELECT XMLTimbrado FROM ing_xmlTimbrados WHERE ID = {IDXML}")
+                Dim saveFileDialog1 As New SaveFileDialog
+                saveFileDialog1.InitialDirectory = "C:\"
+                saveFileDialog1.Title = "Guardar archivo XML"
+                saveFileDialog1.DefaultExt = "xml"
+                saveFileDialog1.Filter = "XML files (*.xml)|"
+                saveFileDialog1.FilterIndex = 2
+                saveFileDialog1.RestoreDirectory = True
+                saveFileDialog1.ShowDialog()
+                Dim doc As XDocument = XDocument.Parse(xml)
+                doc.Save(saveFileDialog1.FileName)
+            Catch ex As Exception
+                MsgBox(ex.ToString, MsgBoxStyle.Exclamation, "Error al guardar el archivo")
+            End Try
+
+        Else
+
+        End If
         Dim folioFiscal As String = db.exectSQLQueryScalar($"SELECT FolioFiscal FROM ing_xmlTimbrados WHERE ID = {IDXML}")
         Dim folioEDC As String = db.exectSQLQueryScalar($"SELECT Folio FROM ing_xmlTimbrados WHERE ID = {IDXML}")
         Dim Total As Decimal = db.exectSQLQueryScalar($"SELECT Total FROM ing_xmlTimbrados WHERE ID = {IDXML}")
@@ -178,7 +198,7 @@ Public Class ReimpresionFacturasEDC
                                                         WHERE RC.clave_cliente = '{Matricula}'")
         End If
         Dim descripcionCFDI As String = db.exectSQLQueryScalar($"select UPPER('(' + clave_usoCFDI + ')' + ' ' + descripcion) As Clave from ing_cat_usoCFDI WHERE clave_usoCFDI = '{usoCFDI}'")
-        Dim QR As String = $"?re={EnviromentService.RFCEDC}&rr={RFCTimbrar}id={folioFiscal}tt={Total}"
+        Dim QR As String = $"?re={EnviromentService.RFCEDC}&rr={rfcTimbrar}id={folioFiscal}tt={Total}"
         c.gernerarQr(QR, $"{Serie}{Folio}")
         rep.AgregarFuente("FacturaEDC.rpt")
         rep.AgregarParametros("IDXML", IDXML)
@@ -211,12 +231,20 @@ Public Class ReimpresionFacturasEDC
                                                     WHERE RC.clave_cliente = '{Matricula}'")
         End If
 
+        If MsgBox($"¿Desea usar este correo electrónico: {emailCliente} ?", MsgBoxStyle.YesNo, "Reenviar correo electrónico") = vbYes Then
+            emailCliente = emailCliente
+        Else
+            emailCliente = InputBox("¿Cuál es el correo electrónico en donde se reenviarán la factura y el XML de este folio?", "Ingrese el correo electrónico")
+        End If
+
         destino.Add(emailCliente)
         mail.Destino = destino
         mail.Asunto = "GRACIAS POR SU PAGO"
         mail.Mensaje = "ANEXAMOS TUS COMPROBANTES DE PAGO ADJUNTOS A ESTE CORREO, GRACIAS."
         mail.BytesFile = archivo_pdf
-        mail.FileName = $"{Folio}.pdf"
+        mail.FileName = $"{folioEDC}.pdf"
+        mail.BytesFile2 = archivo_xml
+        mail.FileName2 = $"{folioEDC}.xml"
         Try
             es.sendEmailWithFileBytes(mail)
             MessageBox.Show("Correo enviado")

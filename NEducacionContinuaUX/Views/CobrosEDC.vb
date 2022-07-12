@@ -739,7 +739,9 @@ Public Class CobrosEDC
             mail.Asunto = "GRACIAS POR SU PAGO"
             mail.Mensaje = "ANEXAMOS TUS COMPROBANTES DE PAGO ADJUNTOS A ESTE CORREO, GRACIAS."
             mail.BytesFile = archivo_pdf
-            mail.FileName = $"{Folio}.pdf"
+            mail.FileName = $"{Serie}{Folio}.pdf"
+            mail.BytesFile2 = archivo_xml
+            mail.FileName2 = $"{Serie}{Folio}.xml "
             Try
                 es.sendEmailWithFileBytes(mail)
                 Me.Reiniciar()

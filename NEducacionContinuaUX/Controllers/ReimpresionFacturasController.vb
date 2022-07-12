@@ -15,6 +15,7 @@
     End Function
 
     Function validarMatricula(Matricula As String) As String
+        Matricula = Matricula.ToUpper()
         If (Matricula.Length() < 9 Or Matricula.Length() > 9) Then
             MessageBox.Show("La clave ingresada no existe, favor de ingresar una clave valida")
             Return "False"

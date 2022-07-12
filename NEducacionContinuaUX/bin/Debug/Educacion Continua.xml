@@ -242,10 +242,11 @@ Educacion Continua
  Path del archivo a adjuntar
  </summary>
 </member>
-<member name="P:NEducacionContinuaUX.EmailModel.BytesFile">
+<member name="P:NEducacionContinuaUX.EmailModel.File2">
  <summary>
  Arreglo de bytes de un archivo a adjuntar
  </summary>
+ 
 </member>
 <member name="M:NEducacionContinuaUX.UXServiceEmail.sendEmail(NEducacionContinuaUX.EmailModel)">
  <summary>

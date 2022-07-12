@@ -18,10 +18,16 @@ Public Class EmailModel
     ''' Path del archivo a adjuntar
     ''' </summary>
     Public Property File As String
-	''' <summary>
+    ''' <summary>
     ''' Arreglo de bytes de un archivo a adjuntar
     ''' </summary>
-	Public Property BytesFile As Byte()
+    ''' 
+    Public Property File2 As String
+    Public Property BytesFile As Byte()
 
     Public Property FileName As String
+
+    Public Property BytesFile2 As Byte()
+
+    Public Property FileName2 As String
 End Class

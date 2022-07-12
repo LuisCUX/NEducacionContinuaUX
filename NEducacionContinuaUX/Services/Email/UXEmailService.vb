@@ -77,11 +77,13 @@ Public Class UXServiceEmail
         Dim client As HttpClient = New HttpClient()
 
         Try
-            Dim URL = $"{ EnviromentService.UXServiceEmail }/api/email/send-file-base"
+            Dim URL = $"{ EnviromentService.UXServiceEmail }/api/email/send-file-base-double"
 
             Dim base64 = Convert.ToBase64String(emailModel.BytesFile, 0, emailModel.BytesFile.Length)
+            Dim base642 = Convert.ToBase64String(emailModel.BytesFile2, 0, emailModel.BytesFile2.Length)
 
             emailModel.File = base64
+            emailModel.File2 = base642
 
             Dim json As String = JsonConvert.SerializeObject(emailModel)
             Dim data As StringContent = New StringContent(json, Encoding.UTF8, "application/json")

@@ -47,6 +47,7 @@ Partial Class ReimpresionFacturasEDC
         Me.btnReenviar = New System.Windows.Forms.Button()
         Me.btnReimprimir = New System.Windows.Forms.Button()
         Me.btnSalir = New System.Windows.Forms.Button()
+        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -346,4 +347,5 @@ Partial Class ReimpresionFacturasEDC
     Friend WithEvents IVA As DataGridViewTextBoxColumn
     Friend WithEvents Descuento As DataGridViewTextBoxColumn
     Friend WithEvents Total As DataGridViewTextBoxColumn
+    Friend WithEvents SaveFileDialog1 As SaveFileDialog
 End Class
