@@ -55,11 +55,11 @@ Partial Class PrincipalView
         Me.CancelaciónDeFacturasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CambioDeFormaDePagoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReportesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DEVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CambiarConexiónToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DesarrolloToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProduccionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Form1ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DEVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip.SuspendLayout()
         Me.MenuStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -270,13 +270,6 @@ Partial Class PrincipalView
         Me.ReportesToolStripMenuItem.Size = New System.Drawing.Size(65, 20)
         Me.ReportesToolStripMenuItem.Text = "Reportes"
         '
-        'DEVToolStripMenuItem
-        '
-        Me.DEVToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CambiarConexiónToolStripMenuItem, Me.Form1ToolStripMenuItem})
-        Me.DEVToolStripMenuItem.Name = "DEVToolStripMenuItem"
-        Me.DEVToolStripMenuItem.Size = New System.Drawing.Size(40, 20)
-        Me.DEVToolStripMenuItem.Text = "DEV"
-        '
         'CambiarConexiónToolStripMenuItem
         '
         Me.CambiarConexiónToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DesarrolloToolStripMenuItem, Me.ProduccionToolStripMenuItem})
@@ -301,6 +294,13 @@ Partial Class PrincipalView
         Me.Form1ToolStripMenuItem.Name = "Form1ToolStripMenuItem"
         Me.Form1ToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.Form1ToolStripMenuItem.Text = "form1"
+        '
+        'DEVToolStripMenuItem
+        '
+        Me.DEVToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CambiarConexiónToolStripMenuItem, Me.Form1ToolStripMenuItem})
+        Me.DEVToolStripMenuItem.Name = "DEVToolStripMenuItem"
+        Me.DEVToolStripMenuItem.Size = New System.Drawing.Size(40, 20)
+        Me.DEVToolStripMenuItem.Text = "DEV"
         '
         'PrincipalView
         '
@@ -363,9 +363,9 @@ Partial Class PrincipalView
     Friend WithEvents AltaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ModificaciónToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CatalogoToolStripMenuItem As ToolStripMenuItem
+    Private WithEvents DEVToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CambiarConexiónToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DesarrolloToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ProduccionToolStripMenuItem As ToolStripMenuItem
-    Private WithEvents DEVToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Form1ToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -500,7 +500,7 @@ Public Class GestionExternosController
         End If
 
         Try
-            My.Computer.FileSystem.CopyFile($"\\{EnviromentService.documentosIP}\Documentos\ConstanciaFiscal\{RFC}.pdf",
+            My.Computer.FileSystem.CopyFile($"\\{EnviromentService.documentosIP}\Sistemas\Documentos\ConstanciaFiscalEDC\{RFC}.pdf",
             Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal\" & RFC & ".pdf",
             FileIO.UIOption.AllDialogs,
             FileIO.UICancelOption.ThrowException)
@@ -515,7 +515,7 @@ Public Class GestionExternosController
         If fileDialog.ShowDialog = DialogResult.OK Then
             Try
                 My.Computer.FileSystem.CopyFile(fileDialog.FileName,
-                $"\\{EnviromentService.documentosIP}\Documentos\ConstanciaFiscal\" & RFC & ".pdf",
+                $"\\{EnviromentService.documentosIP}\Sistemas\Documentos\ConstanciaFiscalEDC\" & RFC & ".pdf",
                 FileIO.UIOption.AllDialogs,
                 FileIO.UICancelOption.ThrowException)
                 MessageBox.Show("Constancia registrada correctamente")
@@ -531,7 +531,7 @@ Public Class GestionExternosController
         End If
 
         Try
-            My.Computer.FileSystem.CopyFile($"\\{EnviromentService.documentosIP}\Documentos\ConstanciaFiscal\{RFC}.pdf",
+            My.Computer.FileSystem.CopyFile($"\\{EnviromentService.documentosIP}\Sistemas\Documentos\ConstanciaFiscalEDC\{RFC}.pdf",
             Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\ConstanciaFiscal\" & RFC & ".pdf",
             FileIO.UIOption.AllDialogs,
             FileIO.UICancelOption.ThrowException)

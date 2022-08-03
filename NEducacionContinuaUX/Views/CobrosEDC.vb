@@ -556,6 +556,7 @@ Public Class CobrosEDC
         Dim RFCTimbrar As String
         Dim RegFiscalTimbrar As String
         Dim UsoCFDITimbrar As String
+        Dim cpTimbrar As String
         Dim tablas As String()
         If (tipoMatricula = "EX") Then
             tablas = {"portal_registroExterno", "portal_reRFC"}
@@ -568,13 +569,13 @@ Public Class CobrosEDC
         Dim IDResRegCF As Integer = db.exectSQLQueryScalar($"SELECT id_res_cfdi_regimen FROM {tablas(1)} AS R
                                                             INNER JOIN portal_catRFC AS RFC ON R.id_rfc = RFC.id_rfc
                                                             WHERE RFC.rfc = '{RFCDefault}' AND R.activo = 1")
-        If (IDResRegCF = 254) Then
+        If (IDResRegCF = 254 Or IDResRegCF = 0) Then
             Dim resulta As DialogResult = MessageBox.Show("La clave ingresada no tiene registrados regimen fiscal ni uso de CFDI, no se podrá cobrar con datos fiscales hasta que sean actualizados, ¿Desea continuar con el cobro sin datos fiscales?", "", MessageBoxButtons.YesNo)
             If (resulta <> 6) Then
                 Exit Sub
             End If
         End If
-        If (lblRFCtxt.Text <> "XAXX010101000" And IDResRegCF <> 254) Then
+        If (lblRFCtxt.Text <> "XAXX010101000" And IDResRegCF <> 254 And IDResRegCF <> 0) Then
             Dim result As DialogResult = MessageBox.Show("¿Quiere usar datos fiscales?", "", MessageBoxButtons.YesNo)
             If (result = 6) Then
                 ObjectBagService.setItem("Matricula", Matricula)
@@ -583,17 +584,20 @@ Public Class CobrosEDC
                 RegFiscalTimbrar = ObjectBagService.getItem("RegFiscalTimbrar")
                 UsoCFDITimbrar = ObjectBagService.getItem("UsoCFDITimbrar")
                 NombreTimbrar = ObjectBagService.getItem("NombreTimbrar")
+                cpTimbrar = ObjectBagService.getItem("cpTimbrar")
             Else
                 RFCTimbrar = "XAXX010101000"
                 RegFiscalTimbrar = "616"
                 UsoCFDITimbrar = "S01"
                 NombreTimbrar = lblNombretxt.Text
+                cpTimbrar = EnviromentService.CP
             End If
         Else
             RFCTimbrar = "XAXX010101000"
             RegFiscalTimbrar = "616"
             UsoCFDITimbrar = "S01"
             NombreTimbrar = lblNombretxt.Text
+            cpTimbrar = EnviromentService.CP
         End If
         If (creditoband = True) Then
             If (tipoMatricula = "EX") Then
@@ -632,7 +636,7 @@ Public Class CobrosEDC
             formaPagoClave = cbFormaPago.SelectedValue
             formaPagoID = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatFormaPago WHERE Forma_Pago = '{formaPagoClave}'")
         End If
-        Dim IDXML As Integer = co.Cobrar(listaconceptosFinal, formaPagoClave, formaPagoID, Matricula, RFCTimbrar, NombreTimbrar, lblTotal.Text, False, tipocliente, lblCPtxt.Text, RegFiscalTimbrar, UsoCFDITimbrar)
+        Dim IDXML As Integer = co.Cobrar(listaconceptosFinal, formaPagoClave, formaPagoID, Matricula, RFCTimbrar, NombreTimbrar, lblTotal.Text, False, tipocliente, cpTimbrar, RegFiscalTimbrar, UsoCFDITimbrar)
 
 
         ''---------------------------------------------------------REGISTRO DE FORMA DE PAGO---------------------------------------------------------

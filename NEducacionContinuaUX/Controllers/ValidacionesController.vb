@@ -93,7 +93,7 @@ Public Class ValidacionesController
         Dim tableDatos As DataTable = db.getDataTableFromSQL($"SELECT UPPER(C.nombre + ' ' + E.paterno + ' ' + E.materno)As Nombre, c.correo, RFC.rfc, REG.ID_Contador, CF.clave_usoCFDI, RE.cp FROM portal_reRFC AS RE
                                                                INNER JOIN portal_registroExterno AS E ON E.id_registro = RE.id_registro
                                                                INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
-                                                               INNER JOIN ing_res_usoCFDI_regimenFiscal AS RF ON RF.id_res_usoCFDI_regimenFiscal = RE.id_res_cfdi_regimen
+                                                               LEFT JOIN ing_res_usoCFDI_regimenFiscal AS RF ON RF.id_res_usoCFDI_regimenFiscal = RE.id_res_cfdi_regimen
                                                                LEFT JOIN ing_cat_usoCFDI AS CF ON CF.clave_usoCFDI = RF.clave_usoCFDI
                                                                LEFT JOIN ing_Cat_RegFis AS REG ON REG.ID_Contador = RF.clave_regimeFiscal
                                                                INNER JOIN portal_catRFC AS RFC ON RFC.id_rfc = RE.id_rfc AND RE.Activo = 1
@@ -160,7 +160,7 @@ Public Class ValidacionesController
         Dim tableDatos As DataTable = db.getDataTableFromSQL($"SELECT UPPER(C.nombre + ' ' + E.apellido_paterno + ' ' + E.apellido_materno)As Nombre, c.correo, RFC.rfc, REG.ID_Contador, CF.clave_usoCFDI, c.cp FROM portal_rcRFC AS RE
                                                                INNER JOIN portal_registroCongreso AS E ON E.id_registro = RE.id_registro
                                                                INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
-                                                               INNER JOIN ing_res_usoCFDI_regimenFiscal AS RF ON RF.id_res_usoCFDI_regimenFiscal = RE.id_res_cfdi_regimen
+                                                               LEFT JOIN ing_res_usoCFDI_regimenFiscal AS RF ON RF.id_res_usoCFDI_regimenFiscal = RE.id_res_cfdi_regimen
                                                                LEFT JOIN ing_cat_usoCFDI AS CF ON CF.clave_usoCFDI = RF.clave_usoCFDI
                                                                LEFT JOIN ing_Cat_RegFis AS REG ON REG.ID_Contador = RF.clave_regimeFiscal
                                                                INNER JOIN portal_catRFC AS RFC ON RFC.id_rfc = RE.id_rfc AND RE.Activo = 1

@@ -89,6 +89,7 @@ Public Class ModalDatosFiscalesCobrosEDC
         ObjectBagService.setItem("RegFiscalTimbrar", lblRegimen.Text.Substring(0, 3))
         ObjectBagService.setItem("UsoCFDITimbrar", lblUsoCFDI.Text)
         ObjectBagService.setItem("NombreTimbrar", lblRazonSocial.Text)
+        ObjectBagService.setItem("cpTimbrar", lblCP.Text)
         Me.Close()
     End Sub
 End Class
