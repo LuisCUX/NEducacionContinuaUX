@@ -50,6 +50,7 @@ Public Class ReimpresionFacturasEDC
     Private Sub btnBuscarFolio_Click(sender As Object, e As EventArgs) Handles btnBuscarFolio.Click
         Folio = txtFolio.Text
         IDXML = db.exectSQLQueryScalar($"SELECT ID FROM ing_xmlTimbrados WHERE Folio = '{Folio}'")
+        Matricula = db.exectSQLQueryScalar($"SELECT Matricula_Clave FROM ing_xmlTimbrados WHERE Folio = '{Folio}'")
         If (IDXML <= 0) Then
             MessageBox.Show("El folio ingresado no existe, ingrese un folio valido")
         Else

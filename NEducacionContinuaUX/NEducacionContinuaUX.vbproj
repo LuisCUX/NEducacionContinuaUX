@@ -28,7 +28,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\192.168.1.252\Sistemas\Ejecutables\EducacionContinua\</InstallUrl>
     <TargetCulture>es-MX</TargetCulture>
-    <ApplicationRevision>45</ApplicationRevision>
+    <ApplicationRevision>47</ApplicationRevision>
     <ApplicationVersion>1.1.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -225,11 +225,13 @@
     <Compile Include="Controllers\PagosCreditoController.vb" />
     <Compile Include="Controllers\PagosOpcionalesController.vb" />
     <Compile Include="Controllers\PlanesController.vb" />
+    <Compile Include="Controllers\PolizaController.vb" />
     <Compile Include="Controllers\ReimpresionFacturasController.vb" />
     <Compile Include="Controllers\ValidacionesController.vb" />
     <Compile Include="Models\Concepto.vb" />
     <Compile Include="Models\ConceptoDiferido.vb" />
     <Compile Include="Models\ConceptoNota.vb" />
+    <Compile Include="Models\ConceptoPoliza.vb" />
     <Compile Include="Models\Mail.vb" />
     <Compile Include="Models\User.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -310,6 +312,12 @@
     <Compile Include="Views\Form1.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Views\GenerarPolizaEDC.Designer.vb">
+      <DependentUpon>GenerarPolizaEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GenerarPolizaEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\IVAEDC.Designer.vb">
       <DependentUpon>IVAEDC.vb</DependentUpon>
     </Compile>
@@ -362,6 +370,12 @@
       <DependentUpon>ModalCobrosDiferidosEDC.vb</DependentUpon>
     </Compile>
     <Compile Include="Views\ModalCobrosDiferidosEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ModalCuentasPoliza.Designer.vb">
+      <DependentUpon>ModalCuentasPoliza.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModalCuentasPoliza.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\ModalDatosFiscalesCobrosEDC.Designer.vb">
@@ -498,6 +512,9 @@
     <EmbeddedResource Include="Views\Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\GenerarPolizaEDC.resx">
+      <DependentUpon>GenerarPolizaEDC.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\IVAEDC.resx">
       <DependentUpon>IVAEDC.vb</DependentUpon>
     </EmbeddedResource>
@@ -524,6 +541,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ModalCobrosDiferidosEDC.resx">
       <DependentUpon>ModalCobrosDiferidosEDC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ModalCuentasPoliza.resx">
+      <DependentUpon>ModalCuentasPoliza.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ModalDatosFiscalesCobrosEDC.resx">
       <DependentUpon>ModalDatosFiscalesCobrosEDC.vb</DependentUpon>
@@ -699,6 +719,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="logoprueba.ico" />
+    <None Include="Resources\icons8-powerpoint-40.png" />
     <None Include="Resources\icons8-add-file-40.png" />
     <None Include="Resources\icons8-analyze-40.png" />
     <None Include="Resources\search_doc1.png" />

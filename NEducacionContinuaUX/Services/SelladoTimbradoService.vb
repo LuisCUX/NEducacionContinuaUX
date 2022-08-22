@@ -55,6 +55,7 @@ Public Class SelladoTimbradoService
             xmlResult = respuesta.XMLResultado
             Return xmlResult
         Else
+            db.execSQLQueryWithoutParams($"INSERT INTO ing_BitacoraXML(XML, Fecha, Cajero) VALUES ('{xml}', GETDATE(), '{User.getUsername}')")
             Throw New Exception($"Error al timbrar {respuesta.MensajeError}")
             Return "Error"
         End If

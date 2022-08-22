@@ -131,4 +131,9 @@
         Form1.MdiParent = Me
         Form1.Show()
     End Sub
+
+    Private Sub GeneraciónDePólizaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GeneraciónDePólizaToolStripMenuItem.Click
+        GenerarPolizaEDC.MdiParent = Me
+        GenerarPolizaEDC.Show()
+    End Sub
 End Class
