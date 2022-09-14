@@ -28,7 +28,7 @@ Partial Class GenerarPolizaEDC
         Me.lblFechaInicio = New System.Windows.Forms.Label()
         Me.lblFechaFin = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtNumPoliza = New System.Windows.Forms.TextBox()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.btnPol = New System.Windows.Forms.Button()
         Me.btnReporte = New System.Windows.Forms.Button()
@@ -96,12 +96,12 @@ Partial Class GenerarPolizaEDC
         Me.Label1.TabIndex = 140
         Me.Label1.Text = "Numero de póliza:"
         '
-        'TextBox1
+        'txtNumPoliza
         '
-        Me.TextBox1.Location = New System.Drawing.Point(144, 140)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(82, 20)
-        Me.TextBox1.TabIndex = 141
+        Me.txtNumPoliza.Location = New System.Drawing.Point(144, 140)
+        Me.txtNumPoliza.Name = "txtNumPoliza"
+        Me.txtNumPoliza.Size = New System.Drawing.Size(82, 20)
+        Me.txtNumPoliza.TabIndex = 141
         '
         'btnPol
         '
@@ -135,7 +135,7 @@ Partial Class GenerarPolizaEDC
         Me.ClientSize = New System.Drawing.Size(551, 290)
         Me.Controls.Add(Me.btnPol)
         Me.Controls.Add(Me.btnReporte)
-        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.txtNumPoliza)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.dtPickerFin)
         Me.Controls.Add(Me.dtPickerInicio)
@@ -156,7 +156,7 @@ Partial Class GenerarPolizaEDC
     Friend WithEvents lblFechaInicio As Label
     Friend WithEvents lblFechaFin As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtNumPoliza As TextBox
     Friend WithEvents btnReporte As Button
     Friend WithEvents btnPol As Button
     Friend WithEvents SaveFileDialog1 As SaveFileDialog

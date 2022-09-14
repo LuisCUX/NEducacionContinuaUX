@@ -6,6 +6,12 @@
         Else
             DEVToolStripMenuItem.Visible = False
         End If
+
+        If (User.getPerfil = "Contabilidad") Then
+            ContabilidadToolStripMenuItem.Visible = True
+        Else
+            ContabilidadToolStripMenuItem.Visible = False
+        End If
     End Sub
 
     Private Sub CobrosToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles CobrosToolStripMenuItem1.Click

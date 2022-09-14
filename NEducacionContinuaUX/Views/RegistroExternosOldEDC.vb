@@ -45,7 +45,7 @@ Public Class RegistroExternosOldEDC
 
     Private Sub btnGuardarN_Click(sender As Object, e As EventArgs) Handles btnGuardarN.Click
         Dim validaTXT As Object() = re.validaTextboxDatos(txtNombre, txtAp_Pat, txtAp_Mat, txtDireccion, txtColonia, txtCorreo, txtCP, txtTelefono, cbMunicipio)
-        Dim validaCorreo As Object() = re.validaCorreo(txtCorreo.Text, "Nuevo", 0)
+        'Dim validaCorreo As Object() = re.validaCorreo(txtCorreo.Text, "Nuevo", 0)
         Dim RFC As String = txtRFC.Text
 
         If (validaTXT(0) = False And matriculaExterna = False) Then
@@ -53,10 +53,10 @@ Public Class RegistroExternosOldEDC
             Return
         End If
 
-        If (validaCorreo(0) = False) Then
-            MessageBox.Show(validaCorreo(1))
-            Return
-        End If
+        'If (validaCorreo(0) = False) Then
+        '    MessageBox.Show(validaCorreo(1))
+        '    Return
+        'End If
 
         Dim datosFiscales As Boolean
 

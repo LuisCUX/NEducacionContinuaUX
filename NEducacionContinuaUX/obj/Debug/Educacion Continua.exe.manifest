@@ -264,14 +264,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Educacion Continua.exe" size="10782208">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Educacion Continua.exe" size="10784256">
       <assemblyIdentity name="Educacion Continua" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>aIY7k8Oo6fEAD4VWKkx1KQ/ohrgc5kpB9FZOcw7120I=</dsig:DigestValue>
+        <dsig:DigestValue>qvK6twf4h+dDS3avzwAykh4ru+gvZcuk8SOJHDFCKGY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

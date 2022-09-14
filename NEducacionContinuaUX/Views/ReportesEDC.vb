@@ -1,4 +1,6 @@
-﻿Public Class ReportesEDC
+﻿Imports System.IO
+
+Public Class ReportesEDC
     Dim db As DataBaseService = New DataBaseService()
     Dim rep As ImpresionReportesService = New ImpresionReportesService()
     Private Sub ReportesEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -24,7 +26,7 @@
             Dim tableCajeros2 As DataTable = db.getDataTableFromSQL($"SELECT ID, Username FROM ing_Usuarios WHERE Activo = 1")
             ComboboxService.llenarCombobox(cbCajero2, tableCajeros2, "ID", "Username")
             cbCajero2.Enabled = True
-        ElseIf (cbTIpoReporte2.Text = "Global") Then
+        ElseIf (cbTipoReporte2.Text = "Global") Then
             cbCajero2.DataSource = Nothing
             cbCajero2.Enabled = False
         End If
@@ -40,14 +42,18 @@
         End If
         rep.AgregarParametros("FechaFin", Me.obtenerFechaFormato(dtPickerFin))
         rep.AgregarParametros("FechaInicio", Me.obtenerFechaFormato(dtPickerInicio))
-        rep.MostrarReporte()
+        Dim pdf As Byte()
+        pdf = rep.obtenerReporteByte()
+        File.WriteAllBytes("C:\Users\Luis\Documents\YourPDF.pdf", pdf)
+        File.Open("C:\Users\Luis\Documents\YourPDF.pdf", ".pdf")
+        ''rep.MostrarReporte()
     End Sub
 
     Private Sub btnGenerar2_Click(sender As Object, e As EventArgs) Handles btnGenerar2.Click
         If (cbTipoReporte2.Text = "Individual") Then
             rep.AgregarFuente("ReporteIngresosDiario.rpt")
             rep.AgregarParametros("Usuario", cbCajero2.Text)
-        ElseIf (cbTIpoReporte2.Text = "Global") Then
+        ElseIf (cbTipoReporte2.Text = "Global") Then
             rep.AgregarFuente("ReporteIngresosDiario.rpt")
             rep.AgregarParametros("Usuario", "")
         End If
