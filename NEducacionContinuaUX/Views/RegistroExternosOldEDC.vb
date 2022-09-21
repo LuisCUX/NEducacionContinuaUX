@@ -84,12 +84,12 @@ Public Class RegistroExternosOldEDC
 
         Dim idResRegCFDI As Integer = db.exectSQLQueryScalar($"SELECT id_res_usoCFDI_regimenFiscal FROM ing_res_usoCFDI_regimenFiscal WHERE clave_usoCFDI = '{cbUsoCFDI.SelectedValue}' AND clave_regimeFiscal = '{cbRegimenFiscal.SelectedValue}'")
 
-        re.RegistroExterno(matriculaExterna, Matricula, txtCorreo.Text, txtNombre.Text, txtDireccion.Text, txtColonia.Text, txtCP.Text, cbMunicipio.SelectedValue, tipocliente, txtTelefono.Text, 104, txtAp_Pat.Text, txtAp_Mat.Text, lblMatriculaEXString.Text, chbDatosFiscales.Checked, RFC, txtDireccionF.Text, 0, txtColoniaF.Text, txtCPF.Text, txtCiudad.Text, txtTelefonoF.Text, txtCorreoF.Text, cbMunicipioF.SelectedValue, txtNR.Text, idResRegCFDI)
+        re.RegistroExterno(matriculaExterna, Matricula, txtCorreo.Text, txtNombre.Text, txtDireccion.Text, txtColonia.Text, txtCP.Text, txtCiudadPersonal.Text, cbMunicipio.SelectedValue, tipocliente, txtTelefono.Text, 104, txtAp_Pat.Text, txtAp_Mat.Text, lblMatriculaEXString.Text, chbDatosFiscales.Checked, RFC, txtDireccionF.Text, 0, txtColoniaF.Text, txtCPF.Text, txtCiudad.Text, txtTelefonoF.Text, txtCorreoF.Text, cbMunicipioF.SelectedValue, txtNR.Text, idResRegCFDI)
     End Sub
 
     Private Sub btnGuardarEdit_Click(sender As Object, e As EventArgs) Handles btnGuardarEdit.Click
         Dim validaTXT As Object() = re.validaTextboxDatos(txtNombreEd, txtAp_PatEd, txtAp_MatEd, txtDireccionEd, txtColoniaEd, txtCorreoEd, txtCPEd, txtTelefonoEd, cbMunicipioEd)
-        Dim validaCorreo As Object() = re.validaCorreo(txtCorreoEd.Text, "Edicion", Matricula)
+        ''Dim validaCorreo As Object() = re.validaCorreo(txtCorreoEd.Text, "Edicion", Matricula)
 
         If (validaTXT(0) = False) Then
             MessageBox.Show(validaTXT(1))
@@ -104,10 +104,10 @@ Public Class RegistroExternosOldEDC
             End If
         End If
 
-        If (validaCorreo(0) = False) Then
-            MessageBox.Show(validaCorreo(1))
-            Return
-        End If
+        'If (validaCorreo(0) = False) Then
+        '    MessageBox.Show(validaCorreo(1))
+        '    Return
+        'End If
 
         Dim tipocliente As Integer
         If (chbDatosFiscales.Checked = True) Then
@@ -116,7 +116,7 @@ Public Class RegistroExternosOldEDC
             tipocliente = 2
         End If
 
-        re.EdicionExterno(txtMatriculaEd.Text, txtCorreoEd.Text, txtNombreEd.Text, txtDireccionEd.Text, txtColoniaEd.Text, txtCPEd.Text, cbMunicipioEd.SelectedValue, tipocliente, txtTelefonoEd.Text, 104, txtAp_PatEd.Text, txtAp_MatEd.Text, matriculaExterna, chbDatosFiscalesEdit.Checked, txtRFCEd.Text, txtDireccionFEd.Text, 0, txtColoniaFEd.Text, txtCPFEd.Text, txtCiudadFEd.Text, txtTelefonoFEd.Text, txtCorreoFEd.Text, cbMunicipioFEd.SelectedValue, txtNREd.Text, cbRegimenFiscalEd.SelectedValue, cbUsoCFDIEd.SelectedValue)
+        re.EdicionExterno(txtMatriculaEd.Text, txtCorreoEd.Text, txtNombreEd.Text, txtDireccionEd.Text, txtColoniaEd.Text, txtCPEd.Text, txtCiudadEd.Text, cbMunicipioEd.SelectedValue, tipocliente, txtTelefonoEd.Text, 104, txtAp_PatEd.Text, txtAp_MatEd.Text, matriculaExterna, chbDatosFiscalesEdit.Checked, txtRFCEd.Text, txtDireccionFEd.Text, 0, txtColoniaFEd.Text, txtCPFEd.Text, txtCiudadFEd.Text, txtTelefonoFEd.Text, txtCorreoFEd.Text, cbMunicipioFEd.SelectedValue, txtNREd.Text, cbRegimenFiscalEd.SelectedValue, cbUsoCFDIEd.SelectedValue)
     End Sub
 
     Private Sub btnBuscarEd_Click(sender As Object, e As EventArgs) Handles btnBuscarEd.Click
@@ -134,20 +134,20 @@ Public Class RegistroExternosOldEDC
 
 
         Matricula = txtMatriculaEd.Text
-        re.buscarDatosMatriculaExterna(Matricula, txtNombreEd, txtAp_PatEd, txtAp_MatEd, txtDireccionEd, txtColoniaEd, cbEstadoEd, cbMunicipioEd, txtCorreoEd, txtCPEd, txtTelefonoEd,
+        re.buscarDatosMatriculaExterna(Matricula, txtNombreEd, txtAp_PatEd, txtAp_MatEd, txtDireccionEd, txtColoniaEd, cbEstadoEd, cbMunicipioEd, txtCiudadEd, txtCorreoEd, txtCPEd, txtTelefonoEd,
                                        txtRFCEd, txtNREd, txtDireccionFEd, txtColoniaFEd, cbEstadoFEd, cbMunicipioFEd, txtCiudadFEd, txtCorreoFEd, txtCPFEd, txtTelefonoFEd, chbDatosFiscalesEdit, panelDatosPersonalesEdit, panelDatosFiscalesEdit, btnGuardarEdit, btnSalirEd, btnLimpiarEd, cbRFCEd)
         lblMatriculaEXEdString.Text = Matricula
     End Sub
 
     Private Sub btnBuscarEC_Click(sender As Object, e As EventArgs) Handles btnBuscarEC.Click
         Matricula = txtClaveEC.Text
-        re.buscarDatosMatriculaEc(txtClaveEC.Text, txtNombreEC, txtApPaternoEC, txtApMaternoEC, txtDireccionEC, txtColoniaEC, cbEstadoEC, cbMunicipioEC, txtCorreoEC, txtCPEC, txtTelefonoEC,
+        re.buscarDatosMatriculaEc(txtClaveEC.Text, txtNombreEC, txtApPaternoEC, txtApMaternoEC, txtDireccionEC, txtColoniaEC, cbEstadoEC, cbMunicipioEC, txtCiudadEC, txtCorreoEC, txtCPEC, txtTelefonoEC,
                                   txtRFCFEC, txtRazonSocialFEC, txtDireccionFEC, txtColoniaFEC, cbEstadoFEC, cbMunicipioFEC, txtCiudadFEC, txtCorreoFEC, txtCPFEC, txtTelefonoFEC, chbDatosFiscalesEC, panelDatosPersonalesEC, panelDatosFiscalesEC, btnGuardarEC, btnSalirEC, btnLimpiarEC, cbRFCEC)
     End Sub
 
     Private Sub btnGuardarEC_Click(sender As Object, e As EventArgs) Handles btnGuardarEC.Click
         Dim validaTXT As Object() = re.validaTextboxDatos(txtNombreEC, txtApPaternoEC, txtApMaternoEC, txtDireccionEC, txtColoniaEC, txtCorreoEC, txtCPEC, txtTelefonoEC, cbMunicipioEC)
-        Dim validaCorreo As Object() = re.validaCorreo(txtCorreoEd.Text, "Edicion", Matricula)
+        ''Dim validaCorreo As Object() = re.validaCorreo(txtCorreoEd.Text, "Edicion", Matricula)
 
         If (validaTXT(0) = False) Then
             MessageBox.Show(validaTXT(1))
@@ -162,10 +162,10 @@ Public Class RegistroExternosOldEDC
             End If
         End If
 
-        If (validaCorreo(0) = False) Then
-            MessageBox.Show(validaCorreo(1))
-            Return
-        End If
+        'If (validaCorreo(0) = False) Then
+        '    MessageBox.Show(validaCorreo(1))
+        '    Return
+        'End If
 
         Dim tipocliente As Integer
         If (chbDatosFiscalesEC.Checked = True) Then
@@ -174,7 +174,7 @@ Public Class RegistroExternosOldEDC
             tipocliente = 2
         End If
 
-        re.EdicionEC(txtClaveEC.Text, txtCorreoEC.Text, txtNombreEC.Text, txtDireccionEC.Text, txtColoniaEC.Text, txtCPEC.Text, cbMunicipioEC.SelectedValue, tipocliente, txtTelefonoEC.Text, 104, txtApPaternoEC.Text, txtApMaternoEC.Text, chbDatosFiscalesEC.Checked,
+        re.EdicionEC(txtClaveEC.Text, txtCorreoEC.Text, txtNombreEC.Text, txtDireccionEC.Text, txtColoniaEC.Text, txtCPEC.Text, txtCiudadEC.Text, cbMunicipioEC.SelectedValue, tipocliente, txtTelefonoEC.Text, 104, txtApPaternoEC.Text, txtApMaternoEC.Text, chbDatosFiscalesEC.Checked,
                      txtRFCFEC.Text, txtDireccionFEC.Text, 0, txtColoniaFEC.Text, txtCPFEC.Text, txtCiudadFEC.Text, txtTelefonoFEC.Text, txtCorreoFEC.Text, cbMunicipioFEC.SelectedValue, txtRazonSocialFEC.Text, cbRegimenFiscalEC.SelectedValue, cbUsoCFDIFEC.SelectedValue)
     End Sub
 
@@ -314,7 +314,7 @@ Public Class RegistroExternosOldEDC
     Private Sub cbExterno_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbExterno.SelectionChangeCommitted
         Try
             Matricula = cbExterno.SelectedValue
-            re.buscarDatosMatriculaExterna(cbExterno.SelectedValue, txtNombreEd, txtAp_PatEd, txtAp_MatEd, txtDireccionEd, txtColoniaEd, cbEstadoEd, cbMunicipioEd, txtCorreoEd, txtCPEd, txtTelefonoEd,
+            re.buscarDatosMatriculaExterna(cbExterno.SelectedValue, txtNombreEd, txtAp_PatEd, txtAp_MatEd, txtDireccionEd, txtColoniaEd, cbEstadoEd, cbMunicipioEd, txtCiudadEd, txtCorreoEd, txtCPEd, txtTelefonoEd,
                                        txtRFCEd, txtNREd, txtDireccionFEd, txtColoniaFEd, cbEstadoFEd, cbMunicipioFEd, txtCiudadFEd, txtCorreoFEd, txtCPFEd, txtTelefonoFEd, chbDatosFiscalesEdit, panelDatosPersonalesEdit, panelDatosFiscalesEdit, btnGuardarEdit, btnSalirEd, btnLimpiarEd, cbRFCEd)
             lblMatriculaEXEdString.Text = Matricula
         Catch ex As Exception
@@ -360,7 +360,7 @@ Public Class RegistroExternosOldEDC
     Private Sub cbCongresos_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbCongresos.SelectionChangeCommitted
         Try
             Matricula = cbCongresos.SelectedValue
-            re.buscarDatosMatriculaEc(Matricula, txtNombreEC, txtApPaternoEC, txtApMaternoEC, txtDireccionEC, txtColoniaEC, cbEstadoEC, cbMunicipioEC, txtCorreoEC, txtCPEC, txtTelefonoEC,
+            re.buscarDatosMatriculaEc(Matricula, txtNombreEC, txtApPaternoEC, txtApMaternoEC, txtDireccionEC, txtColoniaEC, cbEstadoEC, cbMunicipioEC, txtCiudadEC, txtCorreoEC, txtCPEC, txtTelefonoEC,
                                   txtRFCFEC, txtRazonSocialFEC, txtDireccionFEC, txtColoniaFEC, cbEstadoFEC, cbMunicipioFEC, txtCiudadFEC, txtCorreoFEC, txtCPFEC, txtTelefonoFEC, chbDatosFiscalesEC, panelDatosPersonalesEC, panelDatosFiscalesEC, btnGuardarEC, btnSalirEC, btnLimpiarEC, cbRFCEC)
         Catch ex As Exception
 

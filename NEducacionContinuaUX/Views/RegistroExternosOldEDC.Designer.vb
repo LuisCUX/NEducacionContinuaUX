@@ -222,6 +222,12 @@ Partial Class RegistroExternosOldEDC
         Me.Label40 = New System.Windows.Forms.Label()
         Me.btnBuscarEC = New System.Windows.Forms.Button()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.txtCiudadPersonal = New System.Windows.Forms.TextBox()
+        Me.txtCiudadEd = New System.Windows.Forms.TextBox()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.txtCiudadEC = New System.Windows.Forms.TextBox()
+        Me.Label16 = New System.Windows.Forms.Label()
         Me.tabExternos.SuspendLayout()
         Me.tabRegistroExternos.SuspendLayout()
         Me.panelDatosFiscales.SuspendLayout()
@@ -254,7 +260,7 @@ Partial Class RegistroExternosOldEDC
         Me.tabExternos.Location = New System.Drawing.Point(5, 72)
         Me.tabExternos.Name = "tabExternos"
         Me.tabExternos.SelectedIndex = 0
-        Me.tabExternos.Size = New System.Drawing.Size(1030, 631)
+        Me.tabExternos.Size = New System.Drawing.Size(1030, 660)
         Me.tabExternos.TabIndex = 14
         '
         'tabRegistroExternos
@@ -269,7 +275,7 @@ Partial Class RegistroExternosOldEDC
         Me.tabRegistroExternos.Location = New System.Drawing.Point(4, 22)
         Me.tabRegistroExternos.Name = "tabRegistroExternos"
         Me.tabRegistroExternos.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabRegistroExternos.Size = New System.Drawing.Size(1022, 605)
+        Me.tabRegistroExternos.Size = New System.Drawing.Size(1022, 634)
         Me.tabRegistroExternos.TabIndex = 0
         Me.tabRegistroExternos.Text = "Alta de externos"
         '
@@ -277,7 +283,7 @@ Partial Class RegistroExternosOldEDC
         '
         Me.btnLimpiar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
         Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnLimpiar.Location = New System.Drawing.Point(301, 535)
+        Me.btnLimpiar.Location = New System.Drawing.Point(301, 570)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(75, 55)
         Me.btnLimpiar.TabIndex = 68
@@ -287,7 +293,7 @@ Partial Class RegistroExternosOldEDC
         '
         Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
         Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnSalir.Location = New System.Drawing.Point(683, 535)
+        Me.btnSalir.Location = New System.Drawing.Point(690, 570)
         Me.btnSalir.Name = "btnSalir"
         Me.btnSalir.Size = New System.Drawing.Size(75, 55)
         Me.btnSalir.TabIndex = 67
@@ -297,7 +303,7 @@ Partial Class RegistroExternosOldEDC
         '
         Me.btnGuardarN.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
         Me.btnGuardarN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnGuardarN.Location = New System.Drawing.Point(492, 535)
+        Me.btnGuardarN.Location = New System.Drawing.Point(492, 570)
         Me.btnGuardarN.Name = "btnGuardarN"
         Me.btnGuardarN.Size = New System.Drawing.Size(75, 55)
         Me.btnGuardarN.TabIndex = 24
@@ -308,7 +314,7 @@ Partial Class RegistroExternosOldEDC
         Me.chbDatosFiscales.AutoSize = True
         Me.chbDatosFiscales.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chbDatosFiscales.ForeColor = System.Drawing.SystemColors.Control
-        Me.chbDatosFiscales.Location = New System.Drawing.Point(439, 236)
+        Me.chbDatosFiscales.Location = New System.Drawing.Point(439, 271)
         Me.chbDatosFiscales.Name = "chbDatosFiscales"
         Me.chbDatosFiscales.Size = New System.Drawing.Size(160, 22)
         Me.chbDatosFiscales.TabIndex = 66
@@ -346,7 +352,7 @@ Partial Class RegistroExternosOldEDC
         Me.panelDatosFiscales.Controls.Add(Me.lbldatosFiscales)
         Me.panelDatosFiscales.Controls.Add(Me.Label3)
         Me.panelDatosFiscales.Controls.Add(Me.Label4)
-        Me.panelDatosFiscales.Location = New System.Drawing.Point(6, 264)
+        Me.panelDatosFiscales.Location = New System.Drawing.Point(6, 299)
         Me.panelDatosFiscales.Name = "panelDatosFiscales"
         Me.panelDatosFiscales.Size = New System.Drawing.Size(1010, 265)
         Me.panelDatosFiscales.TabIndex = 1
@@ -517,9 +523,9 @@ Partial Class RegistroExternosOldEDC
         Me.lblCiudad.ForeColor = System.Drawing.SystemColors.Control
         Me.lblCiudad.Location = New System.Drawing.Point(12, 181)
         Me.lblCiudad.Name = "lblCiudad"
-        Me.lblCiudad.Size = New System.Drawing.Size(54, 16)
+        Me.lblCiudad.Size = New System.Drawing.Size(118, 16)
         Me.lblCiudad.TabIndex = 63
-        Me.lblCiudad.Text = "Ciudad:"
+        Me.lblCiudad.Text = "Ciudad/Localidad:"
         '
         'cbEstadoF
         '
@@ -655,6 +661,8 @@ Partial Class RegistroExternosOldEDC
         '
         'panelDatosPersonales
         '
+        Me.panelDatosPersonales.Controls.Add(Me.txtCiudadPersonal)
+        Me.panelDatosPersonales.Controls.Add(Me.Label13)
         Me.panelDatosPersonales.Controls.Add(Me.cbUX)
         Me.panelDatosPersonales.Controls.Add(Me.lblMatriculaEXString)
         Me.panelDatosPersonales.Controls.Add(Me.lblMatriculaEX)
@@ -686,7 +694,7 @@ Partial Class RegistroExternosOldEDC
         Me.panelDatosPersonales.Controls.Add(Me.lbldatosPersonales)
         Me.panelDatosPersonales.Location = New System.Drawing.Point(6, 6)
         Me.panelDatosPersonales.Name = "panelDatosPersonales"
-        Me.panelDatosPersonales.Size = New System.Drawing.Size(1010, 224)
+        Me.panelDatosPersonales.Size = New System.Drawing.Size(1010, 259)
         Me.panelDatosPersonales.TabIndex = 0
         '
         'cbUX
@@ -744,7 +752,7 @@ Partial Class RegistroExternosOldEDC
         Me.cbMunicipio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbMunicipio.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbMunicipio.FormattingEnabled = True
-        Me.cbMunicipio.Location = New System.Drawing.Point(131, 188)
+        Me.cbMunicipio.Location = New System.Drawing.Point(130, 185)
         Me.cbMunicipio.Name = "cbMunicipio"
         Me.cbMunicipio.Size = New System.Drawing.Size(341, 24)
         Me.cbMunicipio.TabIndex = 10
@@ -754,7 +762,7 @@ Partial Class RegistroExternosOldEDC
         Me.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbEstado.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbEstado.FormattingEnabled = True
-        Me.cbEstado.Location = New System.Drawing.Point(131, 156)
+        Me.cbEstado.Location = New System.Drawing.Point(130, 157)
         Me.cbEstado.Name = "cbEstado"
         Me.cbEstado.Size = New System.Drawing.Size(341, 24)
         Me.cbEstado.TabIndex = 9
@@ -762,7 +770,7 @@ Partial Class RegistroExternosOldEDC
         'txtTelefono
         '
         Me.txtTelefono.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTelefono.Location = New System.Drawing.Point(851, 134)
+        Me.txtTelefono.Location = New System.Drawing.Point(851, 131)
         Me.txtTelefono.MaxLength = 16
         Me.txtTelefono.Name = "txtTelefono"
         Me.txtTelefono.Size = New System.Drawing.Size(148, 22)
@@ -771,7 +779,7 @@ Partial Class RegistroExternosOldEDC
         'txtCP
         '
         Me.txtCP.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCP.Location = New System.Drawing.Point(594, 134)
+        Me.txtCP.Location = New System.Drawing.Point(594, 131)
         Me.txtCP.MaxLength = 5
         Me.txtCP.Name = "txtCP"
         Me.txtCP.Size = New System.Drawing.Size(143, 22)
@@ -780,7 +788,7 @@ Partial Class RegistroExternosOldEDC
         'txtCorreo
         '
         Me.txtCorreo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCorreo.Location = New System.Drawing.Point(594, 108)
+        Me.txtCorreo.Location = New System.Drawing.Point(594, 105)
         Me.txtCorreo.Name = "txtCorreo"
         Me.txtCorreo.Size = New System.Drawing.Size(405, 22)
         Me.txtCorreo.TabIndex = 11
@@ -788,7 +796,7 @@ Partial Class RegistroExternosOldEDC
         'txtColonia
         '
         Me.txtColonia.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtColonia.Location = New System.Drawing.Point(131, 131)
+        Me.txtColonia.Location = New System.Drawing.Point(130, 131)
         Me.txtColonia.Name = "txtColonia"
         Me.txtColonia.Size = New System.Drawing.Size(341, 22)
         Me.txtColonia.TabIndex = 8
@@ -796,15 +804,15 @@ Partial Class RegistroExternosOldEDC
         'txtDireccion
         '
         Me.txtDireccion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDireccion.Location = New System.Drawing.Point(131, 105)
+        Me.txtDireccion.Location = New System.Drawing.Point(130, 105)
         Me.txtDireccion.Name = "txtDireccion"
-        Me.txtDireccion.Size = New System.Drawing.Size(341, 22)
+        Me.txtDireccion.Size = New System.Drawing.Size(342, 22)
         Me.txtDireccion.TabIndex = 7
         '
         'txtNombre
         '
         Me.txtNombre.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtNombre.Location = New System.Drawing.Point(131, 80)
+        Me.txtNombre.Location = New System.Drawing.Point(130, 80)
         Me.txtNombre.Name = "txtNombre"
         Me.txtNombre.Size = New System.Drawing.Size(341, 22)
         Me.txtNombre.TabIndex = 4
@@ -830,7 +838,7 @@ Partial Class RegistroExternosOldEDC
         Me.lblTelefono.AutoSize = True
         Me.lblTelefono.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTelefono.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblTelefono.Location = New System.Drawing.Point(743, 137)
+        Me.lblTelefono.Location = New System.Drawing.Point(743, 134)
         Me.lblTelefono.Name = "lblTelefono"
         Me.lblTelefono.Size = New System.Drawing.Size(65, 16)
         Me.lblTelefono.TabIndex = 41
@@ -841,7 +849,7 @@ Partial Class RegistroExternosOldEDC
         Me.lblCP.AutoSize = True
         Me.lblCP.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCP.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblCP.Location = New System.Drawing.Point(483, 137)
+        Me.lblCP.Location = New System.Drawing.Point(483, 134)
         Me.lblCP.Name = "lblCP"
         Me.lblCP.Size = New System.Drawing.Size(95, 16)
         Me.lblCP.TabIndex = 40
@@ -852,7 +860,7 @@ Partial Class RegistroExternosOldEDC
         Me.lblCorreo.AutoSize = True
         Me.lblCorreo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCorreo.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblCorreo.Location = New System.Drawing.Point(483, 111)
+        Me.lblCorreo.Location = New System.Drawing.Point(483, 108)
         Me.lblCorreo.Name = "lblCorreo"
         Me.lblCorreo.Size = New System.Drawing.Size(52, 16)
         Me.lblCorreo.TabIndex = 39
@@ -863,7 +871,7 @@ Partial Class RegistroExternosOldEDC
         Me.lblMunicipio.AutoSize = True
         Me.lblMunicipio.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblMunicipio.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblMunicipio.Location = New System.Drawing.Point(12, 191)
+        Me.lblMunicipio.Location = New System.Drawing.Point(12, 188)
         Me.lblMunicipio.Name = "lblMunicipio"
         Me.lblMunicipio.Size = New System.Drawing.Size(68, 16)
         Me.lblMunicipio.TabIndex = 38
@@ -874,7 +882,7 @@ Partial Class RegistroExternosOldEDC
         Me.lblEstado.AutoSize = True
         Me.lblEstado.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEstado.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblEstado.Location = New System.Drawing.Point(12, 159)
+        Me.lblEstado.Location = New System.Drawing.Point(12, 160)
         Me.lblEstado.Name = "lblEstado"
         Me.lblEstado.Size = New System.Drawing.Size(54, 16)
         Me.lblEstado.TabIndex = 37
@@ -992,7 +1000,7 @@ Partial Class RegistroExternosOldEDC
         Me.pageEdicionExternos.Location = New System.Drawing.Point(4, 22)
         Me.pageEdicionExternos.Name = "pageEdicionExternos"
         Me.pageEdicionExternos.Padding = New System.Windows.Forms.Padding(3)
-        Me.pageEdicionExternos.Size = New System.Drawing.Size(1022, 605)
+        Me.pageEdicionExternos.Size = New System.Drawing.Size(1022, 634)
         Me.pageEdicionExternos.TabIndex = 1
         Me.pageEdicionExternos.Text = "Modificación de externos"
         '
@@ -1000,7 +1008,7 @@ Partial Class RegistroExternosOldEDC
         '
         Me.btnLimpiarEd.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
         Me.btnLimpiarEd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnLimpiarEd.Location = New System.Drawing.Point(301, 535)
+        Me.btnLimpiarEd.Location = New System.Drawing.Point(301, 570)
         Me.btnLimpiarEd.Name = "btnLimpiarEd"
         Me.btnLimpiarEd.Size = New System.Drawing.Size(75, 55)
         Me.btnLimpiarEd.TabIndex = 73
@@ -1031,7 +1039,7 @@ Partial Class RegistroExternosOldEDC
         Me.chbDatosFiscalesEdit.AutoSize = True
         Me.chbDatosFiscalesEdit.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chbDatosFiscalesEdit.ForeColor = System.Drawing.SystemColors.Control
-        Me.chbDatosFiscalesEdit.Location = New System.Drawing.Point(438, 233)
+        Me.chbDatosFiscalesEdit.Location = New System.Drawing.Point(439, 271)
         Me.chbDatosFiscalesEdit.Name = "chbDatosFiscalesEdit"
         Me.chbDatosFiscalesEdit.Size = New System.Drawing.Size(160, 22)
         Me.chbDatosFiscalesEdit.TabIndex = 69
@@ -1092,7 +1100,7 @@ Partial Class RegistroExternosOldEDC
         Me.panelDatosFiscalesEdit.Controls.Add(Me.Label29)
         Me.panelDatosFiscalesEdit.Controls.Add(Me.lblColoniaFEd)
         Me.panelDatosFiscalesEdit.Controls.Add(Me.lblDireccionFEd)
-        Me.panelDatosFiscalesEdit.Location = New System.Drawing.Point(6, 261)
+        Me.panelDatosFiscalesEdit.Location = New System.Drawing.Point(6, 296)
         Me.panelDatosFiscalesEdit.Name = "panelDatosFiscalesEdit"
         Me.panelDatosFiscalesEdit.Size = New System.Drawing.Size(1010, 268)
         Me.panelDatosFiscalesEdit.TabIndex = 2
@@ -1246,9 +1254,9 @@ Partial Class RegistroExternosOldEDC
         Me.lblCiudadFEd.ForeColor = System.Drawing.SystemColors.Control
         Me.lblCiudadFEd.Location = New System.Drawing.Point(15, 218)
         Me.lblCiudadFEd.Name = "lblCiudadFEd"
-        Me.lblCiudadFEd.Size = New System.Drawing.Size(54, 16)
+        Me.lblCiudadFEd.Size = New System.Drawing.Size(118, 16)
         Me.lblCiudadFEd.TabIndex = 63
-        Me.lblCiudadFEd.Text = "Ciudad:"
+        Me.lblCiudadFEd.Text = "Ciudad/Localidad:"
         '
         'txtCorreoFEd
         '
@@ -1435,6 +1443,8 @@ Partial Class RegistroExternosOldEDC
         '
         'panelDatosPersonalesEdit
         '
+        Me.panelDatosPersonalesEdit.Controls.Add(Me.txtCiudadEd)
+        Me.panelDatosPersonalesEdit.Controls.Add(Me.Label15)
         Me.panelDatosPersonalesEdit.Controls.Add(Me.lblMatriculaEXEdString)
         Me.panelDatosPersonalesEdit.Controls.Add(Me.lblMatriculaEXEd)
         Me.panelDatosPersonalesEdit.Controls.Add(Me.cbMunicipioEd)
@@ -1460,7 +1470,7 @@ Partial Class RegistroExternosOldEDC
         Me.panelDatosPersonalesEdit.Controls.Add(Me.Label19)
         Me.panelDatosPersonalesEdit.Location = New System.Drawing.Point(6, 50)
         Me.panelDatosPersonalesEdit.Name = "panelDatosPersonalesEdit"
-        Me.panelDatosPersonalesEdit.Size = New System.Drawing.Size(1010, 177)
+        Me.panelDatosPersonalesEdit.Size = New System.Drawing.Size(1010, 215)
         Me.panelDatosPersonalesEdit.TabIndex = 1
         Me.panelDatosPersonalesEdit.Visible = False
         '
@@ -1698,7 +1708,7 @@ Partial Class RegistroExternosOldEDC
         '
         Me.btnSalirEd.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
         Me.btnSalirEd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnSalirEd.Location = New System.Drawing.Point(683, 535)
+        Me.btnSalirEd.Location = New System.Drawing.Point(690, 570)
         Me.btnSalirEd.Name = "btnSalirEd"
         Me.btnSalirEd.Size = New System.Drawing.Size(75, 55)
         Me.btnSalirEd.TabIndex = 70
@@ -1709,7 +1719,7 @@ Partial Class RegistroExternosOldEDC
         '
         Me.btnGuardarEdit.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
         Me.btnGuardarEdit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnGuardarEdit.Location = New System.Drawing.Point(492, 535)
+        Me.btnGuardarEdit.Location = New System.Drawing.Point(492, 570)
         Me.btnGuardarEdit.Name = "btnGuardarEdit"
         Me.btnGuardarEdit.Size = New System.Drawing.Size(75, 55)
         Me.btnGuardarEdit.TabIndex = 68
@@ -1741,7 +1751,7 @@ Partial Class RegistroExternosOldEDC
         Me.tabModDCC.Controls.Add(Me.btnBuscarEC)
         Me.tabModDCC.Location = New System.Drawing.Point(4, 22)
         Me.tabModDCC.Name = "tabModDCC"
-        Me.tabModDCC.Size = New System.Drawing.Size(1022, 605)
+        Me.tabModDCC.Size = New System.Drawing.Size(1022, 634)
         Me.tabModDCC.TabIndex = 2
         Me.tabModDCC.Text = "Modificación Diplomado/Curso/Congreso"
         '
@@ -1749,7 +1759,7 @@ Partial Class RegistroExternosOldEDC
         '
         Me.btnLimpiarEC.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
         Me.btnLimpiarEC.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnLimpiarEC.Location = New System.Drawing.Point(301, 535)
+        Me.btnLimpiarEC.Location = New System.Drawing.Point(301, 570)
         Me.btnLimpiarEC.Name = "btnLimpiarEC"
         Me.btnLimpiarEC.Size = New System.Drawing.Size(75, 55)
         Me.btnLimpiarEC.TabIndex = 85
@@ -1760,7 +1770,7 @@ Partial Class RegistroExternosOldEDC
         '
         Me.btnSalirEC.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
         Me.btnSalirEC.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnSalirEC.Location = New System.Drawing.Point(683, 535)
+        Me.btnSalirEC.Location = New System.Drawing.Point(690, 570)
         Me.btnSalirEC.Name = "btnSalirEC"
         Me.btnSalirEC.Size = New System.Drawing.Size(75, 55)
         Me.btnSalirEC.TabIndex = 84
@@ -1771,7 +1781,7 @@ Partial Class RegistroExternosOldEDC
         '
         Me.btnGuardarEC.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
         Me.btnGuardarEC.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnGuardarEC.Location = New System.Drawing.Point(492, 535)
+        Me.btnGuardarEC.Location = New System.Drawing.Point(492, 570)
         Me.btnGuardarEC.Name = "btnGuardarEC"
         Me.btnGuardarEC.Size = New System.Drawing.Size(75, 55)
         Me.btnGuardarEC.TabIndex = 83
@@ -1802,7 +1812,7 @@ Partial Class RegistroExternosOldEDC
         Me.chbDatosFiscalesEC.AutoSize = True
         Me.chbDatosFiscalesEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chbDatosFiscalesEC.ForeColor = System.Drawing.SystemColors.Control
-        Me.chbDatosFiscalesEC.Location = New System.Drawing.Point(438, 233)
+        Me.chbDatosFiscalesEC.Location = New System.Drawing.Point(439, 271)
         Me.chbDatosFiscalesEC.Name = "chbDatosFiscalesEC"
         Me.chbDatosFiscalesEC.Size = New System.Drawing.Size(160, 22)
         Me.chbDatosFiscalesEC.TabIndex = 79
@@ -1862,7 +1872,7 @@ Partial Class RegistroExternosOldEDC
         Me.panelDatosFiscalesEC.Controls.Add(Me.Label23)
         Me.panelDatosFiscalesEC.Controls.Add(Me.lblColoniaFEC)
         Me.panelDatosFiscalesEC.Controls.Add(Me.lblDireccionFEC)
-        Me.panelDatosFiscalesEC.Location = New System.Drawing.Point(6, 261)
+        Me.panelDatosFiscalesEC.Location = New System.Drawing.Point(6, 296)
         Me.panelDatosFiscalesEC.Name = "panelDatosFiscalesEC"
         Me.panelDatosFiscalesEC.Size = New System.Drawing.Size(1010, 268)
         Me.panelDatosFiscalesEC.TabIndex = 74
@@ -2003,9 +2013,9 @@ Partial Class RegistroExternosOldEDC
         Me.lblCiudadFEC.ForeColor = System.Drawing.SystemColors.Control
         Me.lblCiudadFEC.Location = New System.Drawing.Point(15, 217)
         Me.lblCiudadFEC.Name = "lblCiudadFEC"
-        Me.lblCiudadFEC.Size = New System.Drawing.Size(54, 16)
+        Me.lblCiudadFEC.Size = New System.Drawing.Size(118, 16)
         Me.lblCiudadFEC.TabIndex = 63
-        Me.lblCiudadFEC.Text = "Ciudad:"
+        Me.lblCiudadFEC.Text = "Ciudad/Localidad:"
         '
         'txtCorreoFEC
         '
@@ -2192,6 +2202,8 @@ Partial Class RegistroExternosOldEDC
         '
         'panelDatosPersonalesEC
         '
+        Me.panelDatosPersonalesEC.Controls.Add(Me.txtCiudadEC)
+        Me.panelDatosPersonalesEC.Controls.Add(Me.Label16)
         Me.panelDatosPersonalesEC.Controls.Add(Me.cbMunicipioEC)
         Me.panelDatosPersonalesEC.Controls.Add(Me.cbEstadoEC)
         Me.panelDatosPersonalesEC.Controls.Add(Me.txtTelefonoEC)
@@ -2215,7 +2227,7 @@ Partial Class RegistroExternosOldEDC
         Me.panelDatosPersonalesEC.Controls.Add(Me.Label40)
         Me.panelDatosPersonalesEC.Location = New System.Drawing.Point(6, 50)
         Me.panelDatosPersonalesEC.Name = "panelDatosPersonalesEC"
-        Me.panelDatosPersonalesEC.Size = New System.Drawing.Size(1010, 177)
+        Me.panelDatosPersonalesEC.Size = New System.Drawing.Size(1010, 215)
         Me.panelDatosPersonalesEC.TabIndex = 73
         Me.panelDatosPersonalesEC.Visible = False
         '
@@ -2440,13 +2452,70 @@ Partial Class RegistroExternosOldEDC
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label13.Location = New System.Drawing.Point(12, 216)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(118, 16)
+        Me.Label13.TabIndex = 75
+        Me.Label13.Text = "Ciudad/Localidad:"
+        '
+        'txtCiudadPersonal
+        '
+        Me.txtCiudadPersonal.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCiudadPersonal.Location = New System.Drawing.Point(130, 213)
+        Me.txtCiudadPersonal.Name = "txtCiudadPersonal"
+        Me.txtCiudadPersonal.Size = New System.Drawing.Size(341, 22)
+        Me.txtCiudadPersonal.TabIndex = 76
+        '
+        'txtCiudadEd
+        '
+        Me.txtCiudadEd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCiudadEd.Location = New System.Drawing.Point(131, 179)
+        Me.txtCiudadEd.Name = "txtCiudadEd"
+        Me.txtCiudadEd.Size = New System.Drawing.Size(342, 22)
+        Me.txtCiudadEd.TabIndex = 78
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label15.Location = New System.Drawing.Point(15, 182)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(118, 16)
+        Me.Label15.TabIndex = 77
+        Me.Label15.Text = "Ciudad/Localidad:"
+        '
+        'txtCiudadEC
+        '
+        Me.txtCiudadEC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCiudadEC.Location = New System.Drawing.Point(131, 178)
+        Me.txtCiudadEC.Name = "txtCiudadEC"
+        Me.txtCiudadEC.Size = New System.Drawing.Size(341, 22)
+        Me.txtCiudadEC.TabIndex = 78
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label16.Location = New System.Drawing.Point(15, 181)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(118, 16)
+        Me.Label16.TabIndex = 77
+        Me.Label16.Text = "Ciudad/Localidad:"
+        '
         'RegistroExternosOldEDC
         '
         Me.AcceptButton = Me.btnBuscarUX
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.ClientSize = New System.Drawing.Size(1047, 712)
+        Me.ClientSize = New System.Drawing.Size(1047, 736)
         Me.Controls.Add(Me.tabExternos)
         Me.Controls.Add(Me.lblNombreVentana)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -2676,4 +2745,10 @@ Partial Class RegistroExternosOldEDC
     Friend WithEvents btnSubirConstanciaEC As Button
     Friend WithEvents btnLeerQR As Button
     Friend WithEvents btnLeerQREC As Button
+    Friend WithEvents txtCiudadPersonal As TextBox
+    Friend WithEvents Label13 As Label
+    Friend WithEvents txtCiudadEd As TextBox
+    Friend WithEvents Label15 As Label
+    Friend WithEvents txtCiudadEC As TextBox
+    Friend WithEvents Label16 As Label
 End Class

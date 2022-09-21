@@ -42,11 +42,7 @@ Public Class ReportesEDC
         End If
         rep.AgregarParametros("FechaFin", Me.obtenerFechaFormato(dtPickerFin))
         rep.AgregarParametros("FechaInicio", Me.obtenerFechaFormato(dtPickerInicio))
-        Dim pdf As Byte()
-        pdf = rep.obtenerReporteByte()
-        File.WriteAllBytes("C:\Users\Luis\Documents\YourPDF.pdf", pdf)
-        File.Open("C:\Users\Luis\Documents\YourPDF.pdf", ".pdf")
-        ''rep.MostrarReporte()
+        rep.MostrarReporte()
     End Sub
 
     Private Sub btnGenerar2_Click(sender As Object, e As EventArgs) Handles btnGenerar2.Click
