@@ -7,6 +7,7 @@ Public Class ModalDatosFiscalesCobrosEDC
     Dim db As DataBaseService = New DataBaseService
     Private Sub ModalDatosFiscalesCobrosEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Matricula = ObjectBagService.getItem("Matricula")
+        ObjectBagService.clearBag()
         Dim RFC As String
         Dim tableRFC As DataTable
         If (Matricula.Substring(0, 2) = "EC") Then
@@ -77,11 +78,7 @@ Public Class ModalDatosFiscalesCobrosEDC
     End Sub
 
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
-        Dim result As DialogResult = MessageBox.Show($"Si sale de esta ventana se usaran los datos fiscales correspondientes al rfc: {RFCDefault} ¿Seguro que quiere salir?", "", MessageBoxButtons.YesNo)
-        If (result = 6) Then
-            ObjectBagService.setItem("RFCTimbrar", RFCDefault)
-            Me.Close()
-        End If
+        ObjectBagService.setItem("RFCTimbrar", "FALSE")
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click

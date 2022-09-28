@@ -24,6 +24,9 @@ Public Class PagosCreditoController
             Dim Fecha As String = db.exectSQLQueryScalar("select STUFF(CONVERT(VARCHAR(50),GETDATE(), 127) ,20,4,'') as fecha")
             Dim Certificado As String
             Dim NoCertificado As String
+            Dim IVABool As Boolean = False
+            Dim IVABase As Decimal = 0.00
+            Dim IVACobrado As Decimal = 0.00
             If (System.Diagnostics.Debugger.IsAttached) Then
                 Certificado = ConfigurationSettings.AppSettings.Get("developmentCertificadoContent").ToString()
                 NoCertificado = ConfigurationSettings.AppSettings.Get("developmentCertificado").ToString()
@@ -34,15 +37,21 @@ Public Class PagosCreditoController
             Dim serieOriginal As String = db.exectSQLQueryScalar($"select SUBSTRING(Folio, 1, 1) from ing_Creditos where ID = {IDCredito}")
             Dim folioOriginal As String = db.exectSQLQueryScalar($"select SUBSTRING(Folio, 2, DATALENGTH(Folio)) from ing_Creditos where ID = {IDCredito}")
             Dim FechaOriginal As String = db.exectSQLQueryScalar($"select STUFF(CONVERT(VARCHAR(50),Fecha, 127) ,20,4,'') as fecha from ing_Creditos where ID = {IDCredito}")
+            Dim IVA As Decimal = db.exectSQLQueryScalar($"SELECT IVA FROM ing_xmlTimbrados WHERE Folio = (SELECT Folio FROM ing_Creditos WHERE ID = {IDCredito} AND Activo = 1)")
+            If (IVA > 0) Then
+                IVABool = True
+                IVABase = Format(CDec(CantidadAbonada / 1.16), "#####0.00")
+                IVACobrado = Format(CDec(CantidadAbonada - IVABase), "#####0.00")
+            End If
 
-            Dim Cadena As String = xml.cadenaCredito(Serie, Folio, Fecha, NoCertificado, Certificado, RFC, NombreCompleto, UsoCFDI, FolioFiscal, serieOriginal, folioOriginal, NoParcialidad, MontoAnterior, CantidadAbonada, MontoNuevo, FechaOriginal, FormaPago, CP, RegFiscal)
+            Dim Cadena As String = xml.cadenaCredito(Serie, Folio, Fecha, NoCertificado, Certificado, RFC, NombreCompleto, UsoCFDI, FolioFiscal, serieOriginal, folioOriginal, NoParcialidad, MontoAnterior, CantidadAbonada, MontoNuevo, FechaOriginal, FormaPago, CP, RegFiscal, IVABool, IVABase.ToString(), IVACobrado.ToString())
             Dim sello As String
             If (System.Diagnostics.Debugger.IsAttached) Then
                 sello = st.Sellado("\\192.168.1.252\Sistemas\Reportes\EducacionContinua\Timbrado\pfx\uxa_pfx33.pfx", "12345678a", Cadena) ''PRUEBAS
             Else
                 sello = st.Sellado("\\192.168.1.252\Sistemas\Reportes\EducacionContinua\Timbrado\pfx\EDC.pfx", "EDC12345a", Cadena) ''REAL
             End If
-            Dim xmlString As String = xml.xmlCredito(Serie, Folio, Fecha, NoCertificado, sello, Certificado, RFC, NombreCompleto, UsoCFDI, FolioFiscal, serieOriginal, folioOriginal, NoParcialidad, MontoAnterior, CantidadAbonada, MontoNuevo, FechaOriginal, FormaPago, RegFiscal, CP)
+            Dim xmlString As String = xml.xmlCredito(Serie, Folio, Fecha, NoCertificado, sello, Certificado, RFC, NombreCompleto, UsoCFDI, FolioFiscal, serieOriginal, folioOriginal, NoParcialidad, MontoAnterior, CantidadAbonada, MontoNuevo, FechaOriginal, FormaPago, RegFiscal, CP, IVABool, IVABase.ToString(), IVACobrado.ToString())
             xmlString = xmlString.Replace("utf-16", "UTF-8")
             Dim xmlTimbrado As String
             If (System.Diagnostics.Debugger.IsAttached) Then
@@ -60,7 +69,7 @@ Public Class PagosCreditoController
             db.execSQLQueryWithoutParams($"UPDATE ing_CatFolios SET Consecutivo = Consecutivo + 1 WHERE Usuario = '{User.getUsername()}'")
 
             Dim formapagoid As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatFormaPago WHERE Forma_Pago = '{FormaPago}'")
-            Dim XMLID = db.insertAndGetIDInserted($"INSERT INTO ing_xmlTimbrados(Matricula_Clave, Folio, FolioFiscal, Certificado, XMLTimbrado, fac_Cadena, fac_Sello, Tipo_Pago, Forma_Pago, Forma_PagoID, Fecha_Pago, Cajero, RegimenFiscal, RFCTimbrado, Subtotal, Descuento, IVA, Total, usoCFDI, CanceladaHoy, CanceladaOtroDia) VALUES ('{Matricula}', '{Serie}{Folio}', '{FolioFiscal}', '{NoCertificado}', '{xmlTimbrado}', '{Cadena}', '{sello}', 'PAGO DE CREDITO', '{FormaPago}', {formapagoid}, '{Fecha}', '{User.getUsername}', 'GENERAL DE LEY(603)', {RFC}, 0, 0, 0, 0, '{UsoCFDI}', 0, 0)")
+            Dim XMLID = db.insertAndGetIDInserted($"INSERT INTO ing_xmlTimbrados(Matricula_Clave, Folio, FolioFiscal, Certificado, XMLTimbrado, fac_Cadena, fac_Sello, Tipo_Pago, Forma_Pago, Forma_PagoID, Fecha_Pago, Cajero, RegimenFiscal, RFCTimbrado, Subtotal, Descuento, IVA, Total, usoCFDI, CanceladaHoy, CanceladaOtroDia) VALUES ('{Matricula}', '{Serie}{Folio}', '{FolioFiscal}', '{NoCertificado}', '{xmlTimbrado}', '{Cadena}', '{sello}', 'PAGO DE CREDITO', '{FormaPago}', {formapagoid}, '{Fecha}', '{User.getUsername}', 'GENERAL DE LEY(603)', '{RFC}', 0, 0, 0, 0, '{UsoCFDI}', 0, 0)")
             db.execSQLQueryWithoutParams($"INSERT INTO ing_xmlTimbradosConceptos(Clave_Cliente, XMLID, Nombre_Concepto, IDConcepto, Clave_Concepto, ClaveUnidad, PrecioUnitario, IVA, Descuento, Cantidad, Total) VALUES ('{Matricula}', {XMLID}, 'PAGO', {IDCredito}, 1, 'E48', 0, 0, 0, 1, 0)")
             If (MontoNuevo = 0) Then
                 db.execSQLQueryWithoutParams($"UPDATE ing_Creditos SET Activo = 0 WHERE ID = {IDCredito}")

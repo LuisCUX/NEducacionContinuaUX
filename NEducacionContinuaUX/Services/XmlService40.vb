@@ -85,10 +85,10 @@ Public Class XmlService40
     ''------------------------------------------------------------------------------------------------------------------------------''
 
     Function cadenaCredito(Serie As String, Folio As String, Fecha As String, NoCertificado As String, Certificado As String, RFC As String, NombreCompleto As String, UsoCFDI As String, FolioFiscal As String, SerieOriginal As String, FolioOriginal As String, NumParcialidad As Integer,
-                        SaldoAnterior As Decimal, montoAbonado As Decimal, saldoRestante As Decimal, FechaAbono As String, FormaPago As String, CP As String, RegFiscal As String) As String
+                        SaldoAnterior As Decimal, montoAbonado As Decimal, saldoRestante As Decimal, FechaAbono As String, FormaPago As String, CP As String, RegFiscal As String, ivaBool As Boolean, BaseIVA As String, IVACobrado As String) As String
         Dim cpemisor As String
         If (System.Diagnostics.Debugger.IsAttached) Then
-            cpemisor = EnviromentService.CP
+            cpemisor = "72000"
         Else
             cpemisor = EnviromentService.CP
         End If
@@ -107,8 +107,20 @@ Public Class XmlService40
             nombreEmisor = EnviromentService.NombreEmpresa
         End If
 
-        Dim cadena As String = $"||4.0|{Serie}|{Folio}|{Fecha}|{NoCertificado}|0|XXX|0|P|01|{cpemisor}|{EnviromentService.RFCEDC}|{nombreEmisor}|{EnviromentService.RegimenFiscal}|{RFC}|{NombreCompleto}|{cpreceptor}|{RegFiscal}|{UsoCFDI}|84111506|1|ACT|Pago|0|0|01|2.0|{Format(CDec(montoAbonado), "#####0.00")}|{FechaAbono}|{FormaPago}|MXN|1|{Format(CDec(montoAbonado), "#####0.00")}|{FolioFiscal}|{SerieOriginal}|{FolioOriginal}|MXN|1|{NumParcialidad}|{Format(CDec(SaldoAnterior), "#####0.00")}|{Format(CDec(montoAbonado), "#####0.00")}|{Format(CDec(saldoRestante), "#####0.00")}|01||"
+        Dim seccionDoctoRelacionado As String
+        Dim seccionIVAFinal As String
+        Dim objetoImpuesto As String
+        If (ivaBool = True) Then
+            seccionDoctoRelacionado = $"|{BaseIVA}|{IVACobrado}|"
+            seccionIVAFinal = $"|{BaseIVA}|002|Tasa|0.160000|{IVACobrado}|{BaseIVA}|002|Tasa|0.160000|{IVACobrado}||"
+            objetoImpuesto = "02"
+        Else
+            seccionDoctoRelacionado = "|"
+            seccionIVAFinal = "||"
+            objetoImpuesto = "01"
+        End If
 
+        Dim cadena As String = $"||4.0|{Serie}|{Folio}|{Fecha}|{NoCertificado}|0|XXX|0|P|01|{cpemisor}|{EnviromentService.RFCEDC}|{nombreEmisor}|{EnviromentService.RegimenFiscal}|{RFC}|{NombreCompleto}|{cpreceptor}|{RegFiscal}|CP01|84111506|1|ACT|Pago|0|0|01|2.0{seccionDoctoRelacionado}{Format(CDec(montoAbonado), "#####0.00")}|{FechaAbono}|{FormaPago}|MXN|1|{Format(CDec(montoAbonado), "#####0.00")}|{FolioFiscal}|{SerieOriginal}|{FolioOriginal}|MXN|1|{NumParcialidad}|{Format(CDec(SaldoAnterior), "#####0.00")}|{Format(CDec(montoAbonado), "#####0.00")}|{Format(CDec(saldoRestante), "#####0.00")}|{objetoImpuesto}{seccionIVAFinal}"
 
         Return cadena
     End Function
@@ -328,7 +340,7 @@ Public Class XmlService40
     ''------------------------------------------------------------------------------------------------------------------------------''
 
     Function xmlCredito(Serie As String, Folio As String, Fecha As String, NoCertificado As String, Sello As String, Certificado As String, RFC As String, NombreCompleto As String, UsoCFDI As String, FolioFiscal As String, SerieOriginal As String, FolioOriginal As String, NumParcialidad As Integer,
-                        SaldoAnterior As Decimal, montoAbonado As Decimal, saldoRestante As Decimal, FechaAbono As String, FormaPago As String, RegFiscal As String, Cp As String) As String
+                        SaldoAnterior As Decimal, montoAbonado As Decimal, saldoRestante As Decimal, FechaAbono As String, FormaPago As String, RegFiscal As String, Cp As String, ivaBool As Boolean, BaseIVA As String, IVACobrado As String) As String
         Dim xml As String
         Dim config As New XmlWriterSettings
         config.Indent = True
@@ -380,7 +392,7 @@ Public Class XmlService40
                 End If
                 wr.WriteAttributeString("Rfc", Nothing, RFC)
                 wr.WriteAttributeString("Nombre", Nothing, NombreCompleto)
-                wr.WriteAttributeString("UsoCFDI", Nothing, UsoCFDI)
+                wr.WriteAttributeString("UsoCFDI", Nothing, "CP01")
                 wr.WriteAttributeString("RegimenFiscalReceptor", Nothing, RegFiscal)
                 wr.WriteEndElement() ''NODO RECEPTOR END
 
@@ -394,14 +406,17 @@ Public Class XmlService40
                 wr.WriteAttributeString("Importe", Nothing, "0")
                 wr.WriteAttributeString("ObjetoImp", Nothing, "01")
 
-
                 wr.WriteEndElement() ''NODO CONCEPTO END
                 wr.WriteEndElement() ''NODO CONCEPTOS END
 
                 wr.WriteStartElement("cfdi", "Complemento", Nothing) ''NODO COMPLEMENTO START
-                wr.WriteStartElement("pago20", "Pagos", Nothing) ''NODO PAGO10 START
+                wr.WriteStartElement("pago20", "Pagos", Nothing) ''NODO PAGO20 START
                 wr.WriteAttributeString("Version", Nothing, "2.0")
                 wr.WriteStartElement("pago20", "Totales", Nothing) ''NODO PAGOSTOTALES START
+                If (ivaBool = True) Then
+                    wr.WriteAttributeString("TotalTrasladosBaseIVA16", Nothing, Format(CDec(BaseIVA), "#####0.00"))
+                    wr.WriteAttributeString("TotalTrasladosImpuestoIVA16", Nothing, Format(CDec(IVACobrado), "#####0.00"))
+                End If
                 wr.WriteAttributeString("MontoTotalPagos", Nothing, Format(CDec(montoAbonado), "#####0.00"))
                 wr.WriteEndElement() ''NODO PAGOSTOTALES END
                 wr.WriteStartElement("pago20", "Pago", Nothing) ''NODO PAGO10 START
@@ -420,9 +435,40 @@ Public Class XmlService40
                 wr.WriteAttributeString("ImpPagado", Nothing, Format(CDec(montoAbonado), "#####0.00"))
                 wr.WriteAttributeString("ImpSaldoInsoluto", Nothing, Format(CDec(saldoRestante), "#####0.00"))
                 wr.WriteAttributeString("EquivalenciaDR", Nothing, "1")
-                wr.WriteAttributeString("ObjetoImpDR", Nothing, "01")
+                If (ivaBool = True) Then
+                    wr.WriteAttributeString("ObjetoImpDR", Nothing, "02")
+                Else
+                    wr.WriteAttributeString("ObjetoImpDR", Nothing, "01")
+                End If
+
+                If (ivaBool = True) Then
+                    wr.WriteStartElement("pago20", "ImpuestosDR", Nothing) ''NODO ImpuestosDR START
+                    wr.WriteStartElement("pago20", "TrasladosDR", Nothing) ''NODO TrasladosDR START
+                    wr.WriteStartElement("pago20", "TrasladoDR", Nothing) ''NODO TrasladoDR START
+                    wr.WriteAttributeString("BaseDR", Nothing, Format(CDec(BaseIVA), "#####0.00"))
+                    wr.WriteAttributeString("ImpuestoDR", Nothing, "002")
+                    wr.WriteAttributeString("TipoFactorDR", Nothing, "Tasa")
+                    wr.WriteAttributeString("TasaOCuotaDR", Nothing, "0.160000")
+                    wr.WriteAttributeString("ImporteDR", Nothing, Format(CDec(IVACobrado), "#####0.00"))
+                    wr.WriteEndElement() ''NODO TrasladoDR END
+                    wr.WriteEndElement() ''NODO TrasladosDR END
+                    wr.WriteEndElement() ''NODO ImpuestosDR END
+                End If
                 wr.WriteEndElement() ''NODO COMPLEMENTO END
-                wr.WriteEndElement() ''NODO PAGO10 END
+                If (ivaBool = True) Then
+                    wr.WriteStartElement("pago20", "ImpuestosP", Nothing) ''NODO ImpuestosP START
+                    wr.WriteStartElement("pago20", "TrasladosP", Nothing) ''NODO TrasladosP START
+                    wr.WriteStartElement("pago20", "TrasladoP", Nothing) ''NODO TrasladoP START
+                    wr.WriteAttributeString("BaseP", Nothing, Format(CDec(BaseIVA), "#####0.00"))
+                    wr.WriteAttributeString("ImpuestoP", Nothing, "002")
+                    wr.WriteAttributeString("TipoFactorP", Nothing, "Tasa")
+                    wr.WriteAttributeString("TasaOCuotaP", Nothing, "0.160000")
+                    wr.WriteAttributeString("ImporteP", Nothing, Format(CDec(IVACobrado), "#####0.00"))
+                    wr.WriteEndElement() ''NODO TrasladoP END
+                    wr.WriteEndElement() ''NODO TrasladosP END
+                    wr.WriteEndElement() ''NODO ImpuestosP END
+                End If
+                wr.WriteEndElement() ''NODO PAGO20 END
                 wr.WriteEndElement() ''NODO DOCTORELACIONADO END
 
             End Using

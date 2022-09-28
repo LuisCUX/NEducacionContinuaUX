@@ -14,7 +14,7 @@
         tipoVentana = ObjectBagService.getItem("tipoVentana")
         IDAsignacion = ObjectBagService.getItem("IDPago")
         ap.loadAsignacionPagosOpcionalesModal(tipoMatricula, MatriculaUX, cbTipoPago, cbPagosOpcionales)
-
+        cbTipoPago.SelectedIndex = -1
         If (tipoVentana = "Edicion") Then
             Dim IDPago As String = ObjectBagService.getItem("IDPago")
             ap.llenarVentanaEdicion(tipoMatricula, IDPago, cbTipoPago, cbPagosOpcionales, txtValorUnitario, chbActivo, NUCantidad)

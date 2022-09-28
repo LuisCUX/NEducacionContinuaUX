@@ -87,7 +87,6 @@
     Sub loadAsignacionPagosOpcionalesModal(tipoMatricula As String, Matricula As String, cbTipoPagos As ComboBox, cbPagosOpcionales As ComboBox)
         Dim tableTipoPago As DataTable = db.getDataTableFromSQL("SELECT ID, Nombre FROM ing_CatTipoPagoOpcional WHERE Activo = 1")
         ComboboxService.llenarCombobox(cbTipoPagos, tableTipoPago, "ID", "Nombre")
-        cbTipoPagos.SelectedIndex = 0
         Dim tablePagosOpcionales As DataTable
         If (tipoMatricula = "UX") Then
             Dim NT As String() = UtilitiesService.getNivelTurno(Matricula)

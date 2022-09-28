@@ -581,12 +581,16 @@ Public Class CobrosEDC
                 ObjectBagService.setItem("Matricula", Matricula)
                 ModalDatosFiscalesCobrosEDC.ShowDialog()
                 RFCTimbrar = ObjectBagService.getItem("RFCTimbrar")
+                If (RFCTimbrar = "FALSE") Then
+                    Exit Sub
+                End If
                 RegFiscalTimbrar = ObjectBagService.getItem("RegFiscalTimbrar")
                 UsoCFDITimbrar = ObjectBagService.getItem("UsoCFDITimbrar")
-                NombreTimbrar = ObjectBagService.getItem("NombreTimbrar")
-                cpTimbrar = ObjectBagService.getItem("cpTimbrar")
-            Else
-                RFCTimbrar = "XAXX010101000"
+                    NombreTimbrar = ObjectBagService.getItem("NombreTimbrar")
+                    cpTimbrar = ObjectBagService.getItem("cpTimbrar")
+                    ObjectBagService.clearBag()
+                Else
+                    RFCTimbrar = "XAXX010101000"
                 RegFiscalTimbrar = "616"
                 UsoCFDITimbrar = "S01"
                 NombreTimbrar = lblNombretxt.Text

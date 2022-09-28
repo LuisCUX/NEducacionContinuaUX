@@ -11,7 +11,6 @@
         'Los parametros son usuario,password,referencia
         'Los datos de acceso se deben solicitar a FEL.
         RespuestaServicio_FEL = ServicioTimbrado_FEL.ConsultarTimbrePorReferencia("ECU150924HR4", "JCXM5@uUgr+", TextBox1.Text)
-
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load

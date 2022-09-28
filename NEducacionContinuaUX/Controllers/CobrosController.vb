@@ -89,7 +89,7 @@ Public Class CobrosController
     ''---------------------------------------------------------COBRA PAGO YA VALIDADO---------------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
     Function Cobrar(listaConceptos As List(Of Concepto), formaPago As String, formaPagoID As Integer, Matricula As String, RFCCLiente As String, NombreCLiente As String, montoTotal As Decimal, Credito As Boolean, tipoMatricula As Integer, Cp As String, RegFiscal As String, usoCFDI As String) As Integer
-        NombreCLiente = Me.quitaTildesEspecial(NombreCLiente)
+        ''NombreCLiente = Me.quitaTildesEspecial(NombreCLiente)
         Dim folioPago As String = Me.obtenerFolio("Pago")
         Dim esEvento As Boolean = False
         Try
@@ -660,7 +660,7 @@ Public Class CobrosController
             limpia = Replace(limpia, "í", "i", 1, Len(limpia), 1)
             limpia = Replace(limpia, "ó", "o", 1, Len(limpia), 1)
             limpia = Replace(limpia, "ú", "u", 1, Len(limpia), 1)
-            limpia = Replace(limpia, "ñ", "n", 1, Len(limpia), 1)
+            ''limpia = Replace(limpia, "ñ", "n", 1, Len(limpia), 1)
             limpia = Replace(limpia, "ç", "c", 1, Len(limpia), 1)
 
             limpia = Replace(limpia, "Á", "A", 1, Len(limpia), 1)
@@ -668,7 +668,7 @@ Public Class CobrosController
             limpia = Replace(limpia, "Í", "I", 1, Len(limpia), 1)
             limpia = Replace(limpia, "Ó", "O", 1, Len(limpia), 1)
             limpia = Replace(limpia, "Ú", "U", 1, Len(limpia), 1)
-            limpia = Replace(limpia, "Ñ", "N", 1, Len(limpia), 1)
+            ''limpia = Replace(limpia, "Ñ", "N", 1, Len(limpia), 1)
             limpia = Replace(limpia, "Ç", "C", 1, Len(limpia), 1)
 
             limpia = Replace(limpia, "à", "a", 1, Len(limpia), 1)

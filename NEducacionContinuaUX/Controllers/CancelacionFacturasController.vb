@@ -70,7 +70,7 @@ Public Class CancelacionFacturasController
             EstadoCFDI = RespuestaReal.Timbre.Estado
         End If
 
-        Dim acusexml As String = db.exectSQLQueryScalar($"SELECT xmlAcuse FROM Ing_Cancelaciones WHERE Folio = '{FolioFactura}'")
+        Dim acusexml As String = db.exectSQLQueryScalar($"SELECT xmlAcuse FROM Ing_Cancelaciones WHERE Folio = '{FolioFactura}' AND Activo = 1")
         Dim xmlDoc2 As New XmlDocument
         xmlDoc2.LoadXml(acusexml)
 
