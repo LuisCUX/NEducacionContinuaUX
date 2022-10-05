@@ -12,15 +12,22 @@ Public Class PagosCreditoController
     Dim rep As ImpresionReportesService = New ImpresionReportesService()
     Dim abono As Boolean = False
     Dim co As CobrosController = New CobrosController()
+    Dim re As ReimpresionFacturasController = New ReimpresionFacturasController()
+    Dim es As UXServiceEmail = New UXServiceEmail()
+    Dim va As ValidacionesController = New ValidacionesController()
     Public QR_Generator As New MessagingToolkit.QRCode.Codec.QRCodeEncoder
 
     Function cobroCredito(IDCredito As Integer, CantidadAbonada As Decimal, MontoAnterior As Decimal, MontoNuevo As Decimal, Matricula As String, NumPago As Integer, RFC As String, NombreCompleto As String, FolioFiscal As String, NoParcialidad As Integer, FormaPago As String, RegFiscal As String, CP As String) As Integer
         Try
             db.startTransaction()
+            If (RFC = "XAXX010101000") Then
+                NombreCompleto = va.quitaTildesEspecial(NombreCompleto)
+            End If
+            NombreCompleto = va.borrarEspacios(NombreCompleto)
             Dim FolioPago As String = co.obtenerFolio("Pago")
             Dim Folio As String = FolioPago.Substring(1, 6)
             Dim Serie As String = FolioPago.Substring(0, 1)
-            Dim UsoCFDI As String = "S01"
+            Dim UsoCFDI As String = "CP01"
             Dim Fecha As String = db.exectSQLQueryScalar("select STUFF(CONVERT(VARCHAR(50),GETDATE(), 127) ,20,4,'') as fecha")
             Dim Certificado As String
             Dim NoCertificado As String
@@ -31,17 +38,21 @@ Public Class PagosCreditoController
                 Certificado = ConfigurationSettings.AppSettings.Get("developmentCertificadoContent").ToString()
                 NoCertificado = ConfigurationSettings.AppSettings.Get("developmentCertificado").ToString()
             Else
-                Certificado = ConfigurationSettings.AppSettings.Get("developmentCertificadoContent").ToString()
-                NoCertificado = ConfigurationSettings.AppSettings.Get("developmentCertificado").ToString()
+                Certificado = ConfigurationSettings.AppSettings.Get("prodCertificadoContent").ToString()
+                NoCertificado = ConfigurationSettings.AppSettings.Get("prodCertificado").ToString()
             End If
             Dim serieOriginal As String = db.exectSQLQueryScalar($"select SUBSTRING(Folio, 1, 1) from ing_Creditos where ID = {IDCredito}")
-            Dim folioOriginal As String = db.exectSQLQueryScalar($"select SUBSTRING(Folio, 2, DATALENGTH(Folio)) from ing_Creditos where ID = {IDCredito}")
-            Dim FechaOriginal As String = db.exectSQLQueryScalar($"select STUFF(CONVERT(VARCHAR(50),Fecha, 127) ,20,4,'') as fecha from ing_Creditos where ID = {IDCredito}")
-            Dim IVA As Decimal = db.exectSQLQueryScalar($"SELECT IVA FROM ing_xmlTimbrados WHERE Folio = (SELECT Folio FROM ing_Creditos WHERE ID = {IDCredito} AND Activo = 1)")
+                Dim folioOriginal As String = db.exectSQLQueryScalar($"select SUBSTRING(Folio, 2, DATALENGTH(Folio)) from ing_Creditos where ID = {IDCredito}")
+                Dim FechaOriginal As String = db.exectSQLQueryScalar($"select STUFF(CONVERT(VARCHAR(50),Fecha, 127) ,20,4,'') as fecha from ing_Creditos where ID = {IDCredito}")
+                Dim IVA As Decimal = db.exectSQLQueryScalar($"SELECT IVA FROM ing_xmlTimbrados WHERE Folio = (SELECT Folio FROM ing_Creditos WHERE ID = {IDCredito} AND Activo = 1)")
             If (IVA > 0) Then
                 IVABool = True
                 IVABase = Format(CDec(CantidadAbonada / 1.16), "#####0.00")
                 IVACobrado = Format(CDec(CantidadAbonada - IVABase), "#####0.00")
+            Else
+                IVABool = False
+                IVABase = CantidadAbonada
+                IVACobrado = 0
             End If
 
             Dim Cadena As String = xml.cadenaCredito(Serie, Folio, Fecha, NoCertificado, Certificado, RFC, NombreCompleto, UsoCFDI, FolioFiscal, serieOriginal, folioOriginal, NoParcialidad, MontoAnterior, CantidadAbonada, MontoNuevo, FechaOriginal, FormaPago, CP, RegFiscal, IVABool, IVABase.ToString(), IVACobrado.ToString())
@@ -60,17 +71,17 @@ Public Class PagosCreditoController
                 xmlTimbrado = st.Timbrado(xmlString, Folio)
             End If
             Dim folioFiscalNuevo As String = Me.Extrae_Cadena(xmlTimbrado, "UUID=", " FechaTimbrado")
-            FolioFiscal = Me.Extrae_Cadena(FolioFiscal, "=", "")
-            FolioFiscal = FolioFiscal.Substring(1, FolioFiscal.Length() - 1)
-            File.WriteAllText("C:\Users\Luis\Desktop\wea.xml", xmlTimbrado)
+            folioFiscalNuevo = Me.Extrae_Cadena(FolioFiscal, "=", "")
+            folioFiscalNuevo = FolioFiscal.Substring(1, FolioFiscal.Length() - 1)
+
 
             db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosCredito(ID_Credito, Folio, NumPago, Monto_Anterior, Monto_Actual, Monto_Abonado, Fecha, Activo) VALUES ({IDCredito}, '{FolioPago}', {NumPago}, {MontoAnterior}, {MontoNuevo}, {CantidadAbonada}, GETDATE(), 1)")
             db.execSQLQueryWithoutParams($"UPDATE ing_Creditos SET NumAbonos = NumAbonos + 1, Cantidad_Abonada = Cantidad_Abonada + {CantidadAbonada} WHERE ID = {IDCredito}")
             db.execSQLQueryWithoutParams($"UPDATE ing_CatFolios SET Consecutivo = Consecutivo + 1 WHERE Usuario = '{User.getUsername()}'")
 
             Dim formapagoid As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatFormaPago WHERE Forma_Pago = '{FormaPago}'")
-            Dim XMLID = db.insertAndGetIDInserted($"INSERT INTO ing_xmlTimbrados(Matricula_Clave, Folio, FolioFiscal, Certificado, XMLTimbrado, fac_Cadena, fac_Sello, Tipo_Pago, Forma_Pago, Forma_PagoID, Fecha_Pago, Cajero, RegimenFiscal, RFCTimbrado, Subtotal, Descuento, IVA, Total, usoCFDI, CanceladaHoy, CanceladaOtroDia) VALUES ('{Matricula}', '{Serie}{Folio}', '{FolioFiscal}', '{NoCertificado}', '{xmlTimbrado}', '{Cadena}', '{sello}', 'PAGO DE CREDITO', '{FormaPago}', {formapagoid}, '{Fecha}', '{User.getUsername}', 'GENERAL DE LEY(603)', '{RFC}', 0, 0, 0, 0, '{UsoCFDI}', 0, 0)")
-            db.execSQLQueryWithoutParams($"INSERT INTO ing_xmlTimbradosConceptos(Clave_Cliente, XMLID, Nombre_Concepto, IDConcepto, Clave_Concepto, ClaveUnidad, PrecioUnitario, IVA, Descuento, Cantidad, Total) VALUES ('{Matricula}', {XMLID}, 'PAGO', {IDCredito}, 1, 'E48', 0, 0, 0, 1, 0)")
+            Dim XMLID = db.insertAndGetIDInserted($"INSERT INTO ing_xmlTimbrados(Matricula_Clave, Folio, FolioFiscal, Certificado, XMLTimbrado, fac_Cadena, fac_Sello, Tipo_Pago, Forma_Pago, Forma_PagoID, Fecha_Pago, Cajero, RegimenFiscal, RFCTimbrado, Subtotal, Descuento, IVA, Total, usoCFDI, CanceladaHoy, CanceladaOtroDia) VALUES ('{Matricula}', '{Serie}{Folio}', '{folioFiscalNuevo}', '{NoCertificado}', '{xmlTimbrado}', '{Cadena}', '{sello}', 'PAGO DE CREDITO', '{FormaPago}', {formapagoid}, '{Fecha}', '{User.getUsername}', 'GENERAL DE LEY(603)', '{RFC}', {IVABase}, 0, {IVACobrado}, {CantidadAbonada}, '{UsoCFDI}', 0, 0)")
+            db.execSQLQueryWithoutParams($"INSERT INTO ing_xmlTimbradosConceptos(Clave_Cliente, XMLID, Nombre_Concepto, IDConcepto, Clave_Concepto, ClaveUnidad, PrecioUnitario, IVA, Descuento, Cantidad, Total) VALUES ('{Matricula}', {XMLID}, 'PAGO', {IDCredito}, 1, 'E48', {IVABase}, {IVACobrado}, 0, 1, {CantidadAbonada})")
             If (MontoNuevo = 0) Then
                 db.execSQLQueryWithoutParams($"UPDATE ing_Creditos SET Activo = 0 WHERE ID = {IDCredito}")
             End If
@@ -85,6 +96,22 @@ Public Class PagosCreditoController
                 TotalText = $"{co.Num2Text(CantidadAbonada.ToString())} PESOS"
             End If
 
+            Dim tipoMatricula As String = re.validarMatricula(Matricula)
+            Dim tipoCliente As Integer
+            If (tipoMatricula = "EX") Then
+                tipoCliente = 2
+            ElseIf (tipoMatricula = "EC") Then
+                tipoCliente = 1
+            End If
+
+            ObjectBagService.setItem("CantidadLetra", TotalText)
+            ObjectBagService.setItem("Serie", Serie)
+            ObjectBagService.setItem("usoCFDI", descripcionCFDI)
+            ObjectBagService.setItem("Folio", Folio)
+            ObjectBagService.setItem("RFC", RFC)
+            ObjectBagService.setItem("FolioF", FolioFiscal)
+            ObjectBagService.setItem("tipoCliente", tipoCliente)
+
             Dim QR As String = $"?re={EnviromentService.RFCEDC}&rr={RFC}id={FolioFiscal}tt=0"
             Me.gernerarQr(QR, $"{Serie}{Folio}")
             MessageBox.Show("Abono registrado correctamente")
@@ -93,6 +120,8 @@ Public Class PagosCreditoController
             rep.AgregarParametros("CantidadLetra", TotalText)
             rep.AgregarParametros("ClaveCliente", Matricula)
             rep.AgregarParametros("usoCFDI", descripcionCFDI)
+            rep.AgregarParametros("RFC", RFC)
+            rep.AgregarParametros("TipoCliente", tipoCliente)
             rep.MostrarReporte()
             db.commitTransaction()
             Return XMLID

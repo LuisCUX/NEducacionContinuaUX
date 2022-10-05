@@ -642,7 +642,6 @@ Public Class CobrosEDC
         End If
         Dim IDXML As Integer = co.Cobrar(listaconceptosFinal, formaPagoClave, formaPagoID, Matricula, RFCTimbrar, NombreTimbrar, lblTotal.Text, False, tipocliente, cpTimbrar, RegFiscalTimbrar, UsoCFDITimbrar)
 
-
         ''---------------------------------------------------------REGISTRO DE FORMA DE PAGO---------------------------------------------------------
         If (IDXML > 0) Then
             If (cbFormaPago.Text = "TARJETA DE CREDITO") Then
@@ -654,11 +653,11 @@ Public Class CobrosEDC
             ElseIf (cbFormaPago.Text = "CHEQUE") Then
                 db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosCheques(ID_Factura, NombreBanco, NoCuenta, NoCheque, Monto, FechaPago, Activo) VALUES({IDXML}, '{txtBancotext.Text}', '{txtNoCuenta.Text}', '{txtNoCheque.Text}', {txtMonto.Text}, GETDATE(), 1)")
             ElseIf (cbFormaPago.Text = "TRANSFERENCIA") Then
-                db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosTransferencias(ID_Factura, ID_Banco, Monto, Fecha_Pago) VALUES ({IDXML}, {cbBanco.SelectedValue}, {txtMonto.Text}, '{Me.getFechaDTPicker(DTPickerFecha)}')")
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosTransferencias(ID_Factura, ID_Banco, Monto, Fecha_Pago) VALUES ({IDXML}, {cbBanco.SelectedValue}, {txtMonto.Text}, '{va.obtenerFechaString(DTPickerFecha)}')")
             ElseIf (cbFormaPago.Text = "DEPOSITO BANCARIO C/COMPROBANTE") Then
-                db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosDepositos(ID_Factura, ID_Banco, ID_TipoPago, Monto, TipoDeposito, FechaPago) VALUES({IDXML}, {cbBanco.SelectedValue}, {cbTipoBanco.SelectedValue}, {txtMonto.Text}, 'Comprobante', '{Me.getFechaDTPicker(DTPickerFecha)}')")
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosDepositos(ID_Factura, ID_Banco, ID_TipoPago, Monto, TipoDeposito, FechaPago) VALUES({IDXML}, {cbBanco.SelectedValue}, {cbTipoBanco.SelectedValue}, {txtMonto.Text}, 'Comprobante', '{va.obtenerFechaString(DTPickerFecha)}')")
             ElseIf (cbFormaPago.Text = "DEPOSITO BANCARIO EDO CTA") Then
-                db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosDepositos(ID_Factura, ID_Banco, ID_TipoPago, Monto, TipoDeposito, FechaPago) VALUES({IDXML}, {cbBanco.SelectedValue}, {cbTipoBanco.SelectedValue}, {txtMonto.Text}, 'Edo', '{Me.getFechaDTPicker(DTPickerFecha)}')")
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosDepositos(ID_Factura, ID_Banco, ID_TipoPago, Monto, TipoDeposito, FechaPago) VALUES({IDXML}, {cbBanco.SelectedValue}, {cbTipoBanco.SelectedValue}, {txtMonto.Text}, 'Edo', '{va.obtenerFechaString(DTPickerFecha)}')")
             ElseIf (cbFormaPago.Text = "NOTA DE CREDITO") Then
                 db.execSQLQueryWithoutParams($"UPDATE ing_NotasCredito SET Aplicada = 1 WHERE FolioNota = '{txtNotaAplicada.Text}'")
                 Dim IDNota As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_NotasCredito WHERE FolioNota = '{txtNotaAplicada.Text}'")
@@ -938,12 +937,21 @@ Public Class CobrosEDC
         End If
     End Sub
 
-    Function getFechaDTPicker(dtpicker As DateTimePicker) As String
-        Dim Fecha
+    Function obtenerFechaString(datePicker As DateTimePicker) As String
+        Try
+            Dim dia As String = datePicker.Value.Day
+            Dim mes As String = datePicker.Value.Month
+            Dim año As String = datePicker.Value.Year
+            If (System.Diagnostics.Debugger.IsAttached) Then
+                Return $"{dia}/{mes}/{año}"
+            Else
+                Return $"{mes}/{dia}/{año}"
+            End If
 
-        Fecha = $"{dtpicker.Value.Day}/{dtpicker.Value.Month}/{dtpicker.Value.Year}"
+        Catch ex As Exception
+            Return "1900-01-01"
+        End Try
 
-        Return Fecha
     End Function
 
 End Class

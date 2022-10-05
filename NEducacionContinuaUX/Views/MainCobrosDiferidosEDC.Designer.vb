@@ -32,6 +32,8 @@ Partial Class MainCobrosDiferidosEDC
         Me.txtMatricula = New System.Windows.Forms.TextBox()
         Me.lblMatricula = New System.Windows.Forms.Label()
         Me.panelDatos = New System.Windows.Forms.Panel()
+        Me.lblDireccion = New System.Windows.Forms.Label()
+        Me.lblDirecciontxt = New System.Windows.Forms.Label()
         Me.lblCFDItxt = New System.Windows.Forms.Label()
         Me.lblCFDI = New System.Windows.Forms.Label()
         Me.lblRegFiscaltxt = New System.Windows.Forms.Label()
@@ -83,8 +85,6 @@ Partial Class MainCobrosDiferidosEDC
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.btnCobrar = New System.Windows.Forms.Button()
         Me.ImageListTree = New System.Windows.Forms.ImageList(Me.components)
-        Me.lblDireccion = New System.Windows.Forms.Label()
-        Me.lblDirecciontxt = New System.Windows.Forms.Label()
         Me.panelBusqueda.SuspendLayout()
         Me.panelDatos.SuspendLayout()
         Me.panelCobros.SuspendLayout()
@@ -100,7 +100,7 @@ Partial Class MainCobrosDiferidosEDC
         Me.lblNombreVentana.Name = "lblNombreVentana"
         Me.lblNombreVentana.Size = New System.Drawing.Size(1241, 69)
         Me.lblNombreVentana.TabIndex = 13
-        Me.lblNombreVentana.Text = "Cobros múltiples"
+        Me.lblNombreVentana.Text = "Cobros múltiplesss"
         Me.lblNombreVentana.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'panelBusqueda
@@ -186,6 +186,27 @@ Partial Class MainCobrosDiferidosEDC
         Me.panelDatos.Size = New System.Drawing.Size(1225, 60)
         Me.panelDatos.TabIndex = 16
         Me.panelDatos.Visible = False
+        '
+        'lblDireccion
+        '
+        Me.lblDireccion.AutoSize = True
+        Me.lblDireccion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDireccion.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblDireccion.Location = New System.Drawing.Point(512, 10)
+        Me.lblDireccion.Name = "lblDireccion"
+        Me.lblDireccion.Size = New System.Drawing.Size(0, 15)
+        Me.lblDireccion.TabIndex = 101
+        '
+        'lblDirecciontxt
+        '
+        Me.lblDirecciontxt.AutoSize = True
+        Me.lblDirecciontxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDirecciontxt.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblDirecciontxt.Location = New System.Drawing.Point(429, 10)
+        Me.lblDirecciontxt.Name = "lblDirecciontxt"
+        Me.lblDirecciontxt.Size = New System.Drawing.Size(62, 15)
+        Me.lblDirecciontxt.TabIndex = 100
+        Me.lblDirecciontxt.Text = "Direccion:"
         '
         'lblCFDItxt
         '
@@ -732,27 +753,6 @@ Partial Class MainCobrosDiferidosEDC
         Me.ImageListTree.Images.SetKeyName(0, "unchecked_checkbox_40px.png")
         Me.ImageListTree.Images.SetKeyName(1, "checked_checkbox_40px.png")
         Me.ImageListTree.Images.SetKeyName(2, "folder_40px.png")
-        '
-        'lblDireccion
-        '
-        Me.lblDireccion.AutoSize = True
-        Me.lblDireccion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDireccion.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblDireccion.Location = New System.Drawing.Point(512, 10)
-        Me.lblDireccion.Name = "lblDireccion"
-        Me.lblDireccion.Size = New System.Drawing.Size(0, 15)
-        Me.lblDireccion.TabIndex = 101
-        '
-        'lblDirecciontxt
-        '
-        Me.lblDirecciontxt.AutoSize = True
-        Me.lblDirecciontxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDirecciontxt.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblDirecciontxt.Location = New System.Drawing.Point(429, 10)
-        Me.lblDirecciontxt.Name = "lblDirecciontxt"
-        Me.lblDirecciontxt.Size = New System.Drawing.Size(62, 15)
-        Me.lblDirecciontxt.TabIndex = 100
-        Me.lblDirecciontxt.Text = "Direccion:"
         '
         'MainCobrosDiferidosEDC
         '

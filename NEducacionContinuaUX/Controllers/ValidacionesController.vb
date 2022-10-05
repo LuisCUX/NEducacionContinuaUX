@@ -219,4 +219,114 @@ Public Class ValidacionesController
 
         Return RFC
     End Function
+
+    Function obtenerFechaString(datePicker As DateTimePicker) As String
+        Try
+            Dim dia As String = datePicker.Value.Day
+            Dim mes As String = datePicker.Value.Month
+            Dim año As String = datePicker.Value.Year
+            If (System.Diagnostics.Debugger.IsAttached) Then
+                Return $"{dia}/{mes}/{año}"
+            Else
+                Return $"{mes}/{dia}/{año}"
+            End If
+
+        Catch ex As Exception
+            Return "1900-01-01"
+        End Try
+
+    End Function
+
+    Function borrarEspacios(nombreCliente As String) As String
+        While nombreCliente.Contains("  ")                     '2 spaces.
+            nombreCliente = nombreCliente.Replace("  ", " ")      'Replace with 1 space.
+        End While
+
+        While nombreCliente.Substring(0, 1) = " "
+            nombreCliente = nombreCliente.Remove(0, 1)
+        End While
+
+        While nombreCliente.Substring(nombreCliente.Count() - 1, 1) = " "
+            Dim wea2 = nombreCliente.Count()
+            Dim wea = nombreCliente.Substring(nombreCliente.Count() - 1, 1)
+            nombreCliente = nombreCliente.Remove(nombreCliente.Count() - 1, 1)
+        End While
+
+        Return nombreCliente
+    End Function
+
+    Function quitaTildesEspecial(limpia As String) As String
+        Dim wea As String = """"
+        wea = wea.Substring(0, 1)
+        If Not IsNothing(limpia) Then
+            limpia = Replace(limpia, "¡", "", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "¿", "", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "'", "", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "á", "a", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "é", "e", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "í", "i", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "ó", "o", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "ú", "u", 1, Len(limpia), 1)
+            ''limpia = Replace(limpia, "ñ", "n", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "ç", "c", 1, Len(limpia), 1)
+
+            limpia = Replace(limpia, "Á", "A", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "É", "E", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Í", "I", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Ó", "O", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Ú", "U", 1, Len(limpia), 1)
+            ''limpia = Replace(limpia, "Ñ", "N", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Ç", "C", 1, Len(limpia), 1)
+
+            limpia = Replace(limpia, "à", "a", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "è", "e", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "ì", "i", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "ò", "o", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "ù", "u", 1, Len(limpia), 1)
+
+            limpia = Replace(limpia, "À", "A", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "È", "E", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Ì", "I", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Ò", "O", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Ù", "U", 1, Len(limpia), 1)
+
+            limpia = Replace(limpia, "ä", "a", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "ë", "e", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "ï", "i", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "ö", "o", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "ü", "u", 1, Len(limpia), 1)
+
+            limpia = Replace(limpia, "Ä", "A", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Ë", "E", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Ï", "I", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Ö", "O", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Ü", "U", 1, Len(limpia), 1)
+
+            limpia = Replace(limpia, "â", "a", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "ê", "e", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "î", "i", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "ô", "o", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "û", "u", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Â", "A", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Ê", "E", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Î", "I", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Ô", "O", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Û", "U", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "Nº", "Numero", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "/", "", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "(", "", 1, Len(limpia), 1)
+            limpia = Replace(limpia, ")", "", 1, Len(limpia), 1)
+            'limpia = Replace(limpia, "-", "", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "$", "", 1, Len(limpia), 1)
+            limpia = Replace(limpia, ":", "", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "°", "", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "´", "", 1, Len(limpia), 1)
+            limpia = Replace(limpia, "#", "", 1, Len(limpia), 1)
+            limpia = Replace(limpia, wea, "", 1, Len(limpia), 1)
+        Else
+            limpia = ""
+        End If
+
+        quitaTildesEspecial = Trim((UCase(limpia)))
+    End Function
 End Class

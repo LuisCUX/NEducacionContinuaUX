@@ -23,7 +23,6 @@ Public Class EnviromentService
         Else
             getEnviroment("prod")
         End If
-
         'If (System.Diagnostics.Debugger.IsAttached) Then
         '    getEnviroment("dev")
         'Else

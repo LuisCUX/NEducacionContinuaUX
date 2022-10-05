@@ -1,4 +1,5 @@
-﻿Imports System.Text.RegularExpressions
+﻿Imports System.Text
+Imports System.Text.RegularExpressions
 
 Public Class PagosCreditoEDC
     Dim db As DataBaseService = New DataBaseService()
@@ -8,6 +9,7 @@ Public Class PagosCreditoEDC
     Dim pc As PagosCreditoController = New PagosCreditoController()
     Dim va As ValidacionesController = New ValidacionesController()
     Dim combo_filtro As String
+    Dim es As UXServiceEmail = New UXServiceEmail()
     Private Sub PagosCreditoEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Dim tableEDC As DataTable = db.getDataTableFromSQL("SELECT RC.clave_cliente, UPPER(C.nombre + ' ' + RC.apellido_paterno + ' ' + RC.apellido_materno + ' (' + RC.clave_cliente + ')') AS NombreCliente FROM portal_registroCongreso AS RC
         '                                                    INNER JOIN portal_cliente AS C ON RC.id_cliente = C.id_cliente
@@ -155,9 +157,66 @@ Public Class PagosCreditoEDC
         End If
         Dim montoNuevo As Decimal = montoAnterior - CantidadAbonada
         Dim folioFiscal As String = db.exectSQLQueryScalar($"SELECT FolioFiscal FROM ing_Creditos WHERE ID = {IDCredito}")
-        Dim IDXML As Integer = pc.cobroCredito(IDCredito, CantidadAbonada, montoAnterior, montoNuevo, Matricula, noPago, lblRFCtxt.Text, lblNombretxt.Text, folioFiscal, noPago, cbFormaPago.SelectedValue, lblRegFiscaltxt.Text, lblCPtxt.Text)
 
-        ''---------------------------------------------------------REGISTRO DE FORMA DE PAGO---------------------------------------------------------
+
+
+        ''---------------------------------------------------------VALIDA DATOS FISCALES---------------------------------------------------------
+        Dim RFCTimbrar As String
+        Dim RegFiscalTimbrar As String
+        Dim UsoCFDITimbrar As String
+        Dim cpTimbrar As String
+        Dim nombreTimbrar As String
+        Dim tablas As String()
+        If (tipoMatricula = "EX") Then
+            tablas = {"portal_registroExterno", "portal_reRFC"}
+        ElseIf (tipoMatricula = "EC") Then
+            tablas = {"portal_registroCongreso", "portal_rcRFC"}
+        End If
+        Dim IDRegistro As Integer = db.exectSQLQueryScalar($"SELECT id_registro FROM {tablas(0)} WHERE clave_cliente = '{Matricula}'")
+        Dim RFCDefault As String = db.exectSQLQueryScalar($"SELECT RFC.rfc FROM portal_catRFC AS RFC
+                                                           INNER JOIN {tablas(1)} AS RE ON RE.id_rfc = RFC.id_rfc AND RE.activo = 1 AND RE.id_registro = {IDRegistro}")
+        Dim IDResRegCF As Integer = db.exectSQLQueryScalar($"SELECT id_res_cfdi_regimen FROM {tablas(1)} AS R
+                                                            INNER JOIN portal_catRFC AS RFC ON R.id_rfc = RFC.id_rfc
+                                                            WHERE RFC.rfc = '{RFCDefault}' AND R.activo = 1")
+        If (IDResRegCF = 254 Or IDResRegCF = 0) Then
+            Dim resulta As DialogResult = MessageBox.Show("La clave ingresada no tiene registrados regimen fiscal ni uso de CFDI, no se podrá cobrar con datos fiscales hasta que sean actualizados, ¿Desea continuar con el cobro sin datos fiscales?", "", MessageBoxButtons.YesNo)
+            If (resulta <> 6) Then
+                Exit Sub
+            End If
+        End If
+        If (lblRFCtxt.Text <> "XAXX010101000" And IDResRegCF <> 254 And IDResRegCF <> 0) Then
+            Dim result As DialogResult = MessageBox.Show("¿Quiere usar datos fiscales?", "", MessageBoxButtons.YesNo)
+            If (result = 6) Then
+                ObjectBagService.setItem("Matricula", Matricula)
+                ModalDatosFiscalesCobrosEDC.ShowDialog()
+                RFCTimbrar = ObjectBagService.getItem("RFCTimbrar")
+                If (RFCTimbrar = "FALSE") Then
+                    Exit Sub
+                End If
+                RegFiscalTimbrar = ObjectBagService.getItem("RegFiscalTimbrar")
+                UsoCFDITimbrar = ObjectBagService.getItem("UsoCFDITimbrar")
+                NombreTimbrar = ObjectBagService.getItem("NombreTimbrar")
+                cpTimbrar = ObjectBagService.getItem("cpTimbrar")
+                ObjectBagService.clearBag()
+            Else
+                RFCTimbrar = "XAXX010101000"
+                RegFiscalTimbrar = "616"
+                UsoCFDITimbrar = "S01"
+                NombreTimbrar = lblNombretxt.Text
+                cpTimbrar = EnviromentService.CP
+            End If
+        Else
+            RFCTimbrar = "XAXX010101000"
+            RegFiscalTimbrar = "616"
+            UsoCFDITimbrar = "S01"
+            NombreTimbrar = lblNombretxt.Text
+            cpTimbrar = EnviromentService.CP
+        End If
+
+        ''---------------------------------------------------------TIMBRADO---------------------------------------------------------
+        Dim IDXML As Integer = pc.cobroCredito(IDCredito, CantidadAbonada, montoAnterior, montoNuevo, Matricula, noPago, RFCTimbrar, nombreTimbrar, folioFiscal, noPago, cbFormaPago.SelectedValue, RegFiscalTimbrar, cpTimbrar)
+
+
         If (IDXML > 0) Then
             If (cbFormaPago.Text = "TARJETA DE CREDITO") Then
                 db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosTarjeta(ID_Factura, ID_Banco, ID_TipoPago, NumTarjeta, Monto, FechaPago, TipoTarjeta) VALUES({IDXML}, {cbBanco.SelectedValue}, {cbTipoBanco.SelectedValue}, '{txtUltimos4Digitos.Text}', {txtMonto.Text}, GETDATE(), 'C')")
@@ -166,14 +225,78 @@ Public Class PagosCreditoEDC
             ElseIf (cbFormaPago.Text = "CHEQUE") Then
                 db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosCheques(ID_Factura, NoCuenta, NoCheque, Monto, FechaPago) VALUES({IDXML}, '{txtNoCuenta.Text}', '{txtNoCheque.Text}', {txtMonto.Text}, GETDATE())")
             ElseIf (cbFormaPago.Text = "TRANSFERENCIA") Then
-                db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosTransferencias(ID_Factura, ID_Banco, Monto, Fecha_Pago) VALUES ({IDXML}, {cbBanco.SelectedValue}, {txtMonto.Text}, '{DTPickerFecha.Text}')")
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosTransferencias(ID_Factura, ID_Banco, Monto, Fecha_Pago) VALUES ({IDXML}, {cbBanco.SelectedValue}, {txtMonto.Text}, '{va.obtenerFechaString(DTPickerFecha)}')")
             ElseIf (cbFormaPago.Text = "DEPOSITO BANCARIO C/COMPROBANTE") Then
-                db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosDepositos(ID_Factura, ID_Banco, ID_TipoPago, Monto, TipoDeposito, FechaPago) VALUES({IDXML}, {cbBanco.SelectedValue}, {cbTipoBanco.SelectedValue}, {txtMonto.Text}, 'Comprobante', '{DTPickerFecha.Text}')")
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosDepositos(ID_Factura, ID_Banco, ID_TipoPago, Monto, TipoDeposito, FechaPago) VALUES({IDXML}, {cbBanco.SelectedValue}, {cbTipoBanco.SelectedValue}, {txtMonto.Text}, 'Comprobante', '{va.obtenerFechaString(DTPickerFecha)}')")
             ElseIf (cbFormaPago.Text = "DEPOSITO BANCARIO EDO CTA") Then
-                db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosDepositos(ID_Factura, ID_Banco, ID_TipoPago, Monto, TipoDeposito, FechaPago) VALUES({IDXML}, {cbBanco.SelectedValue}, {cbTipoBanco.SelectedValue}, {txtMonto.Text}, 'Edo', '{DTPickerFecha.Text}')")
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosDepositos(ID_Factura, ID_Banco, ID_TipoPago, Monto, TipoDeposito, FechaPago) VALUES({IDXML}, {cbBanco.SelectedValue}, {cbTipoBanco.SelectedValue}, {txtMonto.Text}, 'Edo', '{va.obtenerFechaString(DTPickerFecha)}')")
             End If
         End If
 
+        ''---------------------------------------------------------ENVIO DE CORREO---------------------------------------------------------
+        If (IDXML > 0) Then
+            Dim Total As String = ObjectBagService.getItem("CantidadLetra")
+            Dim usoCFDI As String = ObjectBagService.getItem("usoCFDI")
+            Dim Serie As String = ObjectBagService.getItem("Serie")
+            Dim Folio As String = ObjectBagService.getItem("Folio")
+            Dim folioFiscalAbono As String = ObjectBagService.getItem("FolioF")
+            Dim tipoClienteint As Integer = ObjectBagService.getItem("tipoCliente")
+            ObjectBagService.clearBag()
+            Dim tipoCliente As Integer
+            If (tipoMatricula = "EX") Then
+                tipoCliente = 2
+            ElseIf (tipoMatricula = "EC") Then
+                tipoCliente = 1
+            End If
+            Dim rep2 As ImpresionReportesService = New ImpresionReportesService()
+
+            Dim QR As String = $"?re={EnviromentService.RFCEDC}&rr={lblRFCtxt.Text}id={folioFiscalAbono}tt={Total}"
+            pc.gernerarQr(QR, $"{Serie}{Folio}")
+            rep2.AgregarFuente("FacturaEDCCredito.rpt")
+            rep2.AgregarParametros("IDXML", IDXML)
+            rep2.AgregarParametros("ClaveCliente", Matricula)
+            rep2.AgregarParametros("CantidadLetra", Total)
+            rep2.AgregarParametros("usoCFDI", usoCFDI)
+            rep2.AgregarParametros("TipoCliente", tipoCliente)
+            rep2.AgregarParametros("RFC", lblRFCtxt.Text)
+
+            Dim mail As New EmailModel
+            Dim archivo_pdf As Byte() = Nothing
+            Dim archivo_xml As Byte() = Nothing
+
+            Dim xmlTimbrado As String = db.exectSQLQueryScalar($"SELECT XMLTimbrado FROM ing_xmlTimbrados WHERE ID = {IDXML}")
+
+
+            archivo_pdf = rep2.obtenerReporteByte()
+            archivo_xml = Encoding.Default.GetBytes(xmlTimbrado)
+
+            Dim emailCliente As String
+            Dim destino As New List(Of String)
+            If (tipoMatricula = "EX") Then
+                emailCliente = db.exectSQLQueryScalar($"SELECT C.correo FROM portal_cliente AS C
+                                                    INNER JOIN portal_registroExterno AS RC ON RC.id_cliente = C.id_cliente
+                                                    WHERE RC.clave_cliente = '{Matricula}'")
+            ElseIf (tipoMatricula = "EC") Then
+                emailCliente = db.exectSQLQueryScalar($"SELECT C.correo FROM portal_cliente AS C
+                                                    INNER JOIN portal_registroCongreso AS RC ON RC.id_cliente = C.id_cliente
+                                                    WHERE RC.clave_cliente = '{Matricula}'")
+            End If
+
+            destino.Add(emailCliente)
+            mail.Destino = destino
+            mail.Asunto = "GRACIAS POR SU PAGO"
+            mail.Mensaje = "ANEXAMOS TUS COMPROBANTES DE PAGO ADJUNTOS A ESTE CORREO, GRACIAS."
+            mail.BytesFile = archivo_pdf
+            mail.FileName = $"{Serie}{Folio}.pdf"
+            mail.BytesFile2 = archivo_xml
+            mail.FileName2 = $"{Serie}{Folio}.xml "
+            Try
+                es.sendEmailWithFileBytes(mail)
+                Me.Reiniciar()
+            Catch ex As Exception
+                MessageBox.Show("Error al enviar email")
+            End Try
+        End If
         Me.Reiniciar()
         Exit Sub
     End Sub

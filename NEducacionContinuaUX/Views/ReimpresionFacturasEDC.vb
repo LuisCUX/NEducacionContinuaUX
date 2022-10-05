@@ -107,6 +107,9 @@ Public Class ReimpresionFacturasEDC
         Dim NombreEvento As String = ObjectBagService.getItem("NombreEvento")
         Dim rfcTimbrar As String = db.exectSQLQueryScalar($"SELECT RFCTimbrado FROM ing_xmlTimbrados WHERE ID = {IDXML}")
         Dim tipoMatricula As String = re.validarMatricula(Matricula)
+        Dim tipoPago As String = db.exectSQLQueryScalar($"SELECT Tipo_Pago FROM ing_xmlTimbrados WHERE ID = {IDXML}")
+        Dim nombreReporte As String
+
         Dim tipoCliente As Integer
         Dim esEvento As Boolean
         If (tipoMatricula = "EX") Then
@@ -142,14 +145,25 @@ Public Class ReimpresionFacturasEDC
         Dim descripcionCFDI As String = db.exectSQLQueryScalar($"select UPPER('(' + clave_usoCFDI + ')' + ' ' + descripcion) As Clave from ing_cat_usoCFDI WHERE clave_usoCFDI = '{usoCFDI}'")
         Dim QR As String = $"?re={EnviromentService.RFCEDC}&rr={rfcTimbrar}id={folioFiscal}tt={Total}"
         c.gernerarQr(QR, $"{Serie}{Folio}")
-        rep.AgregarFuente("FacturaEDC.rpt")
-        rep.AgregarParametros("IDXML", IDXML)
-        rep.AgregarParametros("ClaveCliente", Matricula)
-        rep.AgregarParametros("CantidadLetra", cantidadString)
-        rep.AgregarParametros("usoCFDI", descripcionCFDI)
-        rep.AgregarParametros("TipoCliente", tipoCliente)
-        rep.AgregarParametros("NombreEvento", NombreEvento)
-        rep.AgregarParametros("RFC", rfcTimbrar)
+        If (tipoPago = "PAGO DE CREDITO") Then
+            rep.AgregarFuente("FacturaEDCCredito.rpt")
+            rep.AgregarParametros("IDXML", IDXML)
+            rep.AgregarParametros("ClaveCliente", Matricula)
+            rep.AgregarParametros("CantidadLetra", cantidadString)
+            rep.AgregarParametros("usoCFDI", descripcionCFDI)
+            rep.AgregarParametros("RFC", rfcTimbrar)
+            rep.AgregarParametros("TipoCliente", tipoCliente)
+        ElseIf (tipoPago = "COBRO DE CONCEPTO" Or tipoPago = "COBRO DE CONCEPTO A CREDITO") Then
+            rep.AgregarFuente("FacturaEDC.rpt")
+            rep.AgregarParametros("IDXML", IDXML)
+            rep.AgregarParametros("ClaveCliente", Matricula)
+            rep.AgregarParametros("CantidadLetra", cantidadString)
+            rep.AgregarParametros("usoCFDI", descripcionCFDI)
+            rep.AgregarParametros("TipoCliente", tipoCliente)
+            rep.AgregarParametros("NombreEvento", NombreEvento)
+            rep.AgregarParametros("RFC", rfcTimbrar)
+        End If
+
 
         rep.MostrarReporte()
     End Sub
@@ -166,6 +180,7 @@ Public Class ReimpresionFacturasEDC
         Dim NombreEvento As String = ObjectBagService.getItem("NombreEvento")
         Dim rfcTimbrar As String = db.exectSQLQueryScalar($"SELECT RFCTimbrado FROM ing_xmlTimbrados WHERE ID = {IDXML}")
         Dim tipoMatricula As String = re.validarMatricula(Matricula)
+        Dim tipoPago As String = db.exectSQLQueryScalar($"SELECT Tipo_Pago FROM ing_xmlTimbrados WHERE ID = {IDXML}")
         Dim tipoCliente As Integer
         Dim esEvento As Boolean
         If (tipoMatricula = "EX") Then
@@ -201,14 +216,24 @@ Public Class ReimpresionFacturasEDC
         Dim descripcionCFDI As String = db.exectSQLQueryScalar($"select UPPER('(' + clave_usoCFDI + ')' + ' ' + descripcion) As Clave from ing_cat_usoCFDI WHERE clave_usoCFDI = '{usoCFDI}'")
         Dim QR As String = $"?re={EnviromentService.RFCEDC}&rr={rfcTimbrar}id={folioFiscal}tt={Total}"
         c.gernerarQr(QR, $"{Serie}{Folio}")
-        rep.AgregarFuente("FacturaEDC.rpt")
-        rep.AgregarParametros("IDXML", IDXML)
-        rep.AgregarParametros("ClaveCliente", Matricula)
-        rep.AgregarParametros("CantidadLetra", cantidadString)
-        rep.AgregarParametros("usoCFDI", descripcionCFDI)
-        rep.AgregarParametros("TipoCliente", tipoCliente)
-        rep.AgregarParametros("NombreEvento", NombreEvento)
-        rep.AgregarParametros("RFC", rfcTimbrar)
+        If (tipoPago = "PAGO DE CREDITO") Then
+            rep.AgregarFuente("FacturaEDCCredito.rpt")
+            rep.AgregarParametros("IDXML", IDXML)
+            rep.AgregarParametros("ClaveCliente", Matricula)
+            rep.AgregarParametros("CantidadLetra", cantidadString)
+            rep.AgregarParametros("usoCFDI", descripcionCFDI)
+            rep.AgregarParametros("RFC", rfcTimbrar)
+            rep.AgregarParametros("TipoCliente", tipoCliente)
+        ElseIf (tipoPago = "COBRO DE CONCEPTO" Or tipoPago = "COBRO DE CONCEPTO A CREDITO") Then
+            rep.AgregarFuente("FacturaEDC.rpt")
+            rep.AgregarParametros("IDXML", IDXML)
+            rep.AgregarParametros("ClaveCliente", Matricula)
+            rep.AgregarParametros("CantidadLetra", cantidadString)
+            rep.AgregarParametros("usoCFDI", descripcionCFDI)
+            rep.AgregarParametros("TipoCliente", tipoCliente)
+            rep.AgregarParametros("NombreEvento", NombreEvento)
+            rep.AgregarParametros("RFC", rfcTimbrar)
+        End If
 
         Dim mail As New EmailModel
         Dim archivo_pdf As Byte() = Nothing

@@ -9,8 +9,20 @@
 
         If (User.getPerfil = "Contabilidad") Then
             ContabilidadToolStripMenuItem.Visible = True
+            CobrosToolStripMenuItem.Visible = False
+            CatálogosToolStripMenuItem.Visible = False
+            ExternosToolStripMenuItem.Visible = False
+            ExternosConPlanToolStripMenuItem.Visible = False
+            HerramientasToolStripMenuItem.Visible = False
+            ReportesToolStripMenuItem.Visible = False
         Else
             ContabilidadToolStripMenuItem.Visible = False
+            CobrosToolStripMenuItem.Visible = True
+            CatálogosToolStripMenuItem.Visible = True
+            ExternosToolStripMenuItem.Visible = True
+            ExternosConPlanToolStripMenuItem.Visible = True
+            HerramientasToolStripMenuItem.Visible = True
+            ReportesToolStripMenuItem.Visible = True
         End If
     End Sub
 

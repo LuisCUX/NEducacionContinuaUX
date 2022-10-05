@@ -13,6 +13,7 @@ Public Class CobrosController
     Dim st As SelladoTimbradoService = New SelladoTimbradoService()
     Dim rep As ImpresionReportesService = New ImpresionReportesService()
     Dim es As EmailService = New EmailService()
+    Dim va As ValidacionesController = New ValidacionesController()
     Dim abono As Boolean = False
     Public QR_Generator As New MessagingToolkit.QRCode.Codec.QRCodeEncoder
 
@@ -89,7 +90,10 @@ Public Class CobrosController
     ''---------------------------------------------------------COBRA PAGO YA VALIDADO---------------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
     Function Cobrar(listaConceptos As List(Of Concepto), formaPago As String, formaPagoID As Integer, Matricula As String, RFCCLiente As String, NombreCLiente As String, montoTotal As Decimal, Credito As Boolean, tipoMatricula As Integer, Cp As String, RegFiscal As String, usoCFDI As String) As Integer
-        ''NombreCLiente = Me.quitaTildesEspecial(NombreCLiente)
+        If (RFCCLiente = "XAXX010101000") Then
+            NombreCLiente = va.quitaTildesEspecial(NombreCLiente)
+        End If
+        NombreCLiente = va.borrarEspacios(NombreCLiente)
         Dim folioPago As String = Me.obtenerFolio("Pago")
         Dim esEvento As Boolean = False
         Try

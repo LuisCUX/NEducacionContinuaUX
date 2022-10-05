@@ -55,12 +55,12 @@ Public Class SelladoTimbradoService
             xmlResult = respuesta.XMLResultado
             Return xmlResult
         Else
-            Throw New Exception($"Error al timbrar {respuesta.MensajeError}")
             Try
                 db.execSQLQueryWithoutParams($"INSERT INTO ing_BitacoraXML(XML, Fecha, Cajero) VALUES ('{xml}', GETDATE(), '{User.getUsername}')")
             Catch ex As Exception
                 MessageBox.Show("Error al guardar registro en bitacora")
             End Try
+            Throw New Exception($"Error al timbrar {respuesta.MensajeError}")
             Return "Error"
         End If
     End Function

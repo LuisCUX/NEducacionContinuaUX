@@ -8,7 +8,12 @@ Public Class PolizaController
         Dim tableConceptosPoliza As DataTable = db.getDataTableFromSQL($"SELECT Cuenta, Concepto, Debe, Haber, FolioFiscal, Folio, RFCTimbrado, FechaPago FROM obtenerPolizaEDC('{FechaInicio}', '{FechaFin}')")
         For Each row As DataRow In tableConceptosPoliza.Rows
             Dim conceptoP As ConceptoPoliza = New ConceptoPoliza()
-            conceptoP.Cuenta = row("Cuenta")
+            Try
+                conceptoP.Cuenta = row("Cuenta")
+            Catch ex As Exception
+                conceptoP.Cuenta = ""
+            End Try
+
             conceptoP.Concepto = row("Concepto")
             If (IsDBNull(row("Debe"))) Then
                 conceptoP.Monto = row("Haber")

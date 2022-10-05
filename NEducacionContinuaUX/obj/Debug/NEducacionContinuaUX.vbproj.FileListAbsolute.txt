@@ -118,6 +118,8 @@ C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\Micr
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\Spire.Pdf.xml
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\zxing.xml
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\zxing.presentation.xml
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.GenerarPolizaEDC.resources
+C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.ModalCuentasPoliza.resources
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\Educacion Continua.exe.config
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\Educacion Continua.exe.manifest
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\Educacion Continua.application
@@ -130,5 +132,3 @@ C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\Educ
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\Educacion Continua.exe
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\Educacion Continua.xml
 C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\Educacion Continua.pdb
-C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.GenerarPolizaEDC.resources
-C:\Users\Luis\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.ModalCuentasPoliza.resources

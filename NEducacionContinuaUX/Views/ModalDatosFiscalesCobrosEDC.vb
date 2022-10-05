@@ -79,6 +79,7 @@ Public Class ModalDatosFiscalesCobrosEDC
 
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
         ObjectBagService.setItem("RFCTimbrar", "FALSE")
+        Me.Close()
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
