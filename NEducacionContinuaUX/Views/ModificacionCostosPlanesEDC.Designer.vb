@@ -36,6 +36,7 @@ Partial Class ModificacionCostosPlanesEDC
         Me.lblNombre3 = New System.Windows.Forms.Label()
         Me.cbBuscar3 = New System.Windows.Forms.ComboBox()
         Me.panelModificacion3 = New System.Windows.Forms.Panel()
+        Me.btnReestablecer = New System.Windows.Forms.Button()
         Me.txtPagounico = New System.Windows.Forms.TextBox()
         Me.txtMensualidades = New System.Windows.Forms.TextBox()
         Me.txtInscripcion = New System.Windows.Forms.TextBox()
@@ -193,6 +194,7 @@ Partial Class ModificacionCostosPlanesEDC
         '
         'panelModificacion3
         '
+        Me.panelModificacion3.Controls.Add(Me.btnReestablecer)
         Me.panelModificacion3.Controls.Add(Me.txtPagounico)
         Me.panelModificacion3.Controls.Add(Me.txtMensualidades)
         Me.panelModificacion3.Controls.Add(Me.txtInscripcion)
@@ -208,6 +210,19 @@ Partial Class ModificacionCostosPlanesEDC
         Me.panelModificacion3.Size = New System.Drawing.Size(1030, 412)
         Me.panelModificacion3.TabIndex = 89
         Me.panelModificacion3.Visible = False
+        '
+        'btnReestablecer
+        '
+        Me.btnReestablecer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnReestablecer.Image = Global.NEducacionContinuaUX.My.Resources.Resources.refresh_30px
+        Me.btnReestablecer.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnReestablecer.Location = New System.Drawing.Point(828, 247)
+        Me.btnReestablecer.Name = "btnReestablecer"
+        Me.btnReestablecer.Size = New System.Drawing.Size(87, 60)
+        Me.btnReestablecer.TabIndex = 95
+        Me.btnReestablecer.Text = "Regresar a costo original"
+        Me.btnReestablecer.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnReestablecer.UseVisualStyleBackColor = True
         '
         'txtPagounico
         '
@@ -406,4 +421,5 @@ Partial Class ModificacionCostosPlanesEDC
     Friend WithEvents DescripcionColumn As DataGridViewTextBoxColumn
     Friend WithEvents PrecioActual As DataGridViewTextBoxColumn
     Friend WithEvents NuevoPrecio As DataGridViewTextBoxColumn
+    Friend WithEvents btnReestablecer As Button
 End Class

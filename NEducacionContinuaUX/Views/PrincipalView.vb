@@ -2,9 +2,29 @@
     Private Sub PrincipalView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         statusLabel.Text = User.getPerfil
         If (User.getPerfil = "DEV") Then
+            ContabilidadToolStripMenuItem.Visible = True
+            CobrosToolStripMenuItem.Visible = True
+            CatálogosToolStripMenuItem.Visible = True
+            ExternosToolStripMenuItem.Visible = True
+            ExternosConPlanToolStripMenuItem.Visible = True
+            HerramientasToolStripMenuItem.Visible = True
+            ReportesToolStripMenuItem.Visible = True
+            CongresosDiplomadosToolStripMenuItem.Visible = True
             DEVToolStripMenuItem.Visible = True
-        Else
+            ReportesCongresosDiplomadosToolStripMenuItem.Visible = True
+        End If
+
+        If (User.getPerfil = "Cajero") Then
+            ContabilidadToolStripMenuItem.Visible = False
+            CobrosToolStripMenuItem.Visible = True
+            CatálogosToolStripMenuItem.Visible = True
+            ExternosToolStripMenuItem.Visible = True
+            ExternosConPlanToolStripMenuItem.Visible = True
+            HerramientasToolStripMenuItem.Visible = True
+            ReportesToolStripMenuItem.Visible = True
+            CongresosDiplomadosToolStripMenuItem.Visible = False
             DEVToolStripMenuItem.Visible = False
+            ReportesCongresosDiplomadosToolStripMenuItem.Visible = False
         End If
 
         If (User.getPerfil = "Contabilidad") Then
@@ -15,14 +35,22 @@
             ExternosConPlanToolStripMenuItem.Visible = False
             HerramientasToolStripMenuItem.Visible = False
             ReportesToolStripMenuItem.Visible = False
-        Else
+            CongresosDiplomadosToolStripMenuItem.Visible = False
+            DEVToolStripMenuItem.Visible = False
+            ReportesCongresosDiplomadosToolStripMenuItem.Visible = False
+        End If
+
+        If (User.getPerfil = "Desarrollo Institucional") Then
             ContabilidadToolStripMenuItem.Visible = False
-            CobrosToolStripMenuItem.Visible = True
-            CatálogosToolStripMenuItem.Visible = True
-            ExternosToolStripMenuItem.Visible = True
-            ExternosConPlanToolStripMenuItem.Visible = True
-            HerramientasToolStripMenuItem.Visible = True
-            ReportesToolStripMenuItem.Visible = True
+            CobrosToolStripMenuItem.Visible = False
+            CatálogosToolStripMenuItem.Visible = False
+            ExternosToolStripMenuItem.Visible = False
+            ExternosConPlanToolStripMenuItem.Visible = False
+            HerramientasToolStripMenuItem.Visible = False
+            ReportesToolStripMenuItem.Visible = False
+            CongresosDiplomadosToolStripMenuItem.Visible = True
+            DEVToolStripMenuItem.Visible = False
+            ReportesCongresosDiplomadosToolStripMenuItem.Visible = True
         End If
     End Sub
 
@@ -71,7 +99,7 @@
         CambioPlanesEDC.Show()
     End Sub
 
-    Private Sub ModificacionDeCostosDePlanesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ModificacionDeCostosDePlanesToolStripMenuItem.Click
+    Private Sub ModificacionDeCostosDePlanesToolStripMenuItem_Click(sender As Object, e As EventArgs)
         ModificacionCostosPlanesEDC.MdiParent = Me
         ModificacionCostosPlanesEDC.Show()
     End Sub
@@ -153,5 +181,15 @@
     Private Sub GeneraciónDePólizaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GeneraciónDePólizaToolStripMenuItem.Click
         GenerarPolizaEDC.MdiParent = Me
         GenerarPolizaEDC.Show()
+    End Sub
+
+    Private Sub DescuentosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescuentosToolStripMenuItem.Click
+        ModificacionCostosPlanesEDC.MdiParent = Me
+        ModificacionCostosPlanesEDC.Show()
+    End Sub
+
+    Private Sub ReportesCongresosDiplomadosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReportesCongresosDiplomadosToolStripMenuItem.Click
+        ReportesCongresosDiplomados.MdiParent = Me
+        ReportesCongresosDiplomados.Show()
     End Sub
 End Class

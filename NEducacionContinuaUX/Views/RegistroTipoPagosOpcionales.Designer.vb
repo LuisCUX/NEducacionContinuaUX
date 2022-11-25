@@ -29,13 +29,6 @@ Partial Class RegistroTipoPagosOpcionales
         Me.txtNombre = New System.Windows.Forms.TextBox()
         Me.lblNombre = New System.Windows.Forms.Label()
         Me.GridTipoPago = New System.Windows.Forms.DataGridView()
-        Me.txtClave = New System.Windows.Forms.TextBox()
-        Me.lblClave = New System.Windows.Forms.Label()
-        Me.txtDescripcion = New System.Windows.Forms.TextBox()
-        Me.lblDescripcion = New System.Windows.Forms.Label()
-        Me.btnLimpiar = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.cbAreas = New System.Windows.Forms.ComboBox()
         Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Clave = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -43,6 +36,13 @@ Partial Class RegistroTipoPagosOpcionales
         Me.ID_AreaAsignada = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Activo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Editar = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.txtClave = New System.Windows.Forms.TextBox()
+        Me.lblClave = New System.Windows.Forms.Label()
+        Me.txtDescripcion = New System.Windows.Forms.TextBox()
+        Me.lblDescripcion = New System.Windows.Forms.Label()
+        Me.btnLimpiar = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.cbAreas = New System.Windows.Forms.ComboBox()
         CType(Me.GridTipoPago, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -126,6 +126,47 @@ Partial Class RegistroTipoPagosOpcionales
         Me.GridTipoPago.Size = New System.Drawing.Size(436, 321)
         Me.GridTipoPago.TabIndex = 88
         '
+        'ID
+        '
+        Me.ID.HeaderText = "ID"
+        Me.ID.Name = "ID"
+        Me.ID.Visible = False
+        '
+        'Clave
+        '
+        Me.Clave.HeaderText = "Clave"
+        Me.Clave.Name = "Clave"
+        Me.Clave.Visible = False
+        '
+        'Descripcion
+        '
+        Me.Descripcion.HeaderText = "Descripcion"
+        Me.Descripcion.Name = "Descripcion"
+        Me.Descripcion.Visible = False
+        '
+        'Nombre
+        '
+        Me.Nombre.FillWeight = 215.5866!
+        Me.Nombre.HeaderText = "Nombre"
+        Me.Nombre.Name = "Nombre"
+        '
+        'ID_AreaAsignada
+        '
+        Me.ID_AreaAsignada.HeaderText = "Area"
+        Me.ID_AreaAsignada.Name = "ID_AreaAsignada"
+        '
+        'Activo
+        '
+        Me.Activo.FillWeight = 45.68528!
+        Me.Activo.HeaderText = "Activo"
+        Me.Activo.Name = "Activo"
+        '
+        'Editar
+        '
+        Me.Editar.FillWeight = 38.72813!
+        Me.Editar.HeaderText = "Editar"
+        Me.Editar.Name = "Editar"
+        '
         'txtClave
         '
         Me.txtClave.Location = New System.Drawing.Point(15, 97)
@@ -192,47 +233,6 @@ Partial Class RegistroTipoPagosOpcionales
         Me.cbAreas.Name = "cbAreas"
         Me.cbAreas.Size = New System.Drawing.Size(376, 23)
         Me.cbAreas.TabIndex = 107
-        '
-        'ID
-        '
-        Me.ID.HeaderText = "ID"
-        Me.ID.Name = "ID"
-        Me.ID.Visible = False
-        '
-        'Clave
-        '
-        Me.Clave.HeaderText = "Clave"
-        Me.Clave.Name = "Clave"
-        Me.Clave.Visible = False
-        '
-        'Descripcion
-        '
-        Me.Descripcion.HeaderText = "Descripcion"
-        Me.Descripcion.Name = "Descripcion"
-        Me.Descripcion.Visible = False
-        '
-        'Nombre
-        '
-        Me.Nombre.FillWeight = 215.5866!
-        Me.Nombre.HeaderText = "Nombre"
-        Me.Nombre.Name = "Nombre"
-        '
-        'ID_AreaAsignada
-        '
-        Me.ID_AreaAsignada.HeaderText = "Area"
-        Me.ID_AreaAsignada.Name = "ID_AreaAsignada"
-        '
-        'Activo
-        '
-        Me.Activo.FillWeight = 45.68528!
-        Me.Activo.HeaderText = "Activo"
-        Me.Activo.Name = "Activo"
-        '
-        'Editar
-        '
-        Me.Editar.FillWeight = 38.72813!
-        Me.Editar.HeaderText = "Editar"
-        Me.Editar.Name = "Editar"
         '
         'RegistroTipoPagosOpcionales
         '

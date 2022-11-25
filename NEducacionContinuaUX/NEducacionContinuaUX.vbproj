@@ -28,7 +28,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\192.168.1.252\Sistemas\Ejecutables\EducacionContinua\</InstallUrl>
     <TargetCulture>es-MX</TargetCulture>
-    <ApplicationRevision>93</ApplicationRevision>
+    <ApplicationRevision>108</ApplicationRevision>
     <ApplicationVersion>1.1.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -468,6 +468,12 @@
     <Compile Include="Views\ReimpresionFacturasEDC.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Views\ReportesCongresosDiplomados.Designer.vb">
+      <DependentUpon>ReportesCongresosDiplomados.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportesCongresosDiplomados.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\ReportesEDC.Designer.vb">
       <DependentUpon>ReportesEDC.vb</DependentUpon>
     </Compile>
@@ -589,6 +595,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ReimpresionFacturasEDC.resx">
       <DependentUpon>ReimpresionFacturasEDC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ReportesCongresosDiplomados.resx">
+      <DependentUpon>ReportesCongresosDiplomados.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ReportesEDC.resx">
       <DependentUpon>ReportesEDC.vb</DependentUpon>
@@ -785,6 +794,18 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="log4net">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

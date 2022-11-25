@@ -100,7 +100,7 @@ Partial Class MainCobrosDiferidosEDC
         Me.lblNombreVentana.Name = "lblNombreVentana"
         Me.lblNombreVentana.Size = New System.Drawing.Size(1241, 69)
         Me.lblNombreVentana.TabIndex = 13
-        Me.lblNombreVentana.Text = "Cobros múltiplesss"
+        Me.lblNombreVentana.Text = "Cobros múltiples"
         Me.lblNombreVentana.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'panelBusqueda

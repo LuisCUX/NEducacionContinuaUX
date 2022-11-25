@@ -133,13 +133,17 @@
         Try
             For x = 0 To gridPagos.Rows.Count - 1
                 Dim descuento As Decimal
-                If (gridPagos.Rows(x).Cells(4).Value = "") Then
+                Dim wea = gridPagos.Rows(x).Cells(4).Value
+                If (wea = "") Then
                     descuento = 0.000000
                 Else
                     descuento = gridPagos.Rows(x).Cells(3).Value - gridPagos.Rows(x).Cells(4).Value
+                    If (descuento < 0) Then
+                        descuento = 0.000000
+                    End If
                 End If
 
-                db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionCargosPlanes SET Descuento = {descuento} WHERE ID_Concepto = {gridPagos.Rows(x).Cells(0).Value} AND Matricula = '{Matricula}' AND Activo = 1")
+                    db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionCargosPlanes SET Descuento = {descuento} WHERE ID_Concepto = {gridPagos.Rows(x).Cells(0).Value} AND Matricula = '{Matricula}' AND Activo = 1")
             Next
             MessageBox.Show("Descuentos registrados correctamente")
         Catch ex As Exception

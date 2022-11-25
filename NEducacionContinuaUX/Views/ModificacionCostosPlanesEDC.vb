@@ -211,4 +211,17 @@ Public Class ModificacionCostosPlanesEDC
         ap.cambiarDescuentos(Matricula, GridActual3)
         Me.Reiniciar()
     End Sub
+
+    Private Sub btnReestablecer_Click(sender As Object, e As EventArgs) Handles btnReestablecer.Click
+        For x = 0 To GridActual3.Rows.Count() - 1
+            Dim costoActual As Decimal = Convert.ToDecimal(GridActual3.Rows(x).Cells(3).Value)
+            Dim decuentoActual As Decimal = db.exectSQLQueryScalar($"SELECT Descuento FROM ing_AsignacionCargosPlanes WHERE ID_Concepto = {GridActual3.Rows(x).Cells(0).Value} AND Matricula = '{Matricula}'")
+            Dim costoOriginal = costoActual + decuentoActual
+            GridActual3.Rows(x).Cells(4).Value = costoOriginal.ToString()
+        Next
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Me.Close()
+    End Sub
 End Class

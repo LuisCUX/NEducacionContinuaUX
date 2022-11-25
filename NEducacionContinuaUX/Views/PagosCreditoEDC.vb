@@ -28,10 +28,12 @@ Public Class PagosCreditoEDC
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
-        Matricula = txtMatricula.Text
+        Me.LimpiarVentana()
+        Matricula = txtMatricula.Text.ToUpper()
         tipoMatricula = va.validarMatricula(Matricula)
         lblMatriculatxt.Text = Matricula
         If (tipoMatricula = "False") Then
+            MessageBox.Show("La clave ingresada no existe o esta incorrecta, ingrese una clave valida")
             Me.Reiniciar()
             Exit Sub
         ElseIf (tipoMatricula = "UX") Then
@@ -500,7 +502,26 @@ Public Class PagosCreditoEDC
         End If
     End Sub
 
+    Sub LimpiarVentana()
+        gridConceptosFactura.Rows.Clear()
+        GridFacturaSeleccionada.Rows.Clear()
+        GridFacturaPagos.Rows.Clear()
+        txtMonto.Clear()
+        cbBanco.SelectedIndex = -1
+        cbTipoBanco.SelectedIndex = -1
+        txtUltimos4Digitos.Clear()
+        txtNoCheque.Clear()
+        txtNoCuenta.Clear()
+        cbFormaPago.SelectedIndex = 0
+        Me.cbFormaPago_SelectionChangeCommitted(Nothing, Nothing)
+        ch.limpiarListaConceptos()
+    End Sub
+
     Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
         Me.Reiniciar()
+    End Sub
+
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
+        Me.Close()
     End Sub
 End Class

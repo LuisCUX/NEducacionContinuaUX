@@ -36,6 +36,7 @@ Public Class CobrosEDC
         Matricula = txtMatricula.Text.ToUpper()
         tipoMatricula = va.validarMatricula(Matricula)
         If (tipoMatricula = "False") Then
+            MessageBox.Show("La clave ingresada no existe o esta incorrecta, ingrese una clave valida")
             Me.Reiniciar()
             txtMatricula.Focus()
             Exit Sub
@@ -838,6 +839,13 @@ Public Class CobrosEDC
         lblTotal.Text = ""
         ch.limpiarListaConceptos()
         txtMonto.Clear()
+        cbBanco.SelectedIndex = -1
+        cbTipoBanco.SelectedIndex = -1
+        txtUltimos4Digitos.Clear()
+        txtNoCheque.Clear()
+        txtNoCuenta.Clear()
+        cbFormaPago.SelectedIndex = 0
+        Me.cbFormaPago_SelectionChangeCommitted(Nothing, Nothing)
     End Sub
 
 

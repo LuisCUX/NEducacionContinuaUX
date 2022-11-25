@@ -129,4 +129,8 @@ Public Class CambioPlanesEDC
         CambioPlanesEDC_Load(Me, Nothing)
         txtMatricula2.Focus()
     End Sub
+
+    Private Sub btnSalir2_Click(sender As Object, e As EventArgs) Handles btnSalir2.Click
+        Me.Close()
+    End Sub
 End Class

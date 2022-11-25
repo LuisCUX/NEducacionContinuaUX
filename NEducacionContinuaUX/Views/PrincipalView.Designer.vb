@@ -48,20 +48,22 @@ Partial Class PrincipalView
         Me.ExternosConPlanToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AsignaciónDePlanesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CambioDePlanesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ModificacionDeCostosDePlanesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HerramientasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReimpresiónDeFacturasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TimbresUtilizadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CancelaciónDeFacturasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CambioDeFormaDePagoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReportesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContabilidadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GeneraciónDePólizaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DEVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CambiarConexiónToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DesarrolloToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProduccionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Form1ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ContabilidadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GeneraciónDePólizaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CongresosDiplomadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DescuentosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReportesCongresosDiplomadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip.SuspendLayout()
         Me.MenuStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -83,7 +85,7 @@ Partial Class PrincipalView
         '
         'MenuStrip
         '
-        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CobrosToolStripMenuItem, Me.CatálogosToolStripMenuItem, Me.ExternosToolStripMenuItem, Me.ExternosConPlanToolStripMenuItem, Me.HerramientasToolStripMenuItem, Me.ReportesToolStripMenuItem, Me.ContabilidadToolStripMenuItem, Me.DEVToolStripMenuItem})
+        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CobrosToolStripMenuItem, Me.CatálogosToolStripMenuItem, Me.ExternosToolStripMenuItem, Me.ExternosConPlanToolStripMenuItem, Me.HerramientasToolStripMenuItem, Me.ReportesToolStripMenuItem, Me.ContabilidadToolStripMenuItem, Me.DEVToolStripMenuItem, Me.CongresosDiplomadosToolStripMenuItem, Me.ReportesCongresosDiplomadosToolStripMenuItem})
         Me.MenuStrip.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip.Name = "MenuStrip"
         Me.MenuStrip.Size = New System.Drawing.Size(1423, 24)
@@ -212,7 +214,7 @@ Partial Class PrincipalView
         '
         'ExternosConPlanToolStripMenuItem
         '
-        Me.ExternosConPlanToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AsignaciónDePlanesToolStripMenuItem, Me.CambioDePlanesToolStripMenuItem, Me.ModificacionDeCostosDePlanesToolStripMenuItem})
+        Me.ExternosConPlanToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AsignaciónDePlanesToolStripMenuItem, Me.CambioDePlanesToolStripMenuItem})
         Me.ExternosConPlanToolStripMenuItem.Name = "ExternosConPlanToolStripMenuItem"
         Me.ExternosConPlanToolStripMenuItem.Size = New System.Drawing.Size(112, 20)
         Me.ExternosConPlanToolStripMenuItem.Text = "Externos con plan"
@@ -220,20 +222,14 @@ Partial Class PrincipalView
         'AsignaciónDePlanesToolStripMenuItem
         '
         Me.AsignaciónDePlanesToolStripMenuItem.Name = "AsignaciónDePlanesToolStripMenuItem"
-        Me.AsignaciónDePlanesToolStripMenuItem.Size = New System.Drawing.Size(250, 22)
+        Me.AsignaciónDePlanesToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
         Me.AsignaciónDePlanesToolStripMenuItem.Text = "Asignación de planes"
         '
         'CambioDePlanesToolStripMenuItem
         '
         Me.CambioDePlanesToolStripMenuItem.Name = "CambioDePlanesToolStripMenuItem"
-        Me.CambioDePlanesToolStripMenuItem.Size = New System.Drawing.Size(250, 22)
+        Me.CambioDePlanesToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
         Me.CambioDePlanesToolStripMenuItem.Text = "Cambio de planes"
-        '
-        'ModificacionDeCostosDePlanesToolStripMenuItem
-        '
-        Me.ModificacionDeCostosDePlanesToolStripMenuItem.Name = "ModificacionDeCostosDePlanesToolStripMenuItem"
-        Me.ModificacionDeCostosDePlanesToolStripMenuItem.Size = New System.Drawing.Size(250, 22)
-        Me.ModificacionDeCostosDePlanesToolStripMenuItem.Text = "Modificacion de costos de planes"
         '
         'HerramientasToolStripMenuItem
         '
@@ -272,6 +268,19 @@ Partial Class PrincipalView
         Me.ReportesToolStripMenuItem.Size = New System.Drawing.Size(65, 20)
         Me.ReportesToolStripMenuItem.Text = "Reportes"
         '
+        'ContabilidadToolStripMenuItem
+        '
+        Me.ContabilidadToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GeneraciónDePólizaToolStripMenuItem})
+        Me.ContabilidadToolStripMenuItem.Name = "ContabilidadToolStripMenuItem"
+        Me.ContabilidadToolStripMenuItem.Size = New System.Drawing.Size(87, 20)
+        Me.ContabilidadToolStripMenuItem.Text = "Contabilidad"
+        '
+        'GeneraciónDePólizaToolStripMenuItem
+        '
+        Me.GeneraciónDePólizaToolStripMenuItem.Name = "GeneraciónDePólizaToolStripMenuItem"
+        Me.GeneraciónDePólizaToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GeneraciónDePólizaToolStripMenuItem.Text = "Generar póliza"
+        '
         'DEVToolStripMenuItem
         '
         Me.DEVToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CambiarConexiónToolStripMenuItem, Me.Form1ToolStripMenuItem})
@@ -304,18 +313,24 @@ Partial Class PrincipalView
         Me.Form1ToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
         Me.Form1ToolStripMenuItem.Text = "form1"
         '
-        'ContabilidadToolStripMenuItem
+        'CongresosDiplomadosToolStripMenuItem
         '
-        Me.ContabilidadToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GeneraciónDePólizaToolStripMenuItem})
-        Me.ContabilidadToolStripMenuItem.Name = "ContabilidadToolStripMenuItem"
-        Me.ContabilidadToolStripMenuItem.Size = New System.Drawing.Size(87, 20)
-        Me.ContabilidadToolStripMenuItem.Text = "Contabilidad"
+        Me.CongresosDiplomadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DescuentosToolStripMenuItem})
+        Me.CongresosDiplomadosToolStripMenuItem.Name = "CongresosDiplomadosToolStripMenuItem"
+        Me.CongresosDiplomadosToolStripMenuItem.Size = New System.Drawing.Size(144, 20)
+        Me.CongresosDiplomadosToolStripMenuItem.Text = "Congresos/Diplomados"
         '
-        'GeneraciónDePólizaToolStripMenuItem
+        'DescuentosToolStripMenuItem
         '
-        Me.GeneraciónDePólizaToolStripMenuItem.Name = "GeneraciónDePólizaToolStripMenuItem"
-        Me.GeneraciónDePólizaToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.GeneraciónDePólizaToolStripMenuItem.Text = "Generar póliza"
+        Me.DescuentosToolStripMenuItem.Name = "DescuentosToolStripMenuItem"
+        Me.DescuentosToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
+        Me.DescuentosToolStripMenuItem.Text = "Descuentos"
+        '
+        'ReportesCongresosDiplomadosToolStripMenuItem
+        '
+        Me.ReportesCongresosDiplomadosToolStripMenuItem.Name = "ReportesCongresosDiplomadosToolStripMenuItem"
+        Me.ReportesCongresosDiplomadosToolStripMenuItem.Size = New System.Drawing.Size(193, 20)
+        Me.ReportesCongresosDiplomadosToolStripMenuItem.Text = "Reportes Congresos/Diplomados"
         '
         'PrincipalView
         '
@@ -367,7 +382,6 @@ Partial Class PrincipalView
     Friend WithEvents ExternosConPlanToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AsignaciónDePlanesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CambioDePlanesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ModificacionDeCostosDePlanesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents HerramientasToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ReimpresiónDeFacturasToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TimbresUtilizadosToolStripMenuItem As ToolStripMenuItem
@@ -385,4 +399,7 @@ Partial Class PrincipalView
     Friend WithEvents Form1ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ContabilidadToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GeneraciónDePólizaToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CongresosDiplomadosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DescuentosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ReportesCongresosDiplomadosToolStripMenuItem As ToolStripMenuItem
 End Class

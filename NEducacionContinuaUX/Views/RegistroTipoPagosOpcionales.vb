@@ -120,4 +120,8 @@
             e.Handled = True
         End If
     End Sub
+
+    Private Sub btnSalirB_Click(sender As Object, e As EventArgs) Handles btnSalirB.Click
+        Me.Close()
+    End Sub
 End Class
