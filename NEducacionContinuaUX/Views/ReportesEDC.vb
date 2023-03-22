@@ -8,6 +8,8 @@ Public Class ReportesEDC
         cbTipoReporte2.Items.Add("Individual")
         cbTIpoReporte.Items.Add("Global")
         cbTipoReporte2.Items.Add("Global")
+
+
     End Sub
 
     Private Sub cbTIpoReporte_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbTIpoReporte.SelectionChangeCommitted

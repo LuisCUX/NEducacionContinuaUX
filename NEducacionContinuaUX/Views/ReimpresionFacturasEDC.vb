@@ -19,7 +19,7 @@ Public Class ReimpresionFacturasEDC
     Dim tipoMatricula As String
     Dim combo_filtro As String
     Private Sub ReimpresionFacturasEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        panelFactura.Visible = False
     End Sub
 
     Private Sub cbFactura_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbFactura.SelectionChangeCommitted
@@ -44,11 +44,14 @@ Public Class ReimpresionFacturasEDC
         If (valida = False) Then
             Me.Reiniciar()
         End If
+        re.obtenerDatosCliente(Matricula, lblNombreCL, lblRFCCL, lblEmailCL)
+        panelFactura.Visible = True
     End Sub
 
 
     Private Sub btnBuscarFolio_Click(sender As Object, e As EventArgs) Handles btnBuscarFolio.Click
         Folio = txtFolio.Text
+        GridConceptos.Rows.Clear()
         IDXML = db.exectSQLQueryScalar($"SELECT ID FROM ing_xmlTimbrados WHERE Folio = '{Folio}'")
         Matricula = db.exectSQLQueryScalar($"SELECT Matricula_Clave FROM ing_xmlTimbrados WHERE Folio = '{Folio}'")
         If (IDXML <= 0) Then
@@ -59,6 +62,7 @@ Public Class ReimpresionFacturasEDC
                 GridConceptos.Rows.Add(item("Nombre_Concepto"), item("Cantidad"), Format(item("PrecioUnitario"), "#####0.00"), Format(item("IVA"), "#####0.00"), Format(item("Descuento"), "#####0.00"), Format(item("Total"), "#####0.00"))
             Next
             panelFactura.Visible = True
+            re.obtenerDatosCliente(Matricula, lblNombreCL, lblRFCCL, lblEmailCL)
         End If
     End Sub
 
@@ -114,16 +118,18 @@ Public Class ReimpresionFacturasEDC
         Dim esEvento As Boolean
         If (tipoMatricula = "EX") Then
             tipoCliente = 2
+            esEvento = False
         ElseIf (tipoMatricula = "EC") Then
             tipoCliente = 1
+            esEvento = True
         End If
 
-        Dim tableIDConceptos As DataTable = db.getDataTableFromSQL($"SELECT DISTINCT Clave_Concepto FROM ing_xmlTimbradosConceptos WHERE XMLID = {IDXML}")
-        For Each item As DataRow In tableIDConceptos.Rows
-            If (item("Clave_Concepto") = 3) Then
-                esEvento = True
-            End If
-        Next
+        'Dim tableIDConceptos As DataTable = db.getDataTableFromSQL($"SELECT DISTINCT Clave_Concepto FROM ing_xmlTimbradosConceptos WHERE XMLID = {IDXML}")
+        'For Each item As DataRow In tableIDConceptos.Rows
+        '    If (item("Clave_Concepto") = 3) Then
+        '        esEvento = True
+        '    End If
+        'Next
 
         Dim cantidadString As String
         Dim valores As String()
@@ -137,10 +143,10 @@ Public Class ReimpresionFacturasEDC
         If (esEvento = False) Then
             NombreEvento = "   "
         Else
-            NombreEvento = db.exectSQLQueryScalar($"SELECT C.nombre FROM portal_registroCongreso AS RC
-                                                        INNER JOIN portal_tipoAsistente AS TA ON TA.id_tipo_asistente = RC.id_tipo_asistente
-                                                        INNER JOIN portal_congreso AS C ON C.id_congreso = TA.id_congreso
-                                                        WHERE RC.clave_cliente = '{Matricula}'")
+            NombreEvento = db.exectSQLQueryScalar($"SELECT C.nombre FROM portal_congreso AS C
+                                                    INNER JOIN ing_Planes AS P ON P.ID_Congreso = C.id_congreso
+                                                    INNER JOIN portal_registroCongreso AS RC ON RC.id_plan = P.ID
+                                                    WHERE RC.clave_cliente = '{Matricula}'")
         End If
         Dim descripcionCFDI As String = db.exectSQLQueryScalar($"select UPPER('(' + clave_usoCFDI + ')' + ' ' + descripcion) As Clave from ing_cat_usoCFDI WHERE clave_usoCFDI = '{usoCFDI}'")
         Dim QR As String = $"?re={EnviromentService.RFCEDC}&rr={rfcTimbrar}id={folioFiscal}tt={Total}"
@@ -369,8 +375,6 @@ Public Class ReimpresionFacturasEDC
 
     Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
         Me.Reiniciar()
-        txtMatricula.Text = Matricula
-        btnBuscarMatricula.PerformClick()
     End Sub
 
     Private Sub LimpiaCaracteres_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtMatricula.KeyPress, txtFolio.KeyPress
@@ -442,5 +446,27 @@ Public Class ReimpresionFacturasEDC
         Catch ex As Exception
 
         End Try
+    End Sub
+
+    Private Sub txtMatricula_KeyDown(sender As Object, e As KeyEventArgs) Handles txtMatricula.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnBuscarMatricula.PerformClick()
+        End If
+    End Sub
+
+    Private Sub txtFolio_KeyDown(sender As Object, e As KeyEventArgs) Handles txtFolio.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnBuscarFolio.PerformClick()
+        End If
+    End Sub
+
+    Sub Limpiar()
+        cbFactura.DataSource = Nothing
+        lblNombreCL.Text = ""
+        lblRFCCL.Text = ""
+        lblEmailCL.Text = ""
+        GridConceptos.Rows.Clear()
+        txtMatricula.Clear()
+        txtFolio.Clear()
     End Sub
 End Class

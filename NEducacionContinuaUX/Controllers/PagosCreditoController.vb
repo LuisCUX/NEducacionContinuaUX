@@ -81,7 +81,7 @@ Public Class PagosCreditoController
 
             Dim formapagoid As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatFormaPago WHERE Forma_Pago = '{FormaPago}'")
             Dim XMLID = db.insertAndGetIDInserted($"INSERT INTO ing_xmlTimbrados(Matricula_Clave, Folio, FolioFiscal, Certificado, XMLTimbrado, fac_Cadena, fac_Sello, Tipo_Pago, Forma_Pago, Forma_PagoID, Fecha_Pago, Cajero, RegimenFiscal, RFCTimbrado, Subtotal, Descuento, IVA, Total, usoCFDI, CanceladaHoy, CanceladaOtroDia) VALUES ('{Matricula}', '{Serie}{Folio}', '{folioFiscalNuevo}', '{NoCertificado}', '{xmlTimbrado}', '{Cadena}', '{sello}', 'PAGO DE CREDITO', '{FormaPago}', {formapagoid}, '{Fecha}', '{User.getUsername}', 'GENERAL DE LEY(603)', '{RFC}', {IVABase}, 0, {IVACobrado}, {CantidadAbonada}, '{UsoCFDI}', 0, 0)")
-            db.execSQLQueryWithoutParams($"INSERT INTO ing_xmlTimbradosConceptos(Clave_Cliente, XMLID, Nombre_Concepto, IDConcepto, Clave_Concepto, ClaveUnidad, PrecioUnitario, IVA, Descuento, Cantidad, Total) VALUES ('{Matricula}', {XMLID}, 'PAGO', {IDCredito}, 1, 'E48', {IVABase}, {IVACobrado}, 0, 1, {CantidadAbonada})")
+            db.execSQLQueryWithoutParams($"INSERT INTO ing_xmlTimbradosConceptos(Clave_Cliente, XMLID, Nombre_Concepto, IDConcepto, Clave_Concepto, ClaveUnidad, ClaveProdServ, PrecioUnitario, IVA, Descuento, Cantidad, Total) VALUES ('{Matricula}', {XMLID}, 'PAGO', {IDCredito}, 1, 'E48', '84111506', {IVABase}, {IVACobrado}, 0, 1, {CantidadAbonada})")
             If (MontoNuevo = 0) Then
                 db.execSQLQueryWithoutParams($"UPDATE ing_Creditos SET Activo = 0 WHERE ID = {IDCredito}")
             End If

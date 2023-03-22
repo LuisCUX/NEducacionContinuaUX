@@ -69,10 +69,10 @@
         Dim tableUsuarios As DataTable = db.getDataTableFromSQL($"SELECT Username FROM ing_Usuarios WHERE Activo = 1")
 
         For Each row As DataRow In tableUsuarios.Rows
-            numPagos = db.exectSQLQueryScalar($"SELECT COUNT(DISTINCT Folio) FROM obtenerPolizaEDC('2021-12-01', '2021-12-31') WHERE Cajero = '{row("Username")}'")
+            numPagos = db.exectSQLQueryScalar($"SELECT COUNT(DISTINCT Folio) FROM obtenerPolizaEDC('{FechaInicio}', '{FechaFin}') WHERE Cajero = '{row("Username")}'")
             If (numPagos > 0) Then
-                Primero = db.exectSQLQueryScalar($"SELECT TOP 1 Folio FROM obtenerPolizaEDC('2021-12-01', '2021-12-31') WHERE Cajero = '{row("Username")}' ORDER BY Folio")
-                Ultimo = db.exectSQLQueryScalar($"SELECT TOP 1 Folio FROM obtenerPolizaEDC('2021-12-01', '2021-12-31') WHERE Cajero = '{row("Username")}' ORDER BY Folio DESC")
+                Primero = db.exectSQLQueryScalar($"SELECT TOP 1 Folio FROM obtenerPolizaEDC('{FechaInicio}', '{FechaFin}') WHERE Cajero = '{row("Username")}' ORDER BY Folio")
+                Ultimo = db.exectSQLQueryScalar($"SELECT TOP 1 Folio FROM obtenerPolizaEDC('{FechaInicio}', '{FechaFin}') WHERE Cajero = '{row("Username")}' ORDER BY Folio DESC")
                 message = $"{message} {Primero}-{Ultimo}"
             End If
         Next

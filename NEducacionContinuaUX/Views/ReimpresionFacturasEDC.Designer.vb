@@ -29,12 +29,18 @@ Partial Class ReimpresionFacturasEDC
         Me.txtMatricula = New System.Windows.Forms.TextBox()
         Me.lblMatricula = New System.Windows.Forms.Label()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+        Me.btnBuscarFolio = New System.Windows.Forms.Button()
+        Me.txtFolio = New System.Windows.Forms.TextBox()
+        Me.lblFolioBuscar = New System.Windows.Forms.Label()
         Me.cbFactura = New System.Windows.Forms.ComboBox()
         Me.lblFacturaCB = New System.Windows.Forms.Label()
         Me.btnBuscarMatricula = New System.Windows.Forms.Button()
-        Me.lblFolioBuscar = New System.Windows.Forms.Label()
-        Me.txtFolio = New System.Windows.Forms.TextBox()
-        Me.btnBuscarFolio = New System.Windows.Forms.Button()
+        Me.lblEmailCL = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.lblRFCCL = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.lblNombreCL = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.panelFactura = New System.Windows.Forms.Panel()
         Me.GridConceptos = New System.Windows.Forms.DataGridView()
         Me.NombreConcepto = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -48,6 +54,8 @@ Partial Class ReimpresionFacturasEDC
         Me.btnReimprimir = New System.Windows.Forms.Button()
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -63,7 +71,7 @@ Partial Class ReimpresionFacturasEDC
         Me.lblNombreVentana.ForeColor = System.Drawing.Color.Gold
         Me.lblNombreVentana.Location = New System.Drawing.Point(-2, -1)
         Me.lblNombreVentana.Name = "lblNombreVentana"
-        Me.lblNombreVentana.Size = New System.Drawing.Size(884, 69)
+        Me.lblNombreVentana.Size = New System.Drawing.Size(1001, 69)
         Me.lblNombreVentana.TabIndex = 14
         Me.lblNombreVentana.Text = "Herramientas de facturación"
         Me.lblNombreVentana.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -71,9 +79,9 @@ Partial Class ReimpresionFacturasEDC
         'cbExterno
         '
         Me.cbExterno.FormattingEnabled = True
-        Me.cbExterno.Location = New System.Drawing.Point(8, 67)
+        Me.cbExterno.Location = New System.Drawing.Point(9, 95)
         Me.cbExterno.Name = "cbExterno"
-        Me.cbExterno.Size = New System.Drawing.Size(490, 21)
+        Me.cbExterno.Size = New System.Drawing.Size(417, 21)
         Me.cbExterno.TabIndex = 75
         '
         'lblBusquedaNombre
@@ -81,7 +89,7 @@ Partial Class ReimpresionFacturasEDC
         Me.lblBusquedaNombre.AutoSize = True
         Me.lblBusquedaNombre.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblBusquedaNombre.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblBusquedaNombre.Location = New System.Drawing.Point(5, 48)
+        Me.lblBusquedaNombre.Location = New System.Drawing.Point(6, 76)
         Me.lblBusquedaNombre.Name = "lblBusquedaNombre"
         Me.lblBusquedaNombre.Size = New System.Drawing.Size(63, 16)
         Me.lblBusquedaNombre.TabIndex = 74
@@ -90,7 +98,7 @@ Partial Class ReimpresionFacturasEDC
         'txtMatricula
         '
         Me.txtMatricula.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMatricula.Location = New System.Drawing.Point(77, 15)
+        Me.txtMatricula.Location = New System.Drawing.Point(61, 43)
         Me.txtMatricula.Name = "txtMatricula"
         Me.txtMatricula.Size = New System.Drawing.Size(110, 22)
         Me.txtMatricula.TabIndex = 16
@@ -100,7 +108,7 @@ Partial Class ReimpresionFacturasEDC
         Me.lblMatricula.AutoSize = True
         Me.lblMatricula.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblMatricula.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblMatricula.Location = New System.Drawing.Point(5, 16)
+        Me.lblMatricula.Location = New System.Drawing.Point(6, 44)
         Me.lblMatricula.Name = "lblMatricula"
         Me.lblMatricula.Size = New System.Drawing.Size(49, 18)
         Me.lblMatricula.TabIndex = 15
@@ -113,30 +121,66 @@ Partial Class ReimpresionFacturasEDC
         '
         'SplitContainer1.Panel1
         '
-        Me.SplitContainer1.Panel1.Controls.Add(Me.cbFactura)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.Label2)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.btnBuscarFolio)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.txtFolio)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.lblFolioBuscar)
         Me.SplitContainer1.Panel1.Controls.Add(Me.cbExterno)
         Me.SplitContainer1.Panel1.Controls.Add(Me.lblMatricula)
-        Me.SplitContainer1.Panel1.Controls.Add(Me.lblFacturaCB)
         Me.SplitContainer1.Panel1.Controls.Add(Me.lblBusquedaNombre)
         Me.SplitContainer1.Panel1.Controls.Add(Me.txtMatricula)
         Me.SplitContainer1.Panel1.Controls.Add(Me.btnBuscarMatricula)
         '
         'SplitContainer1.Panel2
         '
-        Me.SplitContainer1.Panel2.Controls.Add(Me.lblFolioBuscar)
-        Me.SplitContainer1.Panel2.Controls.Add(Me.txtFolio)
-        Me.SplitContainer1.Panel2.Controls.Add(Me.btnBuscarFolio)
-        Me.SplitContainer1.Size = New System.Drawing.Size(858, 154)
-        Me.SplitContainer1.SplitterDistance = 509
+        Me.SplitContainer1.Panel2.Controls.Add(Me.Label4)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.lblEmailCL)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.Label5)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.lblRFCCL)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.Label3)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.lblNombreCL)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.Label1)
+        Me.SplitContainer1.Size = New System.Drawing.Size(973, 142)
+        Me.SplitContainer1.SplitterDistance = 498
         Me.SplitContainer1.TabIndex = 16
+        '
+        'btnBuscarFolio
+        '
+        Me.btnBuscarFolio.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.search_30px
+        Me.btnBuscarFolio.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnBuscarFolio.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnBuscarFolio.Location = New System.Drawing.Point(397, 37)
+        Me.btnBuscarFolio.Name = "btnBuscarFolio"
+        Me.btnBuscarFolio.Size = New System.Drawing.Size(41, 34)
+        Me.btnBuscarFolio.TabIndex = 20
+        Me.btnBuscarFolio.UseVisualStyleBackColor = True
+        '
+        'txtFolio
+        '
+        Me.txtFolio.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFolio.Location = New System.Drawing.Point(281, 43)
+        Me.txtFolio.Name = "txtFolio"
+        Me.txtFolio.Size = New System.Drawing.Size(110, 22)
+        Me.txtFolio.TabIndex = 19
+        '
+        'lblFolioBuscar
+        '
+        Me.lblFolioBuscar.AutoSize = True
+        Me.lblFolioBuscar.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFolioBuscar.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblFolioBuscar.Location = New System.Drawing.Point(239, 44)
+        Me.lblFolioBuscar.Name = "lblFolioBuscar"
+        Me.lblFolioBuscar.Size = New System.Drawing.Size(45, 18)
+        Me.lblFolioBuscar.TabIndex = 18
+        Me.lblFolioBuscar.Text = "Folio:"
         '
         'cbFactura
         '
         Me.cbFactura.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbFactura.FormattingEnabled = True
-        Me.cbFactura.Location = New System.Drawing.Point(9, 110)
+        Me.cbFactura.Location = New System.Drawing.Point(9, 23)
         Me.cbFactura.Name = "cbFactura"
-        Me.cbFactura.Size = New System.Drawing.Size(489, 21)
+        Me.cbFactura.Size = New System.Drawing.Size(416, 21)
         Me.cbFactura.TabIndex = 77
         '
         'lblFacturaCB
@@ -144,59 +188,94 @@ Partial Class ReimpresionFacturasEDC
         Me.lblFacturaCB.AutoSize = True
         Me.lblFacturaCB.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblFacturaCB.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblFacturaCB.Location = New System.Drawing.Point(6, 91)
+        Me.lblFacturaCB.Location = New System.Drawing.Point(6, 4)
         Me.lblFacturaCB.Name = "lblFacturaCB"
-        Me.lblFacturaCB.Size = New System.Drawing.Size(56, 16)
+        Me.lblFacturaCB.Size = New System.Drawing.Size(126, 16)
         Me.lblFacturaCB.TabIndex = 76
-        Me.lblFacturaCB.Text = "Factura:"
+        Me.lblFacturaCB.Text = "Seleccionar factura:"
         '
         'btnBuscarMatricula
         '
         Me.btnBuscarMatricula.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.search_30px
         Me.btnBuscarMatricula.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnBuscarMatricula.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnBuscarMatricula.Location = New System.Drawing.Point(194, 9)
+        Me.btnBuscarMatricula.Location = New System.Drawing.Point(177, 37)
         Me.btnBuscarMatricula.Name = "btnBuscarMatricula"
         Me.btnBuscarMatricula.Size = New System.Drawing.Size(41, 34)
         Me.btnBuscarMatricula.TabIndex = 17
         Me.btnBuscarMatricula.UseVisualStyleBackColor = True
         '
-        'lblFolioBuscar
+        'lblEmailCL
         '
-        Me.lblFolioBuscar.AutoSize = True
-        Me.lblFolioBuscar.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFolioBuscar.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblFolioBuscar.Location = New System.Drawing.Point(13, 16)
-        Me.lblFolioBuscar.Name = "lblFolioBuscar"
-        Me.lblFolioBuscar.Size = New System.Drawing.Size(45, 18)
-        Me.lblFolioBuscar.TabIndex = 18
-        Me.lblFolioBuscar.Text = "Folio:"
+        Me.lblEmailCL.AutoSize = True
+        Me.lblEmailCL.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblEmailCL.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblEmailCL.Location = New System.Drawing.Point(71, 93)
+        Me.lblEmailCL.Name = "lblEmailCL"
+        Me.lblEmailCL.Size = New System.Drawing.Size(0, 16)
+        Me.lblEmailCL.TabIndex = 80
         '
-        'txtFolio
+        'Label5
         '
-        Me.txtFolio.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFolio.Location = New System.Drawing.Point(64, 15)
-        Me.txtFolio.Name = "txtFolio"
-        Me.txtFolio.Size = New System.Drawing.Size(110, 22)
-        Me.txtFolio.TabIndex = 19
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label5.Location = New System.Drawing.Point(11, 92)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(45, 16)
+        Me.Label5.TabIndex = 79
+        Me.Label5.Text = "Email:"
         '
-        'btnBuscarFolio
+        'lblRFCCL
         '
-        Me.btnBuscarFolio.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.search_30px
-        Me.btnBuscarFolio.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnBuscarFolio.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnBuscarFolio.Location = New System.Drawing.Point(180, 9)
-        Me.btnBuscarFolio.Name = "btnBuscarFolio"
-        Me.btnBuscarFolio.Size = New System.Drawing.Size(41, 34)
-        Me.btnBuscarFolio.TabIndex = 20
-        Me.btnBuscarFolio.UseVisualStyleBackColor = True
+        Me.lblRFCCL.AutoSize = True
+        Me.lblRFCCL.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRFCCL.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblRFCCL.Location = New System.Drawing.Point(71, 62)
+        Me.lblRFCCL.Name = "lblRFCCL"
+        Me.lblRFCCL.Size = New System.Drawing.Size(0, 16)
+        Me.lblRFCCL.TabIndex = 78
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label3.Location = New System.Drawing.Point(11, 62)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(38, 16)
+        Me.Label3.TabIndex = 77
+        Me.Label3.Text = "RFC:"
+        '
+        'lblNombreCL
+        '
+        Me.lblNombreCL.AutoSize = True
+        Me.lblNombreCL.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNombreCL.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblNombreCL.Location = New System.Drawing.Point(71, 34)
+        Me.lblNombreCL.Name = "lblNombreCL"
+        Me.lblNombreCL.Size = New System.Drawing.Size(0, 16)
+        Me.lblNombreCL.TabIndex = 76
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label1.Location = New System.Drawing.Point(11, 34)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(63, 16)
+        Me.Label1.TabIndex = 75
+        Me.Label1.Text = "Nombre: "
         '
         'panelFactura
         '
         Me.panelFactura.Controls.Add(Me.GridConceptos)
-        Me.panelFactura.Location = New System.Drawing.Point(12, 246)
+        Me.panelFactura.Controls.Add(Me.lblFacturaCB)
+        Me.panelFactura.Controls.Add(Me.cbFactura)
+        Me.panelFactura.Location = New System.Drawing.Point(12, 234)
         Me.panelFactura.Name = "panelFactura"
-        Me.panelFactura.Size = New System.Drawing.Size(860, 357)
+        Me.panelFactura.Size = New System.Drawing.Size(973, 369)
         Me.panelFactura.TabIndex = 17
         Me.panelFactura.Visible = False
         '
@@ -206,9 +285,9 @@ Partial Class ReimpresionFacturasEDC
         Me.GridConceptos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.GridConceptos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GridConceptos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NombreConcepto, Me.Cantidad, Me.PrecioUnitario, Me.IVA, Me.Descuento, Me.Total})
-        Me.GridConceptos.Location = New System.Drawing.Point(9, 12)
+        Me.GridConceptos.Location = New System.Drawing.Point(9, 50)
         Me.GridConceptos.Name = "GridConceptos"
-        Me.GridConceptos.Size = New System.Drawing.Size(840, 332)
+        Me.GridConceptos.Size = New System.Drawing.Size(961, 316)
         Me.GridConceptos.TabIndex = 0
         '
         'NombreConcepto
@@ -246,7 +325,7 @@ Partial Class ReimpresionFacturasEDC
         Me.btnLimpiar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
         Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnLimpiar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnLimpiar.Location = New System.Drawing.Point(714, 618)
+        Me.btnLimpiar.Location = New System.Drawing.Point(829, 609)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(75, 71)
         Me.btnLimpiar.TabIndex = 21
@@ -259,7 +338,7 @@ Partial Class ReimpresionFacturasEDC
         Me.btnReenviar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnReenviar.Image = Global.NEducacionContinuaUX.My.Resources.Resources.send_40px
         Me.btnReenviar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnReenviar.Location = New System.Drawing.Point(633, 618)
+        Me.btnReenviar.Location = New System.Drawing.Point(748, 609)
         Me.btnReenviar.Name = "btnReenviar"
         Me.btnReenviar.Size = New System.Drawing.Size(75, 71)
         Me.btnReenviar.TabIndex = 20
@@ -272,7 +351,7 @@ Partial Class ReimpresionFacturasEDC
         Me.btnReimprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnReimprimir.Image = Global.NEducacionContinuaUX.My.Resources.Resources.print_40px
         Me.btnReimprimir.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnReimprimir.Location = New System.Drawing.Point(552, 618)
+        Me.btnReimprimir.Location = New System.Drawing.Point(667, 609)
         Me.btnReimprimir.Name = "btnReimprimir"
         Me.btnReimprimir.Size = New System.Drawing.Size(75, 71)
         Me.btnReimprimir.TabIndex = 19
@@ -285,7 +364,7 @@ Partial Class ReimpresionFacturasEDC
         Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
         Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnSalir.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnSalir.Location = New System.Drawing.Point(795, 618)
+        Me.btnSalir.Location = New System.Drawing.Point(910, 609)
         Me.btnSalir.Name = "btnSalir"
         Me.btnSalir.Size = New System.Drawing.Size(75, 71)
         Me.btnSalir.TabIndex = 18
@@ -293,13 +372,36 @@ Partial Class ReimpresionFacturasEDC
         Me.btnSalir.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnSalir.UseVisualStyleBackColor = True
         '
+        'Label2
+        '
+        Me.Label2.BackColor = System.Drawing.Color.Maroon
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.Gold
+        Me.Label2.Location = New System.Drawing.Point(2, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(495, 25)
+        Me.Label2.TabIndex = 22
+        Me.Label2.Text = "Busqueda de factura"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label4
+        '
+        Me.Label4.BackColor = System.Drawing.Color.Maroon
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.Color.Gold
+        Me.Label4.Location = New System.Drawing.Point(0, 0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(471, 25)
+        Me.Label4.TabIndex = 81
+        Me.Label4.Text = "Información del cliente"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'ReimpresionFacturasEDC
         '
-        Me.AcceptButton = Me.btnBuscarMatricula
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.ClientSize = New System.Drawing.Size(884, 701)
+        Me.ClientSize = New System.Drawing.Size(997, 692)
         Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.btnReenviar)
         Me.Controls.Add(Me.btnReimprimir)
@@ -318,6 +420,7 @@ Partial Class ReimpresionFacturasEDC
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         Me.panelFactura.ResumeLayout(False)
+        Me.panelFactura.PerformLayout()
         CType(Me.GridConceptos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -348,4 +451,12 @@ Partial Class ReimpresionFacturasEDC
     Friend WithEvents Descuento As DataGridViewTextBoxColumn
     Friend WithEvents Total As DataGridViewTextBoxColumn
     Friend WithEvents SaveFileDialog1 As SaveFileDialog
+    Friend WithEvents lblNombreCL As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents lblRFCCL As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents lblEmailCL As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label4 As Label
 End Class

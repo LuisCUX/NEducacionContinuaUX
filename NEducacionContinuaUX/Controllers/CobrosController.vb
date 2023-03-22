@@ -154,7 +154,7 @@ Public Class CobrosController
             Total = ((CDec(SubTotal) - CDec(Descuento)) + CDec(totalIVA))
 
             For Each concepto As Concepto In listaConceptos
-                If (concepto.claveConcepto <> "POA" And concepto.claveConcepto <> "POE" And concepto.claveConcepto <> "POC") Then
+                If (concepto.claveConcepto <> "POA" And concepto.claveConcepto <> "POE" And concepto.claveConcepto <> "POC" And concepto.claveConcepto <> "REC") Then
                     esEvento = True
                 End If
             Next
@@ -237,7 +237,7 @@ Public Class CobrosController
             Dim IDXML As Integer = db.insertAndGetIDInserted($"INSERT INTO ing_xmlTimbrados(Matricula_Clave, Folio, FolioFiscal, Certificado, XMLTimbrado, fac_Cadena, fac_Sello, Tipo_Pago, Forma_Pago, Forma_PagoID, Fecha_Pago, Cajero, RegimenFiscal, RFCTimbrado, Subtotal, Descuento, IVA, Total, usoCFDI, CanceladaHoy, CanceladaOtroDia) VALUES ('{Matricula}', '{Serie}{Folio}', '{folioFiscal}', '{NoCertificado}', '{xmlTimbrado}', '{cadena}', '{sello}', '{tipoPago}', '{formaPago}', {formaPagoID}, '{Fecha}', '{User.getUsername}', 'GENERAL DE LEY(603)', '{RFCCLiente}', {SubTotal}, {DescuentoS}, {totalIVA}, {Total}, '{usoCFDI}', 0, 0)")
             For Each item As Concepto In listaConceptos
                 Dim IDClave As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatClavesPagos WHERE Clave = '{item.claveConcepto}'")
-                db.execSQLQueryWithoutParams($"INSERT INTO ing_xmlTimbradosConceptos(Clave_Cliente, XMLID, Nombre_Concepto, IDConcepto, Clave_Concepto, ClaveUnidad, PrecioUnitario, IVA, Descuento, Cantidad, Total, Nota) VALUES ('{item.Matricula}', {IDXML}, '{item.NombreConcepto}', {item.IDConcepto}, {IDClave}, '{item.cveUnidad}', {Format(CDec(item.costoUnitario), "#####0.00")}, {Format(CDec(item.costoIVAUnitario), "#####0.00")}, {Format(CDec(item.descuento), "#####0.00")}, {item.Cantidad}, {Format(CDec(((item.costoTotal - item.descuento) + item.costoIVATotal)), "#####0.00")}, 0)")
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_xmlTimbradosConceptos(Clave_Cliente, XMLID, Nombre_Concepto, IDConcepto, Clave_Concepto, ClaveUnidad, ClaveProdServ, PrecioUnitario, IVA, Descuento, Cantidad, Total, Nota) VALUES ('{item.Matricula}', {IDXML}, '{item.NombreConcepto}', {item.IDConcepto}, {IDClave}, '{item.cveUnidad}', '{item.cveClase}', {Format(CDec(item.costoUnitario), "#####0.00")}, {Format(CDec(item.costoIVAUnitario), "#####0.00")}, {Format(CDec(item.descuento), "#####0.00")}, {item.Cantidad}, {Format(CDec(((item.costoTotal - item.descuento) + item.costoIVATotal)), "#####0.00")}, 0)")
             Next
             db.execSQLQueryWithoutParams($"UPDATE ing_CatFolios SET Consecutivo = Consecutivo + 1 WHERE Usuario = '{User.getUsername()}'")
 
@@ -247,9 +247,9 @@ Public Class CobrosController
             If (esEvento = False) Then
                 NombreEvento = "   "
             Else
-                NombreEvento = db.exectSQLQueryScalar($"SELECT C.nombre FROM portal_registroCongreso AS RC
-                                                        INNER JOIN portal_tipoAsistente AS TA ON TA.id_tipo_asistente = RC.id_tipo_asistente
-                                                        INNER JOIN portal_congreso AS C ON C.id_congreso = TA.id_congreso
+                NombreEvento = db.exectSQLQueryScalar($"SELECT C.nombre FROM portal_congreso AS C
+                                                        INNER JOIN ing_Planes AS P ON P.ID_Congreso = C.id_congreso
+                                                        INNER JOIN portal_registroCongreso AS RC ON RC.id_plan = P.ID
                                                         WHERE RC.clave_cliente = '{Matricula}'")
             End If
             If (IsNothing(NombreEvento)) Then

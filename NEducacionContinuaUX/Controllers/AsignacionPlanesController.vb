@@ -143,7 +143,8 @@
                     End If
                 End If
 
-                    db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionCargosPlanes SET Descuento = {descuento} WHERE ID_Concepto = {gridPagos.Rows(x).Cells(0).Value} AND Matricula = '{Matricula}' AND Activo = 1")
+                db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionCargosPlanes SET Descuento = {descuento} WHERE ID_Concepto = {gridPagos.Rows(x).Cells(0).Value} AND Matricula = '{Matricula}' AND Activo = 1")
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_BitacoraDescuentosBecas(Matricula, IDConcepto, MontoAnterior, MontoNuevo, Descuento, FechaDescuento, Usuario) VALUES ('{Matricula}', {gridPagos.Rows(x).Cells(0).Value}, {gridPagos.Rows(x).Cells(3).Value}, {gridPagos.Rows(x).Cells(4).Value}, {descuento}, GETDATE(), '{User.getUsername}')")
             Next
             MessageBox.Show("Descuentos registrados correctamente")
         Catch ex As Exception

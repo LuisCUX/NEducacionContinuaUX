@@ -45,7 +45,7 @@
         txtClavePS.Text = cveProdServ
         Me.BuscarClavePS(cveProdServ, cbTipoConcepto, cbDivision, cbGrupo, cbClase, cbProdServ)
         cbUnidad.SelectedValue = cveUnidad
-        Dim tableAsignacion As DataTable = db.getDataTableFromSQL($"SELECT valorUnitario, Para, ID_res_NT FROM ing_resPagoOpcionalAsignacion WHERE ID = {ID}")
+        Dim tableAsignacion As DataTable = db.getDataTableFromSQL($"SELECT valorUnitario, Para, ID_res_NT FROM ing_resPagoOpcionalAsignacion WHERE ID_PagoOpcional = {ID}")
         For Each item As DataRow In tableAsignacion.Rows
             txtCostoUnitario.Text = Format(CDec(item("valorUnitario")), "#####0.00")
             cbConceptoPara.Text = item("Para")

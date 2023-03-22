@@ -95,7 +95,7 @@ Public Class NotaCreditoController
                     End If
                 End If
                 Dim IDClave As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatClavesPagos WHERE Clave = '{concepto.claveConcepto}'")
-                db.execSQLQueryWithoutParams($"INSERT INTO ing_xmlTimbradosConceptos(Clave_Cliente, XMLID, Nombre_Concepto, IDConcepto, Clave_Concepto, ClaveUnidad, PrecioUnitario, IVA, Descuento, Cantidad, Total, Nota) VALUES ('{concepto.Matricula}', {IDXML}, '{concepto.NombreConcepto}', {concepto.IDConcepto}, {IDClave}, '{concepto.cveUnidad}', {Format(CDec(concepto.costoUnitario), "#####0.00")}, {Format(CDec(concepto.costoIVAUnitario), "#####0.00")}, {Format(CDec(concepto.descuento), "#####0.00")}, {concepto.Cantidad}, {Format(CDec(((concepto.costoTotal - concepto.descuento) + concepto.costoIVATotal)), "#####0.00")}, 0)")
+                db.execSQLQueryWithoutParams($"INSERT INTO ing_xmlTimbradosConceptos(Clave_Cliente, XMLID, Nombre_Concepto, IDConcepto, Clave_Concepto, ClaveUnidad, ClaveProdServ, PrecioUnitario, IVA, Descuento, Cantidad, Total, Nota) VALUES ('{concepto.Matricula}', {IDXML}, '{concepto.NombreConcepto}', {concepto.IDConcepto}, {IDClave}, '{concepto.cveUnidad}', '{concepto.cveClase}', {Format(CDec(concepto.costoUnitario), "#####0.00")}, {Format(CDec(concepto.costoIVAUnitario), "#####0.00")}, {Format(CDec(concepto.descuento), "#####0.00")}, {concepto.Cantidad}, {Format(CDec(((concepto.costoTotal - concepto.descuento) + concepto.costoIVATotal)), "#####0.00")}, 0)")
                 x = x + 1
             Next
 
