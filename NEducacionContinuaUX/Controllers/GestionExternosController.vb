@@ -367,10 +367,17 @@ Public Class GestionExternosController
                 ''NUEVO REGISTRO DE DATOS FISCALES
                 Dim RFCID As Integer = db.exectSQLQueryScalar($"SELECT id_rfc FROM portal_rcRFC WHERE id_registro = {idregistro}")
                 If (RFCID = 2) Then ''NUEVO REGISTRO DE DATOS FISCALES
-                    Dim nuevoRFC As Integer = db.insertAndGetIDInserted($"INSERT INTO portal_catRFC(rfc, direccion, numero, colonia, cp, poblacion, localidad, telefono, correo, id_municipio, razonsocial) VALUES ('{RFC}', '{DireccionF}', 0, '{ColoniaF}', '{CPF}', '{CiudadF}', '{CiudadF}', '{TelefonoF}', '{CorreoF}', {IDMunicipioF}, '{RazonSocialF}')")
+                    Dim existeRFC As Integer = db.exectSQLQueryScalar($"SELECT id_rfc FROM portal_catRFC WHERE rfc = '{RFC}'")
+                    Dim nuevoRFC As Integer
+                    If (existeRFC > 0) Then
+                        nuevoRFC = existeRFC
+                    Else
+                        nuevoRFC = db.insertAndGetIDInserted($"INSERT INTO portal_catRFC(rfc, direccion, numero, colonia, cp, poblacion, localidad, telefono, correo, id_municipio, razonsocial) VALUES ('{RFC}', '{DireccionF}', 0, '{ColoniaF}', '{CPF}', '{CiudadF}', '{CiudadF}', '{TelefonoF}', '{CorreoF}', {IDMunicipioF}, '{RazonSocialF}')")
+                    End If
+
                     db.execSQLQueryWithoutParams($"INSERT INTO portal_rcRFC(id_rfc, id_registro, direccion, numero, colonia, cp, poblacion, localidad, telefono, correo, id_municipio, razonsocial, id_res_cfdi_regimen, activo) VALUES({nuevoRFC}, {idregistro}, '{DireccionF}', 0, '{ColoniaF}', '{CPF}', '{CiudadP}', '{CiudadP}', '{TelefonoF}', '{CorreoF}', {IDMunicipioF}, '{RazonSocialF}', {IDResRegCFDI}, 1)")
-                Else
-                    Dim RFCRegistrado As String = db.exectSQLQueryScalar($"SELECT rfc FROM portal_catRFC WHERE id_rfc = {RFCID}")
+                    Else
+                        Dim RFCRegistrado As String = db.exectSQLQueryScalar($"SELECT rfc FROM portal_catRFC WHERE id_rfc = {RFCID}")
                     If (RFCRegistrado = RFC) Then ''UPDATE
                         Dim IDRes As Integer = db.exectSQLQueryScalar($"SELECT id_rc_rfc FROM portal_rcRFC AS RE
                                                                 INNER JOIN portal_catRFC AS RFC ON RFC.id_rfc = RE.id_rfc

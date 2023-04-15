@@ -47,6 +47,12 @@
             If (Tipo = "Cobros") Then
                 Tree.Nodes(1).Nodes.Add(result).StateImageIndex = 0
                 Tree.Nodes(1).Expand()
+            ElseIf (Tipo = "ConTotal") Then
+                Tree.Nodes(1).Nodes.Add(result).StateImageIndex = 0
+                Tree.Nodes(1).Expand()
+            ElseIf (Tipo = "ConParcial") Then
+                Tree.Nodes(0).Nodes.Add(result).StateImageIndex = 0
+                Tree.Nodes(0).Expand()
             ElseIf (Tipo = "AutCon") Then
                 Tree.Nodes(0).Nodes(0).Nodes.Add(result).StateImageIndex = 0
                 Tree.Nodes(0).Nodes(0).Expand()
@@ -90,7 +96,7 @@
                 Tree.Nodes(0).Nodes.Add(result).StateImageIndex = 0
                 Tree.Nodes(0).Expand()
             ElseIf (Tipo = "ConTotal") Then
-                Tree.Nodes(0).Nodes(0).Nodes.Add(result).StateImageIndex = 0
+                Tree.Nodes(0).Nodes.Add(result).StateImageIndex = 0
                 Tree.Nodes(0).Nodes(0).Expand()
             End If
         Next
@@ -119,6 +125,9 @@
             If (Tipo = "Cobros") Then
                 Tree.Nodes(2).Nodes.Add(result).StateImageIndex = 0
                 Tree.Nodes(2).Expand()
+            ElseIf (Tipo = "ConTotal") Then
+                Tree.Nodes(2).Nodes.Add(result).StateImageIndex = 0
+                Tree.Nodes(2).Nodes(0).Expand()
             End If
         Next
     End Sub
@@ -146,6 +155,9 @@
             If (Tipo = "Cobros") Then
                 Tree.Nodes(3).Nodes.Add(result).StateImageIndex = 0
                 Tree.Nodes(3).Expand()
+            ElseIf (Tipo = "ConTotal") Then
+                Tree.Nodes(3).Nodes.Add(result).StateImageIndex = 0
+                Tree.Nodes(3).Nodes(0).Expand()
             End If
         Next
     End Sub
@@ -174,6 +186,9 @@
                 If (Tipo = "Cobros") Then
                     Tree.Nodes(4).Nodes.Add(result).StateImageIndex = 0
                     Tree.Nodes(4).Expand()
+                ElseIf (Tipo = "ConTotal") Then
+                    Tree.Nodes(4).Nodes.Add(result).StateImageIndex = 0
+                    Tree.Nodes(4).Nodes(0).Expand()
                 End If
             Else
 
@@ -205,6 +220,9 @@
             If (Tipo = "Cobros") Then
                 Tree.Nodes(5).Nodes.Add(result).StateImageIndex = 0
                 Tree.Nodes(5).Expand()
+            ElseIf (Tipo = "ConTotal") Then
+                Tree.Nodes(5).Nodes.Add(result).StateImageIndex = 0
+                Tree.Nodes(5).Nodes(0).Expand()
             ElseIf (Tipo = "ConParcial") Then
                 Tree.Nodes(0).Nodes(0).Nodes.Add(result).StateImageIndex = 0
                 Tree.Nodes(0).Nodes(0).Expand()

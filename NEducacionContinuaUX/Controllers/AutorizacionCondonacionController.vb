@@ -17,33 +17,25 @@
         TreeCondonacion.Nodes.Clear()
         Dim ID As Integer
         If (tipoCondonacion = "CONDONACIÓN TOTAL") Then
-            ID = 4
+            TreeCondonacion.Nodes.Add("Congresos").StateImageIndex = 2
+            TreeCondonacion.Nodes.Add("Pagos Opcionales").StateImageIndex = 2
+            TreeCondonacion.Nodes.Add("Inscripción").StateImageIndex = 2
+            TreeCondonacion.Nodes.Add("Colegiaturas").StateImageIndex = 2
+            TreeCondonacion.Nodes.Add("Pago Unico").StateImageIndex = 2
+            TreeCondonacion.Nodes.Add("Recargos").StateImageIndex = 2
         ElseIf (tipoCondonacion = "CONDONACIÓN PARCIAL") Then
-            ID = 3
+            TreeCondonacion.Nodes.Add("Pagos Opcionales").StateImageIndex = 2
         End If
-
-        Dim tableCondonacionesTotales As DataTable = db.getDataTableFromSQL($"SELECT C.ID, C.Nombre FROM aut_Cat_Claves AS C
-                                                                              INNER JOIN aut_res_AutClaves AS R ON R.ID_Clave = C.ID
-                                                                              INNER JOIN aut_Cat_Autorizaciones AS A ON A.ID = R.ID_Autorizacion
-                                                                              INNER JOIN aut_Cat_TipoAutorizacion AS T ON T.ID = A.ID_TipoAutorizacion AND T.ID = {ID}")
-        For Each item As DataRow In tableCondonacionesTotales.Rows
-            TreeCondonacion.Nodes.Add(item("Nombre")).StateImageIndex = 2
-        Next
-
-        For Each item As TreeNode In TreeCondonacion.Nodes
-            Dim tableItem As DataTable = db.getDataTableFromSQL($"SELECT A.Nombre FROM aut_Cat_Autorizaciones AS A
-                                                                  INNER JOIN aut_res_AutClaves AS R ON R.ID_Autorizacion = A.ID
-                                                                  INNER JOIN aut_Cat_Claves as C ON C.ID = R.ID_Clave
-                                                                  WHERE A.ID_TipoAutorizacion = {ID} AND C.Nombre = '{item.Text}'")
-            For Each row As DataRow In tableItem.Rows
-                TreeCondonacion.Nodes(0).Nodes.Add(row("Nombre")).StateImageIndex = 2
-            Next
-        Next
 
         If (tipoCondonacion = "CONDONACIÓN TOTAL") Then
             ca.buscarCongresos(TreeCondonacion, Matricula, tipoMatricula, "ConTotal")
+            ca.buscarPagosOpcionales(TreeCondonacion, Matricula, tipoMatricula, "ConTotal")
+            ca.buscarInscripcionesDiplomados(TreeCondonacion, Matricula, tipoMatricula, "ConTotal")
+            ca.buscarColegiaturas(TreeCondonacion, Matricula, tipoMatricula, "ConTotal")
+            ca.buscarPagoUnicoDiplomados(TreeCondonacion, Matricula, tipoMatricula, "ConTotal")
+            ca.buscarRecargosDiplomados(TreeCondonacion, Matricula, tipoMatricula, "ConTotal")
         ElseIf (tipoCondonacion = "CONDONACIÓN PARCIAL") Then
-            ca.buscarRecargosDiplomados(TreeCondonacion, Matricula, tipoMatricula, "ConParcial")
+            ca.buscarPagosOpcionales(TreeCondonacion, Matricula, tipoMatricula, "ConParcial")
         End If
     End Sub
 
@@ -72,27 +64,24 @@
     ''-----------------------------------------------------------------------------------------------------''
     ''---------------------------------------GUARDA CONDONACIONES------------------------------------------''
     ''-----------------------------------------------------------------------------------------------------''
-    Sub GuardarCondonaciones(Matricula As String, GridCondonaciones As DataGridView)
+    Sub GuardarCondonaciones(Matricula As String, GridCondonaciones As DataGridView, TipoCondonacion As Integer)
         For X = 0 To GridCondonaciones.Rows.Count() - 1
             Try
                 db.startTransaction()
                 Dim Folio As String = Me.ObtenerFolioAC()
-                Dim IDPago As Integer = Convert.ToInt32(Me.Extrae_Cadena(GridCondonaciones.Rows(X).Cells(1).Value, "[", "]"))
-                Dim IDConcepto As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatClavesPagos WHERE CLAVE = '{Me.Extrae_Cadena(GridCondonaciones.Rows(X).Cells(1).Value, "(", ")")}'")
+                Dim IDPago As Integer = Convert.ToInt32(Me.Extrae_Cadena(GridCondonaciones.Rows(X).Cells(0).Value, "[", "]"))
+                Dim IDConcepto As Integer = GridCondonaciones.Rows(X).Cells(2).Value
                 Dim claveConcepto As String = db.exectSQLQueryScalar($"SELECT Clave FROM ing_CatClavesPagos WHERE ID = {IDConcepto}")
-                db.execSQLQueryWithoutParams($"INSERT INTO aut_Condonaciones (Folio, Fecha_Condonacion, Matricula, Usuario, ID_res_AutClave, ID_Concepto, ID_ClaveConcepto, Descripcion, Porcentaje, Cantidad, Observaciones, Activo) VALUES ('{Folio}', GETDATE(), '{Matricula}', '{User.getUsername()}', {GridCondonaciones.Rows(X).Cells(0).Value}, {IDPago}, {IDConcepto}, '{GridCondonaciones.Rows(X).Cells(1).Value}', {GridCondonaciones.Rows(X).Cells(2).Value}, 1, 'NA', 1)")
+                If (TipoCondonacion = 0) Then ''Total
 
-                If (claveConcepto = "CON") Then
-                    If (GridCondonaciones.Rows(X).Cells(2).Value.ToString() = "100") Then
-                        Dim costos As Decimal() = Me.obtenerCostoIVA(Matricula)
-                        db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosCongresos (Folio, Matricula, valorUnitario, Cantidad, valorIVA, Descuento, ID_FormaPago, Fecha_Pago, Autorizado, Condonado, Usuario) VALUES ('{Folio}', '{Matricula}', {costos(0)}, 1, {costos(1)}, {costos(2)}, 1, GETDATE(), 0, 1, '{User.getUsername()}')")
-                    End If
+                ElseIf (TipoCondonacion = 1) Then ''Parcial
+                    Dim DescuentoPorcentaje As Integer = GridCondonaciones.Rows(X).Cells(1).Value
+                    ''Dim DescuentoPrecio As Decimal = 
+
+                    db.execSQLQueryWithoutParams($"INSERT INTO aut_Condonaciones(Folio, Fecha_Condonacion, Matricula, Usuario, ID_Concepto, ID_ClaveConcepto, ID_TipoConAut, Descripcion, Porcentaje, Observaciones, Activo) VALUES ('{Folio}', GETDATE(), '{Matricula}', '{User.getUsername}', {IDConcepto}, {claveConcepto}, 3, '{GridCondonaciones.Rows(X).Cells(0).Value}', '{GridCondonaciones.Rows(X).Cells(1).Value}', '', 1)")
+                    db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionPagoOpcionalExterno SET costoUnitario = costoUnitario - {GridCondonaciones.Rows(X).Cells(1).Value} WHERE ID = {IDConcepto}")
                 End If
-
-                db.execSQLQueryWithoutParams($"UPDATE ing_catFolios SET Consecutivo = Consecutivo + 1 WHERE Descripcion = 'AC' AND Usuario = '{User.getUsername()}'")
                 db.commitTransaction()
-                MessageBox.Show("Conceptos condonados exitosamente")
-                AutorizacionCondonacionEDC.Reiniciar()
             Catch ex As Exception
                 db.rollBackTransaction()
             End Try

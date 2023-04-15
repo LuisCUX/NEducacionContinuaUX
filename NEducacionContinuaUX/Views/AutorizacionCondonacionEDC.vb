@@ -10,21 +10,24 @@ Public Class AutorizacionCondonacionEDC
     Dim combo_filtro As String
 
     Private Sub AutorizacionCondonacionEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Dim tableEDC As DataTable = db.getDataTableFromSQL("SELECT RC.clave_cliente, UPPER(C.nombre + ' ' + RC.apellido_paterno + ' ' + RC.apellido_materno + ' (' + RC.clave_cliente + ')') AS NombreCliente FROM portal_registroCongreso AS RC
-        '                                                    INNER JOIN portal_cliente AS C ON RC.id_cliente = C.id_cliente
-        '                                                    ORDER BY NombreCliente")
-        'Dim tableExternos As DataTable = db.getDataTableFromSQL("SELECT CL.clave_cliente, UPPER(C.nombre + ' ' + E.paterno + ' ' + E.materno + ' (' + CL.clave_cliente + ')') As NombreCliente FROM portal_registroExterno AS E
-        '                                                         INNER JOIN portal_cliente AS C ON E.id_cliente = C.id_cliente
-        '                                                         INNER JOIN portal_clave AS CL ON CL.id_cliente = C.id_cliente
-        '                                                         ORDER BY C.nombre")
 
-        'tableExternos.Merge(tableEDC)
-        'ComboboxService.llenarCombobox(cbExterno, tableExternos, "clave_cliente", "NombreCliente")
         ac.llenarComboboxes(cbTipoCondonacion)
     End Sub
 
     Private Sub cbTipoCondonacion_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbTipoCondonacion.SelectionChangeCommitted
         ac.ActualizarArbolCondonacion(TreeCondonaciones, cbTipoCondonacion.Text, Matricula, tipoMatricula)
+        Dim tipoObservacion As Integer
+        If (cbTipoCondonacion.SelectedIndex = 0) Then
+            tipoObservacion = 5
+        ElseIf (cbTipoCondonacion.SelectedIndex = 1) Then
+            tipoObservacion = 4
+        End If
+        Dim tableObservaciones As DataTable = db.getDataTableFromSQL($"SELECT ID, Observacion FROM ing_CatObservacionesCancelacion WHERE Activo = 1 AND ID_TipoOtraObservacion = {tipoObservacion}")
+        ComboboxService.llenarCombobox(cbObservaciones, tableObservaciones, "ID", "Observacion")
+        lblObservaciones.Visible = True
+        cbObservaciones.Visible = True
+
+        GridCondonaciones.Rows.Clear()
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
@@ -42,7 +45,7 @@ Public Class AutorizacionCondonacionEDC
         ElseIf (tipoMatricula = "EC") Then
             va.buscarMatriculaEC(Matricula, panelDatos, panelAutCon, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt, lblCP, lblRegFiscal, lblCFDItxt, lblDireccion)
         End If
-        ac.ActualizarArbolAutorizacionCaja(treeAutorizacionCaja, Matricula, tipoMatricula)
+        ''ac.ActualizarArbolAutorizacionCaja(treeAutorizacionCaja, Matricula, tipoMatricula)
     End Sub
 
     Private Sub TreeCondonaciones_DoubleClick(sender As Object, e As EventArgs) Handles TreeCondonaciones.DoubleClick
@@ -62,29 +65,38 @@ Public Class AutorizacionCondonacionEDC
 
         Dim index As Integer = TreeCondonaciones.SelectedNode.Index
         If (TreeCondonaciones.SelectedNode.Checked = False) Then
-            TreeCondonaciones.SelectedNode.Checked = True
-            TreeCondonaciones.SelectedNode.SelectedImageIndex = 1
             If (cbTipoCondonacion.Text = "CONDONACIÓN PARCIAL") Then
                 Me.Enabled = False
                 Dim NombreAutorizacion As String = TreeCondonaciones.SelectedNode.Parent.Text
-                Dim NombreClave As String = TreeCondonaciones.SelectedNode.Parent.Parent.Text
-                Dim ID_res As Integer = ac.ObtenerIDResAutCon(3, NombreAutorizacion, NombreClave)
-                ObjectBagService.setItem("ID_RES", ID_res)
+                Dim NombreClave As String = TreeCondonaciones.SelectedNode.Parent.Text
                 ObjectBagService.setItem("Text", TreeCondonaciones.SelectedNode.Text)
                 ModalAutConPorcentaje.MdiParent = PrincipalView
                 ModalAutConPorcentaje.Show()
             ElseIf (cbTipoCondonacion.Text = "CONDONACIÓN TOTAL") Then
-                Dim NombreAutorizacion As String = TreeCondonaciones.SelectedNode.Parent.Text
-                Dim NombreClave As String = TreeCondonaciones.SelectedNode.Parent.Parent.Text
-                Dim ID_res As Integer = ac.ObtenerIDResAutCon(4, NombreAutorizacion, NombreClave)
-                GridCondonaciones.Rows.Add(ID_res, TreeCondonaciones.SelectedNode.Text, 100.0)
-            End If
-        Else
+                TreeCondonaciones.SelectedNode.Checked = True
+                TreeCondonaciones.SelectedNode.SelectedImageIndex = 1
+                Dim IDClavePago As Integer
+                If (TreeCondonaciones.SelectedNode.Parent.Text = "Congresos") Then
+                    IDClavePago = 3
+                ElseIf (TreeCondonaciones.SelectedNode.Parent.Text = "Pagos Opcionales") Then
+                    IDClavePago = 2
+                ElseIf (TreeCondonaciones.SelectedNode.Parent.Text = "Inscripción") Then
+                    IDClavePago = 6
+                ElseIf (TreeCondonaciones.SelectedNode.Parent.Text = "Colegiaturas") Then
+                    IDClavePago = 4
+                ElseIf (TreeCondonaciones.SelectedNode.Parent.Text = "Pago Unico") Then
+                    IDClavePago = 5
+                ElseIf (TreeCondonaciones.SelectedNode.Parent.Text = "Recargos") Then
+                    IDClavePago = 7
+                End If
+                GridCondonaciones.Rows.Add(TreeCondonaciones.SelectedNode.Text, 100.0)
+                End If
+            Else
             TreeCondonaciones.SelectedNode.Checked = False
             TreeCondonaciones.SelectedNode.SelectedImageIndex = 0
 
             For x = 0 To GridCondonaciones.Rows.Count() - 1
-                If (GridCondonaciones.Rows(x).Cells(1).Value = TreeCondonaciones.SelectedNode.Text) Then
+                If (GridCondonaciones.Rows(x).Cells(0).Value = TreeCondonaciones.SelectedNode.Text) Then
                     GridCondonaciones.Rows.RemoveAt(x)
                     Exit Sub
                 End If
@@ -136,7 +148,7 @@ Public Class AutorizacionCondonacionEDC
     End Sub
 
     Private Sub btnGuardarCondonaciones_Click(sender As Object, e As EventArgs) Handles btnGuardarCondonaciones.Click
-        ac.GuardarCondonaciones(Matricula, GridCondonaciones)
+        ac.GuardarCondonaciones(Matricula, GridCondonaciones, cbTipoCondonacion.SelectedIndex)
     End Sub
 
     Private Sub btnGuardarAutorizacionCaja_Click(sender As Object, e As EventArgs) Handles btnGuardarAutorizacionCaja.Click
