@@ -26,13 +26,14 @@ Public Class AutorizacionCondonacionEDC
         ComboboxService.llenarCombobox(cbObservaciones, tableObservaciones, "ID", "Observacion")
         lblObservaciones.Visible = True
         cbObservaciones.Visible = True
+        cbObservaciones.SelectedIndex = -1
 
         GridCondonaciones.Rows.Clear()
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         Me.limpiar()
-        Matricula = txtMatricula.Text
+        Matricula = txtMatricula.Text.ToUpper()
         tipoMatricula = va.validarMatricula(Matricula)
         lblMatriculatxt.Text = Matricula
         If (tipoMatricula = "False") Then
@@ -56,6 +57,9 @@ Public Class AutorizacionCondonacionEDC
         Me.NodosAutorizacionCaja()
     End Sub
 
+    ''' <summary>
+    ''' NODOS CONDONACIONES
+    ''' </summary>
     Sub NodosCondonaciones()
         If (TreeCondonaciones.SelectedNode Is Nothing) Then
             Exit Sub
@@ -75,23 +79,10 @@ Public Class AutorizacionCondonacionEDC
             ElseIf (cbTipoCondonacion.Text = "CONDONACIÓN TOTAL") Then
                 TreeCondonaciones.SelectedNode.Checked = True
                 TreeCondonaciones.SelectedNode.SelectedImageIndex = 1
-                Dim IDClavePago As Integer
-                If (TreeCondonaciones.SelectedNode.Parent.Text = "Congresos") Then
-                    IDClavePago = 3
-                ElseIf (TreeCondonaciones.SelectedNode.Parent.Text = "Pagos Opcionales") Then
-                    IDClavePago = 2
-                ElseIf (TreeCondonaciones.SelectedNode.Parent.Text = "Inscripción") Then
-                    IDClavePago = 6
-                ElseIf (TreeCondonaciones.SelectedNode.Parent.Text = "Colegiaturas") Then
-                    IDClavePago = 4
-                ElseIf (TreeCondonaciones.SelectedNode.Parent.Text = "Pago Unico") Then
-                    IDClavePago = 5
-                ElseIf (TreeCondonaciones.SelectedNode.Parent.Text = "Recargos") Then
-                    IDClavePago = 7
-                End If
-                GridCondonaciones.Rows.Add(TreeCondonaciones.SelectedNode.Text, 100.0)
-                End If
-            Else
+                Dim clavePago As Integer = ac.obtenerClavePago(TreeCondonaciones.SelectedNode.Parent.Text)
+                GridCondonaciones.Rows.Add(TreeCondonaciones.SelectedNode.Text, 100.0, clavePago, 0.00)
+            End If
+        Else
             TreeCondonaciones.SelectedNode.Checked = False
             TreeCondonaciones.SelectedNode.SelectedImageIndex = 0
 
@@ -104,6 +95,9 @@ Public Class AutorizacionCondonacionEDC
         End If
     End Sub
 
+    ''' <summary>
+    ''' NODOS AUTORIZACIONES
+    ''' </summary>
     Sub NodosAutorizacionCaja()
         If (treeAutorizacionCaja.SelectedNode Is Nothing) Then
             Exit Sub
@@ -118,6 +112,7 @@ Public Class AutorizacionCondonacionEDC
             Dim NombreAutorizacion As String = treeAutorizacionCaja.SelectedNode.Parent.Text
             Dim NombreClave As String = treeAutorizacionCaja.SelectedNode.Parent.Parent.Text
             Dim ID_res As Integer = ac.ObtenerIDResAutCon(1, NombreAutorizacion, NombreClave)
+            Dim clavePago As Integer = ac.obtenerClavePago(treeAutorizacionCaja.SelectedNode.Parent.Text)
             GridAutorizacionCaja.Rows.Add(ID_res, treeAutorizacionCaja.SelectedNode.Text)
         Else
             treeAutorizacionCaja.SelectedNode.Checked = False
@@ -132,7 +127,6 @@ Public Class AutorizacionCondonacionEDC
     End Sub
 
     Sub limpiar()
-        lblMatriculatxt.Text = ""
         lblNombretxt.Text = ""
         lblEmailtxt.Text = ""
         lblCarreratxt.Text = ""
@@ -148,7 +142,15 @@ Public Class AutorizacionCondonacionEDC
     End Sub
 
     Private Sub btnGuardarCondonaciones_Click(sender As Object, e As EventArgs) Handles btnGuardarCondonaciones.Click
-        ac.GuardarCondonaciones(Matricula, GridCondonaciones, cbTipoCondonacion.SelectedIndex)
+        If (GridCondonaciones.Rows.Count = 0) Then
+            MessageBox.Show("Ingrese al menos un pago a condonar")
+            Exit Sub
+        End If
+        If (cbObservaciones.Text = "") Then
+            MessageBox.Show("Seleccione una observación")
+            Exit Sub
+        End If
+        ac.GuardarCondonaciones(Matricula, GridCondonaciones, cbTipoCondonacion.SelectedIndex, cbObservaciones.SelectedValue)
     End Sub
 
     Private Sub btnGuardarAutorizacionCaja_Click(sender As Object, e As EventArgs) Handles btnGuardarAutorizacionCaja.Click

@@ -2,7 +2,13 @@
     Dim db As DataBaseService = New DataBaseService()
 
     Function llenarComboboxFacturas(Matricula As String, cbFacturas As ComboBox) As Boolean
-        Dim tableFacturas As DataTable = db.getDataTableFromSQL($"SELECT ID, UPPER('Folio: ' + ' ' + Folio + ' Fecha: ' + Fecha_Pago)As TextoFactura FROM ing_xmlTimbrados WHERE Matricula_Clave = '{Matricula}'")
+        Dim tableFacturas As DataTable = db.getDataTableFromSQL($"SELECT ID, UPPER('Folio: ' + ' ' + Folio + ' Fecha: ' + Fecha_Pago + 
+                                                                  CASE 
+                                                                  WHEN CanceladaHoy = 1 OR CanceladaOtroDia = 1 THEN ' -----CANCELADA'
+                                                                  WHEN Folio IN (SELECT FolioSustituido FROM ing_Sustituciones WHERE Activo = 1) THEN ' -----SUSTITUIDA'
+                                                                  ELSE ''
+                                                                  END
+                                                                  )As TextoFactura FROM ing_xmlTimbrados WHERE Matricula_Clave = '{Matricula}'")
 
         If (tableFacturas.Rows.Count() = 0) Then
             MessageBox.Show("La clave ingresada no existe o no tiene facturas cobradas, ingrese una clave diferente")

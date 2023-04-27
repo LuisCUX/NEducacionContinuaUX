@@ -28,7 +28,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\192.168.1.252\Sistemas\Ejecutables\EducacionContinua\</InstallUrl>
     <TargetCulture>es-MX</TargetCulture>
-    <ApplicationRevision>114</ApplicationRevision>
+    <ApplicationRevision>122</ApplicationRevision>
     <ApplicationVersion>1.1.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -227,6 +227,7 @@
     <Compile Include="Controllers\PlanesController.vb" />
     <Compile Include="Controllers\PolizaController.vb" />
     <Compile Include="Controllers\ReimpresionFacturasController.vb" />
+    <Compile Include="Controllers\SustitucionDatosFiscalesController.vb" />
     <Compile Include="Controllers\ValidacionesController.vb" />
     <Compile Include="Models\Concepto.vb" />
     <Compile Include="Models\ConceptoDiferido.vb" />
@@ -354,6 +355,12 @@
     <Compile Include="Views\LoginEDC.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Views\MainRecordatoriosEDC.Designer.vb">
+      <DependentUpon>MainRecordatoriosEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainRecordatoriosEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\ModalAsignacionPagosOpcionalesEDC.Designer.vb">
       <DependentUpon>ModalAsignacionPagosOpcionalesEDC.vb</DependentUpon>
     </Compile>
@@ -394,6 +401,12 @@
       <DependentUpon>ModalNotasCreditoEDC.vb</DependentUpon>
     </Compile>
     <Compile Include="Views\ModalNotasCreditoEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ModalRecordatoriosEDC.Designer.vb">
+      <DependentUpon>ModalRecordatoriosEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModalRecordatoriosEDC.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\ModificacionCostosPlanesEDC.Designer.vb">
@@ -486,6 +499,18 @@
     <Compile Include="Views\ReportViewer.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Views\SustitucionDatosFiscalesEDC.Designer.vb">
+      <DependentUpon>SustitucionDatosFiscalesEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SustitucionDatosFiscalesEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\SustitucionConceptoEDC.Designer.vb">
+      <DependentUpon>SustitucionConceptoEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SustitucionConceptoEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -539,6 +564,9 @@
     <EmbeddedResource Include="Views\LoginEDC.resx">
       <DependentUpon>LoginEDC.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\MainRecordatoriosEDC.resx">
+      <DependentUpon>MainRecordatoriosEDC.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\ModalAsignacionPagosOpcionalesEDC.resx">
       <DependentUpon>ModalAsignacionPagosOpcionalesEDC.vb</DependentUpon>
     </EmbeddedResource>
@@ -559,6 +587,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ModalNotasCreditoEDC.resx">
       <DependentUpon>ModalNotasCreditoEDC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ModalRecordatoriosEDC.resx">
+      <DependentUpon>ModalRecordatoriosEDC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ModificacionCostosPlanesEDC.resx">
       <DependentUpon>ModificacionCostosPlanesEDC.vb</DependentUpon>
@@ -604,6 +635,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ReportViewer.resx">
       <DependentUpon>ReportViewer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SustitucionDatosFiscalesEDC.resx">
+      <DependentUpon>SustitucionDatosFiscalesEDC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SustitucionConceptoEDC.resx">
+      <DependentUpon>SustitucionConceptoEDC.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -728,6 +765,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="logoprueba.ico" />
+    <None Include="Resources\icons8-show-property-40.png" />
+    <None Include="Resources\icons8-note-40.png" />
+    <None Include="Resources\icons8-one-page-down-40.png" />
+    <None Include="Resources\icons8-one-page-down-30.png" />
+    <None Include="Resources\icons8-note-32.png" />
+    <None Include="Resources\icons8-eye-32.png" />
     <None Include="Resources\icons8-powerpoint-40.png" />
     <None Include="Resources\icons8-add-file-40.png" />
     <None Include="Resources\icons8-analyze-40.png" />

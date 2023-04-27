@@ -55,6 +55,8 @@ Partial Class AutorizacionCondonacionEDC
         Me.panelAutCon = New System.Windows.Forms.Panel()
         Me.tabAutCon = New System.Windows.Forms.TabControl()
         Me.tabCondonaciones = New System.Windows.Forms.TabPage()
+        Me.cbObservaciones = New System.Windows.Forms.ComboBox()
+        Me.lblObservaciones = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.btnGuardarCondonaciones = New System.Windows.Forms.Button()
@@ -75,11 +77,10 @@ Partial Class AutorizacionCondonacionEDC
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TreeView1 = New System.Windows.Forms.TreeView()
-        Me.lblObservaciones = New System.Windows.Forms.Label()
-        Me.cbObservaciones = New System.Windows.Forms.ComboBox()
         Me.Concepto = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Porcentaje = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IDClavePago = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NuevoPrecio = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.panelBusqueda.SuspendLayout()
         Me.panelDatos.SuspendLayout()
         Me.panelAutCon.SuspendLayout()
@@ -446,6 +447,29 @@ Partial Class AutorizacionCondonacionEDC
         Me.tabCondonaciones.TabIndex = 0
         Me.tabCondonaciones.Text = "Condonación parcial o total"
         '
+        'cbObservaciones
+        '
+        Me.cbObservaciones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbObservaciones.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbObservaciones.FormattingEnabled = True
+        Me.cbObservaciones.Location = New System.Drawing.Point(14, 391)
+        Me.cbObservaciones.Name = "cbObservaciones"
+        Me.cbObservaciones.Size = New System.Drawing.Size(554, 24)
+        Me.cbObservaciones.TabIndex = 42
+        Me.cbObservaciones.Visible = False
+        '
+        'lblObservaciones
+        '
+        Me.lblObservaciones.AutoSize = True
+        Me.lblObservaciones.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblObservaciones.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblObservaciones.Location = New System.Drawing.Point(11, 365)
+        Me.lblObservaciones.Name = "lblObservaciones"
+        Me.lblObservaciones.Size = New System.Drawing.Size(112, 18)
+        Me.lblObservaciones.TabIndex = 41
+        Me.lblObservaciones.Text = "Observaciones:"
+        Me.lblObservaciones.Visible = False
+        '
         'Button2
         '
         Me.Button2.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
@@ -479,12 +503,17 @@ Partial Class AutorizacionCondonacionEDC
         '
         'GridCondonaciones
         '
+        Me.GridCondonaciones.AllowUserToAddRows = False
+        Me.GridCondonaciones.AllowUserToDeleteRows = False
+        Me.GridCondonaciones.AllowUserToResizeColumns = False
+        Me.GridCondonaciones.AllowUserToResizeRows = False
         Me.GridCondonaciones.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridCondonaciones.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.GridCondonaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.GridCondonaciones.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Concepto, Me.Porcentaje, Me.IDClavePago})
+        Me.GridCondonaciones.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Concepto, Me.Porcentaje, Me.IDClavePago, Me.NuevoPrecio})
         Me.GridCondonaciones.Location = New System.Drawing.Point(592, 46)
         Me.GridCondonaciones.Name = "GridCondonaciones"
+        Me.GridCondonaciones.ReadOnly = True
         Me.GridCondonaciones.Size = New System.Drawing.Size(563, 307)
         Me.GridCondonaciones.TabIndex = 12
         '
@@ -641,45 +670,32 @@ Partial Class AutorizacionCondonacionEDC
         Me.TreeView1.StateImageList = Me.ImageListTree
         Me.TreeView1.TabIndex = 11
         '
-        'lblObservaciones
-        '
-        Me.lblObservaciones.AutoSize = True
-        Me.lblObservaciones.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblObservaciones.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblObservaciones.Location = New System.Drawing.Point(11, 365)
-        Me.lblObservaciones.Name = "lblObservaciones"
-        Me.lblObservaciones.Size = New System.Drawing.Size(112, 18)
-        Me.lblObservaciones.TabIndex = 41
-        Me.lblObservaciones.Text = "Observaciones:"
-        Me.lblObservaciones.Visible = False
-        '
-        'cbObservaciones
-        '
-        Me.cbObservaciones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbObservaciones.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbObservaciones.FormattingEnabled = True
-        Me.cbObservaciones.Location = New System.Drawing.Point(14, 391)
-        Me.cbObservaciones.Name = "cbObservaciones"
-        Me.cbObservaciones.Size = New System.Drawing.Size(554, 24)
-        Me.cbObservaciones.TabIndex = 42
-        Me.cbObservaciones.Visible = False
-        '
         'Concepto
         '
         Me.Concepto.HeaderText = "Concepto"
         Me.Concepto.Name = "Concepto"
+        Me.Concepto.ReadOnly = True
         '
         'Porcentaje
         '
         Me.Porcentaje.FillWeight = 15.0!
         Me.Porcentaje.HeaderText = "Porcentaje"
         Me.Porcentaje.Name = "Porcentaje"
+        Me.Porcentaje.ReadOnly = True
         '
         'IDClavePago
         '
         Me.IDClavePago.HeaderText = "IDClavePago"
         Me.IDClavePago.Name = "IDClavePago"
+        Me.IDClavePago.ReadOnly = True
         Me.IDClavePago.Visible = False
+        '
+        'NuevoPrecio
+        '
+        Me.NuevoPrecio.HeaderText = "NuevoPrecio"
+        Me.NuevoPrecio.Name = "NuevoPrecio"
+        Me.NuevoPrecio.ReadOnly = True
+        Me.NuevoPrecio.Visible = False
         '
         'AutorizacionCondonacionEDC
         '
@@ -769,4 +785,5 @@ Partial Class AutorizacionCondonacionEDC
     Friend WithEvents Concepto As DataGridViewTextBoxColumn
     Friend WithEvents Porcentaje As DataGridViewTextBoxColumn
     Friend WithEvents IDClavePago As DataGridViewTextBoxColumn
+    Friend WithEvents NuevoPrecio As DataGridViewTextBoxColumn
 End Class

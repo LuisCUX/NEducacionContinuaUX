@@ -1,6 +1,11 @@
 ﻿Public Class ModalAutConPorcentaje
+    Dim ac As AutorizacionCondonacionController = New AutorizacionCondonacionController()
+    Dim precioDec As Decimal
+    Dim db As DataBaseService = New DataBaseService
     Private Sub ModalAutConPorcentaje_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        Dim info As String = $"{ObjectBagService.getItem("Text")}#"
+        Dim IDConcepto As Integer = ac.Extrae_Cadena(info, "[", "]")
+        precioDec = db.exectSQLQueryScalar($"SELECT costoUnitario FROM ing_AsignacionPagoOpcionalExterno WHERE ID = {IDConcepto}")
     End Sub
 
     Private Sub txtPorcentaje_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPorcentaje.KeyPress
@@ -25,6 +30,14 @@
         End If
     End Sub
 
+    Sub CalcularPorcentajes(porcentaje As Double)
+        Dim Descuento As Decimal = (precioDec / 100) * porcentaje
+        Dim nuevoTotal As Decimal = precioDec - Descuento
+
+        txtDescuento.Text = Format(CDec(Descuento), "#####0.00")
+        txtNtotal.Text = Format(CDec(nuevoTotal), "#####0.00")
+    End Sub
+
     Private Sub ModalAutConPorcentaje_Closed(sender As Object, e As EventArgs) Handles Me.Closed
         AutorizacionCondonacionEDC.Enabled = True
     End Sub
@@ -35,10 +48,20 @@
             Exit Sub
         End If
         Dim text As String = ObjectBagService.getItem("Text")
+        ObjectBagService.clearBag()
         AutorizacionCondonacionEDC.TreeCondonaciones.SelectedNode.Checked = True
         AutorizacionCondonacionEDC.TreeCondonaciones.SelectedNode.SelectedImageIndex = 1
-        AutorizacionCondonacionEDC.GridCondonaciones.Rows.Add(text, CDec(txtPorcentaje.Text), 2)
+        AutorizacionCondonacionEDC.GridCondonaciones.Rows.Add(text, CDec(txtPorcentaje.Text), 2, Convert.ToDecimal(txtNtotal.Text))
         AutorizacionCondonacionEDC.Enabled = True
         Me.Close()
+    End Sub
+
+    Private Sub txtPorcentaje_KeyUp(sender As Object, e As KeyEventArgs) Handles txtPorcentaje.KeyUp
+        If (txtPorcentaje.Text = "") Then
+            txtDescuento.Text = "0.00"
+            txtNtotal.Text = precioDec
+            Exit Sub
+        End If
+        Me.CalcularPorcentajes(Convert.ToDouble(txtPorcentaje.Text))
     End Sub
 End Class

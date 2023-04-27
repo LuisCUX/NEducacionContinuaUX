@@ -23,10 +23,7 @@ Partial Class ObservacionesEDC
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblNombreVentana = New System.Windows.Forms.Label()
-        Me.tabObservaciones = New System.Windows.Forms.TabControl()
-        Me.tabObsAutCon = New System.Windows.Forms.TabPage()
-        Me.tabModificacionObservacion = New System.Windows.Forms.TabPage()
-        Me.tabObservacionesCancelaciones = New System.Windows.Forms.TabPage()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.cbTipoObsCancelacion = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -41,8 +38,7 @@ Partial Class ObservacionesEDC
         Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Observacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Editar = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.tabObservaciones.SuspendLayout()
-        Me.tabObservacionesCancelaciones.SuspendLayout()
+        Me.Panel1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -57,57 +53,23 @@ Partial Class ObservacionesEDC
         Me.lblNombreVentana.ForeColor = System.Drawing.Color.Gold
         Me.lblNombreVentana.Location = New System.Drawing.Point(-1, 1)
         Me.lblNombreVentana.Name = "lblNombreVentana"
-        Me.lblNombreVentana.Size = New System.Drawing.Size(1032, 69)
+        Me.lblNombreVentana.Size = New System.Drawing.Size(1007, 69)
         Me.lblNombreVentana.TabIndex = 14
         Me.lblNombreVentana.Text = "Observaciones"
         Me.lblNombreVentana.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'tabObservaciones
+        'Panel1
         '
-        Me.tabObservaciones.Controls.Add(Me.tabObsAutCon)
-        Me.tabObservaciones.Controls.Add(Me.tabModificacionObservacion)
-        Me.tabObservaciones.Controls.Add(Me.tabObservacionesCancelaciones)
-        Me.tabObservaciones.Location = New System.Drawing.Point(5, 73)
-        Me.tabObservaciones.Name = "tabObservaciones"
-        Me.tabObservaciones.SelectedIndex = 0
-        Me.tabObservaciones.Size = New System.Drawing.Size(1018, 519)
-        Me.tabObservaciones.TabIndex = 15
-        '
-        'tabObsAutCon
-        '
-        Me.tabObsAutCon.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.tabObsAutCon.Location = New System.Drawing.Point(4, 22)
-        Me.tabObsAutCon.Name = "tabObsAutCon"
-        Me.tabObsAutCon.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabObsAutCon.Size = New System.Drawing.Size(1010, 493)
-        Me.tabObsAutCon.TabIndex = 0
-        Me.tabObsAutCon.Text = "Observaciones de autorización y condonación"
-        '
-        'tabModificacionObservacion
-        '
-        Me.tabModificacionObservacion.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.tabModificacionObservacion.Location = New System.Drawing.Point(4, 22)
-        Me.tabModificacionObservacion.Name = "tabModificacionObservacion"
-        Me.tabModificacionObservacion.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabModificacionObservacion.Size = New System.Drawing.Size(1010, 493)
-        Me.tabModificacionObservacion.TabIndex = 1
-        Me.tabModificacionObservacion.Text = "Modificación de observaciones"
-        '
-        'tabObservacionesCancelaciones
-        '
-        Me.tabObservacionesCancelaciones.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.tabObservacionesCancelaciones.Controls.Add(Me.SplitContainer1)
-        Me.tabObservacionesCancelaciones.Location = New System.Drawing.Point(4, 22)
-        Me.tabObservacionesCancelaciones.Name = "tabObservacionesCancelaciones"
-        Me.tabObservacionesCancelaciones.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabObservacionesCancelaciones.Size = New System.Drawing.Size(1010, 493)
-        Me.tabObservacionesCancelaciones.TabIndex = 2
-        Me.tabObservacionesCancelaciones.Text = "Observaciones de cancelaciones"
+        Me.Panel1.Controls.Add(Me.SplitContainer1)
+        Me.Panel1.Location = New System.Drawing.Point(5, 73)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(989, 489)
+        Me.Panel1.TabIndex = 15
         '
         'SplitContainer1
         '
         Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitContainer1.Location = New System.Drawing.Point(3, 3)
+        Me.SplitContainer1.Location = New System.Drawing.Point(0, 0)
         Me.SplitContainer1.Name = "SplitContainer1"
         '
         'SplitContainer1.Panel1
@@ -125,9 +87,9 @@ Partial Class ObservacionesEDC
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.GridObservacionCancelacion)
-        Me.SplitContainer1.Size = New System.Drawing.Size(1004, 487)
-        Me.SplitContainer1.SplitterDistance = 381
-        Me.SplitContainer1.TabIndex = 0
+        Me.SplitContainer1.Size = New System.Drawing.Size(989, 489)
+        Me.SplitContainer1.SplitterDistance = 356
+        Me.SplitContainer1.TabIndex = 1
         '
         'cbTipoObsCancelacion
         '
@@ -153,6 +115,8 @@ Partial Class ObservacionesEDC
         'chbActivoCancelacion
         '
         Me.chbActivoCancelacion.AutoSize = True
+        Me.chbActivoCancelacion.Checked = True
+        Me.chbActivoCancelacion.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chbActivoCancelacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chbActivoCancelacion.ForeColor = System.Drawing.SystemColors.Control
         Me.chbActivoCancelacion.Location = New System.Drawing.Point(281, 132)
@@ -183,22 +147,25 @@ Partial Class ObservacionesEDC
         '
         'btnEditarObCancelacion
         '
-        Me.btnEditarObCancelacion.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.card_exchange_40px
         Me.btnEditarObCancelacion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnEditarObCancelacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEditarObCancelacion.Location = New System.Drawing.Point(32, 405)
+        Me.btnEditarObCancelacion.Image = Global.NEducacionContinuaUX.My.Resources.Resources.card_exchange_40px
+        Me.btnEditarObCancelacion.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnEditarObCancelacion.Location = New System.Drawing.Point(8, 405)
         Me.btnEditarObCancelacion.Name = "btnEditarObCancelacion"
-        Me.btnEditarObCancelacion.Size = New System.Drawing.Size(72, 53)
+        Me.btnEditarObCancelacion.Size = New System.Drawing.Size(101, 63)
         Me.btnEditarObCancelacion.TabIndex = 47
+        Me.btnEditarObCancelacion.Text = "Guardar cambios"
+        Me.btnEditarObCancelacion.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnEditarObCancelacion.UseVisualStyleBackColor = True
         '
         'btnSalirObCancelacion
         '
         Me.btnSalirObCancelacion.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
         Me.btnSalirObCancelacion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnSalirObCancelacion.Location = New System.Drawing.Point(266, 405)
+        Me.btnSalirObCancelacion.Location = New System.Drawing.Point(277, 405)
         Me.btnSalirObCancelacion.Name = "btnSalirObCancelacion"
-        Me.btnSalirObCancelacion.Size = New System.Drawing.Size(72, 53)
+        Me.btnSalirObCancelacion.Size = New System.Drawing.Size(72, 63)
         Me.btnSalirObCancelacion.TabIndex = 46
         Me.btnSalirObCancelacion.UseVisualStyleBackColor = True
         '
@@ -208,19 +175,22 @@ Partial Class ObservacionesEDC
         Me.btnLimpiarObCancelacion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnLimpiarObCancelacion.Location = New System.Drawing.Point(110, 405)
         Me.btnLimpiarObCancelacion.Name = "btnLimpiarObCancelacion"
-        Me.btnLimpiarObCancelacion.Size = New System.Drawing.Size(72, 53)
+        Me.btnLimpiarObCancelacion.Size = New System.Drawing.Size(72, 63)
         Me.btnLimpiarObCancelacion.TabIndex = 45
         Me.btnLimpiarObCancelacion.UseVisualStyleBackColor = True
         '
         'btnGuardarObCancelacion
         '
-        Me.btnGuardarObCancelacion.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
         Me.btnGuardarObCancelacion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnGuardarObCancelacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGuardarObCancelacion.Location = New System.Drawing.Point(188, 405)
+        Me.btnGuardarObCancelacion.Image = Global.NEducacionContinuaUX.My.Resources.Resources.save_40px
+        Me.btnGuardarObCancelacion.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnGuardarObCancelacion.Location = New System.Drawing.Point(184, 405)
         Me.btnGuardarObCancelacion.Name = "btnGuardarObCancelacion"
-        Me.btnGuardarObCancelacion.Size = New System.Drawing.Size(72, 53)
+        Me.btnGuardarObCancelacion.Size = New System.Drawing.Size(92, 63)
         Me.btnGuardarObCancelacion.TabIndex = 44
+        Me.btnGuardarObCancelacion.Text = "Guardar nuevo"
+        Me.btnGuardarObCancelacion.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnGuardarObCancelacion.UseVisualStyleBackColor = True
         '
         'GridObservacionCancelacion
@@ -261,14 +231,13 @@ Partial Class ObservacionesEDC
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.ClientSize = New System.Drawing.Size(1028, 598)
-        Me.Controls.Add(Me.tabObservaciones)
+        Me.ClientSize = New System.Drawing.Size(1005, 569)
+        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.lblNombreVentana)
         Me.Name = "ObservacionesEDC"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "ObservacionesEDC"
-        Me.tabObservaciones.ResumeLayout(False)
-        Me.tabObservacionesCancelaciones.ResumeLayout(False)
+        Me.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel1.PerformLayout()
         Me.SplitContainer1.Panel2.ResumeLayout(False)
@@ -280,21 +249,18 @@ Partial Class ObservacionesEDC
     End Sub
 
     Friend WithEvents lblNombreVentana As Label
-    Friend WithEvents tabObservaciones As TabControl
-    Friend WithEvents tabObsAutCon As TabPage
-    Friend WithEvents tabModificacionObservacion As TabPage
-    Friend WithEvents tabObservacionesCancelaciones As TabPage
+    Friend WithEvents Panel1 As Panel
     Friend WithEvents SplitContainer1 As SplitContainer
-    Friend WithEvents GridObservacionCancelacion As DataGridView
+    Friend WithEvents cbTipoObsCancelacion As ComboBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents chbActivoCancelacion As CheckBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents txtObservacionCancelacion As TextBox
     Friend WithEvents btnEditarObCancelacion As Button
     Friend WithEvents btnSalirObCancelacion As Button
     Friend WithEvents btnLimpiarObCancelacion As Button
     Friend WithEvents btnGuardarObCancelacion As Button
-    Friend WithEvents chbActivoCancelacion As CheckBox
-    Friend WithEvents Label1 As Label
-    Friend WithEvents txtObservacionCancelacion As TextBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents cbTipoObsCancelacion As ComboBox
+    Friend WithEvents GridObservacionCancelacion As DataGridView
     Friend WithEvents ID As DataGridViewTextBoxColumn
     Friend WithEvents Observacion As DataGridViewTextBoxColumn
     Friend WithEvents Editar As DataGridViewCheckBoxColumn

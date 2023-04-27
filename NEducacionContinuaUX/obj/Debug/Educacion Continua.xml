@@ -122,12 +122,42 @@ Educacion Continua
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="P:NEducacionContinuaUX.My.Resources.Resources.icons8_eye_32">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:NEducacionContinuaUX.My.Resources.Resources.icons8_note_32">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:NEducacionContinuaUX.My.Resources.Resources.icons8_note_40">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:NEducacionContinuaUX.My.Resources.Resources.icons8_one_page_down_30">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:NEducacionContinuaUX.My.Resources.Resources.icons8_one_page_down_40">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.icons8_powerpoint_40">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.icons8_qr_code_40">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:NEducacionContinuaUX.My.Resources.Resources.icons8_show_property_40">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
@@ -270,6 +300,16 @@ Educacion Continua
  Envio de email con archivo adjunto en base64, preferiblemente usar cuando se adjunte un PDF, funciona con archivos locales
  </summary>
  <param name="email"></param>
+</member>
+<member name="M:NEducacionContinuaUX.AutorizacionCondonacionEDC.NodosCondonaciones">
+ <summary>
+ NODOS CONDONACIONES
+ </summary>
+</member>
+<member name="M:NEducacionContinuaUX.AutorizacionCondonacionEDC.NodosAutorizacionCaja">
+ <summary>
+ NODOS AUTORIZACIONES
+ </summary>
 </member>
 </members>
 </doc>

@@ -264,12 +264,12 @@
 
     Function generaTexto(concepto As Concepto, claveConcepto As Integer) As String
         Dim result As String
-        result = $"[{concepto.IDConcepto}]|{concepto.NombreConcepto}|Precio: ${Format(CDec(concepto.costoUnitario), "#####0.00")}|Cantidad: {concepto.Cantidad}|Descuento: ${concepto.descuento}|"
+        result = $"[{concepto.IDConcepto}]|{concepto.NombreConcepto}|Precio: ${Format(CDec(concepto.costoUnitario), "#####0.00")}|Cantidad: {concepto.Cantidad}|"
 
         Dim IDCondonacion As Integer = db.exectSQLQueryScalar($"SELECT ID FROM aut_Condonaciones WHERE ID_ClaveConcepto = {claveConcepto} AND ID_Concepto = {concepto.IDConcepto}")
         If (IDCondonacion > 0) Then
             Dim porcentaje As Decimal = db.exectSQLQueryScalar($"SELECT Porcentaje FROM aut_Condonaciones WHERE ID = {IDCondonacion}")
-            result = result + $"Condonacion {porcentaje}%|"
+            result = result + $"Condonacion {Format(CDec(porcentaje), "#####0.00")}%|"
         End If
 
         If (concepto.Abono > 0) Then

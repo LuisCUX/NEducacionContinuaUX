@@ -64,53 +64,59 @@
     ''-----------------------------------------------------------------------------------------------------''
     ''---------------------------------------GUARDA CONDONACIONES------------------------------------------''
     ''-----------------------------------------------------------------------------------------------------''
-    Sub GuardarCondonaciones(Matricula As String, GridCondonaciones As DataGridView, TipoCondonacion As Integer)
-        For X = 0 To GridCondonaciones.Rows.Count() - 1
-            Try
-                db.startTransaction()
-                Dim Folio As String = Me.ObtenerFolioAC()
+    Sub GuardarCondonaciones(Matricula As String, GridCondonaciones As DataGridView, TipoCondonacion As Integer, observacionID As Integer)
+
+        Try
+            db.startTransaction()
+            For X = 0 To GridCondonaciones.Rows.Count() - 1
                 Dim IDPago As Integer = Convert.ToInt32(Me.Extrae_Cadena(GridCondonaciones.Rows(X).Cells(0).Value, "[", "]"))
                 Dim IDConcepto As Integer = GridCondonaciones.Rows(X).Cells(2).Value
                 Dim claveConcepto As String = db.exectSQLQueryScalar($"SELECT Clave FROM ing_CatClavesPagos WHERE ID = {IDConcepto}")
                 If (TipoCondonacion = 0) Then ''Total
-
+                    Dim Folio As String = Me.ObtenerFolioAC("CONTOTAL")
+                    db.execSQLQueryWithoutParams($"INSERT INTO aut_Condonaciones(Folio, Fecha_Condonacion, Matricula, Usuario, ID_Concepto, ID_ClaveConcepto, ID_TipoConAut, Descripcion, Porcentaje, Observaciones, Activo) VALUES ('{Folio}', GETDATE(), '{Matricula}', '{User.getUsername}', {IDPago}, {IDConcepto}, 1, '{GridCondonaciones.Rows(X).Cells(0).Value}', 100, {observacionID}, 1)")
+                    db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionPagoOpcionalExterno SET Activo = 0, Condonado = 1 WHERE ID = {IDPago}")
+                    db.execSQLQueryWithoutParams($"UPDATE ing_CatFolios SET Consecutivo = Consecutivo + 1 WHERE Descripcion = 'CONTOTAL'")
                 ElseIf (TipoCondonacion = 1) Then ''Parcial
-                    Dim DescuentoPorcentaje As Integer = GridCondonaciones.Rows(X).Cells(1).Value
-                    ''Dim DescuentoPrecio As Decimal = 
+                    Dim Folio As String = Me.ObtenerFolioAC("CONPORCENTUAL")
+                    Dim NuevoTotal As Decimal = GridCondonaciones.Rows(X).Cells(3).Value
 
-                    db.execSQLQueryWithoutParams($"INSERT INTO aut_Condonaciones(Folio, Fecha_Condonacion, Matricula, Usuario, ID_Concepto, ID_ClaveConcepto, ID_TipoConAut, Descripcion, Porcentaje, Observaciones, Activo) VALUES ('{Folio}', GETDATE(), '{Matricula}', '{User.getUsername}', {IDConcepto}, {claveConcepto}, 3, '{GridCondonaciones.Rows(X).Cells(0).Value}', '{GridCondonaciones.Rows(X).Cells(1).Value}', '', 1)")
-                    db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionPagoOpcionalExterno SET costoUnitario = costoUnitario - {GridCondonaciones.Rows(X).Cells(1).Value} WHERE ID = {IDConcepto}")
+                    db.execSQLQueryWithoutParams($"INSERT INTO aut_Condonaciones(Folio, Fecha_Condonacion, Matricula, Usuario, ID_Concepto, ID_ClaveConcepto, ID_TipoConAut, Descripcion, Porcentaje, Observaciones, Activo) VALUES ('{Folio}', GETDATE(), '{Matricula}', '{User.getUsername}', {IDPago}, {IDConcepto}, 2, '{GridCondonaciones.Rows(X).Cells(0).Value}', '{GridCondonaciones.Rows(X).Cells(1).Value}', {observacionID}, 1)")
+                    db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionPagoOpcionalExterno SET costoUnitario = {GridCondonaciones.Rows(X).Cells(3).Value} WHERE ID = {IDPago}")
+                    db.execSQLQueryWithoutParams($"UPDATE ing_CatFolios SET Consecutivo = Consecutivo + 1 WHERE Descripcion = 'CONPORCENTUAL'")
                 End If
-                db.commitTransaction()
-            Catch ex As Exception
-                db.rollBackTransaction()
-            End Try
-        Next
+            Next
+            MessageBox.Show("Pagos condonados correctamente")
+            db.commitTransaction()
+            AutorizacionCondonacionEDC.Reiniciar()
+        Catch ex As Exception
+            db.rollBackTransaction()
+        End Try
     End Sub
 
     Sub GuardarAutorizacionesCaja(Matricula As String, GridAutorizacionCaja As DataGridView)
-        For X = 0 To GridAutorizacionCaja.Rows.Count() - 1
-            Try
-                db.startTransaction()
-                Dim Folio As String = Me.ObtenerFolioAC()
-                Dim IDPago As Integer = Convert.ToInt32(Me.Extrae_Cadena(GridAutorizacionCaja.Rows(X).Cells(1).Value, "[", "]"))
-                Dim IDConcepto As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatClavesPagos WHERE CLAVE = '{Me.Extrae_Cadena(GridAutorizacionCaja.Rows(X).Cells(1).Value, "(", ")")}'")
-                Dim claveConcepto As String = db.exectSQLQueryScalar($"SELECT Clave FROM ing_CatClavesPagos WHERE ID = {IDConcepto}")
-                db.execSQLQueryWithoutParams($"INSERT INTO aut_Autorizaciones(Folio, Fecha_Autorizacion, Matricula, ID_Concepto, ID_ClaveConcepto, ID_res_AutClaves, Descripcion, Observaciones, Usuario, Activo) VALUES ('{Folio}', GETDATE(), '{Matricula}', {IDPago}, {IDConcepto}, {GridAutorizacionCaja.Rows(X).Cells(0).Value}, '{GridAutorizacionCaja.Rows(X).Cells(1).Value}', 'N/A', '{User.getUsername()}', 1)")
+        'For X = 0 To GridAutorizacionCaja.Rows.Count() - 1
+        '    Try
+        '        db.startTransaction()
+        '        Dim Folio As String = Me.ObtenerFolioAC()
+        '        Dim IDPago As Integer = Convert.ToInt32(Me.Extrae_Cadena(GridAutorizacionCaja.Rows(X).Cells(1).Value, "[", "]"))
+        '        Dim IDConcepto As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatClavesPagos WHERE CLAVE = '{Me.Extrae_Cadena(GridAutorizacionCaja.Rows(X).Cells(1).Value, "(", ")")}'")
+        '        Dim claveConcepto As String = db.exectSQLQueryScalar($"SELECT Clave FROM ing_CatClavesPagos WHERE ID = {IDConcepto}")
+        '        db.execSQLQueryWithoutParams($"INSERT INTO aut_Autorizaciones(Folio, Fecha_Autorizacion, Matricula, ID_Concepto, ID_ClaveConcepto, ID_res_AutClaves, Descripcion, Observaciones, Usuario, Activo) VALUES ('{Folio}', GETDATE(), '{Matricula}', {IDPago}, {IDConcepto}, {GridAutorizacionCaja.Rows(X).Cells(0).Value}, '{GridAutorizacionCaja.Rows(X).Cells(1).Value}', 'N/A', '{User.getUsername()}', 1)")
 
-                db.execSQLQueryWithoutParams($"UPDATE ing_catFolios SET Consecutivo = Consecutivo + 1 WHERE Descripcion = 'AC' AND Usuario = '{User.getUsername()}'")
-                db.commitTransaction()
+        '        db.execSQLQueryWithoutParams($"UPDATE ing_catFolios SET Consecutivo = Consecutivo + 1 WHERE Descripcion = 'AC' AND Usuario = '{User.getUsername()}'")
+        '        db.commitTransaction()
 
-                If (IDConcepto = 4) Then
-                    db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionCargosPlanes SET Autorizado = 1 WHERE ID = {IDPago}")
-                End If
+        '        If (IDConcepto = 4) Then
+        '            db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionCargosPlanes SET Autorizado = 1 WHERE ID = {IDPago}")
+        '        End If
 
-                MessageBox.Show("Conceptos autorizados exitosamente")
-                AutorizacionCondonacionEDC.Reiniciar()
-            Catch ex As Exception
-                db.rollBackTransaction()
-            End Try
-        Next
+        '        MessageBox.Show("Conceptos autorizados exitosamente")
+        '        AutorizacionCondonacionEDC.Reiniciar()
+        '    Catch ex As Exception
+        '        db.rollBackTransaction()
+        '    End Try
+        'Next
     End Sub
 
     ''----------OBTENER ID RESULTANTE CLAVE AUTORIZACION----------
@@ -140,9 +146,9 @@
     ''----------------------------------------------------------------------------------------------------------------------------------------
     ''--------------------------------------------------------OBTIENE FOLIO DE PAGO-----------------------------------------------------------
     ''----------------------------------------------------------------------------------------------------------------------------------------
-    Function ObtenerFolioAC()
-        Dim Serie As String = db.exectSQLQueryScalar($"SELECT Folio FROM ing_CatFolios WHERE Usuario = '{User.getUsername()}' AND Descripcion = 'AC'")
-        Dim Consecutivo As Integer = db.exectSQLQueryScalar($"SELECT Consecutivo + 1 FROM ing_CatFolios WHERE Usuario = '{User.getUsername()}' AND Descripcion = 'AC'")
+    Function ObtenerFolioAC(tipo As String)
+        Dim Serie As String = db.exectSQLQueryScalar($"SELECT Folio FROM ing_CatFolios WHERE Usuario = '{User.getUsername()}' AND Descripcion = '{tipo}'")
+        Dim Consecutivo As Integer = db.exectSQLQueryScalar($"SELECT Consecutivo + 1 FROM ing_CatFolios WHERE Usuario = '{User.getUsername()}' AND Descripcion = '{tipo}'")
         Dim ConsecutivoStr As String
         If (Consecutivo > 0 And Consecutivo < 10) Then
             ConsecutivoStr = $"00000{Consecutivo}"
@@ -175,6 +181,23 @@
         Next
 
         Return {costototal, iva, descuento}
+    End Function
+
+    Function obtenerClavePago(TipoPago As String) As Integer
+        If (TipoPago = "Congresos") Then
+            Return 3
+        ElseIf (TipoPago = "Pagos Opcionales") Then
+            Return 2
+        ElseIf (TipoPago = "Inscripción") Then
+            Return 6
+        ElseIf (TipoPago = "Colegiaturas") Then
+            Return 4
+        ElseIf (TipoPago = "Pago Unico") Then
+            Return 5
+        ElseIf (TipoPago = "Recargos") Then
+            Return 7
+        End If
+        Return 0
     End Function
 
     Sub eliminarCondonados(tree As TreeView)

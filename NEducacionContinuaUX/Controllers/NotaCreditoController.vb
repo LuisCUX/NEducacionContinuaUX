@@ -69,8 +69,8 @@ Public Class NotaCreditoController
             folioFiscal = folioFiscal.Substring(1, folioFiscal.Length() - 1)
 
             Dim IDReferencia As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatTipoNotaCredito WHERE TipoNota = '{ClaveNota}'")
-
-            Dim IDXML As Integer = db.insertAndGetIDInserted($"INSERT INTO ing_xmlTimbrados(Matricula_Clave, Folio, FolioFiscal, Certificado, XMLTimbrado, fac_Cadena, fac_Sello, Tipo_Pago, Forma_Pago, Forma_PagoID, Fecha_Pago, Cajero, RegimenFiscal, Subtotal, Descuento, IVA, Total, usoCFDI, CanceladaHoy, CanceladaOtroDia) VALUES ('{Matricula}', '{Serie}{Folio}', '{folioFiscal}', '{NoCertificado}', '{xmlTimbrado}', '{cadena}', '{sello}', 'NOTA DE CREDITO', 99, 10, '{Fecha}', '{User.getUsername}', 'GENERAL DE LEY(603)', {subtotal}, 0.00, 0.00, {montoTotal}, '{usoCFDI}', 0, 0)")
+            Dim regimenFiscaltxt As String = db.exectSQLQueryScalar($"SELECT (RegimenFiscal + '(' + CAST(ID_Contador AS varchar(MAX)) + ')') AS regimen FROM ing_Cat_RegFis WHERE ID_Contador = {RegFiscal}")
+            Dim IDXML As Integer = db.insertAndGetIDInserted($"INSERT INTO ing_xmlTimbrados(Matricula_Clave, Folio, FolioFiscal, Certificado, XMLTimbrado, fac_Cadena, fac_Sello, Tipo_Pago, Forma_Pago, Forma_PagoID, Fecha_Pago, Cajero, RegimenFiscal, Subtotal, Descuento, IVA, Total, usoCFDI, CanceladaHoy, CanceladaOtroDia) VALUES ('{Matricula}', '{Serie}{Folio}', '{folioFiscal}', '{NoCertificado}', '{xmlTimbrado}', '{cadena}', '{sello}', 'NOTA DE CREDITO', 99, 10, '{Fecha}', '{User.getUsername}', '{regimenFiscaltxt}', {subtotal}, 0.00, 0.00, {montototal}, '{usoCFDI}', 0, 0)")
 
             Dim x As Integer = 0
             For Each concepto As Concepto In listaConceptos

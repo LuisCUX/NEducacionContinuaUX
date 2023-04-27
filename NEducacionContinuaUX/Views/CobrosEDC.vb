@@ -32,7 +32,6 @@ Public Class CobrosEDC
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         Me.Limpiar()
-
         Matricula = txtMatricula.Text.ToUpper()
         tipoMatricula = va.validarMatricula(Matricula)
         If (tipoMatricula = "False") Then
@@ -47,6 +46,7 @@ Public Class CobrosEDC
         ElseIf (tipoMatricula = "EC") Then
             va.buscarMatriculaEC(Matricula, panelDatos, panelCobros, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt, lblCPtxt, lblRegFiscaltxt, lblCFDItxt, lblDireccion)
         End If
+
         ca.buscarPagosOpcionales(Tree, Matricula, tipoMatricula, "Cobros")
         ca.buscarCongresos(Tree, Matricula, tipoMatricula, "Cobros")
         ca.buscarColegiaturas(Tree, Matricula, tipoMatricula, "Cobros")
@@ -70,6 +70,11 @@ Public Class CobrosEDC
                 Me.Reiniciar()
             End If
         End If
+
+        Dim tableRecordatorios As DataTable = db.getDataTableFromSQL($"SELECT Recordatorio, (Usuario + ' - ' + CAST(Fecha AS varchar(MAX))) As Info FROM ing_CatRecordatorios WHERE Matricula = '{Matricula}' AND Activo = 1")
+        For Each row As DataRow In tableRecordatorios.Rows
+            MessageBox.Show(row("Info") & vbNewLine & row("Recordatorio"))
+        Next
     End Sub
 
     Private Sub cbFormaPago_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbFormaPago.SelectionChangeCommitted
@@ -962,4 +967,20 @@ Public Class CobrosEDC
 
     End Function
 
+    Private Sub btnRecordatorios_Click(sender As Object, e As EventArgs) Handles btnRecordatorios.Click
+        Dim IDLastRecordatorio As Integer = db.exectSQLQueryScalar($"SELECT TOP 1 ID FROM ing_CatRecordatorios WHERE Matricula = '{Matricula}' AND Activo = 1 ORDER BY ID DESC")
+        ObjectBagService.setItem("Tipo", "Edicion")
+        ObjectBagService.setItem("IDRecordatorio", IDLastRecordatorio)
+        ObjectBagService.setItem("Matricula", Matricula)
+        ModalRecordatoriosEDC.MdiParent = PrincipalView
+        ModalRecordatoriosEDC.Show()
+        ModalRecordatoriosEDC.MdiParent = PrincipalView
+        ModalRecordatoriosEDC.Show()
+    End Sub
+
+    Private Sub btnVerRecordatorio_Click(sender As Object, e As EventArgs) Handles btnVerRecordatorio.Click
+        ObjectBagService.setItem("Matricula", Matricula)
+        MainRecordatoriosEDC.MdiParent = PrincipalView
+        MainRecordatoriosEDC.Show()
+    End Sub
 End Class

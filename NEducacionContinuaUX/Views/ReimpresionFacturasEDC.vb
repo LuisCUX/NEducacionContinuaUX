@@ -37,7 +37,7 @@ Public Class ReimpresionFacturasEDC
     End Sub
 
     Private Sub btnBuscarMatricula_Click(sender As Object, e As EventArgs) Handles btnBuscarMatricula.Click
-        Matricula = txtMatricula.Text
+        Matricula = txtMatricula.Text.ToUpper()
         GridConceptos.Rows.Clear()
         tipoMatricula = re.validarMatricula(Matricula)
         Dim valida As Boolean = re.llenarComboboxFacturas(Matricula, cbFactura)
@@ -469,4 +469,22 @@ Public Class ReimpresionFacturasEDC
         txtMatricula.Clear()
         txtFolio.Clear()
     End Sub
+
+    'Private Sub cbFactura_DrawItem(ByVal sender As Object, ByVal e As System.Windows.Forms.DrawItemEventArgs) Handles cbFactura.DrawItem
+    '    Dim myFont As System.Drawing.Font = cbFactura.Font
+    '    Dim TextColor As New System.Drawing.Color
+    '    If e.Index = selecteditemindex Then
+    '        TextColor = System.Drawing.Color.Red
+    '    Else
+    '        TextColor = System.Drawing.Color.Black
+    '    End If
+    '    Dim myBrush As SolidBrush = New SolidBrush(TextColor)
+    '    ' Draw the background of the item.
+    '    e.DrawBackground()
+
+    '    e.Graphics.DrawString(animals(e.Index), myFont, myBrush, New RectangleF(e.Bounds.X, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height))
+
+    '    ' Draw the focus rectangle if the mouse hovers over an item.
+    '    e.DrawFocusRectangle()
+    'End Sub
 End Class

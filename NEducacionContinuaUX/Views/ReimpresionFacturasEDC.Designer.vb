@@ -29,18 +29,20 @@ Partial Class ReimpresionFacturasEDC
         Me.txtMatricula = New System.Windows.Forms.TextBox()
         Me.lblMatricula = New System.Windows.Forms.Label()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.btnBuscarFolio = New System.Windows.Forms.Button()
         Me.txtFolio = New System.Windows.Forms.TextBox()
         Me.lblFolioBuscar = New System.Windows.Forms.Label()
-        Me.cbFactura = New System.Windows.Forms.ComboBox()
-        Me.lblFacturaCB = New System.Windows.Forms.Label()
         Me.btnBuscarMatricula = New System.Windows.Forms.Button()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.lblEmailCL = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.lblRFCCL = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.lblNombreCL = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.cbFactura = New System.Windows.Forms.ComboBox()
+        Me.lblFacturaCB = New System.Windows.Forms.Label()
         Me.panelFactura = New System.Windows.Forms.Panel()
         Me.GridConceptos = New System.Windows.Forms.DataGridView()
         Me.NombreConcepto = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -54,8 +56,6 @@ Partial Class ReimpresionFacturasEDC
         Me.btnReimprimir = New System.Windows.Forms.Button()
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -144,6 +144,18 @@ Partial Class ReimpresionFacturasEDC
         Me.SplitContainer1.SplitterDistance = 498
         Me.SplitContainer1.TabIndex = 16
         '
+        'Label2
+        '
+        Me.Label2.BackColor = System.Drawing.Color.Maroon
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.Gold
+        Me.Label2.Location = New System.Drawing.Point(2, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(495, 25)
+        Me.Label2.TabIndex = 22
+        Me.Label2.Text = "Busqueda de factura"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'btnBuscarFolio
         '
         Me.btnBuscarFolio.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.search_30px
@@ -174,26 +186,6 @@ Partial Class ReimpresionFacturasEDC
         Me.lblFolioBuscar.TabIndex = 18
         Me.lblFolioBuscar.Text = "Folio:"
         '
-        'cbFactura
-        '
-        Me.cbFactura.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbFactura.FormattingEnabled = True
-        Me.cbFactura.Location = New System.Drawing.Point(9, 23)
-        Me.cbFactura.Name = "cbFactura"
-        Me.cbFactura.Size = New System.Drawing.Size(416, 21)
-        Me.cbFactura.TabIndex = 77
-        '
-        'lblFacturaCB
-        '
-        Me.lblFacturaCB.AutoSize = True
-        Me.lblFacturaCB.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFacturaCB.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblFacturaCB.Location = New System.Drawing.Point(6, 4)
-        Me.lblFacturaCB.Name = "lblFacturaCB"
-        Me.lblFacturaCB.Size = New System.Drawing.Size(126, 16)
-        Me.lblFacturaCB.TabIndex = 76
-        Me.lblFacturaCB.Text = "Seleccionar factura:"
-        '
         'btnBuscarMatricula
         '
         Me.btnBuscarMatricula.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.search_30px
@@ -204,6 +196,18 @@ Partial Class ReimpresionFacturasEDC
         Me.btnBuscarMatricula.Size = New System.Drawing.Size(41, 34)
         Me.btnBuscarMatricula.TabIndex = 17
         Me.btnBuscarMatricula.UseVisualStyleBackColor = True
+        '
+        'Label4
+        '
+        Me.Label4.BackColor = System.Drawing.Color.Maroon
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.Color.Gold
+        Me.Label4.Location = New System.Drawing.Point(0, 0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(471, 25)
+        Me.Label4.TabIndex = 81
+        Me.Label4.Text = "Información del cliente"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lblEmailCL
         '
@@ -267,6 +271,26 @@ Partial Class ReimpresionFacturasEDC
         Me.Label1.Size = New System.Drawing.Size(63, 16)
         Me.Label1.TabIndex = 75
         Me.Label1.Text = "Nombre: "
+        '
+        'cbFactura
+        '
+        Me.cbFactura.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbFactura.FormattingEnabled = True
+        Me.cbFactura.Location = New System.Drawing.Point(9, 23)
+        Me.cbFactura.Name = "cbFactura"
+        Me.cbFactura.Size = New System.Drawing.Size(416, 21)
+        Me.cbFactura.TabIndex = 77
+        '
+        'lblFacturaCB
+        '
+        Me.lblFacturaCB.AutoSize = True
+        Me.lblFacturaCB.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFacturaCB.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblFacturaCB.Location = New System.Drawing.Point(6, 4)
+        Me.lblFacturaCB.Name = "lblFacturaCB"
+        Me.lblFacturaCB.Size = New System.Drawing.Size(126, 16)
+        Me.lblFacturaCB.TabIndex = 76
+        Me.lblFacturaCB.Text = "Seleccionar factura:"
         '
         'panelFactura
         '
@@ -372,32 +396,9 @@ Partial Class ReimpresionFacturasEDC
         Me.btnSalir.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnSalir.UseVisualStyleBackColor = True
         '
-        'Label2
-        '
-        Me.Label2.BackColor = System.Drawing.Color.Maroon
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.Gold
-        Me.Label2.Location = New System.Drawing.Point(2, 0)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(495, 25)
-        Me.Label2.TabIndex = 22
-        Me.Label2.Text = "Busqueda de factura"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label4
-        '
-        Me.Label4.BackColor = System.Drawing.Color.Maroon
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.Color.Gold
-        Me.Label4.Location = New System.Drawing.Point(0, 0)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(471, 25)
-        Me.Label4.TabIndex = 81
-        Me.Label4.Text = "Información del cliente"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'ReimpresionFacturasEDC
         '
+        Me.AcceptButton = Me.btnBuscarMatricula
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlDarkDark

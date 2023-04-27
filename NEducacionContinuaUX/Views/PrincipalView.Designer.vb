@@ -119,14 +119,12 @@ Partial Class PrincipalView
         '
         'SustitucioncambioDeDatosToolStripMenuItem
         '
-        Me.SustitucioncambioDeDatosToolStripMenuItem.Enabled = False
         Me.SustitucioncambioDeDatosToolStripMenuItem.Name = "SustitucioncambioDeDatosToolStripMenuItem"
         Me.SustitucioncambioDeDatosToolStripMenuItem.Size = New System.Drawing.Size(279, 22)
         Me.SustitucioncambioDeDatosToolStripMenuItem.Text = "Sustitucion/cambio de datos"
         '
         'SustitucioncambioDeConceptoclaveToolStripMenuItem
         '
-        Me.SustitucioncambioDeConceptoclaveToolStripMenuItem.Enabled = False
         Me.SustitucioncambioDeConceptoclaveToolStripMenuItem.Name = "SustitucioncambioDeConceptoclaveToolStripMenuItem"
         Me.SustitucioncambioDeConceptoclaveToolStripMenuItem.Size = New System.Drawing.Size(279, 22)
         Me.SustitucioncambioDeConceptoclaveToolStripMenuItem.Text = "Sustitucion/cambio de concepto-clave"

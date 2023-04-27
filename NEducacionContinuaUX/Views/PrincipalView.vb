@@ -192,4 +192,14 @@
         ReportesCongresosDiplomados.MdiParent = Me
         ReportesCongresosDiplomados.Show()
     End Sub
+
+    Private Sub SustitucioncambioDeDatosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SustitucioncambioDeDatosToolStripMenuItem.Click
+        SustitucionDatosFiscalesEDC.MdiParent = Me
+        SustitucionDatosFiscalesEDC.Show()
+    End Sub
+
+    Private Sub SustitucioncambioDeConceptoclaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SustitucioncambioDeConceptoclaveToolStripMenuItem.Click
+        SustitucionConceptoEDC.MdiParent = Me
+        SustitucionConceptoEDC.Show()
+    End Sub
 End Class
