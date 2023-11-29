@@ -28,8 +28,13 @@ Partial Class ReportesCongresosDiplomados
         Me.btnImprimirReporteAsistentes = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tabReportes = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.cbCongresos2 = New System.Windows.Forms.ComboBox()
+        Me.btnImprimirReporteIngresosCD = New System.Windows.Forms.Button()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.tabAsistentes.SuspendLayout()
         Me.tabReportes.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblNombreVentana
@@ -91,11 +96,58 @@ Partial Class ReportesCongresosDiplomados
         'tabReportes
         '
         Me.tabReportes.Controls.Add(Me.tabAsistentes)
+        Me.tabReportes.Controls.Add(Me.TabPage1)
         Me.tabReportes.Location = New System.Drawing.Point(6, 81)
         Me.tabReportes.Name = "tabReportes"
         Me.tabReportes.SelectedIndex = 0
         Me.tabReportes.Size = New System.Drawing.Size(840, 526)
         Me.tabReportes.TabIndex = 14
+        '
+        'TabPage1
+        '
+        Me.TabPage1.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.TabPage1.Controls.Add(Me.cbCongresos2)
+        Me.TabPage1.Controls.Add(Me.btnImprimirReporteIngresosCD)
+        Me.TabPage1.Controls.Add(Me.Label2)
+        Me.TabPage1.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(832, 500)
+        Me.TabPage1.TabIndex = 1
+        Me.TabPage1.Text = "Reporte ingresos por congreso/diplomado"
+        '
+        'cbCongresos2
+        '
+        Me.cbCongresos2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbCongresos2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbCongresos2.FormattingEnabled = True
+        Me.cbCongresos2.Location = New System.Drawing.Point(106, 36)
+        Me.cbCongresos2.Name = "cbCongresos2"
+        Me.cbCongresos2.Size = New System.Drawing.Size(668, 24)
+        Me.cbCongresos2.TabIndex = 5
+        '
+        'btnImprimirReporteIngresosCD
+        '
+        Me.btnImprimirReporteIngresosCD.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnImprimirReporteIngresosCD.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnImprimirReporteIngresosCD.Location = New System.Drawing.Point(691, 453)
+        Me.btnImprimirReporteIngresosCD.Name = "btnImprimirReporteIngresosCD"
+        Me.btnImprimirReporteIngresosCD.Size = New System.Drawing.Size(135, 41)
+        Me.btnImprimirReporteIngresosCD.TabIndex = 4
+        Me.btnImprimirReporteIngresosCD.Text = "Generar reporte"
+        Me.btnImprimirReporteIngresosCD.UseVisualStyleBackColor = True
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label2.Location = New System.Drawing.Point(23, 39)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(77, 16)
+        Me.Label2.TabIndex = 3
+        Me.Label2.Text = "Congresos:"
         '
         'ReportesCongresosDiplomados
         '
@@ -111,6 +163,8 @@ Partial Class ReportesCongresosDiplomados
         Me.tabAsistentes.ResumeLayout(False)
         Me.tabAsistentes.PerformLayout()
         Me.tabReportes.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
+        Me.TabPage1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -121,4 +175,8 @@ Partial Class ReportesCongresosDiplomados
     Friend WithEvents Label1 As Label
     Friend WithEvents btnImprimirReporteAsistentes As Button
     Friend WithEvents cbCongresos As ComboBox
+    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents cbCongresos2 As ComboBox
+    Friend WithEvents btnImprimirReporteIngresosCD As Button
+    Friend WithEvents Label2 As Label
 End Class

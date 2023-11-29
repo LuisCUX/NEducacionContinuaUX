@@ -8,248 +8,253 @@ Educacion Continua
 <members>
 <member name="T:NEducacionContinuaUX.My.Resources.Resources">
 <summary>
-  A strongly-typed resource class, for looking up localized strings, etc.
+  Clase de recurso fuertemente tipado, para buscar cadenas traducidas, etc.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.ResourceManager">
 <summary>
-  Returns the cached ResourceManager instance used by this class.
+  Devuelve la instancia de ResourceManager almacenada en caché utilizada por esta clase.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.Culture">
 <summary>
-  Overrides the current thread's CurrentUICulture property for all
-  resource lookups using this strongly typed resource class.
+  Reemplaza la propiedad CurrentUICulture del subproceso actual para todas las
+  búsquedas de recursos mediante esta clase de recurso fuertemente tipado.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.Add_16px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.Add_30px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.Add_40px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.broom_16px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.broom_32px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.broom_40px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.cancel_subscription_40px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.card_exchange_40px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.cash_counter_32px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.cash_register_26px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.cash_register_40px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.cash_register_40px1">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.Construction_4_512">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.delete_32px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.descargar">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.EDCLogo">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.exit_32px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.exit_40px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:NEducacionContinuaUX.My.Resources.Resources.icons8_accounting_40">
+<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.icons8_add_file_40">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.icons8_analyze_40">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.icons8_eye_32">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.icons8_note_32">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.icons8_note_40">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.icons8_one_page_down_30">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.icons8_one_page_down_40">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.icons8_powerpoint_40">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.icons8_qr_code_40">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.icons8_show_property_40">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.login_rounded_up_26px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.plus_32px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.plus_math_32px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.print_40px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.refresh_16px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.refresh_30px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.refresh_32px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.save_16px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.save_40px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.search_30px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.search_32px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.search_40px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.search_doc">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.search_doc1">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.send_40px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.trash_32px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.trash_can_30px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:NEducacionContinuaUX.My.Resources.Resources.trash_can_40px">
 <summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="T:NEducacionContinuaUX.EmailModel">

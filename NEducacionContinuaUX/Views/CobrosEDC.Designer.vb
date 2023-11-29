@@ -23,17 +23,21 @@ Partial Class CobrosEDC
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim TreeNode7 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Congresos")
-        Dim TreeNode8 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Pagos Opcionales")
-        Dim TreeNode9 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Inscripción")
-        Dim TreeNode10 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Colegiaturas")
-        Dim TreeNode11 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Pago Unico")
-        Dim TreeNode12 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Recargos")
+        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Congresos")
+        Dim TreeNode2 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Pagos Opcionales")
+        Dim TreeNode3 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Inscripción")
+        Dim TreeNode4 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Colegiaturas")
+        Dim TreeNode5 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Pago Unico")
+        Dim TreeNode6 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Recargos")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CobrosEDC))
         Me.lblNombreVentana = New System.Windows.Forms.Label()
         Me.panelBusqueda = New System.Windows.Forms.Panel()
+        Me.btnDatosFiscales = New System.Windows.Forms.Button()
+        Me.btnVerRecordatorio = New System.Windows.Forms.Button()
+        Me.btnRecordatorios = New System.Windows.Forms.Button()
         Me.cbExterno = New System.Windows.Forms.ComboBox()
         Me.lblBusquedaNombre = New System.Windows.Forms.Label()
+        Me.btnBuscar = New System.Windows.Forms.Button()
         Me.txtMatricula = New System.Windows.Forms.TextBox()
         Me.lblMatricula = New System.Windows.Forms.Label()
         Me.lblCarreratxt = New System.Windows.Forms.Label()
@@ -59,6 +63,9 @@ Partial Class CobrosEDC
         Me.lblFoliotxt = New System.Windows.Forms.Label()
         Me.panelCobros = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnCobrar = New System.Windows.Forms.Button()
+        Me.btnSalir = New System.Windows.Forms.Button()
+        Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.panelTipoPago = New System.Windows.Forms.Panel()
         Me.lblFormadepago = New System.Windows.Forms.Label()
         Me.txtNotaAplicada = New System.Windows.Forms.TextBox()
@@ -86,12 +93,6 @@ Partial Class CobrosEDC
         Me.Tree = New System.Windows.Forms.TreeView()
         Me.ImageListTree = New System.Windows.Forms.ImageList(Me.components)
         Me.lblPendientes = New System.Windows.Forms.Label()
-        Me.btnBuscar = New System.Windows.Forms.Button()
-        Me.btnCobrar = New System.Windows.Forms.Button()
-        Me.btnSalir = New System.Windows.Forms.Button()
-        Me.btnLimpiar = New System.Windows.Forms.Button()
-        Me.btnVerRecordatorio = New System.Windows.Forms.Button()
-        Me.btnRecordatorios = New System.Windows.Forms.Button()
         Me.panelBusqueda.SuspendLayout()
         Me.panelDatos.SuspendLayout()
         Me.panelCobros.SuspendLayout()
@@ -113,6 +114,7 @@ Partial Class CobrosEDC
         '
         'panelBusqueda
         '
+        Me.panelBusqueda.Controls.Add(Me.btnDatosFiscales)
         Me.panelBusqueda.Controls.Add(Me.btnVerRecordatorio)
         Me.panelBusqueda.Controls.Add(Me.btnRecordatorios)
         Me.panelBusqueda.Controls.Add(Me.cbExterno)
@@ -127,12 +129,51 @@ Partial Class CobrosEDC
         Me.panelBusqueda.Size = New System.Drawing.Size(1300, 60)
         Me.panelBusqueda.TabIndex = 14
         '
+        'btnDatosFiscales
+        '
+        Me.btnDatosFiscales.Image = Global.NEducacionContinuaUX.My.Resources.Resources.icons8_accounting_40
+        Me.btnDatosFiscales.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnDatosFiscales.Location = New System.Drawing.Point(973, 0)
+        Me.btnDatosFiscales.Name = "btnDatosFiscales"
+        Me.btnDatosFiscales.Size = New System.Drawing.Size(96, 57)
+        Me.btnDatosFiscales.TabIndex = 76
+        Me.btnDatosFiscales.Text = "Link para datos fiscales clave EC"
+        Me.btnDatosFiscales.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnDatosFiscales.UseVisualStyleBackColor = True
+        Me.btnDatosFiscales.Visible = False
+        '
+        'btnVerRecordatorio
+        '
+        Me.btnVerRecordatorio.Image = Global.NEducacionContinuaUX.My.Resources.Resources.icons8_show_property_40
+        Me.btnVerRecordatorio.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnVerRecordatorio.Location = New System.Drawing.Point(895, 0)
+        Me.btnVerRecordatorio.Name = "btnVerRecordatorio"
+        Me.btnVerRecordatorio.Size = New System.Drawing.Size(72, 57)
+        Me.btnVerRecordatorio.TabIndex = 75
+        Me.btnVerRecordatorio.Text = "Ver recordatorio"
+        Me.btnVerRecordatorio.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnVerRecordatorio.UseVisualStyleBackColor = True
+        Me.btnVerRecordatorio.Visible = False
+        '
+        'btnRecordatorios
+        '
+        Me.btnRecordatorios.Image = Global.NEducacionContinuaUX.My.Resources.Resources.icons8_note_40
+        Me.btnRecordatorios.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnRecordatorios.Location = New System.Drawing.Point(807, 0)
+        Me.btnRecordatorios.Name = "btnRecordatorios"
+        Me.btnRecordatorios.Size = New System.Drawing.Size(84, 57)
+        Me.btnRecordatorios.TabIndex = 74
+        Me.btnRecordatorios.Text = "Recordatorios"
+        Me.btnRecordatorios.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnRecordatorios.UseVisualStyleBackColor = True
+        Me.btnRecordatorios.Visible = False
+        '
         'cbExterno
         '
         Me.cbExterno.FormattingEnabled = True
         Me.cbExterno.Location = New System.Drawing.Point(300, 14)
         Me.cbExterno.Name = "cbExterno"
-        Me.cbExterno.Size = New System.Drawing.Size(586, 21)
+        Me.cbExterno.Size = New System.Drawing.Size(481, 21)
         Me.cbExterno.TabIndex = 73
         '
         'lblBusquedaNombre
@@ -145,6 +186,16 @@ Partial Class CobrosEDC
         Me.lblBusquedaNombre.Size = New System.Drawing.Size(63, 16)
         Me.lblBusquedaNombre.TabIndex = 3
         Me.lblBusquedaNombre.Text = "Nombre: "
+        '
+        'btnBuscar
+        '
+        Me.btnBuscar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.search_30px
+        Me.btnBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnBuscar.Location = New System.Drawing.Point(186, 7)
+        Me.btnBuscar.Name = "btnBuscar"
+        Me.btnBuscar.Size = New System.Drawing.Size(41, 34)
+        Me.btnBuscar.TabIndex = 2
+        Me.btnBuscar.UseVisualStyleBackColor = True
         '
         'txtMatricula
         '
@@ -428,6 +479,36 @@ Partial Class CobrosEDC
         Me.Panel1.Size = New System.Drawing.Size(391, 60)
         Me.Panel1.TabIndex = 43
         '
+        'btnCobrar
+        '
+        Me.btnCobrar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.cash_register_40px
+        Me.btnCobrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnCobrar.Location = New System.Drawing.Point(162, 3)
+        Me.btnCobrar.Name = "btnCobrar"
+        Me.btnCobrar.Size = New System.Drawing.Size(82, 51)
+        Me.btnCobrar.TabIndex = 5
+        Me.btnCobrar.UseVisualStyleBackColor = True
+        '
+        'btnSalir
+        '
+        Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
+        Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnSalir.Location = New System.Drawing.Point(261, 3)
+        Me.btnSalir.Name = "btnSalir"
+        Me.btnSalir.Size = New System.Drawing.Size(83, 51)
+        Me.btnSalir.TabIndex = 4
+        Me.btnSalir.UseVisualStyleBackColor = True
+        '
+        'btnLimpiar
+        '
+        Me.btnLimpiar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
+        Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnLimpiar.Location = New System.Drawing.Point(57, 3)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(82, 51)
+        Me.btnLimpiar.TabIndex = 38
+        Me.btnLimpiar.UseVisualStyleBackColor = True
+        '
         'panelTipoPago
         '
         Me.panelTipoPago.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
@@ -710,37 +791,37 @@ Partial Class CobrosEDC
         Me.Tree.ForeColor = System.Drawing.SystemColors.Control
         Me.Tree.Location = New System.Drawing.Point(7, 31)
         Me.Tree.Name = "Tree"
-        TreeNode7.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        TreeNode7.ForeColor = System.Drawing.SystemColors.Control
-        TreeNode7.Name = "nodeCongresos"
-        TreeNode7.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        TreeNode7.SelectedImageIndex = -2
-        TreeNode7.StateImageIndex = 2
-        TreeNode7.Text = "Congresos"
-        TreeNode8.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        TreeNode8.ForeColor = System.Drawing.SystemColors.Control
-        TreeNode8.Name = "nodePagosOpcionales"
-        TreeNode8.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        TreeNode8.SelectedImageIndex = -2
-        TreeNode8.StateImageIndex = 2
-        TreeNode8.Text = "Pagos Opcionales"
-        TreeNode9.Name = "nodeInscripcionDip"
-        TreeNode9.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        TreeNode9.StateImageIndex = 2
-        TreeNode9.Text = "Inscripción"
-        TreeNode10.Name = "nodeColegiaturaDip"
-        TreeNode10.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        TreeNode10.StateImageIndex = 2
-        TreeNode10.Text = "Colegiaturas"
-        TreeNode11.Name = "nodePagoUnicoDip"
-        TreeNode11.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        TreeNode11.StateImageIndex = 2
-        TreeNode11.Text = "Pago Unico"
-        TreeNode12.Name = "nodeColegiaturasRec"
-        TreeNode12.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        TreeNode12.StateImageIndex = 2
-        TreeNode12.Text = "Recargos"
-        Me.Tree.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode7, TreeNode8, TreeNode9, TreeNode10, TreeNode11, TreeNode12})
+        TreeNode1.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        TreeNode1.ForeColor = System.Drawing.SystemColors.Control
+        TreeNode1.Name = "nodeCongresos"
+        TreeNode1.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        TreeNode1.SelectedImageIndex = -2
+        TreeNode1.StateImageIndex = 2
+        TreeNode1.Text = "Congresos"
+        TreeNode2.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        TreeNode2.ForeColor = System.Drawing.SystemColors.Control
+        TreeNode2.Name = "nodePagosOpcionales"
+        TreeNode2.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        TreeNode2.SelectedImageIndex = -2
+        TreeNode2.StateImageIndex = 2
+        TreeNode2.Text = "Pagos Opcionales"
+        TreeNode3.Name = "nodeInscripcionDip"
+        TreeNode3.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        TreeNode3.StateImageIndex = 2
+        TreeNode3.Text = "Inscripción"
+        TreeNode4.Name = "nodeColegiaturaDip"
+        TreeNode4.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        TreeNode4.StateImageIndex = 2
+        TreeNode4.Text = "Colegiaturas"
+        TreeNode5.Name = "nodePagoUnicoDip"
+        TreeNode5.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        TreeNode5.StateImageIndex = 2
+        TreeNode5.Text = "Pago Unico"
+        TreeNode6.Name = "nodeColegiaturasRec"
+        TreeNode6.NodeFont = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        TreeNode6.StateImageIndex = 2
+        TreeNode6.Text = "Recargos"
+        Me.Tree.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2, TreeNode3, TreeNode4, TreeNode5, TreeNode6})
         Me.Tree.Size = New System.Drawing.Size(879, 445)
         Me.Tree.StateImageList = Me.ImageListTree
         Me.Tree.TabIndex = 8
@@ -763,70 +844,6 @@ Partial Class CobrosEDC
         Me.lblPendientes.Size = New System.Drawing.Size(121, 16)
         Me.lblPendientes.TabIndex = 3
         Me.lblPendientes.Text = "Pagos pendientes:"
-        '
-        'btnBuscar
-        '
-        Me.btnBuscar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.search_30px
-        Me.btnBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnBuscar.Location = New System.Drawing.Point(186, 7)
-        Me.btnBuscar.Name = "btnBuscar"
-        Me.btnBuscar.Size = New System.Drawing.Size(41, 34)
-        Me.btnBuscar.TabIndex = 2
-        Me.btnBuscar.UseVisualStyleBackColor = True
-        '
-        'btnCobrar
-        '
-        Me.btnCobrar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.cash_register_40px
-        Me.btnCobrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnCobrar.Location = New System.Drawing.Point(162, 3)
-        Me.btnCobrar.Name = "btnCobrar"
-        Me.btnCobrar.Size = New System.Drawing.Size(82, 51)
-        Me.btnCobrar.TabIndex = 5
-        Me.btnCobrar.UseVisualStyleBackColor = True
-        '
-        'btnSalir
-        '
-        Me.btnSalir.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.exit_40px
-        Me.btnSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnSalir.Location = New System.Drawing.Point(261, 3)
-        Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New System.Drawing.Size(83, 51)
-        Me.btnSalir.TabIndex = 4
-        Me.btnSalir.UseVisualStyleBackColor = True
-        '
-        'btnLimpiar
-        '
-        Me.btnLimpiar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.broom_40px
-        Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnLimpiar.Location = New System.Drawing.Point(57, 3)
-        Me.btnLimpiar.Name = "btnLimpiar"
-        Me.btnLimpiar.Size = New System.Drawing.Size(82, 51)
-        Me.btnLimpiar.TabIndex = 38
-        Me.btnLimpiar.UseVisualStyleBackColor = True
-        '
-        'btnVerRecordatorio
-        '
-        Me.btnVerRecordatorio.Image = Global.NEducacionContinuaUX.My.Resources.Resources.icons8_show_property_40
-        Me.btnVerRecordatorio.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnVerRecordatorio.Location = New System.Drawing.Point(999, 0)
-        Me.btnVerRecordatorio.Name = "btnVerRecordatorio"
-        Me.btnVerRecordatorio.Size = New System.Drawing.Size(88, 57)
-        Me.btnVerRecordatorio.TabIndex = 75
-        Me.btnVerRecordatorio.Text = "Ver recordatorio"
-        Me.btnVerRecordatorio.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnVerRecordatorio.UseVisualStyleBackColor = True
-        '
-        'btnRecordatorios
-        '
-        Me.btnRecordatorios.Image = Global.NEducacionContinuaUX.My.Resources.Resources.icons8_note_40
-        Me.btnRecordatorios.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnRecordatorios.Location = New System.Drawing.Point(905, 0)
-        Me.btnRecordatorios.Name = "btnRecordatorios"
-        Me.btnRecordatorios.Size = New System.Drawing.Size(88, 57)
-        Me.btnRecordatorios.TabIndex = 74
-        Me.btnRecordatorios.Text = "Recordatorios"
-        Me.btnRecordatorios.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnRecordatorios.UseVisualStyleBackColor = True
         '
         'CobrosEDC
         '
@@ -919,4 +936,5 @@ Partial Class CobrosEDC
     Public WithEvents Tree As TreeView
     Friend WithEvents btnRecordatorios As Button
     Friend WithEvents btnVerRecordatorio As Button
+    Friend WithEvents btnDatosFiscales As Button
 End Class

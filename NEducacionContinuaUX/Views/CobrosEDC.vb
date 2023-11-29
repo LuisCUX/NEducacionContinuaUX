@@ -75,6 +75,10 @@ Public Class CobrosEDC
         For Each row As DataRow In tableRecordatorios.Rows
             MessageBox.Show(row("Info") & vbNewLine & row("Recordatorio"))
         Next
+
+        btnRecordatorios.Visible = True
+        btnVerRecordatorio.Visible = True
+        btnDatosFiscales.Visible = True
     End Sub
 
     Private Sub cbFormaPago_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cbFormaPago.SelectionChangeCommitted
@@ -851,6 +855,9 @@ Public Class CobrosEDC
         txtNoCuenta.Clear()
         cbFormaPago.SelectedIndex = 0
         Me.cbFormaPago_SelectionChangeCommitted(Nothing, Nothing)
+        btnRecordatorios.Visible = False
+        btnVerRecordatorio.Visible = False
+        btnDatosFiscales.Visible = False
     End Sub
 
 
@@ -969,11 +976,13 @@ Public Class CobrosEDC
 
     Private Sub btnRecordatorios_Click(sender As Object, e As EventArgs) Handles btnRecordatorios.Click
         Dim IDLastRecordatorio As Integer = db.exectSQLQueryScalar($"SELECT TOP 1 ID FROM ing_CatRecordatorios WHERE Matricula = '{Matricula}' AND Activo = 1 ORDER BY ID DESC")
-        ObjectBagService.setItem("Tipo", "Edicion")
+        If (IDLastRecordatorio = 0) Then
+            ObjectBagService.setItem("Tipo", "Nuevo")
+        Else
+            ObjectBagService.setItem("Tipo", "Edicion")
+        End If
         ObjectBagService.setItem("IDRecordatorio", IDLastRecordatorio)
         ObjectBagService.setItem("Matricula", Matricula)
-        ModalRecordatoriosEDC.MdiParent = PrincipalView
-        ModalRecordatoriosEDC.Show()
         ModalRecordatoriosEDC.MdiParent = PrincipalView
         ModalRecordatoriosEDC.Show()
     End Sub
@@ -982,5 +991,18 @@ Public Class CobrosEDC
         ObjectBagService.setItem("Matricula", Matricula)
         MainRecordatoriosEDC.MdiParent = PrincipalView
         MainRecordatoriosEDC.Show()
+    End Sub
+
+    Private Sub btnDatosFiscales_Click(sender As Object, e As EventArgs) Handles btnDatosFiscales.Click
+        If (tipoMatricula = "EX") Then
+
+        ElseIf (tipoMatricula = "EC") Then
+            Dim result As DialogResult = MessageBox.Show("Se enviará un correo al email del cliente con un link mediante el cual podrá actualizar sus datos fiscales ¿Desea enviar el correo?", "", MessageBoxButtons.YesNo)
+            If (result = 6) Then
+                co.enviarCorreoActualizacionDatos(Matricula, tipoMatricula)
+            Else
+                Exit Sub
+            End If
+        End If
     End Sub
 End Class

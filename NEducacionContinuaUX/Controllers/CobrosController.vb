@@ -14,6 +14,7 @@ Public Class CobrosController
     Dim rep As ImpresionReportesService = New ImpresionReportesService()
     Dim es As EmailService = New EmailService()
     Dim va As ValidacionesController = New ValidacionesController()
+    Dim esux As UXServiceEmail = New UXServiceEmail()
     Dim abono As Boolean = False
     Public QR_Generator As New MessagingToolkit.QRCode.Codec.QRCodeEncoder
 
@@ -196,7 +197,7 @@ Public Class CobrosController
             folioFiscal = Me.Extrae_Cadena(folioFiscal, "=", "")
             folioFiscal = folioFiscal.Substring(1, folioFiscal.Length() - 1)
             If (System.Diagnostics.Debugger.IsAttached) Then
-                File.WriteAllText("C:\Users\Luis\Desktop\wea.xml", xmlTimbrado)
+                ''File.WriteAllText("C:\Users\Luis\Desktop\wea.xml", xmlTimbrado)
             End If
 
             ''---------------------------------------------------------REGISTRO DE COBRO/S EN BASE DE DATOS---------------------------------------------------------
@@ -728,4 +729,38 @@ Public Class CobrosController
 
         quitaTildesEspecial = Trim((UCase(limpia)))
     End Function
+
+    Sub enviarCorreoActualizacionDatos(Matricula As String, tipoMatricula As String)
+        Dim mail As New EmailModel
+        Dim emailCliente As String
+        Dim destino As New List(Of String)
+        Dim mensaje As String
+        Dim token
+        If (tipoMatricula = "EX") Then
+            emailCliente = db.exectSQLQueryScalar($"SELECT C.correo FROM portal_cliente AS C
+                                                    INNER JOIN portal_registroExterno AS RC ON RC.id_cliente = C.id_cliente
+                                                    WHERE RC.clave_cliente = '{Matricula}'")
+        ElseIf (tipoMatricula = "EC") Then
+            emailCliente = db.exectSQLQueryScalar($"SELECT C.correo FROM portal_cliente AS C
+                                                    INNER JOIN portal_registroCongreso AS RC ON RC.id_cliente = C.id_cliente
+                                                    WHERE RC.clave_cliente = '{Matricula}'")
+        End If
+
+        db.execSQLQueryWithoutParams($"UPDATE portal_registroCongreso SET token_datosFiscales = NEWID() WHERE clave_cliente = '{Matricula}'")
+        token = db.exectSQLQueryScalar($"SELECT token_datosFiscales FROM portal_registroCongreso WHERE clave_cliente = '{Matricula}'")
+
+
+        mensaje = $"De click en este enlace para poder actualizar o dar de alta sus datos fiscales: http://192.168.1.31:4200/EducacionContinua/update/{token}"
+
+        destino.Add(emailCliente)
+        mail.Destino = destino
+        mail.Asunto = "ACTUALIZACIÓN DE DATOS FISCALES"
+        mail.Mensaje = mensaje
+        Try
+            esux.sendEmail(mail)
+            MessageBox.Show("Correo enviado exisosamente")
+        Catch ex As Exception
+            MessageBox.Show("Error al enviar email")
+        End Try
+    End Sub
 End Class

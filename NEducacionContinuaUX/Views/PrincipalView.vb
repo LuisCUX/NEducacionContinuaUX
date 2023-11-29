@@ -24,7 +24,7 @@
             ReportesToolStripMenuItem.Visible = True
             CongresosDiplomadosToolStripMenuItem.Visible = False
             DEVToolStripMenuItem.Visible = False
-            ReportesCongresosDiplomadosToolStripMenuItem.Visible = False
+            ReportesCongresosDiplomadosToolStripMenuItem.Visible = True
         End If
 
         If (User.getPerfil = "Contabilidad") Then
@@ -50,7 +50,7 @@
             ReportesToolStripMenuItem.Visible = False
             CongresosDiplomadosToolStripMenuItem.Visible = True
             DEVToolStripMenuItem.Visible = False
-            ReportesCongresosDiplomadosToolStripMenuItem.Visible = True
+            ReportesCongresosDiplomadosToolStripMenuItem.Visible = False
         End If
     End Sub
 
@@ -201,5 +201,10 @@
     Private Sub SustitucioncambioDeConceptoclaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SustitucioncambioDeConceptoclaveToolStripMenuItem.Click
         SustitucionConceptoEDC.MdiParent = Me
         SustitucionConceptoEDC.Show()
+    End Sub
+
+    Private Sub ModificaciónDeDatosFiscalesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ModificaciónDeDatosFiscalesToolStripMenuItem.Click
+        ModificacionDatosFiscalesECEDC.MdiParent = Me
+        ModificacionDatosFiscalesECEDC.Show()
     End Sub
 End Class

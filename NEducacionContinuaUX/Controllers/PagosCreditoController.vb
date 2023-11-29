@@ -71,8 +71,8 @@ Public Class PagosCreditoController
                 xmlTimbrado = st.Timbrado(xmlString, Folio)
             End If
             Dim folioFiscalNuevo As String = Me.Extrae_Cadena(xmlTimbrado, "UUID=", " FechaTimbrado")
-            folioFiscalNuevo = Me.Extrae_Cadena(FolioFiscal, "=", "")
-            folioFiscalNuevo = FolioFiscal.Substring(1, FolioFiscal.Length() - 1)
+            folioFiscalNuevo = Me.Extrae_Cadena(folioFiscalNuevo, "=", "")
+            folioFiscalNuevo = folioFiscalNuevo.Substring(1, folioFiscalNuevo.Length() - 1)
 
 
             db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosCredito(ID_Credito, Folio, NumPago, Monto_Anterior, Monto_Actual, Monto_Abonado, Fecha, Activo) VALUES ({IDCredito}, '{FolioPago}', {NumPago}, {MontoAnterior}, {MontoNuevo}, {CantidadAbonada}, GETDATE(), 1)")

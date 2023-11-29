@@ -24,6 +24,7 @@
             estadoCheck = chbActivo.Checked
         Else
             ObjectBagService.clearBag()
+            chbNuevo.Checked = True
         End If
     End Sub
 
