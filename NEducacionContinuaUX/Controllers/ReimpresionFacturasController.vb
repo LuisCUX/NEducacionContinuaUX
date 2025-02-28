@@ -43,9 +43,9 @@
     Sub obtenerDatosCliente(Matricula As String, lblNombre As Label, lblRFC As Label, lblEmail As Label)
         Dim tablas As String()
         If (Matricula.Substring(0, 2) = "EX") Then
-            tablas = {"portal_reRFC", "portal_registroExterno"}
+            tablas = {"portal_reRFC", "portal_registroExterno", "paterno", "materno"}
         ElseIf (Matricula.Substring(0, 2) = "EC") Then
-            tablas = {"portal_rcRFC", "portal_registroCongreso"}
+            tablas = {"portal_rcRFC", "portal_registroCongreso", "apellido_paterno", "apellido_materno"}
         End If
 
         Dim RFC As String = db.exectSQLQueryScalar($"SELECT RFC.rfc FROM {tablas(0)} AS RE
@@ -63,10 +63,10 @@
                                                 INNER JOIN {tablas(1)} AS EX ON EX.id_registro = RE.id_registro
                                                 WHERE EX.clave_cliente = '{Matricula}'")
         Else
-            lblNombre.Text = db.exectSQLQueryScalar($"select (C.nombre + ' ' + RE.paterno + ' ' + RE.materno) from portal_cliente AS C 
+            lblNombre.Text = db.exectSQLQueryScalar($"select (C.nombre + ' ' + RE.{tablas(2)} + ' ' + RE.{tablas(3)}) from portal_cliente AS C 
                                                        INNER JOIN {tablas(1)} AS RE ON RE.id_cliente = C.id_cliente
                                                        WHERE RE.clave_cliente = '{Matricula}'")
-            lblEmail.Text = db.exectSQLQueryScalar($"select (C.nombre + ' ' + RE.paterno + ' ' + RE.materno) from portal_cliente AS C 
+            lblEmail.Text = db.exectSQLQueryScalar($"select (C.nombre + ' ' + RE.{tablas(2)} + ' ' + RE.{tablas(3)}) from portal_cliente AS C 
                                                      INNER JOIN {tablas(1)} AS RE ON RE.id_cliente = C.id_cliente
                                                      WHERE RE.clave_cliente = '{Matricula}'")
         End If

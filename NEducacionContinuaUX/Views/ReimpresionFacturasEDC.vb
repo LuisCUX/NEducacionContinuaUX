@@ -144,8 +144,8 @@ Public Class ReimpresionFacturasEDC
             NombreEvento = "   "
         Else
             NombreEvento = db.exectSQLQueryScalar($"SELECT C.nombre FROM portal_congreso AS C
-                                                    INNER JOIN ing_Planes AS P ON P.ID_Congreso = C.id_congreso
-                                                    INNER JOIN portal_registroCongreso AS RC ON RC.id_plan = P.ID
+                                                    INNER JOIN portal_tipoAsistente AS TA ON TA.id_congreso = C.id_congreso
+                                                    INNER JOIN portal_registroCongreso AS RC ON RC.id_tipo_asistente = TA.id_tipo_asistente
                                                     WHERE RC.clave_cliente = '{Matricula}'")
         End If
         Dim descripcionCFDI As String = db.exectSQLQueryScalar($"select UPPER('(' + clave_usoCFDI + ')' + ' ' + descripcion) As Clave from ing_cat_usoCFDI WHERE clave_usoCFDI = '{usoCFDI}'")
@@ -160,6 +160,15 @@ Public Class ReimpresionFacturasEDC
             rep.AgregarParametros("RFC", rfcTimbrar)
             rep.AgregarParametros("TipoCliente", tipoCliente)
         ElseIf (tipoPago = "COBRO DE CONCEPTO" Or tipoPago = "COBRO DE CONCEPTO A CREDITO") Then
+            rep.AgregarFuente("FacturaEDC.rpt")
+            rep.AgregarParametros("IDXML", IDXML)
+            rep.AgregarParametros("ClaveCliente", Matricula)
+            rep.AgregarParametros("CantidadLetra", cantidadString)
+            rep.AgregarParametros("usoCFDI", descripcionCFDI)
+            rep.AgregarParametros("TipoCliente", tipoCliente)
+            rep.AgregarParametros("NombreEvento", NombreEvento)
+            rep.AgregarParametros("RFC", rfcTimbrar)
+        ElseIf (tipoPago.Contains("SUSTITUYENDO FACTURA")) Then
             rep.AgregarFuente("FacturaEDC.rpt")
             rep.AgregarParametros("IDXML", IDXML)
             rep.AgregarParametros("ClaveCliente", Matricula)
@@ -241,7 +250,7 @@ Public Class ReimpresionFacturasEDC
             rep.AgregarParametros("RFC", rfcTimbrar)
         End If
 
-        Dim mail As New EmailModel
+        Dim mailStructure As New NEmailStructureModel
         Dim archivo_pdf As Byte() = Nothing
         Dim archivo_xml As Byte() = Nothing
 
@@ -252,7 +261,7 @@ Public Class ReimpresionFacturasEDC
         archivo_xml = Encoding.Default.GetBytes(xmlTimbrado)
 
         Dim emailCliente As String
-        Dim destino As New List(Of String)
+        Dim destino As String
         If (tipoMatricula = "EX") Then
             emailCliente = db.exectSQLQueryScalar($"SELECT C.correo FROM portal_cliente AS C
                                                     INNER JOIN portal_registroExterno AS RC ON RC.id_cliente = C.id_cliente
@@ -269,16 +278,46 @@ Public Class ReimpresionFacturasEDC
             emailCliente = InputBox("¿Cuál es el correo electrónico en donde se reenviarán la factura y el XML de este folio?", "Ingrese el correo electrónico")
         End If
 
-        destino.Add(emailCliente)
-        mail.Destino = destino
-        mail.Asunto = "GRACIAS POR SU PAGO"
-        mail.Mensaje = "ANEXAMOS TUS COMPROBANTES DE PAGO ADJUNTOS A ESTE CORREO, GRACIAS."
-        mail.BytesFile = archivo_pdf
-        mail.FileName = $"{folioEDC}.pdf"
-        mail.BytesFile2 = archivo_xml
-        mail.FileName2 = $"{folioEDC}.xml"
+        Dim attatchment1 As Byte()
+        Dim attatchment2 As Byte()
+        Dim attatchmentImg As String
+
+        Dim message As String
+        Dim band As Boolean = False
+        Dim tableClavesPagos As DataTable = db.getDataTableFromSQL($"SELECT Clave_Concepto FROM ing_xmlTimbradosConceptos WHERE XMLID = {IDXML}")
+        For Each row As DataRow In tableClavesPagos.Rows
+            If (row("Clave_Concepto") = 3) Then
+                band = True
+            End If
+        Next
+
+        If (band = True) Then
+            message = Me.getCorreoCongreso(Matricula)
+            Try
+                Dim idCongreso As Integer = db.exectSQLQueryScalar($"SELECT CON.id_congreso FROM portal_congreso AS CON
+                                                                        INNER JOIN portal_tipoAsistente AS TA ON TA.id_congreso = CON.id_congreso
+                                                                        INNER JOIN portal_registroCongreso AS RC ON RC.id_tipo_asistente = TA.id_tipo_asistente
+                                                                        WHERE RC.clave_cliente = '{Matricula}'")
+                attatchmentImg = db.exectSQLQueryScalar($"SELECT link_Img FROM ing_res_congresoLink WHERE id_congreso = {idCongreso}")
+            Catch ex As Exception
+                attatchmentImg = ""
+            End Try
+        Else
+            message = "ANEXAMOS TUS COMPROBANTES DE PAGO ADJUNTOS A ESTE CORREO, GRACIAS."
+            attatchmentImg = ""
+        End If
+
+        destino = emailCliente
+        mailStructure.to = destino
+        mailStructure.subject = "GRACIAS POR SU PAGO"
+        mailStructure.message = "ANEXAMOS TUS COMPROBANTES DE PAGO ADJUNTOS A ESTE CORREO, GRACIAS."
+        attatchment1 = archivo_pdf
+        attatchment2 = archivo_xml
+        mailStructure.attatchmentImg = attatchmentImg
+        mailStructure.nameFile = $"{folioEDC}"
+
         Try
-            es.sendEmailWithFileBytes(mail)
+            es.sendEmailWithFileBytes(mailStructure, attatchment1, attatchment2)
             MessageBox.Show("Correo enviado")
             Me.Reiniciar()
         Catch ex As Exception
@@ -469,6 +508,45 @@ Public Class ReimpresionFacturasEDC
         txtMatricula.Clear()
         txtFolio.Clear()
     End Sub
+
+    Function getCorreoCongreso(Matricula As String) As String
+        Dim correo As String
+        Dim nombreMesa As String
+        Dim nombreCongreso As String
+        Dim idCongreso As String
+        Dim tableDatos As DataTable = db.getDataTableFromSQL($"SELECT
+	                                                            RC.clave_cliente,
+	                                                            C.nombre,
+	                                                            RC.apellido_paterno,
+	                                                            RC.apellido_materno,
+	                                                            RC.pagar,
+	                                                            CON.nombre AS NombreCongreso,
+	                                                            ISNULL(M.nombre, '') AS nombreMesa
+                                                            FROM portal_registroCongreso AS RC
+                                                            INNER JOIN portal_cliente AS C ON RC.clave_cliente = '{Matricula}' AND RC.id_cliente = C.id_cliente
+                                                            INNER JOIN portal_tipoAsistente AS TA ON TA.id_tipo_asistente = RC.id_tipo_asistente
+                                                            INNER JOIN portal_congreso AS CON ON CON.id_congreso = TA.id_congreso
+                                                            LEFT JOIN portal_registroMesas AS RM ON RC.id_registro = RM.id_registro
+                                                            LEFT JOIN portal_mesa AS M ON RM.id_mesa = M.id_mesa")
+        For Each row As DataRow In tableDatos.Rows
+            Try
+                nombreMesa = row("nombreMesa")
+            Catch ex As Exception
+                nombreMesa = ""
+            End Try
+            nombreCongreso = row("NombreCongreso")
+        Next
+
+        correo = $"Se ha completado su registro al congreso: {nombreCongreso} <br>"
+
+        If (nombreMesa <> "") Then
+            correo = $"{correo} Taller: {nombreMesa}<br>"
+        End If
+
+        correo = $"{correo}ANEXAMOS TUS COMPROBANTES DE PAGO ADJUNTOS A ESTE CORREO, GRACIAS."
+
+        Return correo
+    End Function
 
     'Private Sub cbFactura_DrawItem(ByVal sender As Object, ByVal e As System.Windows.Forms.DrawItemEventArgs) Handles cbFactura.DrawItem
     '    Dim myFont As System.Drawing.Font = cbFactura.Font

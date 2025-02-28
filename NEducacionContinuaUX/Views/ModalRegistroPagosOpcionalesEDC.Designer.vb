@@ -60,6 +60,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         Me.lblBuscarPS = New System.Windows.Forms.Label()
         Me.txtClavePS = New System.Windows.Forms.TextBox()
         Me.btnLimpiar = New System.Windows.Forms.Button()
+        Me.chbActivo = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'lblNombreVentana
@@ -165,7 +166,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         Me.lblValorUnitario.AutoSize = True
         Me.lblValorUnitario.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblValorUnitario.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblValorUnitario.Location = New System.Drawing.Point(13, 300)
+        Me.lblValorUnitario.Location = New System.Drawing.Point(13, 320)
         Me.lblValorUnitario.Name = "lblValorUnitario"
         Me.lblValorUnitario.Size = New System.Drawing.Size(167, 16)
         Me.lblValorUnitario.TabIndex = 20
@@ -175,7 +176,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         '
         Me.txtValorUnitario.Enabled = False
         Me.txtValorUnitario.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtValorUnitario.Location = New System.Drawing.Point(317, 297)
+        Me.txtValorUnitario.Location = New System.Drawing.Point(317, 317)
         Me.txtValorUnitario.Name = "txtValorUnitario"
         Me.txtValorUnitario.Size = New System.Drawing.Size(113, 22)
         Me.txtValorUnitario.TabIndex = 21
@@ -185,7 +186,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         Me.lblValorUnitarioSinIVA.AutoSize = True
         Me.lblValorUnitarioSinIVA.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblValorUnitarioSinIVA.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblValorUnitarioSinIVA.Location = New System.Drawing.Point(13, 336)
+        Me.lblValorUnitarioSinIVA.Location = New System.Drawing.Point(13, 356)
         Me.lblValorUnitarioSinIVA.Name = "lblValorUnitarioSinIVA"
         Me.lblValorUnitarioSinIVA.Size = New System.Drawing.Size(133, 16)
         Me.lblValorUnitarioSinIVA.TabIndex = 22
@@ -195,7 +196,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         '
         Me.txtValorUnitarioSinIVA.Enabled = False
         Me.txtValorUnitarioSinIVA.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtValorUnitarioSinIVA.Location = New System.Drawing.Point(317, 333)
+        Me.txtValorUnitarioSinIVA.Location = New System.Drawing.Point(317, 353)
         Me.txtValorUnitarioSinIVA.Name = "txtValorUnitarioSinIVA"
         Me.txtValorUnitarioSinIVA.Size = New System.Drawing.Size(113, 22)
         Me.txtValorUnitarioSinIVA.TabIndex = 23
@@ -206,7 +207,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         Me.chbConsideraIVA.Enabled = False
         Me.chbConsideraIVA.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chbConsideraIVA.ForeColor = System.Drawing.SystemColors.Control
-        Me.chbConsideraIVA.Location = New System.Drawing.Point(446, 299)
+        Me.chbConsideraIVA.Location = New System.Drawing.Point(446, 319)
         Me.chbConsideraIVA.Name = "chbConsideraIVA"
         Me.chbConsideraIVA.Size = New System.Drawing.Size(105, 19)
         Me.chbConsideraIVA.TabIndex = 24
@@ -418,7 +419,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         Me.chbIncluyeIVA.Enabled = False
         Me.chbIncluyeIVA.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chbIncluyeIVA.ForeColor = System.Drawing.SystemColors.Control
-        Me.chbIncluyeIVA.Location = New System.Drawing.Point(446, 324)
+        Me.chbIncluyeIVA.Location = New System.Drawing.Point(446, 344)
         Me.chbIncluyeIVA.Name = "chbIncluyeIVA"
         Me.chbIncluyeIVA.Size = New System.Drawing.Size(109, 19)
         Me.chbIncluyeIVA.TabIndex = 43
@@ -433,7 +434,7 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         Me.chbExentaIVA.Enabled = False
         Me.chbExentaIVA.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chbExentaIVA.ForeColor = System.Drawing.SystemColors.Control
-        Me.chbExentaIVA.Location = New System.Drawing.Point(446, 349)
+        Me.chbExentaIVA.Location = New System.Drawing.Point(446, 369)
         Me.chbExentaIVA.Name = "chbExentaIVA"
         Me.chbExentaIVA.Size = New System.Drawing.Size(98, 19)
         Me.chbExentaIVA.TabIndex = 44
@@ -470,12 +471,27 @@ Partial Class ModalRegistroPagosOpcionalesEDC
         Me.btnLimpiar.TabIndex = 47
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
+        'chbActivo
+        '
+        Me.chbActivo.AutoSize = True
+        Me.chbActivo.Checked = True
+        Me.chbActivo.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chbActivo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chbActivo.ForeColor = System.Drawing.SystemColors.Control
+        Me.chbActivo.Location = New System.Drawing.Point(180, 281)
+        Me.chbActivo.Name = "chbActivo"
+        Me.chbActivo.Size = New System.Drawing.Size(57, 19)
+        Me.chbActivo.TabIndex = 48
+        Me.chbActivo.Text = "Activo"
+        Me.chbActivo.UseVisualStyleBackColor = True
+        '
         'ModalRegistroPagosOpcionalesEDC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
         Me.ClientSize = New System.Drawing.Size(677, 701)
+        Me.Controls.Add(Me.chbActivo)
         Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.txtClavePS)
         Me.Controls.Add(Me.lblBuscarPS)
@@ -559,4 +575,5 @@ Partial Class ModalRegistroPagosOpcionalesEDC
     Friend WithEvents lblBuscarPS As Label
     Friend WithEvents txtClavePS As TextBox
     Friend WithEvents btnLimpiar As Button
+    Friend WithEvents chbActivo As CheckBox
 End Class

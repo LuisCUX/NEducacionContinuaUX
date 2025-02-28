@@ -52,11 +52,12 @@ Public Class ConsultaTimbresService
                     Dim respuestaTimbres As String = ""
 
                     RespuestaDetalleCreditos = RespuestaServicio.Paquetes.ToList()
+                Dim band As Integer
+                band = 0
+                For Each Paquete As TimbradoUXReal.DetallesPaqueteCreditos In RespuestaDetalleCreditos
 
-                    For Each Paquete As TimbradoUXReal.DetallesPaqueteCreditos In RespuestaDetalleCreditos
-
+                    If (band >= RespuestaDetalleCreditos.Count - 3) Then
                         timbresRestantes = Paquete.TimbresRestantes
-
                         respuestaTimbres += "En Uso: " + Paquete.EnUso.ToString + vbNewLine
                         respuestaTimbres += "Fecha Activacion: " + IIf(Paquete.FechaActivacion Is Nothing, "", Paquete.FechaActivacion) + vbNewLine
                         respuestaTimbres += "Fecha Vencimiento: " + IIf(Paquete.FechaVencimiento Is Nothing, "", Paquete.FechaVencimiento) + vbNewLine
@@ -66,8 +67,10 @@ Public Class ConsultaTimbresService
                         respuestaTimbres += "Timbres Restantes: " + timbresRestantes.ToString + vbNewLine
                         respuestaTimbres += "Timbres Usados: " + Paquete.TimbresUsados.ToString + vbNewLine
                         respuestaTimbres += "Vigente: " + IIf(Paquete.Vigente.ToString Is Nothing, "", Paquete.Vigente.ToString) + vbNewLine
+                    End If
 
-                    Next
+                    band = band + 1
+                Next
 
                     MsgBox(respuestaTimbres)
                 Else

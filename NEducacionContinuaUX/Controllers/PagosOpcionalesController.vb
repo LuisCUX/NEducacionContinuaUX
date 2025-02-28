@@ -19,12 +19,12 @@
     End Sub
 
     Sub llenarVentanaPago(ID As Integer, cbConceptoPara As ComboBox, cbNivel As ComboBox, cbTurno As ComboBox, cbTipoPago As ComboBox, cbTipoConcepto As ComboBox, cbDivision As ComboBox, cbGrupo As ComboBox, cbClase As ComboBox, cbProdServ As ComboBox, cbUnidad As ComboBox,
-                           lblNivel As Label, lblTurno As Label, txtNombre As TextBox, txtDesc As TextBox, txtCostoUnitario As TextBox, txtCostoIVA As TextBox, chbExento As CheckBox, chbAbsorbe As CheckBox, chbAgrega As CheckBox, txtClavePS As TextBox)
+                           lblNivel As Label, lblTurno As Label, txtNombre As TextBox, txtDesc As TextBox, txtCostoUnitario As TextBox, txtCostoIVA As TextBox, chbExento As CheckBox, chbAbsorbe As CheckBox, chbAgrega As CheckBox, txtClavePS As TextBox, chbActivo As CheckBox)
         Dim cveUnidad As String
         Dim cveProdServ As String
         Dim tableUnidad As DataTable = db.getDataTableFromSQL("SELECT id_claveProd, nombre FROM ing_cat_unidad")
         ComboboxService.llenarCombobox(cbUnidad, tableUnidad, "id_claveProd", "nombre")
-        Dim tablePago As DataTable = db.getDataTableFromSQL($"SELECT Nombre, Descripcion, claveProductoServicio, claveUnidad, considerarIVA, AgregaIVA, ExentaIVA, ID_cat_TipoPagoOpcional FROM ing_PagosOpcionales WHERE ID = {ID}")
+        Dim tablePago As DataTable = db.getDataTableFromSQL($"SELECT Nombre, Descripcion, claveProductoServicio, claveUnidad, considerarIVA, AgregaIVA, ExentaIVA, ID_cat_TipoPagoOpcional, Activo FROM ing_PagosOpcionales WHERE ID = {ID}")
         For Each item As DataRow In tablePago.Rows
             txtNombre.Text = item("Nombre")
             txtDesc.Text = item("Descripcion")
@@ -38,6 +38,7 @@
             If (item("ExentaIVA") = True) Then
                 chbExento.Checked = True
             End If
+            chbActivo.Checked = item("Activo")
             cbTipoPago.SelectedValue = item("ID_cat_TipoPagoOpcional")
             cveProdServ = item("claveProductoServicio")
         Next
@@ -75,14 +76,22 @@
         txtDesc.Enabled = True
     End Sub
 
-    Sub registrarPagoOpcional(NombrePago As String, Descripcion As String, claveProdServ As String, claveUnidad As String, valorUnitario As Decimal, para As String, considerarIVA As Integer, agregarIVA As Integer, exentaIVA As Integer, idTipoPago As Integer, turno As String, nivel As String)
+    Sub registrarPagoOpcional(NombrePago As String, Descripcion As String, claveProdServ As String, claveUnidad As String, valorUnitario As Decimal, para As String, considerarIVA As Integer, agregarIVA As Integer, exentaIVA As Integer, idTipoPago As Integer, turno As String, nivel As String, activo As Boolean)
         Try
             db.startTransaction()
             Dim ID_ResNT As Integer
             If (para <> "EXTERNO") Then
                 ID_ResNT = db.exectSQLQueryScalar($"SELECT ID FROM mov_Res_Nivel_Turno WHERE Clave_Nivel = '{nivel}' AND Clave_Turno = '{turno}'")
             End If
-            Dim ID_PagoOpcional As Integer = db.insertAndGetIDInserted($"INSERT INTO ing_PagosOpcionales(Nombre, Descripcion, claveProductoServicio, claveUnidad, considerarIVA, AgregaIVA, ExentaIVA, ID_cat_TipoPagoOpcional, Activo) VALUES ('{NombrePago}', '{Descripcion}', '{claveProdServ}', '{claveUnidad}', {considerarIVA}, {agregarIVA}, {exentaIVA}, {idTipoPago}, 1)")
+
+            Dim activoInt As Integer
+            If (activo) Then
+                activoInt = 1
+            Else
+                activoInt = 0
+            End If
+
+            Dim ID_PagoOpcional As Integer = db.insertAndGetIDInserted($"INSERT INTO ing_PagosOpcionales(Nombre, Descripcion, claveProductoServicio, claveUnidad, considerarIVA, AgregaIVA, ExentaIVA, ID_cat_TipoPagoOpcional, Activo) VALUES ('{NombrePago}', '{Descripcion}', '{claveProdServ}', '{claveUnidad}', {considerarIVA}, {agregarIVA}, {exentaIVA}, {idTipoPago}, {activoInt})")
             db.execSQLQueryWithoutParams($"INSERT INTO ing_resPagoOpcionalAsignacion(ID_PagoOpcional, valorUnitario, Para, ID_res_NT, Activo) VALUES ({ID_PagoOpcional}, {valorUnitario}, '{para}', {ID_ResNT}, 1)")
             db.commitTransaction()
             MessageBox.Show("Pago opcional registrado correctamente")
@@ -93,7 +102,7 @@
         End Try
     End Sub
 
-    Sub guardarCambios(IDPago As Integer, NombrePago As String, Descripcion As String, claveProdServ As String, claveUnidad As String, valorUnitario As Decimal, para As String, considerarIVA As Integer, agregarIVA As Integer, exentaIVA As Integer, idTipoPago As Integer, turno As String, nivel As String)
+    Sub guardarCambios(IDPago As Integer, NombrePago As String, Descripcion As String, claveProdServ As String, claveUnidad As String, valorUnitario As Decimal, para As String, considerarIVA As Integer, agregarIVA As Integer, exentaIVA As Integer, idTipoPago As Integer, turno As String, nivel As String, activo As Boolean)
         Try
             db.startTransaction()
             Dim ID_ResNT As Integer
@@ -101,7 +110,14 @@
                 ID_ResNT = db.exectSQLQueryScalar($"SELECT ID FROM mov_Res_Nivel_Turno WHERE Clave_Nivel = '{nivel}' AND Clave_Turno = '{turno}'")
             End If
 
-            db.execSQLQueryWithoutParams($"UPDATE ing_PagosOpcionales SET Nombre = '{NombrePago}', Descripcion = '{Descripcion}', claveProductoServicio = '{claveProdServ}', claveUnidad = '{claveUnidad}', considerarIVA = {considerarIVA}, AgregaIVA = {agregarIVA}, ExentaIVA = {exentaIVA}, ID_cat_TipoPagoOpcional = {idTipoPago} WHERE ID = {IDPago}")
+            Dim activoInt As Integer
+            If (activo) Then
+                activoInt = 1
+            Else
+                activoInt = 0
+            End If
+
+            db.execSQLQueryWithoutParams($"UPDATE ing_PagosOpcionales SET Nombre = '{NombrePago}', Descripcion = '{Descripcion}', claveProductoServicio = '{claveProdServ}', claveUnidad = '{claveUnidad}', considerarIVA = {considerarIVA}, AgregaIVA = {agregarIVA}, ExentaIVA = {exentaIVA}, ID_cat_TipoPagoOpcional = {idTipoPago}, Activo = {activoInt} WHERE ID = {IDPago}")
             db.execSQLQueryWithoutParams($"UPDATE ing_resPagoOpcionalAsignacion SET valorUnitario = {valorUnitario}, Para = '{para}', ID_res_NT = {ID_ResNT} WHERE ID_PagoOpcional = {IDPago}")
             db.commitTransaction()
             MessageBox.Show("Pago opcional editado correctamente")

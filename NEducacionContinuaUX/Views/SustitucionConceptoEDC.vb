@@ -288,8 +288,13 @@
 
         Dim nuevoFolio As String = sd.Cobrar(listaconceptosFinal, formaPagoClave, formaPagoID, Matricula, RFCTimbrar, NombreTimbrar, Convert.ToDecimal(lblTotal.Text), False, tipocliente, cpTimbrar, RegFiscalTimbrar, UsoCFDITimbrar, lblFolioFiscal.Text)
 
-        db.execSQLQueryWithoutParams($"INSERT INTO ing_Sustituciones(Clave_Matricula, FolioSustituido, FolioNuevo, FechaSustitucion, IDObservacion, TipoSustitucion, Usuario, Activo) VALUES('{Matricula}', '{Folio}', '{nuevoFolio}', GETDATE(), {cbObservaciones.SelectedValue}, 'Datos', '{User.getUsername}', 1)")
-        MessageBox.Show("Factura sustituida exitosamente")
+        If (nuevoFolio Is Nothing) Then
+            MessageBox.Show("Error al sustituir la factura")
+            Me.Reiniciar()
+        Else
+            db.execSQLQueryWithoutParams($"INSERT INTO ing_Sustituciones(Clave_Matricula, FolioSustituido, FolioNuevo, FechaSustitucion, IDObservacion, TipoSustitucion, Usuario, Activo) VALUES('{Matricula}', '{Folio}', '{nuevoFolio}', GETDATE(), {cbObservaciones.SelectedValue}, 'Datos', '{User.getUsername}', 1)")
+            MessageBox.Show("Factura sustituida exitosamente")
+        End If
         Me.Reiniciar()
     End Sub
 End Class

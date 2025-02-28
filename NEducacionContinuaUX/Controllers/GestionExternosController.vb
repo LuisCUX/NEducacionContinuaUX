@@ -262,7 +262,7 @@ Public Class GestionExternosController
             Dim idRegistroExterno As Integer = db.insertAndGetIDInserted($"INSERT INTO portal_registroExterno (paterno, materno, id_cliente, clave_cliente) VALUES ('{ap_pat}', '{ap_mat}', {idCliente}, '{clave_cliente}')")
 
             If (datosFiscales = True) Then
-                Dim idRFC As Integer = db.insertAndGetIDInserted($"INSERT INTO portal_catRFC (rfc, direccion, numero, colonia, cp, poblacion, localidad, telefono, correo, id_municipio, razonsocial) VALUES ('{RFC}', '{DireccionF}', '', '{ColoniaF}', '{CPF}', '{CiudadF}', '{CiudadF}', '{TelefonoF}', '{CorreoF}', {IDMunicipioF}, '{RazonSocialF}')")
+                Dim idRFC As Integer = db.insertAndGetIDInserted($"INSERT INTO portal_catRFC (rfc, direccion, numero, colonia, cp, poblacion, localidad, telefono, correo, id_municipio, razonsocial, constanciaFiscal) VALUES ('{RFC}', '{DireccionF}', '', '{ColoniaF}', '{CPF}', '{CiudadF}', '{CiudadF}', '{TelefonoF}', '{CorreoF}', {IDMunicipioF}, '{RazonSocialF}', 0)")
                 db.execSQLQueryWithoutParams($"INSERT INTO portal_reRFC(id_rfc, id_registro, direccion, numero, colonia, cp, poblacion, localidad, telefono, correo, id_municipio, razonsocial, id_res_cfdi_regimen, Activo) VALUES ({idRFC}, {idRegistroExterno}, '{DireccionF}', '', '{ColoniaF}', '{CPF}', '{CiudadP}', '{CiudadP}', '{TelefonoF}', '{CorreoF}', {IDMunicipioF}, '{RazonSocialF}', {idResRegCF}, 1)")
             Else
                 db.execSQLQueryWithoutParams($"INSERT INTO portal_reRFC(id_rfc, id_registro, direccion, numero, colonia, cp, poblacion, localidad, telefono, correo, id_municipio, razonsocial, id_res_cfdi_regimen, Activo) VALUES (2, {idRegistroExterno}, 'XX', '0', 'XX', '0', 'XX', 'XX', '0', 'XX', 0, 'XX', 221, 1)")

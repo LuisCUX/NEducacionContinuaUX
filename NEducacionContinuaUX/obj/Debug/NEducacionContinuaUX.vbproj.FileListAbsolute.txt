@@ -237,3 +237,5 @@ C:\Users\LuisUXX\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\E
 C:\Users\LuisUXX\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\Educacion Continua.xml
 C:\Users\LuisUXX\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\Educacion Continua.pdb
 C:\Users\LuisUXX\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.ModificacionDatosFiscalesECEDC.resources
+C:\Users\LuisUXX\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.ModificacionCostosCongresos.resources
+C:\Users\LuisUXX\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.Form2.resources

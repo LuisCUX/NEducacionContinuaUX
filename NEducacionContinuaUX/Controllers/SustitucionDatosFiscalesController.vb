@@ -1,4 +1,5 @@
 ﻿Imports System.Configuration
+Imports System.Text.RegularExpressions
 
 Public Class SustitucionDatosFiscalesController
     Dim db As DataBaseService = New DataBaseService()
@@ -123,8 +124,8 @@ Public Class SustitucionDatosFiscalesController
                 Certificado = ConfigurationSettings.AppSettings.Get("developmentCertificadoContent").ToString()
                 NoCertificado = ConfigurationSettings.AppSettings.Get("developmentCertificado").ToString()
             Else
-                Certificado = ConfigurationSettings.AppSettings.Get("prodCertificadoContent").ToString()
-                NoCertificado = ConfigurationSettings.AppSettings.Get("prodCertificado").ToString()
+                Certificado = db.exectSQLQueryScalar("SELECT ContenidoCertPem FROM ing_catCertificados WHERE Activo = 1")
+                NoCertificado = db.exectSQLQueryScalar("SELECT Nombre FROM ing_catCertificados WHERE Activo = 1")
             End If
 
             ''-----CALCULA SUBTOTAL-----''
@@ -194,10 +195,11 @@ Public Class SustitucionDatosFiscalesController
             ''---------------------------------------------------------TIMBRADO---------------------------------------------------------
             Dim cadena = xml.cadenaSustitucion(Serie, Folio, Fecha, formaPago, NoCertificado, SubTotal, DescuentoS, Total, listaConceptos, totalIVA, RFCCLiente, NombreCLiente, Credito, Cp, RegFiscal, totalBase, usoCFDI, UUIDSustituido)
             Dim sello As String
+            Dim pass As String = db.exectSQLQueryScalar("SELECT [Password] FROM ing_catCertificados WHERE Activo = 1")
             If (System.Diagnostics.Debugger.IsAttached) Then
                 sello = st.Sellado("\\192.168.1.252\Sistemas\Reportes\EducacionContinua\Timbrado\pfx\uxa_pfx33.pfx", "12345678a", cadena) ''PRUEBAS
             Else
-                sello = st.Sellado("\\192.168.1.252\Sistemas\Reportes\EducacionContinua\Timbrado\pfx\EDC.pfx", "EDC12345a", cadena) ''REAL
+                sello = st.Sellado("\\192.168.1.252\Sistemas\Reportes\EducacionContinua\Timbrado\pfx\EDC.pfx", pass, cadena) ''REAL
             End If
 
             Dim xmlString As String = xml.xmlPruebaSustitucion(Total, SubTotal, DescuentoS, totalIVA, Fecha, sello, Certificado, NoCertificado, formaPago, Folio, Serie, usoCFDI, listaConceptos, RFCCLiente, NombreCLiente, Credito, Cp, RegFiscal, totalBase, UUIDSustituido)
@@ -361,7 +363,7 @@ Public Class SustitucionDatosFiscalesController
             cadena = cadena.Substring(1, cadena.Length() - 1)
             Return cadena.Substring(0, cadena.Length() - 2)
         ElseIf (first <> " " And last <> " ") Then
-            Return cadena
+            Return Regex.Replace(cadena, " {2,}", " ")
         End If
         Return Nothing
     End Function

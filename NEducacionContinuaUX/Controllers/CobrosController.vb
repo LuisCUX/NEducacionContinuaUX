@@ -50,7 +50,7 @@ Public Class CobrosController
     ''----------------------------------------------------------------------------------------------------------------------------------------
     Sub cobrarCongreso(concepto As Concepto, Matricula As String, Folio As String, formaPago As String)
         Dim formaPagoint As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatFormaPago WHERE Forma_Pago = '{formaPago}'")
-        db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosCongresos(Folio, Matricula, valorUnitario, Cantidad, valorIVA, Descuento, ID_FormaPago, Fecha_Pago, Autorizado, Condonado, Usuario, Activo) VALUES ('{Folio}', '{Matricula}', {CDec(concepto.costoBase)}, {concepto.Cantidad}, {CDec(concepto.costoIVAUnitario)}, {CDec(concepto.descuento)}, {formaPagoint}, GETDATE(), 0, 0, '{User.getUsername()}', 0)")
+        db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosCongresos(Folio, Matricula, valorUnitario, Cantidad, valorIVA, Descuento, ID_FormaPago, Fecha_Pago, Autorizado, Condonado, Usuario, Activo) VALUES ('{Folio}', '{Matricula}', {CDec(concepto.costoBase)}, {concepto.Cantidad}, {CDec(concepto.costoIVAUnitario)}, {CDec(concepto.descuento)}, {formaPagoint}, GETDATE(), 0, 0, '{User.getUsername()}', 1)")
     End Sub
 
     ''----------------------------------------------------------------------------------------------------------------------------------------
@@ -105,11 +105,15 @@ Public Class CobrosController
             Dim Certificado As String
             Dim NoCertificado As String
             If (System.Diagnostics.Debugger.IsAttached) Then
+                ''Certificado = db.exectSQLQueryScalar("SELECT ContenidoCertPem FROM ing_catCertificados WHERE Activo = 1")
+                ''NoCertificado = db.exectSQLQueryScalar("SELECT Nombre FROM ing_catCertificados WHERE Activo = 1")
                 Certificado = ConfigurationSettings.AppSettings.Get("developmentCertificadoContent").ToString()
                 NoCertificado = ConfigurationSettings.AppSettings.Get("developmentCertificado").ToString()
             Else
-                Certificado = ConfigurationSettings.AppSettings.Get("prodCertificadoContent").ToString()
-                NoCertificado = ConfigurationSettings.AppSettings.Get("prodCertificado").ToString()
+                Certificado = db.exectSQLQueryScalar("SELECT ContenidoCertPem FROM ing_catCertificados WHERE Activo = 1")
+                NoCertificado = db.exectSQLQueryScalar("SELECT Nombre FROM ing_catCertificados WHERE Activo = 1")
+                ''Certificado = ConfigurationSettings.AppSettings.Get("prodCertificadoContent").ToString()
+                ''NoCertificado = ConfigurationSettings.AppSettings.Get("prodCertificado").ToString()
             End If
 
             ''-----CALCULA SUBTOTAL-----''
@@ -172,6 +176,7 @@ Public Class CobrosController
 
             For Each concepto As Concepto In listaConceptos
                 concepto.NombreConcepto = Me.quitaTildesEspecial(concepto.NombreConcepto)
+                concepto.NombreConcepto = Regex.Replace(concepto.NombreConcepto, " {2,}", " ")
             Next
 
 
@@ -179,16 +184,19 @@ Public Class CobrosController
             ''---------------------------------------------------------TIMBRADO---------------------------------------------------------
             Dim cadena = xml.cadenaPrueba(Serie, Folio, Fecha, formaPago, NoCertificado, SubTotal, DescuentoS, Total, listaConceptos, totalIVA, RFCCLiente, NombreCLiente, Credito, Cp, RegFiscal, totalBase, usoCFDI)
             Dim sello As String
+            Dim pass As String = db.exectSQLQueryScalar("SELECT [Password] FROM ing_catCertificados WHERE Activo = 1")
             If (System.Diagnostics.Debugger.IsAttached) Then
+                ''sello = st.Sellado("\\192.168.1.252\Sistemas\Reportes\EducacionContinua\Timbrado\pfx\EDC.pfx", pass, cadena) ''REAL
                 sello = st.Sellado("\\192.168.1.252\Sistemas\Reportes\EducacionContinua\Timbrado\pfx\uxa_pfx33.pfx", "12345678a", cadena) ''PRUEBAS
             Else
-                sello = st.Sellado("\\192.168.1.252\Sistemas\Reportes\EducacionContinua\Timbrado\pfx\EDC.pfx", "EDC12345a", cadena) ''REAL
+                sello = st.Sellado("\\192.168.1.252\Sistemas\Reportes\EducacionContinua\Timbrado\pfx\EDC.pfx", pass, cadena) ''REAL
             End If
 
             Dim xmlString As String = xml.xmlPrueba(Total, SubTotal, DescuentoS, totalIVA, Fecha, sello, Certificado, NoCertificado, formaPago, Folio, Serie, usoCFDI, listaConceptos, RFCCLiente, NombreCLiente, Credito, Cp, RegFiscal, totalBase)
             xmlString = xmlString.Replace("utf-16", "UTF-8")
             Dim xmlTimbrado As String
             If (System.Diagnostics.Debugger.IsAttached) Then
+                ''xmlTimbrado = st.Timbrado(xmlString, Folio)
                 xmlTimbrado = st.TimbradoPruebas(xmlString, Folio)
             Else
                 xmlTimbrado = st.Timbrado(xmlString, Folio)
@@ -261,7 +269,11 @@ Public Class CobrosController
             Dim descripcionCFDI As String = db.exectSQLQueryScalar($"select UPPER('(' + clave_usoCFDI + ')' + ' ' + descripcion) As Clave from ing_cat_usoCFDI WHERE clave_usoCFDI = '{usoCFDI}'")
             Dim QR As String = $"?re={EnviromentService.RFCEDC}&rr={RFCCLiente}id={folioFiscal}tt={Total}"
             Me.gernerarQr(QR, $"{Serie}{Folio}")
-            rep.AgregarFuente("FacturaEDC.rpt")
+            If (System.Diagnostics.Debugger.IsAttached) Then
+                rep.AgregarFuente("FacturaEDCPrueba.rpt")
+            Else
+                rep.AgregarFuente("FacturaEDC.rpt")
+            End If
             rep.AgregarParametros("IDXML", IDXML)
             rep.AgregarParametros("ClaveCliente", Matricula)
             rep.AgregarParametros("CantidadLetra", TotalText)
@@ -329,9 +341,11 @@ Public Class CobrosController
     Public Function obtenerFolio(Tipo As String) As String
         Dim Serie As String
         Dim Consecutivo As Integer
+        Dim username As String = User.getUsername().ToString()
+        ''Dim username As String = "luiscr"
         If (Tipo = "Pago") Then
-            Serie = db.exectSQLQueryScalar($"SELECT Folio FROM ing_CatFolios WHERE Usuario = '{User.getUsername()}' AND Descripcion = 'ING'")
-            Consecutivo = db.exectSQLQueryScalar($"SELECT Consecutivo + 1 FROM ing_CatFolios WHERE Usuario = '{User.getUsername()}' AND Descripcion = 'ING'")
+            Serie = db.exectSQLQueryScalar($"SELECT Folio FROM ing_CatFolios WHERE Usuario = '{username}' AND Descripcion = 'ING'")
+            Consecutivo = db.exectSQLQueryScalar($"SELECT Consecutivo + 1 FROM ing_CatFolios WHERE Usuario = '{username}' AND Descripcion = 'ING'")
         ElseIf (Tipo = "Abono") Then
             Serie = db.exectSQLQueryScalar($"SELECT Folio FROM ing_CatFolios WHERE Usuario = 'Abonos' AND Descripcion = 'ABONOS'")
             Consecutivo = db.exectSQLQueryScalar($"SELECT Consecutivo + 1 FROM ing_CatFolios WHERE Usuario = 'Abonos' AND Descripcion = 'ABONOS'")
@@ -731,9 +745,9 @@ Public Class CobrosController
     End Function
 
     Sub enviarCorreoActualizacionDatos(Matricula As String, tipoMatricula As String)
-        Dim mail As New EmailModel
+        Dim mail As New NEmailStructureModel
         Dim emailCliente As String
-        Dim destino As New List(Of String)
+        Dim destino As String
         Dim mensaje As String
         Dim token
         If (tipoMatricula = "EX") Then
@@ -746,16 +760,20 @@ Public Class CobrosController
                                                     WHERE RC.clave_cliente = '{Matricula}'")
         End If
 
+        If (System.Diagnostics.Debugger.IsAttached) Then
+            emailCliente = "luis.c@ux.edu.mx"
+        End If
+
         db.execSQLQueryWithoutParams($"UPDATE portal_registroCongreso SET token_datosFiscales = NEWID() WHERE clave_cliente = '{Matricula}'")
         token = db.exectSQLQueryScalar($"SELECT token_datosFiscales FROM portal_registroCongreso WHERE clave_cliente = '{Matricula}'")
 
 
         mensaje = $"De click en este enlace para poder actualizar o dar de alta sus datos fiscales: http://192.168.1.31:4200/EducacionContinua/update/{token}"
 
-        destino.Add(emailCliente)
-        mail.Destino = destino
-        mail.Asunto = "ACTUALIZACIÓN DE DATOS FISCALES"
-        mail.Mensaje = mensaje
+        destino = emailCliente
+        mail.to = destino
+        mail.subject = "ACTUALIZACIÓN DE DATOS FISCALES"
+        mail.message = mensaje
         Try
             esux.sendEmail(mail)
             MessageBox.Show("Correo enviado exisosamente")

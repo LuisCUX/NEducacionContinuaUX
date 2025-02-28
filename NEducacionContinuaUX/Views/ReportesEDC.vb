@@ -48,6 +48,10 @@ Public Class ReportesEDC
     End Sub
 
     Private Sub btnGenerar2_Click(sender As Object, e As EventArgs) Handles btnGenerar2.Click
+        If (cbTipoReporte2.Text = "") Then
+            MessageBox.Show("Seleccione el tipo de reporte a imrpimir (individual o global)")
+            Exit Sub
+        End If
         If (cbTipoReporte2.Text = "Individual") Then
             rep.AgregarFuente("ReporteIngresosDiario.rpt")
             rep.AgregarParametros("Usuario", cbCajero2.Text)

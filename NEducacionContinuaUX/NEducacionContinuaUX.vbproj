@@ -28,7 +28,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\192.168.1.252\Sistemas\Ejecutables\EducacionContinua\</InstallUrl>
     <TargetCulture>es-MX</TargetCulture>
-    <ApplicationRevision>129</ApplicationRevision>
+    <ApplicationRevision>163</ApplicationRevision>
     <ApplicationVersion>1.1.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -220,6 +220,7 @@
     <Compile Include="Controllers\CobrosDiferidosController.vb" />
     <Compile Include="Controllers\ConceptHandlerController.vb" />
     <Compile Include="Controllers\GestionExternosController.vb" />
+    <Compile Include="Controllers\ModificacionCostosCongresosController.vb" />
     <Compile Include="Controllers\NotaCreditoController.vb" />
     <Compile Include="Controllers\ObservacionesController.vb" />
     <Compile Include="Controllers\PagosCreditoController.vb" />
@@ -257,6 +258,8 @@
     <Compile Include="Services\DataBaseService.vb" />
     <Compile Include="Services\EmailService.vb" />
     <Compile Include="Services\Email\EmailModel.vb" />
+    <Compile Include="Services\Email\NEmailModel.vb" />
+    <Compile Include="Services\Email\NEmailStructureModel.vb" />
     <Compile Include="Services\Email\UXEmailService.vb" />
     <Compile Include="Services\EnviromentService.vb" />
     <Compile Include="Services\ImpresionReportesService.vb" />
@@ -312,6 +315,12 @@
       <DependentUpon>Form1.vb</DependentUpon>
     </Compile>
     <Compile Include="Views\Form1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Form2.Designer.vb">
+      <DependentUpon>Form2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Form2.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\GenerarPolizaEDC.Designer.vb">
@@ -408,6 +417,12 @@
       <DependentUpon>ModalRecordatoriosEDC.vb</DependentUpon>
     </Compile>
     <Compile Include="Views\ModalRecordatoriosEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ModificacionCostosCongresos.Designer.vb">
+      <DependentUpon>ModificacionCostosCongresos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModificacionCostosCongresos.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\ModificacionCostosPlanesEDC.Designer.vb">
@@ -550,6 +565,9 @@
     <EmbeddedResource Include="Views\Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Form2.resx">
+      <DependentUpon>Form2.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\GenerarPolizaEDC.resx">
       <DependentUpon>GenerarPolizaEDC.vb</DependentUpon>
     </EmbeddedResource>
@@ -597,6 +615,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ModalRecordatoriosEDC.resx">
       <DependentUpon>ModalRecordatoriosEDC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ModificacionCostosCongresos.resx">
+      <DependentUpon>ModificacionCostosCongresos.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ModificacionCostosPlanesEDC.resx">
       <DependentUpon>ModificacionCostosPlanesEDC.vb</DependentUpon>

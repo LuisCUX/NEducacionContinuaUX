@@ -24,7 +24,7 @@
             ReportesToolStripMenuItem.Visible = True
             CongresosDiplomadosToolStripMenuItem.Visible = False
             DEVToolStripMenuItem.Visible = False
-            ReportesCongresosDiplomadosToolStripMenuItem.Visible = True
+            ReportesCongresosDiplomadosToolStripMenuItem.Visible = False
         End If
 
         If (User.getPerfil = "Contabilidad") Then
@@ -49,6 +49,19 @@
             HerramientasToolStripMenuItem.Visible = False
             ReportesToolStripMenuItem.Visible = False
             CongresosDiplomadosToolStripMenuItem.Visible = True
+            DEVToolStripMenuItem.Visible = False
+            ReportesCongresosDiplomadosToolStripMenuItem.Visible = True
+        End If
+
+        If (User.getPerfil = "Reportes") Then
+            ContabilidadToolStripMenuItem.Visible = False
+            CobrosToolStripMenuItem.Visible = False
+            CatálogosToolStripMenuItem.Visible = False
+            ExternosToolStripMenuItem.Visible = False
+            ExternosConPlanToolStripMenuItem.Visible = False
+            HerramientasToolStripMenuItem.Visible = False
+            ReportesToolStripMenuItem.Visible = True
+            CongresosDiplomadosToolStripMenuItem.Visible = False
             DEVToolStripMenuItem.Visible = False
             ReportesCongresosDiplomadosToolStripMenuItem.Visible = False
         End If
@@ -206,5 +219,15 @@
     Private Sub ModificaciónDeDatosFiscalesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ModificaciónDeDatosFiscalesToolStripMenuItem.Click
         ModificacionDatosFiscalesECEDC.MdiParent = Me
         ModificacionDatosFiscalesECEDC.Show()
+    End Sub
+
+    Private Sub DescuentosCongresosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescuentosCongresosToolStripMenuItem.Click
+        ModificacionCostosCongresos.MdiParent = Me
+        ModificacionCostosCongresos.Show()
+    End Sub
+
+    Private Sub Form2ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Form2ToolStripMenuItem.Click
+        Form2.MdiParent = Me
+        Form2.Show()
     End Sub
 End Class

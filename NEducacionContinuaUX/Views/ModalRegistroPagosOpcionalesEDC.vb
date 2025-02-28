@@ -16,7 +16,7 @@
         If (tipoVentana = "Edicion") Then
             lblNombreVentana.Text = "Modificación de pagos opcionales"
             IDPago = ObjectBagService.getItem("IDPago")
-            po.llenarVentanaPago(IDPago, cbConceptoPara, cbNivel, cbTurno, cbTipoPago, cbTipoConcepto, cbDivision, cbGrupo, cbClase, cbProdServ, cbUnidad, lblNivel, lblTurno, txtConcepto, txtDescripcion, txtValorUnitario, txtValorUnitarioSinIVA, chbExentaIVA, chbConsideraIVA, chbIncluyeIVA, txtClavePS)
+            po.llenarVentanaPago(IDPago, cbConceptoPara, cbNivel, cbTurno, cbTipoPago, cbTipoConcepto, cbDivision, cbGrupo, cbClase, cbProdServ, cbUnidad, lblNivel, lblTurno, txtConcepto, txtDescripcion, txtValorUnitario, txtValorUnitarioSinIVA, chbExentaIVA, chbConsideraIVA, chbIncluyeIVA, txtClavePS, chbActivo)
             Me.enableControls()
             btnGuardar.Enabled = True
             txtClavePS.Enabled = True
@@ -266,9 +266,9 @@
             exentaIVA = 0
         End If
         If (tipoVentana = "Edicion") Then
-            po.guardarCambios(IDPago, txtConcepto.Text, txtDescripcion.Text, cbProdServ.SelectedValue, cbUnidad.SelectedValue, CDec(txtValorUnitario.Text), cbConceptoPara.Text, consideraIVA, agregaIVA, exentaIVA, cbTipoPago.SelectedValue, cbTurno.SelectedValue, cbNivel.SelectedValue)
+            po.guardarCambios(IDPago, txtConcepto.Text, txtDescripcion.Text, cbProdServ.SelectedValue, cbUnidad.SelectedValue, CDec(txtValorUnitario.Text), cbConceptoPara.Text, consideraIVA, agregaIVA, exentaIVA, cbTipoPago.SelectedValue, cbTurno.SelectedValue, cbNivel.SelectedValue, chbActivo.Checked)
         ElseIf (tipoVentana = "Nuevo") Then
-            po.registrarPagoOpcional(txtConcepto.Text, txtDescripcion.Text, cbProdServ.SelectedValue, cbUnidad.SelectedValue, CDec(txtValorUnitario.Text), cbConceptoPara.Text, consideraIVA, agregaIVA, exentaIVA, cbTipoPago.SelectedValue, cbTurno.SelectedValue, cbNivel.SelectedValue)
+            po.registrarPagoOpcional(txtConcepto.Text, txtDescripcion.Text, cbProdServ.SelectedValue, cbUnidad.SelectedValue, CDec(txtValorUnitario.Text), cbConceptoPara.Text, consideraIVA, agregaIVA, exentaIVA, cbTipoPago.SelectedValue, cbTurno.SelectedValue, cbNivel.SelectedValue, chbActivo.Checked)
         End If
     End Sub
 

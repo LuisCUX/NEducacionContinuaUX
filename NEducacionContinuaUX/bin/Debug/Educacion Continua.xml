@@ -288,19 +288,53 @@ Educacion Continua
  </summary>
  
 </member>
-<member name="M:NEducacionContinuaUX.UXServiceEmail.sendEmail(NEducacionContinuaUX.EmailModel)">
+<member name="P:NEducacionContinuaUX.NEmailModel.EmailStructure">
+ <summary>
+ Estructura del email
+ </summary>
+</member>
+<member name="P:NEducacionContinuaUX.NEmailStructureModel.to">
+ <summary>
+ Texto del asunto del email
+ </summary>
+</member>
+<member name="P:NEducacionContinuaUX.NEmailStructureModel.subject">
+ <summary>
+ Contenido del email, puede ser texto plano o contener etiquetas HTML
+ </summary>
+</member>
+<member name="P:NEducacionContinuaUX.NEmailStructureModel.message">
+ <summary>
+ Arreglo con los emails destinos
+ </summary>
+</member>
+<member name="P:NEducacionContinuaUX.NEmailStructureModel.attatchment1">
+ <summary>
+ Arreglo de bytes de un archivo a adjuntar
+ </summary>
+</member>
+<member name="P:NEducacionContinuaUX.NEmailStructureModel.attatchment2">
+ <summary>
+ Arreglo de bytes de un archivo a adjuntar
+ </summary>
+</member>
+<member name="P:NEducacionContinuaUX.NEmailStructureModel.attatchmentImg">
+ <summary>
+ Arreglo de bytes de una imagen a adjuntar
+ </summary>
+</member>
+<member name="P:NEducacionContinuaUX.NEmailStructureModel.nameFile">
+ <summary>
+ Nombre de archivos a adjuntar
+ </summary>
+</member>
+<member name="M:NEducacionContinuaUX.UXServiceEmail.sendEmail(NEducacionContinuaUX.NEmailStructureModel)">
  <summary>
  Envio de email sencillo
  </summary>
  <param name="email"></param>
 </member>
-<member name="M:NEducacionContinuaUX.UXServiceEmail.sendEmailWithFile(NEducacionContinuaUX.EmailModel)">
- <summary>
- Envio de email con path de archivo adjunto (el archivo debe estar en el servidor)
- </summary>
- <param name="email"></param>
-</member>
-<member name="M:NEducacionContinuaUX.UXServiceEmail.sendEmailWithFileBytes(NEducacionContinuaUX.EmailModel)">
+<member name="M:NEducacionContinuaUX.UXServiceEmail.sendEmailWithFileBytes(NEducacionContinuaUX.NEmailStructureModel,System.Byte[],System.Byte[])">
  <summary>
  Envio de email con archivo adjunto en base64, preferiblemente usar cuando se adjunte un PDF, funciona con archivos locales
  </summary>
