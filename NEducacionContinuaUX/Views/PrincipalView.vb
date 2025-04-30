@@ -230,4 +230,19 @@
         Form2.MdiParent = Me
         Form2.Show()
     End Sub
+
+    Private Sub Form3ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Form3ToolStripMenuItem.Click
+        Form3.MdiParent = Me
+        Form3.Show()
+    End Sub
+
+    Private Sub PruebaEnvioCorreosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PruebaEnvioCorreosToolStripMenuItem.Click
+        PruebaEnvioCorreosEDC.MdiParent = Me
+        PruebaEnvioCorreosEDC.Show()
+    End Sub
+
+    Private Sub EnvioQRCongresosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EnvioQRCongresosToolStripMenuItem.Click
+        EnviarCorreosQRCongresosEDC.MdiParent = Me
+        EnviarCorreosQRCongresosEDC.Show()
+    End Sub
 End Class

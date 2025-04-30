@@ -29,12 +29,13 @@ Partial Class ModificacionCostosCongresos
         Me.txtEmail3 = New System.Windows.Forms.TextBox()
         Me.txtNombre3 = New System.Windows.Forms.TextBox()
         Me.panelBusqueda3 = New System.Windows.Forms.Panel()
-        Me.txtMatricula3 = New System.Windows.Forms.TextBox()
+        Me.txtMatricula = New System.Windows.Forms.TextBox()
         Me.lblMatricula3 = New System.Windows.Forms.Label()
-        Me.btnBuscar3 = New System.Windows.Forms.Button()
+        Me.btnBuscar = New System.Windows.Forms.Button()
         Me.lblNombre3 = New System.Windows.Forms.Label()
-        Me.cbBuscar3 = New System.Windows.Forms.ComboBox()
+        Me.cbExterno = New System.Windows.Forms.ComboBox()
         Me.panelRegistro = New System.Windows.Forms.Panel()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.btnModificacionDesc = New System.Windows.Forms.Button()
         Me.txtNuevoCosto = New System.Windows.Forms.TextBox()
@@ -43,7 +44,6 @@ Partial Class ModificacionCostosCongresos
         Me.txtNombreCongreso = New System.Windows.Forms.TextBox()
         Me.lblMensualidades = New System.Windows.Forms.Label()
         Me.lblInscripcion = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.panelInfo3.SuspendLayout()
         Me.panelBusqueda3.SuspendLayout()
         Me.panelRegistro.SuspendLayout()
@@ -115,23 +115,23 @@ Partial Class ModificacionCostosCongresos
         '
         'panelBusqueda3
         '
-        Me.panelBusqueda3.Controls.Add(Me.txtMatricula3)
+        Me.panelBusqueda3.Controls.Add(Me.txtMatricula)
         Me.panelBusqueda3.Controls.Add(Me.lblMatricula3)
-        Me.panelBusqueda3.Controls.Add(Me.btnBuscar3)
+        Me.panelBusqueda3.Controls.Add(Me.btnBuscar)
         Me.panelBusqueda3.Controls.Add(Me.lblNombre3)
-        Me.panelBusqueda3.Controls.Add(Me.cbBuscar3)
+        Me.panelBusqueda3.Controls.Add(Me.cbExterno)
         Me.panelBusqueda3.Location = New System.Drawing.Point(5, 79)
         Me.panelBusqueda3.Name = "panelBusqueda3"
         Me.panelBusqueda3.Size = New System.Drawing.Size(788, 39)
         Me.panelBusqueda3.TabIndex = 89
         '
-        'txtMatricula3
+        'txtMatricula
         '
-        Me.txtMatricula3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMatricula3.Location = New System.Drawing.Point(70, 6)
-        Me.txtMatricula3.Name = "txtMatricula3"
-        Me.txtMatricula3.Size = New System.Drawing.Size(111, 22)
-        Me.txtMatricula3.TabIndex = 75
+        Me.txtMatricula.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMatricula.Location = New System.Drawing.Point(70, 6)
+        Me.txtMatricula.Name = "txtMatricula"
+        Me.txtMatricula.Size = New System.Drawing.Size(111, 22)
+        Me.txtMatricula.TabIndex = 75
         '
         'lblMatricula3
         '
@@ -144,15 +144,15 @@ Partial Class ModificacionCostosCongresos
         Me.lblMatricula3.TabIndex = 74
         Me.lblMatricula3.Text = "Clave:"
         '
-        'btnBuscar3
+        'btnBuscar
         '
-        Me.btnBuscar3.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.search_30px
-        Me.btnBuscar3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnBuscar3.Location = New System.Drawing.Point(187, 0)
-        Me.btnBuscar3.Name = "btnBuscar3"
-        Me.btnBuscar3.Size = New System.Drawing.Size(41, 39)
-        Me.btnBuscar3.TabIndex = 76
-        Me.btnBuscar3.UseVisualStyleBackColor = True
+        Me.btnBuscar.BackgroundImage = Global.NEducacionContinuaUX.My.Resources.Resources.search_30px
+        Me.btnBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnBuscar.Location = New System.Drawing.Point(187, 0)
+        Me.btnBuscar.Name = "btnBuscar"
+        Me.btnBuscar.Size = New System.Drawing.Size(41, 39)
+        Me.btnBuscar.TabIndex = 76
+        Me.btnBuscar.UseVisualStyleBackColor = True
         '
         'lblNombre3
         '
@@ -165,13 +165,13 @@ Partial Class ModificacionCostosCongresos
         Me.lblNombre3.TabIndex = 77
         Me.lblNombre3.Text = "Nombre: "
         '
-        'cbBuscar3
+        'cbExterno
         '
-        Me.cbBuscar3.FormattingEnabled = True
-        Me.cbBuscar3.Location = New System.Drawing.Point(303, 8)
-        Me.cbBuscar3.Name = "cbBuscar3"
-        Me.cbBuscar3.Size = New System.Drawing.Size(478, 21)
-        Me.cbBuscar3.TabIndex = 78
+        Me.cbExterno.FormattingEnabled = True
+        Me.cbExterno.Location = New System.Drawing.Point(303, 8)
+        Me.cbExterno.Name = "cbExterno"
+        Me.cbExterno.Size = New System.Drawing.Size(478, 21)
+        Me.cbExterno.TabIndex = 78
         '
         'panelRegistro
         '
@@ -189,6 +189,15 @@ Partial Class ModificacionCostosCongresos
         Me.panelRegistro.Size = New System.Drawing.Size(788, 358)
         Me.panelRegistro.TabIndex = 91
         Me.panelRegistro.Visible = False
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(665, 92)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(84, 52)
+        Me.Button1.TabIndex = 108
+        Me.Button1.Text = "Reestablecer costo original"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'Button2
         '
@@ -269,15 +278,6 @@ Partial Class ModificacionCostosCongresos
         Me.lblInscripcion.TabIndex = 100
         Me.lblInscripcion.Text = "Congreso:"
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(665, 92)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(84, 52)
-        Me.Button1.TabIndex = 108
-        Me.Button1.Text = "Reestablecer costo original"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'ModificacionCostosCongresos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -308,11 +308,11 @@ Partial Class ModificacionCostosCongresos
     Friend WithEvents txtEmail3 As TextBox
     Friend WithEvents txtNombre3 As TextBox
     Friend WithEvents panelBusqueda3 As Panel
-    Friend WithEvents txtMatricula3 As TextBox
+    Friend WithEvents txtMatricula As TextBox
     Friend WithEvents lblMatricula3 As Label
-    Friend WithEvents btnBuscar3 As Button
+    Friend WithEvents btnBuscar As Button
     Friend WithEvents lblNombre3 As Label
-    Friend WithEvents cbBuscar3 As ComboBox
+    Friend WithEvents cbExterno As ComboBox
     Friend WithEvents panelRegistro As Panel
     Friend WithEvents txtNuevoCosto As TextBox
     Friend WithEvents Label1 As Label

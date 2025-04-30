@@ -30,6 +30,28 @@ Public Class UXServiceEmail
 
     End Sub
 
+    Public Async Sub sendEmailWithFile(emailModel As NEmailStructureModel, attatchment1 As Byte())
+        Dim client As HttpClient = New HttpClient()
+
+        Try
+            Dim URL = $"http://192.168.1.12:3001/api/emails/send-email-attatchment/"
+
+            Dim base64 = Convert.ToBase64String(attatchment1, 0, attatchment1.Length)
+
+            emailModel.attatchment = base64
+
+            Dim json As String = JsonConvert.SerializeObject(emailModel)
+            Dim jsonHeader As String = "{""emails"": [jsonCompleto]}"
+            jsonHeader = jsonHeader.Replace("jsonCompleto", json)
+            Dim data As StringContent = New StringContent(jsonHeader, Encoding.UTF8, "application/json")
+
+            Dim response = Await client.PostAsync(URL, data)
+            Dim result As String = Await response.Content.ReadAsStringAsync()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+    End Sub
+
     ''' <summary>
     ''' Envio de email con archivo adjunto en base64, preferiblemente usar cuando se adjunte un PDF, funciona con archivos locales
     ''' </summary>

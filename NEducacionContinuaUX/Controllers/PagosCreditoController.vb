@@ -34,13 +34,19 @@ Public Class PagosCreditoController
             Dim IVABool As Boolean = False
             Dim IVABase As Decimal = 0.00
             Dim IVACobrado As Decimal = 0.00
+
             If (System.Diagnostics.Debugger.IsAttached) Then
+                ''Certificado = db.exectSQLQueryScalar("SELECT ContenidoCertPem FROM ing_catCertificados WHERE Activo = 1")
+                ''NoCertificado = db.exectSQLQueryScalar("SELECT Nombre FROM ing_catCertificados WHERE Activo = 1")
                 Certificado = ConfigurationSettings.AppSettings.Get("developmentCertificadoContent").ToString()
                 NoCertificado = ConfigurationSettings.AppSettings.Get("developmentCertificado").ToString()
             Else
-                Certificado = ConfigurationSettings.AppSettings.Get("prodCertificadoContent").ToString()
-                NoCertificado = ConfigurationSettings.AppSettings.Get("prodCertificado").ToString()
+                Certificado = db.exectSQLQueryScalar("SELECT ContenidoCertPem FROM ing_catCertificados WHERE Activo = 1")
+                NoCertificado = db.exectSQLQueryScalar("SELECT Nombre FROM ing_catCertificados WHERE Activo = 1")
+                ''Certificado = ConfigurationSettings.AppSettings.Get("prodCertificadoContent").ToString()
+                ''NoCertificado = ConfigurationSettings.AppSettings.Get("prodCertificado").ToString()
             End If
+
             Dim serieOriginal As String = db.exectSQLQueryScalar($"select SUBSTRING(Folio, 1, 1) from ing_Creditos where ID = {IDCredito}")
                 Dim folioOriginal As String = db.exectSQLQueryScalar($"select SUBSTRING(Folio, 2, DATALENGTH(Folio)) from ing_Creditos where ID = {IDCredito}")
                 Dim FechaOriginal As String = db.exectSQLQueryScalar($"select STUFF(CONVERT(VARCHAR(50),Fecha, 127) ,20,4,'') as fecha from ing_Creditos where ID = {IDCredito}")
@@ -57,10 +63,12 @@ Public Class PagosCreditoController
 
             Dim Cadena As String = xml.cadenaCredito(Serie, Folio, Fecha, NoCertificado, Certificado, RFC, NombreCompleto, UsoCFDI, FolioFiscal, serieOriginal, folioOriginal, NoParcialidad, MontoAnterior, CantidadAbonada, MontoNuevo, FechaOriginal, FormaPago, CP, RegFiscal, IVABool, IVABase.ToString(), IVACobrado.ToString())
             Dim sello As String
+            Dim pass As String = db.exectSQLQueryScalar("SELECT [Password] FROM ing_catCertificados WHERE Activo = 1")
             If (System.Diagnostics.Debugger.IsAttached) Then
+                ''sello = st.Sellado("\\192.168.1.252\Sistemas\Reportes\EducacionContinua\Timbrado\pfx\EDC.pfx", pass, cadena) ''REAL
                 sello = st.Sellado("\\192.168.1.252\Sistemas\Reportes\EducacionContinua\Timbrado\pfx\uxa_pfx33.pfx", "12345678a", Cadena) ''PRUEBAS
             Else
-                sello = st.Sellado("\\192.168.1.252\Sistemas\Reportes\EducacionContinua\Timbrado\pfx\EDC.pfx", "EDC12345a", Cadena) ''REAL
+                sello = st.Sellado("\\192.168.1.252\Sistemas\Reportes\EducacionContinua\Timbrado\pfx\EDC.pfx", pass, Cadena) ''REAL
             End If
             Dim xmlString As String = xml.xmlCredito(Serie, Folio, Fecha, NoCertificado, sello, Certificado, RFC, NombreCompleto, UsoCFDI, FolioFiscal, serieOriginal, folioOriginal, NoParcialidad, MontoAnterior, CantidadAbonada, MontoNuevo, FechaOriginal, FormaPago, RegFiscal, CP, IVABool, IVABase.ToString(), IVACobrado.ToString())
             xmlString = xmlString.Replace("utf-16", "UTF-8")

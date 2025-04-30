@@ -14,6 +14,10 @@
     ''' <summary>
     ''' Arreglo de bytes de un archivo a adjuntar
     ''' </summary>
+    Public Property attatchment As String
+    ''' <summary>
+    ''' Arreglo de bytes de un archivo a adjuntar
+    ''' </summary>
     Public Property attatchment1 As String
     ''' <summary>
     ''' Arreglo de bytes de un archivo a adjuntar

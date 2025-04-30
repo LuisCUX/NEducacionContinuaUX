@@ -562,6 +562,32 @@ Public Class CobrosEDC
                 tipocliente = 1
             End If
         End If
+
+        ''---------------------------------------------------------CLAVE DE FORMA DE PAGO---------------------------------------------------------
+        If (cbFormaPago.Text = "DEPOSITO BANCARIO C/COMPROBANTE" Or cbFormaPago.Text = "DEPOSITO BANCARIO EDO CTA") Then
+            If (cbTipoBanco.Text = "EFECTIVO") Then
+                formaPagoClave = "01"
+                If (cbFormaPago.Text = "DEPOSITO BANCARIO C/COMPROBANTE") Then
+                    formaPagoID = 7
+                ElseIf (cbFormaPago.Text = "DEPOSITO BANCARIO EDO CTA") Then
+                    formaPagoID = 8
+                End If
+            ElseIf (cbTipoBanco.Text = "OTRO") Then
+                formaPagoClave = "99"
+                If (cbFormaPago.Text = "DEPOSITO BANCARIO C/COMPROBANTE") Then
+                    formaPagoID = 7
+                ElseIf (cbFormaPago.Text = "DEPOSITO BANCARIO EDO CTA") Then
+                    formaPagoID = 8
+                End If
+            End If
+        ElseIf (cbFormaPago.Text = "NOTA DE CREDITO") Then
+            formaPagoClave = "99"
+            formaPagoID = 10
+        Else
+            formaPagoClave = cbFormaPago.SelectedValue
+            formaPagoID = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatFormaPago WHERE Forma_Pago = '{formaPagoClave}'")
+        End If
+
         ''---------------------------------------------------------VALIDA DATOS FISCALES---------------------------------------------------------
         Dim RFCTimbrar As String
         Dim RegFiscalTimbrar As String
@@ -596,8 +622,9 @@ Public Class CobrosEDC
                 End If
                 RegFiscalTimbrar = ObjectBagService.getItem("RegFiscalTimbrar")
                 UsoCFDITimbrar = ObjectBagService.getItem("UsoCFDITimbrar")
-                    NombreTimbrar = ObjectBagService.getItem("NombreTimbrar")
-                    cpTimbrar = ObjectBagService.getItem("cpTimbrar")
+                NombreTimbrar = ObjectBagService.getItem("NombreTimbrar").ToString.ToUpper()
+                NombreTimbrar = Me.QuitarAcentos(NombreTimbrar)
+                cpTimbrar = ObjectBagService.getItem("cpTimbrar")
                     ObjectBagService.clearBag()
                 Else
                     RFCTimbrar = "XAXX010101000"
@@ -619,37 +646,14 @@ Public Class CobrosEDC
             ElseIf (tipoMatricula = "EC") Then
                 tipocliente = 1
             End If
-            Dim IDXMLC As Integer = co.Cobrar(listaConceptosPrueba, cbFormaPago.SelectedValue, 9, Matricula, RFCTimbrar, NombreTimbrar, lblTotal.Text, True, tipocliente, lblCPtxt.Text, RegFiscalTimbrar, UsoCFDITimbrar)
+            Dim IDXMLC As Integer = co.Cobrar(listaConceptosPrueba, formaPagoClave, 9, Matricula, RFCTimbrar, NombreTimbrar, lblTotal.Text, True, tipocliente, lblCPtxt.Text, RegFiscalTimbrar, UsoCFDITimbrar)
             If (IDXMLC > 0) Then
                 Me.Reiniciar()
                 Exit Sub
             End If
         End If
 
-        ''---------------------------------------------------------CLAVE DE FORMA DE PAGO---------------------------------------------------------
-        If (cbFormaPago.Text = "DEPOSITO BANCARIO C/COMPROBANTE" Or cbFormaPago.Text = "DEPOSITO BANCARIO EDO CTA") Then
-            If (cbTipoBanco.Text = "EFECTIVO") Then
-                formaPagoClave = "01"
-                If (cbFormaPago.Text = "DEPOSITO BANCARIO C/COMPROBANTE") Then
-                    formaPagoID = 7
-                ElseIf (cbFormaPago.Text = "DEPOSITO BANCARIO EDO CTA") Then
-                    formaPagoID = 8
-                End If
-            ElseIf (cbTipoBanco.Text = "OTRO") Then
-                formaPagoClave = "99"
-                If (cbFormaPago.Text = "DEPOSITO BANCARIO C/COMPROBANTE") Then
-                    formaPagoID = 7
-                ElseIf (cbFormaPago.Text = "DEPOSITO BANCARIO EDO CTA") Then
-                    formaPagoID = 8
-                End If
-            End If
-        ElseIf (cbFormaPago.Text = "NOTA DE CREDITO") Then
-            formaPagoClave = "99"
-            formaPagoID = 10
-        Else
-            formaPagoClave = cbFormaPago.SelectedValue
-            formaPagoID = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatFormaPago WHERE Forma_Pago = '{formaPagoClave}'")
-        End If
+
         Dim IDXML As Integer = co.Cobrar(listaconceptosFinal, formaPagoClave, formaPagoID, Matricula, RFCTimbrar, NombreTimbrar, lblTotal.Text, False, tipocliente, cpTimbrar, RegFiscalTimbrar, UsoCFDITimbrar)
 
         ''---------------------------------------------------------REGISTRO DE FORMA DE PAGO---------------------------------------------------------
@@ -1047,6 +1051,24 @@ Public Class CobrosEDC
             End If
         End If
     End Sub
+
+    Function QuitarAcentos(input As String) As String
+        Dim acentos As String = "áéíóúÁÉÍÓÚñÑ"
+        Dim sinAcentos As String = "aeiouAEIOUnN"
+
+        Dim resultado As New Text.StringBuilder()
+
+        For Each c As Char In input
+            Dim index As Integer = acentos.IndexOf(c)
+            If index >= 0 Then
+                resultado.Append(sinAcentos(index))
+            Else
+                resultado.Append(c)
+            End If
+        Next
+
+        Return resultado.ToString()
+    End Function
 
     Function getCorreoCongreso(Matricula As String) As String
         Dim correo As String

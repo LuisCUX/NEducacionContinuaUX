@@ -768,7 +768,7 @@ Public Class CobrosController
         token = db.exectSQLQueryScalar($"SELECT token_datosFiscales FROM portal_registroCongreso WHERE clave_cliente = '{Matricula}'")
 
 
-        mensaje = $"De click en este enlace para poder actualizar o dar de alta sus datos fiscales: http://192.168.1.31:4200/EducacionContinua/update/{token}"
+        mensaje = $"De click en este enlace para poder actualizar o dar de alta sus datos fiscales: https://jaguar3.ux.edu.mx/EducacionContinua/update/{token}"
 
         destino = emailCliente
         mail.to = destino

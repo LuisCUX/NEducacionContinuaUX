@@ -167,6 +167,8 @@ Public Class PagosCreditoEDC
         Dim RegFiscalTimbrar As String
         Dim UsoCFDITimbrar As String
         Dim cpTimbrar As String
+        Dim formaPagoClave As String
+        Dim formaPagoID As Integer
         Dim nombreTimbrar As String
         Dim tablas As String()
         If (tipoMatricula = "EX") Then
@@ -215,8 +217,33 @@ Public Class PagosCreditoEDC
             cpTimbrar = EnviromentService.CP
         End If
 
+        ''---------------------------------------------------------CLAVE DE FORMA DE PAGO---------------------------------------------------------
+        If (cbFormaPago.Text = "DEPOSITO BANCARIO C/COMPROBANTE" Or cbFormaPago.Text = "DEPOSITO BANCARIO EDO CTA") Then
+            If (cbTipoBanco.Text = "EFECTIVO") Then
+                formaPagoClave = "01"
+                If (cbFormaPago.Text = "DEPOSITO BANCARIO C/COMPROBANTE") Then
+                    formaPagoID = 7
+                ElseIf (cbFormaPago.Text = "DEPOSITO BANCARIO EDO CTA") Then
+                    formaPagoID = 8
+                End If
+            ElseIf (cbTipoBanco.Text = "OTRO") Then
+                formaPagoClave = "99"
+                If (cbFormaPago.Text = "DEPOSITO BANCARIO C/COMPROBANTE") Then
+                    formaPagoID = 7
+                ElseIf (cbFormaPago.Text = "DEPOSITO BANCARIO EDO CTA") Then
+                    formaPagoID = 8
+                End If
+            End If
+        ElseIf (cbFormaPago.Text = "NOTA DE CREDITO") Then
+            formaPagoClave = "99"
+            formaPagoID = 10
+        Else
+            formaPagoClave = cbFormaPago.SelectedValue
+            formaPagoID = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatFormaPago WHERE Forma_Pago = '{formaPagoClave}'")
+        End If
+
         ''---------------------------------------------------------TIMBRADO---------------------------------------------------------
-        Dim IDXML As Integer = pc.cobroCredito(IDCredito, CantidadAbonada, montoAnterior, montoNuevo, Matricula, noPago, RFCTimbrar, nombreTimbrar, folioFiscal, noPago, cbFormaPago.SelectedValue, RegFiscalTimbrar, cpTimbrar)
+        Dim IDXML As Integer = pc.cobroCredito(IDCredito, CantidadAbonada, montoAnterior, montoNuevo, Matricula, noPago, RFCTimbrar, nombreTimbrar, folioFiscal, noPago, formaPagoClave, RegFiscalTimbrar, cpTimbrar)
 
 
         If (IDXML > 0) Then

@@ -310,7 +310,7 @@ Public Class ReimpresionFacturasEDC
         destino = emailCliente
         mailStructure.to = destino
         mailStructure.subject = "GRACIAS POR SU PAGO"
-        mailStructure.message = "ANEXAMOS TUS COMPROBANTES DE PAGO ADJUNTOS A ESTE CORREO, GRACIAS."
+        mailStructure.message = message
         attatchment1 = archivo_pdf
         attatchment2 = archivo_xml
         mailStructure.attatchmentImg = attatchmentImg

@@ -28,7 +28,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\192.168.1.252\Sistemas\Ejecutables\EducacionContinua\</InstallUrl>
     <TargetCulture>es-MX</TargetCulture>
-    <ApplicationRevision>163</ApplicationRevision>
+    <ApplicationRevision>173</ApplicationRevision>
     <ApplicationVersion>1.1.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -144,11 +144,26 @@
     <Reference Include="MessagingToolkit.QRCode">
       <HintPath>bin\MessagingToolkit.QRCode.dll</HintPath>
     </Reference>
+    <Reference Include="MigraDoc.DocumentObjectModel, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\MigraDoc.DocumentObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\MigraDoc.Rendering.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.RtfRendering, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\MigraDoc.RtfRendering.dll</HintPath>
+    </Reference>
     <Reference Include="MimeKit, Version=2.10.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
       <HintPath>..\packages\MimeKit.2.10.1\lib\net45\MimeKit.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\PdfSharp.Charting.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -264,6 +279,7 @@
     <Compile Include="Services\EnviromentService.vb" />
     <Compile Include="Services\ImpresionReportesService.vb" />
     <Compile Include="Services\ObjectBagService.vb" />
+    <Compile Include="Services\PDFService.vb" />
     <Compile Include="Services\SelladoTimbradoService.vb" />
     <Compile Include="Services\UtilitiesService.vb" />
     <Compile Include="Services\ValidadorCobrosService.vb" />
@@ -311,6 +327,12 @@
     <Compile Include="Views\CancelacionFacturasEDC.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Views\EnviarCorreosQRCongresosEDC.Designer.vb">
+      <DependentUpon>EnviarCorreosQRCongresosEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EnviarCorreosQRCongresosEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\Form1.Designer.vb">
       <DependentUpon>Form1.vb</DependentUpon>
     </Compile>
@@ -321,6 +343,12 @@
       <DependentUpon>Form2.vb</DependentUpon>
     </Compile>
     <Compile Include="Views\Form2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Form3.Designer.vb">
+      <DependentUpon>Form3.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Form3.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\GenerarPolizaEDC.Designer.vb">
@@ -479,6 +507,12 @@
     <Compile Include="Views\ModalRegistroPagosOpcionalesEDC.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Views\PruebaEnvioCorreosEDC.Designer.vb">
+      <DependentUpon>PruebaEnvioCorreosEDC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PruebaEnvioCorreosEDC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\RegistroExternos.Designer.vb">
       <DependentUpon>RegistroExternos.vb</DependentUpon>
     </Compile>
@@ -562,11 +596,17 @@
     <EmbeddedResource Include="Views\CancelacionFacturasEDC.resx">
       <DependentUpon>CancelacionFacturasEDC.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\EnviarCorreosQRCongresosEDC.resx">
+      <DependentUpon>EnviarCorreosQRCongresosEDC.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Form2.resx">
       <DependentUpon>Form2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Form3.resx">
+      <DependentUpon>Form3.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\GenerarPolizaEDC.resx">
       <DependentUpon>GenerarPolizaEDC.vb</DependentUpon>
@@ -645,6 +685,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ModalRegistroPagosOpcionalesEDC.resx">
       <DependentUpon>ModalRegistroPagosOpcionalesEDC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PruebaEnvioCorreosEDC.resx">
+      <DependentUpon>PruebaEnvioCorreosEDC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\RegistroExternos.resx">
       <DependentUpon>RegistroExternos.vb</DependentUpon>
@@ -796,6 +839,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="logoprueba.ico" />
+    <Content Include="Views\Opera Captura de pantalla_2025-03-08_095836_nus.syd1.qualtrics.com.png" />
     <None Include="Resources\icons8-accounting-40.png" />
     <None Include="Resources\icons8-show-property-40.png" />
     <None Include="Resources\icons8-note-40.png" />
