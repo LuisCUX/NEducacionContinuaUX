@@ -132,6 +132,7 @@ Public Class ValidacionesController
         If (txtRFC.Text = "XAXX010101000") Then
             lblCP.Text = EnviromentService.CP
         End If
+
         panelDatos.Visible = True
         panelCobros.Visible = True
     End Sub
@@ -328,5 +329,84 @@ Public Class ValidacionesController
         End If
 
         quitaTildesEspecial = Trim((UCase(limpia)))
+    End Function
+
+
+    Public Function getDigitoVerificador(ByVal matricula As String) As String
+
+        Dim arreglo(6) As Integer
+        arreglo(1) = 11
+        arreglo(2) = 13
+        arreglo(3) = 17
+        arreglo(4) = 19
+        arreglo(5) = 23
+        Dim conta As Integer = 1
+        Dim DGV As String = ""
+
+
+        Dim suma As Integer = 0
+
+        For i = 0 To Len(UCase(matricula)) - 1
+            If (IsNumeric(Mid(UCase(matricula), Len(matricula) - i, 1))) Then
+                suma = suma + Mid(UCase(matricula), Len(matricula) - i, 1) * arreglo(conta)
+            Else
+                suma = suma + letranume(Mid(UCase(matricula), Len(matricula) - i, 1)) * arreglo(conta)
+            End If
+            conta = conta + 1
+            If conta = 6 Then
+                conta = 1
+            End If
+        Next i
+        suma = suma + 330
+        suma = (suma Mod 97) + 1
+
+        If suma < 10 Then
+            DGV = "0" + CStr(suma)
+        Else
+            DGV = CStr(suma)
+        End If
+
+        'MsgBox(DGV)
+        Return DGV
+
+    End Function
+
+    Function letranume(C As String) As Integer
+        If (C = "A" Or C = "J" Or C = "S") Then
+            letranume = 1
+        Else
+            If (C = "B" Or C = "K" Or C = "T") Then
+                letranume = 2
+            Else
+                If (C = "C" Or C = "L" Or C = "U") Then
+                    letranume = 3
+                Else
+                    If (C = "D" Or C = "M" Or C = "V") Then
+                        letranume = 4
+                    Else
+                        If (C = "E" Or C = "N" Or C = "W") Then
+                            letranume = 5
+                        Else
+                            If (C = "F" Or C = "O" Or C = "X") Then
+                                letranume = 6
+                            Else
+                                If (C = "G" Or C = "P" Or C = "Y") Then
+                                    letranume = 7
+                                Else
+                                    If (C = "H" Or C = "Q" Or C = "Z") Then
+                                        letranume = 8
+                                    Else
+                                        If (C = "I" Or C = "R") Then
+                                            letranume = 9
+                                        End If
+                                    End If
+                                End If
+                            End If
+                        End If
+                    End If
+                End If
+            End If
+        End If
+        Return letranume
     End Function
 End Class

@@ -61,6 +61,7 @@ Partial Class PrincipalView
         Me.DesarrolloToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProduccionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PruebaEnvioCorreosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EnvioQRCongresosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Form1ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Form2ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Form3ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -69,7 +70,7 @@ Partial Class PrincipalView
         Me.DescuentosCongresosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ModificaciónDeDatosFiscalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReportesCongresosDiplomadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EnvioQRCongresosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EnvioConstanciasCongresosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip.SuspendLayout()
         Me.MenuStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -287,7 +288,7 @@ Partial Class PrincipalView
         '
         'DEVToolStripMenuItem
         '
-        Me.DEVToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CambiarConexiónToolStripMenuItem, Me.PruebaEnvioCorreosToolStripMenuItem, Me.EnvioQRCongresosToolStripMenuItem, Me.Form1ToolStripMenuItem, Me.Form2ToolStripMenuItem, Me.Form3ToolStripMenuItem})
+        Me.DEVToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CambiarConexiónToolStripMenuItem, Me.PruebaEnvioCorreosToolStripMenuItem, Me.EnvioQRCongresosToolStripMenuItem, Me.EnvioConstanciasCongresosToolStripMenuItem, Me.Form1ToolStripMenuItem, Me.Form2ToolStripMenuItem, Me.Form3ToolStripMenuItem})
         Me.DEVToolStripMenuItem.Name = "DEVToolStripMenuItem"
         Me.DEVToolStripMenuItem.Size = New System.Drawing.Size(40, 20)
         Me.DEVToolStripMenuItem.Text = "DEV"
@@ -296,7 +297,7 @@ Partial Class PrincipalView
         '
         Me.CambiarConexiónToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DesarrolloToolStripMenuItem, Me.ProduccionToolStripMenuItem})
         Me.CambiarConexiónToolStripMenuItem.Name = "CambiarConexiónToolStripMenuItem"
-        Me.CambiarConexiónToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.CambiarConexiónToolStripMenuItem.Size = New System.Drawing.Size(225, 22)
         Me.CambiarConexiónToolStripMenuItem.Text = "Cambiar conexión"
         '
         'DesarrolloToolStripMenuItem
@@ -314,25 +315,31 @@ Partial Class PrincipalView
         'PruebaEnvioCorreosToolStripMenuItem
         '
         Me.PruebaEnvioCorreosToolStripMenuItem.Name = "PruebaEnvioCorreosToolStripMenuItem"
-        Me.PruebaEnvioCorreosToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.PruebaEnvioCorreosToolStripMenuItem.Size = New System.Drawing.Size(225, 22)
         Me.PruebaEnvioCorreosToolStripMenuItem.Text = "Prueba envio correos"
+        '
+        'EnvioQRCongresosToolStripMenuItem
+        '
+        Me.EnvioQRCongresosToolStripMenuItem.Name = "EnvioQRCongresosToolStripMenuItem"
+        Me.EnvioQRCongresosToolStripMenuItem.Size = New System.Drawing.Size(225, 22)
+        Me.EnvioQRCongresosToolStripMenuItem.Text = "Envio QR congresos"
         '
         'Form1ToolStripMenuItem
         '
         Me.Form1ToolStripMenuItem.Name = "Form1ToolStripMenuItem"
-        Me.Form1ToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.Form1ToolStripMenuItem.Size = New System.Drawing.Size(225, 22)
         Me.Form1ToolStripMenuItem.Text = "form1"
         '
         'Form2ToolStripMenuItem
         '
         Me.Form2ToolStripMenuItem.Name = "Form2ToolStripMenuItem"
-        Me.Form2ToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.Form2ToolStripMenuItem.Size = New System.Drawing.Size(225, 22)
         Me.Form2ToolStripMenuItem.Text = "form2"
         '
         'Form3ToolStripMenuItem
         '
         Me.Form3ToolStripMenuItem.Name = "Form3ToolStripMenuItem"
-        Me.Form3ToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.Form3ToolStripMenuItem.Size = New System.Drawing.Size(225, 22)
         Me.Form3ToolStripMenuItem.Text = "form3"
         '
         'CongresosDiplomadosToolStripMenuItem
@@ -366,11 +373,11 @@ Partial Class PrincipalView
         Me.ReportesCongresosDiplomadosToolStripMenuItem.Size = New System.Drawing.Size(193, 20)
         Me.ReportesCongresosDiplomadosToolStripMenuItem.Text = "Reportes Congresos/Diplomados"
         '
-        'EnvioQRCongresosToolStripMenuItem
+        'EnvioConstanciasCongresosToolStripMenuItem
         '
-        Me.EnvioQRCongresosToolStripMenuItem.Name = "EnvioQRCongresosToolStripMenuItem"
-        Me.EnvioQRCongresosToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
-        Me.EnvioQRCongresosToolStripMenuItem.Text = "Envio QR congresos"
+        Me.EnvioConstanciasCongresosToolStripMenuItem.Name = "EnvioConstanciasCongresosToolStripMenuItem"
+        Me.EnvioConstanciasCongresosToolStripMenuItem.Size = New System.Drawing.Size(225, 22)
+        Me.EnvioConstanciasCongresosToolStripMenuItem.Text = "Envio constancias congresos"
         '
         'PrincipalView
         '
@@ -448,4 +455,5 @@ Partial Class PrincipalView
     Friend WithEvents Form3ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PruebaEnvioCorreosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents EnvioQRCongresosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents EnvioConstanciasCongresosToolStripMenuItem As ToolStripMenuItem
 End Class

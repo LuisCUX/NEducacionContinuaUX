@@ -17,7 +17,7 @@ Public Class PagosCreditoController
     Dim va As ValidacionesController = New ValidacionesController()
     Public QR_Generator As New MessagingToolkit.QRCode.Codec.QRCodeEncoder
 
-    Function cobroCredito(IDCredito As Integer, CantidadAbonada As Decimal, MontoAnterior As Decimal, MontoNuevo As Decimal, Matricula As String, NumPago As Integer, RFC As String, NombreCompleto As String, FolioFiscal As String, NoParcialidad As Integer, FormaPago As String, RegFiscal As String, CP As String) As Integer
+    Function cobroCredito(IDCredito As Integer, CantidadAbonada As Decimal, MontoAnterior As Decimal, MontoNuevo As Decimal, Matricula As String, NumPago As Integer, RFC As String, NombreCompleto As String, FolioFiscal As String, NoParcialidad As Integer, FormaPago As String, RegFiscal As String, CP As String, formaPagoClaveBD As String, formaPagoID As Integer) As Integer
         Try
             db.startTransaction()
             If (RFC = "XAXX010101000") Then
@@ -48,9 +48,9 @@ Public Class PagosCreditoController
             End If
 
             Dim serieOriginal As String = db.exectSQLQueryScalar($"select SUBSTRING(Folio, 1, 1) from ing_Creditos where ID = {IDCredito}")
-                Dim folioOriginal As String = db.exectSQLQueryScalar($"select SUBSTRING(Folio, 2, DATALENGTH(Folio)) from ing_Creditos where ID = {IDCredito}")
-                Dim FechaOriginal As String = db.exectSQLQueryScalar($"select STUFF(CONVERT(VARCHAR(50),Fecha, 127) ,20,4,'') as fecha from ing_Creditos where ID = {IDCredito}")
-                Dim IVA As Decimal = db.exectSQLQueryScalar($"SELECT IVA FROM ing_xmlTimbrados WHERE Folio = (SELECT Folio FROM ing_Creditos WHERE ID = {IDCredito} AND Activo = 1)")
+            Dim folioOriginal As String = db.exectSQLQueryScalar($"select SUBSTRING(Folio, 2, DATALENGTH(Folio)) from ing_Creditos where ID = {IDCredito}")
+            Dim FechaOriginal As String = db.exectSQLQueryScalar($"select STUFF(CONVERT(VARCHAR(50),Fecha, 127) ,20,4,'') as fecha from ing_Creditos where ID = {IDCredito}")
+            Dim IVA As Decimal = db.exectSQLQueryScalar($"SELECT IVA FROM ing_xmlTimbrados WHERE Folio = (SELECT Folio FROM ing_Creditos WHERE ID = {IDCredito} AND Activo = 1)")
             If (IVA > 0) Then
                 IVABool = True
                 IVABase = Format(CDec(CantidadAbonada / 1.16), "#####0.00")
@@ -89,8 +89,8 @@ Public Class PagosCreditoController
 
             Dim regimenFiscaltxt As String = db.exectSQLQueryScalar($"SELECT (RegimenFiscal + '(' + CAST(ID_Contador AS varchar(MAX)) + ')') AS regimen FROM ing_Cat_RegFis WHERE ID_Contador = {RegFiscal}")
 
-            Dim formapagoid As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatFormaPago WHERE Forma_Pago = '{FormaPago}'")
-            Dim XMLID = db.insertAndGetIDInserted($"INSERT INTO ing_xmlTimbrados(Matricula_Clave, Folio, FolioFiscal, Certificado, XMLTimbrado, fac_Cadena, fac_Sello, Tipo_Pago, Forma_Pago, Forma_PagoID, Fecha_Pago, Cajero, RegimenFiscal, RFCTimbrado, Subtotal, Descuento, IVA, Total, usoCFDI, CanceladaHoy, CanceladaOtroDia) VALUES ('{Matricula}', '{Serie}{Folio}', '{folioFiscalNuevo}', '{NoCertificado}', '{xmlTimbrado}', '{Cadena}', '{sello}', 'PAGO DE CREDITO', '{FormaPago}', {formapagoid}, '{Fecha}', '{User.getUsername}', '{regimenFiscaltxt}', '{RFC}', {IVABase}, 0, {IVACobrado}, {CantidadAbonada}, '{UsoCFDI}', 0, 0)")
+            ''Dim formapagoid As Integer = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatFormaPago WHERE Forma_Pago = '{formaPagoClaveBD}'")
+            Dim XMLID = db.insertAndGetIDInserted($"INSERT INTO ing_xmlTimbrados(Matricula_Clave, Folio, FolioFiscal, Certificado, XMLTimbrado, fac_Cadena, fac_Sello, Tipo_Pago, Forma_Pago, Forma_PagoID, Fecha_Pago, Cajero, RegimenFiscal, RFCTimbrado, Subtotal, Descuento, IVA, Total, usoCFDI, CanceladaHoy, CanceladaOtroDia) VALUES ('{Matricula}', '{Serie}{Folio}', '{folioFiscalNuevo}', '{NoCertificado}', '{xmlTimbrado}', '{Cadena}', '{sello}', 'PAGO DE CREDITO', '{formaPagoClaveBD}', {formaPagoID}, '{Fecha}', '{User.getUsername}', '{regimenFiscaltxt}', '{RFC}', {IVABase}, 0, {IVACobrado}, {CantidadAbonada}, '{UsoCFDI}', 0, 0)")
             db.execSQLQueryWithoutParams($"INSERT INTO ing_xmlTimbradosConceptos(Clave_Cliente, XMLID, Nombre_Concepto, IDConcepto, Clave_Concepto, ClaveUnidad, ClaveProdServ, PrecioUnitario, IVA, Descuento, Cantidad, Total) VALUES ('{Matricula}', {XMLID}, 'PAGO', {IDCredito}, 1, 'E48', '84111506', {IVABase}, {IVACobrado}, 0, 1, {CantidadAbonada})")
             If (MontoNuevo = 0) Then
                 db.execSQLQueryWithoutParams($"UPDATE ing_Creditos SET Activo = 0 WHERE ID = {IDCredito}")

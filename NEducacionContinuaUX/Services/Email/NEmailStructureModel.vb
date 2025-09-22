@@ -6,6 +6,8 @@
     ''' <summary>
     ''' Contenido del email, puede ser texto plano o contener etiquetas HTML
     ''' </summary>
+    ''' 
+    Public Property [bcc] As String
     Public Property subject As String
     ''' <summary>
     ''' Arreglo con los emails destinos
@@ -31,4 +33,6 @@
     ''' Nombre de archivos a adjuntar
     ''' </summary>
     Public Property nameFile As String
+
+    Public Property nameFile2 As String
 End Class

@@ -9,8 +9,8 @@
                                                      Username = '{txtUsuario.Text}' AND CAST(Username AS varbinary(4000)) = CAST('{txtUsuario.Text}' AS varbinary(4000)) AND
                                                      Password = '{txtContraseña.Text}' AND CAST(Password AS varbinary(4000)) = CAST('{txtContraseña.Text}' AS varbinary(4000))")
         If (ID > 0) Then
-            Dim tableDatosLogin As DataTable = db.getDataTableFromSQL($"SELECT U.Username, U.NUP, UPPER(E.nombre + ' ' + E.apepat + ' ' + E.apemat) AS Nombre, P.Perfil FROM [{EnviromentService.dbName}].dbo.ing_Usuarios AS U
-                                                                       INNER JOIN [ux].dbo.adm_catEmpleados AS E ON E.nup = U.NUP
+            Dim tableDatosLogin As DataTable = db.getDataTableFromSQL($"SELECT U.Username, U.NUP, CASE WHEN E.nombre IS NULL THEN 'N/A' ELSE (UPPER(E.nombre + ' ' + E.apepat + ' ' + E.apemat)) END AS Nombre, P.Perfil FROM [{EnviromentService.dbName}].dbo.ing_Usuarios AS U
+                                                                       LEFT JOIN [ux].dbo.adm_catEmpleados AS E ON E.nup = U.NUP
                                                                        INNER JOIN [{EnviromentService.dbName}].dbo.ing_CatPerfiles AS P ON P.ID = U.ID_Perfil
                                                                        WHERE U.ID = {ID}")
             For Each row As DataRow In tableDatosLogin.Rows

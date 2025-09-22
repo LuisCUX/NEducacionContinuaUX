@@ -65,7 +65,12 @@
     ''---------------------------------------GUARDA CONDONACIONES------------------------------------------''
     ''-----------------------------------------------------------------------------------------------------''
     Sub GuardarCondonaciones(Matricula As String, GridCondonaciones As DataGridView, TipoCondonacion As Integer, observacionID As Integer)
-
+        Dim tipoMatricula As String
+        If (Matricula.Substring(0, 2) = "EX") Then
+            tipoMatricula = "EX"
+        ElseIf (Matricula.Substring(0, 2) = "EC") Then
+            tipoMatricula = "EC"
+        End If
         Try
             db.startTransaction()
             For X = 0 To GridCondonaciones.Rows.Count() - 1
@@ -75,15 +80,29 @@
                 If (TipoCondonacion = 0) Then ''Total
                     Dim Folio As String = Me.ObtenerFolioAC("CONTOTAL")
                     db.execSQLQueryWithoutParams($"INSERT INTO aut_Condonaciones(Folio, Fecha_Condonacion, Matricula, Usuario, ID_Concepto, ID_ClaveConcepto, ID_TipoConAut, Descripcion, Porcentaje, Observaciones, Activo) VALUES ('{Folio}', GETDATE(), '{Matricula}', '{User.getUsername}', {IDPago}, {IDConcepto}, 1, '{GridCondonaciones.Rows(X).Cells(0).Value}', 100, {observacionID}, 1)")
-                    db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionPagoOpcionalExterno SET Activo = 0, Condonado = 1 WHERE ID = {IDPago}")
-                    db.execSQLQueryWithoutParams($"UPDATE ing_CatFolios SET Consecutivo = Consecutivo + 1 WHERE Descripcion = 'CONTOTAL'")
+
+                    If (tipoMatricula = "EX") Then
+                        db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionPagoOpcionalExterno SET Activo = 0, Condonado = 1 WHERE ID = {IDPago}")
+                        db.execSQLQueryWithoutParams($"UPDATE ing_CatFolios SET Consecutivo = Consecutivo + 1 WHERE Descripcion = 'CONTOTAL' AND Usuario = '{User.getUsername()}'")
+                    ElseIf (tipoMatricula = "EC") Then
+                        Dim pagar As Decimal = db.exectSQLQueryScalar($"SELECT pagar FROM portal_registroCongreso WHERE id_registro = {IDPago}")
+                        db.execSQLQueryWithoutParams($"UPDATE ing_CatFolios SET Consecutivo = Consecutivo + 1 WHERE Descripcion = 'CONTOTAL' AND Usuario = '{User.getUsername()}'")
+                        db.execSQLQueryWithoutParams($"INSERT INTO ing_PagosCongresos(Folio, Matricula, valorUnitario, Cantidad, valorIVA, Descuento, ID_FormaPago, Fecha_Pago, Autorizado, Condonado, Usuario, Activo) VALUES ('{Folio}', '{Matricula}', {pagar}, 1, 0.00000000, 0.00000000, 0, GETDATE(), 0, 1, '{User.getUsername()}', 1)")
+                    End If
+
                 ElseIf (TipoCondonacion = 1) Then ''Parcial
-                    Dim Folio As String = Me.ObtenerFolioAC("CONPORCENTUAL")
+                        Dim Folio As String = Me.ObtenerFolioAC("CONPORCENTUAL")
                     Dim NuevoTotal As Decimal = GridCondonaciones.Rows(X).Cells(3).Value
 
                     db.execSQLQueryWithoutParams($"INSERT INTO aut_Condonaciones(Folio, Fecha_Condonacion, Matricula, Usuario, ID_Concepto, ID_ClaveConcepto, ID_TipoConAut, Descripcion, Porcentaje, Observaciones, Activo) VALUES ('{Folio}', GETDATE(), '{Matricula}', '{User.getUsername}', {IDPago}, {IDConcepto}, 2, '{GridCondonaciones.Rows(X).Cells(0).Value}', '{GridCondonaciones.Rows(X).Cells(1).Value}', {observacionID}, 1)")
-                    db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionPagoOpcionalExterno SET costoUnitario = {GridCondonaciones.Rows(X).Cells(3).Value} WHERE ID = {IDPago}")
-                    db.execSQLQueryWithoutParams($"UPDATE ing_CatFolios SET Consecutivo = Consecutivo + 1 WHERE Descripcion = 'CONPORCENTUAL'")
+
+                    If (tipoMatricula = "EX") Then
+                        db.execSQLQueryWithoutParams($"UPDATE ing_AsignacionPagoOpcionalExterno SET costoUnitario = {GridCondonaciones.Rows(X).Cells(3).Value} WHERE ID = {IDPago}")
+                        db.execSQLQueryWithoutParams($"UPDATE ing_CatFolios SET Consecutivo = Consecutivo + 1 WHERE Descripcion = 'CONPORCENTUAL' AND Usuario = '{User.getUsername()}'")
+                    ElseIf (tipoMatricula = "EC") Then
+
+                    End If
+
                 End If
             Next
             MessageBox.Show("Pagos condonados correctamente")

@@ -1,5 +1,7 @@
-﻿Imports System.Text
+﻿Imports System.IO
+Imports System.Text
 Imports System.Text.RegularExpressions
+Imports PdfSharp.Pdf
 
 Public Class CobrosEDC
     Dim db As DataBaseService = New DataBaseService()
@@ -10,6 +12,7 @@ Public Class CobrosEDC
     Dim ch As ConceptHandlerController = New ConceptHandlerController()
     Dim va As ValidacionesController = New ValidacionesController()
     Dim es As UXServiceEmail = New UXServiceEmail()
+    Dim pdfs As PDFService = New PDFService()
     Dim combo_filtro As String
     Private Sub CobrosEDC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim folioPago As String = co.obtenerFolio("Pago")
@@ -46,6 +49,8 @@ Public Class CobrosEDC
         ElseIf (tipoMatricula = "EC") Then
             va.buscarMatriculaEC(Matricula, panelDatos, panelCobros, lblNombretxt, lblEmailtxt, lblCarreratxt, lblTurnotxt, lblRFCtxt, lblCPtxt, lblRegFiscaltxt, lblCFDItxt, lblDireccion)
         End If
+
+        lblDigitoVerificador.Text = va.getDigitoVerificador(Matricula)
 
         ca.buscarPagosOpcionales(Tree, Matricula, tipoMatricula, "Cobros")
         ca.buscarCongresos(Tree, Matricula, tipoMatricula, "Cobros")
@@ -452,6 +457,7 @@ Public Class CobrosEDC
         Dim cobrarAbono As Boolean = False
         Dim creditoband As Boolean = False
         Dim formaPagoClave As String
+        Dim formaPagoClaveBD As String
         Dim formaPagoID As Integer
         Dim NombreTimbrar As String
         listaConceptos = ch.getListaConceptos()
@@ -565,6 +571,7 @@ Public Class CobrosEDC
 
         ''---------------------------------------------------------CLAVE DE FORMA DE PAGO---------------------------------------------------------
         If (cbFormaPago.Text = "DEPOSITO BANCARIO C/COMPROBANTE" Or cbFormaPago.Text = "DEPOSITO BANCARIO EDO CTA") Then
+            formaPagoClaveBD = cbFormaPago.SelectedValue
             If (cbTipoBanco.Text = "EFECTIVO") Then
                 formaPagoClave = "01"
                 If (cbFormaPago.Text = "DEPOSITO BANCARIO C/COMPROBANTE") Then
@@ -585,6 +592,7 @@ Public Class CobrosEDC
             formaPagoID = 10
         Else
             formaPagoClave = cbFormaPago.SelectedValue
+            formaPagoClaveBD = cbFormaPago.SelectedValue
             formaPagoID = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatFormaPago WHERE Forma_Pago = '{formaPagoClave}'")
         End If
 
@@ -625,9 +633,9 @@ Public Class CobrosEDC
                 NombreTimbrar = ObjectBagService.getItem("NombreTimbrar").ToString.ToUpper()
                 NombreTimbrar = Me.QuitarAcentos(NombreTimbrar)
                 cpTimbrar = ObjectBagService.getItem("cpTimbrar")
-                    ObjectBagService.clearBag()
-                Else
-                    RFCTimbrar = "XAXX010101000"
+                ObjectBagService.clearBag()
+            Else
+                RFCTimbrar = "XAXX010101000"
                 RegFiscalTimbrar = "616"
                 UsoCFDITimbrar = "S01"
                 NombreTimbrar = lblNombretxt.Text
@@ -646,7 +654,7 @@ Public Class CobrosEDC
             ElseIf (tipoMatricula = "EC") Then
                 tipocliente = 1
             End If
-            Dim IDXMLC As Integer = co.Cobrar(listaConceptosPrueba, formaPagoClave, 9, Matricula, RFCTimbrar, NombreTimbrar, lblTotal.Text, True, tipocliente, lblCPtxt.Text, RegFiscalTimbrar, UsoCFDITimbrar)
+            Dim IDXMLC As Integer = co.Cobrar(listaConceptosPrueba, formaPagoClave, 9, Matricula, RFCTimbrar, NombreTimbrar, lblTotal.Text, True, tipocliente, lblCPtxt.Text, RegFiscalTimbrar, UsoCFDITimbrar, formaPagoClaveBD)
             If (IDXMLC > 0) Then
                 Me.Reiniciar()
                 Exit Sub
@@ -654,7 +662,7 @@ Public Class CobrosEDC
         End If
 
 
-        Dim IDXML As Integer = co.Cobrar(listaconceptosFinal, formaPagoClave, formaPagoID, Matricula, RFCTimbrar, NombreTimbrar, lblTotal.Text, False, tipocliente, cpTimbrar, RegFiscalTimbrar, UsoCFDITimbrar)
+        Dim IDXML As Integer = co.Cobrar(listaconceptosFinal, formaPagoClave, formaPagoID, Matricula, RFCTimbrar, NombreTimbrar, lblTotal.Text, False, tipocliente, cpTimbrar, RegFiscalTimbrar, UsoCFDITimbrar, formaPagoClaveBD)
 
         ''---------------------------------------------------------REGISTRO DE FORMA DE PAGO---------------------------------------------------------
         If (IDXML > 0) Then
@@ -772,6 +780,8 @@ Public Class CobrosEDC
 
             Dim message As String
             Dim band As Boolean = False
+            Dim bandEmailQR As Boolean = False
+            Dim idCongreso As Integer
             Dim tableClavesPagos As DataTable = db.getDataTableFromSQL($"SELECT Clave_Concepto FROM ing_xmlTimbradosConceptos WHERE XMLID = {IDXML}")
             For Each row As DataRow In tableClavesPagos.Rows
                 If (row("Clave_Concepto") = 3) Then
@@ -782,11 +792,14 @@ Public Class CobrosEDC
             If (band = True) Then
                 message = Me.getCorreoCongreso(Matricula)
                 Try
-                    Dim idCongreso As Integer = db.exectSQLQueryScalar($"SELECT CON.id_congreso FROM portal_congreso AS CON
+                    idCongreso = db.exectSQLQueryScalar($"SELECT CON.id_congreso FROM portal_congreso AS CON
                                                                         INNER JOIN portal_tipoAsistente AS TA ON TA.id_congreso = CON.id_congreso
                                                                         INNER JOIN portal_registroCongreso AS RC ON RC.id_tipo_asistente = TA.id_tipo_asistente
                                                                         WHERE RC.clave_cliente = '{Matricula}'")
                     attatchmentImg = db.exectSQLQueryScalar($"SELECT link_Img FROM ing_res_congresoLink WHERE id_congreso = {idCongreso}")
+                    If (idCongreso = 1019) Then
+                        bandEmailQR = True
+                    End If
                 Catch ex As Exception
                     attatchmentImg = ""
                 End Try
@@ -805,14 +818,17 @@ Public Class CobrosEDC
             mailStructure.nameFile = $"{Serie}{Folio}"
             attatchment2 = archivo_xml
 
+            If (bandEmailQR = True) Then
+                Me.EnviarEmailQRCongreso(Matricula, idCongreso)
+            End If
             Try
-                es.sendEmailWithFileBytes(mailStructure, attatchment1, attatchment2)
-                Me.Reiniciar()
-            Catch ex As Exception
-                MessageBox.Show("Error al enviar email")
-            End Try
-        End If
-        Me.Reiniciar()
+                    es.sendEmailWithFileBytes(mailStructure, attatchment1, attatchment2)
+                    Me.Reiniciar()
+                Catch ex As Exception
+                    MessageBox.Show("Error al enviar email")
+                End Try
+            End If
+            Me.Reiniciar()
     End Sub
 
     Function buscarRecargoColegiaturas(ID As Integer) As Boolean
@@ -1108,4 +1124,43 @@ Public Class CobrosEDC
 
         Return correo
     End Function
+
+    Sub EnviarEmailQRCongreso(Matricula As String, idCongreso As Integer)
+        Dim nombreCongreso As String = db.exectSQLQueryScalar($"SELECT nombre FROM portal_congreso where id_congreso = {idCongreso}")
+        Dim mailStructure As New NEmailStructureModel
+
+        ''Dim destino As String = "estebanh@ux.edu.mx"
+        Dim destino As String = db.exectSQLQueryScalar($"SELECT C.correo FROM portal_cliente AS C
+                                                    INNER JOIN portal_registroCongreso AS RC ON RC.id_cliente = C.id_cliente
+                                                    WHERE RC.clave_cliente = '{Matricula}'")
+        Dim archivo_pdf As Byte() = Nothing
+        Dim attatchment1 As Byte()
+        Dim subject As String = $"Pase de acceso – {nombreCongreso} {Matricula}"
+        Dim Message As String = $"¡Tu acceso al Congreso está listo! <br>
+                                   Te compartimos tu pase digital de ingreso para el Primer Congreso Internacional en Terapias Contextuales y Cognitivo-Conductuales. <br>
+                                   Por favor, guarda el código QR adjunto y preséntalo el día del evento, ya sea desde tu celular o en formato impreso. El personal del congreso lo escaneará para registrar tu asistencia. <br>
+                                   🔒 Este código es personal e intransferible. <br>
+                                   ¡Gracias por ser parte de esta experiencia! <br>
+                                   Atentamente: <br>
+                                   Comité Organizador"
+
+        Dim pdf As PdfDocument
+        pdf = pdfs.getPDFQRCongresos(Matricula)
+
+        Using ms As New MemoryStream()
+            pdf.Save(ms, False) ' Guardar el PDF dentro del MemoryStream
+            archivo_pdf = ms.ToArray() ' Convertir el MemoryStream a un arreglo de bytes
+        End Using
+
+        mailStructure.to = destino
+        mailStructure.subject = subject
+        mailStructure.message = Message
+        attatchment1 = archivo_pdf
+        mailStructure.nameFile = $"Pase de acceso"
+
+        es.sendEmailWithFile(mailStructure, attatchment1)
+
+        db.execSQLQueryWithoutParams($"INSERT INTO ing_BitacoraCorreosCongresos(Matricula, FechaEnvio, Activo) VALUES ('{Matricula}', GETDATE(), 1)")
+
+    End Sub
 End Class

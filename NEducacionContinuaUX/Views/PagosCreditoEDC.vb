@@ -168,6 +168,7 @@ Public Class PagosCreditoEDC
         Dim UsoCFDITimbrar As String
         Dim cpTimbrar As String
         Dim formaPagoClave As String
+        Dim formaPagoClaveBD As String
         Dim formaPagoID As Integer
         Dim nombreTimbrar As String
         Dim tablas As String()
@@ -219,6 +220,7 @@ Public Class PagosCreditoEDC
 
         ''---------------------------------------------------------CLAVE DE FORMA DE PAGO---------------------------------------------------------
         If (cbFormaPago.Text = "DEPOSITO BANCARIO C/COMPROBANTE" Or cbFormaPago.Text = "DEPOSITO BANCARIO EDO CTA") Then
+            formaPagoClaveBD = cbFormaPago.SelectedValue
             If (cbTipoBanco.Text = "EFECTIVO") Then
                 formaPagoClave = "01"
                 If (cbFormaPago.Text = "DEPOSITO BANCARIO C/COMPROBANTE") Then
@@ -239,11 +241,12 @@ Public Class PagosCreditoEDC
             formaPagoID = 10
         Else
             formaPagoClave = cbFormaPago.SelectedValue
+            formaPagoClaveBD = cbFormaPago.SelectedValue
             formaPagoID = db.exectSQLQueryScalar($"SELECT ID FROM ing_CatFormaPago WHERE Forma_Pago = '{formaPagoClave}'")
         End If
 
         ''---------------------------------------------------------TIMBRADO---------------------------------------------------------
-        Dim IDXML As Integer = pc.cobroCredito(IDCredito, CantidadAbonada, montoAnterior, montoNuevo, Matricula, noPago, RFCTimbrar, nombreTimbrar, folioFiscal, noPago, formaPagoClave, RegFiscalTimbrar, cpTimbrar)
+        Dim IDXML As Integer = pc.cobroCredito(IDCredito, CantidadAbonada, montoAnterior, montoNuevo, Matricula, noPago, RFCTimbrar, nombreTimbrar, folioFiscal, noPago, formaPagoClave, RegFiscalTimbrar, cpTimbrar, formaPagoClaveBD, formaPagoID)
 
 
         If (IDXML > 0) Then

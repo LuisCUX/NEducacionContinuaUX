@@ -245,4 +245,9 @@
         EnviarCorreosQRCongresosEDC.MdiParent = Me
         EnviarCorreosQRCongresosEDC.Show()
     End Sub
+
+    Private Sub EnvioConstanciasCongresosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EnvioConstanciasCongresosToolStripMenuItem.Click
+        EnviarCorreosConstanciasCongresosEDC.MdiParent = Me
+        EnviarCorreosConstanciasCongresosEDC.Show()
+    End Sub
 End Class

@@ -123,32 +123,32 @@
             Dim estatusCancelacion As String
             Dim Total As String = db.exectSQLQueryScalar($"SELECT Total FROM ing_xmlTimbrados WHERE ID = {IDFolio}")
 
-            If (System.Diagnostics.Debugger.IsAttached) Then
-                Dim ListaUUID As New List(Of TimbradoUXPruebas.DetalleCFDICancelacion)
-                Dim DatosUUID As New TimbradoUXPruebas.DetalleCFDICancelacion
-                DatosUUID.UUID = "6E2B9B01-7E57-7E57-7E57-26818FAED065"
-                DatosUUID.RFCReceptor = RFCReceptor
-                DatosUUID.Total = Total
-                DatosUUID.Motivo = cbMotivoSAT.SelectedValue
+            'If (System.Diagnostics.Debugger.IsAttached) Then
+            '    Dim ListaUUID As New List(Of TimbradoUXPruebas.DetalleCFDICancelacion)
+            '    Dim DatosUUID As New TimbradoUXPruebas.DetalleCFDICancelacion
+            '    DatosUUID.UUID = "6E2B9B01-7E57-7E57-7E57-26818FAED065"
+            '    DatosUUID.RFCReceptor = RFCReceptor
+            '    DatosUUID.Total = Total
+            '    DatosUUID.Motivo = cbMotivoSAT.SelectedValue
 
 
-                ListaUUID.Add(DatosUUID)
-                Dim resultado As String()
+            '    ListaUUID.Add(DatosUUID)
+            '    Dim resultado As String()
 
-                ''resultado = st.TimbreCancelacionFacturasPrueba(ListaUUID)
-                resultado = {"True", "AAAAAAAAAAA", "201   UUID Cancelado.   25F5CD94-8D50-4DE1-9742-C5B1FA2861E7   Cancelable sin aceptación", "Cancelable sin aceptación"}
+            '    ''resultado = st.TimbreCancelacionFacturasPrueba(ListaUUID)
+            '    resultado = {"True", "AAAAAAAAAAA", "201   UUID Cancelado.   25F5CD94-8D50-4DE1-9742-C5B1FA2861E7   Cancelable sin aceptación", "Cancelable sin aceptación"}
 
-                If (resultado(0) = "False") Then
-                    BitacoraService.BitacoraCancelacionError(Matricula, Folio, cbMotivoSAT.SelectedValue, resultado(1), resultado(2))
-                    MessageBox.Show(resultado(1))
-                    Exit Sub
-                Else
-                    xmlAcuse = resultado(1)
-                    mensajeCancelacion = resultado(2)
-                    estatusCancelacion = resultado(3)
-                End If
-            Else
-                Dim ListaUUID As New List(Of TimbradoUXReal.DetalleCFDICancelacion)
+            '    If (resultado(0) = "False") Then
+            '        BitacoraService.BitacoraCancelacionError(Matricula, Folio, cbMotivoSAT.SelectedValue, resultado(1), resultado(2))
+            '        MessageBox.Show(resultado(1))
+            '        Exit Sub
+            '    Else
+            '        xmlAcuse = resultado(1)
+            '        mensajeCancelacion = resultado(2)
+            '        estatusCancelacion = resultado(3)
+            '    End If
+            'Else
+            Dim ListaUUID As New List(Of TimbradoUXReal.DetalleCFDICancelacion)
                 Dim DatosUUID As New TimbradoUXReal.DetalleCFDICancelacion
                 DatosUUID.UUID = UUID
                 DatosUUID.RFCReceptor = RFCReceptor
@@ -168,7 +168,7 @@
                     mensajeCancelacion = resultado(2)
                     estatusCancelacion = resultado(3)
                 End If
-            End If
+            ''End If
 
             db.startTransaction()
             Dim tableConceptos As DataTable = db.getDataTableFromSQL($"SELECT ID, Clave_Concepto, IDConcepto FROM ing_xmlTimbradosConceptos WHERE XMLID = {IDFolio}")

@@ -257,3 +257,4 @@ C:\Users\LuisUXX\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\d
 C:\Users\LuisUXX\Documents\NEducacionContinuaUX\NEducacionContinuaUX\bin\Debug\de\PdfSharp.Charting.resources.dll
 C:\Users\LuisUXX\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.EnviarCorreosQRCongresosEDC.resources
 C:\Users\LuisUXX\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.PruebaEnvioCorreosEDC.resources
+C:\Users\LuisUXX\Documents\NEducacionContinuaUX\NEducacionContinuaUX\obj\Debug\NEducacionContinuaUX.EnviarCorreosConstanciasCongresosEDC.resources

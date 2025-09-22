@@ -45,6 +45,8 @@ Partial Class CobrosEDC
         Me.lblTurno = New System.Windows.Forms.Label()
         Me.lblCarrera = New System.Windows.Forms.Label()
         Me.panelDatos = New System.Windows.Forms.Panel()
+        Me.lblDigitoVerificador = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.lblDireccion = New System.Windows.Forms.Label()
         Me.lblDirecciontxt = New System.Windows.Forms.Label()
         Me.lblCFDItxt = New System.Windows.Forms.Label()
@@ -264,6 +266,8 @@ Partial Class CobrosEDC
         '
         'panelDatos
         '
+        Me.panelDatos.Controls.Add(Me.lblDigitoVerificador)
+        Me.panelDatos.Controls.Add(Me.Label1)
         Me.panelDatos.Controls.Add(Me.lblDireccion)
         Me.panelDatos.Controls.Add(Me.lblDirecciontxt)
         Me.panelDatos.Controls.Add(Me.lblCFDItxt)
@@ -283,6 +287,27 @@ Partial Class CobrosEDC
         Me.panelDatos.Size = New System.Drawing.Size(1300, 101)
         Me.panelDatos.TabIndex = 15
         Me.panelDatos.Visible = False
+        '
+        'lblDigitoVerificador
+        '
+        Me.lblDigitoVerificador.AutoSize = True
+        Me.lblDigitoVerificador.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDigitoVerificador.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblDigitoVerificador.Location = New System.Drawing.Point(793, 77)
+        Me.lblDigitoVerificador.Name = "lblDigitoVerificador"
+        Me.lblDigitoVerificador.Size = New System.Drawing.Size(0, 15)
+        Me.lblDigitoVerificador.TabIndex = 101
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label1.Location = New System.Drawing.Point(676, 77)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(42, 15)
+        Me.Label1.TabIndex = 100
+        Me.Label1.Text = "Digito:"
         '
         'lblDireccion
         '
@@ -937,4 +962,6 @@ Partial Class CobrosEDC
     Friend WithEvents btnRecordatorios As Button
     Friend WithEvents btnVerRecordatorio As Button
     Friend WithEvents btnDatosFiscales As Button
+    Friend WithEvents Label1 As Label
+    Friend WithEvents lblDigitoVerificador As Label
 End Class

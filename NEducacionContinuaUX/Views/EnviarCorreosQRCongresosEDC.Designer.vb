@@ -40,7 +40,7 @@ Partial Class EnviarCorreosQRCongresosEDC
         Me.lblNombreVentana.Name = "lblNombreVentana"
         Me.lblNombreVentana.Size = New System.Drawing.Size(801, 62)
         Me.lblNombreVentana.TabIndex = 15
-        Me.lblNombreVentana.Text = "Envio de codigos QR a  asistentes de congresos"
+        Me.lblNombreVentana.Text = "Envio de codigos QR a asistentes de congresos"
         Me.lblNombreVentana.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label1
